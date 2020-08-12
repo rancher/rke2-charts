@@ -1,3 +1,15 @@
+diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-coredns/charts-original/Chart.yaml packages/rke2-coredns/charts/Chart.yaml
+--- packages/rke2-coredns/charts-original/Chart.yaml
++++ packages/rke2-coredns/charts/Chart.yaml
+@@ -17,7 +17,7 @@
+   name: andor44
+ - email: manuel@rueg.eu
+   name: mrueg
+-name: coredns
++name: rke2-coredns
+ sources:
+ - https://github.com/coredns/coredns
+ version: 1.10.1
 diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-coredns/charts-original/templates/configmap.yaml packages/rke2-coredns/charts/templates/configmap.yaml
 --- packages/rke2-coredns/charts-original/templates/configmap.yaml
 +++ packages/rke2-coredns/charts/templates/configmap.yaml
