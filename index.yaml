@@ -1,12 +1,30 @@
 apiVersion: v1
 entries:
-  coredns:
+  rke2-canal:
+  - apiVersion: v1
+    appVersion: v3.13.3
+    created: "2020-08-12T21:20:54.703625499Z"
+    description: Install Canal Network Plugin.
+    digest: 65ecbac54d1affdbea8678373c13cfb8124d3a988e63a66fe959af85dfa91db9
+    home: https://www.projectcalico.org/
+    keywords:
+    - canal
+    maintainers:
+    - email: charts@rancher.com
+      name: Rancher Labs
+    name: rke2-canal
+    sources:
+    - https://github.com/rancher/rke2-charts
+    urls:
+    - assets/rke2-canal/rke2-canal-v3.13.3.tgz
+    version: v3.13.3
+  rke2-coredns:
   - apiVersion: v1
     appVersion: 1.6.9
-    created: "2020-08-12T20:00:24.494726903Z"
+    created: "2020-08-12T21:20:54.725142684Z"
     description: CoreDNS is a DNS server that chains plugins and provides Kubernetes
       DNS Services
-    digest: 1fb7e63efe66e42f130f2a28a0240039b9fafa0af07d5bc596a5cc6c88dc1992
+    digest: 265e8b73eed76666c7d2a521e4a5d7722feb8d49ee26421d05654c0e1961279b
     home: https://coredns.io
     icon: https://coredns.io/images/CoreDNS_Colour_Horizontal.png
     keywords:
@@ -22,39 +40,19 @@ entries:
       name: andor44
     - email: manuel@rueg.eu
       name: mrueg
-    name: coredns
+    name: rke2-coredns
     sources:
     - https://github.com/coredns/coredns
     urls:
-    - assets/rke2-coredns/coredns-1.10.101.tgz
+    - assets/rke2-coredns/rke2-coredns-1.10.101.tgz
     version: 1.10.101
-  metrics-server:
-  - apiVersion: v1
-    appVersion: 0.3.6
-    created: "2020-08-12T20:00:24.499677619Z"
-    description: Metrics Server is a cluster-wide aggregator of resource usage data.
-    digest: a5f1065b3a9dd5239dd0094df55c92215abde84f14ca041d119aa0c6eae57547
-    home: https://github.com/kubernetes-incubator/metrics-server
-    keywords:
-    - metrics-server
-    maintainers:
-    - email: o.with@sportradar.com
-      name: olemarkus
-    - email: k.aasan@sportradar.com
-      name: kennethaasan
-    name: metrics-server
-    sources:
-    - https://github.com/kubernetes-incubator/metrics-server
-    urls:
-    - assets/rke2-metrics-server/metrics-server-2.11.100.tgz
-    version: 2.11.100
-  nginx-ingress:
+  rke2-ingress-nginx:
   - apiVersion: v1
     appVersion: 0.30.0
-    created: "2020-08-12T20:00:24.497612712Z"
+    created: "2020-08-12T21:20:54.727903282Z"
     description: An nginx Ingress controller that uses ConfigMap to store the nginx
       configuration.
-    digest: 75b4b39cd1a115c89a305297d4353944e49af51fb75a523a3b5bb8eea9937124
+    digest: f7930fb70b32e46d6db21fb71a9c4d787a94e73d171da555fc986eca672e40f5
     home: https://github.com/kubernetes/ingress-nginx
     icon: https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Nginx_logo.svg/500px-Nginx_logo.svg.png
     keywords:
@@ -65,34 +63,16 @@ entries:
     - name: ChiefAlexander
     - email: Trevor.G.Wood@gmail.com
       name: taharah
-    name: nginx-ingress
+    name: rke2-ingress-nginx
     sources:
     - https://github.com/kubernetes/ingress-nginx
     urls:
-    - assets/rke2-ingress-nginx/nginx-ingress-1.36.300.tgz
+    - assets/rke2-ingress-nginx/rke2-ingress-nginx-1.36.300.tgz
     version: 1.36.300
-  rke2-canal:
-  - apiVersion: v1
-    appVersion: v3.13.3
-    created: "2020-08-12T20:00:24.493374099Z"
-    description: Install Canal Network Plugin.
-    digest: 65ecbac54d1affdbea8678373c13cfb8124d3a988e63a66fe959af85dfa91db9
-    home: https://www.projectcalico.org/
-    keywords:
-    - canal
-    maintainers:
-    - email: charts@rancher.com
-      name: Rancher Labs
-    name: rke2-canal
-    sources:
-    - https://github.com/rancher/rke2-charts
-    urls:
-    - assets/rke2-canal/rke2-canal-v3.13.3.tgz
-    version: v3.13.3
   rke2-kube-proxy:
   - apiVersion: v1
     appVersion: v1.18.4
-    created: "2020-08-12T20:00:24.498747116Z"
+    created: "2020-08-12T21:20:54.728938382Z"
     description: Install Kube Proxy.
     digest: 05733d83934eb5cd4e7adf456b57f3185c4588cf229ccf7a502e72150770d0ac
     keywords:
@@ -106,4 +86,24 @@ entries:
     urls:
     - assets/rke2-kube-proxy/rke2-kube-proxy-v1.18.4.tgz
     version: v1.18.4
-generated: "2020-08-12T20:00:24.492516896Z"
+  rke2-metrics-server:
+  - apiVersion: v1
+    appVersion: 0.3.6
+    created: "2020-08-12T21:20:54.729703881Z"
+    description: Metrics Server is a cluster-wide aggregator of resource usage data.
+    digest: 20ef62666051d10faae485c731ff011d40c2078ae9a1c263809b2e64084715b5
+    home: https://github.com/kubernetes-incubator/metrics-server
+    keywords:
+    - metrics-server
+    maintainers:
+    - email: o.with@sportradar.com
+      name: olemarkus
+    - email: k.aasan@sportradar.com
+      name: kennethaasan
+    name: rke2-metrics-server
+    sources:
+    - https://github.com/kubernetes-incubator/metrics-server
+    urls:
+    - assets/rke2-metrics-server/rke2-metrics-server-2.11.100.tgz
+    version: 2.11.100
+generated: "2020-08-12T21:20:54.7025868Z"
