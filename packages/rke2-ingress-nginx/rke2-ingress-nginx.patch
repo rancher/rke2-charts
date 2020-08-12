@@ -1,3 +1,15 @@
+diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-ingress-nginx/charts-original/Chart.yaml packages/rke2-ingress-nginx/charts/Chart.yaml
+--- packages/rke2-ingress-nginx/charts-original/Chart.yaml
++++ packages/rke2-ingress-nginx/charts/Chart.yaml
+@@ -12,7 +12,7 @@
+ - name: ChiefAlexander
+ - email: Trevor.G.Wood@gmail.com
+   name: taharah
+-name: nginx-ingress
++name: rke2-ingress-nginx
+ sources:
+ - https://github.com/kubernetes/ingress-nginx
+ version: 1.36.3
 diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-ingress-nginx/charts-original/values.yaml packages/rke2-ingress-nginx/charts/values.yaml
 --- packages/rke2-ingress-nginx/charts-original/values.yaml
 +++ packages/rke2-ingress-nginx/charts/values.yaml
