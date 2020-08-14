@@ -18,7 +18,7 @@ diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-coredns/charts-original/templates
      helm.sh/chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
      {{- if .Values.isClusterService }}
 -    k8s-app: {{ .Chart.Name }}-autoscaler
-+    k8s-app: {{ .Values.k8s-app }}-autoscaler
++    k8s-app: {{ .Values.k8sApp }}-autoscaler
      kubernetes.io/cluster-service: "true"
      kubernetes.io/name: "CoreDNS"
      {{- end }}
@@ -30,7 +30,7 @@ diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-coredns/charts-original/templates
      helm.sh/chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
      {{- if .Values.isClusterService }}
 -    k8s-app: {{ .Chart.Name }}-autoscaler
-+    k8s-app: {{ .Values.k8s-app }}-autoscaler
++    k8s-app: {{ .Values.k8sApp }}-autoscaler
      kubernetes.io/cluster-service: "true"
      kubernetes.io/name: "CoreDNS"
      {{- end }}
@@ -42,7 +42,7 @@ diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-coredns/charts-original/templates
      helm.sh/chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
      {{- if .Values.isClusterService }}
 -    k8s-app: {{ .Chart.Name | quote }}
-+    k8s-app: {{ .Values.k8s-app | quote }}
++    k8s-app: {{ .Values.k8sApp | quote }}
      kubernetes.io/cluster-service: "true"
      kubernetes.io/name: "CoreDNS"
      {{- end }}
@@ -54,7 +54,7 @@ diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-coredns/charts-original/templates
      helm.sh/chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
      {{- if .Values.isClusterService }}
 -    k8s-app: {{ .Chart.Name | quote }}
-+    k8s-app: {{ .Values.k8s-app | quote }}
++    k8s-app: {{ .Values.k8sApp | quote }}
      kubernetes.io/cluster-service: "true"
      kubernetes.io/name: "CoreDNS"
      {{- end }}
@@ -66,7 +66,7 @@ diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-coredns/charts-original/templates
      helm.sh/chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
      {{- if .Values.isClusterService }}
 -    k8s-app: {{ .Chart.Name }}-autoscaler
-+    k8s-app: {{ .Values.k8s-app }}-autoscaler
++    k8s-app: {{ .Values.k8sApp }}-autoscaler
      kubernetes.io/cluster-service: "true"
      kubernetes.io/name: "CoreDNS"
      {{- end }}
@@ -78,7 +78,7 @@ diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-coredns/charts-original/templates
      helm.sh/chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
      {{- if .Values.isClusterService }}
 -    k8s-app: {{ .Chart.Name | quote }}
-+    k8s-app: {{ .Values.k8s-app | quote }}
++    k8s-app: {{ .Values.k8sApp | quote }}
      kubernetes.io/cluster-service: "true"
      kubernetes.io/name: "CoreDNS"
      {{- end }}
@@ -99,7 +99,7 @@ diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-coredns/charts-original/templates
      helm.sh/chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
      {{- if .Values.isClusterService }}
 -    k8s-app: {{ .Chart.Name }}-autoscaler
-+    k8s-app: {{ .Values.k8s-app }}-autoscaler
++    k8s-app: {{ .Values.k8sApp }}-autoscaler
      kubernetes.io/cluster-service: "true"
      kubernetes.io/name: "CoreDNS"
      {{- end }}
@@ -108,7 +108,7 @@ diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-coredns/charts-original/templates
        app.kubernetes.io/instance: {{ .Release.Name | quote }}
        {{- if .Values.isClusterService }}
 -      k8s-app: {{ .Chart.Name }}-autoscaler
-+      k8s-app: {{ .Values.k8s-app }}-autoscaler
++      k8s-app: {{ .Values.k8sApp }}-autoscaler
        {{- end }}
        app.kubernetes.io/name: {{ template "coredns.name" . }}-autoscaler
    template:
@@ -116,7 +116,7 @@ diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-coredns/charts-original/templates
        labels:
          {{- if .Values.isClusterService }}
 -        k8s-app: {{ .Chart.Name }}-autoscaler
-+        k8s-app: {{ .Values.k8s-app }}-autoscaler
++        k8s-app: {{ .Values.k8sApp }}-autoscaler
          {{- end }}
          app.kubernetes.io/name: {{ template "coredns.name" . }}-autoscaler
          app.kubernetes.io/instance: {{ .Release.Name | quote }}
@@ -128,7 +128,7 @@ diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-coredns/charts-original/templates
      helm.sh/chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
      {{- if .Values.isClusterService }}
 -    k8s-app: {{ .Chart.Name | quote }}
-+    k8s-app: {{ .Values.k8s-app | quote }}
++    k8s-app: {{ .Values.k8sApp | quote }}
      kubernetes.io/cluster-service: "true"
      kubernetes.io/name: "CoreDNS"
      {{- end }}
@@ -137,7 +137,7 @@ diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-coredns/charts-original/templates
        app.kubernetes.io/instance: {{ .Release.Name | quote }}
        {{- if .Values.isClusterService }}
 -      k8s-app: {{ .Chart.Name | quote }}
-+      k8s-app: {{ .Values.k8s-app | quote }}
++      k8s-app: {{ .Values.k8sApp | quote }}
        {{- end }}
        app.kubernetes.io/name: {{ template "coredns.name" . }}
    template:
@@ -145,7 +145,7 @@ diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-coredns/charts-original/templates
        labels:
          {{- if .Values.isClusterService }}
 -        k8s-app: {{ .Chart.Name | quote }}
-+        k8s-app: {{ .Values.k8s-app | quote }}
++        k8s-app: {{ .Values.k8sApp | quote }}
          {{- end }}
          app.kubernetes.io/name: {{ template "coredns.name" . }}
          app.kubernetes.io/instance: {{ .Release.Name | quote }}
@@ -168,7 +168,7 @@ diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-coredns/charts-original/templates
      helm.sh/chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
      {{- if .Values.isClusterService }}
 -    k8s-app: {{ .Chart.Name | quote }}
-+    k8s-app: {{ .Values.k8s-app | quote }}
++    k8s-app: {{ .Values.k8sApp | quote }}
      kubernetes.io/cluster-service: "true"
      kubernetes.io/name: "CoreDNS"
      {{- end }}
@@ -177,7 +177,7 @@ diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-coredns/charts-original/templates
          app.kubernetes.io/instance: {{ .Release.Name | quote }}
          {{- if .Values.isClusterService }}
 -        k8s-app: {{ .Chart.Name | quote }}
-+        k8s-app: {{ .Values.k8s-app | quote }}
++        k8s-app: {{ .Values.k8sApp | quote }}
          {{- end }}
          app.kubernetes.io/name: {{ template "coredns.name" . }}
  {{ toYaml .Values.podDisruptionBudget | indent 2 }}
@@ -189,7 +189,7 @@ diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-coredns/charts-original/templates
      helm.sh/chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
      {{- if .Values.isClusterService }}
 -    k8s-app: {{ .Chart.Name | quote }}
-+    k8s-app: {{ .Values.k8s-app | quote }}
++    k8s-app: {{ .Values.k8sApp | quote }}
      kubernetes.io/cluster-service: "true"
      kubernetes.io/name: "CoreDNS"
      {{- else }}
@@ -201,7 +201,7 @@ diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-coredns/charts-original/templates
      helm.sh/chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
      {{- if .Values.isClusterService }}
 -    k8s-app: {{ .Chart.Name }}-autoscaler
-+    k8s-app: {{ .Values.k8s-app }}-autoscaler
++    k8s-app: {{ .Values.k8sApp }}-autoscaler
      kubernetes.io/cluster-service: "true"
      kubernetes.io/name: "CoreDNS"
      {{- end }}
@@ -213,7 +213,7 @@ diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-coredns/charts-original/templates
      helm.sh/chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
      {{- if .Values.isClusterService }}
 -    k8s-app: {{ .Chart.Name | quote }}
-+    k8s-app: {{ .Values.k8s-app | quote }}
++    k8s-app: {{ .Values.k8sApp | quote }}
      kubernetes.io/cluster-service: "true"
      kubernetes.io/name: "CoreDNS"
      {{- end }}
@@ -225,7 +225,7 @@ diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-coredns/charts-original/templates
      helm.sh/chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
      {{- if .Values.isClusterService }}
 -    k8s-app: {{ .Chart.Name | quote }}
-+    k8s-app: {{ .Values.k8s-app | quote }}
++    k8s-app: {{ .Values.k8sApp | quote }}
      kubernetes.io/cluster-service: "true"
      kubernetes.io/name: "CoreDNS"
      {{- end }}
@@ -234,7 +234,7 @@ diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-coredns/charts-original/templates
      app.kubernetes.io/instance: {{ .Release.Name | quote }}
      {{- if .Values.isClusterService }}
 -    k8s-app: {{ .Chart.Name | quote }}
-+    k8s-app: {{ .Values.k8s-app | quote }}
++    k8s-app: {{ .Values.k8sApp | quote }}
      {{- end }}
      app.kubernetes.io/name: {{ template "coredns.name" . }}
    ports:
@@ -246,7 +246,7 @@ diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-coredns/charts-original/templates
      helm.sh/chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
      {{- if .Values.isClusterService }}
 -    k8s-app: {{ .Chart.Name | quote }}
-+    k8s-app: {{ .Values.k8s-app | quote }}
++    k8s-app: {{ .Values.k8sApp | quote }}
      kubernetes.io/cluster-service: "true"
      kubernetes.io/name: "CoreDNS"
      {{- end }}
@@ -255,7 +255,7 @@ diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-coredns/charts-original/templates
        app.kubernetes.io/instance: {{ .Release.Name | quote }}
        {{- if .Values.isClusterService }}
 -      k8s-app: {{ .Chart.Name | quote }}
-+      k8s-app: {{ .Values.k8s-app | quote }}
++      k8s-app: {{ .Values.k8sApp | quote }}
        {{- end }}
        app.kubernetes.io/name: {{ template "coredns.name" . }}
        app.kubernetes.io/component: metrics
@@ -267,7 +267,7 @@ diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-coredns/charts-original/templates
      helm.sh/chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
      {{- if .Values.isClusterService }}
 -    k8s-app: {{ .Chart.Name | quote }}
-+    k8s-app: {{ .Values.k8s-app | quote }}
++    k8s-app: {{ .Values.k8sApp | quote }}
      kubernetes.io/cluster-service: "true"
      kubernetes.io/name: "CoreDNS"
      {{- end }}
@@ -276,7 +276,7 @@ diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-coredns/charts-original/templates
      app.kubernetes.io/instance: {{ .Release.Name | quote }}
      {{- if .Values.isClusterService }}
 -    k8s-app: {{ .Chart.Name | quote }}
-+    k8s-app: {{ .Values.k8s-app | quote }}
++    k8s-app: {{ .Values.k8sApp | quote }}
      {{- end }}
      app.kubernetes.io/name: {{ template "coredns.name" . }}
    {{- if .Values.service.clusterIP }}
@@ -304,5 +304,5 @@ diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-coredns/charts-original/values.ya
      ## Annotations for the coredns-autoscaler configmap
      # i.e. strategy.spinnaker.io/versioned: "false" to ensure configmap isn't renamed
      annotations: {}
-+k8s-app : "kube-dns"
++k8sApp : "kube-dns"
 \ No newline at end of file
