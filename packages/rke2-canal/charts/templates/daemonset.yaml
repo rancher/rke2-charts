@@ -60,7 +60,7 @@ spec:
             - name: CNI_NETWORK_CONFIG
               valueFrom:
                 configMapKeyRef:
-                  name: canal-config
+                  name: {{ .Release.Name }}-config
                   key: cni_network_config
             # Set the hostname based on the k8s node name.
             - name: KUBERNETES_NODE_NAME
@@ -71,7 +71,7 @@ spec:
             - name: CNI_MTU
               valueFrom:
                 configMapKeyRef:
-                  name: canal-config
+                  name: {{ .Release.Name }}-config
                   key: veth_mtu
             # Prevents the container from sleeping forever.
             - name: SLEEP
@@ -203,12 +203,12 @@ spec:
             - name: FLANNELD_IFACE
               valueFrom:
                 configMapKeyRef:
-                  name: canal-config
+                  name: {{ .Release.Name }}-config
                   key: canal_iface
             - name: FLANNELD_IP_MASQ
               valueFrom:
                 configMapKeyRef:
-                  name: canal-config
+                  name: {{ .Release.Name }}-config
                   key: masquerade
           volumeMounts:
           - mountPath: /run/xtables.lock
@@ -234,7 +234,7 @@ spec:
         # Used by flannel.
         - name: flannel-cfg
           configMap:
-            name: canal-config
+            name: {{ .Release.Name }}-config
         # Used to install CNI.
         - name: cni-bin-dir
           hostPath:
