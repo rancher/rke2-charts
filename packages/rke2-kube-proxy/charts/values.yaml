@@ -1,7 +1,7 @@
 ---
 
 # image for kubeproxy
-image: ranchertest/kube-proxy
+image: rancher/kube-proxy
 
 # image tag for kubeproxy
 imageTag: v1.18.4

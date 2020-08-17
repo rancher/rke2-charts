@@ -295,7 +295,7 @@ diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-coredns/charts-original/values.ya
  image:
 -  repository: coredns/coredns
 -  tag: "1.6.9"
-+  repository: ranchertest/coredns
++  repository: rancher/coredns
 +  tag: "v1.6.9"
    pullPolicy: IfNotPresent
  

@@ -18,7 +18,7 @@ diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-metrics-server/charts-original/va
  
  image:
 -  repository: k8s.gcr.io/metrics-server-amd64
-+  repository: ranchertest/k8s-metrics-server
++  repositor/k8s-metrics-server
    tag: v0.3.6
    pullPolicy: IfNotPresent
  
