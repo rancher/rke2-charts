@@ -3,9 +3,9 @@ entries:
   rke2-canal:
   - apiVersion: v1
     appVersion: v3.13.3
-    created: "2020-08-19T17:08:18.741574151Z"
+    created: "2020-08-19T18:27:09.003531359Z"
     description: Install Canal Network Plugin.
-    digest: ee5af77e73e1aa819789ca761db39762482bd65f6a0c8353354ee5ac25c9ea41
+    digest: 77fd8fb9b40725cadf529a9559f630580758d1c71522adff5ef9a63c0ccf1087
     home: https://www.projectcalico.org/
     keywords:
     - canal
@@ -21,7 +21,7 @@ entries:
   rke2-coredns:
   - apiVersion: v1
     appVersion: 1.6.9
-    created: "2020-08-19T17:08:18.743120273Z"
+    created: "2020-08-19T18:27:09.004724358Z"
     description: CoreDNS is a DNS server that chains plugins and provides Kubernetes
       DNS Services
     digest: 433bf6c715ae4459cbc6ce3cdd9df4191256c1363f64836dc3c2a24f890ee833
@@ -49,7 +49,7 @@ entries:
   rke2-ingress-nginx:
   - apiVersion: v1
     appVersion: 0.30.0
-    created: "2020-08-19T17:08:18.745799613Z"
+    created: "2020-08-19T18:27:09.007191057Z"
     description: An nginx Ingress controller that uses ConfigMap to store the nginx
       configuration.
     digest: 6125ef099a6d75bae51beabb60d317904d597686fd65a3a4935fd6d2f8411a3e
@@ -72,7 +72,7 @@ entries:
   rke2-kube-proxy:
   - apiVersion: v1
     appVersion: v1.18.4
-    created: "2020-08-19T17:08:18.746861128Z"
+    created: "2020-08-19T18:27:09.008166657Z"
     description: Install Kube Proxy.
     digest: e6baf5b2b7f4dd0475e1e401b87f114301a3d114c0975ff5159953239ffe9041
     keywords:
@@ -89,7 +89,7 @@ entries:
   rke2-metrics-server:
   - apiVersion: v1
     appVersion: 0.3.6
-    created: "2020-08-19T17:08:18.74768084Z"
+    created: "2020-08-19T18:27:09.008972256Z"
     description: Metrics Server is a cluster-wide aggregator of resource usage data.
     digest: 5a31f729eb0fc6fe848089bb69c9e95cb834abcd82aba0faba26b1dcdcdb9cee
     home: https://github.com/kubernetes-incubator/metrics-server
@@ -106,4 +106,4 @@ entries:
     urls:
     - assets/rke2-metrics-server/rke2-metrics-server-2.11.100.tgz
     version: 2.11.100
-generated: "2020-08-19T17:08:18.740490635Z"
+generated: "2020-08-19T18:27:09.00240296Z"
