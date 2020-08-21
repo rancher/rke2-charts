@@ -149,6 +149,15 @@ diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-coredns/charts-original/templates
          {{- end }}
          app.kubernetes.io/name: {{ template "coredns.name" . }}
          app.kubernetes.io/instance: {{ .Release.Name | quote }}
+@@ -70,7 +70,7 @@
+       {{- end }}
+       containers:
+       - name: "coredns"
+-        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
++        image: {{ template "system_default_registry" . }}{{ .Values.image.repository }}:{{ .Values.image.tag }}
+         imagePullPolicy: {{ .Values.image.pullPolicy }}
+         args: [ "-conf", "/etc/coredns/Corefile" ]
+         volumeMounts:
 diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-coredns/charts-original/templates/_helpers.tpl packages/rke2-coredns/charts/templates/_helpers.tpl
 --- packages/rke2-coredns/charts-original/templates/_helpers.tpl
 +++ packages/rke2-coredns/charts/templates/_helpers.tpl

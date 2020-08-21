@@ -10,6 +10,30 @@ diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-ingress-nginx/charts-original/Cha
  sources:
  - https://github.com/kubernetes/ingress-nginx
  version: 1.36.3
+diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-ingress-nginx/charts-original/templates/admission-webhooks/job-patch/job-createSecret.yaml packages/rke2-ingress-nginx/charts/templates/admission-webhooks/job-patch/job-createSecret.yaml
+--- packages/rke2-ingress-nginx/charts-original/templates/admission-webhooks/job-patch/job-createSecret.yaml
++++ packages/rke2-ingress-nginx/charts/templates/admission-webhooks/job-patch/job-createSecret.yaml
+@@ -36,7 +36,7 @@
+       {{- end }}
+       containers:
+         - name: create
+-          image: {{ .Values.controller.admissionWebhooks.patch.image.repository }}:{{ .Values.controller.admissionWebhooks.patch.image.tag }}
++          image: {{ template "system_default_registry" . }}{{ .Values.controller.admissionWebhooks.patch.image.repository }}:{{ .Values.controller.admissionWebhooks.patch.image.tag }}
+           imagePullPolicy: {{ .Values.controller.admissionWebhooks.patch.image.pullPolicy }}
+           args:
+             - create
+diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-ingress-nginx/charts-original/templates/controller-daemonset.yaml packages/rke2-ingress-nginx/charts/templates/controller-daemonset.yaml
+--- packages/rke2-ingress-nginx/charts-original/templates/controller-daemonset.yaml
++++ packages/rke2-ingress-nginx/charts/templates/controller-daemonset.yaml
+@@ -60,7 +60,7 @@
+       {{- end }}
+       containers:
+         - name: {{ template "nginx-ingress.name" . }}-{{ .Values.controller.name }}
+-          image: "{{ .Values.controller.image.repository }}:{{ .Values.controller.image.tag }}"
++          image: {{ template "system_default_registry" . }}{{ .Values.controller.image.repository }}:{{ .Values.controller.image.tag }}
+           imagePullPolicy: "{{ .Values.controller.image.pullPolicy }}"
+           {{- if .Values.controller.lifecycle }}
+           lifecycle:
 diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-ingress-nginx/charts-original/templates/_helpers.tpl packages/rke2-ingress-nginx/charts/templates/_helpers.tpl
 --- packages/rke2-ingress-nginx/charts-original/templates/_helpers.tpl
 +++ packages/rke2-ingress-nginx/charts/templates/_helpers.tpl
