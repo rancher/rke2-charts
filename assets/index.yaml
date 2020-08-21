@@ -3,9 +3,9 @@ entries:
   rke2-canal:
   - apiVersion: v1
     appVersion: v3.13.3
-    created: "2020-08-19T18:27:09.003531359Z"
+    created: "2020-08-21T18:56:34.206269254Z"
     description: Install Canal Network Plugin.
-    digest: 77fd8fb9b40725cadf529a9559f630580758d1c71522adff5ef9a63c0ccf1087
+    digest: 3ade2d76747ef98839cda1f413e7516552dfe9d7c24af9a0e55d4b4a82682ed1
     home: https://www.projectcalico.org/
     keywords:
     - canal
@@ -21,10 +21,10 @@ entries:
   rke2-coredns:
   - apiVersion: v1
     appVersion: 1.6.9
-    created: "2020-08-19T18:27:09.004724358Z"
+    created: "2020-08-21T18:56:34.207494043Z"
     description: CoreDNS is a DNS server that chains plugins and provides Kubernetes
       DNS Services
-    digest: 433bf6c715ae4459cbc6ce3cdd9df4191256c1363f64836dc3c2a24f890ee833
+    digest: 557431aaad003d28a15d929e2fdbe6649499a911ecb341c6d9603fb7b17ac5c6
     home: https://coredns.io
     icon: https://coredns.io/images/CoreDNS_Colour_Horizontal.png
     keywords:
@@ -49,10 +49,10 @@ entries:
   rke2-ingress-nginx:
   - apiVersion: v1
     appVersion: 0.30.0
-    created: "2020-08-19T18:27:09.007191057Z"
+    created: "2020-08-21T18:56:34.210215617Z"
     description: An nginx Ingress controller that uses ConfigMap to store the nginx
       configuration.
-    digest: 6125ef099a6d75bae51beabb60d317904d597686fd65a3a4935fd6d2f8411a3e
+    digest: a4ac4369e809e3f2be372f8ee2c95b4d83c55c2d7fe523e64ee8f3734b976d75
     home: https://github.com/kubernetes/ingress-nginx
     icon: https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Nginx_logo.svg/500px-Nginx_logo.svg.png
     keywords:
@@ -72,9 +72,9 @@ entries:
   rke2-kube-proxy:
   - apiVersion: v1
     appVersion: v1.18.4
-    created: "2020-08-19T18:27:09.008166657Z"
+    created: "2020-08-21T18:56:34.212325197Z"
     description: Install Kube Proxy.
-    digest: e6baf5b2b7f4dd0475e1e401b87f114301a3d114c0975ff5159953239ffe9041
+    digest: b859363c5ecab8c46b53efa34d866b9c27840737ad1afec0eb9729b8968304fb
     keywords:
     - kube-proxy
     maintainers:
@@ -89,9 +89,9 @@ entries:
   rke2-metrics-server:
   - apiVersion: v1
     appVersion: 0.3.6
-    created: "2020-08-19T18:27:09.008972256Z"
+    created: "2020-08-21T18:56:34.21314239Z"
     description: Metrics Server is a cluster-wide aggregator of resource usage data.
-    digest: 5a31f729eb0fc6fe848089bb69c9e95cb834abcd82aba0faba26b1dcdcdb9cee
+    digest: 0fd945409ad5fe6c287aa4f59bc2ac57f12f0af169e0144220ca0b80f110393d
     home: https://github.com/kubernetes-incubator/metrics-server
     keywords:
     - metrics-server
@@ -106,4 +106,4 @@ entries:
     urls:
     - assets/rke2-metrics-server/rke2-metrics-server-2.11.100.tgz
     version: 2.11.100
-generated: "2020-08-19T18:27:09.00240296Z"
+generated: "2020-08-21T18:56:34.204913967Z"
