@@ -34,6 +34,18 @@ diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-ingress-nginx/charts-original/tem
            imagePullPolicy: "{{ .Values.controller.image.pullPolicy }}"
            {{- if .Values.controller.lifecycle }}
            lifecycle:
+diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-ingress-nginx/charts-original/templates/default-backend-deployment.yaml packages/rke2-ingress-nginx/charts/templates/default-backend-deployment.yaml
+--- packages/rke2-ingress-nginx/charts-original/templates/default-backend-deployment.yaml
++++ packages/rke2-ingress-nginx/charts/templates/default-backend-deployment.yaml
+@@ -51,7 +51,7 @@
+       {{- end }}
+       containers:
+         - name: {{ template "nginx-ingress.name" . }}-{{ .Values.defaultBackend.name }}
+-          image: "{{ .Values.defaultBackend.image.repository }}:{{ .Values.defaultBackend.image.tag }}"
++          image:  {{ template "system_default_registry" . }}{{ .Values.defaultBackend.image.repository }}:{{ .Values.defaultBackend.image.tag }}
+           imagePullPolicy: "{{ .Values.defaultBackend.image.pullPolicy }}"
+           args:
+           {{- range $key, $value := .Values.defaultBackend.extraArgs }}
 diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-ingress-nginx/charts-original/templates/_helpers.tpl packages/rke2-ingress-nginx/charts/templates/_helpers.tpl
 --- packages/rke2-ingress-nginx/charts-original/templates/_helpers.tpl
 +++ packages/rke2-ingress-nginx/charts/templates/_helpers.tpl
