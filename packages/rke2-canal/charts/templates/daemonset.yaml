@@ -50,7 +50,7 @@ spec:
         # This container installs the CNI binaries
         # and CNI network config file on each node.
         - name: install-cni
-          image: {{ .Values.calico.cniImage }}:{{ .Values.calico.imageTag }}
+          image: {{ template "system_default_registry" . }}{{ .Values.calico.cniImage.repository }}:{{ .Values.calico.cniImage.tag }}
           command: ["/install-cni.sh"]
           env:
             # Name of the CNI config file to create.
@@ -86,7 +86,7 @@ spec:
         # Adds a Flex Volume Driver that creates a per-pod Unix Domain Socket to allow Dikastes
         # to communicate with Felix over the Policy Sync API.
         - name: flexvol-driver
-          image: {{ .Values.calico.flexvolImage }}:{{ .Values.calico.imageTag }}
+          image: {{ template "system_default_registry" . }}{{ .Values.calico.flexvolImage.repository }}:{{ .Values.calico.flexvolImage.tag }}
           volumeMounts:
           - name: flexvol-driver-host
             mountPath: /host/driver
@@ -99,7 +99,7 @@ spec:
         - name: calico-node
           command:
           - "start_runit"
-          image: {{ .Values.calico.nodeImage }}:{{ .Values.calico.imageTag }}
+          image: {{ template "system_default_registry" . }}{{ .Values.calico.nodeImage.repository }}:{{ .Values.calico.nodeImage.tag }}
           env:
             # Use Kubernetes API as the backing datastore.
             - name: DATASTORE_TYPE
@@ -186,7 +186,7 @@ spec:
         # This container runs flannel using the kube-subnet-mgr backend
         # for allocating subnets.
         - name: kube-flannel
-          image: {{ .Values.flannel.image }}:{{ .Values.flannel.imageTag }}
+          image: {{ template "system_default_registry" . }}{{ .Values.flannel.image.repository }}:{{ .Values.flannel.image.tag }}
           command:
           - "/opt/bin/flanneld"
           {{- range .Values.flannel.args }}

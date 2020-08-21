@@ -120,6 +120,15 @@ diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-coredns/charts-original/templates
          {{- end }}
          app.kubernetes.io/name: {{ template "coredns.name" . }}-autoscaler
          app.kubernetes.io/instance: {{ .Release.Name | quote }}
+@@ -63,7 +63,7 @@
+       {{- end }}
+       containers:
+       - name: autoscaler
+-        image: "{{ .Values.autoscaler.image.repository }}:{{ .Values.autoscaler.image.tag }}"
++        image:  {{ template "system_default_registry" . }}{{ .Values.autoscaler.image.repository }}:{{ .Values.autoscaler.image.tag }}
+         imagePullPolicy: {{ .Values.autoscaler.image.pullPolicy }}
+         resources:
+ {{ toYaml .Values.autoscaler.resources | indent 10 }}
 diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-coredns/charts-original/templates/deployment.yaml packages/rke2-coredns/charts/templates/deployment.yaml
 --- packages/rke2-coredns/charts-original/templates/deployment.yaml
 +++ packages/rke2-coredns/charts/templates/deployment.yaml
@@ -149,6 +158,15 @@ diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-coredns/charts-original/templates
          {{- end }}
          app.kubernetes.io/name: {{ template "coredns.name" . }}
          app.kubernetes.io/instance: {{ .Release.Name | quote }}
+@@ -70,7 +70,7 @@
+       {{- end }}
+       containers:
+       - name: "coredns"
+-        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
++        image: {{ template "system_default_registry" . }}{{ .Values.image.repository }}:{{ .Values.image.tag }}
+         imagePullPolicy: {{ .Values.image.pullPolicy }}
+         args: [ "-conf", "/etc/coredns/Corefile" ]
+         volumeMounts:
 diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-coredns/charts-original/templates/_helpers.tpl packages/rke2-coredns/charts/templates/_helpers.tpl
 --- packages/rke2-coredns/charts-original/templates/_helpers.tpl
 +++ packages/rke2-coredns/charts/templates/_helpers.tpl
@@ -160,6 +178,18 @@ diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-coredns/charts-original/templates
  {{/*
  Create the name of the service account to use
  */}}
+@@ -147,3 +148,11 @@
+     {{ default "default" .Values.serviceAccount.name }}
+ {{- end -}}
+ {{- end -}}
++
++{{- define "system_default_registry" -}}
++{{- if .Values.global.systemDefaultRegistry -}}
++{{- printf "%s/" .Values.global.systemDefaultRegistry -}}
++{{- else -}}
++{{- "" -}}
++{{- end -}}
++{{- end -}}
 diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-coredns/charts-original/templates/poddisruptionbudget.yaml packages/rke2-coredns/charts/templates/poddisruptionbudget.yaml
 --- packages/rke2-coredns/charts-original/templates/poddisruptionbudget.yaml
 +++ packages/rke2-coredns/charts/templates/poddisruptionbudget.yaml
@@ -300,9 +330,12 @@ diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-coredns/charts-original/values.ya
    pullPolicy: IfNotPresent
  
  replicaCount: 1
-@@ -196,3 +196,4 @@
+@@ -196,3 +196,7 @@
      ## Annotations for the coredns-autoscaler configmap
      # i.e. strategy.spinnaker.io/versioned: "false" to ensure configmap isn't renamed
      annotations: {}
 +k8sApp : "kube-dns"
++
++global:
++  systemDefaultRegistry: ""
 \ No newline at end of file

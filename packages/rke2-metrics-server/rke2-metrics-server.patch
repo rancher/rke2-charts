@@ -10,6 +10,33 @@ diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-metrics-server/charts-original/Ch
  sources:
  - https://github.com/kubernetes-incubator/metrics-server
  version: 2.11.1
+diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-metrics-server/charts-original/templates/_helpers.tpl packages/rke2-metrics-server/charts/templates/_helpers.tpl
+--- packages/rke2-metrics-server/charts-original/templates/_helpers.tpl
++++ packages/rke2-metrics-server/charts/templates/_helpers.tpl
+@@ -49,3 +49,11 @@
+     {{ default "default" .Values.serviceAccount.name }}
+ {{- end -}}
+ {{- end -}}
++
++{{- define "system_default_registry" -}}
++{{- if .Values.global.systemDefaultRegistry -}}
++{{- printf "%s/" .Values.global.systemDefaultRegistry -}}
++{{- else -}}
++{{- "" -}}
++{{- end -}}
++{{- end -}}
+diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-metrics-server/charts-original/templates/metrics-server-deployment.yaml packages/rke2-metrics-server/charts/templates/metrics-server-deployment.yaml
+--- packages/rke2-metrics-server/charts-original/templates/metrics-server-deployment.yaml
++++ packages/rke2-metrics-server/charts/templates/metrics-server-deployment.yaml
+@@ -47,7 +47,7 @@
+         {{- ( tpl (toYaml .Values.extraContainers) . ) | nindent 8 }}
+         {{- end }}
+         - name: metrics-server
+-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
++          image: {{ template "system_default_registry" . }}{{ .Values.image.repository }}:{{ .Values.image.tag }}
+           imagePullPolicy: {{ .Values.image.pullPolicy }}
+           command:
+             - /metrics-server
 diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-metrics-server/charts-original/values.yaml packages/rke2-metrics-server/charts/values.yaml
 --- packages/rke2-metrics-server/charts-original/values.yaml
 +++ packages/rke2-metrics-server/charts/values.yaml
@@ -22,3 +49,10 @@ diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-metrics-server/charts-original/va
    tag: v0.3.6
    pullPolicy: IfNotPresent
  
+@@ -107,3 +107,6 @@
+   enabled: false
+   minAvailable:
+   maxUnavailable:
++
++global:
++  systemDefaultRegistry: ""
