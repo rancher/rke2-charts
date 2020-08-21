@@ -120,6 +120,15 @@ diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-coredns/charts-original/templates
          {{- end }}
          app.kubernetes.io/name: {{ template "coredns.name" . }}-autoscaler
          app.kubernetes.io/instance: {{ .Release.Name | quote }}
+@@ -63,7 +63,7 @@
+       {{- end }}
+       containers:
+       - name: autoscaler
+-        image: "{{ .Values.autoscaler.image.repository }}:{{ .Values.autoscaler.image.tag }}"
++        image:  {{ template "system_default_registry" . }}{{ .Values.autoscaler.image.repository }}:{{ .Values.autoscaler.image.tag }}
+         imagePullPolicy: {{ .Values.autoscaler.image.pullPolicy }}
+         resources:
+ {{ toYaml .Values.autoscaler.resources | indent 10 }}
 diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-coredns/charts-original/templates/deployment.yaml packages/rke2-coredns/charts/templates/deployment.yaml
 --- packages/rke2-coredns/charts-original/templates/deployment.yaml
 +++ packages/rke2-coredns/charts/templates/deployment.yaml
