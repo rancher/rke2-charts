@@ -61,3 +61,6 @@ calico:
   vethuMTU: 1450
   # Typha is disabled.
   typhaServiceName: none
+
+global:
+  systemDefaultRegistry: ""

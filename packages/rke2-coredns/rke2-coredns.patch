@@ -160,6 +160,19 @@ diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-coredns/charts-original/templates
  {{/*
  Create the name of the service account to use
  */}}
+@@ -147,3 +148,11 @@
+     {{ default "default" .Values.serviceAccount.name }}
+ {{- end -}}
+ {{- end -}}
++
++{{- define "system_default_registry" -}}
++{{- if .Values.global.systemDefaultRegistry -}}
++{{- printf "%s/" .Values.global.systemDefaultRegistry -}}
++{{- else -}}
++{{- "" -}}
++{{- end -}}
++{{- end -}}
+\ No newline at end of file
 diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-coredns/charts-original/templates/poddisruptionbudget.yaml packages/rke2-coredns/charts/templates/poddisruptionbudget.yaml
 --- packages/rke2-coredns/charts-original/templates/poddisruptionbudget.yaml
 +++ packages/rke2-coredns/charts/templates/poddisruptionbudget.yaml
@@ -300,9 +313,12 @@ diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-coredns/charts-original/values.ya
    pullPolicy: IfNotPresent
  
  replicaCount: 1
-@@ -196,3 +196,4 @@
+@@ -196,3 +196,7 @@
      ## Annotations for the coredns-autoscaler configmap
      # i.e. strategy.spinnaker.io/versioned: "false" to ensure configmap isn't renamed
      annotations: {}
 +k8sApp : "kube-dns"
++
++global:
++  systemDefaultRegistry: ""
 \ No newline at end of file
