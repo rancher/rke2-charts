@@ -49,6 +49,8 @@ diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-ingress-nginx/charts-original/tem
  {{- else -}}
  {{- print "extensions/v1beta1" -}}
  {{- end -}}
+-{{- end -}}
+\ No newline at end of file
 +{{- end -}}
 +
 +{{- define "system_default_registry" -}}
@@ -57,8 +59,7 @@ diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-ingress-nginx/charts-original/tem
 +{{- else -}}
 +{{- "" -}}
 +{{- end -}}
- {{- end -}}
-\ No newline at end of file
++{{- end -}}
 diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-ingress-nginx/charts-original/values.yaml packages/rke2-ingress-nginx/charts/values.yaml
 --- packages/rke2-ingress-nginx/charts-original/values.yaml
 +++ packages/rke2-ingress-nginx/charts/values.yaml

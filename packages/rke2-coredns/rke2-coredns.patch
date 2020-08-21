@@ -181,7 +181,6 @@ diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-coredns/charts-original/templates
 +{{- "" -}}
 +{{- end -}}
 +{{- end -}}
-\ No newline at end of file
 diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-coredns/charts-original/templates/poddisruptionbudget.yaml packages/rke2-coredns/charts/templates/poddisruptionbudget.yaml
 --- packages/rke2-coredns/charts-original/templates/poddisruptionbudget.yaml
 +++ packages/rke2-coredns/charts/templates/poddisruptionbudget.yaml

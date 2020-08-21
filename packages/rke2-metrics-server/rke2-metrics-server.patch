@@ -25,7 +25,6 @@ diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-metrics-server/charts-original/te
 +{{- "" -}}
 +{{- end -}}
 +{{- end -}}
-\ No newline at end of file
 diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-metrics-server/charts-original/templates/metrics-server-deployment.yaml packages/rke2-metrics-server/charts/templates/metrics-server-deployment.yaml
 --- packages/rke2-metrics-server/charts-original/templates/metrics-server-deployment.yaml
 +++ packages/rke2-metrics-server/charts/templates/metrics-server-deployment.yaml
