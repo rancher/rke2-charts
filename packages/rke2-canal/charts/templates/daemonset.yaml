@@ -124,6 +124,8 @@ spec:
             # Period, in seconds, at which felix re-applies all iptables state
             - name: FELIX_IPTABLESREFRESHINTERVAL
               value: {{ .Values.calico.felixIptablesRefreshInterval | quote}}
+            - name: FELIX_IPTABLESBACKEND
+              value: {{ .Values.calico.felixIptablesBackend | quote}}
             # No IP address needed.
             - name: IP
               value: ""
