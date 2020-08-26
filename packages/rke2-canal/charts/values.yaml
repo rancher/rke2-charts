@@ -8,7 +8,7 @@ flannel:
   # kube-flannel image
   image:
     repository: rancher/flannel
-    tag: v0.11.0
+    tag: v0.13.0-rancher1-rc1
   # The interface used by canal for host <-> host communication.
   # If left blank, then the interface is chosen using the node's
   # default route.
@@ -50,6 +50,8 @@ calico:
   felixIpv6Support: false
   # Period, in seconds, at which felix re-applies all iptables state
   felixIptablesRefreshInterval: 60
+  # iptables backend to use for felix, defaults to auto but can also be set to nft or legacy
+  felixIptablesBackend: auto
   # Set Felix logging to "info".
   felixLogSeverityScreen: info
   # Enable felix healthcheck.
