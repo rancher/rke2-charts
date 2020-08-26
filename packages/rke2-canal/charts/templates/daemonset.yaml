@@ -151,6 +151,8 @@ spec:
             # enable promentheus metrics
             - name: FELIX_PROMETHEUSMETRICSENABLED
               value: {{ .Values.calico.felixPrometheusMetricsEnabled | quote }}
+            - name: FELIX_XDPENABLED
+              value: {{ .Values.calico.felixXDPEnabled | quote }}
           securityContext:
             privileged: true
           resources:
