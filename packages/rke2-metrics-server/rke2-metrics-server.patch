@@ -37,6 +37,7 @@ diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-metrics-server/charts-original/te
            imagePullPolicy: {{ .Values.image.pullPolicy }}
            command:
              - /metrics-server
+             - --kubelet-preferred-address-types=InternalIP
 diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-metrics-server/charts-original/values.yaml packages/rke2-metrics-server/charts/values.yaml
 --- packages/rke2-metrics-server/charts-original/values.yaml
 +++ packages/rke2-metrics-server/charts/values.yaml
