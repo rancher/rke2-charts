@@ -3,7 +3,7 @@ entries:
   rke2-canal:
   - apiVersion: v1
     appVersion: v3.13.3
-    created: "2020-08-26T23:25:35.281738661Z"
+    created: "2020-09-08T21:39:36.688643173Z"
     description: Install Canal Network Plugin.
     digest: 066bbe68d872d1efbbaf0ddc8f661c0fde558e5ab71d66c8dcd7e85e64ef35b6
     home: https://www.projectcalico.org/
@@ -21,7 +21,7 @@ entries:
   rke2-coredns:
   - apiVersion: v1
     appVersion: 1.6.9
-    created: "2020-08-26T23:25:35.283000463Z"
+    created: "2020-09-08T21:39:36.690957334Z"
     description: CoreDNS is a DNS server that chains plugins and provides Kubernetes
       DNS Services
     digest: 557431aaad003d28a15d929e2fdbe6649499a911ecb341c6d9603fb7b17ac5c6
@@ -49,7 +49,7 @@ entries:
   rke2-ingress-nginx:
   - apiVersion: v1
     appVersion: 0.30.0
-    created: "2020-08-26T23:25:35.285570365Z"
+    created: "2020-09-08T21:39:36.694219802Z"
     description: An nginx Ingress controller that uses ConfigMap to store the nginx
       configuration.
     digest: a4ac4369e809e3f2be372f8ee2c95b4d83c55c2d7fe523e64ee8f3734b976d75
@@ -72,7 +72,7 @@ entries:
   rke2-kube-proxy:
   - apiVersion: v1
     appVersion: v1.18.4
-    created: "2020-08-26T23:25:35.286582667Z"
+    created: "2020-09-08T21:39:36.695864187Z"
     description: Install Kube Proxy.
     digest: b859363c5ecab8c46b53efa34d866b9c27840737ad1afec0eb9729b8968304fb
     keywords:
@@ -89,9 +89,9 @@ entries:
   rke2-metrics-server:
   - apiVersion: v1
     appVersion: 0.3.6
-    created: "2020-08-26T23:25:35.287382868Z"
+    created: "2020-09-08T21:39:36.696834296Z"
     description: Metrics Server is a cluster-wide aggregator of resource usage data.
-    digest: 0fd945409ad5fe6c287aa4f59bc2ac57f12f0af169e0144220ca0b80f110393d
+    digest: 2f0a131ced6b0b17ca1ac684b42f78b08a7016284a9237f333537c8d938f3385
     home: https://github.com/kubernetes-incubator/metrics-server
     keywords:
     - metrics-server
@@ -106,4 +106,4 @@ entries:
     urls:
     - assets/rke2-metrics-server/rke2-metrics-server-2.11.100.tgz
     version: 2.11.100
-generated: "2020-08-26T23:25:35.28078446Z"
+generated: "2020-09-08T21:39:36.686739159Z"
