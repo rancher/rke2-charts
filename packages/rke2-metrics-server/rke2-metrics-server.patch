@@ -40,7 +40,7 @@ diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-metrics-server/charts-original/te
 diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-metrics-server/charts-original/values.yaml packages/rke2-metrics-server/charts/values.yaml
 --- packages/rke2-metrics-server/charts-original/values.yaml
 +++ packages/rke2-metrics-server/charts/values.yaml
-@@ -27,7 +27,7 @@
+@@ -27,16 +27,17 @@
    enabled: false
  
  image:
@@ -49,8 +49,11 @@ diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-metrics-server/charts-original/va
    tag: v0.3.6
    pullPolicy: IfNotPresent
  
-@@ -37,6 +37,7 @@
- args: []
+ imagePullSecrets: []
+ # - registrySecretName
+ 
+-args: []
++args:
  # enable this if you have self-signed certificates, see: https://github.com/kubernetes-incubator/metrics-server
  #  - --kubelet-insecure-tls
 +  - --kubelet-preferred-address-types=InternalIP
