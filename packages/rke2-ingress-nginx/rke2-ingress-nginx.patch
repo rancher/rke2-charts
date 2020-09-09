@@ -75,6 +75,17 @@ diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-ingress-nginx/charts-original/tem
 diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-ingress-nginx/charts-original/values.yaml packages/rke2-ingress-nginx/charts/values.yaml
 --- packages/rke2-ingress-nginx/charts-original/values.yaml
 +++ packages/rke2-ingress-nginx/charts/values.yaml
+@@ -4,8 +4,8 @@
+ controller:
+   name: controller
+   image:
+-    repository: quay.io/kubernetes-ingress-controller/nginx-ingress-controller
+-    tag: "0.30.0"
++    repository: rancher/nginx-ingress-controller
++    tag: "nginx-0.30.0-rancher1"
+     pullPolicy: IfNotPresent
+     # www-data -> uid 101
+     runAsUser: 101
 @@ -37,7 +37,7 @@
    # Required for use with CNI based kubernetes installations (such as ones set up by kubeadm),
    # since CNI and hostport don't mix yet. Can be deprecated once https://github.com/kubernetes/kubernetes/issues/23920
@@ -102,6 +113,17 @@ diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-ingress-nginx/charts-original/val
  
      annotations: {}
      labels: {}
+@@ -440,8 +440,8 @@
+ 
+   name: default-backend
+   image:
+-    repository: k8s.gcr.io/defaultbackend-amd64
+-    tag: "1.5"
++    repository: rancher/nginx-ingress-controller-defaultbackend
++    tag: "1.5-rancher1"
+     pullPolicy: IfNotPresent
+     # nobody user -> uid 65534
+     runAsUser: 65534
 @@ -573,3 +573,6 @@
  ##
  udp: {}
