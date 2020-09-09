@@ -34,6 +34,39 @@ diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-ingress-nginx/charts-original/tem
            imagePullPolicy: "{{ .Values.controller.image.pullPolicy }}"
            {{- if .Values.controller.lifecycle }}
            lifecycle:
+diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-ingress-nginx/charts-original/templates/controller-deployment.yaml packages/rke2-ingress-nginx/charts/templates/controller-deployment.yaml
+--- packages/rke2-ingress-nginx/charts-original/templates/controller-deployment.yaml
++++ packages/rke2-ingress-nginx/charts/templates/controller-deployment.yaml
+@@ -81,16 +81,16 @@
+             - --default-backend-service={{ .Values.controller.defaultBackendService }}
+             {{- end }}
+           {{- end }}
+-          {{- if and (semverCompare ">=0.9.0-beta.1" .Values.controller.image.tag) .Values.controller.publishService.enabled }}
++          {{- if and (semverCompare ">=0.9.0-beta.1" (trimPrefix "nginx-" .Values.controller.image.tag)) .Values.controller.publishService.enabled }}
+             - --publish-service={{ template "nginx-ingress.controller.publishServicePath" . }}
+           {{- end }}
+-          {{- if (semverCompare ">=0.9.0-beta.1" .Values.controller.image.tag) }}
++          {{- if (semverCompare ">=0.9.0-beta.1" (trimPrefix "nginx-" .Values.controller.image.tag)) }}
+             - --election-id={{ .Values.controller.electionID }}
+           {{- end }}
+-          {{- if (semverCompare ">=0.9.0-beta.1" .Values.controller.image.tag) }}
++          {{- if (semverCompare ">=0.9.0-beta.1" (trimPrefix "nginx-" .Values.controller.image.tag)) }}
+             - --ingress-class={{ .Values.controller.ingressClass }}
+           {{- end }}
+-          {{- if (semverCompare ">=0.9.0-beta.1" .Values.controller.image.tag) }}
++          {{- if (semverCompare ">=0.9.0-beta.1" (trimPrefix "nginx-" .Values.controller.image.tag)) }}
+             - --configmap={{ default .Release.Namespace .Values.controller.configMapNamespace }}/{{ template "nginx-ingress.controller.fullname" . }}
+           {{- else }}
+             - --nginx-configmap={{ default .Release.Namespace .Values.controller.configMapNamespace }}/{{ template "nginx-ingress.controller.fullname" . }}
+@@ -125,7 +125,7 @@
+             - --{{ $key }}
+             {{- end }}
+           {{- end }}
+-          {{- if (semverCompare ">=0.16.0" .Values.controller.image.tag) }}
++          {{- if (semverCompare ">=0.16.0" (trimPrefix "nginx-" .Values.controller.image.tag)) }}
+           securityContext:
+             capabilities:
+                 drop:
 diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-ingress-nginx/charts-original/templates/default-backend-deployment.yaml packages/rke2-ingress-nginx/charts/templates/default-backend-deployment.yaml
 --- packages/rke2-ingress-nginx/charts-original/templates/default-backend-deployment.yaml
 +++ packages/rke2-ingress-nginx/charts/templates/default-backend-deployment.yaml
