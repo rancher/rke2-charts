@@ -71,7 +71,7 @@ entries:
     version: 1.36.300
   rke2-kube-proxy:
   - apiVersion: v1
-    appVersion: v1.18.8
+    appVersion: v1.18.4
     created: "2020-09-09T21:34:35.685040219Z"
     description: Install Kube Proxy.
     digest: b859363c5ecab8c46b53efa34d866b9c27840737ad1afec0eb9729b8968304fb
@@ -84,8 +84,8 @@ entries:
     sources:
     - https://github.com/rancher/rke2-charts
     urls:
-    - assets/rke2-kube-proxy/rke2-kube-proxy-v1.18.8.tgz
-    version: v1.18.8
+    - assets/rke2-kube-proxy/rke2-kube-proxy-v1.18.4.tgz
+    version: v1.18.4
   rke2-metrics-server:
   - apiVersion: v1
     appVersion: 0.3.6
