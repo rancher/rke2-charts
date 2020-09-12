@@ -7,7 +7,7 @@ podCidr: "10.42.0.0/16"
 flannel:
   # kube-flannel image
   image:
-    repository: rancher/flannel
+    repository: rancher/hardened-flannel
     tag: v0.13.0-rancher1-rc1
   # The interface used by canal for host <-> host communication.
   # If left blank, then the interface is chosen using the node's
@@ -24,15 +24,15 @@ flannel:
 calico:
   # CNI installation image.
   cniImage:
-    repository: rancher/calico
+    repository: rancher/hardened-calico
     tag: v3.13.3
   # Canal node image.
   nodeImage:
-    repository: rancher/calico
+    repository: rancher/hardened-calico
     tag: v3.13.3
   # Flexvol Image.
   flexvolImage:
-    repository: rancher/calico
+    repository: rancher/hardened-calico
     tag: v3.13.3
   # Datastore type for canal. It can be either kuberentes or etcd.
   datastoreType: kubernetes
