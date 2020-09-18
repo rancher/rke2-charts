@@ -3,9 +3,9 @@ entries:
   rke2-canal:
   - apiVersion: v1
     appVersion: v3.13.3
-    created: "2020-09-12T02:38:09.100101953Z"
+    created: "2020-09-18T23:26:58.364661434Z"
     description: Install Canal Network Plugin.
-    digest: d273c5623d39c1b1bfdf106b9001b126ef1fdab40c6684efc0e648de63233dd3
+    digest: 80038fb1936be26ca762df0ef0d1408b871f139969cac95acdefc8ca2ad5115a
     home: https://www.projectcalico.org/
     keywords:
     - canal
@@ -21,7 +21,7 @@ entries:
   rke2-coredns:
   - apiVersion: v1
     appVersion: 1.6.9
-    created: "2020-09-12T02:38:09.101329257Z"
+    created: "2020-09-18T23:26:58.365929293Z"
     description: CoreDNS is a DNS server that chains plugins and provides Kubernetes
       DNS Services
     digest: c64b636d24e74fb15867c9f10b4cc25f31ba47bcbf1a7d928f3de751106cd951
@@ -49,7 +49,7 @@ entries:
   rke2-ingress-nginx:
   - apiVersion: v1
     appVersion: 0.30.0
-    created: "2020-09-12T02:38:09.103763764Z"
+    created: "2020-09-18T23:26:58.368555122Z"
     description: An nginx Ingress controller that uses ConfigMap to store the nginx
       configuration.
     digest: 1282ac262e761f8f744792ddc8f30adfdba70556fa7d816cf0e63090aa389779
@@ -72,7 +72,7 @@ entries:
   rke2-kube-proxy:
   - apiVersion: v1
     appVersion: v1.18.8
-    created: "2020-09-12T02:38:09.106563273Z"
+    created: "2020-09-18T23:26:58.370388352Z"
     description: Install Kube Proxy.
     digest: 7765237ddc39c416178242e7a6798d679a50f466ac18d3a412207606cd0d66ed
     keywords:
@@ -88,7 +88,7 @@ entries:
     version: v1.18.8
   - apiVersion: v1
     appVersion: v1.18.4
-    created: "2020-09-12T02:38:09.105068368Z"
+    created: "2020-09-18T23:26:58.369513842Z"
     description: Install Kube Proxy.
     digest: b859363c5ecab8c46b53efa34d866b9c27840737ad1afec0eb9729b8968304fb
     keywords:
@@ -105,7 +105,7 @@ entries:
   rke2-metrics-server:
   - apiVersion: v1
     appVersion: 0.3.6
-    created: "2020-09-12T02:38:09.107710576Z"
+    created: "2020-09-18T23:26:58.371102141Z"
     description: Metrics Server is a cluster-wide aggregator of resource usage data.
     digest: b5e662db69252601d2391fc6d299dbf5cb664df0f49a946491b51a616956d45a
     home: https://github.com/kubernetes-incubator/metrics-server
@@ -122,4 +122,4 @@ entries:
     urls:
     - assets/rke2-metrics-server/rke2-metrics-server-2.11.100.tgz
     version: 2.11.100
-generated: "2020-09-12T02:38:09.099251751Z"
+generated: "2020-09-18T23:26:58.356644429Z"
