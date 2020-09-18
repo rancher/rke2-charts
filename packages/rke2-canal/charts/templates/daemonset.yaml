@@ -87,6 +87,7 @@ spec:
         # to communicate with Felix over the Policy Sync API.
         - name: flexvol-driver
           image: {{ template "system_default_registry" . }}{{ .Values.calico.flexvolImage.repository }}:{{ .Values.calico.flexvolImage.tag }}
+          command: ['/usr/local/bin/flexvol.sh', '-s', '/usr/local/bin/flexvol', '-i', 'flexvoldriver']
           volumeMounts:
           - name: flexvol-driver-host
             mountPath: /host/driver
