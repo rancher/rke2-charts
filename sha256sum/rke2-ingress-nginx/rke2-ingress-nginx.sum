@@ -1,0 +1,2 @@
+4bde02ba10867ab55939d0f5a093f2101fc96a9b9816838b53a1e332cb10989f  packages/rke2-ingress-nginx/package.yaml
+8a21fccbfcfa2ae468e496b0b253d5e41bea0d9fbaf43e87dc9e632f8a918af0  packages/rke2-ingress-nginx/rke2-ingress-nginx.patch

@@ -1,0 +1,141 @@
+apiVersion: v1
+entries:
+  rke2-canal:
+  - apiVersion: v1
+    appVersion: v3.13.3
+    created: "2020-09-29T00:14:59.62720045Z"
+    description: Install Canal Network Plugin.
+    digest: 3f0899bac831324de58f398fec36a8e83e04d543ff957320c51c1bd6a1a19f62
+    home: https://www.projectcalico.org/
+    keywords:
+    - canal
+    maintainers:
+    - email: charts@rancher.com
+      name: Rancher Labs
+    name: rke2-canal
+    sources:
+    - https://github.com/rancher/rke2-charts
+    urls:
+    - assets/rke2-canal/rke2-canal-v3.13.3.tgz
+    version: v3.13.3
+  rke2-coredns:
+  - apiVersion: v1
+    appVersion: 1.6.9
+    created: "2020-09-29T00:14:59.628418969Z"
+    description: CoreDNS is a DNS server that chains plugins and provides Kubernetes
+      DNS Services
+    digest: 804db2411f93e67e29a44f8e8f8129d11260b215c3a4905a8db801ce8278562f
+    home: https://coredns.io
+    icon: https://coredns.io/images/CoreDNS_Colour_Horizontal.png
+    keywords:
+    - coredns
+    - dns
+    - kubedns
+    maintainers:
+    - email: hello@acale.ph
+      name: Acaleph
+    - email: shashidhara.huawei@gmail.com
+      name: shashidharatd
+    - email: andor44@gmail.com
+      name: andor44
+    - email: manuel@rueg.eu
+      name: mrueg
+    name: rke2-coredns
+    sources:
+    - https://github.com/coredns/coredns
+    urls:
+    - assets/rke2-coredns/rke2-coredns-1.10.101.tgz
+    version: 1.10.101
+  rke2-ingress-nginx:
+  - apiVersion: v1
+    appVersion: 0.30.0
+    created: "2020-09-29T00:14:59.631113211Z"
+    description: An nginx Ingress controller that uses ConfigMap to store the nginx
+      configuration.
+    digest: 35716cd7d43d7f9041099e274e2baea992a7cf35cc2ebaeb0258c63382300bc8
+    home: https://github.com/kubernetes/ingress-nginx
+    icon: https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Nginx_logo.svg/500px-Nginx_logo.svg.png
+    keywords:
+    - ingress
+    - nginx
+    kubeVersion: '>=1.10.0-0'
+    maintainers:
+    - name: ChiefAlexander
+    - email: Trevor.G.Wood@gmail.com
+      name: taharah
+    name: rke2-ingress-nginx
+    sources:
+    - https://github.com/kubernetes/ingress-nginx
+    urls:
+    - assets/rke2-ingress-nginx/rke2-ingress-nginx-1.36.300.tgz
+    version: 1.36.300
+  rke2-kube-proxy:
+  - apiVersion: v1
+    appVersion: v1.18.9
+    created: "2020-09-29T00:14:59.635289477Z"
+    description: Install Kube Proxy.
+    digest: bac5d46883c6f2d8cea991fed4e398ecd7ba8f0adcab3562f134a189da6a0373
+    keywords:
+    - kube-proxy
+    maintainers:
+    - email: charts@rancher.com
+      name: Rancher Labs
+    name: rke2-kube-proxy
+    sources:
+    - https://github.com/rancher/rke2-charts
+    urls:
+    - assets/rke2-kube-proxy/rke2-kube-proxy-v1.18.9.tgz
+    version: v1.18.9
+  - apiVersion: v1
+    appVersion: v1.18.8
+    created: "2020-09-29T00:14:59.633896455Z"
+    description: Install Kube Proxy.
+    digest: 7765237ddc39c416178242e7a6798d679a50f466ac18d3a412207606cd0d66ed
+    keywords:
+    - kube-proxy
+    maintainers:
+    - email: charts@rancher.com
+      name: Rancher Labs
+    name: rke2-kube-proxy
+    sources:
+    - https://github.com/rancher/rke2-charts
+    urls:
+    - assets/rke2-kube-proxy/rke2-kube-proxy-v1.18.8.tgz
+    version: v1.18.8
+  - apiVersion: v1
+    appVersion: v1.18.4
+    created: "2020-09-29T00:14:59.632610835Z"
+    description: Install Kube Proxy.
+    digest: b859363c5ecab8c46b53efa34d866b9c27840737ad1afec0eb9729b8968304fb
+    keywords:
+    - kube-proxy
+    maintainers:
+    - email: charts@rancher.com
+      name: Rancher Labs
+    name: rke2-kube-proxy
+    sources:
+    - https://github.com/rancher/rke2-charts
+    urls:
+    - assets/rke2-kube-proxy/rke2-kube-proxy-v1.18.4.tgz
+    version: v1.18.4
+  rke2-metrics-server:
+  - apiVersion: v1
+    appVersion: 0.3.6
+    created: "2020-09-29T00:14:59.635936587Z"
+    description: Metrics Server is a cluster-wide aggregator of resource usage data.
+    digest: 6819fd92a1474f815025ca82d943acc1befbf2ba78f12356ecb413d64e3ac3d4
+    home: https://github.com/kubernetes-incubator/metrics-server
+    keywords:
+    - metrics-server
+    maintainers:
+    - email: o.with@sportradar.com
+      name: olemarkus
+    - email: k.aasan@sportradar.com
+      name: kennethaasan
+    name: rke2-metrics-server
+    sources:
+    - https://github.com/kubernetes-incubator/metrics-server
+    urls:
+    - assets/rke2-metrics-server/rke2-metrics-server-2.11.100.tgz
+    version: 2.11.100
+generated: "2020-09-29T00:14:59.626366337Z"
