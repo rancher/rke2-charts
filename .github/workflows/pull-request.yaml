@@ -3,7 +3,7 @@ name: CI-pullrequest
 on:
   pull_request:
     branches:
-      - master
+      - main-source
 
 jobs:
   build:
