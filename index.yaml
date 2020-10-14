@@ -3,9 +3,9 @@ entries:
   rke2-canal:
   - apiVersion: v1
     appVersion: v3.13.3
-    created: "2020-09-29T00:14:59.62720045Z"
+    created: "2020-10-14T23:04:28.478973098Z"
     description: Install Canal Network Plugin.
-    digest: 3f0899bac831324de58f398fec36a8e83e04d543ff957320c51c1bd6a1a19f62
+    digest: 6423216bcc6f75f7039f2e5cdaee17f12e2105d7e051de191d69d6bbbb5ab0bb
     home: https://www.projectcalico.org/
     keywords:
     - canal
@@ -21,10 +21,10 @@ entries:
   rke2-coredns:
   - apiVersion: v1
     appVersion: 1.6.9
-    created: "2020-09-29T00:14:59.628418969Z"
+    created: "2020-10-14T23:04:28.480474823Z"
     description: CoreDNS is a DNS server that chains plugins and provides Kubernetes
       DNS Services
-    digest: 804db2411f93e67e29a44f8e8f8129d11260b215c3a4905a8db801ce8278562f
+    digest: ab846ab883bd4d0023f5a295b1f2c96868a512399331c7f3a71beeff95346bd6
     home: https://coredns.io
     icon: https://coredns.io/images/CoreDNS_Colour_Horizontal.png
     keywords:
@@ -72,9 +72,9 @@ entries:
   rke2-kube-proxy:
   - apiVersion: v1
     appVersion: v1.18.9
-    created: "2020-09-29T00:14:59.635289477Z"
+    created: "2020-10-14T23:04:28.48143194Z"
     description: Install Kube Proxy.
-    digest: bac5d46883c6f2d8cea991fed4e398ecd7ba8f0adcab3562f134a189da6a0373
+    digest: e1e5b6f98c535fa5d90469bd3f731d331bdaa3f9154157d7625b367a7023f399
     keywords:
     - kube-proxy
     maintainers:
@@ -138,4 +138,4 @@ entries:
     urls:
     - assets/rke2-metrics-server/rke2-metrics-server-2.11.100.tgz
     version: 2.11.100
-generated: "2020-09-29T00:14:59.626366337Z"
+generated: "2020-10-14T23:04:28.47797718Z"
