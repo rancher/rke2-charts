@@ -1,0 +1,12 @@
+diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-cilium/charts/Chart.yaml.original packages/rke2-cilium/charts/Chart.yaml
+--- packages/rke2-cilium/charts/Chart.yaml.original	2020-10-22 11:18:24.684786184 +0200
++++ packages/rke2-cilium/charts/Chart.yaml	2020-10-22 11:18:24.684786184 +0200
+@@ -2,7 +2,7 @@
+ appVersion: 1.8.4
+ description: Helm chart for Cilium
+ home: https://cilium.io/
+-name: cilium
++name: rke2-cilium
+ sources:
+ - https://github.com/cilium/cilium
+ version: 1.8.4
