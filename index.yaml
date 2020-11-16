@@ -3,9 +3,9 @@ entries:
   rke2-canal:
   - apiVersion: v1
     appVersion: v3.13.3
-    created: "2020-10-14T23:04:28.478973098Z"
+    created: "2020-11-16T17:06:15.94681859Z"
     description: Install Canal Network Plugin.
-    digest: 6423216bcc6f75f7039f2e5cdaee17f12e2105d7e051de191d69d6bbbb5ab0bb
+    digest: 9d13f506fc17350bb91cce124cfd9b07c593d8ce234e02b855e5146e03e4e913
     home: https://www.projectcalico.org/
     keywords:
     - canal
@@ -70,6 +70,22 @@ entries:
     - assets/rke2-ingress-nginx/rke2-ingress-nginx-1.36.300.tgz
     version: 1.36.300
   rke2-kube-proxy:
+  - apiVersion: v1
+    appVersion: v1.18.12
+    created: "2020-11-16T17:06:15.947860884Z"
+    description: Install Kube Proxy.
+    digest: 4b1b89afca3d533558568c17e5500588bd7fddbb3ddf064ee83caab70a5dd151
+    keywords:
+    - kube-proxy
+    maintainers:
+    - email: charts@rancher.com
+      name: Rancher Labs
+    name: rke2-kube-proxy
+    sources:
+    - https://github.com/rancher/rke2-charts
+    urls:
+    - assets/rke2-kube-proxy/rke2-kube-proxy-v1.18.12.tgz
+    version: v1.18.12
   - apiVersion: v1
     appVersion: v1.18.10
     created: "2020-10-15T22:21:23.252729387Z"
@@ -154,4 +170,4 @@ entries:
     urls:
     - assets/rke2-metrics-server/rke2-metrics-server-2.11.100.tgz
     version: 2.11.100
-generated: "2020-10-15T22:21:23.250893965Z"
+generated: "2020-11-16T17:06:15.945667198Z"
