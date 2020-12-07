@@ -330,6 +330,19 @@ diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-coredns/charts-original/values.ya
    pullPolicy: IfNotPresent
  
  replicaCount: 1
+@@ -34,10 +34,10 @@
+     prometheus.io/port: "9153"
+ 
+ serviceAccount:
+-  create: false
++  create: true
+   # The name of the ServiceAccount to use
+   # If not set and create is true, a name is generated using the fullname template
+-  name:
++  name: coredns
+ 
+ rbac:
+   # If true, create & use RBAC resources
 @@ -196,3 +196,7 @@
      ## Annotations for the coredns-autoscaler configmap
      # i.e. strategy.spinnaker.io/versioned: "false" to ensure configmap isn't renamed
