@@ -3,9 +3,9 @@ entries:
   rke2-canal:
   - apiVersion: v1
     appVersion: v3.13.3
-    created: "2020-11-16T17:06:15.94681859Z"
+    created: "2020-12-07T21:17:34.241969589Z"
     description: Install Canal Network Plugin.
-    digest: 9d13f506fc17350bb91cce124cfd9b07c593d8ce234e02b855e5146e03e4e913
+    digest: 39be2f9b072c8ae6561f5458a04b563bf2c9fe05cb960cb745c1015145c0d5cf
     home: https://www.projectcalico.org/
     keywords:
     - canal
@@ -21,10 +21,10 @@ entries:
   rke2-coredns:
   - apiVersion: v1
     appVersion: 1.6.9
-    created: "2020-10-14T23:04:28.480474823Z"
+    created: "2020-12-07T21:17:34.243794775Z"
     description: CoreDNS is a DNS server that chains plugins and provides Kubernetes
       DNS Services
-    digest: ab846ab883bd4d0023f5a295b1f2c96868a512399331c7f3a71beeff95346bd6
+    digest: 864e87e1e91aacb0a4dba99b9827d4579344fcb6004ef8946c42933d3c0b6a9c
     home: https://coredns.io
     icon: https://coredns.io/images/CoreDNS_Colour_Horizontal.png
     keywords:
@@ -72,9 +72,9 @@ entries:
   rke2-kube-proxy:
   - apiVersion: v1
     appVersion: v1.18.12
-    created: "2020-11-16T17:06:15.947860884Z"
+    created: "2020-12-07T21:17:34.244857883Z"
     description: Install Kube Proxy.
-    digest: 4b1b89afca3d533558568c17e5500588bd7fddbb3ddf064ee83caab70a5dd151
+    digest: e1da2b245da23aaa526cb94c04ed48cd3e730b848c0d33e420dcfd5b15374f5e
     keywords:
     - kube-proxy
     maintainers:
@@ -153,9 +153,9 @@ entries:
   rke2-metrics-server:
   - apiVersion: v1
     appVersion: 0.3.6
-    created: "2020-09-29T00:14:59.635936587Z"
+    created: "2020-12-07T21:17:34.245675966Z"
     description: Metrics Server is a cluster-wide aggregator of resource usage data.
-    digest: 6819fd92a1474f815025ca82d943acc1befbf2ba78f12356ecb413d64e3ac3d4
+    digest: e8f6c8b340f28204dce4887a5ccb10509d190ccaee645ebaad7a0d5a90ab3c45
     home: https://github.com/kubernetes-incubator/metrics-server
     keywords:
     - metrics-server
@@ -170,4 +170,4 @@ entries:
     urls:
     - assets/rke2-metrics-server/rke2-metrics-server-2.11.100.tgz
     version: 2.11.100
-generated: "2020-11-16T17:06:15.945667198Z"
+generated: "2020-12-07T21:17:34.239610748Z"
