@@ -68,7 +68,6 @@ featureGates:
   DefaultIngressClass: true
   DevicePlugins: true
   DryRun: true
-  DynamicAuditing: false
   DynamicKubeletConfig: true
   EndpointSlice: true
   EndpointSliceProxying: false

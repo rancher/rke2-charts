@@ -72,9 +72,9 @@ entries:
   rke2-kube-proxy:
   - apiVersion: v1
     appVersion: v1.19.5
-    created: "2020-12-11T21:02:07.665798353Z"
+    created: "2020-12-12T00:03:09.343109414Z"
     description: Install Kube Proxy.
-    digest: 22f04ce1313fb4b10a2134fb1f852c7d8db09397f6d71cf12c12fed7b8ade3d1
+    digest: 81e1df1c71abb852045ca6d5ddec7a22961db38ce9635d222f660744d97a2493
     keywords:
     - kube-proxy
     maintainers:
@@ -202,4 +202,4 @@ entries:
     urls:
     - assets/rke2-metrics-server/rke2-metrics-server-2.11.100.tgz
     version: 2.11.100
-generated: "2020-12-11T21:02:07.664486941Z"
+generated: "2020-12-12T00:03:09.342029299Z"
