@@ -94,7 +94,6 @@ featureGates:
   QOSReserved: false
   RemainingItemCount: true
   RemoveSelfLink: false
-  ResourceLimitsPriorityFunction: false
   RotateKubeletClientCertificate: true
   RotateKubeletServerCertificate: true
   RunAsGroup: true
