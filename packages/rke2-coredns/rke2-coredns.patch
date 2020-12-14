@@ -1,15 +1,24 @@
 diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-coredns/charts-original/Chart.yaml packages/rke2-coredns/charts/Chart.yaml
 --- packages/rke2-coredns/charts-original/Chart.yaml
 +++ packages/rke2-coredns/charts/Chart.yaml
-@@ -17,7 +17,7 @@
-   name: andor44
- - email: manuel@rueg.eu
-   name: mrueg
+@@ -1,7 +1,6 @@
+ apiVersion: v1
+ appVersion: 1.7.1
+-deprecated: true
+-description: DEPRECATED CoreDNS is a DNS server that chains plugins and provides Kubernetes
++description: CoreDNS is a DNS server that chains plugins and provides Kubernetes
+   DNS Services
+ home: https://coredns.io
+ icon: https://coredns.io/images/CoreDNS_Colour_Horizontal.png
+@@ -9,7 +8,7 @@
+ - coredns
+ - dns
+ - kubedns
 -name: coredns
 +name: rke2-coredns
  sources:
  - https://github.com/coredns/coredns
- version: 1.10.1
+ version: 1.13.8
 diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-coredns/charts-original/templates/clusterrole-autoscaler.yaml packages/rke2-coredns/charts/templates/clusterrole-autoscaler.yaml
 --- packages/rke2-coredns/charts-original/templates/clusterrole-autoscaler.yaml
 +++ packages/rke2-coredns/charts/templates/clusterrole-autoscaler.yaml
@@ -158,7 +167,7 @@ diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-coredns/charts-original/templates
          {{- end }}
          app.kubernetes.io/name: {{ template "coredns.name" . }}
          app.kubernetes.io/instance: {{ .Release.Name | quote }}
-@@ -70,7 +70,7 @@
+@@ -76,7 +76,7 @@
        {{- end }}
        containers:
        - name: "coredns"
@@ -167,6 +176,150 @@ diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-coredns/charts-original/templates
          imagePullPolicy: {{ .Values.image.pullPolicy }}
          args: [ "-conf", "/etc/coredns/Corefile" ]
          volumeMounts:
+diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-coredns/charts-original/templates/deployment.yaml.orig packages/rke2-coredns/charts/templates/deployment.yaml.orig
+--- packages/rke2-coredns/charts-original/templates/deployment.yaml.orig
++++ packages/rke2-coredns/charts/templates/deployment.yaml.orig
+@@ -0,0 +1,140 @@
++apiVersion: apps/v1
++kind: Deployment
++metadata:
++  name: {{ template "coredns.fullname" . }}
++  labels:
++    app.kubernetes.io/managed-by: {{ .Release.Service | quote }}
++    app.kubernetes.io/instance: {{ .Release.Name | quote }}
++    helm.sh/chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
++    {{- if .Values.isClusterService }}
++    k8s-app: {{ .Chart.Name | quote }}
++    kubernetes.io/cluster-service: "true"
++    kubernetes.io/name: "CoreDNS"
++    {{- end }}
++    app.kubernetes.io/name: {{ template "coredns.name" . }}
++{{- if .Values.customLabels }}
++{{ toYaml .Values.customLabels | indent 4 }}
++{{- end }}
++spec:
++  {{- if not .Values.autoscaler.enabled }}
++  replicas: {{ .Values.replicaCount }}
++  {{- end }}
++  strategy:
++    type: RollingUpdate
++    rollingUpdate:
++      maxUnavailable: {{ .Values.rollingUpdate.maxUnavailable }}
++      maxSurge: {{ .Values.rollingUpdate.maxSurge }}
++  selector:
++    matchLabels:
++      app.kubernetes.io/instance: {{ .Release.Name | quote }}
++      {{- if .Values.isClusterService }}
++      k8s-app: {{ .Chart.Name | quote }}
++      {{- end }}
++      app.kubernetes.io/name: {{ template "coredns.name" . }}
++  template:
++    metadata:
++      labels:
++        {{- if .Values.isClusterService }}
++        k8s-app: {{ .Chart.Name | quote }}
++        {{- end }}
++        app.kubernetes.io/name: {{ template "coredns.name" . }}
++        app.kubernetes.io/instance: {{ .Release.Name | quote }}
++        {{- if .Values.customLabels }}
++        {{ toYaml .Values.customLabels }}
++        {{- end }}
++      annotations:
++        checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
++        {{- if .Values.isClusterService }}
++        scheduler.alpha.kubernetes.io/critical-pod: ''
++        scheduler.alpha.kubernetes.io/tolerations: '[{"key":"CriticalAddonsOnly", "operator":"Exists"}]'
++        {{- end }}
++{{- if .Values.podAnnotations }}
++{{ toYaml .Values.podAnnotations | indent 8 }}
++{{- end }}
++    spec:
++      {{- if .Values.terminationGracePeriodSeconds }}
++      terminationGracePeriodSeconds: {{ .Values.terminationGracePeriodSeconds }}
++      {{- end }}
++      serviceAccountName: {{ template "coredns.serviceAccountName" . }}
++      {{- if .Values.priorityClassName }}
++      priorityClassName: {{ .Values.priorityClassName | quote }}
++      {{- end }}
++      {{- if .Values.isClusterService }}
++      dnsPolicy: Default
++      {{- end }}
++      {{- if .Values.affinity }}
++      affinity:
++{{ toYaml .Values.affinity | indent 8 }}
++      {{- end }}
++      {{- if .Values.tolerations }}
++      tolerations:
++{{ toYaml .Values.tolerations | indent 8 }}
++      {{- end }}
++      {{- if .Values.nodeSelector }}
++      nodeSelector:
++{{ toYaml .Values.nodeSelector | indent 8 }}
++      {{- end }}
++      containers:
++      - name: "coredns"
++        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
++        imagePullPolicy: {{ .Values.image.pullPolicy }}
++        args: [ "-conf", "/etc/coredns/Corefile" ]
++        volumeMounts:
++        - name: config-volume
++          mountPath: /etc/coredns
++{{- range .Values.extraSecrets }}
++        - name: {{ .name }}
++          mountPath: {{ .mountPath }}
++          readOnly: true
++{{- end }}
++{{- if .Values.extraVolumeMounts }}
++{{- toYaml .Values.extraVolumeMounts | nindent 8}}
++{{- end }}
++        resources:
++{{ toYaml .Values.resources | indent 10 }}
++        ports:
++{{ include "coredns.containerPorts" . | indent 8 }}
++        livenessProbe:
++          httpGet:
++            path: /health
++            port: 8080
++            scheme: HTTP
++          initialDelaySeconds: 60
++          timeoutSeconds: 5
++          successThreshold: 1
++          failureThreshold: 5
++        readinessProbe:
++          httpGet:
++            path: /ready
++            port: 8181
++            scheme: HTTP
++          initialDelaySeconds: 10
++          timeoutSeconds: 5
++          successThreshold: 1
++          failureThreshold: 5
++        {{- if .Values.preStopSleep }}
++        lifecycle:
++          preStop:
++            exec:
++              command: ["/usr/bin/sleep", "{{ .Values.preStopSleep }}"]
++        {{- end }}
++      volumes:
++        - name: config-volume
++          configMap:
++            name: {{ template "coredns.fullname" . }}
++            items:
++            - key: Corefile
++              path: Corefile
++            {{ range .Values.zoneFiles }}
++            - key: {{ .filename }}
++              path: {{ .filename }}
++            {{ end }}
++{{- range .Values.extraSecrets }}
++        - name: {{ .name }}
++          secret:
++            secretName: {{ .name }}
++            defaultMode: 400
++{{- end }}
++{{- if .Values.extraVolumes }}
++{{ toYaml .Values.extraVolumes | indent 8 }}
++{{- end }}
 diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-coredns/charts-original/templates/_helpers.tpl packages/rke2-coredns/charts/templates/_helpers.tpl
 --- packages/rke2-coredns/charts-original/templates/_helpers.tpl
 +++ packages/rke2-coredns/charts/templates/_helpers.tpl
@@ -314,8 +467,54 @@ diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-coredns/charts-original/templates
 +  {{ else }}
 +  clusterIP: {{ (lookup "v1" "ConfigMap" "kube-system" "cluster-dns").data.clusterDNS }}
    {{- end }}
-   {{- if .Values.service.externalTrafficPolicy }}
-   externalTrafficPolicy: {{ .Values.service.externalTrafficPolicy }}
+   {{- if .Values.service.externalIPs }}
+   externalIPs:
+diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-coredns/charts-original/templates/service.yaml.orig packages/rke2-coredns/charts/templates/service.yaml.orig
+--- packages/rke2-coredns/charts-original/templates/service.yaml.orig
++++ packages/rke2-coredns/charts/templates/service.yaml.orig
+@@ -0,0 +1,42 @@
++apiVersion: v1
++kind: Service
++metadata:
++  name: {{ template "coredns.fullname" . }}
++  labels:
++    app.kubernetes.io/managed-by: {{ .Release.Service | quote }}
++    app.kubernetes.io/instance: {{ .Release.Name | quote }}
++    helm.sh/chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
++    {{- if .Values.isClusterService }}
++    k8s-app: {{ .Chart.Name | quote }}
++    kubernetes.io/cluster-service: "true"
++    kubernetes.io/name: "CoreDNS"
++    {{- end }}
++    app.kubernetes.io/name: {{ template "coredns.name" . }}
++{{- if .Values.customLabels }}
++{{ toYaml .Values.customLabels | indent 4 }}
++{{- end }}
++  annotations:
++{{ toYaml .Values.service.annotations | indent 4 }}
++spec:
++  selector:
++    app.kubernetes.io/instance: {{ .Release.Name | quote }}
++    {{- if .Values.isClusterService }}
++    k8s-app: {{ .Chart.Name | quote }}
++    {{- end }}
++    app.kubernetes.io/name: {{ template "coredns.name" . }}
++  {{- if .Values.service.clusterIP }}
++  clusterIP: {{ .Values.service.clusterIP }}
++  {{- end }}
++  {{- if .Values.service.externalIPs }}
++  externalIPs:
++  {{ toYaml .Values.service.externalIPs | indent 4 }}
++  {{- end }}
++  {{- if .Values.service.externalTrafficPolicy }}
++  externalTrafficPolicy: {{ .Values.service.externalTrafficPolicy }}
++  {{- end }}
++  {{- if .Values.service.loadBalancerIP }}
++  loadBalancerIP: {{ .Values.service.loadBalancerIP }}
++  {{- end }}
++  ports:
++{{ include "coredns.servicePorts" . | indent 2 -}}
++  type: {{ default "ClusterIP" .Values.serviceType }}
 diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-coredns/charts-original/values.yaml packages/rke2-coredns/charts/values.yaml
 --- packages/rke2-coredns/charts-original/values.yaml
 +++ packages/rke2-coredns/charts/values.yaml
@@ -324,14 +523,14 @@ diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-coredns/charts-original/values.ya
  
  image:
 -  repository: coredns/coredns
--  tag: "1.6.9"
+-  tag: "1.7.1"
 +  repository: rancher/hardened-coredns
-+  tag: "v1.6.9"
++  tag: "v1.7.1"
    pullPolicy: IfNotPresent
  
  replicaCount: 1
-@@ -34,10 +34,10 @@
-     prometheus.io/port: "9153"
+@@ -66,10 +66,10 @@
+   annotations: {}
  
  serviceAccount:
 -  create: false
@@ -343,7 +542,7 @@ diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-coredns/charts-original/values.ya
  
  rbac:
    # If true, create & use RBAC resources
-@@ -196,3 +196,7 @@
+@@ -253,3 +253,7 @@
      ## Annotations for the coredns-autoscaler configmap
      # i.e. strategy.spinnaker.io/versioned: "false" to ensure configmap isn't renamed
      annotations: {}
