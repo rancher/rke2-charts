@@ -1,2 +1,2 @@
-fc5ea8304280468121448104f00dddefc683eb28c65d76659f570c2c0d4100c0  packages/rke2-coredns/rke2-coredns.patch
-f6587331463a0e78ebc919f858baa65197041da16114c27f3171a98ed02c8f82  packages/rke2-coredns/package.yaml
+287ce7136d6ca8c0a945a40a6a1bc805c6a28356e82e0250de1db640071875e5  packages/rke2-coredns/rke2-coredns.patch
+23c356b184a5b9a13c464ada2fcebd80c0abed8793d685586adb821d41751d1b  packages/rke2-coredns/package.yaml

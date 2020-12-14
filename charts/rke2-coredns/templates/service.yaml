@@ -29,6 +29,10 @@ spec:
   {{ else }}
   clusterIP: {{ (lookup "v1" "ConfigMap" "kube-system" "cluster-dns").data.clusterDNS }}
   {{- end }}
+  {{- if .Values.service.externalIPs }}
+  externalIPs:
+  {{ toYaml .Values.service.externalIPs | indent 4 }}
+  {{- end }}
   {{- if .Values.service.externalTrafficPolicy }}
   externalTrafficPolicy: {{ .Values.service.externalTrafficPolicy }}
   {{- end }}

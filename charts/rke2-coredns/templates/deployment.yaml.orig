@@ -7,7 +7,7 @@ metadata:
     app.kubernetes.io/instance: {{ .Release.Name | quote }}
     helm.sh/chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
     {{- if .Values.isClusterService }}
-    k8s-app: {{ .Values.k8sApp | default .Chart.Name | quote }}
+    k8s-app: {{ .Chart.Name | quote }}
     kubernetes.io/cluster-service: "true"
     kubernetes.io/name: "CoreDNS"
     {{- end }}
@@ -28,14 +28,14 @@ spec:
     matchLabels:
       app.kubernetes.io/instance: {{ .Release.Name | quote }}
       {{- if .Values.isClusterService }}
-      k8s-app: {{ .Values.k8sApp | default .Chart.Name | quote }}
+      k8s-app: {{ .Chart.Name | quote }}
       {{- end }}
       app.kubernetes.io/name: {{ template "coredns.name" . }}
   template:
     metadata:
       labels:
         {{- if .Values.isClusterService }}
-        k8s-app: {{ .Values.k8sApp | default .Chart.Name | quote }}
+        k8s-app: {{ .Chart.Name | quote }}
         {{- end }}
         app.kubernetes.io/name: {{ template "coredns.name" . }}
         app.kubernetes.io/instance: {{ .Release.Name | quote }}
@@ -76,7 +76,7 @@ spec:
       {{- end }}
       containers:
       - name: "coredns"
-        image: {{ template "system_default_registry" . }}{{ .Values.image.repository }}:{{ .Values.image.tag }}
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         args: [ "-conf", "/etc/coredns/Corefile" ]
         volumeMounts:
