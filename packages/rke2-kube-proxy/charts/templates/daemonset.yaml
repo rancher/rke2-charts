@@ -58,7 +58,7 @@ spec:
       - operator: Exists
       volumes:
       - hostPath:
-          path: /var/lib/rancher/rke2/agent
+          path: {{ template "rke2_data_dir" . }}/agent
           type: ""
         name: rke2config
       - configMap:
