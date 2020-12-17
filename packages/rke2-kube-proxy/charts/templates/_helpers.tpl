@@ -12,3 +12,10 @@
 {{- "/var/lib/rancher/rke2" -}}
 {{- end -}}
 {{- end -}}
+{{- define "kubeproxy_kubeconfig" -}}
+{{- if .Values.global.rke2DataDir -}}
+{{- printf "%s/agent/kubeproxy.kubeconfig" .Values.global.rke2DataDir -}}
+{{- else -}}
+{{- printf "%s" .Values.clientConnection.kubeconfig -}}
+{{- end -}}
+{{- end -}}

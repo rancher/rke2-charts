@@ -8,7 +8,7 @@ data:
       acceptContentTypes: {{ .Values.clientConnection.acceptContentTypes | quote }}
       burst: {{ .Values.clientConnection.burst }}
       contentType: {{ .Values.clientConnection.contentType | quote }}
-      kubeconfig: {{ .Values.clientConnection.kubeconfig | quote }}
+      kubeconfig: {{ include "kubeproxy_kubeconfig" . | quote }}
       qps: {{ .Values.clientConnection.qps }} 
     clusterCIDR: {{ .Values.clusterCIDR | quote }} 
     configSyncPeriod: {{ .Values.configSyncPeriod }}
