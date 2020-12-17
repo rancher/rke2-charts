@@ -33,7 +33,7 @@ spec:
         volumeMounts:
         - mountPath: /var/lib/kube-proxy
           name: kube-proxy
-        - mountPath: /var/lib/rancher/rke2/agent
+        - mountPath: {{ template "rke2_data_dir" . }}/agent
           name: rke2config
           readOnly: true
         - mountPath: /run/xtables.lock
