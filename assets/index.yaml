@@ -21,10 +21,10 @@ entries:
   rke2-coredns:
   - apiVersion: v1
     appVersion: 1.7.1
-    created: "2020-12-17T00:41:06.135209637Z"
+    created: "2021-01-08T18:12:00.296423364Z"
     description: CoreDNS is a DNS server that chains plugins and provides Kubernetes
       DNS Services
-    digest: 638d62257ef168967f52a09f9083896d1f0dbc16bf55781251dbd2c94a4704bd
+    digest: 335099356a98589e09f1bb940913b0ed6abb8d2c4db91720f87d1cf7697a5cf7
     home: https://coredns.io
     icon: https://coredns.io/images/CoreDNS_Colour_Horizontal.png
     keywords:
@@ -67,10 +67,10 @@ entries:
   rke2-ingress-nginx:
   - apiVersion: v1
     appVersion: 0.30.0
-    created: "2020-09-29T00:14:59.631113211Z"
+    created: "2021-01-08T18:12:00.29873777Z"
     description: An nginx Ingress controller that uses ConfigMap to store the nginx
       configuration.
-    digest: 35716cd7d43d7f9041099e274e2baea992a7cf35cc2ebaeb0258c63382300bc8
+    digest: a033934e70a3761d2ba5b55e782c4169088bf8f53f5bcf30eec5e237282261c2
     home: https://github.com/kubernetes/ingress-nginx
     icon: https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Nginx_logo.svg/500px-Nginx_logo.svg.png
     keywords:
@@ -203,9 +203,9 @@ entries:
   rke2-metrics-server:
   - apiVersion: v1
     appVersion: 0.3.6
-    created: "2020-12-17T00:41:06.13713324Z"
+    created: "2021-01-08T18:12:00.299468471Z"
     description: Metrics Server is a cluster-wide aggregator of resource usage data.
-    digest: 87715a302acc4229bba04200b3f607f2a1bb5d3c507b436194df7fb4ac219abd
+    digest: 8523a3954cd797e2e2094bde462e85cb86453a6349b8c09d1f7e19072caa5768
     home: https://github.com/kubernetes-incubator/metrics-server
     keywords:
     - metrics-server
@@ -220,4 +220,4 @@ entries:
     urls:
     - assets/rke2-metrics-server/rke2-metrics-server-2.11.100.tgz
     version: 2.11.100
-generated: "2020-12-17T19:20:49.382405551Z"
+generated: "2021-01-08T18:12:00.295038561Z"

@@ -59,7 +59,7 @@ podAnnotations: {}
 #  scheduler.alpha.kubernetes.io/critical-pod: ''
 
 ## Set a pod priorityClassName
-# priorityClassName: system-node-critical
+priorityClassName: system-node-critical
 
 extraVolumeMounts: []
 #  - name: secrets
