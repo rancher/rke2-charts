@@ -1,24 +1,15 @@
 diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-coredns/charts-original/Chart.yaml packages/rke2-coredns/charts/Chart.yaml
 --- packages/rke2-coredns/charts-original/Chart.yaml
 +++ packages/rke2-coredns/charts/Chart.yaml
-@@ -1,7 +1,6 @@
- apiVersion: v1
- appVersion: 1.7.1
--deprecated: true
--description: DEPRECATED CoreDNS is a DNS server that chains plugins and provides Kubernetes
-+description: CoreDNS is a DNS server that chains plugins and provides Kubernetes
-   DNS Services
- home: https://coredns.io
- icon: https://coredns.io/images/CoreDNS_Colour_Horizontal.png
-@@ -9,7 +8,7 @@
- - coredns
- - dns
- - kubedns
+@@ -17,7 +17,7 @@
+   name: andor44
+ - email: manuel@rueg.eu
+   name: mrueg
 -name: coredns
 +name: rke2-coredns
  sources:
  - https://github.com/coredns/coredns
- version: 1.13.8
+ version: 1.10.1
 diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-coredns/charts-original/templates/_helpers.tpl packages/rke2-coredns/charts/templates/_helpers.tpl
 --- packages/rke2-coredns/charts-original/templates/_helpers.tpl
 +++ packages/rke2-coredns/charts/templates/_helpers.tpl
@@ -190,7 +181,7 @@ diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-coredns/charts-original/templates
          {{- end }}
          app.kubernetes.io/name: {{ template "coredns.name" . }}
          app.kubernetes.io/instance: {{ .Release.Name | quote }}
-@@ -76,7 +76,7 @@
+@@ -70,7 +70,7 @@
        {{- end }}
        containers:
        - name: "coredns"
@@ -278,8 +269,8 @@ diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-coredns/charts-original/templates
 +  {{ else }}
 +  clusterIP: {{ (lookup "v1" "ConfigMap" "kube-system" "cluster-dns").data.clusterDNS }}
    {{- end }}
-   {{- if .Values.service.externalIPs }}
-   externalIPs:
+   {{- if .Values.service.externalTrafficPolicy }}
+   externalTrafficPolicy: {{ .Values.service.externalTrafficPolicy }}
 diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-coredns/charts-original/templates/serviceaccount-autoscaler.yaml packages/rke2-coredns/charts/templates/serviceaccount-autoscaler.yaml
 --- packages/rke2-coredns/charts-original/templates/serviceaccount-autoscaler.yaml
 +++ packages/rke2-coredns/charts/templates/serviceaccount-autoscaler.yaml
@@ -333,14 +324,14 @@ diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-coredns/charts-original/values.ya
  
  image:
 -  repository: coredns/coredns
--  tag: "1.7.1"
+-  tag: "1.6.9"
 +  repository: rancher/hardened-coredns
-+  tag: "v1.7.1"
++  tag: "v1.6.9"
    pullPolicy: IfNotPresent
  
  replicaCount: 1
-@@ -66,10 +66,10 @@
-   annotations: {}
+@@ -34,10 +34,10 @@
+     prometheus.io/port: "9153"
  
  serviceAccount:
 -  create: false
@@ -352,7 +343,7 @@ diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-coredns/charts-original/values.ya
  
  rbac:
    # If true, create & use RBAC resources
-@@ -84,7 +84,7 @@
+@@ -52,7 +52,7 @@
  isClusterService: true
  
  # Optional priority class to be used for the coredns pods. Used for autoscaler if autoscaler.priorityClassName not set.
@@ -361,7 +352,7 @@ diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-coredns/charts-original/values.ya
  
  # Default zone is what Kubernetes recommends:
  # https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/#coredns-configmap-options
-@@ -253,3 +253,7 @@
+@@ -196,3 +196,7 @@
      ## Annotations for the coredns-autoscaler configmap
      # i.e. strategy.spinnaker.io/versioned: "false" to ensure configmap isn't renamed
      annotations: {}
