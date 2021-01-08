@@ -10,6 +10,32 @@ diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-ingress-nginx/charts-original/Cha
  sources:
  - https://github.com/kubernetes/ingress-nginx
  version: 1.36.3
+diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-ingress-nginx/charts-original/templates/_helpers.tpl packages/rke2-ingress-nginx/charts/templates/_helpers.tpl
+--- packages/rke2-ingress-nginx/charts-original/templates/_helpers.tpl
++++ packages/rke2-ingress-nginx/charts/templates/_helpers.tpl
+@@ -55,6 +55,7 @@
+ Users can provide an override for an explicit service they want bound via `.Values.controller.publishService.pathOverride`
+ 
+ */}}
++
+ {{- define "nginx-ingress.controller.publishServicePath" -}}
+ {{- $defServiceName := printf "%s/%s" .Release.Namespace (include "nginx-ingress.controller.fullname" .) -}}
+ {{- $servicePath := default $defServiceName .Values.controller.publishService.pathOverride }}
+@@ -122,4 +123,12 @@
+ {{- else -}}
+ {{- print "extensions/v1beta1" -}}
+ {{- end -}}
+-{{- end -}}
+\ No newline at end of file
++{{- end -}}
++
++{{- define "system_default_registry" -}}
++{{- if .Values.global.systemDefaultRegistry -}}
++{{- printf "%s/" .Values.global.systemDefaultRegistry -}}
++{{- else -}}
++{{- "" -}}
++{{- end -}}
++{{- end -}}
 diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-ingress-nginx/charts-original/templates/admission-webhooks/job-patch/job-createSecret.yaml packages/rke2-ingress-nginx/charts/templates/admission-webhooks/job-patch/job-createSecret.yaml
 --- packages/rke2-ingress-nginx/charts-original/templates/admission-webhooks/job-patch/job-createSecret.yaml
 +++ packages/rke2-ingress-nginx/charts/templates/admission-webhooks/job-patch/job-createSecret.yaml
@@ -100,32 +126,6 @@ diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-ingress-nginx/charts-original/tem
            imagePullPolicy: "{{ .Values.defaultBackend.image.pullPolicy }}"
            args:
            {{- range $key, $value := .Values.defaultBackend.extraArgs }}
-diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-ingress-nginx/charts-original/templates/_helpers.tpl packages/rke2-ingress-nginx/charts/templates/_helpers.tpl
---- packages/rke2-ingress-nginx/charts-original/templates/_helpers.tpl
-+++ packages/rke2-ingress-nginx/charts/templates/_helpers.tpl
-@@ -55,6 +55,7 @@
- Users can provide an override for an explicit service they want bound via `.Values.controller.publishService.pathOverride`
- 
- */}}
-+
- {{- define "nginx-ingress.controller.publishServicePath" -}}
- {{- $defServiceName := printf "%s/%s" .Release.Namespace (include "nginx-ingress.controller.fullname" .) -}}
- {{- $servicePath := default $defServiceName .Values.controller.publishService.pathOverride }}
-@@ -122,4 +123,12 @@
- {{- else -}}
- {{- print "extensions/v1beta1" -}}
- {{- end -}}
--{{- end -}}
-\ No newline at end of file
-+{{- end -}}
-+
-+{{- define "system_default_registry" -}}
-+{{- if .Values.global.systemDefaultRegistry -}}
-+{{- printf "%s/" .Values.global.systemDefaultRegistry -}}
-+{{- else -}}
-+{{- "" -}}
-+{{- end -}}
-+{{- end -}}
 diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-ingress-nginx/charts-original/values.yaml packages/rke2-ingress-nginx/charts/values.yaml
 --- packages/rke2-ingress-nginx/charts-original/values.yaml
 +++ packages/rke2-ingress-nginx/charts/values.yaml
