@@ -39,10 +39,10 @@ entries:
     version: 1.13.800
   - apiVersion: v1
     appVersion: 1.6.9
-    created: "2021-01-09T00:58:33.508229127Z"
+    created: "2021-01-13T00:41:56.07674445Z"
     description: CoreDNS is a DNS server that chains plugins and provides Kubernetes
       DNS Services
-    digest: 702e7bb14f3a32108166c58e060fb76098a3f44cf92807bd7a9c49ce3fcedd9d
+    digest: c5663262f8382f88cfa65cec1064ecceeef564ce38910004505a9612ec4c4f00
     home: https://coredns.io
     icon: https://coredns.io/images/CoreDNS_Colour_Horizontal.png
     keywords:
@@ -220,4 +220,4 @@ entries:
     urls:
     - assets/rke2-metrics-server/rke2-metrics-server-2.11.100.tgz
     version: 2.11.100
-generated: "2021-01-09T00:58:33.506836225Z"
+generated: "2021-01-13T00:41:56.075564647Z"
