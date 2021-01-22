@@ -46,7 +46,7 @@ data:
       udpTimeout: {{ .Values.ipvs.udpTimeout }}
       {{ end }}
     kind: KubeProxyConfiguration
-    metricsBindAddress: {{ .Values.metricsBindAddresses | quote }}
+    metricsBindAddress: {{ .Values.metricsBindAddress | quote }}
     mode: {{ .Values.proxy.mode | quote }}
     nodePortAddresses: null
     oomScoreAdj: {{ .Values.oomScoreAdj }}
