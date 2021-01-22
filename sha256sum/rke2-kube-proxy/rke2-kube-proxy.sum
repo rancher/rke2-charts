@@ -1,5 +1,5 @@
-592ed2815ef2cafb35da8200f3aed944f62d64e3b9bd5c8f92485d2912852de8  packages/rke2-kube-proxy/charts/values.yaml
-85530290990f9ababced4f0ebc4e255af7d78df35e112e0e19a896c56ad1942c  packages/rke2-kube-proxy/charts/Chart.yaml
+599756b59da3b3b76c787539e0f6bb2f884f0fc16cefd2d43f86e85b8695c276  packages/rke2-kube-proxy/charts/values.yaml
+444c96f0363011a6cbd60939e9b2bfe52144679c44d99ec8c651875d669f6687  packages/rke2-kube-proxy/charts/Chart.yaml
 6a1dcaed632df8e1c4478255d9fba792f4ee7a10aa5fe88861d0eed4357ca392  packages/rke2-kube-proxy/charts/templates/daemonset.yaml
 3ea61d8092a4c6841e1a28d9b5db86110a263b693fb2845679cd2fc1891b5763  packages/rke2-kube-proxy/charts/templates/rbac.yaml
 00e5a2a05f04e3a96f0d7b68516ca830bc35dae1ce8a61bbe78adc3b53f02c6d  packages/rke2-kube-proxy/charts/templates/_helpers.tpl

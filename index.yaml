@@ -89,6 +89,22 @@ entries:
     version: 1.36.300
   rke2-kube-proxy:
   - apiVersion: v1
+    appVersion: v1.20.2
+    created: "2021-01-22T21:48:26.082236107Z"
+    description: Install Kube Proxy.
+    digest: 90c5cd701a5f7cce25a06384ebe2598c5c706bf0b595cd66d56f255a7eb64f4b
+    keywords:
+    - kube-proxy
+    maintainers:
+    - email: charts@rancher.com
+      name: Rancher Labs
+    name: rke2-kube-proxy
+    sources:
+    - https://github.com/rancher/rke2-charts
+    urls:
+    - assets/rke2-kube-proxy/rke2-kube-proxy-v1.20.2.tgz
+    version: v1.20.2
+  - apiVersion: v1
     appVersion: v1.19.7
     created: "2021-01-22T21:35:45.405178128Z"
     description: Install Kube Proxy.
@@ -252,4 +268,4 @@ entries:
     urls:
     - assets/rke2-metrics-server/rke2-metrics-server-2.11.100.tgz
     version: 2.11.100
-generated: "2021-01-22T21:35:45.399982097Z"
+generated: "2021-01-22T21:48:26.080448508Z"
