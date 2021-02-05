@@ -1,0 +1,12 @@
+--- charts-original/templates/hubble-relay-deployment.yaml	2021-02-04 01:17:41.000000000 +0100
++++ charts/templates/hubble-relay-deployment.yaml	2021-02-08 14:38:47.683465207 +0100
+@@ -45,7 +45,7 @@
+ {{- end }}
+       containers:
+         - name: hubble-relay
+-          image: {{ .Values.hubble.relay.image.repository }}:{{ .Values.hubble.relay.image.tag }}
++          image: {{ template "system_default_registry" . }}{{ .Values.hubble.relay.image.repository }}:{{ .Values.hubble.relay.image.tag }}
+           imagePullPolicy: {{ .Values.hubble.relay.image.pullPolicy }}
+           command:
+             - hubble-relay
+diff -x '*.tgz' -x '*.lock' -uNr charts-original/templates/hubble-ui-deployment.yaml charts/templates/hubble-ui-deployment.yaml

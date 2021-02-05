@@ -1,0 +1,30 @@
+--- charts-original/templates/clustermesh-apiserver-deployment.yaml	2021-02-04 01:17:41.000000000 +0100
++++ charts/templates/clustermesh-apiserver-deployment.yaml	2021-02-08 14:38:47.591464573 +0100
+@@ -30,7 +30,7 @@
+       serviceAccount: clustermesh-apiserver
+       initContainers:
+       - name: etcd-init
+-        image: {{ .Values.clustermesh.apiserver.etcd.image.repository }}:{{ .Values.clustermesh.apiserver.etcd.image.tag }}
++        image: {{ template "system_default_registry" . }}{{ .Values.clustermesh.apiserver.etcd.image.repository }}:{{ .Values.clustermesh.apiserver.etcd.image.tag }}
+         imagePullPolicy: {{ .Values.clustermesh.apiserver.etcd.image.pullPolicy }}
+         env:
+         - name: ETCDCTL_API
+@@ -67,7 +67,7 @@
+           name: etcd-data-dir
+       containers:
+       - name: etcd
+-        image: {{ .Values.clustermesh.apiserver.etcd.image.repository }}:{{ .Values.clustermesh.apiserver.etcd.image.tag }}
++        image: {{ template "system_default_registry" . }}{{ .Values.clustermesh.apiserver.etcd.image.repository }}:{{ .Values.clustermesh.apiserver.etcd.image.tag }}
+         imagePullPolicy: {{ .Values.clustermesh.apiserver.etcd.image.pullPolicy }}
+         env:
+         - name: ETCDCTL_API
+@@ -96,7 +96,7 @@
+         - mountPath: /var/run/etcd
+           name: etcd-data-dir
+       - name: "apiserver"
+-        image: {{ .Values.clustermesh.apiserver.image.repository }}:{{ .Values.clustermesh.apiserver.image.tag }}
++        image: {{ template "system_default_registry" . }}{{ .Values.clustermesh.apiserver.image.repository }}:{{ .Values.clustermesh.apiserver.image.tag }}
+         imagePullPolicy: {{ .Values.clustermesh.apiserver.image.pullPolicy }}
+         command:
+           - /usr/bin/clustermesh-apiserver
+diff -x '*.tgz' -x '*.lock' -uNr charts-original/templates/_clustermesh-apiserver-generate-certs-job-spec.tpl charts/templates/_clustermesh-apiserver-generate-certs-job-spec.tpl

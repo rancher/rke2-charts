@@ -1,0 +1,12 @@
+--- charts-original/templates/cilium-nodeinit-daemonset.yaml	2021-02-04 01:17:41.000000000 +0100
++++ charts/templates/cilium-nodeinit-daemonset.yaml	2021-02-08 14:38:47.519464077 +0100
+@@ -34,7 +34,7 @@
+ {{- end }}
+       containers:
+         - name: node-init
+-          image: {{ .Values.nodeinit.image.repository }}:{{ .Values.nodeinit.image.tag }}
++          image: {{ template "system_default_registry" . }}{{ .Values.nodeinit.image.repository }}:{{ .Values.nodeinit.image.tag }}
+           imagePullPolicy: {{ .Values.nodeinit.image.pullPolicy }}
+           securityContext:
+             privileged: true
+diff -x '*.tgz' -x '*.lock' -uNr charts-original/templates/cilium-operator-deployment.yaml charts/templates/cilium-operator-deployment.yaml
