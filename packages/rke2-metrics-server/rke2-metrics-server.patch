@@ -9,7 +9,8 @@ diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-metrics-server/charts-original/Ch
 +name: rke2-metrics-server
  sources:
  - https://github.com/kubernetes-incubator/metrics-server
- version: 2.11.1
+-version: 2.11.1
++version: 2.11.100-build20210223
 diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-metrics-server/charts-original/templates/_helpers.tpl packages/rke2-metrics-server/charts/templates/_helpers.tpl
 --- packages/rke2-metrics-server/charts-original/templates/_helpers.tpl
 +++ packages/rke2-metrics-server/charts/templates/_helpers.tpl
@@ -45,8 +46,9 @@ diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-metrics-server/charts-original/va
  
  image:
 -  repository: k8s.gcr.io/metrics-server-amd64
+-  tag: v0.3.6
 +  repository: rancher/hardened-k8s-metrics-server
-   tag: v0.3.6
++  tag: v0.3.6-build20210223
    pullPolicy: IfNotPresent
  
  imagePullSecrets: []
