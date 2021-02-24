@@ -1,33 +1,27 @@
 diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-ingress-nginx/charts-original/Chart.yaml packages/rke2-ingress-nginx/charts/Chart.yaml
 --- packages/rke2-ingress-nginx/charts-original/Chart.yaml
 +++ packages/rke2-ingress-nginx/charts/Chart.yaml
-@@ -12,7 +12,7 @@
+@@ -10,7 +10,7 @@
+ kubeVersion: '>=1.16.0-0'
+ maintainers:
  - name: ChiefAlexander
- - email: Trevor.G.Wood@gmail.com
-   name: taharah
--name: nginx-ingress
+-name: ingress-nginx
 +name: rke2-ingress-nginx
  sources:
  - https://github.com/kubernetes/ingress-nginx
- version: 1.36.3
+ version: 3.3.0
 diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-ingress-nginx/charts-original/templates/_helpers.tpl packages/rke2-ingress-nginx/charts/templates/_helpers.tpl
 --- packages/rke2-ingress-nginx/charts-original/templates/_helpers.tpl
 +++ packages/rke2-ingress-nginx/charts/templates/_helpers.tpl
-@@ -55,6 +55,7 @@
- Users can provide an override for an explicit service they want bound via `.Values.controller.publishService.pathOverride`
- 
+@@ -118,7 +118,15 @@
+ Check the ingress controller version tag is at most three versions behind the last release
  */}}
-+
- {{- define "nginx-ingress.controller.publishServicePath" -}}
- {{- $defServiceName := printf "%s/%s" .Release.Namespace (include "nginx-ingress.controller.fullname" .) -}}
- {{- $servicePath := default $defServiceName .Values.controller.publishService.pathOverride }}
-@@ -122,4 +123,12 @@
- {{- else -}}
- {{- print "extensions/v1beta1" -}}
+ {{- define "isControllerTagValid" -}}
+-{{- if not (semverCompare ">=0.27.0-0" .Values.controller.image.tag) -}}
++{{- if not (semverCompare ">=0.27.0-0" (trimPrefix "nginx-" .Values.controller.image.tag)) -}}
+ {{- fail "Controller container image tag should be 0.27.0 or higher" -}}
  {{- end -}}
--{{- end -}}
-\ No newline at end of file
-+{{- end -}}
+ {{- end -}}
 +
 +{{- define "system_default_registry" -}}
 +{{- if .Values.global.systemDefaultRegistry -}}
@@ -39,117 +33,78 @@ diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-ingress-nginx/charts-original/tem
 diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-ingress-nginx/charts-original/templates/admission-webhooks/job-patch/job-createSecret.yaml packages/rke2-ingress-nginx/charts/templates/admission-webhooks/job-patch/job-createSecret.yaml
 --- packages/rke2-ingress-nginx/charts-original/templates/admission-webhooks/job-patch/job-createSecret.yaml
 +++ packages/rke2-ingress-nginx/charts/templates/admission-webhooks/job-patch/job-createSecret.yaml
-@@ -36,7 +36,7 @@
-       {{- end }}
+@@ -33,7 +33,7 @@
        containers:
          - name: create
--          image: {{ .Values.controller.admissionWebhooks.patch.image.repository }}:{{ .Values.controller.admissionWebhooks.patch.image.tag }}
-+          image: {{ template "system_default_registry" . }}{{ .Values.controller.admissionWebhooks.patch.image.repository }}:{{ .Values.controller.admissionWebhooks.patch.image.tag }}
+           {{- with .Values.controller.admissionWebhooks.patch.image }}
+-          image: "{{.repository}}:{{ .tag }}{{- if (.digest) -}} @{{.digest}} {{- end -}}"
++          image: "{{ template "system_default_registry" . }}{{.repository}}:{{ .tag }}{{- if (.digest) -}} @{{.digest}} {{- end -}}"
+           {{- end }}
            imagePullPolicy: {{ .Values.controller.admissionWebhooks.patch.image.pullPolicy }}
            args:
-             - create
 diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-ingress-nginx/charts-original/templates/admission-webhooks/job-patch/job-patchWebhook.yaml packages/rke2-ingress-nginx/charts/templates/admission-webhooks/job-patch/job-patchWebhook.yaml
 --- packages/rke2-ingress-nginx/charts-original/templates/admission-webhooks/job-patch/job-patchWebhook.yaml
 +++ packages/rke2-ingress-nginx/charts/templates/admission-webhooks/job-patch/job-patchWebhook.yaml
-@@ -36,7 +36,7 @@
-       {{- end }}
+@@ -33,7 +33,7 @@
        containers:
          - name: patch
--          image: {{ .Values.controller.admissionWebhooks.patch.image.repository }}:{{ .Values.controller.admissionWebhooks.patch.image.tag }}
-+          image: {{ template "system_default_registry" . }}{{ .Values.controller.admissionWebhooks.patch.image.repository }}:{{ .Values.controller.admissionWebhooks.patch.image.tag }}
-           imagePullPolicy: {{ .Values.controller.admissionWebhooks.patch.pullPolicy }}
+           {{- with .Values.controller.admissionWebhooks.patch.image }}
+-          image: "{{.repository}}:{{ .tag }}{{- if (.digest) -}} @{{.digest}} {{- end -}}"
++          image: "{{ template "system_default_registry" . }}{{.repository}}:{{ .tag }}{{- if (.digest) -}} @{{.digest}} {{- end -}}"
+           {{- end }}
+           imagePullPolicy: {{ .Values.controller.admissionWebhooks.patch.image.pullPolicy }}
            args:
-             - patch
 diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-ingress-nginx/charts-original/templates/controller-daemonset.yaml packages/rke2-ingress-nginx/charts/templates/controller-daemonset.yaml
 --- packages/rke2-ingress-nginx/charts-original/templates/controller-daemonset.yaml
 +++ packages/rke2-ingress-nginx/charts/templates/controller-daemonset.yaml
-@@ -60,7 +60,7 @@
-       {{- end }}
+@@ -61,7 +61,7 @@
        containers:
-         - name: {{ template "nginx-ingress.name" . }}-{{ .Values.controller.name }}
--          image: "{{ .Values.controller.image.repository }}:{{ .Values.controller.image.tag }}"
-+          image: {{ template "system_default_registry" . }}{{ .Values.controller.image.repository }}:{{ .Values.controller.image.tag }}
-           imagePullPolicy: "{{ .Values.controller.image.pullPolicy }}"
-           {{- if .Values.controller.lifecycle }}
-           lifecycle:
+         - name: controller
+           {{- with .Values.controller.image }}
+-          image: "{{.repository}}:{{ .tag }}{{- if (.digest) -}} @{{.digest}} {{- end -}}"
++          image: "{{ template "system_default_registry" . }}{{.repository}}:{{ .tag }}{{- if (.digest) -}} @{{.digest}} {{- end -}}"
+           {{- end }}
+           imagePullPolicy: {{ .Values.controller.image.pullPolicy }}
+         {{- if .Values.controller.lifecycle }}
 diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-ingress-nginx/charts-original/templates/controller-deployment.yaml packages/rke2-ingress-nginx/charts/templates/controller-deployment.yaml
 --- packages/rke2-ingress-nginx/charts-original/templates/controller-deployment.yaml
 +++ packages/rke2-ingress-nginx/charts/templates/controller-deployment.yaml
-@@ -64,7 +64,7 @@
-       {{- end }}
+@@ -65,7 +65,7 @@
        containers:
-         - name: {{ template "nginx-ingress.name" . }}-{{ .Values.controller.name }}
--          image: "{{ .Values.controller.image.repository }}:{{ .Values.controller.image.tag }}"
-+          image: {{ template "system_default_registry" . }}{{ .Values.controller.image.repository }}:{{ .Values.controller.image.tag }}
-           imagePullPolicy: "{{ .Values.controller.image.pullPolicy }}"
-           {{- if .Values.controller.lifecycle }}
-           lifecycle:
-@@ -81,16 +81,16 @@
-             - --default-backend-service={{ .Values.controller.defaultBackendService }}
-             {{- end }}
+         - name: controller
+           {{- with .Values.controller.image }}
+-          image: "{{.repository}}:{{ .tag }}{{- if (.digest) -}} @{{.digest}} {{- end -}}"
++          image: "{{ template "system_default_registry" . }}{{.repository}}:{{ .tag }}{{- if (.digest) -}} @{{.digest}} {{- end -}}"
            {{- end }}
--          {{- if and (semverCompare ">=0.9.0-beta.1" .Values.controller.image.tag) .Values.controller.publishService.enabled }}
-+          {{- if and (semverCompare ">=0.9.0-beta.1" (trimPrefix "nginx-" .Values.controller.image.tag)) .Values.controller.publishService.enabled }}
-             - --publish-service={{ template "nginx-ingress.controller.publishServicePath" . }}
-           {{- end }}
--          {{- if (semverCompare ">=0.9.0-beta.1" .Values.controller.image.tag) }}
-+          {{- if (semverCompare ">=0.9.0-beta.1" (trimPrefix "nginx-" .Values.controller.image.tag)) }}
-             - --election-id={{ .Values.controller.electionID }}
-           {{- end }}
--          {{- if (semverCompare ">=0.9.0-beta.1" .Values.controller.image.tag) }}
-+          {{- if (semverCompare ">=0.9.0-beta.1" (trimPrefix "nginx-" .Values.controller.image.tag)) }}
-             - --ingress-class={{ .Values.controller.ingressClass }}
-           {{- end }}
--          {{- if (semverCompare ">=0.9.0-beta.1" .Values.controller.image.tag) }}
-+          {{- if (semverCompare ">=0.9.0-beta.1" (trimPrefix "nginx-" .Values.controller.image.tag)) }}
-             - --configmap={{ default .Release.Namespace .Values.controller.configMapNamespace }}/{{ template "nginx-ingress.controller.fullname" . }}
-           {{- else }}
-             - --nginx-configmap={{ default .Release.Namespace .Values.controller.configMapNamespace }}/{{ template "nginx-ingress.controller.fullname" . }}
-@@ -125,7 +125,7 @@
-             - --{{ $key }}
-             {{- end }}
-           {{- end }}
--          {{- if (semverCompare ">=0.16.0" .Values.controller.image.tag) }}
-+          {{- if (semverCompare ">=0.16.0" (trimPrefix "nginx-" .Values.controller.image.tag)) }}
-           securityContext:
-             capabilities:
-                 drop:
+           imagePullPolicy: {{ .Values.controller.image.pullPolicy }}
+         {{- if .Values.controller.lifecycle }}
 diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-ingress-nginx/charts-original/templates/default-backend-deployment.yaml packages/rke2-ingress-nginx/charts/templates/default-backend-deployment.yaml
 --- packages/rke2-ingress-nginx/charts-original/templates/default-backend-deployment.yaml
 +++ packages/rke2-ingress-nginx/charts/templates/default-backend-deployment.yaml
-@@ -51,7 +51,7 @@
-       {{- end }}
+@@ -37,7 +37,7 @@
        containers:
-         - name: {{ template "nginx-ingress.name" . }}-{{ .Values.defaultBackend.name }}
--          image: "{{ .Values.defaultBackend.image.repository }}:{{ .Values.defaultBackend.image.tag }}"
-+          image:  {{ template "system_default_registry" . }}{{ .Values.defaultBackend.image.repository }}:{{ .Values.defaultBackend.image.tag }}
-           imagePullPolicy: "{{ .Values.defaultBackend.image.pullPolicy }}"
-           args:
-           {{- range $key, $value := .Values.defaultBackend.extraArgs }}
+         - name: {{ template "ingress-nginx.name" . }}-default-backend
+           {{- with .Values.defaultBackend.image }}
+-          image: "{{.repository}}:{{ .tag }}{{- if (.digest) -}} @{{.digest}} {{- end -}}"
++          image: "{{ template "system_default_registry" . }}{{.repository}}:{{ .tag }}{{- if (.digest) -}} @{{.digest}} {{- end -}}"
+           {{- end }}
+           imagePullPolicy: {{ .Values.defaultBackend.image.pullPolicy }}
+         {{- if .Values.defaultBackend.extraArgs }}
 diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-ingress-nginx/charts-original/values.yaml packages/rke2-ingress-nginx/charts/values.yaml
 --- packages/rke2-ingress-nginx/charts-original/values.yaml
 +++ packages/rke2-ingress-nginx/charts/values.yaml
-@@ -4,8 +4,8 @@
+@@ -3,8 +3,8 @@
+ ##
  controller:
-   name: controller
    image:
--    repository: quay.io/kubernetes-ingress-controller/nginx-ingress-controller
--    tag: "0.30.0"
+-    repository: k8s.gcr.io/ingress-nginx/controller
+-    tag: "v0.35.0"
 +    repository: rancher/nginx-ingress-controller
-+    tag: "nginx-0.30.0-rancher1"
++    tag: "nginx-0.35.0-rancher2"
+     digest: sha256:fc4979d8b8443a831c9789b5155cded454cb7de737a8b727bc2ba0106d2eae8b
      pullPolicy: IfNotPresent
      # www-data -> uid 101
-     runAsUser: 101
-@@ -37,7 +37,7 @@
-   # Required for use with CNI based kubernetes installations (such as ones set up by kubeadm),
-   # since CNI and hostport don't mix yet. Can be deprecated once https://github.com/kubernetes/kubernetes/issues/23920
-   # is merged
--  hostNetwork: false
-+  hostNetwork: true
- 
-   # Optionally customize the pod dnsConfig.
-   dnsConfig: {}
-@@ -45,7 +45,7 @@
+@@ -35,7 +35,7 @@
    # Optionally change this to ClusterFirstWithHostNet in case you have 'hostNetwork: true'.
    # By default, while using host network, name resolution uses the host's DNS. If you wish nginx-controller
    # to keep resolving names inside the k8s network, use ClusterFirstWithHostNet.
@@ -158,7 +113,16 @@ diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-ingress-nginx/charts-original/val
  
    # Bare-metal considerations via the host network https://kubernetes.github.io/ingress-nginx/deploy/baremetal/#via-the-host-network
    # Ingress status was blank because there is no Service exposing the NGINX Ingress controller in a configuration using the host network, the default --publish-service flag used in standard cloud setups does not apply
-@@ -242,7 +242,7 @@
+@@ -44,7 +44,7 @@
+   # Required for use with CNI based kubernetes installations (such as ones set up by kubeadm),
+   # since CNI and hostport don't mix yet. Can be deprecated once https://github.com/kubernetes/kubernetes/issues/23920
+   # is merged
+-  hostNetwork: false
++  hostNetwork: true
+ 
+   ## Use host ports 80 and 443
+   ## Disabled by default
+@@ -301,7 +301,7 @@
      configMapKey: ""
  
    service:
@@ -167,9 +131,9 @@ diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-ingress-nginx/charts-original/val
  
      annotations: {}
      labels: {}
-@@ -440,8 +440,8 @@
+@@ -540,8 +540,8 @@
+   enabled: false
  
-   name: default-backend
    image:
 -    repository: k8s.gcr.io/defaultbackend-amd64
 -    tag: "1.5"
@@ -178,7 +142,7 @@ diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-ingress-nginx/charts-original/val
      pullPolicy: IfNotPresent
      # nobody user -> uid 65534
      runAsUser: 65534
-@@ -573,3 +573,6 @@
+@@ -661,3 +661,6 @@
  ##
  udp: {}
  #  53: "kube-system/kube-dns:53"
