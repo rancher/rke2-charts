@@ -4,7 +4,7 @@
 
 image:
   repository: rancher/hardened-coredns
-  tag: "v1.6.9"
+  tag: "v1.6.9-build20210223"
   pullPolicy: IfNotPresent
 
 replicaCount: 1

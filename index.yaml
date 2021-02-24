@@ -3,6 +3,23 @@ entries:
   rke2-canal:
   - apiVersion: v1
     appVersion: v3.13.3
+    created: "2021-02-24T21:41:48.737080031Z"
+    description: Install Canal Network Plugin.
+    digest: 4b6ac74aec73a70d12186701660c1f221fdbcb582571029a6c8fbc2738065742
+    home: https://www.projectcalico.org/
+    keywords:
+    - canal
+    maintainers:
+    - email: charts@rancher.com
+      name: Rancher Labs
+    name: rke2-canal
+    sources:
+    - https://github.com/rancher/rke2-charts
+    urls:
+    - assets/rke2-canal/rke2-canal-v3.13.300-build20210223.tgz
+    version: v3.13.300-build20210223
+  - apiVersion: v1
+    appVersion: v3.13.3
     created: "2021-02-19T16:11:27.472930693Z"
     description: Install Canal Network Plugin.
     digest: 2396b0aca28a6d4a373a251b02e4efa12bbfedf29e37e45904b860176d0c80f8
@@ -62,6 +79,32 @@ entries:
     urls:
     - assets/rke2-coredns/rke2-coredns-1.10.101.tgz
     version: 1.10.101
+  - apiVersion: v1
+    appVersion: 1.6.9
+    created: "2021-02-24T21:41:48.738290233Z"
+    description: CoreDNS is a DNS server that chains plugins and provides Kubernetes DNS Services
+    digest: 869cb592cac545f579b6de6b35de82de4904566fd91826bc16546fddc48fe1c4
+    home: https://coredns.io
+    icon: https://coredns.io/images/CoreDNS_Colour_Horizontal.png
+    keywords:
+    - coredns
+    - dns
+    - kubedns
+    maintainers:
+    - email: hello@acale.ph
+      name: Acaleph
+    - email: shashidhara.huawei@gmail.com
+      name: shashidharatd
+    - email: andor44@gmail.com
+      name: andor44
+    - email: manuel@rueg.eu
+      name: mrueg
+    name: rke2-coredns
+    sources:
+    - https://github.com/coredns/coredns
+    urls:
+    - assets/rke2-coredns/rke2-coredns-1.10.101-build2021022301.tgz
+    version: 1.10.101-build2021022301
   rke2-ingress-nginx:
   - apiVersion: v1
     appVersion: 0.30.0
@@ -103,9 +146,9 @@ entries:
     version: v1.20.2
   - apiVersion: v1
     appVersion: v1.19.8
-    created: "2021-02-19T16:11:27.476739005Z"
+    created: "2021-02-24T21:41:48.739048333Z"
     description: Install Kube Proxy.
-    digest: 69014f703ca284fece01d20a9c4c470f17ce855a931610c9254bea91ff9710d6
+    digest: f2bace51d33062e3ac713ebbedd48dd4df56c821dfa52da9fdf71891d601bcde
     keywords:
     - kube-proxy
     maintainers:
@@ -297,4 +340,23 @@ entries:
     urls:
     - assets/rke2-metrics-server/rke2-metrics-server-2.11.100.tgz
     version: 2.11.100
-generated: "2021-02-19T17:03:49.956737617Z"
+  - apiVersion: v1
+    appVersion: 0.3.6
+    created: "2021-02-24T21:41:48.739850734Z"
+    description: Metrics Server is a cluster-wide aggregator of resource usage data.
+    digest: a7cbec2f4764c99db298fb4e1f5297246253a3228daf2747281c953059160fc9
+    home: https://github.com/kubernetes-incubator/metrics-server
+    keywords:
+    - metrics-server
+    maintainers:
+    - email: o.with@sportradar.com
+      name: olemarkus
+    - email: k.aasan@sportradar.com
+      name: kennethaasan
+    name: rke2-metrics-server
+    sources:
+    - https://github.com/kubernetes-incubator/metrics-server
+    urls:
+    - assets/rke2-metrics-server/rke2-metrics-server-2.11.100-build2021022300.tgz
+    version: 2.11.100-build2021022300
+generated: "2021-02-24T21:41:48.73617673Z"

@@ -28,7 +28,7 @@ hostNetwork:
 
 image:
   repository: rancher/hardened-k8s-metrics-server
-  tag: v0.3.6
+  tag: v0.3.6-build20210223
   pullPolicy: IfNotPresent
 
 imagePullSecrets: []

@@ -1,2 +1,2 @@
-6a3f06b77e3d24224f3e64f60dae5fa7f993a8ad9fe4176b7b6f1e44d44b6f83  packages/rke2-metrics-server/rke2-metrics-server.patch
+d70eeb3eed4cbf768778e64cb74fe0341b0ad05ced3685b82d4e62af25fe150a  packages/rke2-metrics-server/rke2-metrics-server.patch
 87c58bd17bd974b3956e43df568d87fc6ea7b690c68e88d9fa8d238702030062  packages/rke2-metrics-server/package.yaml
