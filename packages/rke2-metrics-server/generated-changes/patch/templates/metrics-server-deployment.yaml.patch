@@ -1,0 +1,11 @@
+--- charts-original/templates/metrics-server-deployment.yaml
++++ charts/templates/metrics-server-deployment.yaml
+@@ -47,7 +47,7 @@
+         {{- ( tpl (toYaml .Values.extraContainers) . ) | nindent 8 }}
+         {{- end }}
+         - name: metrics-server
+-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
++          image: {{ template "system_default_registry" . }}{{ .Values.image.repository }}:{{ .Values.image.tag }}
+           imagePullPolicy: {{ .Values.image.pullPolicy }}
+           command:
+             - /metrics-server

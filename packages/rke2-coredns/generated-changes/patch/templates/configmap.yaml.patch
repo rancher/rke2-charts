@@ -1,0 +1,20 @@
+--- charts-original/templates/configmap.yaml
++++ charts/templates/configmap.yaml
+@@ -7,7 +7,7 @@
+     app.kubernetes.io/instance: {{ .Release.Name | quote }}
+     helm.sh/chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
+     {{- if .Values.isClusterService }}
+-    k8s-app: {{ .Chart.Name | quote }}
++    k8s-app: {{ .Values.k8sApp | default .Chart.Name | quote }}
+     kubernetes.io/cluster-service: "true"
+     kubernetes.io/name: "CoreDNS"
+     {{- end }}
+@@ -19,7 +19,7 @@
+     {{- if .port }}:{{ .port }} {{ end -}}
+     {
+       {{- range .plugins }}
+-        {{ .name }}{{ if .parameters }} {{ .parameters }}{{ end }}{{ if .configBlock }} {
++        {{ .name }} {{ if .parameters }} {{if eq .name "kubernetes" }} {{ (lookup "v1" "ConfigMap" "kube-system" "cluster-dns").data.clusterDomain }} {{ end }} {{.parameters}}{{ end }}{{ if .configBlock }} {
+ {{ .configBlock | indent 12 }}
+         }{{ end }}
+       {{- end }}

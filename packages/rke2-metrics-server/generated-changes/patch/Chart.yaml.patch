@@ -1,0 +1,12 @@
+--- charts-original/Chart.yaml
++++ charts/Chart.yaml
+@@ -9,7 +9,7 @@
+   name: olemarkus
+ - email: k.aasan@sportradar.com
+   name: kennethaasan
+-name: metrics-server
++name: rke2-metrics-server
+ sources:
+ - https://github.com/kubernetes-incubator/metrics-server
+-version: 2.11.1
++version: 2.11.100-build20210223

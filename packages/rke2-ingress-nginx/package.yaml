@@ -1,2 +1,3 @@
 url: https://github.com/kubernetes/ingress-nginx/releases/download/ingress-nginx-3.3.0/ingress-nginx-3.3.0.tgz
 packageVersion: 00
+releaseCandidateVersion: 00
