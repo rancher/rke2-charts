@@ -104,7 +104,7 @@ diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-ingress-nginx/charts-original/val
 --- packages/rke2-ingress-nginx/charts-original/values.yaml
 +++ packages/rke2-ingress-nginx/charts/values.yaml
 @@ -1,11 +1,12 @@
-+fullnameOverride: rke2-ingress-nginx
++nameOverride: v3
 +
  ## nginx configuration
  ## Ref: https://github.com/kubernetes/ingress/blob/master/controllers/nginx/configuration.md
