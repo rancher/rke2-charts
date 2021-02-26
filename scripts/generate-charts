@@ -1,7 +1,12 @@
 #!/usr/bin/env bash
 set -e
 
-for f in packages/*; do
+rm -rf tmp/packages
+mkdir -p tmp/packages
+
+for p in packages/*; do
+	f=tmp/$p
+	cp -rp $p $f
 	if [[ -z $CHART || $CHART == $(basename -- ${f}) ]]; then
 		mkdir -p assets/$(basename -- ${f})
 		if [[ -d ${f}/overlay ]]; then
