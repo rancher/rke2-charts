@@ -103,7 +103,11 @@ diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-ingress-nginx/charts-original/tem
 diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-ingress-nginx/charts-original/values.yaml packages/rke2-ingress-nginx/charts/values.yaml
 --- packages/rke2-ingress-nginx/charts-original/values.yaml
 +++ packages/rke2-ingress-nginx/charts/values.yaml
-@@ -3,9 +3,8 @@
+@@ -1,11 +1,12 @@
++fullnameOverride: rke2-ingress-nginx
++
+ ## nginx configuration
+ ## Ref: https://github.com/kubernetes/ingress/blob/master/controllers/nginx/configuration.md
  ##
  controller:
    image:
@@ -115,7 +119,7 @@ diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-ingress-nginx/charts-original/val
      pullPolicy: IfNotPresent
      # www-data -> uid 101
      runAsUser: 101
-@@ -35,7 +34,7 @@
+@@ -35,7 +36,7 @@
    # Optionally change this to ClusterFirstWithHostNet in case you have 'hostNetwork: true'.
    # By default, while using host network, name resolution uses the host's DNS. If you wish nginx-controller
    # to keep resolving names inside the k8s network, use ClusterFirstWithHostNet.
@@ -124,7 +128,7 @@ diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-ingress-nginx/charts-original/val
  
    # Bare-metal considerations via the host network https://kubernetes.github.io/ingress-nginx/deploy/baremetal/#via-the-host-network
    # Ingress status was blank because there is no Service exposing the NGINX Ingress controller in a configuration using the host network, the default --publish-service flag used in standard cloud setups does not apply
-@@ -44,7 +43,7 @@
+@@ -44,7 +45,7 @@
    # Required for use with CNI based kubernetes installations (such as ones set up by kubeadm),
    # since CNI and hostport don't mix yet. Can be deprecated once https://github.com/kubernetes/kubernetes/issues/23920
    # is merged
@@ -133,7 +137,7 @@ diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-ingress-nginx/charts-original/val
  
    ## Use host ports 80 and 443
    ## Disabled by default
-@@ -83,7 +82,7 @@
+@@ -83,7 +84,7 @@
    ## by the service. If disable, the status field reports the IP address of the
    ## node or nodes where an ingress controller pod is running.
    publishService:
@@ -142,7 +146,7 @@ diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-ingress-nginx/charts-original/val
      ## Allows overriding of the publish service to bind to
      ## Must be <namespace>/<service_name>
      ##
-@@ -301,7 +300,7 @@
+@@ -301,7 +302,7 @@
      configMapKey: ""
  
    service:
@@ -151,21 +155,8 @@ diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-ingress-nginx/charts-original/val
  
      annotations: {}
      labels: {}
-@@ -406,7 +405,7 @@
-   #   command: ['sh', '-c', 'until nslookup myservice; do echo waiting for myservice; sleep 2; done;']
- 
-   admissionWebhooks:
--    enabled: true
-+    enabled: false
-     failurePolicy: Fail
-     port: 8443
- 
-@@ -537,11 +536,11 @@
- ##
- defaultBackend:
-   ##
--  enabled: false
-+  enabled: true
+@@ -540,8 +541,8 @@
+   enabled: false
  
    image:
 -    repository: k8s.gcr.io/defaultbackend-amd64
@@ -175,7 +166,7 @@ diff -x '*.tgz' -x '*.lock' -uNr packages/rke2-ingress-nginx/charts-original/val
      pullPolicy: IfNotPresent
      # nobody user -> uid 65534
      runAsUser: 65534
-@@ -661,3 +660,6 @@
+@@ -661,3 +662,6 @@
  ##
  udp: {}
  #  53: "kube-system/kube-dns:53"
