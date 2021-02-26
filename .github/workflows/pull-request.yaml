@@ -1,0 +1,22 @@
+name: CI-pullrequest
+
+on:
+  pull_request:
+    branches:
+      - dev-v2.5-source-alt
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Pull scripts
+        run: sudo make pull-scripts
+
+      - name: Pull in all relevant branches
+        run: git fetch origin dev-v2.5-source-alt dev-v2.5-alt main-alt
+      
+      - name: Validate 
+        run: sudo make validate
