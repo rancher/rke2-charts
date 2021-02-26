@@ -1,6 +1,6 @@
 template: source
 
 validate:
-- url: https://github.com/aiyengar2/rke2-charts.git
-  branch: migrate-live
+- url: https://github.com/rancher/rke2-charts.git
+  branch: main
   dropReleaseCandidates: true
