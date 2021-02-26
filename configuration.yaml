@@ -1,0 +1,8 @@
+template: live
+
+sync:
+- url: https://github.com/rancher/rke2-charts.git
+  branch: main-source
+  dropReleaseCandidates: true
+helmRepo:
+  cname: rke2-charts.rancher.io
