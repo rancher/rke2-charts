@@ -1,0 +1,19 @@
+--- charts-original/templates/_helpers.tpl
++++ charts/templates/_helpers.tpl
+@@ -118,7 +118,15 @@
+ Check the ingress controller version tag is at most three versions behind the last release
+ */}}
+ {{- define "isControllerTagValid" -}}
+-{{- if not (semverCompare ">=0.27.0-0" .Values.controller.image.tag) -}}
++{{- if not (semverCompare ">=0.27.0-0" (trimPrefix "nginx-" .Values.controller.image.tag)) -}}
+ {{- fail "Controller container image tag should be 0.27.0 or higher" -}}
+ {{- end -}}
+ {{- end -}}
++
++{{- define "system_default_registry" -}}
++{{- if .Values.global.systemDefaultRegistry -}}
++{{- printf "%s/" .Values.global.systemDefaultRegistry -}}
++{{- else -}}
++{{- "" -}}
++{{- end -}}
++{{- end -}}

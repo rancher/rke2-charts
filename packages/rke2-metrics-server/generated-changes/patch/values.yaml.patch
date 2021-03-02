@@ -1,0 +1,39 @@
+--- charts-original/values.yaml
++++ charts/values.yaml
+@@ -27,16 +27,17 @@
+   enabled: false
+ 
+ image:
+-  repository: k8s.gcr.io/metrics-server-amd64
+-  tag: v0.3.6
++  repository: rancher/hardened-k8s-metrics-server
++  tag: v0.3.6-build20210223
+   pullPolicy: IfNotPresent
+ 
+ imagePullSecrets: []
+ # - registrySecretName
+ 
+-args: []
++args:
+ # enable this if you have self-signed certificates, see: https://github.com/kubernetes-incubator/metrics-server
+ #  - --kubelet-insecure-tls
++  - --kubelet-preferred-address-types=InternalIP
+ 
+ resources: {}
+ 
+@@ -58,7 +59,7 @@
+ #  scheduler.alpha.kubernetes.io/critical-pod: ''
+ 
+ ## Set a pod priorityClassName
+-# priorityClassName: system-node-critical
++priorityClassName: system-node-critical
+ 
+ extraVolumeMounts: []
+ #  - name: secrets
+@@ -107,3 +108,6 @@
+   enabled: false
+   minAvailable:
+   maxUnavailable:
++
++global:
++  systemDefaultRegistry: ""

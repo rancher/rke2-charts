@@ -1,0 +1,6 @@
+template: source
+
+validate:
+- url: https://github.com/rancher/rke2-charts.git
+  branch: main
+  dropReleaseCandidates: true

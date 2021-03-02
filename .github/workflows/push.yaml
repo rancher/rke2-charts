@@ -1,0 +1,30 @@
+name: CI-push
+
+on:
+  push:
+    branches:
+      - main-source
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Pull scripts
+      run: sudo make pull-scripts
+
+    - name: Pull in all relevant branches
+      run: git fetch origin main-source main
+
+    - name: Checkout live branch
+      run: git checkout main
+
+    - name: Synchronize
+      run: sudo make sync
+      
+    - name: Add assets to branch
+      run: git add . && git -c user.name="actions" -c user.email="actions@github.com" commit -m "$(git log -b main-source --oneline -n1 --pretty=format:'%B')" || true
+
+    - name: Push assets
+      run: git push origin main

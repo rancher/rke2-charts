@@ -1,0 +1,11 @@
+--- charts-original/Chart.yaml
++++ charts/Chart.yaml
+@@ -10,7 +10,7 @@
+ kubeVersion: '>=1.16.0-0'
+ maintainers:
+ - name: ChiefAlexander
+-name: ingress-nginx
++name: rke2-ingress-nginx
+ sources:
+ - https://github.com/kubernetes/ingress-nginx
+ version: 3.3.0

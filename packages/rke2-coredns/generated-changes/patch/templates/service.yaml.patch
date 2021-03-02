@@ -1,0 +1,26 @@
+--- charts-original/templates/service.yaml
++++ charts/templates/service.yaml
+@@ -7,7 +7,7 @@
+     app.kubernetes.io/instance: {{ .Release.Name | quote }}
+     helm.sh/chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
+     {{- if .Values.isClusterService }}
+-    k8s-app: {{ .Chart.Name | quote }}
++    k8s-app: {{ .Values.k8sApp | default .Chart.Name | quote }}
+     kubernetes.io/cluster-service: "true"
+     kubernetes.io/name: "CoreDNS"
+     {{- end }}
+@@ -21,11 +21,13 @@
+   selector:
+     app.kubernetes.io/instance: {{ .Release.Name | quote }}
+     {{- if .Values.isClusterService }}
+-    k8s-app: {{ .Chart.Name | quote }}
++    k8s-app: {{ .Values.k8sApp | default .Chart.Name | quote }}
+     {{- end }}
+     app.kubernetes.io/name: {{ template "coredns.name" . }}
+   {{- if .Values.service.clusterIP }}
+   clusterIP: {{ .Values.service.clusterIP }}
++  {{ else }}
++  clusterIP: {{ (lookup "v1" "ConfigMap" "kube-system" "cluster-dns").data.clusterDNS }}
+   {{- end }}
+   {{- if .Values.service.externalTrafficPolicy }}
+   externalTrafficPolicy: {{ .Values.service.externalTrafficPolicy }}
