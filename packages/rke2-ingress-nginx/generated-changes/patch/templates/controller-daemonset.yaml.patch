@@ -1,11 +1,13 @@
 --- charts-original/templates/controller-daemonset.yaml
 +++ charts/templates/controller-daemonset.yaml
-@@ -61,7 +61,7 @@
+@@ -60,9 +60,7 @@
+     {{- end }}
        containers:
          - name: controller
-           {{- with .Values.controller.image }}
+-          {{- with .Values.controller.image }}
 -          image: "{{.repository}}:{{ .tag }}{{- if (.digest) -}} @{{.digest}} {{- end -}}"
-+          image: "{{ template "system_default_registry" . }}{{.repository}}:{{ .tag }}{{- if (.digest) -}} @{{.digest}} {{- end -}}"
-           {{- end }}
+-          {{- end }}
++          image: "{{ template "system_default_registry" . }}{{- with .Values.controller.image -}}{{.repository}}:{{ .tag }}{{- if (.digest) -}} @{{.digest}} {{- end -}}{{- end -}}"
            imagePullPolicy: {{ .Values.controller.image.pullPolicy }}
          {{- if .Values.controller.lifecycle }}
+           lifecycle: {{ toYaml .Values.controller.lifecycle | nindent 12 }}

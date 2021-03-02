@@ -1,11 +1,13 @@
 --- charts-original/templates/admission-webhooks/job-patch/job-patchWebhook.yaml
 +++ charts/templates/admission-webhooks/job-patch/job-patchWebhook.yaml
-@@ -33,7 +33,7 @@
+@@ -32,9 +32,7 @@
+     {{- end }}
        containers:
          - name: patch
-           {{- with .Values.controller.admissionWebhooks.patch.image }}
+-          {{- with .Values.controller.admissionWebhooks.patch.image }}
 -          image: "{{.repository}}:{{ .tag }}{{- if (.digest) -}} @{{.digest}} {{- end -}}"
-+          image: "{{ template "system_default_registry" . }}{{.repository}}:{{ .tag }}{{- if (.digest) -}} @{{.digest}} {{- end -}}"
-           {{- end }}
+-          {{- end }}
++          image: "{{ template "system_default_registry" . }}{{- with .Values.controller.admissionWebhooks.patch.image -}}{{.repository}}:{{ .tag }}{{- if (.digest) -}} @{{.digest}} {{- end -}}{{- end -}}"
            imagePullPolicy: {{ .Values.controller.admissionWebhooks.patch.image.pullPolicy }}
            args:
+             - patch
