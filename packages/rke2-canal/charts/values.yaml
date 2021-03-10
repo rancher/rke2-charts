@@ -69,6 +69,8 @@ calico:
   vethuMTU: 1450
   # Typha is disabled.
   typhaServiceName: none
+  # Kubelet flex-volume-plugin-dir
+  flexVolumePluginDir: /var/lib/kubelet/volumeplugins
 
 global:
   systemDefaultRegistry: ""
