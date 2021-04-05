@@ -1,11 +1,11 @@
 --- charts-original/templates/default-backend-deployment.yaml
 +++ charts/templates/default-backend-deployment.yaml
-@@ -37,7 +37,7 @@
+@@ -51,7 +51,7 @@
+       {{- end }}
        containers:
-         - name: {{ template "ingress-nginx.name" . }}-default-backend
-           {{- with .Values.defaultBackend.image }}
--          image: "{{.repository}}:{{ .tag }}{{- if (.digest) -}} @{{.digest}} {{- end -}}"
-+          image: "{{ template "system_default_registry" . }}{{.repository}}:{{ .tag }}{{- if (.digest) -}} @{{.digest}} {{- end -}}"
-           {{- end }}
-           imagePullPolicy: {{ .Values.defaultBackend.image.pullPolicy }}
-         {{- if .Values.defaultBackend.extraArgs }}
+         - name: {{ template "nginx-ingress.name" . }}-{{ .Values.defaultBackend.name }}
+-          image: "{{ .Values.defaultBackend.image.repository }}:{{ .Values.defaultBackend.image.tag }}"
++          image:  {{ template "system_default_registry" . }}{{ .Values.defaultBackend.image.repository }}:{{ .Values.defaultBackend.image.tag }}
+           imagePullPolicy: "{{ .Values.defaultBackend.image.pullPolicy }}"
+           args:
+           {{- range $key, $value := .Values.defaultBackend.extraArgs }}
