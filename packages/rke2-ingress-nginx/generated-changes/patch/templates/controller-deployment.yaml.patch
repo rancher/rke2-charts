@@ -1,11 +1,41 @@
 --- charts-original/templates/controller-deployment.yaml
 +++ charts/templates/controller-deployment.yaml
-@@ -65,7 +65,7 @@
+@@ -64,7 +64,7 @@
+       {{- end }}
        containers:
-         - name: controller
-           {{- with .Values.controller.image }}
--          image: "{{.repository}}:{{ .tag }}{{- if (.digest) -}} @{{.digest}} {{- end -}}"
-+          image: "{{ template "system_default_registry" . }}{{.repository}}:{{ .tag }}{{- if (.digest) -}} @{{.digest}} {{- end -}}"
+         - name: {{ template "nginx-ingress.name" . }}-{{ .Values.controller.name }}
+-          image: "{{ .Values.controller.image.repository }}:{{ .Values.controller.image.tag }}"
++          image: {{ template "system_default_registry" . }}{{ .Values.controller.image.repository }}:{{ .Values.controller.image.tag }}
+           imagePullPolicy: "{{ .Values.controller.image.pullPolicy }}"
+           {{- if .Values.controller.lifecycle }}
+           lifecycle:
+@@ -81,16 +81,16 @@
+             - --default-backend-service={{ .Values.controller.defaultBackendService }}
+             {{- end }}
            {{- end }}
-           imagePullPolicy: {{ .Values.controller.image.pullPolicy }}
-         {{- if .Values.controller.lifecycle }}
+-          {{- if and (semverCompare ">=0.9.0-beta.1" .Values.controller.image.tag) .Values.controller.publishService.enabled }}
++          {{- if and (semverCompare ">=0.9.0-beta.1" (trimPrefix "nginx-" .Values.controller.image.tag)) .Values.controller.publishService.enabled }}
+             - --publish-service={{ template "nginx-ingress.controller.publishServicePath" . }}
+           {{- end }}
+-          {{- if (semverCompare ">=0.9.0-beta.1" .Values.controller.image.tag) }}
++          {{- if (semverCompare ">=0.9.0-beta.1" (trimPrefix "nginx-" .Values.controller.image.tag)) }}
+             - --election-id={{ .Values.controller.electionID }}
+           {{- end }}
+-          {{- if (semverCompare ">=0.9.0-beta.1" .Values.controller.image.tag) }}
++          {{- if (semverCompare ">=0.9.0-beta.1" (trimPrefix "nginx-" .Values.controller.image.tag)) }}
+             - --ingress-class={{ .Values.controller.ingressClass }}
+           {{- end }}
+-          {{- if (semverCompare ">=0.9.0-beta.1" .Values.controller.image.tag) }}
++          {{- if (semverCompare ">=0.9.0-beta.1" (trimPrefix "nginx-" .Values.controller.image.tag)) }}
+             - --configmap={{ default .Release.Namespace .Values.controller.configMapNamespace }}/{{ template "nginx-ingress.controller.fullname" . }}
+           {{- else }}
+             - --nginx-configmap={{ default .Release.Namespace .Values.controller.configMapNamespace }}/{{ template "nginx-ingress.controller.fullname" . }}
+@@ -125,7 +125,7 @@
+             - --{{ $key }}
+             {{- end }}
+           {{- end }}
+-          {{- if (semverCompare ">=0.16.0" .Values.controller.image.tag) }}
++          {{- if (semverCompare ">=0.16.0" (trimPrefix "nginx-" .Values.controller.image.tag)) }}
+           securityContext:
+             capabilities:
+                 drop:

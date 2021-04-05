@@ -1,14 +1,20 @@
 --- charts-original/templates/_helpers.tpl
 +++ charts/templates/_helpers.tpl
-@@ -118,7 +118,15 @@
- Check the ingress controller version tag is at most three versions behind the last release
+@@ -55,6 +55,7 @@
+ Users can provide an override for an explicit service they want bound via `.Values.controller.publishService.pathOverride`
+ 
  */}}
- {{- define "isControllerTagValid" -}}
--{{- if not (semverCompare ">=0.27.0-0" .Values.controller.image.tag) -}}
-+{{- if not (semverCompare ">=0.27.0-0" (trimPrefix "nginx-" .Values.controller.image.tag)) -}}
- {{- fail "Controller container image tag should be 0.27.0 or higher" -}}
++
+ {{- define "nginx-ingress.controller.publishServicePath" -}}
+ {{- $defServiceName := printf "%s/%s" .Release.Namespace (include "nginx-ingress.controller.fullname" .) -}}
+ {{- $servicePath := default $defServiceName .Values.controller.publishService.pathOverride }}
+@@ -122,4 +123,12 @@
+ {{- else -}}
+ {{- print "extensions/v1beta1" -}}
  {{- end -}}
- {{- end -}}
+-{{- end -}}
+\ No newline at end of file
++{{- end -}}
 +
 +{{- define "system_default_registry" -}}
 +{{- if .Values.global.systemDefaultRegistry -}}
