@@ -1,0 +1,15 @@
+--- charts-original/templates/_helpers.tpl	2021-02-08 14:24:33.605473204 +0100
++++ charts/templates/_helpers.tpl	2021-02-08 14:38:47.443463553 +0100
+@@ -122,3 +122,11 @@
+ tls.crt: {{ $cert.Cert | b64enc }}
+ tls.key: {{ $cert.Key | b64enc }}
+ {{- end }}
++  
++{{- define "system_default_registry" -}}
++{{- if .Values.global.systemDefaultRegistry -}}
++{{- printf "%s/" .Values.global.systemDefaultRegistry -}}
++{{- else -}}
++{{- "" -}}
++{{- end }}
++{{- end }}
+diff -x '*.tgz' -x '*.lock' -uNr charts-original/templates/_hubble-generate-certs-job-spec.tpl charts/templates/_hubble-generate-certs-job-spec.tpl

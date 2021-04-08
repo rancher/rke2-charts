@@ -1,0 +1,12 @@
+--- charts-original/templates/cilium-preflight-deployment.yaml	2021-02-04 01:17:41.000000000 +0100
++++ charts/templates/cilium-preflight-deployment.yaml	2021-02-08 14:38:47.559464353 +0100
+@@ -37,7 +37,7 @@
+       containers:
+ {{- if .Values.preflight.validateCNPs }}
+         - name: cnp-validator
+-          image: {{ .Values.preflight.image.repository }}:{{ .Values.preflight.image.tag }}
++          image: {{ template "system_default_registry" . }}{{ .Values.preflight.image.repository }}:{{ .Values.preflight.image.tag }}
+           imagePullPolicy: {{ .Values.preflight.image.pullPolicy }}
+           command: ["/bin/sh"]
+           args:
+diff -x '*.tgz' -x '*.lock' -uNr charts-original/templates/clustermesh-apiserver-deployment.yaml charts/templates/clustermesh-apiserver-deployment.yaml

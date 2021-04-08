@@ -1,0 +1,18 @@
+--- charts-original/templates/cilium-operator-deployment.yaml	2021-02-04 01:17:41.000000000 +0100
++++ charts/templates/cilium-operator-deployment.yaml	2021-02-08 14:38:47.531464160 +0100
+@@ -136,11 +136,11 @@
+           value: {{ $value }}
+ {{- end }}
+ {{- if .Values.eni }}
+-        image: {{ .Values.operator.image.repository }}-aws:{{ .Values.operator.image.tag }}
++        image: {{ template "system_default_registry" . }}{{ .Values.operator.image.repository }}-aws:{{ .Values.operator.image.tag }}
+ {{- else if .Values.azure.enabled }}
+-        image: {{ .Values.operator.image.repository }}-azure:{{ .Values.operator.image.tag }}
++        image: {{ template "system_default_registry" . }}{{ .Values.operator.image.repository }}-azure:{{ .Values.operator.image.tag }}
+ {{- else }}
+-        image: {{ .Values.operator.image.repository }}-generic:{{ .Values.operator.image.tag }}
++        image: {{ template "system_default_registry" . }}{{ .Values.operator.image.repository }}-generic:{{ .Values.operator.image.tag }}
+ {{- end }}
+         imagePullPolicy: {{ .Values.operator.image.pullPolicy }}
+         name: cilium-operator
+diff -x '*.tgz' -x '*.lock' -uNr charts-original/templates/cilium-preflight-daemonset.yaml charts/templates/cilium-preflight-daemonset.yaml

@@ -1,0 +1,29 @@
+--- charts-original/templates/hubble-ui-deployment.yaml	2021-02-04 01:17:41.000000000 +0100
++++ charts/templates/hubble-ui-deployment.yaml	2021-02-08 14:38:47.715465428 +0100
+@@ -40,7 +40,7 @@
+ {{- end }}
+       containers:
+         - name: frontend
+-          image: "{{ .Values.hubble.ui.frontend.image.repository }}:{{ .Values.hubble.ui.frontend.image.tag }}"
++          image: "{{ template "system_default_registry" . }}{{ .Values.hubble.ui.frontend.image.repository }}:{{ .Values.hubble.ui.frontend.image.tag }}"
+           imagePullPolicy: {{ .Values.hubble.ui.frontend.image.pullPolicy }}
+           ports:
+             - containerPort: 8080
+@@ -48,7 +48,7 @@
+           resources:
+             {{- toYaml .Values.hubble.ui.frontend.resources | trim | nindent 12 }}
+         - name: backend
+-          image: "{{ .Values.hubble.ui.backend.image.repository }}:{{ .Values.hubble.ui.backend.image.tag }}"
++          image: "{{ template "system_default_registry" . }}{{ .Values.hubble.ui.backend.image.repository }}:{{ .Values.hubble.ui.backend.image.tag }}"
+           imagePullPolicy: {{ .Values.hubble.ui.backend.image.pullPolicy }}
+           env:
+             - name: EVENTS_SERVER_PORT
+@@ -61,7 +61,7 @@
+           resources:
+             {{- toYaml .Values.hubble.ui.backend.resources  | trim | nindent 12 }}
+         - name: proxy
+-          image: "{{ .Values.hubble.ui.proxy.image.repository }}:{{ .Values.hubble.ui.proxy.image.tag }}"
++          image: "{{ template "system_default_registry" . }}{{ .Values.hubble.ui.proxy.image.repository }}:{{ .Values.hubble.ui.proxy.image.tag }}"
+           imagePullPolicy: {{ .Values.hubble.ui.proxy.image.pullPolicy }}
+           ports:
+             - containerPort: 8081

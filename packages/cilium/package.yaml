@@ -1,0 +1,6 @@
+url: https://helm.cilium.io/cilium-1.9.4.tgz
+packageVersion: 01
+releaseCandidateVersion: 00
+# This package is meant to be consumed as a subchart of another package,
+# not directly.
+doNotRelease: true

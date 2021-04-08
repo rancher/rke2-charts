@@ -1,0 +1,29 @@
+--- charts-original/templates/cilium-preflight-daemonset.yaml	2021-02-04 01:17:41.000000000 +0100
++++ charts/templates/cilium-preflight-daemonset.yaml	2021-02-08 14:38:47.555464324 +0100
+@@ -25,14 +25,14 @@
+ {{- end }}
+       initContainers:
+         - name: clean-cilium-state
+-          image: {{ .Values.preflight.image.repository }}:{{ .Values.preflight.image.tag }}
++          image: {{ template "system_default_registry" . }}{{ .Values.preflight.image.repository }}:{{ .Values.preflight.image.tag }}
+           imagePullPolicy: {{ .Values.preflight.image.pullPolicy }}
+           command: ["/bin/echo"]
+           args:
+           - "hello"
+       containers:
+         - name: cilium-pre-flight-check
+-          image: {{ .Values.preflight.image.repository }}:{{ .Values.preflight.image.tag }}
++          image: {{ template "system_default_registry" . }}{{ .Values.preflight.image.repository }}:{{ .Values.preflight.image.tag }}
+           imagePullPolicy: {{ .Values.preflight.image.pullPolicy }}
+           command: ["/bin/sh"]
+           args:
+@@ -68,7 +68,7 @@
+ 
+ {{- if ne .Values.preflight.tofqdnsPreCache "" }}
+         - name: cilium-pre-flight-fqdn-precache
+-          image: {{ .Values.preflight.image.repository }}:{{ .Values.preflight.image.tag }}
++          image: {{ template "system_default_registry" . }}{{ .Values.preflight.image.repository }}:{{ .Values.preflight.image.tag }}
+           imagePullPolicy: {{ .Values.preflight.image.pullPolicy }}
+           name: cilium-pre-flight-fqdn-precache
+           command: ["/bin/sh"]
+diff -x '*.tgz' -x '*.lock' -uNr charts-original/templates/cilium-preflight-deployment.yaml charts/templates/cilium-preflight-deployment.yaml
