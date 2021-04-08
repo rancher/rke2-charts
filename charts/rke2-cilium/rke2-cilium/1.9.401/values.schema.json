@@ -1,0 +1,240 @@
+{
+    "$schema": "http://json-schema.org/draft-09/schema",
+    "type": "object",
+    "properties": {
+        "cilium": {
+            "type": "object",
+            "properties": {
+                "azure": {
+                    "type": "object",
+                    "properties": {
+                        "enabled": {
+                            "type": "boolean"
+                        }
+                    }
+                },
+                "cni": {
+                    "type": "object",
+                    "properties": {
+                        "chainingMode": {
+                            "type": "string"
+                        },
+                        "customConf": {
+                            "type": "boolean"
+                        }
+                    }
+                },
+                "eni": {
+                    "type": "boolean"
+                },
+                "image": {
+                    "type": "object",
+                    "properties": {
+                        "repository": {
+                            "type": "string"
+                        },
+                        "tag": {
+                            "type": "string"
+                        }
+                    },
+                    "required": ["repository", "tag" ]
+                },
+                "imagePullSecrets": {
+                    "type": "array"
+                },
+                "ipam": {
+                    "type": "object",
+                    "properties": {
+                        "mode": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "masquerade": {
+                    "type": "boolean"
+                },
+                "nodeinit": {
+                    "type": "object",
+                    "properties": {
+                        "image": {
+                            "type": "object",
+                            "properties": {
+                                "repository": {
+                                    "type": "string"
+                                },
+                                "tag": {
+                                    "type": "string"
+                                }
+                            },
+                            "required": ["repository", "tag" ]
+                        }
+                    },
+                    "required": ["image" ]
+                },
+                "operator": {
+                    "type": "object",
+                    "properties": {
+                        "image": {
+                            "type": "object",
+                            "properties": {
+                                "repository": {
+                                    "type": "string"
+                                },
+                                "tag": {
+                                    "type": "string"
+                                }
+                            },
+                            "required": ["repository", "tag" ]
+                        }
+                    },
+                    "required": ["image" ]
+                },
+                "preflight": {
+                    "type": "object",
+                    "properties": {
+                        "enabled": {
+                            "type": "boolean"
+                        },
+                        "image": {
+                            "type": "object",
+                            "properties": {
+                                "repository": {
+                                    "type": "string"
+                                },
+                                "tag": {
+                                    "type": "string"
+                                }
+                            },
+                            "required": ["repository", "tag" ]
+                        }
+                    }
+                },
+                "tunnel": {
+                    "type": "string"
+                }
+            },
+            "required": ["image", "operator", "nodeinit" ]
+        },
+        "global": {
+            "type": "object",
+            "properties": {
+                "systemDefaultRegistry": {
+                    "type": "string"
+                }
+            }
+        }
+    },
+    "required": ["cilium"],
+    "allOf": [
+        { "$ref" : "#/$defs/azure-requires-config" },
+        { "$ref" : "#/$defs/aws-requires-config" },
+        { "$ref" : "#/$defs/azure-aws-are-exclusive" },
+        { "$ref" : "#/$defs/preflight-requires-config" }
+    ],
+    "$defs": {
+        "is-azure": {
+            "properties" : {
+                "cilium": {
+                    "properties": {
+                        "azure": {
+                            "properties": {
+                                "enabled": { "const": true }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "azure-requires-config" : {
+            "anyOf": [
+                { "not": { "$ref": "#/$defs/is-azure" } },
+                { 
+                    "properties": {
+                        "cilium": {
+                            "properties": {
+                                "masquerade": { "const": true },
+                                "cni": {
+                                    "properties": {
+                                        "chainingMode": { "const": "generic-veth" },
+                                        "customConf": { "const": true },
+                                        "configMap": { "const": "cni-configuration"}
+                                    },
+                                    "required": [ "chainingMode", "customConf", "configMap" ]
+                                }
+                            },
+                            "required": [ "cni" ]
+                        }
+                    }
+                }
+            ]
+        },
+        "is-aws": {
+            "properties" : {
+                "cilium": {
+                    "properties": {
+                        "eni": { "const": true }
+                    }
+                }
+            }
+        },
+        "aws-requires-config": {
+            "anyOf": [
+                { "not": { "$ref": "#/$defs/is-aws" } },
+                {
+                    "properties": {
+                        "cilium": {
+                            "properties": {
+                                "tunnel": { "const": "disabled" },
+                                "egressMasqueradeInterfaces": { "const": "eth0" },
+                                "ipam": {
+                                    "properties": {
+                                        "mode": { "const": "eni" }
+                                    },
+                                    "required": [ "mode" ]
+                                }
+                            },
+                            "required": [ "tunnel", "egressMasqueradeInterfaces", "ipam" ]
+                        }
+                    }
+                }
+            ]
+        },
+        "azure-aws-are-exclusive": {
+            "not": {
+                "allOf": [
+                    { "$ref": "#/$defs/is-azure" },
+                    { "$ref": "#/$defs/is-aws" }
+                ]
+            }
+        },
+        "is-preflight": {
+            "properties" : {
+                "cilium": {
+                    "properties": {
+                        "preflight": {
+                            "properties": {
+                                "enabled": { "const": true }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "preflight-requires-config" : {
+            "anyOf": [
+                { "not": { "$ref": "#/$defs/is-preflight" } },
+                { 
+                    "properties": {
+                        "cilium": {
+                            "properties": {
+                                "preflight": {
+                                    "required": [ "image" ]
+                                }
+                            }
+                        }
+                    }
+                }
+            ]
+        }
+    }
+}
