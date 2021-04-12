@@ -49,5 +49,9 @@ cilium:
   # Set to "eth0" for ENI AWS intetgration.
   #egressMasqueradeInterfaces: eth0
 
+  ipv6:
+  # -- Enable dual stack 
+    enabled: false
+
 global:
   systemDefaultRegistry: ""

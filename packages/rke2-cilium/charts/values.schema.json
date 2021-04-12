@@ -111,6 +111,14 @@
                 },
                 "tunnel": {
                     "type": "string"
+                },
+                "ipv6": {
+                    "type": "object",
+                    "properties": {
+                        "enabled": {
+                            "type": "boolean"
+                        }
+                    }
                 }
             },
             "required": ["image", "operator", "nodeinit" ]
