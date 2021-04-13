@@ -3,7 +3,7 @@
 # image for kubeproxy
 image:
   repository: rancher/hardened-kube-proxy
-  tag: v1.20.5-build20210405
+  tag: v1.21.0-build20210413
 
 # The IP address for the proxy server to serve on 
 # (set to '0.0.0.0' for all IPv4 interfaces and '::' for all IPv6 interfaces)
