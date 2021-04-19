@@ -43,7 +43,7 @@ cilium:
   eni: false
   ipam:
     # Set mode to "eni" for ENI AWS intetgration.
-    mode: "cluster-pool"
+    mode: "kubernetes"
   # Set tunnel to "disable" if ENI AWS or Azure integrations are enabled.
   tunnel: "vxlan"
   # Set to "eth0" for ENI AWS intetgration.
