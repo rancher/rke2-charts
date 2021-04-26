@@ -154,6 +154,10 @@ spec:
               value: {{ .Values.calico.felixPrometheusMetricsEnabled | quote }}
             - name: FELIX_XDPENABLED
               value: {{ .Values.calico.felixXDPEnabled | quote }}
+            - name: FELIX_FAILSAFEINBOUNDHOSTPORTS
+              value: {{ .Values.calico.felixFailsafeInboundHostPorts | quote }}
+            - name: FELIX_FAILSAFEOUTBOUNDHOSTPORTS
+              value: {{ .Values.calico.felixFailsafeOutboundHostPorts | quote }}
           securityContext:
             privileged: true
           resources:
