@@ -190,6 +190,33 @@ entries:
     version: 1.10.101
   - apiVersion: v1
     appVersion: 1.6.9
+    created: "2021-04-27T22:59:40.857249253Z"
+    description: CoreDNS is a DNS server that chains plugins and provides Kubernetes
+      DNS Services
+    digest: 4d6220b7a50e2efecbb930f7046f26a24738667e3ecad3ad0f3cff55631ea607
+    home: https://coredns.io
+    icon: https://coredns.io/images/CoreDNS_Colour_Horizontal.png
+    keywords:
+    - coredns
+    - dns
+    - kubedns
+    maintainers:
+    - email: hello@acale.ph
+      name: Acaleph
+    - email: shashidhara.huawei@gmail.com
+      name: shashidharatd
+    - email: andor44@gmail.com
+      name: andor44
+    - email: manuel@rueg.eu
+      name: mrueg
+    name: rke2-coredns
+    sources:
+    - https://github.com/coredns/coredns
+    urls:
+    - assets/rke2-coredns/rke2-coredns-1.10.101-build2021022303.tgz
+    version: 1.10.101-build2021022303
+  - apiVersion: v1
+    appVersion: 1.6.9
     created: "2021-03-02T00:27:49.034054989Z"
     description: CoreDNS is a DNS server that chains plugins and provides Kubernetes
       DNS Services
@@ -328,6 +355,22 @@ entries:
     - assets/rke2-ingress-nginx/rke2-ingress-nginx-1.36.300.tgz
     version: 1.36.300
   rke2-kube-proxy:
+  - apiVersion: v1
+    appVersion: v1.21.0
+    created: "2021-04-27T22:59:40.886210593Z"
+    description: Install Kube Proxy.
+    digest: 7b61ea3a0d3525890c11e3a9ca70cedec80076459fc9dab0d20ca33e29f3e346
+    keywords:
+    - kube-proxy
+    maintainers:
+    - email: charts@rancher.com
+      name: Rancher Labs
+    name: rke2-kube-proxy
+    sources:
+    - https://github.com/rancher/rke2-charts
+    urls:
+    - assets/rke2-kube-proxy/rke2-kube-proxy-v1.21.0-build2021041302.tgz
+    version: v1.21.0-build2021041302
   - apiVersion: v1
     appVersion: v1.21.0
     created: "2021-04-13T17:57:25.768646909Z"
