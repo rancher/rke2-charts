@@ -20,7 +20,7 @@
    {{- if .Values.service.clusterIP }}
    clusterIP: {{ .Values.service.clusterIP }}
 +  {{ else }}
-+  clusterIP: {{ (lookup "v1" "ConfigMap" "kube-system" "cluster-dns").data.clusterDNS }}
++  clusterIP: {{ coalesce .Values.global.clusterDNS "10.43.0.10" }}
    {{- end }}
    {{- if .Values.service.externalTrafficPolicy }}
    externalTrafficPolicy: {{ .Values.service.externalTrafficPolicy }}
