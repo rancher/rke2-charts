@@ -14,7 +14,7 @@
      {
        {{- range .plugins }}
 -        {{ .name }}{{ if .parameters }} {{ .parameters }}{{ end }}{{ if .configBlock }} {
-+        {{ .name }} {{ if .parameters }} {{if eq .name "kubernetes" }} {{ (lookup "v1" "ConfigMap" "kube-system" "cluster-dns").data.clusterDomain }} {{ end }} {{.parameters}}{{ end }}{{ if .configBlock }} {
++        {{ .name }} {{ if .parameters }} {{if eq .name "kubernetes" }} {{ coalesce $.Values.global.clusterDomain "cluster.local" }} {{ end }} {{.parameters}}{{ end }}{{ if .configBlock }} {
  {{ .configBlock | indent 12 }}
          }{{ end }}
        {{- end }}

@@ -10,7 +10,7 @@ data:
       contentType: {{ .Values.clientConnection.contentType | quote }}
       kubeconfig: {{ include "kubeproxy_kubeconfig" . | quote }}
       qps: {{ .Values.clientConnection.qps }} 
-    clusterCIDR: {{ .Values.clusterCIDR | quote }} 
+    clusterCIDR: {{ coalesce .Values.global.clusterCIDR .Values.clusterCIDR | quote }}
     configSyncPeriod: {{ .Values.configSyncPeriod }}
     conntrack:
       maxPerCore: {{ .Values.conntrack.maxPerCore }}
