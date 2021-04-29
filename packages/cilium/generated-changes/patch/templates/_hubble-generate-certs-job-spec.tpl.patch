@@ -1,6 +1,14 @@
---- charts-original/templates/_hubble-generate-certs-job-spec.tpl	2021-02-04 01:17:41.000000000 +0100
-+++ charts/templates/_hubble-generate-certs-job-spec.tpl	2021-02-08 14:38:47.451463609 +0100
-@@ -10,7 +10,7 @@
+--- charts-original/templates/_hubble-generate-certs-job-spec.tpl
++++ charts/templates/_hubble-generate-certs-job-spec.tpl
+@@ -5,15 +5,12 @@
+     metadata:
+       labels:
+         k8s-app: hubble-generate-certs
+-        {{- with .Values.certgen.podLabels }}
+-        {{- toYaml . | nindent 8 }}
+-        {{- end }}
+     spec:
+       serviceAccount: hubble-generate-certs
        serviceAccountName: hubble-generate-certs
        containers:
          - name: certgen
@@ -9,4 +17,3 @@
            imagePullPolicy: {{ .Values.certgen.image.pullPolicy }}
            command:
              - "/usr/bin/cilium-certgen"
-diff -x '*.tgz' -x '*.lock' -uNr charts-original/templates/hubble-relay-deployment.yaml charts/templates/hubble-relay-deployment.yaml

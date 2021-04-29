@@ -1,6 +1,16 @@
---- charts-original/templates/cilium-etcd-operator-deployment.yaml	2021-02-04 01:17:41.000000000 +0100
-+++ charts/templates/cilium-etcd-operator-deployment.yaml	2021-02-08 14:38:47.511464021 +0100
-@@ -64,7 +64,7 @@
+--- charts-original/templates/cilium-etcd-operator-deployment.yaml
++++ charts/templates/cilium-etcd-operator-deployment.yaml
+@@ -26,9 +26,6 @@
+       labels:
+         io.cilium/app: etcd-operator
+         name: cilium-etcd-operator
+-{{- with .Values.etcd.podLabels }}
+-        {{- toYaml . | nindent 8 }}
+-{{- end }}
+     spec:
+ {{- if .Values.etcd.affinity }}
+       affinity:
+@@ -67,7 +64,7 @@
            value: "revision"
          - name: CILIUM_ETCD_META_ETCD_AUTO_COMPACTION_RETENTION
            value: "25000"
@@ -9,4 +19,3 @@
          imagePullPolicy: {{ .Values.etcd.image.pullPolicy }}
          name: cilium-etcd-operator
        dnsPolicy: ClusterFirst
-diff -x '*.tgz' -x '*.lock' -uNr charts-original/templates/cilium-nodeinit-daemonset.yaml charts/templates/cilium-nodeinit-daemonset.yaml
