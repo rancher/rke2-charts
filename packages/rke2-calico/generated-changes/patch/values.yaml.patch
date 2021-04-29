@@ -1,0 +1,15 @@
+--- charts-original/values.yaml
++++ charts/values.yaml
+@@ -3,6 +3,12 @@
+ installation:
+   enabled: true
+   kubernetesProvider: ""
++  calicoNetwork:
++    bgp: Disabled
++    ipPools:
++    - natOutgoing: Enabled
++      encapsulation: VXLAN
++      cidr: 10.42.0.0/16
+ 
+ certs:
+   node:
