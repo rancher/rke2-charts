@@ -28,16 +28,19 @@
          imagePullPolicy: {{ .Values.image.pullPolicy }}
          volumeMounts:
          - mountPath: /var/run/cilium
-@@ -334,7 +331,7 @@
+@@ -334,8 +331,10 @@
  {{- if and .Values.nodeinit.enabled (not (eq .Values.nodeinit.bootstrapFile "")) }}
        - name: wait-for-node-init
          command: ['sh', '-c', 'until stat {{ .Values.nodeinit.bootstrapFile }} > /dev/null 2>&1; do echo "Waiting on node-init to run..."; sleep 1; done']
 -        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}{{ if .Values.image.useDigest }}@{{ .Values.image.digest }}{{ end }}"
 +        image: {{ template "system_default_registry" . }}{{ .Values.image.repository }}:{{ .Values.image.tag }}
          imagePullPolicy: {{ .Values.image.pullPolicy }}
++        securityContext:
++          privileged: true
          volumeMounts:
          - mountPath: {{ .Values.nodeinit.bootstrapFile }}
-@@ -372,7 +369,7 @@
+           name: cilium-bootstrap-file
+@@ -372,7 +371,7 @@
  {{- if .Values.extraEnv }}
  {{ toYaml .Values.extraEnv | indent 8 }}
  {{- end }}
