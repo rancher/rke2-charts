@@ -13,7 +13,7 @@
  
  certs:
    node:
-@@ -17,9 +23,10 @@
+@@ -17,9 +23,13 @@
  
  # Configuration for the tigera operator
  tigeraOperator:
@@ -27,3 +27,6 @@
 -  image: quay.io/docker.io/calico/ctl
 +  image: rancher/mirrored-calico-ctl
    tag: v3.18.1
++
++global:
++  systemDefaultRegistry: ""
