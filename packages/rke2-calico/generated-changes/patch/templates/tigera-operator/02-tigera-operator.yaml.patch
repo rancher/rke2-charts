@@ -1,0 +1,11 @@
+--- charts-original/templates/tigera-operator/02-tigera-operator.yaml
++++ charts/templates/tigera-operator/02-tigera-operator.yaml
+@@ -29,7 +29,7 @@
+       dnsPolicy: ClusterFirstWithHostNet
+       containers:
+         - name: tigera-operator
+-          image: {{ template "tigera-operator.image" .Values.tigeraOperator}}
++          image: {{ template "tigera-operator.image" . }}
+           imagePullPolicy: IfNotPresent
+           command:
+             - operator

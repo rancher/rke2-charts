@@ -1,0 +1,16 @@
+--- charts-original/templates/_helpers.tpl
++++ charts/templates/_helpers.tpl
+@@ -1,7 +1,10 @@
+ {{/* generate the image name for a component*/}}
+ {{- define "tigera-operator.image" -}}
+-{{- if .registry -}}
+-    {{- .registry | trimSuffix "/" -}}/
++{{- if .Values.global.systemDefaultRegistry -}}
++{{- $_ := set .Values.tigeraOperator "registry" .Values.global.systemDefaultRegistry -}}
+ {{- end -}}
+-{{- .image -}}:{{- .version -}}
++{{- if .Values.tigeraOperator.registry -}}
++    {{- .Values.tigeraOperator.registry | trimSuffix "/" -}}/
++{{- end -}}
++{{- .Values.tigeraOperator.image -}}:{{- .Values.tigeraOperator.version -}}
+ {{- end -}}
