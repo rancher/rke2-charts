@@ -1,0 +1,35 @@
+imagePullSecrets: {}
+
+installation:
+  enabled: true
+  kubernetesProvider: ""
+  calicoNetwork:
+    bgp: Disabled
+    ipPools:
+    - natOutgoing: Enabled
+      encapsulation: VXLAN
+      cidr: 10.42.0.0/16
+
+certs:
+  node:
+    key:
+    cert:
+    commonName:
+  typha:
+    key:
+    cert:
+    commonName:
+    caBundle:
+
+# Configuration for the tigera operator
+tigeraOperator:
+  registry: docker.io
+  image: rancher/mirrored-calico-operator
+  version: v1.15.1
+
+calicoctl:
+  image: rancher/mirrored-calico-ctl
+  tag: v3.18.1
+
+global:
+  systemDefaultRegistry: ""
