@@ -397,6 +397,30 @@ entries:
     - assets/rke2-coredns/rke2-coredns-1.10.101-build2021022301.tgz
     version: 1.10.101-build2021022301
   rke2-ingress-nginx:
+  - annotations:
+      artifacthub.io/changes: |
+        - Removes the possibility of using localhost in ExternalNames as endpoints
+    apiVersion: v2
+    appVersion: 0.46.0
+    created: "2021-05-07T23:21:50.284563388Z"
+    description: Ingress controller for Kubernetes using NGINX as a reverse proxy
+      and load balancer
+    digest: 9c3507d51e6b6e893fe8794bbf53f028dd04930d8ffe81f46e38cb3a6d44ba22
+    home: https://github.com/kubernetes/ingress-nginx
+    icon: https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Nginx_logo.svg/500px-Nginx_logo.svg.png
+    keywords:
+    - ingress
+    - nginx
+    kubeVersion: '>=1.16.0-0'
+    maintainers:
+    - name: ChiefAlexander
+    name: rke2-ingress-nginx
+    sources:
+    - https://github.com/kubernetes/ingress-nginx
+    type: application
+    urls:
+    - assets/rke2-ingress-nginx/rke2-ingress-nginx-3.30.001.tgz
+    version: 3.30.001
   - apiVersion: v1
     appVersion: 0.35.0
     created: "2021-03-02T00:27:49.044712378Z"
