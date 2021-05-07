@@ -1,4 +1,4 @@
-url: https://charts.helm.sh/stable/packages/nginx-ingress-1.36.3.tgz
-packageVersion: 02
+url: https://github.com/kubernetes/ingress-nginx/releases/download/helm-chart-3.30.0/ingress-nginx-3.30.0.tgz
+packageVersion: 01
 # This repository does not use releaseCandidateVersions, so you can leave this as 00.
 releaseCandidateVersion: 00

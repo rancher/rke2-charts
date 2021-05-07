@@ -1,26 +1,24 @@
 --- charts-original/values.yaml
 +++ charts/values.yaml
-@@ -4,8 +4,8 @@
+@@ -1,3 +1,5 @@
++nameOverride: v3
++
+ ## nginx configuration
+ ## Ref: https://github.com/kubernetes/ingress-nginx/blob/master/docs/user-guide/nginx-configuration/index.md
+ ##
+@@ -10,9 +12,8 @@
  controller:
    name: controller
    image:
--    repository: quay.io/kubernetes-ingress-controller/nginx-ingress-controller
--    tag: "0.30.0"
+-    repository: k8s.gcr.io/ingress-nginx/controller
+-    tag: "v0.46.0"
+-    digest: sha256:52f0058bed0a17ab0fb35628ba97e8d52b5d32299fbc03cc0f6c7b9ff036b61a
 +    repository: rancher/nginx-ingress-controller
-+    tag: "nginx-0.30.0-rancher1"
++    tag: "nginx-0.46.0-rancher1"
      pullPolicy: IfNotPresent
      # www-data -> uid 101
      runAsUser: 101
-@@ -37,7 +37,7 @@
-   # Required for use with CNI based kubernetes installations (such as ones set up by kubeadm),
-   # since CNI and hostport don't mix yet. Can be deprecated once https://github.com/kubernetes/kubernetes/issues/23920
-   # is merged
--  hostNetwork: false
-+  hostNetwork: true
- 
-   # Optionally customize the pod dnsConfig.
-   dnsConfig: {}
-@@ -45,7 +45,7 @@
+@@ -45,7 +46,7 @@
    # Optionally change this to ClusterFirstWithHostNet in case you have 'hostNetwork: true'.
    # By default, while using host network, name resolution uses the host's DNS. If you wish nginx-controller
    # to keep resolving names inside the k8s network, use ClusterFirstWithHostNet.
@@ -29,36 +27,34 @@
  
    # Bare-metal considerations via the host network https://kubernetes.github.io/ingress-nginx/deploy/baremetal/#via-the-host-network
    # Ingress status was blank because there is no Service exposing the NGINX Ingress controller in a configuration using the host network, the default --publish-service flag used in standard cloud setups does not apply
-@@ -53,7 +53,7 @@
+@@ -54,13 +55,13 @@
+   # Required for use with CNI based kubernetes installations (such as ones set up by kubeadm),
+   # since CNI and hostport don't mix yet. Can be deprecated once https://github.com/kubernetes/kubernetes/issues/23920
+   # is merged
+-  hostNetwork: false
++  hostNetwork: true
  
    ## Use host ports 80 and 443
-   daemonset:
--    useHostPort: false
-+    useHostPort: true
- 
-     hostPorts:
+   ## Disabled by default
+   ##
+   hostPort:
+-    enabled: false
++    enabled: true
+     ports:
        http: 80
-@@ -131,7 +131,7 @@
+       https: 443
+@@ -144,7 +145,7 @@
  
    ## DaemonSet or Deployment
    ##
 -  kind: Deployment
 +  kind: DaemonSet
  
-   ## Annotations to be added to the controller deployment
+   ## Annotations to be added to the controller Deployment or DaemonSet
    ##
-@@ -242,7 +242,7 @@
-     configMapKey: ""
+@@ -608,8 +609,8 @@
  
-   service:
--    enabled: true
-+    enabled: false
- 
-     annotations: {}
-     labels: {}
-@@ -440,8 +440,8 @@
- 
-   name: default-backend
+   name: defaultbackend
    image:
 -    repository: k8s.gcr.io/defaultbackend-amd64
 -    tag: "1.5"
@@ -67,10 +63,10 @@
      pullPolicy: IfNotPresent
      # nobody user -> uid 65534
      runAsUser: 65534
-@@ -573,3 +573,6 @@
- ##
- udp: {}
- #  53: "kube-system/kube-dns:53"
+@@ -759,3 +760,6 @@
+ # This can be generated with: openssl dhparam 4096 2> /dev/null | base64
+ # Ref: https://github.com/krmichel/ingress-nginx/blob/master/docs/examples/customization/ssl-dh-param
+ dhParam:
 +
 +global:
 +  systemDefaultRegistry: ""
