@@ -23,7 +23,6 @@ flannel:
     type: "vxlan"
     port: "8472"
 
-
 calico:
   # CNI installation image.
   cniImage:
