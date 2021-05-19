@@ -62,6 +62,7 @@ data:
     {
       "Network": {{ coalesce .Values.global.clusterCIDR .Values.podCidr | quote }},
       "Backend": {
-        "Type": {{ .Values.flannel.backend | quote }}
+        "Type": {{ .Values.flannel.backend.type | quote }}
+        "Port": {{ .Values.flannel.backend.port | quote }}
       }
     }

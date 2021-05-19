@@ -13,14 +13,17 @@ flannel:
   # If left blank, then the interface is chosen using the node's
   # default route.
   iface: ""
-  # kube-flannel command arguments 
+  # kube-flannel command arguments
   args:
   - "--ip-masq"
   - "--kube-subnet-mgr"
   # Backend for kube-flannel. Backend should not be changed
   # at runtime.
-  backend: "vxlan"
-          
+  backend:
+    type: "vxlan"
+    port: "8472"
+
+
 calico:
   # CNI installation image.
   cniImage:
