@@ -127,7 +127,7 @@
             "type": "object",
             "properties": {
                 "systemDefaultRegistry": {
-                    "type": ["string", "integer"]
+                    "type": "string"
                 }
             }
         }
