@@ -18,11 +18,11 @@ data:
       tcpCloseWaitTimeout: {{ .Values.conntrack.tcpCloseWaitTimeout | quote }}
       tcpEstablishedTimeout: {{ .Values.conntrack.tcpEstablishedTimeout | quote }}
     detectLocalMode: {{ .Values.detectLocalMode | quote }}
-    enableProfiling: {{ .Values.enableProfiling | quote }}
+    enableProfiling: {{ .Values.enableProfiling }}
     healthzBindAddress: {{ .Values.healthzBindAddress | quote }}
     hostnameOverride: {{ .Values.hostnameOverride | quote }}
     iptables:
-      masqueradeAll: {{ .Values.iptables.masqueradeAll | quote }}
+      masqueradeAll: {{ .Values.iptables.masqueradeAll }}
       masqueradeBit: {{ .Values.iptables.masqueradeBit }}
       {{ if .Values.iptables.minSyncPeriod }}
       minSyncPeriod: {{ .Values.iptables.minSyncPeriod }}
@@ -34,7 +34,7 @@ data:
       minSyncPeriod: {{ .Values.ipvs.minSyncPeriod }}
       {{ end }}
       scheduler: {{ .Values.ipvs.scheduler | quote }}
-      strictARP: {{ .Values.ipvs.strictARP | quote }}
+      strictARP: {{ .Values.ipvs.strictARP }}
       syncPeriod: {{ .Values.ipvs.syncPeriod }}
       {{ if .Values.ipvs.tcpFinTimeout }}
       tcpFinTimeout: {{ .Values.ipvs.tcpFinTimeout }}
