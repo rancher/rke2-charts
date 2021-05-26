@@ -1,5 +1,5 @@
 url: local
-packageVersion: 01
+packageVersion: 02
 releaseCandidateVersion: 00
 additionalCharts:
   - workingDir: charts-crd
