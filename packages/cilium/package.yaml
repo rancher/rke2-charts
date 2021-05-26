@@ -1,5 +1,5 @@
 url: https://helm.cilium.io/cilium-1.9.6.tgz
-packageVersion: 05
+packageVersion: 06
 releaseCandidateVersion: 00
 # This package is meant to be consumed as a subchart of another package,
 # not directly.
