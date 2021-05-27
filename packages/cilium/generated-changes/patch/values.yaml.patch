@@ -1,0 +1,11 @@
+--- charts-original/values.yaml
++++ charts/values.yaml
+@@ -1320,6 +1320,8 @@
+   - effect: NoSchedule
+     key: node-role.kubernetes.io/master
+   - effect: NoSchedule
++    key: node-role.kubernetes.io/control-plane
++  - effect: NoSchedule
+     key: node.cloudprovider.kubernetes.io/uninitialized
+     value: "true"
+   - key: CriticalAddonsOnly

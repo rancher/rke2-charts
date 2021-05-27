@@ -1,7 +1,16 @@
 --- charts-original/values.yaml
 +++ charts/values.yaml
-@@ -3,6 +3,12 @@
+@@ -1,8 +1,21 @@
+ imagePullSecrets: {}
+ 
  installation:
++  controlPlaneTolerations:
++  - key: "node-role.kubernetes.io/control-plane"
++    operator: "Exists"
++    effect: "NoSchedule"
++  - key: "node-role.kubernetes.io/etcd"
++    operator: "Exists"
++    effect: "NoExecute"
    enabled: true
    kubernetesProvider: ""
 +  calicoNetwork:
@@ -13,7 +22,7 @@
  
  certs:
    node:
-@@ -17,9 +23,12 @@
+@@ -17,9 +30,12 @@
  
  # Configuration for the tigera operator
  tigeraOperator:

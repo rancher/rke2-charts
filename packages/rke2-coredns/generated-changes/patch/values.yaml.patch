@@ -33,7 +33,37 @@
  
  # Default zone is what Kubernetes recommends:
  # https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/#coredns-configmap-options
-@@ -196,3 +196,7 @@
+@@ -126,7 +126,13 @@
+ #     operator: Equal
+ #     value: master
+ #     effect: NoSchedule
+-tolerations: []
++tolerations: 
++- key: "node-role.kubernetes.io/control-plane"
++  operator: "Exists"
++  effect: "NoSchedule"
++- key: "node-role.kubernetes.io/etcd"
++  operator: "Exists"
++  effect: "NoExecute"
+ 
+ # https://kubernetes.io/docs/tasks/run-application/configure-pdb/#specifying-a-poddisruptionbudget
+ podDisruptionBudget: {}
+@@ -180,7 +186,13 @@
+   nodeSelector: {}
+ 
+   # expects input structure as per specification https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.11/#toleration-v1-core
+-  tolerations: []
++  tolerations:
++  - key: "node-role.kubernetes.io/control-plane"
++    operator: "Exists"
++    effect: "NoSchedule"
++  - key: "node-role.kubernetes.io/etcd"
++    operator: "Exists"
++    effect: "NoExecute"
+ 
+   # resources for autoscaler pod
+   resources:
+@@ -196,3 +208,7 @@
      ## Annotations for the coredns-autoscaler configmap
      # i.e. strategy.spinnaker.io/versioned: "false" to ensure configmap isn't renamed
      annotations: {}

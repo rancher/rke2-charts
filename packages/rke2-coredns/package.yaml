@@ -1,4 +1,4 @@
 url: https://charts.helm.sh/stable/packages/coredns-1.10.1.tgz
-packageVersion: 03
+packageVersion: 04
 # This repository does not use releaseCandidateVersions, so you can leave this as 00.
 releaseCandidateVersion: 00
