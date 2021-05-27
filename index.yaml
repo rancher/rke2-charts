@@ -5,6 +5,17 @@ entries:
       catalog.cattle.io/namespace: tigera-operator
     apiVersion: v2
     appVersion: v3.19.1
+    created: "2021-05-27T19:13:47.698749797Z"
+    description: Installs the Tigera operator for Calico
+    digest: e14c8ef4139a63a090d8f7ec58b2d39e8ec7faf36e847d077f54d6792b0a1a3c
+    name: rke2-calico
+    urls:
+    - assets/rke2-calico/rke2-calico-v3.19.1-105.tgz
+    version: v3.19.1-105
+  - annotations:
+      catalog.cattle.io/namespace: tigera-operator
+    apiVersion: v2
+    appVersion: v3.19.1
     created: "2021-05-26T00:25:17.539998581Z"
     description: Installs the Tigera operator for Calico
     digest: 486e95c201519c85f81b5cb4b5173de8bf2a6f305b5a8cafbca98af70a40748a
@@ -46,6 +57,15 @@ entries:
     - assets/rke2-calico/rke2-calico-v3.18.1-101.tgz
     version: v3.18.1-101
   rke2-calico-crd:
+  - apiVersion: v1
+    created: "2021-05-27T19:13:47.687978063Z"
+    description: Installs the CRDs for rke2-calico
+    digest: 0cb5a98dbba707a62108e34309a5b6862c789eb80ba29b664f3e0525a6d33032
+    name: rke2-calico-crd
+    type: application
+    urls:
+    - assets/rke2-calico/rke2-calico-crd-v1.0.005.tgz
+    version: v1.0.005
   - apiVersion: v1
     created: "2021-05-26T00:25:17.533303484Z"
     description: Installs the CRDs for rke2-calico
@@ -220,6 +240,30 @@ entries:
     - assets/rke2-canal/rke2-canal-v3.13.3.tgz
     version: v3.13.3
   rke2-cilium:
+  - apiVersion: v1
+    created: "2021-05-27T19:13:47.75881454Z"
+    dependencies:
+    - name: cilium
+      repository: file://./charts/cilium
+    - import-values:
+      - defaults
+      name: rke2-cilium-hard-defaults
+      repository: file://./charts/rke2-cilium-hard-defaults
+    description: eBPF-based Networking, Security, and Observability
+    digest: 894dce927daac988afe6e71cca0bb6b89f18a161a5016fb542b352b47c00bc71
+    home: https://cilium.io/
+    keywords:
+    - cilium
+    kubeVersion: '>= 1.12.0-0'
+    maintainers:
+    - email: charts@rancher.com
+      name: Rancher Labs
+    name: rke2-cilium
+    sources:
+    - https://github.com/rancher/rke2-charts
+    urls:
+    - assets/rke2-cilium/rke2-cilium-1.9.607.tgz
+    version: 1.9.607
   - apiVersion: v1
     created: "2021-05-20T19:21:37.102233148Z"
     dependencies:
@@ -434,6 +478,33 @@ entries:
     urls:
     - assets/rke2-coredns/rke2-coredns-1.10.101.tgz
     version: 1.10.101
+  - apiVersion: v1
+    appVersion: 1.6.9
+    created: "2021-05-27T19:13:47.765832327Z"
+    description: CoreDNS is a DNS server that chains plugins and provides Kubernetes
+      DNS Services
+    digest: 16d509bed657a7809a1f7a796774768249a606cc58400a108db66276f7a06849
+    home: https://coredns.io
+    icon: https://coredns.io/images/CoreDNS_Colour_Horizontal.png
+    keywords:
+    - coredns
+    - dns
+    - kubedns
+    maintainers:
+    - email: hello@acale.ph
+      name: Acaleph
+    - email: shashidhara.huawei@gmail.com
+      name: shashidharatd
+    - email: andor44@gmail.com
+      name: andor44
+    - email: manuel@rueg.eu
+      name: mrueg
+    name: rke2-coredns
+    sources:
+    - https://github.com/coredns/coredns
+    urls:
+    - assets/rke2-coredns/rke2-coredns-1.10.101-build2021022304.tgz
+    version: 1.10.101-build2021022304
   - apiVersion: v1
     appVersion: 1.6.9
     created: "2021-04-27T22:59:40.857249253Z"
@@ -1260,6 +1331,23 @@ entries:
   rke2-multus:
   - apiVersion: v1
     appVersion: v3.7.1
+    created: "2021-05-27T19:13:47.820940509Z"
+    description: Multus CNI enables attaching multiple network interfaces to pods
+      in Kubernetes.
+    digest: 8315f43c580bf7dfce4218eb0b926c6685ea0a70806a753be08367d5bce25a1f
+    home: https://github.com/k8snetworkplumbingwg/multus-cni
+    icon: https://raw.githubusercontent.com/k8snetworkplumbingwg/multus-cni/master/doc/images/Multus.png
+    maintainers:
+    - email: charts@rancher.com
+      name: Rancher Labs
+    name: rke2-multus
+    sources:
+    - https://github.com/k8snetworkplumbingwg/multus-cni
+    urls:
+    - assets/rke2-multus/rke2-multus-v3.7.1-build2021041602.tgz
+    version: v3.7.1-build2021041602
+  - apiVersion: v1
+    appVersion: v3.7.1
     created: "2021-05-04T08:26:16.874798019Z"
     description: Multus CNI enables attaching multiple network interfaces to pods
       in Kubernetes.
@@ -1278,6 +1366,23 @@ entries:
   rke2-sriov:
   - apiVersion: v1
     appVersion: v1.0.0
+    created: "2021-05-27T19:13:47.822868433Z"
+    description: Install SR-IOV operator, cni and device polugin.
+    digest: 1318130259e289442eec21d1477a53bc321f149dee1fad0c4d3bb774d1f284d2
+    home: https://github.com/k8snetworkplumbingwg/sriov-network-operator
+    keywords:
+    - sr-iov
+    maintainers:
+    - email: charts@rancher.com
+      name: Rancher Labs
+    name: rke2-sriov
+    sources:
+    - https://github.com/rancher/rke2-charts
+    urls:
+    - assets/rke2-sriov/rke2-sriov-v1.0.0-build2021042902.tgz
+    version: v1.0.0-build2021042902
+  - apiVersion: v1
+    appVersion: v1.0.0
     created: "2021-05-04T08:26:16.875599966Z"
     description: Install SR-IOV operator, cni and device polugin.
     digest: d3b40f84956f2df45da0d7130b562b2a75b9cb7088083ef85a2794456c3aa412
@@ -1294,6 +1399,15 @@ entries:
     - assets/rke2-sriov/rke2-sriov-v1.0.0-build2021042901.tgz
     version: v1.0.0-build2021042901
   rke2-sriov-crd:
+  - apiVersion: v1
+    created: "2021-05-27T19:13:47.821495316Z"
+    description: Installs the CRDs for rke2-sriov.
+    digest: 658163a607af36e1877ee87d4ca0e057cabc374f3de1e427cad107c4b2564012
+    name: rke2-sriov-crd
+    type: application
+    urls:
+    - assets/rke2-sriov/rke2-sriov-crd-v1.0.002.tgz
+    version: v1.0.002
   - apiVersion: v1
     created: "2021-05-04T08:26:16.875081035Z"
     description: Installs the CRDs for rke2-sriov.
