@@ -1,6 +1,6 @@
 --- charts-original/values.yaml
 +++ charts/values.yaml
-@@ -1,8 +1,21 @@
+@@ -1,8 +1,24 @@
  imagePullSecrets: {}
  
  installation:
@@ -19,16 +19,19 @@
 +    - natOutgoing: Enabled
 +      encapsulation: VXLAN
 +      cidr: 10.42.0.0/16
++  imagePath: "rancher"
++  imagePrefix: "mirrored-calico-"
++
  
  certs:
    node:
-@@ -17,9 +30,12 @@
+@@ -17,9 +33,12 @@
  
  # Configuration for the tigera operator
  tigeraOperator:
 -  image: tigera/operator
 +  image: rancher/mirrored-calico-operator
-   version: v1.17.2
+   version: v1.17.4
 -  registry: quay.io
 +  registry: docker.io
  calicoctl:
