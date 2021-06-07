@@ -1,6 +1,6 @@
 --- charts-original/values.yaml
 +++ charts/values.yaml
-@@ -1320,6 +1320,8 @@
+@@ -1325,6 +1325,8 @@
    - effect: NoSchedule
      key: node-role.kubernetes.io/master
    - effect: NoSchedule
