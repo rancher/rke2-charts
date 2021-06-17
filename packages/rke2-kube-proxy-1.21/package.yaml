@@ -2,4 +2,3 @@ url: local
 packageVersion: 01
 # This repository does not use releaseCandidateVersions, so you can leave this as 00.
 releaseCandidateVersion: 00
-name: rke2-kube-proxy
