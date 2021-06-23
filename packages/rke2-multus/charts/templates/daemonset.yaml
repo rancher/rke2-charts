@@ -22,6 +22,8 @@ spec:
       initContainers:
       - name: cni-plugins
         image: {{ template "system_default_registry" . }}{{ .Values.cniplugins.image.repository }}:{{ .Values.cniplugins.image.tag }}
+        securityContext:
+          privileged: true
         volumeMounts:
         - name: cnibin
           mountPath: /host/opt/cni/bin
