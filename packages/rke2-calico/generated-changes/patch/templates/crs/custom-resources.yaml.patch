@@ -1,9 +1,12 @@
 --- charts-original/templates/crs/custom-resources.yaml
 +++ charts/templates/crs/custom-resources.yaml
-@@ -6,6 +6,10 @@
+@@ -6,6 +6,13 @@
  {{ $secrets = append $secrets $item }}
  {{ end }}
  {{ $_ := set $installSpec "imagePullSecrets" $secrets }}
++{{ $defaultRegistry := get $installSpec "registry" }}
++{{ $finalRegistry := coalesce .Values.global.systemDefaultRegistry $defaultRegistry }}
++{{ $_ := set $installSpec "registry" $finalRegistry }}
 +{{ $defaultipPools := get .Values.installation.calicoNetwork "ipPools" | first }}
 +{{ $defaultCIDR := get $defaultipPools "cidr" }}
 +{{ $finalCIDR := coalesce .Values.global.clusterCIDR $defaultCIDR }}
