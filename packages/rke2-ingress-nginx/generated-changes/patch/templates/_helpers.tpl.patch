@@ -1,6 +1,6 @@
 --- charts-original/templates/_helpers.tpl
 +++ charts/templates/_helpers.tpl
-@@ -118,7 +118,15 @@
+@@ -118,7 +118,7 @@
  Check the ingress controller version tag is at most three versions behind the last release
  */}}
  {{- define "isControllerTagValid" -}}
@@ -9,6 +9,10 @@
  {{- fail "Controller container image tag should be 0.27.0 or higher" -}}
  {{- end -}}
  {{- end -}}
+@@ -132,3 +132,15 @@
+ {{ toYaml .Values.controller.ingressClassResource.parameters | indent 4}}
+   {{ end }}
+ {{- end -}}
 +
 +{{- define "system_default_registry" -}}
 +{{- if .Values.global.systemDefaultRegistry -}}
@@ -16,4 +20,8 @@
 +{{- else -}}
 +{{- "" -}}
 +{{- end -}}
++{{- end -}}
++
++{{- define "repository_or_registry_and_image" -}}
++{{- if .repository -}}{{ .repository }}{{ else }}{{ .registry }}/{{ .image }}{{- end -}}:{{ .tag }}{{- if (.digest) -}} @{{.digest}} {{- end -}}
 +{{- end -}}

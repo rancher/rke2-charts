@@ -1,18 +1,31 @@
 --- charts-original/values.yaml
 +++ charts/values.yaml
-@@ -10,9 +10,8 @@
+@@ -10,13 +10,11 @@
  controller:
    name: controller
    image:
--    repository: k8s.gcr.io/ingress-nginx/controller
--    tag: "v0.46.0"
--    digest: sha256:52f0058bed0a17ab0fb35628ba97e8d52b5d32299fbc03cc0f6c7b9ff036b61a
+-    registry: k8s.gcr.io
+-    image: ingress-nginx/controller
 +    repository: rancher/nginx-ingress-controller
-+    tag: "nginx-0.46.0-rancher1"
+     # for backwards compatibility consider setting the full image url via the repository value below
+     # use *either* current default registry/image or repository format or installing chart by providing the values.yaml will fail
+     # repository:
+-    tag: "v0.47.0"
+-    digest: sha256:a1e4efc107be0bb78f32eaec37bef17d7a0c81bec8066cdf2572508d21351d0b
++    tag: "nginx-0.47.0-hardened1"
      pullPolicy: IfNotPresent
      # www-data -> uid 101
      runAsUser: 101
-@@ -45,7 +44,7 @@
+@@ -26,7 +24,7 @@
+   existingPsp: ""
+ 
+   # Configures the controller container name
+-  containerName: controller
++  containerName: rke2-ingress-nginx-controller
+ 
+   # Configures the ports the nginx-controller listens on
+   containerPort:
+@@ -52,7 +50,7 @@
    # Optionally change this to ClusterFirstWithHostNet in case you have 'hostNetwork: true'.
    # By default, while using host network, name resolution uses the host's DNS. If you wish nginx-controller
    # to keep resolving names inside the k8s network, use ClusterFirstWithHostNet.
@@ -21,7 +34,7 @@
  
    # Bare-metal considerations via the host network https://kubernetes.github.io/ingress-nginx/deploy/baremetal/#via-the-host-network
    # Ingress status was blank because there is no Service exposing the NGINX Ingress controller in a configuration using the host network, the default --publish-service flag used in standard cloud setups does not apply
-@@ -54,13 +53,13 @@
+@@ -61,13 +59,13 @@
    # Required for use with CNI based kubernetes installations (such as ones set up by kubeadm),
    # since CNI and hostport don't mix yet. Can be deprecated once https://github.com/kubernetes/kubernetes/issues/23920
    # is merged
@@ -37,7 +50,7 @@
      ports:
        http: 80
        https: 443
-@@ -144,7 +143,7 @@
+@@ -162,7 +160,7 @@
  
    ## DaemonSet or Deployment
    ##
@@ -46,27 +59,32 @@
  
    ## Annotations to be added to the controller Deployment or DaemonSet
    ##
-@@ -491,7 +490,7 @@
+@@ -529,8 +527,7 @@
      patch:
        enabled: true
        image:
--        repository: docker.io/jettech/kube-webhook-certgen
+-        registry: docker.io
+-        image: jettech/kube-webhook-certgen
 +        repository: rancher/mirrored-jettech-kube-webhook-certgen
-         tag: v1.5.1
-         pullPolicy: IfNotPresent
-       ## Provide a priority class name to the webhook patching job
-@@ -608,8 +607,8 @@
+         # for backwards compatibility consider setting the full image url via the repository value below
+         # use *either* current default registry/image or repository format or installing chart by providing the values.yaml will fail
+         # repository:
+@@ -650,12 +647,11 @@
  
    name: defaultbackend
    image:
--    repository: k8s.gcr.io/defaultbackend-amd64
--    tag: "1.5"
+-    registry: k8s.gcr.io
+-    image: defaultbackend-amd64
 +    repository: rancher/nginx-ingress-controller-defaultbackend
+     # for backwards compatibility consider setting the full image url via the repository value below
+     # use *either* current default registry/image or repository format or installing chart by providing the values.yaml will fail
+     # repository:
+-    tag: "1.5"
 +    tag: "1.5-rancher1"
      pullPolicy: IfNotPresent
      # nobody user -> uid 65534
      runAsUser: 65534
-@@ -759,3 +758,6 @@
+@@ -806,3 +802,6 @@
  # This can be generated with: openssl dhparam 4096 2> /dev/null | base64
  # Ref: https://github.com/krmichel/ingress-nginx/blob/master/docs/examples/customization/ssl-dh-param
  dhParam:
