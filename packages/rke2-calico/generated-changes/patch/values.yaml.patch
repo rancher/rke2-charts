@@ -1,6 +1,6 @@
 --- charts-original/values.yaml
 +++ charts/values.yaml
-@@ -1,8 +1,24 @@
+@@ -1,8 +1,35 @@
  imagePullSecrets: {}
  
  installation:
@@ -17,15 +17,26 @@
 +    bgp: Disabled
 +    ipPools:
 +    - natOutgoing: Enabled
++      blockSize: 24
 +      encapsulation: VXLAN
 +      cidr: 10.42.0.0/16
 +  imagePath: "rancher"
 +  imagePrefix: "mirrored-calico-"
 +
++felixconfigurations:
++  spec:
++    allowVXLANPacketsFromWorkloads: true
++    vxlanEnabled: true
++    ipipEnabled: false
++    vxlanVNI: 4096
++
++ipamconfigs:
++  spec:
++    strictAffinity: true
  
  certs:
    node:
-@@ -17,9 +33,12 @@
+@@ -17,9 +44,12 @@
  
  # Configuration for the tigera operator
  tigeraOperator:
