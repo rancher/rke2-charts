@@ -7,7 +7,7 @@
 -  repository: coredns/coredns
 -  tag: "1.6.9"
 +  repository: rancher/hardened-coredns
-+  tag: "v1.6.9-build20210223"
++  tag: "v1.8.3-build20210720"
    pullPolicy: IfNotPresent
  
  replicaCount: 1
@@ -48,6 +48,26 @@
  
  # https://kubernetes.io/docs/tasks/run-application/configure-pdb/#specifying-a-poddisruptionbudget
  podDisruptionBudget: {}
+@@ -157,7 +163,7 @@
+ # See https://github.com/kubernetes-incubator/cluster-proportional-autoscaler
+ autoscaler:
+   # Enabled the cluster-proportional-autoscaler
+-  enabled: false
++  enabled: true
+ 
+   # Number of cores in the cluster per coredns replica
+   coresPerReplica: 256
+@@ -165,8 +171,8 @@
+   nodesPerReplica: 16
+ 
+   image:
+-    repository: k8s.gcr.io/cluster-proportional-autoscaler-amd64
+-    tag: "1.7.1"
++    repository: rancher/mirrored-cluster-proportional-autoscaler
++    tag: "1.8.3"
+     pullPolicy: IfNotPresent
+ 
+   # Optional priority class to be used for the autoscaler pods. priorityClassName used if not set.
 @@ -180,7 +186,13 @@
    nodeSelector: {}
  
