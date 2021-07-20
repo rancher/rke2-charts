@@ -83,12 +83,20 @@
  
    # resources for autoscaler pod
    resources:
-@@ -287,3 +299,8 @@
+@@ -287,3 +299,16 @@
  deployment:
    enabled: true
    name: ""
 +
 +k8sApp : "kube-dns"
++
++nodelocal:
++  enabled: false
++  ip_address: "169.254.20.10"
++  ipvs: false
++  image:
++    repository: rancher/mirrored-k8s-dns-node-cache
++    tag: "1.15.13"
 +
 +global:
 +  systemDefaultRegistry: ""
