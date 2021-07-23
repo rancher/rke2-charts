@@ -514,6 +514,31 @@ entries:
     - assets/rke2-cilium/rke2-cilium-1.9.401.tgz
     version: 1.9.401
   rke2-coredns:
+  - annotations:
+      artifacthub.io/changes: |
+        - Initial helm chart changelog
+    apiVersion: v2
+    appVersion: 1.8.4
+    created: "2021-07-23T22:49:07.947925846Z"
+    description: CoreDNS is a DNS server that chains plugins and provides Kubernetes
+      DNS Services
+    digest: 3fa4e8e59cb8255b8b061011aa29cd0dec70085d5d3dbbe5dced37459295d326
+    home: https://coredns.io
+    icon: https://coredns.io/images/CoreDNS_Colour_Horizontal.png
+    keywords:
+    - coredns
+    - dns
+    - kubedns
+    maintainers:
+    - name: mrueg
+    - name: haad
+    name: rke2-coredns
+    sources:
+    - https://github.com/coredns/coredns
+    type: application
+    urls:
+    - assets/rke2-coredns/rke2-coredns-1.16.201-build2021072301.tgz
+    version: 1.16.201-build2021072301
   - apiVersion: v1
     appVersion: 1.7.1
     created: "2021-02-25T17:59:12.935081-08:00"
