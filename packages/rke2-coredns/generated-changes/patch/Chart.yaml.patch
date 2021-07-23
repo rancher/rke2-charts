@@ -1,12 +1,13 @@
 --- charts-original/Chart.yaml
 +++ charts/Chart.yaml
-@@ -17,7 +17,7 @@
-   name: andor44
- - email: manuel@rueg.eu
-   name: mrueg
+@@ -14,8 +14,8 @@
+ maintainers:
+ - name: mrueg
+ - name: haad
 -name: coredns
 +name: rke2-coredns
  sources:
  - https://github.com/coredns/coredns
--version: 1.10.1
-+version: 1.10.101-build20210223
+ type: application
+-version: 1.16.2
++version: 1.16.201-build20210723

@@ -5,26 +5,26 @@
  
  image:
 -  repository: coredns/coredns
--  tag: "1.6.9"
+-  tag: "1.8.4"
 +  repository: rancher/hardened-coredns
 +  tag: "v1.8.3-build20210720"
    pullPolicy: IfNotPresent
  
  replicaCount: 1
-@@ -34,10 +34,10 @@
-     prometheus.io/port: "9153"
+@@ -69,10 +69,10 @@
+   annotations: {}
  
  serviceAccount:
 -  create: false
 +  create: true
    # The name of the ServiceAccount to use
    # If not set and create is true, a name is generated using the fullname template
--  name:
-+  name: coredns
+-  name: ""
++  name: "coredns"
+   annotations: {}
  
  rbac:
-   # If true, create & use RBAC resources
-@@ -52,7 +52,7 @@
+@@ -88,7 +88,7 @@
  isClusterService: true
  
  # Optional priority class to be used for the coredns pods. Used for autoscaler if autoscaler.priorityClassName not set.
@@ -33,12 +33,12 @@
  
  # Default zone is what Kubernetes recommends:
  # https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/#coredns-configmap-options
-@@ -126,7 +126,13 @@
+@@ -179,7 +179,13 @@
  #     operator: Equal
  #     value: master
  #     effect: NoSchedule
 -tolerations: []
-+tolerations: 
++tolerations:
 +- key: "node-role.kubernetes.io/control-plane"
 +  operator: "Exists"
 +  effect: "NoSchedule"
@@ -48,7 +48,7 @@
  
  # https://kubernetes.io/docs/tasks/run-application/configure-pdb/#specifying-a-poddisruptionbudget
  podDisruptionBudget: {}
-@@ -157,7 +163,7 @@
+@@ -227,7 +233,7 @@
  # See https://github.com/kubernetes-incubator/cluster-proportional-autoscaler
  autoscaler:
    # Enabled the cluster-proportional-autoscaler
@@ -57,18 +57,18 @@
  
    # Number of cores in the cluster per coredns replica
    coresPerReplica: 256
-@@ -165,8 +171,8 @@
-   nodesPerReplica: 16
+@@ -243,8 +249,8 @@
+   preventSinglePointFailure: true
  
    image:
 -    repository: k8s.gcr.io/cluster-proportional-autoscaler-amd64
--    tag: "1.7.1"
+-    tag: "1.8.1"
 +    repository: rancher/mirrored-cluster-proportional-autoscaler
 +    tag: "1.8.3"
      pullPolicy: IfNotPresent
  
    # Optional priority class to be used for the autoscaler pods. priorityClassName used if not set.
-@@ -180,7 +186,13 @@
+@@ -258,7 +264,13 @@
    nodeSelector: {}
  
    # expects input structure as per specification https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.11/#toleration-v1-core
@@ -83,10 +83,11 @@
  
    # resources for autoscaler pod
    resources:
-@@ -196,3 +208,7 @@
-     ## Annotations for the coredns-autoscaler configmap
-     # i.e. strategy.spinnaker.io/versioned: "false" to ensure configmap isn't renamed
-     annotations: {}
+@@ -287,3 +299,8 @@
+ deployment:
+   enabled: true
+   name: ""
++
 +k8sApp : "kube-dns"
 +
 +global:

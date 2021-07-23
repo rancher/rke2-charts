@@ -1,6 +1,6 @@
 --- charts-original/templates/configmap.yaml
 +++ charts/templates/configmap.yaml
-@@ -7,7 +7,7 @@
+@@ -9,7 +9,7 @@
      app.kubernetes.io/instance: {{ .Release.Name | quote }}
      helm.sh/chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
      {{- if .Values.isClusterService }}
@@ -9,7 +9,7 @@
      kubernetes.io/cluster-service: "true"
      kubernetes.io/name: "CoreDNS"
      {{- end }}
-@@ -19,7 +19,7 @@
+@@ -24,7 +24,7 @@
      {{- if .port }}:{{ .port }} {{ end -}}
      {
        {{- range .plugins }}
