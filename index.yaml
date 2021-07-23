@@ -561,6 +561,33 @@ entries:
     version: 1.10.101
   - apiVersion: v1
     appVersion: 1.6.9
+    created: "2021-07-23T08:19:25.388454806Z"
+    description: CoreDNS is a DNS server that chains plugins and provides Kubernetes
+      DNS Services
+    digest: 655e0b83c239d40db2120f44ce6a9f84429d145584ee8cf841a5664f5b3c05f8
+    home: https://coredns.io
+    icon: https://coredns.io/images/CoreDNS_Colour_Horizontal.png
+    keywords:
+    - coredns
+    - dns
+    - kubedns
+    maintainers:
+    - email: hello@acale.ph
+      name: Acaleph
+    - email: shashidhara.huawei@gmail.com
+      name: shashidharatd
+    - email: andor44@gmail.com
+      name: andor44
+    - email: manuel@rueg.eu
+      name: mrueg
+    name: rke2-coredns
+    sources:
+    - https://github.com/coredns/coredns
+    urls:
+    - assets/rke2-coredns/rke2-coredns-1.10.101-build2021022305.tgz
+    version: 1.10.101-build2021022305
+  - apiVersion: v1
+    appVersion: 1.6.9
     created: "2021-05-27T19:13:47.765832327Z"
     description: CoreDNS is a DNS server that chains plugins and provides Kubernetes
       DNS Services
