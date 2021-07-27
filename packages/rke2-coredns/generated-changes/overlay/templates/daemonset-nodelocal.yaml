@@ -41,7 +41,7 @@ spec:
 {{- if eq .Values.nodelocal.ipvs false }}
       initContainers:
       - name: wait-coredns
-        image: busybox:1.28
+        image: {{ template "system_default_registry" . }}{{ .Values.nodelocal.initimage.repository }}:{{ .Values.nodelocal.initimage.tag }}
         command: ['sh', '-c', "until nc -zv {{ template "clusterDNSServerIP" . }} 53; do echo waiting for dns service; sleep 2; done"]
 {{- end }}
       containers:

@@ -83,7 +83,7 @@
  
    # resources for autoscaler pod
    resources:
-@@ -287,3 +299,16 @@
+@@ -287,3 +299,19 @@
  deployment:
    enabled: true
    name: ""
@@ -97,6 +97,9 @@
 +  image:
 +    repository: rancher/mirrored-k8s-dns-node-cache
 +    tag: "1.15.13"
++  initimage:
++    repository: rancher/library-busybox
++    tag: "1.32.1"
 +
 +global:
 +  systemDefaultRegistry: ""
