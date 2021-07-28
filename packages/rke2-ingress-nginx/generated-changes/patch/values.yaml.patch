@@ -50,6 +50,15 @@
      ports:
        http: 80
        https: 443
+@@ -111,7 +109,7 @@
+   ## by the service. If disable, the status field reports the IP address of the
+   ## node or nodes where an ingress controller pod is running.
+   publishService:
+-    enabled: true
++    enabled: false
+     ## Allows overriding of the publish service to bind to
+     ## Must be <namespace>/<service_name>
+     ##
 @@ -162,7 +160,7 @@
  
    ## DaemonSet or Deployment
@@ -59,6 +68,15 @@
  
    ## Annotations to be added to the controller Deployment or DaemonSet
    ##
+@@ -394,7 +392,7 @@
+     configMapKey: ""
+ 
+   service:
+-    enabled: true
++    enabled: false
+ 
+     annotations: {}
+     labels: {}
 @@ -529,8 +527,7 @@
      patch:
        enabled: true
