@@ -63,8 +63,8 @@
    image:
 -    repository: k8s.gcr.io/cluster-proportional-autoscaler-amd64
 -    tag: "1.8.1"
-+    repository: rancher/mirrored-cluster-proportional-autoscaler
-+    tag: "1.8.3"
++    repository: rancher/hardened-cluster-autoscaler
++    tag: "v1.8.3-build20210729"
      pullPolicy: IfNotPresent
  
    # Optional priority class to be used for the autoscaler pods. priorityClassName used if not set.
@@ -95,11 +95,11 @@
 +  ip_address: "169.254.20.10"
 +  ipvs: false
 +  image:
-+    repository: rancher/mirrored-k8s-dns-node-cache
-+    tag: "1.15.13"
++    repository: rancher/hardened-dns-node-cache
++    tag: "1.20.0-build20210802"
 +  initimage:
-+    repository: rancher/library-busybox
-+    tag: "1.32.1"
++    repository: rancher/hardened-dns-node-cache
++    tag: "1.20.0-build20210802"
 +
 +global:
 +  systemDefaultRegistry: ""
