@@ -1,6 +1,6 @@
 --- charts-original/values.yaml
 +++ charts/values.yaml
-@@ -1,8 +1,24 @@
+@@ -1,8 +1,25 @@
  imagePullSecrets: {}
  
  installation:
@@ -19,13 +19,14 @@
 +    - natOutgoing: Enabled
 +      encapsulation: VXLAN
 +      cidr: 10.42.0.0/16
++      blockSize: 24
 +  imagePath: "rancher"
 +  imagePrefix: "mirrored-calico-"
 +
  
  certs:
    node:
-@@ -17,9 +33,12 @@
+@@ -17,9 +34,16 @@
  
  # Configuration for the tigera operator
  tigeraOperator:
@@ -41,3 +42,7 @@
 +
 +global:
 +  systemDefaultRegistry: ""
++
++ipamConfig:
++  strictAffinity: true
++  autoAllocateBlocks: true
