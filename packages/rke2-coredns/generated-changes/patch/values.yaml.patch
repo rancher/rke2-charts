@@ -96,10 +96,10 @@
 +  ipvs: false
 +  image:
 +    repository: rancher/hardened-dns-node-cache
-+    tag: "1.20.0-build20210802"
++    tag: "1.20.0-build20210803"
 +  initimage:
 +    repository: rancher/hardened-dns-node-cache
-+    tag: "1.20.0-build20210802"
++    tag: "1.20.0-build20210803"
 +
 +global:
 +  systemDefaultRegistry: ""
