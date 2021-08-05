@@ -68,7 +68,7 @@
      pullPolicy: IfNotPresent
  
    # Optional priority class to be used for the autoscaler pods. priorityClassName used if not set.
-@@ -258,7 +264,13 @@
+@@ -258,16 +264,22 @@
    nodeSelector: {}
  
    # expects input structure as per specification https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.11/#toleration-v1-core
@@ -83,6 +83,17 @@
  
    # resources for autoscaler pod
    resources:
+     requests:
+       cpu: "20m"
+-      memory: "10Mi"
++      memory: "20Mi"
+     limits:
+       cpu: "20m"
+-      memory: "10Mi"
++      memory: "20Mi"
+ 
+   # Options for autoscaler configmap
+   configmap:
 @@ -287,3 +299,19 @@
  deployment:
    enabled: true
