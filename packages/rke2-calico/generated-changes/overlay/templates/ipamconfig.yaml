@@ -1,7 +1,7 @@
 apiVersion: crd.projectcalico.org/v1
 kind: IPAMConfig
 metadata:
-  name: rancher-config
+  name: default
 spec:
   strictAffinity: {{ .Values.ipamConfig.strictAffinity }}
   autoAllocateBlocks: {{ .Values.ipamConfig.autoAllocateBlocks }}
