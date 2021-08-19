@@ -59,3 +59,5 @@ spec:
         - name: cnibin
           hostPath:
             path: /opt/cni/bin
+      nodeSelector:
+        kubernetes.io/os: linux

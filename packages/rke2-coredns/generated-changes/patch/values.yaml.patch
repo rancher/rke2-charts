@@ -33,7 +33,17 @@
  
  # Default zone is what Kubernetes recommends:
  # https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/#coredns-configmap-options
-@@ -179,7 +179,13 @@
+@@ -170,7 +170,8 @@
+ 
+ # Node labels for pod assignment
+ # Ref: https://kubernetes.io/docs/user-guide/node-selection/
+-nodeSelector: {}
++nodeSelector:
++  kubernetes.io/os: linux
+ 
+ # expects input structure as per specification https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.11/#toleration-v1-core
+ # for example:
+@@ -179,7 +180,13 @@
  #     operator: Equal
  #     value: master
  #     effect: NoSchedule
@@ -48,7 +58,7 @@
  
  # https://kubernetes.io/docs/tasks/run-application/configure-pdb/#specifying-a-poddisruptionbudget
  podDisruptionBudget: {}
-@@ -227,7 +233,7 @@
+@@ -227,7 +234,7 @@
  # See https://github.com/kubernetes-incubator/cluster-proportional-autoscaler
  autoscaler:
    # Enabled the cluster-proportional-autoscaler
@@ -57,7 +67,7 @@
  
    # Number of cores in the cluster per coredns replica
    coresPerReplica: 256
-@@ -243,8 +249,8 @@
+@@ -243,8 +250,8 @@
    preventSinglePointFailure: true
  
    image:
@@ -68,7 +78,7 @@
      pullPolicy: IfNotPresent
  
    # Optional priority class to be used for the autoscaler pods. priorityClassName used if not set.
-@@ -258,16 +264,22 @@
+@@ -258,16 +265,22 @@
    nodeSelector: {}
  
    # expects input structure as per specification https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.11/#toleration-v1-core
@@ -94,7 +104,7 @@
  
    # Options for autoscaler configmap
    configmap:
-@@ -287,3 +299,19 @@
+@@ -287,3 +300,19 @@
  deployment:
    enabled: true
    name: ""
