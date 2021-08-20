@@ -78,8 +78,13 @@
      pullPolicy: IfNotPresent
  
    # Optional priority class to be used for the autoscaler pods. priorityClassName used if not set.
-@@ -258,16 +265,22 @@
-   nodeSelector: {}
+@@ -255,19 +262,26 @@
+ 
+   # Node labels for pod assignment
+   # Ref: https://kubernetes.io/docs/user-guide/node-selection/
+-  nodeSelector: {}
++  nodeSelector:
++    kubernetes.io/os: linux
  
    # expects input structure as per specification https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.11/#toleration-v1-core
 -  tolerations: []
@@ -104,7 +109,7 @@
  
    # Options for autoscaler configmap
    configmap:
-@@ -287,3 +300,19 @@
+@@ -287,3 +301,21 @@
  deployment:
    enabled: true
    name: ""
@@ -121,6 +126,8 @@
 +  initimage:
 +    repository: rancher/hardened-dns-node-cache
 +    tag: "1.20.0-build20210803"
++  nodeSelector:
++    kubernetes.io/os: linux
 +
 +global:
 +  systemDefaultRegistry: ""
