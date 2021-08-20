@@ -25,15 +25,10 @@ spec:
 {{- if .Values.rbac.create }}
       serviceAccountName: node-local-dns
 {{- end }}
-      affinity:
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-              - matchExpressions:
-                - key: beta.kubernetes.io/os
-                  operator: NotIn
-                  values:
-                    - windows
+{{- if .Values.nodelocal.nodeSelector }}
+      nodeSelector:
+{{ toYaml .Values.nodelocal.nodeSelector | indent 8 }}
+{{- end }}
       hostNetwork: true
       dnsPolicy: Default  # Don't use cluster DNS.
       tolerations:
