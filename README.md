@@ -10,6 +10,26 @@ package/
   <package>/
 ```
 
+
+### RKE2 Integration
+
+RKE2 injects at runtime a number of cluster configuration values into values.yaml; the most important of which is `global.systemDefaultRegistry`.
+If set this **must** be used as a registry prefix for all images used by the chart.
+
+The authoritative list of variables can be found within the
+[setChartValues function of boostrap.go](https://github.com/rancher/rke2/blob/master/pkg/bootstrap/bootstrap.go);
+at the time this document was last updated it includes:
+* `global.clusterCIDR` - the CIDR range used for pod IP addresses.
+* `global.clusterDNS` - the cluster DNS (coredns) service address.
+* `global.clusterDomain` - the cluster DNS suffix.
+* `global.rke2DataDir` - the RKE2 data-dir; effectively must be the same on all nodes.
+* `global.serviceCIDR` - the CIDR range used for in-cluster service IP addresses.
+* `global.systemDefaultRegistry` - the default registry that all images should be loaded from.
+
+For an example of a chart that uses systemdefaultregistry you can look at:
+* https://github.com/rancher/rke2-charts/blob/de5dd4c9f4ded7c08b4417922f691139d2417e9f/packages/rke2-canal/charts/templates/_helpers.tpl#L1-L7
+* https://github.com/rancher/rke2-charts/blob/de5dd4c9f4ded7c08b4417922f691139d2417e9f/packages/rke2-canal/charts/templates/daemonset.yaml#L53
+
 ### Configuration
 
 This repository branch contains a `configuration.yaml` file that is used to specify how it interacts with other repository branches.
