@@ -1,6 +1,6 @@
 --- charts-original/templates/cilium-etcd-operator-deployment.yaml
 +++ charts/templates/cilium-etcd-operator-deployment.yaml
-@@ -26,9 +26,6 @@
+@@ -46,9 +46,6 @@
        labels:
          io.cilium/app: etcd-operator
          name: cilium-etcd-operator
@@ -10,7 +10,7 @@
      spec:
  {{- if .Values.etcd.affinity }}
        affinity:
-@@ -67,7 +64,7 @@
+@@ -90,7 +87,7 @@
            value: "revision"
          - name: CILIUM_ETCD_META_ETCD_AUTO_COMPACTION_RETENTION
            value: "25000"

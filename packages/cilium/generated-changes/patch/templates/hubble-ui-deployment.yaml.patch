@@ -10,7 +10,7 @@
      spec:
        {{- if .Values.hubble.ui.securityContext.enabled }}
        securityContext:
-@@ -43,7 +40,7 @@
+@@ -47,7 +44,7 @@
  {{- end }}
        containers:
          - name: frontend
@@ -19,7 +19,7 @@
            imagePullPolicy: {{ .Values.hubble.ui.frontend.image.pullPolicy }}
            ports:
              - containerPort: 8080
-@@ -51,7 +48,7 @@
+@@ -55,7 +52,7 @@
            resources:
              {{- toYaml .Values.hubble.ui.frontend.resources | trim | nindent 12 }}
          - name: backend
@@ -28,7 +28,7 @@
            imagePullPolicy: {{ .Values.hubble.ui.backend.image.pullPolicy }}
            env:
              - name: EVENTS_SERVER_PORT
-@@ -64,7 +61,7 @@
+@@ -68,7 +65,7 @@
            resources:
              {{- toYaml .Values.hubble.ui.backend.resources  | trim | nindent 12 }}
          - name: proxy

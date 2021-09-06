@@ -1,6 +1,6 @@
 --- charts-original/templates/cilium-operator-deployment.yaml
 +++ charts/templates/cilium-operator-deployment.yaml
-@@ -41,9 +41,6 @@
+@@ -56,9 +56,6 @@
        labels:
          io.cilium/app: operator
          name: cilium-operator
@@ -8,17 +8,20 @@
 -        {{- toYaml . | nindent 8 }}
 -{{- end }}
      spec:
- {{- if or (ge .Capabilities.KubeVersion.Minor "14") (gt .Capabilities.KubeVersion.Major "1") }}
        # In HA mode, cilium-operator pods must not be scheduled on the same
-@@ -139,11 +136,11 @@
+       # node as they will clash with each other.
+@@ -171,13 +168,13 @@
            value: {{ $value }}
  {{- end }}
- {{- if .Values.eni }}
+ {{- if .Values.eni.enabled }}
 -        image: "{{ .Values.operator.image.repository }}-aws{{ .Values.operator.image.suffix }}:{{ .Values.operator.image.tag }}{{ if .Values.operator.image.useDigest }}@{{ .Values.operator.image.awsDigest }}{{ end }}"
 +        image: {{ template "system_default_registry" . }}{{ .Values.operator.image.repository }}-aws:{{ .Values.operator.image.tag }}
  {{- else if .Values.azure.enabled }}
 -        image: "{{ .Values.operator.image.repository }}-azure{{ .Values.operator.image.suffix }}:{{ .Values.operator.image.tag }}{{ if .Values.operator.image.useDigest }}@{{ .Values.operator.image.azureDigest }}{{ end }}"
 +        image: {{ template "system_default_registry" . }}{{ .Values.operator.image.repository }}-azure:{{ .Values.operator.image.tag }}
+ {{- else if .Values.alibabacloud.enabled }}
+-        image: "{{ .Values.operator.image.repository }}-alibabacloud{{ .Values.operator.image.suffix }}:{{ .Values.operator.image.tag }}{{ if .Values.operator.image.useDigest }}@{{ .Values.operator.image.alibabacloudDigest }}{{ end }}"
++        image: {{ template "system_default_registry" . }}{{ .Values.operator.image.repository }}-alibabacloud:{{ .Values.operator.image.tag }}
  {{- else }}
 -        image: "{{ .Values.operator.image.repository }}-generic{{ .Values.operator.image.suffix }}:{{ .Values.operator.image.tag }}{{ if .Values.operator.image.useDigest }}@{{ .Values.operator.image.genericDigest }}{{ end }}"
 +        image: {{ template "system_default_registry" . }}{{ .Values.operator.image.repository }}-generic:{{ .Values.operator.image.tag }}
