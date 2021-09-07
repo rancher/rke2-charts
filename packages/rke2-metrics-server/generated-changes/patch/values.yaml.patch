@@ -1,6 +1,6 @@
 --- charts-original/values.yaml
 +++ charts/values.yaml
-@@ -27,20 +27,22 @@
+@@ -27,22 +27,26 @@
    enabled: false
  
  image:
@@ -25,9 +25,14 @@
 +nodeSelector:
 +  kubernetes.io/os: linux
  
- tolerations: []
+-tolerations: []
++tolerations:
++  - key: CriticalAddonsOnly
++    operator: Exists
  
-@@ -58,7 +60,7 @@
+ affinity: {}
+ 
+@@ -58,7 +62,7 @@
  #  scheduler.alpha.kubernetes.io/critical-pod: ''
  
  ## Set a pod priorityClassName
@@ -36,7 +41,7 @@
  
  extraVolumeMounts: []
  #  - name: secrets
-@@ -107,3 +109,6 @@
+@@ -107,3 +111,6 @@
    enabled: false
    minAvailable:
    maxUnavailable:
