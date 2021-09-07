@@ -1,0 +1,39 @@
+# Default values for harvester-csi-driver.
+
+replicasCount: 3
+
+image:
+  harvester:
+    csiDriver:
+      repository: rancher/harvester-csi-driver
+      tag: ""
+  csi:
+    nodeDriverRegistrar:
+      repository: rancher/longhornio-csi-node-driver-registrar
+      tag: v2.3.0
+    resizer:
+      repository: rancher/longhornio-csi-resizer
+      tag: v1.2.0
+    provisioner:
+      repository: rancher/longhornio-csi-provisioner
+      tag: v2.1.2
+    attacher:
+      repository: rancher/longhornio-csi-attacher
+      tag: v3.2.1
+  pullPolicy: IfNotPresent
+
+nameOverride: ""
+fullnameOverride: ""
+
+kubeletRootDir: /var/lib/kubelet
+cloudConfig:
+  secretName: ""
+  hostPath: /var/lib/rancher/rke2/etc/config-files/cloud-provider-config
+
+tolerations:
+- effect: NoSchedule
+  key: kubevirt.io/drain
+  operator: Exists
+
+global:
+  systemDefaultRegistry: ""
