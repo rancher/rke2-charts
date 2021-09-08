@@ -1,6 +1,6 @@
 --- charts-original/templates/cilium-agent-daemonset.yaml
 +++ charts/templates/cilium-agent-daemonset.yaml
-@@ -56,9 +56,6 @@
+@@ -75,9 +75,6 @@
  {{- if .Values.keepDeprecatedLabels }}
          kubernetes.io/cluster-service: "true"
  {{- end }}
@@ -10,7 +10,7 @@
      spec:
  {{- if .Values.affinity }}
        affinity:
-@@ -196,7 +193,7 @@
+@@ -223,7 +220,7 @@
  {{- with .Values.extraEnv }}
  {{ toYaml . | trim | indent 8 }}
  {{- end }}
@@ -19,7 +19,7 @@
          imagePullPolicy: {{ .Values.image.pullPolicy }}
  {{- if .Values.cni.install }}
          lifecycle:
-@@ -314,7 +311,7 @@
+@@ -358,7 +355,7 @@
  {{- range $type := .Values.monitor.eventTypes }}
          - --type={{ $type }}
  {{- end }}
@@ -28,7 +28,7 @@
          imagePullPolicy: {{ .Values.image.pullPolicy }}
          volumeMounts:
          - mountPath: /var/run/cilium
-@@ -334,8 +331,10 @@
+@@ -406,8 +403,10 @@
  {{- if and .Values.nodeinit.enabled (not (eq .Values.nodeinit.bootstrapFile "")) }}
        - name: wait-for-node-init
          command: ['sh', '-c', 'until stat {{ .Values.nodeinit.bootstrapFile }} > /dev/null 2>&1; do echo "Waiting on node-init to run..."; sleep 1; done']
@@ -40,7 +40,7 @@
          volumeMounts:
          - mountPath: {{ .Values.nodeinit.bootstrapFile }}
            name: cilium-bootstrap-file
-@@ -372,7 +371,7 @@
+@@ -438,7 +437,7 @@
  {{- if .Values.extraEnv }}
  {{ toYaml .Values.extraEnv | indent 8 }}
  {{- end }}

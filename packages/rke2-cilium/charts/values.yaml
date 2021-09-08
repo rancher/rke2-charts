@@ -6,11 +6,11 @@ cilium:
   imagePullSecrets: []
   image:
     repository: rancher/mirrored-cilium-cilium
-    tag: v1.9.8
+    tag: v1.10.4
   operator:
     image:
       repository: rancher/mirrored-cilium-operator
-      tag: v1.9.8
+      tag: v1.10.4
   nodeinit:
     image:
       repository: rancher/mirrored-cilium-startup-script
@@ -20,7 +20,7 @@ cilium:
     enabled: false
     image:
       repository: rancher/mirrored-cilium-cilium
-      tag: v1.9.8
+      tag: v1.10.4
 
   #
   # Enable Azure integration.
@@ -50,7 +50,7 @@ cilium:
   #egressMasqueradeInterfaces: eth0
 
   ipv6:
-  # -- Enable dual stack 
+  # -- Enable dual stack
     enabled: false
 
 global:
