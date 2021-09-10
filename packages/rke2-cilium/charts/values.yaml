@@ -40,7 +40,9 @@ cilium:
   #
   # Enable Elastic Network Interface (ENI) for AWS integration.
   #
-  eni: false
+  eni:
+    enabled: false
+
   ipam:
     # Set mode to "eni" for ENI AWS intetgration.
     mode: "kubernetes"
