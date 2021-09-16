@@ -25,7 +25,7 @@
  
  certs:
    node:
-@@ -17,9 +33,21 @@
+@@ -17,9 +33,23 @@
  
  # Configuration for the tigera operator
  tigeraOperator:
@@ -41,6 +41,8 @@
 +
 +global:
 +  systemDefaultRegistry: ""
++  clusterCIDRv4: ""
++  clusterCIDRv6: ""
 +
 +# Config required by Windows nodes
 +ipamConfig:
