@@ -18,7 +18,7 @@
 +{{ $myIP6Dict := dict "natOutgoing" "Enabled" "cidr" .Values.global.clusterCIDRv6 }}
 +{{ $allIpPools := get .Values.installation.calicoNetwork "ipPools" }}
 +{{ range $allIpPools }}
-+{{ $_ := unset . "encapsulation" }}
++{{ $_ := set . "encapsulation" "None" }}
 +{{ end }}
 +{{ $finalIpPoolList := append $allIpPools $myIP6Dict }}
 +{{ $calicoNetwork := get .Values.installation "calicoNetwork" }}
