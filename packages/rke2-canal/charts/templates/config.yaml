@@ -61,8 +61,10 @@ data:
   net-conf.json: |
     {
       "Network": {{ coalesce .Values.global.clusterCIDRv4 .Values.podCidr | quote }},
+{{- if coalesce .Values.global.clusterCIDRv6 .Values.podCidrv6 }}
       "IPv6Network": {{ coalesce .Values.global.clusterCIDRv6 .Values.podCidrv6 | quote }},
-      "EnableIPv6": {{ template "enableIPv6?" . }},
+      "EnableIPv6": true,
+{{- end }}
       "Backend": {
         "Type": {{ .Values.flannel.backend | quote }}
       }
