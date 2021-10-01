@@ -7,7 +7,7 @@
 -  repository: k8s.gcr.io/metrics-server-amd64
 -  tag: v0.3.6
 +  repository: rancher/hardened-k8s-metrics-server
-+  tag: v0.3.6-build20210223
++  tag: v0.5.0-build20210915
    pullPolicy: IfNotPresent
  
  imagePullSecrets: []
