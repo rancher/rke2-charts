@@ -2460,6 +2460,25 @@ entries:
     - assets/rke2-metrics-server/rke2-metrics-server-2.11.100.tgz
     version: 2.11.100
   - apiVersion: v1
+    appVersion: 0.5.0
+    created: "2021-10-01T19:07:35.360915886Z"
+    description: Metrics Server is a cluster-wide aggregator of resource usage data.
+    digest: dfab8d9bb42380aff0e754a1f85ef6e92547f7141c38cba8a142cb16d4bc20bd
+    home: https://github.com/kubernetes-incubator/metrics-server
+    keywords:
+    - metrics-server
+    maintainers:
+    - email: o.with@sportradar.com
+      name: olemarkus
+    - email: k.aasan@sportradar.com
+      name: kennethaasan
+    name: rke2-metrics-server
+    sources:
+    - https://github.com/kubernetes-incubator/metrics-server
+    urls:
+    - assets/rke2-metrics-server/rke2-metrics-server-2.11.100-build2021091503.tgz
+    version: 2.11.100-build2021091503
+  - apiVersion: v1
     appVersion: 0.3.6
     created: "2021-08-19T18:31:37.450618192Z"
     description: Metrics Server is a cluster-wide aggregator of resource usage data.
