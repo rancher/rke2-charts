@@ -2,10 +2,10 @@
 +++ charts/Chart.yaml
 @@ -1,5 +1,7 @@
  apiVersion: v2
- appVersion: v3.19.2
+ appVersion: v3.20.1
  description: Installs the Tigera operator for Calico
 -name: tigera-operator
 +name: rke2-calico
- version: v3.19.2-2
+ version: v3.20.1
 +annotations:
 +  catalog.cattle.io/namespace: tigera-operator
