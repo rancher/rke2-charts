@@ -1,5 +1,14 @@
 --- charts-original/Chart.yaml
 +++ charts/Chart.yaml
+@@ -2,7 +2,7 @@
+   artifacthub.io/changes: |
+     - Initial helm chart changelog
+ apiVersion: v2
+-appVersion: 1.8.4
++appVersion: 1.8.5
+ description: CoreDNS is a DNS server that chains plugins and provides Kubernetes DNS
+   Services
+ home: https://coredns.io
 @@ -14,8 +14,8 @@
  maintainers:
  - name: mrueg
@@ -10,4 +19,4 @@
  - https://github.com/coredns/coredns
  type: application
 -version: 1.16.2
-+version: 1.16.201-build20210723
++version: 1.16.201-build20211006
