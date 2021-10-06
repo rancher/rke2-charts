@@ -1,14 +1,5 @@
 --- charts-original/templates/controller-deployment.yaml
 +++ charts/templates/controller-deployment.yaml
-@@ -23,7 +23,7 @@
-   replicas: {{ .Values.controller.replicaCount }}
-   {{- end }}
-   revisionHistoryLimit: {{ .Values.revisionHistoryLimit }}
--  {{- if .Values.controller.updateStrategy }}
-+  {{- if .Values.controller.updateStrfategy }}
-   strategy:
-     {{ toYaml .Values.controller.updateStrategy | nindent 4 }}
-   {{- end }}
 @@ -71,9 +71,7 @@
      {{- end }}
        containers:
