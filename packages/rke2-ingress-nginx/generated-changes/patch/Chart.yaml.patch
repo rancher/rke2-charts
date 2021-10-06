@@ -1,7 +1,7 @@
 --- charts-original/Chart.yaml
 +++ charts/Chart.yaml
-@@ -12,7 +12,7 @@
- kubeVersion: '>=1.16.0-0'
+@@ -15,7 +15,7 @@
+ kubeVersion: '>=1.19.0-0'
  maintainers:
  - name: ChiefAlexander
 -name: ingress-nginx
