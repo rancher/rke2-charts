@@ -1,0 +1,17 @@
+exports:
+  defaults:
+    # These are the default options override of cilium for RKE2
+    # for which no customization is allowed
+    cilium:
+      
+      # Enable all metrics
+      prometheus:
+        enabled: true
+      operator:
+        prometheus:
+          enabled: true
+      
+      # Enable node init to correctly setup the node as required for cilium
+      # throughout all the supported OS
+      nodeinit:
+        enabled: true

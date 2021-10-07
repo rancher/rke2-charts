@@ -549,6 +549,30 @@ entries:
     version: v3.13.3
   rke2-cilium:
   - apiVersion: v1
+    created: "2021-10-07T16:05:43.015915354Z"
+    dependencies:
+    - name: cilium
+      repository: file://./charts/cilium
+    - import-values:
+      - defaults
+      name: rke2-cilium-hard-defaults
+      repository: file://./charts/rke2-cilium-hard-defaults
+    description: eBPF-based Networking, Security, and Observability
+    digest: 340730f5fc83c9356b82ecd6f22c4047a89c0f2314a122c36495909ee3e7b6cd
+    home: https://cilium.io/
+    keywords:
+    - cilium
+    kubeVersion: '>= 1.12.0-0'
+    maintainers:
+    - email: charts@rancher.com
+      name: Rancher Labs
+    name: rke2-cilium
+    sources:
+    - https://github.com/rancher/rke2-charts
+    urls:
+    - assets/rke2-cilium/rke2-cilium-1.10.404.tgz
+    version: 1.10.404
+  - apiVersion: v1
     created: "2021-10-06T23:37:08.178641508Z"
     dependencies:
     - name: cilium
