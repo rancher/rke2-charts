@@ -9,9 +9,9 @@
 +  repository: rancher/hardened-coredns
 +  tag: "v1.8.5-build20211006"
    pullPolicy: IfNotPresent
- 
- replicaCount: 1
-@@ -69,10 +69,10 @@
+   ## Optionally specify an array of imagePullSecrets.
+   ## Secrets must be manually created in the namespace.
+@@ -75,10 +75,10 @@
    annotations: {}
  
  serviceAccount:
@@ -24,7 +24,7 @@
    annotations: {}
  
  rbac:
-@@ -88,7 +88,7 @@
+@@ -94,7 +94,7 @@
  isClusterService: true
  
  # Optional priority class to be used for the coredns pods. Used for autoscaler if autoscaler.priorityClassName not set.
@@ -33,7 +33,7 @@
  
  # Default zone is what Kubernetes recommends:
  # https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/#coredns-configmap-options
-@@ -170,7 +170,8 @@
+@@ -176,7 +176,8 @@
  
  # Node labels for pod assignment
  # Ref: https://kubernetes.io/docs/user-guide/node-selection/
@@ -43,7 +43,7 @@
  
  # expects input structure as per specification https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.11/#toleration-v1-core
  # for example:
-@@ -179,7 +180,13 @@
+@@ -185,7 +186,13 @@
  #     operator: Equal
  #     value: master
  #     effect: NoSchedule
@@ -58,7 +58,7 @@
  
  # https://kubernetes.io/docs/tasks/run-application/configure-pdb/#specifying-a-poddisruptionbudget
  podDisruptionBudget: {}
-@@ -227,7 +234,7 @@
+@@ -233,7 +240,7 @@
  # See https://github.com/kubernetes-incubator/cluster-proportional-autoscaler
  autoscaler:
    # Enabled the cluster-proportional-autoscaler
@@ -67,7 +67,7 @@
  
    # Number of cores in the cluster per coredns replica
    coresPerReplica: 256
-@@ -243,8 +250,8 @@
+@@ -249,8 +256,8 @@
    preventSinglePointFailure: true
  
    image:
@@ -76,9 +76,9 @@
 +    repository: rancher/hardened-cluster-autoscaler
 +    tag: "v1.8.5-build20211006"
      pullPolicy: IfNotPresent
- 
-   # Optional priority class to be used for the autoscaler pods. priorityClassName used if not set.
-@@ -255,19 +262,26 @@
+     ## Optionally specify an array of imagePullSecrets.
+     ## Secrets must be manually created in the namespace.
+@@ -267,19 +274,26 @@
  
    # Node labels for pod assignment
    # Ref: https://kubernetes.io/docs/user-guide/node-selection/
@@ -109,7 +109,17 @@
  
    # Options for autoscaler configmap
    configmap:
-@@ -287,3 +301,21 @@
+@@ -291,11 +305,28 @@
+   livenessProbe:
+     enabled: true
+     initialDelaySeconds: 10
+-    periodSeconds: 5
+-    timeoutSeconds: 5
++    periodSeconds: 30
++    timeoutSeconds: 10
+     failureThreshold: 3
+     successThreshold: 1
+-
  deployment:
    enabled: true
    name: ""

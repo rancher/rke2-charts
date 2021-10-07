@@ -18,5 +18,5 @@
  sources:
  - https://github.com/coredns/coredns
  type: application
--version: 1.16.2
-+version: 1.16.201-build20211006
+-version: 1.16.3
++version: 1.16.301-build20211006
