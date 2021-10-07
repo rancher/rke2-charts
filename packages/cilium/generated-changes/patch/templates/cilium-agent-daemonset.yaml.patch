@@ -28,6 +28,15 @@
          imagePullPolicy: {{ .Values.image.pullPolicy }}
          volumeMounts:
          - mountPath: /var/run/cilium
+@@ -393,7 +390,7 @@
+           # same directory where we install cilium cni plugin so that exec permissions
+           # are available.
+           - 'cp /usr/bin/cilium-mount /hostbin/cilium-mount && nsenter --cgroup=/hostproc/1/ns/cgroup --mount=/hostproc/1/ns/mnt "${BIN_PATH}/cilium-mount" $CGROUP_ROOT; rm /hostbin/cilium-mount'
+-        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}{{ if .Values.image.useDigest }}@{{ .Values.image.digest }}{{ end }}"
++        image: {{ template "system_default_registry" . }}{{ .Values.image.repository }}:{{ .Values.image.tag }}{{ if .Values.image.useDigest }}@{{ .Values.image.digest }}{{ end }}
+         imagePullPolicy: {{ .Values.image.pullPolicy }}
+         volumeMounts:
+           - mountPath: /hostproc
 @@ -406,8 +403,10 @@
  {{- if and .Values.nodeinit.enabled (not (eq .Values.nodeinit.bootstrapFile "")) }}
        - name: wait-for-node-init
