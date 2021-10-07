@@ -1,12 +1,12 @@
 multus:
   image:
     repository: rancher/hardened-multus-cni
-    tag: v3.7.1-build20210416
+    tag: v3.7.1-build20211007
 
 cniplugins:
   image:
     repository: rancher/hardened-cni-plugins
-    tag: v0.9.1-build20210414
+    tag: v0.9.1-build20211006
 
   # skipcnis is a comma separated list of cni binaries to skip from
   # installing.
