@@ -3,4 +3,5 @@ kind: FelixConfiguration
 metadata:
   name: default
 spec:
+  wireguardEnabled: {{ .Values.felixConfiguration.wireguardEnabled }}
   featureDetectOverride: {{ .Values.felixConfiguration.featureDetectOverride }}

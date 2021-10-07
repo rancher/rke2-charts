@@ -25,7 +25,7 @@
  
  apiServer:
    enabled: true
-@@ -20,9 +36,23 @@
+@@ -20,9 +36,24 @@
  
  # Configuration for the tigera operator
  tigeraOperator:
@@ -49,6 +49,7 @@
 +  strictAffinity: true
 +  autoAllocateBlocks: true
 +
-+# Config required to fix RKE2 issue #1541
 +felixConfiguration:
++  wireguardEnabled: false
++  # Config required to fix RKE2 issue #1541
 +  featureDetectOverride: "ChecksumOffloadBroken=true"
