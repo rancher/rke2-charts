@@ -33,7 +33,31 @@
  
  # Default zone is what Kubernetes recommends:
  # https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/#coredns-configmap-options
-@@ -176,7 +176,8 @@
+@@ -162,21 +162,21 @@
+   successThreshold: 1
+ 
+ # expects input structure as per specification https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.11/#affinity-v1-core
+-# for example:
+-#   affinity:
+-#     nodeAffinity:
+-#      requiredDuringSchedulingIgnoredDuringExecution:
+-#        nodeSelectorTerms:
+-#        - matchExpressions:
+-#          - key: foo.bar.com/role
+-#            operator: In
+-#            values:
+-#            - master
+-affinity: {}
++affinity:
++  podAntiAffinity:
++    requiredDuringSchedulingIgnoredDuringExecution:
++    - topologyKey: "kubernetes.io/hostname"
++      labelSelector:
++        matchExpressions:
++        - key: k8s-app
++          operator: In
++          values:
++          - kube-dns
  
  # Node labels for pod assignment
  # Ref: https://kubernetes.io/docs/user-guide/node-selection/
@@ -43,7 +67,7 @@
  
  # expects input structure as per specification https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.11/#toleration-v1-core
  # for example:
-@@ -185,7 +186,13 @@
+@@ -185,7 +185,13 @@
  #     operator: Equal
  #     value: master
  #     effect: NoSchedule
@@ -58,7 +82,7 @@
  
  # https://kubernetes.io/docs/tasks/run-application/configure-pdb/#specifying-a-poddisruptionbudget
  podDisruptionBudget: {}
-@@ -233,7 +240,7 @@
+@@ -233,7 +239,7 @@
  # See https://github.com/kubernetes-incubator/cluster-proportional-autoscaler
  autoscaler:
    # Enabled the cluster-proportional-autoscaler
@@ -67,7 +91,7 @@
  
    # Number of cores in the cluster per coredns replica
    coresPerReplica: 256
-@@ -249,8 +256,8 @@
+@@ -249,8 +255,8 @@
    preventSinglePointFailure: true
  
    image:
@@ -78,7 +102,7 @@
      pullPolicy: IfNotPresent
      ## Optionally specify an array of imagePullSecrets.
      ## Secrets must be manually created in the namespace.
-@@ -267,19 +274,26 @@
+@@ -267,19 +273,26 @@
  
    # Node labels for pod assignment
    # Ref: https://kubernetes.io/docs/user-guide/node-selection/
@@ -109,7 +133,7 @@
  
    # Options for autoscaler configmap
    configmap:
-@@ -291,11 +305,28 @@
+@@ -291,11 +304,28 @@
    livenessProbe:
      enabled: true
      initialDelaySeconds: 10
