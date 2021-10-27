@@ -31,13 +31,13 @@
  tigeraOperator:
 -  image: tigera/operator
 +  image: rancher/mirrored-calico-operator
-   version: v1.20.3
+   version: v1.20.4
 -  registry: quay.io
 +  registry: docker.io
  calicoctl:
 -  image: quay.io/docker.io/calico/ctl
 +  image: rancher/mirrored-calico-ctl
-   tag: v3.20.1
+   tag: v3.20.2
 +
 +global:
 +  systemDefaultRegistry: ""
