@@ -1,0 +1,12 @@
+apiVersion: v1
+appVersion: v1.19.16-rke2r1
+description: Install Kube Proxy.
+keywords:
+- kube-proxy
+maintainers:
+- email: charts@rancher.com
+  name: Rancher Labs
+name: rke2-kube-proxy
+sources:
+- https://github.com/rancher/rke2-charts
+version: v1.19.16-rke2r1-build2021102801
