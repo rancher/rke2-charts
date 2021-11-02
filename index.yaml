@@ -3,6 +3,18 @@ entries:
   harvester-cloud-provider:
   - apiVersion: v2
     appVersion: v0.1.1
+    created: "2021-11-02T16:15:04.680168017Z"
+    description: A Helm chart for Harvester Cloud Provider
+    digest: d2966f75cdcc1124e69983a3c1ef229e2206f1903295475f8207f8fe8d10ba98
+    maintainers:
+    - name: harvester
+    name: harvester-cloud-provider
+    type: application
+    urls:
+    - assets/harvester-cloud-provider/harvester-cloud-provider-0.1.300.tgz
+    version: 0.1.300
+  - apiVersion: v2
+    appVersion: v0.1.1
     created: "2021-09-07T20:10:03.440089002Z"
     description: A Helm chart for Harvester Cloud Provider
     digest: 16e3e6658222ea2f3d046f2084a54eaa78833b8184e423385e416ee59b6935b8
@@ -14,6 +26,18 @@ entries:
     - assets/harvester-cloud-provider/harvester-cloud-provider-0.1.200.tgz
     version: 0.1.200
   harvester-csi-driver:
+  - apiVersion: v2
+    appVersion: v0.1.1
+    created: "2021-11-02T16:15:04.682200645Z"
+    description: A Helm chart for Harvester CSI driver
+    digest: effe2be29e58517a86b032d5436792a78a7a3601a2df26440af6b457b605574c
+    maintainers:
+    - name: harvester
+    name: harvester-csi-driver
+    type: application
+    urls:
+    - assets/harvester-csi-driver/harvester-csi-driver-0.1.400.tgz
+    version: 0.1.400
   - apiVersion: v2
     appVersion: v0.1.1
     created: "2021-09-07T20:10:03.440622206Z"
