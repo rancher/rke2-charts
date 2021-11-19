@@ -12,7 +12,7 @@
      # repository:
 -    tag: "v1.0.2"
 -    digest: sha256:85b53b493d6d658d8c013449223b0ffd739c76d76dc9bf9000786669ec04e049
-+    tag: "nginx-1.0.2-hardened1"
++    tag: "nginx-1.0.2-hardened2"
      pullPolicy: IfNotPresent
      # www-data -> uid 101
      runAsUser: 101
