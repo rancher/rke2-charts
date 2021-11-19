@@ -19,4 +19,4 @@
  - https://github.com/coredns/coredns
  type: application
 -version: 1.16.4
-+version: 1.16.401-build20211118
++version: 1.16.401-build20211119

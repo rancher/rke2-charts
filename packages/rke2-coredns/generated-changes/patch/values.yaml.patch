@@ -7,7 +7,7 @@
 -  repository: coredns/coredns
 -  tag: "1.8.4"
 +  repository: rancher/hardened-coredns
-+  tag: "v1.8.5-build20211027"
++  tag: "v1.8.5-build20211119"
    pullPolicy: IfNotPresent
    ## Optionally specify an array of imagePullSecrets.
    ## Secrets must be manually created in the namespace.
@@ -98,7 +98,7 @@
 -    repository: k8s.gcr.io/cluster-proportional-autoscaler-amd64
 -    tag: "1.8.1"
 +    repository: rancher/hardened-cluster-autoscaler
-+    tag: "v1.8.5-build20211027"
++    tag: "v1.8.5-build20211119"
      pullPolicy: IfNotPresent
      ## Optionally specify an array of imagePullSecrets.
      ## Secrets must be manually created in the namespace.
@@ -156,10 +156,10 @@
 +  ipvs: false
 +  image:
 +    repository: rancher/hardened-dns-node-cache
-+    tag: "1.21.1-build20211006"
++    tag: "1.21.2-build20211119"
 +  initimage:
 +    repository: rancher/hardened-dns-node-cache
-+    tag: "1.21.1-build20211006"
++    tag: "1.21.2-build20211119"
 +  nodeSelector:
 +    kubernetes.io/os: linux
 +
