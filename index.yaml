@@ -365,6 +365,23 @@ entries:
     version: v1.0.001
   rke2-canal:
   - apiVersion: v1
+    appVersion: v3.20.2
+    created: "2021-11-19T23:16:40.744374444Z"
+    description: Install Canal Network Plugin.
+    digest: a5365b928c97e5d7b10188ad1fb584b0972cae0be678351776723ab9ac37bba8
+    home: https://www.projectcalico.org/
+    keywords:
+    - canal
+    maintainers:
+    - email: charts@rancher.com
+      name: Rancher Labs
+    name: rke2-canal
+    sources:
+    - https://github.com/rancher/rke2-charts
+    urls:
+    - assets/rke2-canal/rke2-canal-v3.20.1-build2021111904.tgz
+    version: v3.20.1-build2021111904
+  - apiVersion: v1
     appVersion: v3.20.1
     created: "2021-10-21T17:16:22.054537226Z"
     description: Install Canal Network Plugin.
@@ -1043,6 +1060,31 @@ entries:
     - assets/rke2-cilium/rke2-cilium-1.9.401.tgz
     version: 1.9.401
   rke2-coredns:
+  - annotations:
+      artifacthub.io/changes: |
+        - Initial helm chart changelog
+    apiVersion: v2
+    appVersion: 1.8.5
+    created: "2021-11-19T23:16:40.861244937Z"
+    description: CoreDNS is a DNS server that chains plugins and provides Kubernetes
+      DNS Services
+    digest: 30c251bdba9e7ace1ee2bfe0f24f73dfd7a35db34a9eea26699f1241041cde8b
+    home: https://coredns.io
+    icon: https://coredns.io/images/CoreDNS_Colour_Horizontal.png
+    keywords:
+    - coredns
+    - dns
+    - kubedns
+    maintainers:
+    - name: mrueg
+    - name: haad
+    name: rke2-coredns
+    sources:
+    - https://github.com/coredns/coredns
+    type: application
+    urls:
+    - assets/rke2-coredns/rke2-coredns-1.16.401-build2021111900.tgz
+    version: 1.16.401-build2021111900
   - annotations:
       artifacthub.io/changes: |
         - Initial helm chart changelog
@@ -3116,6 +3158,25 @@ entries:
     version: 2.11.100
   - apiVersion: v1
     appVersion: 0.5.0
+    created: "2021-11-19T23:16:40.958072259Z"
+    description: Metrics Server is a cluster-wide aggregator of resource usage data.
+    digest: 85896f9fc95c7d3418e76e92d55522a8d67f5f8c16d3713d9c5921a6268b6d3a
+    home: https://github.com/kubernetes-incubator/metrics-server
+    keywords:
+    - metrics-server
+    maintainers:
+    - email: o.with@sportradar.com
+      name: olemarkus
+    - email: k.aasan@sportradar.com
+      name: kennethaasan
+    name: rke2-metrics-server
+    sources:
+    - https://github.com/kubernetes-incubator/metrics-server
+    urls:
+    - assets/rke2-metrics-server/rke2-metrics-server-2.11.100-build2021111904.tgz
+    version: 2.11.100-build2021111904
+  - apiVersion: v1
+    appVersion: 0.5.0
     created: "2021-10-01T19:07:35.360915886Z"
     description: Metrics Server is a cluster-wide aggregator of resource usage data.
     digest: dfab8d9bb42380aff0e754a1f85ef6e92547f7141c38cba8a142cb16d4bc20bd
@@ -3191,6 +3252,23 @@ entries:
     - assets/rke2-metrics-server/rke2-metrics-server-2.11.100-build2021022300.tgz
     version: 2.11.100-build2021022300
   rke2-multus:
+  - apiVersion: v1
+    appVersion: v3.7.1
+    created: "2021-11-19T23:16:40.961991092Z"
+    description: Multus CNI enables attaching multiple network interfaces to pods
+      in Kubernetes.
+    digest: 00007c8d1dbc5b0eb3dda45d2c16077c0797d218b8cfa8cf9b256810a15183bd
+    home: https://github.com/k8snetworkplumbingwg/multus-cni
+    icon: https://raw.githubusercontent.com/k8snetworkplumbingwg/multus-cni/master/doc/images/Multus.png
+    maintainers:
+    - email: charts@rancher.com
+      name: Rancher Labs
+    name: rke2-multus
+    sources:
+    - https://github.com/k8snetworkplumbingwg/multus-cni
+    urls:
+    - assets/rke2-multus/rke2-multus-v3.7.1-build2021111906.tgz
+    version: v3.7.1-build2021111906
   - apiVersion: v1
     appVersion: v3.7.1
     created: "2021-10-07T13:30:27.300280096Z"
