@@ -1,4 +1,4 @@
 url: https://github.com/coredns/helm/releases/download/coredns-1.16.4/coredns-1.16.4.tgz
-packageVersion: 00
+packageVersion: 01
 # This repository does not use releaseCandidateVersions, so you can leave this as 00.
 releaseCandidateVersion: 00

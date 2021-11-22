@@ -9,7 +9,7 @@
      kubernetes.io/cluster-service: "true"
      kubernetes.io/name: "CoreDNS"
      {{- end }}
-@@ -24,7 +24,7 @@
+@@ -27,7 +27,7 @@
      {{- if .port }}:{{ .port }} {{ end -}}
      {
        {{- range .plugins }}
