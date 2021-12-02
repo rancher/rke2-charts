@@ -6,12 +6,12 @@ cilium:
   imagePullSecrets: []
   image:
     repository: rancher/mirrored-cilium-cilium
-    tag: v1.10.4
+    tag: v1.10.5
     useDigest: false
   operator:
     image:
       repository: rancher/mirrored-cilium-operator
-      tag: v1.10.4
+      tag: v1.10.5
   nodeinit:
     image:
       repository: rancher/mirrored-cilium-startup-script
@@ -21,7 +21,7 @@ cilium:
     enabled: false
     image:
       repository: rancher/mirrored-cilium-cilium
-      tag: v1.10.4
+      tag: v1.10.5
 
   #
   # Enable Azure integration.

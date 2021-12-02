@@ -1,6 +1,6 @@
 --- charts-original/values.yaml
 +++ charts/values.yaml
-@@ -658,7 +658,8 @@
+@@ -660,7 +660,8 @@
  
      # -- Node labels for pod assignment
      # ref: https://kubernetes.io/docs/user-guide/node-selection/
@@ -10,7 +10,7 @@
  
      # -- Annotations to be added to hubble-relay pods
      podAnnotations: {}
-@@ -789,7 +790,8 @@
+@@ -791,7 +792,8 @@
  
      # -- Node labels for pod assignment
      # ref: https://kubernetes.io/docs/user-guide/node-selection/
@@ -20,7 +20,7 @@
  
      # -- Node tolerations for pod assignment on nodes with taints
      # ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/
-@@ -1145,7 +1147,8 @@
+@@ -1153,7 +1155,8 @@
  
    # -- Node labels for cilium-etcd-operator pod assignment
    # ref: https://kubernetes.io/docs/user-guide/node-selection/
@@ -30,7 +30,7 @@
  
    # -- Annotations to be added to cilium-etcd-operator pods
    podAnnotations: {}
-@@ -1288,7 +1291,8 @@
+@@ -1296,7 +1299,8 @@
    # -- Node labels for cilium-operator pod assignment
    # ref: https://kubernetes.io/docs/user-guide/node-selection/
    #
@@ -40,7 +40,7 @@
  
    # -- Annotations to be added to cilium-operator pods
    podAnnotations: {}
-@@ -1394,7 +1398,8 @@
+@@ -1402,7 +1406,8 @@
    # -- Node labels for nodeinit pod assignment
    # ref: https://kubernetes.io/docs/user-guide/node-selection/
    #
@@ -50,7 +50,7 @@
  
    # -- Annotations to be added to node-init pods.
    podAnnotations: {}
-@@ -1488,7 +1493,8 @@
+@@ -1496,7 +1501,8 @@
    # -- Node labels for preflight pod assignment
    # ref: https://kubernetes.io/docs/user-guide/node-selection/
    #
@@ -60,7 +60,7 @@
  
    # -- Annotations to be added to preflight pods
    podAnnotations: {}
-@@ -1576,7 +1582,8 @@
+@@ -1584,7 +1590,8 @@
  
      # -- Node labels for pod assignment
      # ref: https://kubernetes.io/docs/user-guide/node-selection/
