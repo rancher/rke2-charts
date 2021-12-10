@@ -1,8 +1,8 @@
 apiVersion: v1
 name: rke2-kube-proxy
 description: Install Kube Proxy.
-version: v1.21.7-rke2r2-build20211206
-appVersion: v1.21.7-rke2r1
+version: v1.21.7-rke2r3-build20211210
+appVersion: v1.21.7-rke2r3
 keywords:
   - kube-proxy
 sources:
