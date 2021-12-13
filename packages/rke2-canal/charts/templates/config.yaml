@@ -8,7 +8,7 @@ metadata:
   namespace: kube-system
 stringData:
 {{- $config := (lookup "v1" "Secret" .Release.Namespace "{{ .Release.Name }}-config)") | default dict }}
-{{- $psk := (get $config "psk") | default (randAlphaNum 32 | b64enc) }}
+{{- $psk := (get $config "psk") | default (randAlphaNum 96 | b64enc) }}
 {{- if eq .Values.flannel.backend "ipsec" }}
   psk: {{ $psk  | quote }}
 {{- end }}
