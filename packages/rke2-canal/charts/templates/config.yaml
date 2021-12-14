@@ -8,12 +8,12 @@ metadata:
   namespace: kube-system
 stringData:
 {{- $config := (lookup "v1" "Secret" .Release.Namespace "{{ .Release.Name }}-config)") | default dict }}
-{{- $psk := (get $config "psk") | default (randAlphaNum 96 | b64enc) }}
+{{- $psk := (get $config "psk") | default (randAlphaNum 96) }}
 {{- if eq .Values.flannel.backend "ipsec" }}
   psk: {{ $psk  | quote }}
 {{- end }}
   # Typha is disabled.
-  typha_service_name: {{ .Values.calico.typhaServiceName | b64enc | quote }}
+  typha_service_name: {{ .Values.calico.typhaServiceName | quote }}
   # The interface used by canal for host <-> host communication.
   # If left blank, then the interface is chosen using the node's
   # default route.
