@@ -1,6 +1,31 @@
 apiVersion: v1
 entries:
   harvester-cloud-provider:
+  - annotations:
+      catalog.cattle.io/certified: rancher
+      catalog.cattle.io/display-name: Harvester Cloud Provider
+      catalog.cattle.io/kube-version: '>= 1.18'
+      catalog.cattle.io/namespace: kube-system
+      catalog.cattle.io/os: linux
+      catalog.cattle.io/rancher-version: '>= 2.6.1-0 <= 2.6.99-0'
+      catalog.cattle.io/release-name: harvester-cloud-provider
+      catalog.cattle.io/ui-component: harvester-cloud-provider
+      catalog.cattle.io/upstream-version: 0.1.8
+    apiVersion: v2
+    appVersion: v0.1.1
+    created: "2021-12-15T19:52:38.913333684Z"
+    description: A Helm chart for Harvester Cloud Provider
+    digest: a9ddd5d1ce9b587be016a3b398c47a5982379374b99caa4fa52f78fa873a8a49
+    keywords:
+    - infrastructure
+    - harvester
+    maintainers:
+    - name: harvester
+    name: harvester-cloud-provider
+    type: application
+    urls:
+    - assets/harvester-cloud-provider/harvester-cloud-provider-0.1.800.tgz
+    version: 0.1.800
   - apiVersion: v2
     appVersion: v0.1.1
     created: "2021-11-02T16:15:04.680168017Z"
@@ -26,6 +51,31 @@ entries:
     - assets/harvester-cloud-provider/harvester-cloud-provider-0.1.200.tgz
     version: 0.1.200
   harvester-csi-driver:
+  - annotations:
+      catalog.cattle.io/certified: rancher
+      catalog.cattle.io/display-name: Harvester CSI Driver
+      catalog.cattle.io/kube-version: '>= 1.18'
+      catalog.cattle.io/namespace: kube-system
+      catalog.cattle.io/os: linux
+      catalog.cattle.io/rancher-version: '>= 2.6.1-0 <= 2.6.99-0'
+      catalog.cattle.io/release-name: harvester-csi-driver
+      catalog.cattle.io/ui-component: harvester-csi-driver
+      catalog.cattle.io/upstream-version: 0.1.9
+    apiVersion: v2
+    appVersion: v0.1.1
+    created: "2021-12-15T19:52:38.914705201Z"
+    description: A Helm chart for Harvester CSI driver
+    digest: d77ddc8661b2ebf1524f59db6208cb5b9c183132ece22a43fff8fed759eb4600
+    keywords:
+    - infrastructure
+    - harvester
+    maintainers:
+    - name: harvester
+    name: harvester-csi-driver
+    type: application
+    urls:
+    - assets/harvester-csi-driver/harvester-csi-driver-0.1.900.tgz
+    version: 0.1.900
   - apiVersion: v2
     appVersion: v0.1.1
     created: "2021-11-02T16:15:04.682200645Z"
