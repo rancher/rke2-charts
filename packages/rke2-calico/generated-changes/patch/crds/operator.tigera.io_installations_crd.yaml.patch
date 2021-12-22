@@ -1,0 +1,52 @@
+--- charts-original/crds/operator.tigera.io_installations_crd.yaml
++++ charts/crds/operator.tigera.io_installations_crd.yaml
+@@ -341,13 +341,6 @@
+                   nodes on which to run Calico components. This is globally applied
+                   to all resources created by the operator excluding daemonsets.
+                 type: object
+-              controlPlaneReplicas:
+-                description: ControlPlaneReplicas defines how many replicas of the
+-                  control plane core components will be deployed. This field applies
+-                  to all control plane components that support High Availability.
+-                  Defaults to 2.
+-                format: int32
+-                type: integer
+               controlPlaneTolerations:
+                 description: ControlPlaneTolerations specify tolerations which are
+                   then globally applied to all resources created by the operator.
+@@ -489,10 +482,6 @@
+                       or "OnDelete". Default is RollingUpdate.
+                     type: string
+                 type: object
+-              nonPrivileged:
+-                description: NonPrivileged configures Calico to be run in non-privileged
+-                  containers as non-root users where possible.
+-                type: string
+               registry:
+                 description: "Registry is the default Docker registry used for component
+                   Docker images. If specified, all images will be pulled from this
+@@ -1047,13 +1036,6 @@
+                       plane nodes on which to run Calico components. This is globally
+                       applied to all resources created by the operator excluding daemonsets.
+                     type: object
+-                  controlPlaneReplicas:
+-                    description: ControlPlaneReplicas defines how many replicas of
+-                      the control plane core components will be deployed. This field
+-                      applies to all control plane components that support High Availability.
+-                      Defaults to 2.
+-                    format: int32
+-                    type: integer
+                   controlPlaneTolerations:
+                     description: ControlPlaneTolerations specify tolerations which
+                       are then globally applied to all resources created by the operator.
+@@ -1197,10 +1179,6 @@
+                           or "OnDelete". Default is RollingUpdate.
+                         type: string
+                     type: object
+-                  nonPrivileged:
+-                    description: NonPrivileged configures Calico to be run in non-privileged
+-                      containers as non-root users where possible.
+-                    type: string
+                   registry:
+                     description: "Registry is the default Docker registry used for
+                       component Docker images. If specified, all images will be pulled
