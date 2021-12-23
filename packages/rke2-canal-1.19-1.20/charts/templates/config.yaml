@@ -60,11 +60,7 @@ data:
   # Flannel network configuration. Mounted into the flannel container.
   net-conf.json: |
     {
-      "Network": {{ coalesce .Values.global.clusterCIDRv4 .Values.podCidr | quote }},
-{{- if coalesce .Values.global.clusterCIDRv6 .Values.podCidrv6 }}
-      "IPv6Network": {{ coalesce .Values.global.clusterCIDRv6 .Values.podCidrv6 | quote }},
-      "EnableIPv6": true,
-{{- end }}
+      "Network": {{ coalesce .Values.global.clusterCIDR .Values.podCidr | quote }},
       "Backend": {
         "Type": {{ .Values.flannel.backend | quote }}
       }
