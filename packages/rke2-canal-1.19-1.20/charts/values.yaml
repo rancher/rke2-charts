@@ -78,5 +78,3 @@ calico:
 
 global:
   systemDefaultRegistry: ""
-  clusterCIDRv4: ""
-  clusterCIDRv6: ""
