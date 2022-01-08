@@ -13,14 +13,14 @@ flannel:
   # If left blank, then the interface is chosen using the node's
   # default route.
   iface: ""
-  # kube-flannel command arguments 
+  # kube-flannel command arguments
   args:
   - "--ip-masq"
   - "--kube-subnet-mgr"
   # Backend for kube-flannel. Backend should not be changed
   # at runtime.
   backend: "vxlan"
-          
+
 calico:
   # CNI installation image.
   cniImage:
@@ -75,6 +75,10 @@ calico:
   felixFailsafeInboundHostPorts: ""
   # calico outbound failsafe ports. Empty string means defaults. Use 'none' to disable failsafe if you have your own rules.
   felixFailsafeOutboundHostPorts: ""
+  # The method to use to autodetect the IPv4 address for this host.
+  ipAutoDetectionMethod: "first-found"
+  # The method to use to autodetect the IPv6 address for this host.
+  ip6AutoDetectionMethod: "first-found"
 
 global:
   systemDefaultRegistry: ""

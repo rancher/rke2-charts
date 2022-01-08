@@ -152,6 +152,12 @@ spec:
               value: {{ .Values.calico.felixFailsafeInboundHostPorts | quote }}
             - name: FELIX_FAILSAFEOUTBOUNDHOSTPORTS
               value: {{ .Values.calico.felixFailsafeOutboundHostPorts | quote }}
+            # The method to use to autodetect the IPv4 address for this host.
+            - name: IP_AUTODETECTION_METHOD
+              value: {{ .Values.calico.ipAutoDetectionMethod | quote }}
+            # The method to use to autodetect the IPv6 address for this host.
+            - name: IP6_AUTODETECTION_METHOD
+              value: {{ .Values.calico.ip6AutoDetectionMethod | quote }}
           securityContext:
             privileged: true
           resources:
