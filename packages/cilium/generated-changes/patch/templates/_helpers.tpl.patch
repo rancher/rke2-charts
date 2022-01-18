@@ -1,10 +1,9 @@
 --- charts-original/templates/_helpers.tpl
 +++ charts/templates/_helpers.tpl
-@@ -126,3 +126,11 @@
- tls.crt: {{ $cert.Cert | b64enc }}
- tls.key: {{ $cert.Key | b64enc }}
+@@ -5,6 +5,14 @@
+ {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" }}
  {{- end }}
-+  
+ 
 +{{- define "system_default_registry" -}}
 +{{- if .Values.global.systemDefaultRegistry -}}
 +{{- printf "%s/" .Values.global.systemDefaultRegistry -}}
@@ -12,3 +11,18 @@
 +{{- "" -}}
 +{{- end }}
 +{{- end }}
++
+ {{/*
+ Render full image name from given values, e.g:
+ ```
+@@ -18,8 +26,9 @@
+ will return `quay.io/cilium/cilium:v1.10.1@abcdefgh`
+ */}}
+ {{- define "cilium.image" -}}
++{{- $registry := include "system_default_registry" . -}}
+ {{- $digest := (.useDigest | default false) | ternary (printf "@%s" .digest) "" -}}
+-{{- printf "%s:%s%s" .repository .tag $digest -}}
++{{- printf "%s%s:%s%s" $registry .repository .tag $digest -}}
+ {{- end -}}
+ 
+ {{/*

@@ -1,0 +1,11 @@
+--- charts-original/templates/cilium-agent/daemonset.yaml
++++ charts/templates/cilium-agent/daemonset.yaml
+@@ -390,6 +390,8 @@
+         volumeMounts:
+         - name: cilium-bootstrap-file
+           mountPath: {{ .Values.nodeinit.bootstrapFile }}
++        securityContext:
++          privileged: true
+       {{- end }}
+       - name: clean-cilium-state
+         image: {{ include "cilium.image" .Values.image | quote }}

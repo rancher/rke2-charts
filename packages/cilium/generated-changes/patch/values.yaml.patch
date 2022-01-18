@@ -1,6 +1,15 @@
 --- charts-original/values.yaml
 +++ charts/values.yaml
-@@ -658,7 +658,8 @@
+@@ -561,7 +561,7 @@
+ 
+ hubble:
+   # -- Enable Hubble (true by default).
+-  enabled: true
++  enabled: false
+ 
+   # -- Buffer size of the channel Hubble uses to receive monitor events. If this
+   # value is not set, the queue size is set to the default monitor queue size.
+@@ -694,7 +694,8 @@
  
      # -- Node labels for pod assignment
      # ref: https://kubernetes.io/docs/user-guide/node-selection/
@@ -10,7 +19,7 @@
  
      # -- Annotations to be added to hubble-relay pods
      podAnnotations: {}
-@@ -789,7 +790,8 @@
+@@ -864,7 +865,8 @@
  
      # -- Node labels for pod assignment
      # ref: https://kubernetes.io/docs/user-guide/node-selection/
@@ -20,7 +29,7 @@
  
      # -- Node tolerations for pod assignment on nodes with taints
      # ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/
-@@ -1145,7 +1147,8 @@
+@@ -1248,7 +1250,8 @@
  
    # -- Node labels for cilium-etcd-operator pod assignment
    # ref: https://kubernetes.io/docs/user-guide/node-selection/
@@ -30,37 +39,37 @@
  
    # -- Annotations to be added to cilium-etcd-operator pods
    podAnnotations: {}
-@@ -1288,7 +1291,8 @@
+@@ -1387,7 +1390,8 @@
+ 
    # -- Node labels for cilium-operator pod assignment
    # ref: https://kubernetes.io/docs/user-guide/node-selection/
-   #
 -  nodeSelector: {}
 +  nodeSelector:
 +    kubernetes.io/os: linux
  
    # -- Annotations to be added to cilium-operator pods
    podAnnotations: {}
-@@ -1394,7 +1398,8 @@
+@@ -1489,7 +1493,8 @@
+ 
    # -- Node labels for nodeinit pod assignment
    # ref: https://kubernetes.io/docs/user-guide/node-selection/
-   #
 -  nodeSelector: {}
 +  nodeSelector:
 +    kubernetes.io/os: linux
  
    # -- Annotations to be added to node-init pods.
    podAnnotations: {}
-@@ -1488,7 +1493,8 @@
+@@ -1578,7 +1583,8 @@
+ 
    # -- Node labels for preflight pod assignment
    # ref: https://kubernetes.io/docs/user-guide/node-selection/
-   #
 -  nodeSelector: {}
 +  nodeSelector:
 +    kubernetes.io/os: linux
  
    # -- Annotations to be added to preflight pods
    podAnnotations: {}
-@@ -1576,7 +1582,8 @@
+@@ -1663,7 +1669,8 @@
  
      # -- Node labels for pod assignment
      # ref: https://kubernetes.io/docs/user-guide/node-selection/

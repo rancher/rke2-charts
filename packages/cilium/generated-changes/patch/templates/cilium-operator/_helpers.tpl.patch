@@ -1,0 +1,12 @@
+--- charts-original/templates/cilium-operator/_helpers.tpl
++++ charts/templates/cilium-operator/_helpers.tpl
+@@ -26,7 +26,8 @@
+ Return cilium operator image
+ */}}
+ {{- define "cilium.operator.image" -}}
++{{- $registry := include "system_default_registry" . }}
+ {{- $cloud := include "cilium.operator.cloud" . }}
+ {{- $imageDigest := include "cilium.operator.imageDigestName" . }}
+-{{- printf "%s-%s%s:%s%s" .Values.operator.image.repository $cloud .Values.operator.image.suffix .Values.operator.image.tag $imageDigest -}}
++{{- printf "%s%s-%s%s:%s%s" $registry .Values.operator.image.repository $cloud .Values.operator.image.suffix .Values.operator.image.tag $imageDigest -}}
+ {{- end -}}
