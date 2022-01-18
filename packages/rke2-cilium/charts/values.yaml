@@ -1,17 +1,17 @@
 # Cilium specific options that can be customized for RKE2
 # Set with '--set cilium.<option>=<value>'
 cilium:
-
   # imagePullSecrets specifies the key to access the registry
   imagePullSecrets: []
   image:
     repository: rancher/mirrored-cilium-cilium
-    tag: v1.10.4
+    tag: v1.11.0
     useDigest: false
   operator:
     image:
       repository: rancher/mirrored-cilium-operator
-      tag: v1.10.4
+      tag: v1.11.0
+      useDigest: false
   nodeinit:
     image:
       repository: rancher/mirrored-cilium-startup-script
@@ -21,7 +21,8 @@ cilium:
     enabled: false
     image:
       repository: rancher/mirrored-cilium-cilium
-      tag: v1.10.4
+      tag: v1.11.0
+      useDigest: false
 
   #
   # Enable Azure integration.
