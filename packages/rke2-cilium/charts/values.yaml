@@ -5,12 +5,12 @@ cilium:
   imagePullSecrets: []
   image:
     repository: rancher/mirrored-cilium-cilium
-    tag: v1.11.0
+    tag: v1.11.1
     useDigest: false
   operator:
     image:
       repository: rancher/mirrored-cilium-operator
-      tag: v1.11.0
+      tag: v1.11.1
       useDigest: false
   nodeinit:
     image:
@@ -21,7 +21,7 @@ cilium:
     enabled: false
     image:
       repository: rancher/mirrored-cilium-cilium
-      tag: v1.11.0
+      tag: v1.11.1
       useDigest: false
 
   #
