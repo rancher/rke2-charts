@@ -1,10 +1,9 @@
 --- charts-original/templates/_helpers.tpl
 +++ charts/templates/_helpers.tpl
-@@ -126,3 +126,11 @@
- tls.crt: {{ $cert.Cert | b64enc }}
- tls.key: {{ $cert.Key | b64enc }}
+@@ -5,6 +5,14 @@
+ {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" }}
  {{- end }}
-+  
+ 
 +{{- define "system_default_registry" -}}
 +{{- if .Values.global.systemDefaultRegistry -}}
 +{{- printf "%s/" .Values.global.systemDefaultRegistry -}}
@@ -12,3 +11,7 @@
 +{{- "" -}}
 +{{- end }}
 +{{- end }}
++
+ {{/*
+ Render full image name from given values, e.g:
+ ```

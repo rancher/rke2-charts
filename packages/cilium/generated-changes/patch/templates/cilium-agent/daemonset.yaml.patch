@@ -1,0 +1,51 @@
+--- charts-original/templates/cilium-agent/daemonset.yaml
++++ charts/templates/cilium-agent/daemonset.yaml
+@@ -70,7 +70,7 @@
+       {{- end }}
+       containers:
+       - name: cilium-agent
+-        image: {{ include "cilium.image" .Values.image | quote }}
++        image: "{{ template "system_default_registry" . }}{{ include "cilium.image" .Values.image }}"
+         imagePullPolicy: {{ .Values.image.pullPolicy }}
+         {{- if .Values.sleepAfterInit }}
+         command:
+@@ -321,7 +321,7 @@
+         {{- end }}
+       {{- if .Values.monitor.enabled }}
+       - name: cilium-monitor
+-        image: {{ include "cilium.image" .Values.image | quote }}
++        image: "{{ template "system_default_registry" . }}{{ include "cilium.image" .Values.image }}"
+         imagePullPolicy: {{ .Values.image.pullPolicy }}
+         command: ["cilium"]
+         args:
+@@ -348,7 +348,7 @@
+       # Required to mount cgroup2 filesystem on the underlying Kubernetes node.
+       # We use nsenter command with host's cgroup and mount namespaces enabled.
+       - name: mount-cgroup
+-        image: {{ include "cilium.image" .Values.image | quote }}
++        image: "{{ template "system_default_registry" . }}{{ include "cilium.image" .Values.image }}"
+         imagePullPolicy: {{ .Values.image.pullPolicy }}
+         env:
+         - name: CGROUP_ROOT
+@@ -377,7 +377,7 @@
+       {{- end }}
+       {{- if and .Values.nodeinit.enabled .Values.nodeinit.bootstrapFile }}
+       - name: wait-for-node-init
+-        image: {{ include "cilium.image" .Values.image | quote }}
++        image: "{{ template "system_default_registry" . }}{{ include "cilium.image" .Values.image }}"
+         imagePullPolicy: {{ .Values.image.pullPolicy }}
+         command:
+         - sh
+@@ -390,9 +390,11 @@
+         volumeMounts:
+         - name: cilium-bootstrap-file
+           mountPath: {{ .Values.nodeinit.bootstrapFile }}
++        securityContext:
++          privileged: true
+       {{- end }}
+       - name: clean-cilium-state
+-        image: {{ include "cilium.image" .Values.image | quote }}
++        image: "{{ template "system_default_registry" . }}{{ include "cilium.image" .Values.image }}"
+         imagePullPolicy: {{ .Values.image.pullPolicy }}
+         command:
+         - /init-container.sh
