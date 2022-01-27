@@ -1,4 +1,2 @@
 url: local
-# This repository does not use releaseCandidateVersions, so you can leave this as 00.
-releaseCandidateVersion: 00
-packageVersion: 07
+packageVersion: 08
