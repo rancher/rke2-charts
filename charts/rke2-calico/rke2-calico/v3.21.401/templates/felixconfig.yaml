@@ -1,0 +1,7 @@
+apiVersion: crd.projectcalico.org/v1
+kind: FelixConfiguration
+metadata:
+  name: default
+spec:
+  wireguardEnabled: {{ .Values.felixConfiguration.wireguardEnabled }}
+  featureDetectOverride: {{ .Values.felixConfiguration.featureDetectOverride }}
