@@ -5,7 +5,7 @@
  apiVersion: rbac.authorization.k8s.io/v1
  kind: ClusterRole
  metadata:
-@@ -29,11 +28,11 @@
+@@ -51,11 +50,11 @@
        - nodes
      verbs:
        # Need to update node labels when migrating nodes.
@@ -21,7 +21,7 @@
    - apiGroups:
        - rbac.authorization.k8s.io
      resources:
-@@ -126,6 +125,13 @@
+@@ -148,6 +147,13 @@
        - delete
        - watch
    - apiGroups:
