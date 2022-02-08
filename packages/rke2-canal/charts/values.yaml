@@ -25,15 +25,20 @@ calico:
   # CNI installation image.
   cniImage:
     repository: rancher/hardened-calico
-    tag: v3.21.2-build20220119
+    tag: v3.21.4-build20220208
   # Canal node image.
   nodeImage:
     repository: rancher/hardened-calico
-    tag: v3.21.2-build20220119
+    tag: v3.21.4-build20220208
   # Flexvol Image.
   flexvolImage:
     repository: rancher/hardened-calico
-    tag: v3.21.2-build20220119
+    tag: v3.21.4-build20220208
+  # kubecontroller image
+  kubeControllerImage:
+    repository: rancher/hardened-calico
+    tag: v3.21.4-build20220208
+
   # Datastore type for canal. It can be either kuberentes or etcd.
   datastoreType: kubernetes
   # Wait for datastore to initialize.
@@ -79,6 +84,8 @@ calico:
   ipAutoDetectionMethod: "first-found"
   # The method to use to autodetect the IPv6 address for this host.
   ip6AutoDetectionMethod: "first-found"
+  # Enable calico kube-controllers
+  calicoKubeControllers: false
 
 global:
   systemDefaultRegistry: ""
