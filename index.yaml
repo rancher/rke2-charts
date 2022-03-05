@@ -100,6 +100,60 @@ entries:
     urls:
     - assets/harvester-csi-driver/harvester-csi-driver-0.1.300.tgz
     version: 0.1.300
+  rancher-vsphere-cpi:
+  - annotations:
+      catalog.cattle.io/certified: rancher
+      catalog.cattle.io/display-name: vSphere CPI
+      catalog.cattle.io/kube-version: '>= 1.18.0-0 < 1.23.0-0'
+      catalog.cattle.io/namespace: kube-system
+      catalog.cattle.io/os: linux
+      catalog.cattle.io/permits-os: linux,windows
+      catalog.cattle.io/rancher-version: '>= 2.6.0-0 <= 2.6.100-0'
+      catalog.cattle.io/release-name: vsphere-cpi
+    apiVersion: v1
+    appVersion: 1.1.0
+    created: "2022-03-05T00:37:27.410809336Z"
+    description: vSphere Cloud Provider Interface (CPI)
+    digest: 6b7516309e763b6cecd94c12a193782aebc7f93fcae08f6baf642b60a71756e4
+    icon: https://charts.rancher.io/assets/logos/vsphere-cpi.svg
+    keywords:
+    - infrastructure
+    maintainers:
+    - email: caleb@rancher.com
+      name: Rancher
+    name: rancher-vsphere-cpi
+    sources:
+    - https://github.com/kubernetes/cloud-provider-vsphere
+    urls:
+    - assets/rancher-vsphere-cpi/rancher-vsphere-cpi-1.1.000.tgz
+    version: 1.1.000
+  rancher-vsphere-csi:
+  - annotations:
+      catalog.cattle.io/certified: rancher
+      catalog.cattle.io/display-name: vSphere CSI
+      catalog.cattle.io/kube-version: '>= 1.19.0-0 < 1.23.0-0'
+      catalog.cattle.io/namespace: kube-system
+      catalog.cattle.io/os: linux
+      catalog.cattle.io/permits-os: linux,windows
+      catalog.cattle.io/rancher-version: '>= 2.6.0-0 <= 2.6.100-0'
+      catalog.cattle.io/release-name: vsphere-csi
+    apiVersion: v1
+    appVersion: 2.4.1-rancher1
+    created: "2022-03-05T00:37:27.411891336Z"
+    description: vSphere Cloud Storage Interface (CSI)
+    digest: d1fa0b9d9b9cb6d39c7c1cd52dfb2215942cdf8eb40e34d990d289ae785b8795
+    icon: https://charts.rancher.io/assets/logos/vsphere-csi.svg
+    keywords:
+    - infrastructure
+    maintainers:
+    - email: caleb@rancher.com
+      name: Rancher
+    name: rancher-vsphere-csi
+    sources:
+    - https://github.com/kubernetes-sigs/vsphere-csi-driver
+    urls:
+    - assets/rancher-vsphere-csi/rancher-vsphere-csi-2.4.1-rancher100.tgz
+    version: 2.4.1-rancher100
   rke2-calico:
   - annotations:
       catalog.cattle.io/namespace: tigera-operator
