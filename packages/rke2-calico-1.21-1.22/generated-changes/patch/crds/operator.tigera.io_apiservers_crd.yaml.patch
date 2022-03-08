@@ -1,0 +1,11 @@
+--- charts-original/crds/operator.tigera.io_apiservers_crd.yaml
++++ charts/crds/operator.tigera.io_apiservers_crd.yaml
+@@ -2,8 +2,6 @@
+ kind: CustomResourceDefinition
+ metadata:
+   name: apiservers.operator.tigera.io
+-  annotations:
+-    helm.sh/hook: crd-install
+ spec:
+   group: operator.tigera.io
+   names:
