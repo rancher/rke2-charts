@@ -241,6 +241,23 @@ entries:
   - annotations:
       catalog.cattle.io/namespace: tigera-operator
     apiVersion: v2
+    appVersion: v3.22.1
+    created: "2022-03-08T19:14:58.275849044Z"
+    description: Installs the Tigera operator for Calico
+    digest: 3b64b6b41c437a32b8dde95f719237786781649139ac6bc13e1ae143cde6b94e
+    home: https://projectcalico.docs.tigera.io/about/about-calico
+    icon: https://projectcalico.docs.tigera.io/images/felix_icon.png
+    name: rke2-calico
+    sources:
+    - https://github.com/projectcalico/calico/tree/master/calico/_includes/charts/tigera-operator
+    - https://github.com/tigera/operator
+    - https://github.com/projectcalico/calico
+    urls:
+    - assets/rke2-calico/rke2-calico-v3.22.101.tgz
+    version: v3.22.101
+  - annotations:
+      catalog.cattle.io/namespace: tigera-operator
+    apiVersion: v2
     appVersion: v3.22.0
     created: "2022-02-07T17:54:29.353494537Z"
     description: Installs the Tigera operator for Calico
@@ -255,6 +272,17 @@ entries:
     urls:
     - assets/rke2-calico/rke2-calico-v3.22.001.tgz
     version: v3.22.001
+  - annotations:
+      catalog.cattle.io/namespace: tigera-operator
+    apiVersion: v2
+    appVersion: v3.21.4
+    created: "2022-03-08T19:14:58.278623724Z"
+    description: Installs the Tigera operator for Calico
+    digest: 91d431660d2bea4c41567684ec8e8cde37f95d7f36972f5cb5783e8ed99f4120
+    name: rke2-calico
+    urls:
+    - assets/rke2-calico-1.21-1.22/rke2-calico-v3.21.402.tgz
+    version: v3.21.402
   - annotations:
       catalog.cattle.io/namespace: tigera-operator
     apiVersion: v2
@@ -430,6 +458,15 @@ entries:
     urls:
     - assets/rke2-calico/rke2-calico-crd-v3.22.001.tgz
     version: v3.22.001
+  - apiVersion: v1
+    created: "2022-03-08T19:14:58.277907577Z"
+    description: Installs the CRDs for rke2-calico
+    digest: 90a320dcf38a221eb29ae8589571d97f8bd15a38a8fd5789a49ae6ce8f1db1a0
+    name: rke2-calico-crd
+    type: application
+    urls:
+    - assets/rke2-calico-1.21-1.22/rke2-calico-crd-v3.21.402.tgz
+    version: v3.21.402
   - apiVersion: v1
     created: "2022-01-05T18:04:36.026866003Z"
     description: Installs the CRDs for rke2-calico
