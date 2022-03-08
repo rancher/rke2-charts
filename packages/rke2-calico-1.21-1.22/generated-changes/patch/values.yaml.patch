@@ -30,15 +30,15 @@
  # Configuration for the tigera operator
  tigeraOperator:
 -  image: tigera/operator
--  version: v1.25.2
+-  version: v1.23.5
 -  registry: quay.io
 +  image: rancher/mirrored-calico-operator
-+  version: v1.25.3
++  version: v1.23.6
 +  registry: docker.io
  calicoctl:
 -  image: docker.io/calico/ctl
 +  image: rancher/mirrored-calico-ctl
-   tag: v3.22.1
+   tag: v3.21.4
 +
 +global:
 +  systemDefaultRegistry: ""
