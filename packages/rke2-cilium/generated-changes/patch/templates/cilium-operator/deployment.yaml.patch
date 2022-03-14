@@ -1,0 +1,11 @@
+--- charts-original/templates/cilium-operator/deployment.yaml
++++ charts/templates/cilium-operator/deployment.yaml
+@@ -53,7 +53,7 @@
+       {{- end }}
+       containers:
+       - name: cilium-operator
+-        image: {{ include "cilium.operator.image" . }}
++        image: "{{ template "system_default_registry" . }}{{ include "cilium.operator.image" . }}"
+         imagePullPolicy: {{ .Values.operator.image.pullPolicy }}
+         command:
+         - cilium-operator-{{ include "cilium.operator.cloud" . }}

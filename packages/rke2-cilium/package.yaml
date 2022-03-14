@@ -1,3 +1,2 @@
-url: local
-packageVersion: 01
-releaseCandidateVersion: 00
+url: https://helm.cilium.io/cilium-1.11.1.tgz
+packageVersion: 02

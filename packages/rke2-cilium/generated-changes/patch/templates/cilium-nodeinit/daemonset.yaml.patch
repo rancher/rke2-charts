@@ -1,0 +1,11 @@
+--- charts-original/templates/cilium-nodeinit/daemonset.yaml
++++ charts/templates/cilium-nodeinit/daemonset.yaml
+@@ -42,7 +42,7 @@
+         name: xtables-lock
+       containers:
+         - name: node-init
+-          image: {{ include "cilium.image" .Values.nodeinit.image | quote }}
++          image: "{{ template "system_default_registry" . }}{{ include "cilium.image" .Values.nodeinit.image }}"
+           imagePullPolicy: {{ .Values.nodeinit.image.pullPolicy }}
+           securityContext:
+             privileged: true
