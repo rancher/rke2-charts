@@ -1,0 +1,61 @@
+# Cilium specific options that can be customized for RKE2
+# Set with '--set cilium.<option>=<value>'
+cilium:
+  # imagePullSecrets specifies the key to access the registry
+  imagePullSecrets: []
+  image:
+    repository: rancher/mirrored-cilium-cilium
+    tag: v1.11.1
+    useDigest: false
+  operator:
+    image:
+      repository: rancher/mirrored-cilium-operator
+      tag: v1.11.1
+      useDigest: false
+  nodeinit:
+    image:
+      repository: rancher/mirrored-cilium-startup-script
+      tag: 62bfbe88c17778aad7bef9fa57ff9e2d4a9ba0d8
+  preflight:
+    # preflight enable to optionally prepare cilium prior to an upgrade
+    enabled: false
+    image:
+      repository: rancher/mirrored-cilium-cilium
+      tag: v1.11.1
+      useDigest: false
+
+  #
+  # Enable Azure integration.
+  #
+  azure:
+    enabled: false
+  cni:
+    # Set to "generic-veth" for Azure integration.
+    chainingMode: none
+    # Set to "true" for Azure integration.
+    customConf: false
+    # Set to "cni-configuration" for Azure integration.
+    # configMap: cni-configuration
+  # Set to "true" for Azure integration.
+  masquerade: true
+
+  #
+  # Enable Elastic Network Interface (ENI) for AWS integration.
+  #
+  eni:
+    enabled: false
+
+  ipam:
+    # Set mode to "eni" for ENI AWS intetgration.
+    mode: "kubernetes"
+  # Set tunnel to "disable" if ENI AWS or Azure integrations are enabled.
+  tunnel: "vxlan"
+  # Set to "eth0" for ENI AWS intetgration.
+  #egressMasqueradeInterfaces: eth0
+
+  ipv6:
+  # -- Enable dual stack
+    enabled: false
+
+global:
+  systemDefaultRegistry: ""
