@@ -5,13 +5,13 @@
  
  image:
 -  repository: coredns/coredns
--  tag: "1.8.4"
+-  tag: "1.8.7"
 +  repository: rancher/hardened-coredns
-+  tag: "v1.8.5-build20211119"
++  tag: "v1.9.1-build20220318"
    pullPolicy: IfNotPresent
    ## Optionally specify an array of imagePullSecrets.
    ## Secrets must be manually created in the namespace.
-@@ -75,10 +75,10 @@
+@@ -76,10 +76,10 @@
    annotations: {}
  
  serviceAccount:
@@ -24,7 +24,7 @@
    annotations: {}
  
  rbac:
-@@ -94,7 +94,7 @@
+@@ -95,7 +95,7 @@
  isClusterService: true
  
  # Optional priority class to be used for the coredns pods. Used for autoscaler if autoscaler.priorityClassName not set.
@@ -33,7 +33,7 @@
  
  # Default zone is what Kubernetes recommends:
  # https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/#coredns-configmap-options
-@@ -169,21 +169,21 @@
+@@ -172,21 +172,21 @@
    successThreshold: 1
  
  # expects input structure as per specification https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.11/#affinity-v1-core
@@ -67,7 +67,7 @@
  
  # expects input structure as per specification https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.11/#toleration-v1-core
  # for example:
-@@ -192,7 +192,13 @@
+@@ -195,7 +195,13 @@
  #     operator: Equal
  #     value: master
  #     effect: NoSchedule
@@ -82,7 +82,7 @@
  
  # https://kubernetes.io/docs/tasks/run-application/configure-pdb/#specifying-a-poddisruptionbudget
  podDisruptionBudget: {}
-@@ -240,7 +246,7 @@
+@@ -243,7 +249,7 @@
  # See https://github.com/kubernetes-incubator/cluster-proportional-autoscaler
  autoscaler:
    # Enabled the cluster-proportional-autoscaler
@@ -91,8 +91,8 @@
  
    # Number of cores in the cluster per coredns replica
    coresPerReplica: 256
-@@ -256,8 +262,8 @@
-   preventSinglePointFailure: true
+@@ -264,8 +270,8 @@
+   #   - --nodelabels=topology.kubernetes.io/zone=us-east-1a
  
    image:
 -    repository: k8s.gcr.io/cluster-proportional-autoscaler-amd64
@@ -102,7 +102,7 @@
      pullPolicy: IfNotPresent
      ## Optionally specify an array of imagePullSecrets.
      ## Secrets must be manually created in the namespace.
-@@ -274,19 +280,26 @@
+@@ -282,19 +288,26 @@
  
    # Node labels for pod assignment
    # Ref: https://kubernetes.io/docs/user-guide/node-selection/
@@ -133,7 +133,7 @@
  
    # Options for autoscaler configmap
    configmap:
-@@ -298,11 +311,28 @@
+@@ -306,11 +319,28 @@
    livenessProbe:
      enabled: true
      initialDelaySeconds: 10
