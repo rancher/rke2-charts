@@ -1,0 +1,15 @@
+--- charts-original/templates/cilium-configmap.yaml
++++ charts/templates/cilium-configmap.yaml
+@@ -195,7 +195,11 @@
+ 
+   # Enable IPv6 addressing. If enabled, all endpoints are allocated an IPv6
+   # address.
+-  enable-ipv6: {{ .Values.ipv6.enabled | quote }}
++{{- if coalesce .Values.global.clusterCIDRv6 .Values.ipv6.enabled }}
++  enable-ipv6: true
++{{ else }}
++  enable-ipv6: false
++{{- end }}
+ 
+ {{- if .Values.cleanState }}
+   # If a serious issue occurs during Cilium startup, this
