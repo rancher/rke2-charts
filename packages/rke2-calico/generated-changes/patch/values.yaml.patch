@@ -1,6 +1,6 @@
 --- charts-original/values.yaml
 +++ charts/values.yaml
-@@ -1,8 +1,24 @@
+@@ -1,11 +1,27 @@
  imagePullSecrets: {}
  
  installation:
@@ -24,7 +24,11 @@
 +  imagePrefix: "mirrored-calico-"
  
  apiServer:
-   enabled: true
+-  enabled: true
++  enabled: false
+ 
+ certs:
+   node:
 @@ -20,9 +36,24 @@
  
  # Configuration for the tigera operator
