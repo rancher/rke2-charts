@@ -1,5 +1,20 @@
 --- charts-original/templates/_helpers.tpl
 +++ charts/templates/_helpers.tpl
+@@ -54,11 +54,11 @@
+ {{/*
+ Get specific image
+ */}}
+-{{- define "ingress-nginx.image" -}}
++{{- define "ingress-nginx.repository" -}}
+ {{- if .chroot -}}
+-{{- printf "%s-chroot" .image -}}
++{{- printf "%s-chroot" .repository -}}
+ {{- else -}}
+-{{- printf "%s" .image -}}
++{{- printf "%s" .repository -}}
+ {{- end }}
+ {{- end -}}
+ 
 @@ -169,7 +169,7 @@
  Check the ingress controller version tag is at most three versions behind the last release
  */}}
