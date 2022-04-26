@@ -1,11 +1,11 @@
 --- charts-original/templates/controller-deployment.yaml
 +++ charts/templates/controller-deployment.yaml
-@@ -71,9 +71,7 @@
+@@ -77,9 +77,7 @@
      {{- end }}
        containers:
          - name: {{ .Values.controller.containerName }}
 -          {{- with .Values.controller.image }}
--          image: "{{- if .repository -}}{{ .repository }}{{ else }}{{ .registry }}/{{ .image }}{{- end -}}:{{ .tag }}{{- if (.digest) -}} @{{.digest}} {{- end -}}"
+-          image: "{{- if .repository -}}{{ .repository }}{{ else }}{{ .registry }}/{{ include "ingress-nginx.image" . }}{{- end -}}:{{ .tag }}{{ include "ingress-nginx.imageDigest" . }}"
 -          {{- end }}
 +          image: "{{ template "system_default_registry" . }}{{ template "repository_or_registry_and_image" .Values.controller.image }}"
            imagePullPolicy: {{ .Values.controller.image.pullPolicy }}
