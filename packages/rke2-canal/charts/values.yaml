@@ -2,7 +2,7 @@
 
 # The IPv4 cidr pool to create on startup if none exists. Pod IPs will be
 # chosen from this range.
-podCidr: "10.42.0.0/16"
+#podCidr: "10.42.0.0/16"
 
 flannel:
   # kube-flannel image

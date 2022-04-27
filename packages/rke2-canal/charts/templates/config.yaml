@@ -37,18 +37,24 @@ data:
           "ipam": {
               "type": "host-local",
               "ranges": [
+{{- if coalesce .Values.global.clusterCIDRv4 .Values.podCidr }}
                   [
                       {
                           "subnet": "usePodCidr"
                       }
 {{- if coalesce .Values.global.clusterCIDRv6 .Values.podCidrv6 }}
                   ],
+{{- else }}
+                  ]
+{{- end }}
+{{- end }}
+{{- if coalesce .Values.global.clusterCIDRv6 .Values.podCidrv6 }}
                   [
                       {
                           "subnet": "usePodCidrIPv6"
                       }
-{{- end }}
                   ]
+{{- end }}
               ]
           },
           "policy": {
@@ -73,7 +79,11 @@ data:
   # Flannel network configuration. Mounted into the flannel container.
   net-conf.json: |
     {
+{{- if coalesce .Values.global.clusterCIDRv4 .Values.podCidr }}
       "Network": {{ coalesce .Values.global.clusterCIDRv4 .Values.podCidr | quote }},
+{{- else }}
+      "EnableIPv4": false,
+{{- end }}
 {{- if coalesce .Values.global.clusterCIDRv6 .Values.podCidrv6 }}
       "IPv6Network": {{ coalesce .Values.global.clusterCIDRv6 .Values.podCidrv6 | quote }},
       "EnableIPv6": true,
