@@ -1,0 +1,12 @@
+apiVersion: v1
+appVersion: v3.8
+description: Multus CNI enables attaching multiple network interfaces to pods in Kubernetes.
+home: https://github.com/k8snetworkplumbingwg/multus-cni
+icon: https://raw.githubusercontent.com/k8snetworkplumbingwg/multus-cni/master/doc/images/Multus.png
+maintainers:
+- email: charts@rancher.com
+  name: Rancher Labs
+name: rke2-multus
+sources:
+- https://github.com/k8snetworkplumbingwg/multus-cni
+version: v3.8-build2021110401

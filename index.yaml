@@ -4759,6 +4759,23 @@ entries:
     version: 2.11.100-build2021022300
   rke2-multus:
   - apiVersion: v1
+    appVersion: v3.8
+    created: "2022-05-04T15:39:12.58315014Z"
+    description: Multus CNI enables attaching multiple network interfaces to pods
+      in Kubernetes.
+    digest: 39e1326f93fa7e03c2e7ae985499b37abb2c9436379c4870ee3f8db4ecfada47
+    home: https://github.com/k8snetworkplumbingwg/multus-cni
+    icon: https://raw.githubusercontent.com/k8snetworkplumbingwg/multus-cni/master/doc/images/Multus.png
+    maintainers:
+    - email: charts@rancher.com
+      name: Rancher Labs
+    name: rke2-multus
+    sources:
+    - https://github.com/k8snetworkplumbingwg/multus-cni
+    urls:
+    - assets/rke2-multus/rke2-multus-v3.8-build2021110401.tgz
+    version: v3.8-build2021110401
+  - apiVersion: v1
     appVersion: v3.7.1
     created: "2021-11-19T23:16:40.961991092Z"
     description: Multus CNI enables attaching multiple network interfaces to pods
