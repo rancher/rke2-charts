@@ -46,8 +46,8 @@
          - sh
 @@ -390,9 +389,11 @@
          volumeMounts:
-         - name: cilium-bootstrap-file
-           mountPath: {{ .Values.nodeinit.bootstrapFile }}
+         - name: cilium-bootstrap-file-dir
+           mountPath: "/tmp/cilium-bootstrap.d"
 +        securityContext:
 +          privileged: true
        {{- end }}
