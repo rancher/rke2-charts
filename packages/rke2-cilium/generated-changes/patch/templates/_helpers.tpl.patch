@@ -1,6 +1,6 @@
 --- charts-original/templates/_helpers.tpl
 +++ charts/templates/_helpers.tpl
-@@ -86,3 +86,11 @@
+@@ -90,3 +90,11 @@
  {{- print "batch/v1beta1" -}}
  {{- end -}}
  {{- end -}}
