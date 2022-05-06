@@ -1,0 +1,59 @@
+imagePullSecrets: {}
+
+installation:
+  controlPlaneTolerations:
+  - key: "node-role.kubernetes.io/control-plane"
+    operator: "Exists"
+    effect: "NoSchedule"
+  - key: "node-role.kubernetes.io/etcd"
+    operator: "Exists"
+    effect: "NoExecute"
+  enabled: true
+  kubernetesProvider: ""
+  calicoNetwork:
+    bgp: Disabled
+    ipPools:
+    - natOutgoing: Enabled
+      encapsulation: VXLAN
+      cidr: 10.42.0.0/16
+      blockSize: 24
+  imagePath: "rancher"
+  imagePrefix: "mirrored-calico-"
+
+apiServer:
+  enabled: false
+
+certs:
+  node:
+    key:
+    cert:
+    commonName:
+  typha:
+    key:
+    cert:
+    commonName:
+    caBundle:
+
+# Configuration for the tigera operator
+tigeraOperator:
+  image: rancher/mirrored-calico-operator
+  version: v1.25.8
+  registry: docker.io
+calicoctl:
+  image: rancher/mirrored-calico-ctl
+  tag: v3.22.2
+
+global:
+  systemDefaultRegistry: ""
+  clusterCIDRv4: ""
+  clusterCIDRv6: ""
+
+# Config required by Windows nodes
+ipamConfig:
+  strictAffinity: true
+  autoAllocateBlocks: true
+
+felixConfiguration:
+  wireguardEnabled: false
+  # Config required to fix RKE2 issue #1541
+  featureDetectOverride: "ChecksumOffloadBroken=true"
