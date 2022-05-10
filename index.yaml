@@ -447,6 +447,23 @@ entries:
       catalog.cattle.io/namespace: tigera-operator
     apiVersion: v2
     appVersion: v3.22.2
+    created: "2022-05-10T07:06:37.417356442Z"
+    description: Installs the Tigera operator for Calico
+    digest: 13aa28aa4830c26ee32fab748633fb64f3f485fb720b54e170cb9dca31ac14c3
+    home: https://projectcalico.docs.tigera.io/about/about-calico
+    icon: https://projectcalico.docs.tigera.io/images/felix_icon.png
+    name: rke2-calico
+    sources:
+    - https://github.com/projectcalico/calico/tree/master/calico/_includes/charts/tigera-operator
+    - https://github.com/tigera/operator
+    - https://github.com/projectcalico/calico
+    urls:
+    - assets/rke2-calico/rke2-calico-v3.22.202.tgz
+    version: v3.22.202
+  - annotations:
+      catalog.cattle.io/namespace: tigera-operator
+    apiVersion: v2
+    appVersion: v3.22.2
     created: "2022-05-06T14:49:52.555900462Z"
     description: Installs the Tigera operator for Calico
     digest: 22f0d6c24a05a23cadb4f2c17bf18601d0147e154991c1d34ca6d4068af02887
