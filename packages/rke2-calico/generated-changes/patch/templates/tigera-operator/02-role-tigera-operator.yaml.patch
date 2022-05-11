@@ -21,7 +21,7 @@
    - apiGroups:
        - rbac.authorization.k8s.io
      resources:
-@@ -148,6 +147,13 @@
+@@ -149,6 +148,13 @@
        - delete
        - watch
    - apiGroups:
