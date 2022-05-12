@@ -1,6 +1,6 @@
 --- charts-original/values.yaml
 +++ charts/values.yaml
-@@ -1,8 +1,24 @@
+@@ -1,8 +1,25 @@
  imagePullSecrets: {}
  
  installation:
@@ -22,10 +22,11 @@
 +      blockSize: 24
 +  imagePath: "rancher"
 +  imagePrefix: "mirrored-calico-"
++  flexVolumePluginDir: "/var/lib/kubelet/volumeplugins"
  
  apiServer:
    enabled: true
-@@ -20,9 +36,24 @@
+@@ -20,9 +37,24 @@
  
  # Configuration for the tigera operator
  tigeraOperator:
