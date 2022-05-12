@@ -1,5 +1,5 @@
---- charts-original/crds/calico/kdd/crd.projectcalico.org_felixconfigurations.yaml
-+++ charts/crds/calico/kdd/crd.projectcalico.org_felixconfigurations.yaml
+--- charts-original/crds/calico/crd.projectcalico.org_felixconfigurations.yaml
++++ charts/crds/calico/crd.projectcalico.org_felixconfigurations.yaml
 @@ -43,7 +43,7 @@
                  type: boolean
                awsSrcDstCheck:
@@ -9,10 +9,10 @@
                    DoNothing]'
                  enum:
                  - DoNothing
-@@ -77,13 +77,6 @@
-                 description: 'BPFEnabled, if enabled Felix will use the BPF dataplane.
-                   [Default: false]'
-                 type: boolean
+@@ -82,13 +82,6 @@
+                   BPF programs regardless of what is the per-interfaces or global
+                   setting. Possible values are Disabled or Strict. [Default: Strict]'
+                 type: string
 -              bpfExtToServiceConnmark:
 -                description: 'BPFExtToServiceConnmark in BPF mode, control a 32bit
 -                  mark that is set on connections from an external client to a local
@@ -23,22 +23,21 @@
                bpfExternalServiceMode:
                  description: 'BPFExternalServiceMode in BPF mode, controls how connections
                    from outside the cluster to services (node ports and cluster IPs)
-@@ -94,6 +87,14 @@
+@@ -99,6 +92,13 @@
                    node appears to use the IP of the ingress node; this requires a
                    permissive L2 network.  [Default: Tunnel]'
                  type: string
 +              bpfExtToServiceConnmark:
-+                description: 'BPFExtToServiceConnmark in BPF mode, controls a
-+                  32bit mark that is set on connections from an external client to
-+                  a local service. This mark allows us to control how packets of
-+                  that connection are routed within the host and how is routing
-+                  intepreted by RPF check. [Default: 0]'
++                description: 'BPFExtToServiceConnmark in BPF mode, control a 32bit
++                  mark that is set on connections from an external client to a local
++                  service. This mark allows us to control how packets of that connection
++                  are routed within the host and how is routing intepreted by RPF
++                  check. [Default: 0]'
 +                type: integer
-+
                bpfKubeProxyEndpointSlicesEnabled:
                  description: BPFKubeProxyEndpointSlicesEnabled in BPF mode, controls
                    whether Felix's embedded kube-proxy accepts EndpointSlices or not.
-@@ -442,12 +443,6 @@
+@@ -525,12 +525,6 @@
                    to false. This reduces the number of metrics reported, reducing
                    Prometheus load. [Default: true]'
                  type: boolean
@@ -51,7 +50,7 @@
                removeExternalRoutes:
                  description: Whether or not to remove device routes that have not
                    been programmed by Felix. Disabling this will allow external applications
-@@ -529,10 +524,6 @@
+@@ -637,10 +631,6 @@
                  description: 'WireguardEnabled controls whether Wireguard is enabled.
                    [Default: false]'
                  type: boolean

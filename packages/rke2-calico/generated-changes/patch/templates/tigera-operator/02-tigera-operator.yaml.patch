@@ -9,7 +9,7 @@
            imagePullPolicy: IfNotPresent
            command:
              - operator
-@@ -74,7 +74,6 @@
+@@ -78,7 +78,6 @@
            command:
              - calicoctl
            args:

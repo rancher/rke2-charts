@@ -1,6 +1,6 @@
 --- charts-original/templates/crs/custom-resources.yaml
 +++ charts/templates/crs/custom-resources.yaml
-@@ -6,6 +6,30 @@
+@@ -6,6 +6,28 @@
  {{ $secrets = append $secrets $item }}
  {{ end }}
  {{ $_ := set $installSpec "imagePullSecrets" $secrets }}
@@ -15,18 +15,16 @@
 +If there is a defined ipv6 CIDR, we must add it as a new IPPool, disable any encapsulation and enable bgp
 +*/}}
 +{{ if not (empty .Values.global.clusterCIDRv6) }}
-+{{ $myIP6Dict := dict "natOutgoing" "Enabled" "cidr" .Values.global.clusterCIDRv6 }}
-+{{ $finalIpPoolList := list $myIP6Dict }}
++{{ $myIP6Dict := dict "natOutgoing" "Enabled" "encapsulation" "VXLAN" "cidr" .Values.global.clusterCIDRv6 }}
++{{ $calicoNetwork := get .Values.installation "calicoNetwork" }}
 +{{ if not (empty .Values.global.clusterCIDRv4) }}
 +{{ $allIpPools := get .Values.installation.calicoNetwork "ipPools" }}
-+{{ range $allIpPools }}
-+{{ $_ := set . "encapsulation" "None" }}
-+{{ end }}
 +{{ $finalIpPoolList := append $allIpPools $myIP6Dict }}
-+{ end }}
-+{{ $calicoNetwork := get .Values.installation "calicoNetwork" }}
 +{{ $_ := set $calicoNetwork "ipPools" $finalIpPoolList }}
-+{{ $_ := set $calicoNetwork "bgp" "Enabled" }}
++{{ else }}
++{{ $finalIpPoolList := list $myIP6Dict }}
++{{ $_ := set $calicoNetwork "ipPools" $finalIpPoolList }}
++{{ end }}
 +{{ end }}
  
  apiVersion: operator.tigera.io/v1
