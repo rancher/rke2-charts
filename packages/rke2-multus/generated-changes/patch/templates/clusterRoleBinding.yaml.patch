@@ -1,0 +1,10 @@
+--- charts-original/templates/clusterRoleBinding.yaml
++++ charts/templates/clusterRoleBinding.yaml
+@@ -24,6 +24,6 @@
+ subjects:
+ - kind: ServiceAccount
+   name: {{ .Values.serviceAccount.name }}
+-  namespace: kube-system
++  namespace: {{ .Release.Namespace }}
+ {{- end }}
+ {{- end }}
