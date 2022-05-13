@@ -22,7 +22,7 @@
 +      blockSize: 24
 +  imagePath: "rancher"
 +  imagePrefix: "mirrored-calico-"
-+  flexVolumePath: "/var/lib/kubelet/volumeplugins"
++  flexVolumePath: "/var/lib/kubelet/volumeplugins/"
  
  apiServer:
    enabled: true
