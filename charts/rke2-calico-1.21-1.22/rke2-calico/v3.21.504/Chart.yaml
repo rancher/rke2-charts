@@ -1,0 +1,7 @@
+annotations:
+  catalog.cattle.io/namespace: tigera-operator
+apiVersion: v2
+appVersion: v3.21.5
+description: Installs the Tigera operator for Calico
+name: rke2-calico
+version: v3.21.504
