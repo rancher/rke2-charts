@@ -1,5 +1,5 @@
 url: https://github.com/projectcalico/calico/releases/download/v3.21.5/tigera-operator-v3.21.5.tgz
-packageVersion: 02
+packageVersion: 03
 additionalCharts:
   - workingDir: charts-crd
     crdOptions:
