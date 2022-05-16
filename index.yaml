@@ -5110,6 +5110,23 @@ entries:
     - assets/rke2-metrics-server/rke2-metrics-server-2.11.100-build2021022300.tgz
     version: 2.11.100-build2021022300
   rke2-multus:
+  - apiVersion: v2
+    appVersion: v3.8
+    created: "2022-05-16T12:52:36.897481653Z"
+    description: Multus Helm chart for Kubernetes
+    digest: 489852be3ea1d50ae83abb1ec4481a67ada4a93a29fc9d6ed5631b08dc85b96f
+    home: https://github.com/k8snetworkplumbingwg/multus-cni
+    icon: https://raw.githubusercontent.com/k8snetworkplumbingwg/multus-cni/master/doc/images/Multus.png
+    maintainers:
+    - email: charts@rancher.com
+      name: Rancher Labs
+    name: rke2-multus
+    sources:
+    - https://github.com/k8snetworkplumbingwg/multus-cni
+    type: application
+    urls:
+    - assets/rke2-multus/rke2-multus-v3.8-build2021110402.tgz
+    version: v3.8-build2021110402
   - apiVersion: v1
     appVersion: v3.8
     created: "2022-05-04T15:39:12.58315014Z"
