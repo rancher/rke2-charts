@@ -1,0 +1,13 @@
+--- charts-original/templates/configMap.yaml
++++ charts/templates/configMap.yaml
+@@ -16,8 +16,8 @@
+ apiVersion: v1
+ kind: ConfigMap
+ metadata:
+-  name: {{ .Release.Name }}-{{ .Chart.Name }}-{{ .Chart.Version }}-config
+-  namespace: kube-system
++  name: {{ .Release.Name }}-{{ .Chart.Version }}-config
++  namespace: {{ .Release.Namespace }}
+   labels:
+ {{- include "multus.labels" . | indent 4 }}
+ data:
