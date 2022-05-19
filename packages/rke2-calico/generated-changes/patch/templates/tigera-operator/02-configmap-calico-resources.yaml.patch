@@ -1,0 +1,11 @@
+--- charts-original/templates/tigera-operator/02-configmap-calico-resources.yaml
++++ charts/templates/tigera-operator/02-configmap-calico-resources.yaml
+@@ -3,7 +3,7 @@
+ kind: ConfigMap
+ metadata:
+   name: calico-resources
+-  namespace: {{.Release.Namespace}}
++  namespace: tigera-operator
+ data:
+   # To create Calico resources before Calico components are started add
+   # an entry here and the contents of the resource under the entry.
