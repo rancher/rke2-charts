@@ -30,19 +30,19 @@
  
  certs:
    node:
-@@ -22,9 +39,24 @@
+@@ -22,9 +39,25 @@
  
  # Configuration for the tigera operator
  tigeraOperator:
 -  image: tigera/operator
 +  image: rancher/mirrored-calico-operator
-   version: v1.27.0
+   version: v1.27.1
 -  registry: quay.io
 +  registry: docker.io
  calicoctl:
 -  image: docker.io/calico/ctl
 +  image: rancher/mirrored-calico-ctl
-   tag: v3.23.0
+   tag: v3.23.1
 +
 +global:
 +  systemDefaultRegistry: ""
@@ -58,3 +58,4 @@
 +  wireguardEnabled: false
 +  # Config required to fix RKE2 issue #1541
 +  featureDetectOverride: "ChecksumOffloadBroken=true"
++  healthPort: 9099

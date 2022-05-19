@@ -5,3 +5,4 @@ metadata:
 spec:
   wireguardEnabled: {{ .Values.felixConfiguration.wireguardEnabled }}
   featureDetectOverride: {{ .Values.felixConfiguration.featureDetectOverride }}
+  healthPort: {{ .Values.felixConfiguration.healthPort }}
