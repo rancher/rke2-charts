@@ -30,7 +30,7 @@
  
  certs:
    node:
-@@ -22,9 +38,24 @@
+@@ -22,9 +39,24 @@
  
  # Configuration for the tigera operator
  tigeraOperator:
