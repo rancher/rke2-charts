@@ -121,9 +121,6 @@ spec:
               value: {{ .Values.calico.felixIptablesRefreshInterval | quote}}
             - name: FELIX_IPTABLESBACKEND
               value: {{ .Values.calico.felixIptablesBackend | quote}}
-            # No IP address needed.
-            - name: IP
-              value: ""
             # The default IPv4 pool to create on startup if none exists. Pod IPs will be
             # chosen from this range. Changing this value after installation will have
             # no effect. This should fall within `--cluster-cidr`.
@@ -135,9 +132,14 @@ spec:
             # Set Felix endpoint to host default action to ACCEPT.
             - name: FELIX_DEFAULTENDPOINTTOHOSTACTION
               value: {{ .Values.calico.felixDefaultEndpointToHostAction | quote }}
+{{- if coalesce .Values.global.clusterCIDRv6 .Values.podCidrv6 }}
+            - name: FELIX_IPV6SUPPORT
+              value: "true"
+{{- else }}
             # Disable IPv6 on Kubernetes.
             - name: FELIX_IPV6SUPPORT
               value: {{ .Values.calico.felixIpv6Support | quote }}
+{{- end }}
             # Set Felix logging to "info"
             - name: FELIX_LOGSEVERITYSCREEN
               value: {{ .Values.calico.felixLogSeverityScreen | quote }}
@@ -152,12 +154,19 @@ spec:
               value: {{ .Values.calico.felixFailsafeInboundHostPorts | quote }}
             - name: FELIX_FAILSAFEOUTBOUNDHOSTPORTS
               value: {{ .Values.calico.felixFailsafeOutboundHostPorts | quote }}
+{{- if coalesce .Values.global.clusterCIDRv4 .Values.podCidr }}
             # The method to use to autodetect the IPv4 address for this host.
             - name: IP_AUTODETECTION_METHOD
               value: {{ .Values.calico.ipAutoDetectionMethod | quote }}
+{{- else }}
+            - name: IP
+              value: "none"
+{{- end }}
+{{- if coalesce .Values.global.clusterCIDRv6 .Values.podCidrv6 }}
             # The method to use to autodetect the IPv6 address for this host.
             - name: IP6_AUTODETECTION_METHOD
               value: {{ .Values.calico.ip6AutoDetectionMethod | quote }}
+{{- end }}
           securityContext:
             privileged: true
           resources:
