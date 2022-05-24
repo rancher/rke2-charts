@@ -67,7 +67,7 @@
  
  # expects input structure as per specification https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.11/#toleration-v1-core
  # for example:
-@@ -195,7 +195,13 @@
+@@ -195,7 +195,16 @@
  #     operator: Equal
  #     value: master
  #     effect: NoSchedule
@@ -79,10 +79,13 @@
 +- key: "node-role.kubernetes.io/etcd"
 +  operator: "Exists"
 +  effect: "NoExecute"
++- key: "node.cloudprovider.kubernetes.io/uninitialized"
++  operator: "Exists"
++  effect: "NoSchedule"
  
  # https://kubernetes.io/docs/tasks/run-application/configure-pdb/#specifying-a-poddisruptionbudget
  podDisruptionBudget: {}
-@@ -243,7 +249,7 @@
+@@ -243,7 +252,7 @@
  # See https://github.com/kubernetes-incubator/cluster-proportional-autoscaler
  autoscaler:
    # Enabled the cluster-proportional-autoscaler
@@ -91,7 +94,7 @@
  
    # Number of cores in the cluster per coredns replica
    coresPerReplica: 256
-@@ -264,8 +270,8 @@
+@@ -264,8 +273,8 @@
    #   - --nodelabels=topology.kubernetes.io/zone=us-east-1a
  
    image:
@@ -102,7 +105,7 @@
      pullPolicy: IfNotPresent
      ## Optionally specify an array of imagePullSecrets.
      ## Secrets must be manually created in the namespace.
-@@ -282,19 +288,26 @@
+@@ -282,19 +291,29 @@
  
    # Node labels for pod assignment
    # Ref: https://kubernetes.io/docs/user-guide/node-selection/
@@ -119,6 +122,9 @@
 +  - key: "node-role.kubernetes.io/etcd"
 +    operator: "Exists"
 +    effect: "NoExecute"
++  - key: "node.cloudprovider.kubernetes.io/uninitialized"
++    operator: "Exists"
++    effect: "NoSchedule"
  
    # resources for autoscaler pod
    resources:
@@ -133,7 +139,7 @@
  
    # Options for autoscaler configmap
    configmap:
-@@ -306,11 +319,28 @@
+@@ -306,11 +325,28 @@
    livenessProbe:
      enabled: true
      initialDelaySeconds: 10
