@@ -1,6 +1,6 @@
 --- charts-original/values.yaml
 +++ charts/values.yaml
-@@ -1,11 +1,28 @@
+@@ -1,11 +1,23 @@
  imagePullSecrets: {}
  
  installation:
@@ -15,11 +15,6 @@
    kubernetesProvider: ""
 +  calicoNetwork:
 +    bgp: Disabled
-+    ipPools:
-+    - natOutgoing: Enabled
-+      encapsulation: VXLAN
-+      cidr: 10.42.0.0/16
-+      blockSize: 24
 +  imagePath: "rancher"
 +  imagePrefix: "mirrored-calico-"
 +  flexVolumePath: "/var/lib/kubelet/volumeplugins/"
@@ -30,7 +25,7 @@
  
  certs:
    node:
-@@ -22,9 +39,25 @@
+@@ -22,9 +34,25 @@
  
  # Configuration for the tigera operator
  tigeraOperator:

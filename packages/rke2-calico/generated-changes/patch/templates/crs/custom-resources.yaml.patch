@@ -1,27 +1,26 @@
 --- charts-original/templates/crs/custom-resources.yaml
 +++ charts/templates/crs/custom-resources.yaml
-@@ -6,6 +6,28 @@
+@@ -6,6 +6,27 @@
  {{ $secrets = append $secrets $item }}
  {{ end }}
  {{ $_ := set $installSpec "imagePullSecrets" $secrets }}
 +{{ $defaultRegistry := get $installSpec "registry" }}
 +{{ $finalRegistry := coalesce .Values.global.systemDefaultRegistry $defaultRegistry }}
 +{{ $_ := set $installSpec "registry" $finalRegistry }}
-+{{ $defaultipPools := get .Values.installation.calicoNetwork "ipPools" | first }}
-+{{ $defaultCIDR := get $defaultipPools "cidr" }}
-+{{ $finalCIDR := coalesce .Values.global.clusterCIDRv4 $defaultCIDR }}
-+{{ $_ := set $defaultipPools "cidr" $finalCIDR }}
-+{{- /*
-+If there is a defined ipv6 CIDR, we must add it as a new IPPool, disable any encapsulation and enable bgp
-+*/}}
-+{{ if not (empty .Values.global.clusterCIDRv6) }}
-+{{ $myIP6Dict := dict "natOutgoing" "Enabled" "encapsulation" "VXLAN" "cidr" .Values.global.clusterCIDRv6 }}
++{{ if empty .Values.installation.calicoNetwork.ipPools }}
 +{{ $calicoNetwork := get .Values.installation "calicoNetwork" }}
 +{{ if not (empty .Values.global.clusterCIDRv4) }}
-+{{ $allIpPools := get .Values.installation.calicoNetwork "ipPools" }}
-+{{ $finalIpPoolList := append $allIpPools $myIP6Dict }}
++{{ $myIP4Dict := dict "natOutgoing" "Enabled" "encapsulation" "VXLAN" "cidr" .Values.global.clusterCIDRv4 }}
++{{ if not (empty .Values.global.clusterCIDRv6) }}
++{{ $myIP6Dict := dict "natOutgoing" "Enabled" "encapsulation" "VXLAN" "cidr" .Values.global.clusterCIDRv6 }}
++{{ $finalIpPoolList := append $myIP4Dict $myIP6Dict }}
 +{{ $_ := set $calicoNetwork "ipPools" $finalIpPoolList }}
 +{{ else }}
++{{ $finalIpPoolList := list $myIP4Dict }}
++{{ $_ := set $calicoNetwork "ipPools" $finalIpPoolList }}
++{{ end }}
++{{ else if not (empty .Values.global.clusterCIDRv6) }}
++{{ $myIP6Dict := dict "natOutgoing" "Enabled" "encapsulation" "VXLAN" "cidr" .Values.global.clusterCIDRv6 }}
 +{{ $finalIpPoolList := list $myIP6Dict }}
 +{{ $_ := set $calicoNetwork "ipPools" $finalIpPoolList }}
 +{{ end }}
