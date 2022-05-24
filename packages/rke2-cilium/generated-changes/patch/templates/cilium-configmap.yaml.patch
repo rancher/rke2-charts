@@ -1,6 +1,6 @@
 --- charts-original/templates/cilium-configmap.yaml
 +++ charts/templates/cilium-configmap.yaml
-@@ -195,7 +195,11 @@
+@@ -199,7 +199,11 @@
  
    # Enable IPv6 addressing. If enabled, all endpoints are allocated an IPv6
    # address.
