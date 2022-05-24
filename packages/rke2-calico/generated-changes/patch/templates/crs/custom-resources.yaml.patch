@@ -1,6 +1,6 @@
 --- charts-original/templates/crs/custom-resources.yaml
 +++ charts/templates/crs/custom-resources.yaml
-@@ -6,6 +6,27 @@
+@@ -6,6 +6,28 @@
  {{ $secrets = append $secrets $item }}
  {{ end }}
  {{ $_ := set $installSpec "imagePullSecrets" $secrets }}
@@ -13,7 +13,8 @@
 +{{ $myIP4Dict := dict "natOutgoing" "Enabled" "encapsulation" "VXLAN" "cidr" .Values.global.clusterCIDRv4 }}
 +{{ if not (empty .Values.global.clusterCIDRv6) }}
 +{{ $myIP6Dict := dict "natOutgoing" "Enabled" "encapsulation" "VXLAN" "cidr" .Values.global.clusterCIDRv6 }}
-+{{ $finalIpPoolList := append $myIP4Dict $myIP6Dict }}
++{{ $ipPoolList := list $myIP4Dict }}
++{{ $finalIpPoolList := append $ipPoolList $myIP6Dict }}
 +{{ $_ := set $calicoNetwork "ipPools" $finalIpPoolList }}
 +{{ else }}
 +{{ $finalIpPoolList := list $myIP4Dict }}
