@@ -5,9 +5,9 @@
  
  image:
 -  repository: coredns/coredns
--  tag: "1.8.7"
+-  tag: "1.9.3"
 +  repository: rancher/hardened-coredns
-+  tag: "v1.9.1-build20220318"
++  tag: "v1.9.3-build20220613"
    pullPolicy: IfNotPresent
    ## Optionally specify an array of imagePullSecrets.
    ## Secrets must be manually created in the namespace.
@@ -82,7 +82,7 @@
  
  # https://kubernetes.io/docs/tasks/run-application/configure-pdb/#specifying-a-poddisruptionbudget
  podDisruptionBudget: {}
-@@ -243,7 +249,7 @@
+@@ -246,7 +252,7 @@
  # See https://github.com/kubernetes-incubator/cluster-proportional-autoscaler
  autoscaler:
    # Enabled the cluster-proportional-autoscaler
@@ -91,18 +91,18 @@
  
    # Number of cores in the cluster per coredns replica
    coresPerReplica: 256
-@@ -264,8 +270,8 @@
+@@ -267,8 +273,8 @@
    #   - --nodelabels=topology.kubernetes.io/zone=us-east-1a
  
    image:
--    repository: k8s.gcr.io/cluster-proportional-autoscaler-amd64
--    tag: "1.8.1"
+-    repository: k8s.gcr.io/cpa/cluster-proportional-autoscaler
+-    tag: "1.8.5"
 +    repository: rancher/hardened-cluster-autoscaler
 +    tag: "v1.8.5-build20211119"
      pullPolicy: IfNotPresent
      ## Optionally specify an array of imagePullSecrets.
      ## Secrets must be manually created in the namespace.
-@@ -282,19 +288,26 @@
+@@ -285,19 +291,26 @@
  
    # Node labels for pod assignment
    # Ref: https://kubernetes.io/docs/user-guide/node-selection/
@@ -123,17 +123,19 @@
    # resources for autoscaler pod
    resources:
      requests:
-       cpu: "20m"
+-      cpu: "20m"
 -      memory: "10Mi"
-+      memory: "20Mi"
++      cpu: "25m"
++      memory: "16Mi"
      limits:
-       cpu: "20m"
+-      cpu: "20m"
 -      memory: "10Mi"
-+      memory: "20Mi"
++      cpu: "100m"
++      memory: "64Mi"
  
    # Options for autoscaler configmap
    configmap:
-@@ -306,11 +319,28 @@
+@@ -309,8 +322,8 @@
    livenessProbe:
      enabled: true
      initialDelaySeconds: 10
@@ -143,10 +145,11 @@
 +    timeoutSeconds: 10
      failureThreshold: 3
      successThreshold: 1
--
- deployment:
-   enabled: true
+ 
+@@ -319,3 +332,21 @@
    name: ""
+   ## Annotations for the coredns deployment
+   annotations: {}
 +
 +k8sApp : "kube-dns"
 +

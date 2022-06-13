@@ -9,7 +9,7 @@
      kubernetes.io/cluster-service: "true"
      kubernetes.io/name: "CoreDNS"
      {{- end }}
-@@ -23,14 +23,14 @@
+@@ -27,14 +27,14 @@
      matchLabels:
        app.kubernetes.io/instance: {{ .Release.Name | quote }}
        {{- if .Values.isClusterService }}
@@ -26,7 +26,7 @@
          {{- end }}
          app.kubernetes.io/name: {{ template "coredns.name" . }}-autoscaler
          app.kubernetes.io/instance: {{ .Release.Name | quote }}
-@@ -63,7 +63,7 @@
+@@ -67,7 +67,7 @@
        {{- end }}
        containers:
        - name: autoscaler
