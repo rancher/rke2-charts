@@ -9,7 +9,7 @@
      kubernetes.io/cluster-service: "true"
      kubernetes.io/name: "CoreDNS"
      {{- end }}
-@@ -23,7 +23,7 @@
+@@ -33,7 +33,7 @@
    selector:
      app.kubernetes.io/instance: {{ .Release.Name | quote }}
      {{- if .Values.isClusterService }}

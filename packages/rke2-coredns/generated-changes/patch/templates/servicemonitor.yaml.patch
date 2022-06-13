@@ -9,7 +9,7 @@
      kubernetes.io/cluster-service: "true"
      kubernetes.io/name: "CoreDNS"
      {{- end }}
-@@ -24,7 +24,7 @@
+@@ -28,7 +28,7 @@
      matchLabels:
        app.kubernetes.io/instance: {{ .Release.Name | quote }}
        {{- if .Values.isClusterService }}
