@@ -19,7 +19,7 @@
      kubernetes.io/arch: amd64
  
  config:
-@@ -103,10 +104,24 @@
+@@ -103,10 +104,28 @@
    serviceAccount: true
    clusterRole: true
    clusterRoleBinding: true
@@ -45,3 +45,8 @@
 +
 +global:
 +  systemDefaultRegistry: ""
++
++rke2-whereabouts:
++  enabled: false
++  
+\ No newline at end of file

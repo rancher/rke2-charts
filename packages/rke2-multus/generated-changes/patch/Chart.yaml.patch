@@ -1,25 +1,26 @@
 --- charts-original/Chart.yaml
 +++ charts/Chart.yaml
-@@ -12,14 +12,15 @@
- # See the License for the specific language governing permissions and
- # limitations under the License.
+@@ -1,16 +1,17 @@
  apiVersion: v2
--name: multus
-+name: rke2-multus
+-appVersion: 0.1.0
++appVersion: 3.8
+ dependencies:
+ - condition: rke2-whereabouts.enabled
+   name: rke2-whereabouts
+   repository: file://./charts/rke2-whereabouts
  description: Multus Helm chart for Kubernetes
- type: application
--version: 0.1.2
 -home: https://github.com/intel/multus-cni
 -icon: https://raw.githubusercontent.com/intel/multus-cni/master/doc/images/Multus.png
-+version: v3.8-build20211104
 +home: https://github.com/k8snetworkplumbingwg/multus-cni
 +icon: https://raw.githubusercontent.com/k8snetworkplumbingwg/multus-cni/master/doc/images/Multus.png
- sources:
--  - https://github.com/intel/multus-cni
-+  - https://github.com/k8snetworkplumbingwg/multus-cni
  maintainers:
--  - name: Network Plumbing Group
--appVersion: 0.1.0
-+  - name: Rancher Labs
-+    email: charts@rancher.com
-+appVersion: v3.8
+-- name: Network Plumbing Group
+-name: multus
++- name: Rancher Labs
++  email: charts@rancher.com
++name: rke2-multus
+ sources:
+ - https://github.com/intel/multus-cni
+ type: application
+-version: 0.1.2
++version: v3.8-build20211104
