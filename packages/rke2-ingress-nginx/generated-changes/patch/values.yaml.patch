@@ -44,7 +44,7 @@
  
    # -- Process IngressClass per name (additionally as per spec.controller).
    ingressClassByName: false
-@@ -81,18 +78,18 @@
+@@ -81,7 +78,7 @@
    # their own *-snippet annotations, otherwise this is forbidden / dropped
    # when users add those annotations.
    # Global snippets in ConfigMap are still respected
@@ -53,11 +53,7 @@
  
    # -- Required for use with CNI based kubernetes installations (such as ones set up by kubeadm),
    # since CNI and hostport don't mix yet. Can be deprecated once https://github.com/kubernetes/kubernetes/issues/23920
-   # is merged
--  hostNetwork: false
-+  hostNetwork: true
- 
-   ## Use host ports 80 and 443
+@@ -92,7 +89,7 @@
    ## Disabled by default
    hostPort:
      # -- Enable 'hostPort' or not
