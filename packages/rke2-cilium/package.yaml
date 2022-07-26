@@ -1,2 +1,2 @@
-url: https://helm.cilium.io/cilium-1.11.5.tgz
-packageVersion: 02
+url: https://helm.cilium.io/cilium-1.12.0.tgz
+packageVersion: 01

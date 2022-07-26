@@ -1,8 +1,8 @@
 --- charts-original/templates/_helpers.tpl
 +++ charts/templates/_helpers.tpl
-@@ -90,3 +90,11 @@
- {{- print "batch/v1beta1" -}}
- {{- end -}}
+@@ -132,3 +132,11 @@
+     {{- $_ := set (set . "commonCA" $ca) "commonCASecretName" $secretName -}}
+   {{- end -}}
  {{- end -}}
 +
 +{{- define "system_default_registry" -}}

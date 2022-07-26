@@ -1,34 +1,21 @@
 --- charts-original/values.yaml
 +++ charts/values.yaml
-@@ -82,12 +82,10 @@
+@@ -89,12 +89,10 @@
  # -- Agent container image.
  image:
    override: ~
--  repository: quay.io/cilium/cilium
-+  repository: rancher/mirrored-cilium-cilium
-   tag: v1.11.5
-   pullPolicy: IfNotPresent
+-  repository: "quay.io/cilium/cilium"
++  repository: "rancher/mirrored-cilium-cilium"
+   tag: "v1.12.0"
+   pullPolicy: "IfNotPresent"
 -  # cilium-digest
--  digest: "sha256:79e66c3c2677e9ecc3fd5b2ed8e4ea7e49cf99ed6ee181f2ef43400c4db5eef0"
+-  digest: "sha256:079baa4fa1b9fe638f96084f4e0297c84dd4fb215d29d2321dcbe54273f63ade"
 -  useDigest: true
 +  useDigest: false
  
- # -- Pod affinity for cilium-agent.
+ # -- Affinity for cilium-agent.
  affinity:
-@@ -99,12 +97,6 @@
-               operator: In
-               values:
-                 - linux
--        # Compatible with Kubernetes 1.12.x and 1.13.x
--        - matchExpressions:
--            - key: beta.kubernetes.io/os
--              operator: In
--              values:
--                - linux
-   podAntiAffinity:
-     requiredDuringSchedulingIgnoredDuringExecution:
-     - labelSelector:
-@@ -572,7 +564,7 @@
+@@ -648,7 +646,7 @@
  
  hubble:
    # -- Enable Hubble (true by default).
@@ -37,27 +24,7 @@
  
    # -- Buffer size of the channel Hubble uses to receive monitor events. If this
    # value is not set, the queue size is set to the default monitor queue size.
-@@ -716,7 +708,8 @@
- 
-     # -- Node labels for pod assignment
-     # ref: https://kubernetes.io/docs/user-guide/node-selection/
--    nodeSelector: {}
-+    nodeSelector:
-+      kubernetes.io/os: linux
- 
-     # -- Annotations to be added to hubble-relay pods
-     podAnnotations: {}
-@@ -889,7 +882,8 @@
- 
-     # -- Node labels for pod assignment
-     # ref: https://kubernetes.io/docs/user-guide/node-selection/
--    nodeSelector: {}
-+    nodeSelector:
-+      kubernetes.io/os: linux
- 
-     # -- Node tolerations for pod assignment on nodes with taints
-     # ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/
-@@ -950,7 +944,7 @@
+@@ -1105,7 +1103,7 @@
  ipam:
    # -- Configure IP Address Management mode.
    # ref: https://docs.cilium.io/en/stable/concepts/networking/ipam/
@@ -66,65 +33,45 @@
    operator:
      # -- Deprecated in favor of ipam.operator.clusterPoolIPv4PodCIDRList.
      # IPv4 CIDR range to delegate to individual nodes for IPAM.
-@@ -1147,7 +1141,7 @@
+@@ -1335,7 +1333,7 @@
  
  # -- Configure prometheus metrics on the configured port at /metrics
  prometheus:
 -  enabled: false
 +  enabled: true
-   port: 9090
+   port: 9962
    serviceMonitor:
      # -- Enable service monitors.
-@@ -1276,7 +1270,8 @@
- 
-   # -- Node labels for cilium-etcd-operator pod assignment
-   # ref: https://kubernetes.io/docs/user-guide/node-selection/
--  nodeSelector: {}
-+  nodeSelector:
-+    kubernetes.io/os: linux
- 
-   # -- Annotations to be added to cilium-etcd-operator pods
-   podAnnotations: {}
-@@ -1337,17 +1332,9 @@
+@@ -1531,17 +1529,9 @@
    # -- cilium-operator image.
    image:
      override: ~
--    repository: quay.io/cilium/operator
-+    repository: rancher/mirrored-cilium-operator
-     tag: v1.11.5
+-    repository: "quay.io/cilium/operator"
++    repository: "rancher/mirrored-cilium-operator"
+     tag: "v1.12.0"
 -    # operator-generic-digest
--    genericDigest: "sha256:8ace281328b27d4216218c604d720b9a63a8aec2bd1996057c79ab0168f9d6d8"
+-    genericDigest: "sha256:bb2a42eda766e5d4a87ee8a5433f089db81b72dd04acf6b59fcbb445a95f9410"
 -    # operator-azure-digest
--    azureDigest: "sha256:e6565a0bafbd6a6c45c2467010b6a3032e32db9889083214e988e2706e84816e"
+-    azureDigest: "sha256:98ffa2c8ebff33d4e91762fb57d4c36f152bb044c4e2141e15362cf95ecc24ba"
 -    # operator-aws-digest
--    awsDigest: "sha256:8ff67ee754ef752af98d41819fb25261f9506872f47d17c6a552ed5c5e063d2d"
+-    awsDigest: "sha256:cb73df18b03b4fc914c80045d0ddb6c9256972449382e3c4b294fd9c371ace22"
 -    # operator-alibabacloud-digest
--    alibabacloudDigest: "sha256:063956884c549d8d5e5f540fb84d39c7ba62b02cb52f5f7297c46652379963a7"
+-    alibabacloudDigest: "sha256:93dddf88e92119a141a913b44ab9cb909f19b9a7bf01e30b98c1e8afeec51cd5"
 -    useDigest: true
 +    useDigest: false
-     pullPolicy: IfNotPresent
+     pullPolicy: "IfNotPresent"
      suffix: ""
  
-@@ -1416,7 +1403,8 @@
- 
-   # -- Node labels for cilium-operator pod assignment
-   # ref: https://kubernetes.io/docs/user-guide/node-selection/
--  nodeSelector: {}
-+  nodeSelector:
-+    kubernetes.io/os: linux
- 
-   # -- Annotations to be added to cilium-operator pods
-   podAnnotations: {}
-@@ -1459,7 +1447,7 @@
+@@ -1653,7 +1643,7 @@
    # -- Enable prometheus metrics for cilium-operator on the configured port at
    # /metrics
    prometheus:
 -    enabled: false
 +    enabled: true
-     port: 6942
+     port: 9963
      serviceMonitor:
        # -- Enable service monitors.
-@@ -1490,12 +1478,12 @@
+@@ -1684,12 +1674,12 @@
  
  nodeinit:
    # -- Enable the node initialization DaemonSet
@@ -134,25 +81,29 @@
    # -- node-init image.
    image:
      override: ~
--    repository: quay.io/cilium/startup-script
-+    repository: rancher/mirrored-cilium-startup-script
-     tag: 62bfbe88c17778aad7bef9fa57ff9e2d4a9ba0d8
-     pullPolicy: IfNotPresent
+-    repository: "quay.io/cilium/startup-script"
++    repository: "rancher/mirrored-cilium-startup-script"
+     tag: "d69851597ea019af980891a4628fb36b7880ec26"
+     pullPolicy: "IfNotPresent"
  
-@@ -1538,7 +1526,8 @@
+@@ -1764,11 +1754,9 @@
+   # -- Cilium pre-flight image.
+   image:
+     override: ~
+-    repository: "quay.io/cilium/cilium"
++    repository: "rancher/mirrored-cilium-cilium"
+     tag: "v1.12.0"
+-    # cilium-digest
+-    digest: "sha256:079baa4fa1b9fe638f96084f4e0297c84dd4fb215d29d2321dcbe54273f63ade"
+-    useDigest: true
++    useDigest: false
+     pullPolicy: "IfNotPresent"
  
-   # -- Node labels for nodeinit pod assignment
-   # ref: https://kubernetes.io/docs/user-guide/node-selection/
--  nodeSelector: {}
-+  nodeSelector:
-+    kubernetes.io/os: linux
- 
-   # -- Annotations to be added to node-init pods.
-   podAnnotations: {}
-@@ -1868,3 +1857,6 @@
- # -- Configure whether to enable auto detect of terminating state for endpoints
- # in order to support graceful termination.
- enableK8sTerminatingEndpoint: true
+   # -- The priority class to use for the preflight pod.
+@@ -2118,3 +2106,6 @@
+   proxyPort: 0
+   # -- The maximum time the DNS proxy holds an allowed DNS response before sending it along. Responses are sent as soon as the datapath is updated with the new IP information.
+   proxyResponseMaxDelay: 100ms
 +
 +global:
 +  systemDefaultRegistry: ""
