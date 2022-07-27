@@ -17,7 +17,7 @@
            imagePullPolicy: {{ .Values.preflight.image.pullPolicy }}
            command: ["/bin/sh"]
            args:
-@@ -70,7 +70,7 @@
+@@ -82,7 +82,7 @@
            {{- end }}
          {{- if ne .Values.preflight.tofqdnsPreCache "" }}
          - name: cilium-pre-flight-fqdn-precache
