@@ -54,3 +54,10 @@
 +  # Config required to fix RKE2 issue #1541
 +  featureDetectOverride: "ChecksumOffloadBroken=true"
 +  healthPort: 9099
++  defaultEndpointToHostAction: Drop
++  failsafeInboundHostPorts: ""
++  failsafeOutboundHostPorts: ""
++  iptablesRefreshInterval: 90s
++  iptablesBackend: auto
++  logSeveritySys: Info
++  xdpEnabled: true
