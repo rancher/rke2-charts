@@ -12,7 +12,7 @@
  {{- if and (.Values.agent) (not .Values.preflight.enabled) }}
  {{- /*  Default values with backwards compatibility */ -}}
  {{- $defaultEnableCnpStatusUpdates := "true" -}}
-@@ -220,7 +228,11 @@
+@@ -221,7 +229,11 @@
  
    # Enable IPv6 addressing. If enabled, all endpoints are allocated an IPv6
    # address.
@@ -25,7 +25,7 @@
  
  {{- if .Values.cleanState }}
    # If a serious issue occurs during Cilium startup, this
-@@ -386,6 +398,8 @@
+@@ -387,6 +399,8 @@
    enable-local-node-route: "false"
  {{- else if .Values.aksbyocni.enabled }}
    tunnel: "vxlan"
@@ -34,7 +34,7 @@
  {{- else }}
    tunnel: {{ .Values.tunnel | quote }}
  {{- end }}
-@@ -545,6 +559,8 @@
+@@ -539,6 +553,8 @@
  
  {{- if hasKey .Values "ipv6NativeRoutingCIDR" }}
    ipv6-native-routing-cidr: {{ .Values.ipv6NativeRoutingCIDR }}
