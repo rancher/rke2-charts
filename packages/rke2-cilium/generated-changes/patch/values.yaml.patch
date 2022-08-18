@@ -6,10 +6,10 @@
    override: ~
 -  repository: "quay.io/cilium/cilium"
 +  repository: "rancher/mirrored-cilium-cilium"
-   tag: "v1.12.0"
+   tag: "v1.12.1"
    pullPolicy: "IfNotPresent"
 -  # cilium-digest
--  digest: "sha256:079baa4fa1b9fe638f96084f4e0297c84dd4fb215d29d2321dcbe54273f63ade"
+-  digest: "sha256:ea2db1ee21b88127b5c18a96ad155c25485d0815a667ef77c2b7c7f31cab601b"
 -  useDigest: true
 +  useDigest: false
  
@@ -33,7 +33,7 @@
    operator:
      # -- Deprecated in favor of ipam.operator.clusterPoolIPv4PodCIDRList.
      # IPv4 CIDR range to delegate to individual nodes for IPAM.
-@@ -1335,7 +1333,7 @@
+@@ -1327,7 +1325,7 @@
  
  # -- Configure prometheus metrics on the configured port at /metrics
  prometheus:
@@ -42,27 +42,27 @@
    port: 9962
    serviceMonitor:
      # -- Enable service monitors.
-@@ -1531,17 +1529,9 @@
+@@ -1523,17 +1521,9 @@
    # -- cilium-operator image.
    image:
      override: ~
 -    repository: "quay.io/cilium/operator"
 +    repository: "rancher/mirrored-cilium-operator"
-     tag: "v1.12.0"
+     tag: "v1.12.1"
 -    # operator-generic-digest
--    genericDigest: "sha256:bb2a42eda766e5d4a87ee8a5433f089db81b72dd04acf6b59fcbb445a95f9410"
+-    genericDigest: "sha256:93d5aaeda37d59e6c4325ff05030d7b48fabde6576478e3fdbfb9bb4a68ec4a1"
 -    # operator-azure-digest
--    azureDigest: "sha256:98ffa2c8ebff33d4e91762fb57d4c36f152bb044c4e2141e15362cf95ecc24ba"
+-    azureDigest: "sha256:73f3ecfc331a3bd3017017492489c45979cf43103d61c6eb6af1662e28e499ac"
 -    # operator-aws-digest
--    awsDigest: "sha256:cb73df18b03b4fc914c80045d0ddb6c9256972449382e3c4b294fd9c371ace22"
+-    awsDigest: "sha256:cbd07141fb2c6ef172b3241d4cf3edac21922959b9325ef1f2d12d9f67e13ea3"
 -    # operator-alibabacloud-digest
--    alibabacloudDigest: "sha256:93dddf88e92119a141a913b44ab9cb909f19b9a7bf01e30b98c1e8afeec51cd5"
+-    alibabacloudDigest: "sha256:a5ae07d5866c3299f6ff2d00634fa500b911fe2629dcabfcd119026aa8062b58"
 -    useDigest: true
 +    useDigest: false
      pullPolicy: "IfNotPresent"
      suffix: ""
  
-@@ -1653,7 +1643,7 @@
+@@ -1645,7 +1635,7 @@
    # -- Enable prometheus metrics for cilium-operator on the configured port at
    # /metrics
    prometheus:
@@ -71,36 +71,21 @@
      port: 9963
      serviceMonitor:
        # -- Enable service monitors.
-@@ -1684,12 +1674,12 @@
- 
- nodeinit:
-   # -- Enable the node initialization DaemonSet
--  enabled: false
-+  enabled: true
- 
-   # -- node-init image.
-   image:
-     override: ~
--    repository: "quay.io/cilium/startup-script"
-+    repository: "rancher/mirrored-cilium-startup-script"
-     tag: "d69851597ea019af980891a4628fb36b7880ec26"
-     pullPolicy: "IfNotPresent"
- 
-@@ -1764,11 +1754,9 @@
+@@ -1756,11 +1746,9 @@
    # -- Cilium pre-flight image.
    image:
      override: ~
 -    repository: "quay.io/cilium/cilium"
 +    repository: "rancher/mirrored-cilium-cilium"
-     tag: "v1.12.0"
+     tag: "v1.12.1"
 -    # cilium-digest
--    digest: "sha256:079baa4fa1b9fe638f96084f4e0297c84dd4fb215d29d2321dcbe54273f63ade"
+-    digest: "sha256:ea2db1ee21b88127b5c18a96ad155c25485d0815a667ef77c2b7c7f31cab601b"
 -    useDigest: true
 +    useDigest: false
      pullPolicy: "IfNotPresent"
  
    # -- The priority class to use for the preflight pod.
-@@ -2118,3 +2106,6 @@
+@@ -2110,3 +2098,6 @@
    proxyPort: 0
    # -- The maximum time the DNS proxy holds an allowed DNS response before sending it along. Responses are sent as soon as the datapath is updated with the new IP information.
    proxyResponseMaxDelay: 100ms
