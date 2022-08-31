@@ -10,6 +10,6 @@
  - https://github.com/projectcalico/calico/tree/master/calico/_includes/charts/tigera-operator
  - https://github.com/tigera/operator
  - https://github.com/projectcalico/calico
- version: v3.23.1
+ version: v3.23.3
 +annotations:
 +  catalog.cattle.io/namespace: tigera-operator
