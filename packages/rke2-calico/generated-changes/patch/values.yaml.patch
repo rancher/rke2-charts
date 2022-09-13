@@ -1,6 +1,6 @@
 --- charts-original/values.yaml
 +++ charts/values.yaml
-@@ -1,11 +1,23 @@
+@@ -1,11 +1,24 @@
  imagePullSecrets: {}
  
  installation:
@@ -12,6 +12,7 @@
 +    operator: "Exists"
 +    effect: "NoExecute"
    enabled: true
++  kubeletVolumePluginPath: "None"
    kubernetesProvider: ""
 +  calicoNetwork:
 +    bgp: Disabled
@@ -25,7 +26,7 @@
  
  certs:
    node:
-@@ -40,9 +52,32 @@
+@@ -40,9 +53,30 @@
  
  # Image and registry configuration for the tigera/operator pod.
  tigeraOperator:
@@ -54,10 +55,8 @@
 +  # Config required to fix RKE2 issue #1541
 +  featureDetectOverride: "ChecksumOffloadBroken=true"
 +  healthPort: 9099
-+  defaultEndpointToHostAction: Drop
++  defaultEndpointToHostAction: "Drop"
 +  failsafeInboundHostPorts: ""
 +  failsafeOutboundHostPorts: ""
-+  iptablesRefreshInterval: 90s
-+  iptablesBackend: auto
-+  logSeveritySys: Info
++  logSeveritySys: "Info"
 +  xdpEnabled: true
