@@ -1,6 +1,6 @@
 --- charts-original/crds/calico/crd.projectcalico.org_bgppeers.yaml
 +++ charts/crds/calico/crd.projectcalico.org_bgppeers.yaml
-@@ -41,8 +41,8 @@
+@@ -42,8 +42,8 @@
                    in the specific branch of the Node on "bird.cfg".
                  type: boolean
                maxRestartTime:

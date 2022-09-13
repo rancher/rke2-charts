@@ -1,6 +1,6 @@
 --- charts-original/crds/calico/crd.projectcalico.org_ippools.yaml
 +++ charts/crds/calico/crd.projectcalico.org_ippools.yaml
-@@ -30,12 +30,6 @@
+@@ -31,12 +31,6 @@
            spec:
              description: IPPoolSpec contains the specification for an IPPool resource.
              properties:
@@ -13,7 +13,7 @@
                blockSize:
                  description: The block size to use for IP address assignments from
                    this pool. Defaults to 26 for IPv4 and 122 for IPv6.
-@@ -43,10 +37,6 @@
+@@ -44,10 +38,6 @@
                cidr:
                  description: The pool CIDR.
                  type: string

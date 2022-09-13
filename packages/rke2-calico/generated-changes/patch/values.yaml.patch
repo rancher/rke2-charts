@@ -25,19 +25,19 @@
  
  certs:
    node:
-@@ -22,9 +34,25 @@
+@@ -40,9 +52,32 @@
  
- # Configuration for the tigera operator
+ # Image and registry configuration for the tigera/operator pod.
  tigeraOperator:
 -  image: tigera/operator
 +  image: rancher/mirrored-calico-operator
-   version: v1.27.12
+   version: v1.28.1
 -  registry: quay.io
 +  registry: docker.io
  calicoctl:
 -  image: docker.io/calico/ctl
 +  image: rancher/mirrored-calico-ctl
-   tag: v3.23.3
+   tag: v3.24.1
 +
 +global:
 +  systemDefaultRegistry: ""

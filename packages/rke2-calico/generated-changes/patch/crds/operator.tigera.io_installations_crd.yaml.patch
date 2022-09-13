@@ -1,6 +1,6 @@
 --- charts-original/crds/operator.tigera.io_installations_crd.yaml
 +++ charts/crds/operator.tigera.io_installations_crd.yaml
-@@ -354,13 +354,6 @@
+@@ -4154,13 +4154,6 @@
                    nodes on which to run Calico components. This is globally applied
                    to all resources created by the operator excluding daemonsets.
                  type: object
@@ -14,7 +14,7 @@
                controlPlaneTolerations:
                  description: ControlPlaneTolerations specify tolerations which are
                    then globally applied to all resources created by the operator.
-@@ -531,10 +524,6 @@
+@@ -4337,10 +4330,6 @@
                        or "OnDelete". Default is RollingUpdate.
                      type: string
                  type: object
@@ -25,7 +25,7 @@
                registry:
                  description: "Registry is the default Docker registry used for component
                    Docker images. If specified then the given value must end with a
-@@ -1103,13 +1092,6 @@
+@@ -10305,13 +10294,6 @@
                        plane nodes on which to run Calico components. This is globally
                        applied to all resources created by the operator excluding daemonsets.
                      type: object
@@ -39,7 +39,7 @@
                    controlPlaneTolerations:
                      description: ControlPlaneTolerations specify tolerations which
                        are then globally applied to all resources created by the operator.
-@@ -1282,10 +1264,6 @@
+@@ -10490,10 +10472,6 @@
                            or "OnDelete". Default is RollingUpdate.
                          type: string
                      type: object

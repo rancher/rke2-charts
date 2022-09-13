@@ -1,6 +1,6 @@
 --- charts-original/crds/calico/crd.projectcalico.org_globalnetworkpolicies.yaml
 +++ charts/crds/calico/crd.projectcalico.org_globalnetworkpolicies.yaml
-@@ -169,8 +169,8 @@
+@@ -170,8 +170,8 @@
                              within the selected service(s) will be matched, and only
                              to/from each endpoint's port. \n Services cannot be specified
                              on the same rule as Selector, NotSelector, NamespaceSelector,
@@ -11,7 +11,7 @@
                            properties:
                              name:
                                description: Name specifies the name of a Kubernetes
-@@ -395,8 +395,8 @@
+@@ -396,8 +396,8 @@
                              within the selected service(s) will be matched, and only
                              to/from each endpoint's port. \n Services cannot be specified
                              on the same rule as Selector, NotSelector, NamespaceSelector,
@@ -22,7 +22,7 @@
                            properties:
                              name:
                                description: Name specifies the name of a Kubernetes
-@@ -542,8 +542,8 @@
+@@ -543,8 +543,8 @@
                              within the selected service(s) will be matched, and only
                              to/from each endpoint's port. \n Services cannot be specified
                              on the same rule as Selector, NotSelector, NamespaceSelector,
@@ -33,7 +33,7 @@
                            properties:
                              name:
                                description: Name specifies the name of a Kubernetes
-@@ -768,8 +768,8 @@
+@@ -769,8 +769,8 @@
                              within the selected service(s) will be matched, and only
                              to/from each endpoint's port. \n Services cannot be specified
                              on the same rule as Selector, NotSelector, NamespaceSelector,
