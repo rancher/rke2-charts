@@ -1,6 +1,6 @@
 --- charts-original/templates/metrics-server-deployment.yaml
 +++ charts/templates/metrics-server-deployment.yaml
-@@ -47,7 +47,7 @@
+@@ -47,18 +47,20 @@
          {{- ( tpl (toYaml .Values.extraContainers) . ) | nindent 8 }}
          {{- end }}
          - name: metrics-server
@@ -9,3 +9,18 @@
            imagePullPolicy: {{ .Values.image.pullPolicy }}
            command:
              - /metrics-server
+             - --cert-dir=/tmp
+             - --logtostderr
+-            - --secure-port=8443
++            - --secure-port=10250
++            - --kubelet-use-node-status-port
++            - --metric-resolution=15s
+             {{- range .Values.args }}
+             - {{ . }}
+             {{- end }}
+           ports:
+-          - containerPort: 8443
++          - containerPort: 10250
+             name: https
+           livenessProbe:
+             {{- toYaml .Values.livenessProbe | trim | nindent 12 }}
