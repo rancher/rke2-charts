@@ -188,12 +188,12 @@ spec:
             preStop:
               exec:
                 command:
-                - /bin/calico-node
+                - /usr/bin/calico-node
                 - -shutdown
           livenessProbe:
             exec:
               command:
-              - /bin/calico-node
+              - /usr/bin/calico-node
               - -felix-live
             periodSeconds: 10
             initialDelaySeconds: 10
