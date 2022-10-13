@@ -16,4 +16,4 @@
  sources:
  - https://github.com/kubernetes-incubator/metrics-server
 -version: 2.11.1
-+version: 2.11.100-build20220929
++version: 2.11.100-build20221011

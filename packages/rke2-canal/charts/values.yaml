@@ -8,7 +8,7 @@ flannel:
   # kube-flannel image
   image:
     repository: rancher/hardened-flannel
-    tag: v0.19.1-build20220810
+    tag: v0.19.1-build20221011
   # The interface used by canal for host <-> host communication.
   # If left blank, then the interface is chosen using the node's
   # default route.
