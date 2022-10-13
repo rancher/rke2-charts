@@ -7,7 +7,7 @@
 -  repository: ghcr.io/k8snetworkplumbingwg/multus-cni
 -  tag: v3.8
 +  repository: rancher/hardened-multus-cni
-+  tag: v3.8-build20211104
++  tag: v3.8-build20221011
    pullPolicy: IfNotPresent
  
  #imagePullSecrets: []
@@ -37,7 +37,7 @@
 +cniplugins:
 +  image:
 +    repository: rancher/hardened-cni-plugins
-+    tag: v1.0.1-build20220223
++    tag: v1.0.1-build20221011
 +
 +  # skipcnis is a comma separated list of cni binaries to skip from
 +  # installing.
