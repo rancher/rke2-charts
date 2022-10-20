@@ -39,6 +39,24 @@
          imagePullPolicy: {{ .Values.image.pullPolicy }}
          env:
          - name: CGROUP_ROOT
+@@ -464,7 +472,7 @@
+               - SYS_PTRACE
+           {{- end}}
+       - name: apply-sysctl-overwrites
+-        image: {{ include "cilium.image" .Values.image | quote }}
++        image: "{{ template "system_default_registry" . }}{{ include "cilium.image" .Values.image }}"
+         imagePullPolicy: {{ .Values.image.pullPolicy }}
+         env:
+         - name: BIN_PATH
+@@ -512,7 +520,7 @@
+       # from a privileged container because the mount propagation bidirectional
+       # only works from privileged containers.
+       - name: mount-bpf-fs
+-        image: {{ include "cilium.image" .Values.image | quote }}
++        image: "{{ template "system_default_registry" . }}{{ include "cilium.image" .Values.image }}"
+         imagePullPolicy: {{ .Values.image.pullPolicy }}
+         args:
+         - 'mount | grep "/sys/fs/bpf type bpf" || mount -t bpf bpf /sys/fs/bpf'
 @@ -532,7 +540,7 @@
        {{- end }}
        {{- if and .Values.nodeinit.enabled .Values.nodeinit.bootstrapFile }}
@@ -61,3 +79,12 @@
          imagePullPolicy: {{ .Values.image.pullPolicy }}
          command:
          - /init-container.sh
+@@ -627,7 +637,7 @@
+         {{- end }}
+       {{- if and .Values.waitForKubeProxy (ne $kubeProxyReplacement "strict") }}
+       - name: wait-for-kube-proxy
+-        image: {{ include "cilium.image" .Values.image | quote }}
++        image: "{{ template "system_default_registry" . }}{{ include "cilium.image" .Values.image }}"
+         imagePullPolicy: {{ .Values.image.pullPolicy }}
+         securityContext:
+           privileged: true
