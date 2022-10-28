@@ -7,7 +7,7 @@
 -  repository: ghcr.io/k8snetworkplumbingwg/multus-cni
 -  tag: v3.8
 +  repository: rancher/hardened-multus-cni
-+  tag: v3.8-build20221011
++  tag: v3.9-build20221028
    pullPolicy: IfNotPresent
  
  #imagePullSecrets: []
