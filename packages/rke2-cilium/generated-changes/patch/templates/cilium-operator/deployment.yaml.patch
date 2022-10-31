@@ -16,7 +16,7 @@
        {{- end }}
        containers:
        - name: cilium-operator
--        image: {{ include "cilium.operator.image" . }}
+-        image: {{ include "cilium.operator.image" . | quote }}
 +        image: "{{ template "system_default_registry" . }}{{ include "cilium.operator.image" . }}"
          imagePullPolicy: {{ .Values.operator.image.pullPolicy }}
          command:
