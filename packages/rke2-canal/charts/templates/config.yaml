@@ -1,12 +1,18 @@
 ---
 # Source: calico/templates/calico-config.yaml
 # This ConfigMap is used to configure a self-hosted Canal installation.
-kind: ConfigMap
+kind: Secret
 apiVersion: v1
 metadata:
   name: {{ .Release.Name }}-config
   namespace: kube-system
-data:
+stringData:
+{{- $secretName := print .Release.Name "-config"}}
+{{- $config := (lookup "v1" "Secret" .Release.Namespace $secretName) | default dict }}
+{{- $psk := (get $config "psk") | default (randAlphaNum 96) }}
+{{- if eq .Values.flannel.backend "ipsec" }}
+  psk: {{ $psk  | quote }}
+{{- end }}
   # Typha is disabled.
   typha_service_name: {{ .Values.calico.typhaServiceName | quote }}
   # The interface used by canal for host <-> host communication.
@@ -90,5 +96,8 @@ data:
 {{- end }}
       "Backend": {
         "Type": {{ .Values.flannel.backend | quote }}
+{{- if eq .Values.flannel.backend "ipsec" }}
+        "PSK": {{ $psk | quote }}
+{{- end }}
       }
     }

@@ -59,7 +59,7 @@ spec:
             # The CNI network config to install on each node.
             - name: CNI_NETWORK_CONFIG
               valueFrom:
-                configMapKeyRef:
+                secretKeyRef:
                   name: {{ .Release.Name }}-config
                   key: cni_network_config
             # Set the hostname based on the k8s node name.
@@ -70,7 +70,7 @@ spec:
             # CNI MTU Config variable
             - name: CNI_MTU
               valueFrom:
-                configMapKeyRef:
+                secretKeyRef:
                   name: {{ .Release.Name }}-config
                   key: veth_mtu
             # Prevents the container from sleeping forever.
@@ -250,12 +250,12 @@ spec:
                   fieldPath: metadata.namespace
             - name: FLANNELD_IFACE
               valueFrom:
-                configMapKeyRef:
+                secretKeyRef:
                   name: {{ .Release.Name }}-config
                   key: canal_iface
             - name: FLANNELD_IP_MASQ
               valueFrom:
-                configMapKeyRef:
+                secretKeyRef:
                   name: {{ .Release.Name }}-config
                   key: masquerade
           volumeMounts:
@@ -281,8 +281,8 @@ spec:
             type: FileOrCreate
         # Used by flannel.
         - name: flannel-cfg
-          configMap:
-            name: {{ .Release.Name }}-config
+          secret:
+            secretName: {{ .Release.Name }}-config
         # Used to install CNI.
         - name: cni-bin-dir
           hostPath:
