@@ -36,7 +36,7 @@
        initContainers:
 +      {{- if eq .Values.cni.chainingMode "portmap" }}
 +      - name: install-portmap-cni-plugin
-+        image: rancher/hardened-cni-plugins:v1.0.1-build20221011
++        image: "{{ template "system_default_registry" . }}{{ .Values.portmapPlugin.image.repository }}:{{ .Values.portmapPlugin.image.tag }}"
 +        volumeMounts:
 +        - mountPath: /host/opt/cni/bin
 +          name: cni-path
