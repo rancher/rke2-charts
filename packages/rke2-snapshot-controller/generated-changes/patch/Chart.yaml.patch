@@ -1,0 +1,10 @@
+--- charts-original/Chart.yaml
++++ charts/Chart.yaml
+@@ -1,6 +1,6 @@
+ apiVersion: v2
+ type: application
+-name: snapshot-controller
++name: rke2-snapshot-controller
+ version: 1.7.2
+ appVersion: "v6.2.1"
+ icon: https://raw.githubusercontent.com/piraeusdatastore/piraeus/master/artwork/sandbox-artwork/icon/color.svg

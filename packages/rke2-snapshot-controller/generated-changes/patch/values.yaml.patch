@@ -1,0 +1,18 @@
+--- charts-original/values.yaml
++++ charts/values.yaml
+@@ -6,7 +6,7 @@
+   httpEndpoint: ":8080"
+ 
+ image:
+-  repository: registry.k8s.io/sig-storage/snapshot-controller
++  repository: rancher/mirrored-sig-storage-snapshot-controller
+   pullPolicy: IfNotPresent
+   # Overrides the image tag whose default is the chart appVersion.
+   tag: ""
+@@ -54,3 +54,6 @@
+ #      velero.io/csi-volumesnapshot-class: "true"
+ #    driver: linstor.csi.linbit.com
+ #    deletionPolicy: Delete
++
++global:
++  systemDefaultRegistry: ""
