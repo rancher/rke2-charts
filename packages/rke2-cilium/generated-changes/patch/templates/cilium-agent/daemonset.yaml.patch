@@ -30,7 +30,7 @@
          imagePullPolicy: {{ .Values.image.pullPolicy }}
          command:
          - /bin/bash
-@@ -419,11 +427,21 @@
+@@ -419,11 +427,37 @@
          {{- end }}
        {{- end }}
        initContainers:
@@ -43,6 +43,22 @@
 +        env:
 +        - name: SKIP_CNI_BINARIES
 +          value: "bandwidth,bridge,dhcp,firewall,flannel,host-device,host-local,ipvlan,loopback,macvlan,ptp,sbr,static,tuning,vlan,vrf"
++        terminationMessagePolicy: FallbackToLogsOnError
++        securityContext:
++          {{- if .Values.securityContext.privileged }}
++          privileged: true
++          {{- else }}
++          seLinuxOptions:
++            level: 's0'
++            type: 'spc_t'
++          capabilities:
++            drop:
++              - ALL
++            add:
++              - SYS_ADMIN
++              - SYS_CHROOT
++              - SYS_PTRACE
++          {{- end }}
 +      {{- end }}
        {{- if .Values.cgroup.autoMount.enabled }}
        # Required to mount cgroup2 filesystem on the underlying Kubernetes node.
@@ -53,7 +69,7 @@
          imagePullPolicy: {{ .Values.image.pullPolicy }}
          env:
          - name: CGROUP_ROOT
-@@ -469,7 +487,7 @@
+@@ -469,7 +503,7 @@
                - SYS_PTRACE
            {{- end}}
        - name: apply-sysctl-overwrites
@@ -62,7 +78,7 @@
          imagePullPolicy: {{ .Values.image.pullPolicy }}
          env:
          - name: BIN_PATH
-@@ -518,7 +536,7 @@
+@@ -518,7 +552,7 @@
        # from a privileged container because the mount propagation bidirectional
        # only works from privileged containers.
        - name: mount-bpf-fs
@@ -71,7 +87,7 @@
          imagePullPolicy: {{ .Values.image.pullPolicy }}
          args:
          - 'mount | grep "/sys/fs/bpf type bpf" || mount -t bpf bpf /sys/fs/bpf'
-@@ -539,7 +557,7 @@
+@@ -539,7 +573,7 @@
        {{- end }}
        {{- if and .Values.nodeinit.enabled .Values.nodeinit.bootstrapFile }}
        - name: wait-for-node-init
@@ -80,7 +96,7 @@
          imagePullPolicy: {{ .Values.image.pullPolicy }}
          command:
          - sh
-@@ -553,9 +571,11 @@
+@@ -553,9 +587,11 @@
          volumeMounts:
          - name: cilium-bootstrap-file-dir
            mountPath: "/tmp/cilium-bootstrap.d"
@@ -93,7 +109,7 @@
          imagePullPolicy: {{ .Values.image.pullPolicy }}
          command:
          - /init-container.sh
-@@ -636,7 +656,7 @@
+@@ -636,7 +672,7 @@
          {{- end }}
        {{- if and .Values.waitForKubeProxy (ne $kubeProxyReplacement "strict") }}
        - name: wait-for-kube-proxy
