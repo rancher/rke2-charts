@@ -14,7 +14,31 @@
                controlPlaneTolerations:
                  description: ControlPlaneTolerations specify tolerations which are
                    then globally applied to all resources created by the operator.
-@@ -4337,10 +4330,6 @@
+@@ -4202,14 +4195,6 @@
+                       type: string
+                   type: object
+                 type: array
+-              fipsMode:
+-                description: 'FIPSMode uses images and features only that are using
+-                  FIPS 140-2 validated cryptographic modules and standards. Default:
+-                  Disabled'
+-                enum:
+-                - Enabled
+-                - Disabled
+-                type: string
+               flexVolumePath:
+                 description: FlexVolumePath optionally specifies a custom path for
+                   FlexVolume. If not specified, FlexVolume will be enabled by default.
+@@ -4253,7 +4238,7 @@
+               kubeletVolumePluginPath:
+                 description: 'KubeletVolumePluginPath optionally specifies enablement
+                   of Calico CSI plugin. If not specified, CSI will be enabled by default.
+-                  If set to ''None'', CSI will be disabled. Default: /var/lib/kubelet'
++                  If set to "None", CSI will be disabled. Default: /var/lib/kubelet'
+                 type: string
+               kubernetesProvider:
+                 description: KubernetesProvider specifies a particular provider of
+@@ -4345,10 +4330,6 @@
                        or "OnDelete". Default is RollingUpdate.
                      type: string
                  type: object
@@ -25,7 +49,7 @@
                registry:
                  description: "Registry is the default Docker registry used for component
                    Docker images. If specified then the given value must end with a
-@@ -10305,13 +10294,6 @@
+@@ -10313,13 +10294,6 @@
                        plane nodes on which to run Calico components. This is globally
                        applied to all resources created by the operator excluding daemonsets.
                      type: object
@@ -39,7 +63,34 @@
                    controlPlaneTolerations:
                      description: ControlPlaneTolerations specify tolerations which
                        are then globally applied to all resources created by the operator.
-@@ -10490,10 +10472,6 @@
+@@ -10362,14 +10336,6 @@
+                           type: string
+                       type: object
+                     type: array
+-                  fipsMode:
+-                    description: 'FIPSMode uses images and features only that are
+-                      using FIPS 140-2 validated cryptographic modules and standards.
+-                      Default: Disabled'
+-                    enum:
+-                    - Enabled
+-                    - Disabled
+-                    type: string
+                   flexVolumePath:
+                     description: FlexVolumePath optionally specifies a custom path
+                       for FlexVolume. If not specified, FlexVolume will be enabled
+@@ -10412,9 +10378,8 @@
+                     type: array
+                   kubeletVolumePluginPath:
+                     description: 'KubeletVolumePluginPath optionally specifies enablement
+-                      of Calico CSI plugin. If not specified, CSI will be enabled
+-                      by default. If set to ''None'', CSI will be disabled. Default:
+-                      /var/lib/kubelet'
++                      of Calico CSI plugin. If not specified, CSI will be enabled by default.
++                      If set to "None", CSI will be disabled. Default: /var/lib/kubelet'
+                     type: string
+                   kubernetesProvider:
+                     description: KubernetesProvider specifies a particular provider
+@@ -10507,10 +10472,6 @@
                            or "OnDelete". Default is RollingUpdate.
                          type: string
                      type: object
