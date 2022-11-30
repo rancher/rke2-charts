@@ -1,0 +1,11 @@
+--- charts-original/templates/hubble-relay/deployment.yaml
++++ charts/templates/hubble-relay/deployment.yaml
+@@ -42,7 +42,7 @@
+       {{- end }}
+       containers:
+         - name: hubble-relay
+-          image: {{ include "cilium.image" .Values.hubble.relay.image | quote }}
++          image: "{{ template "system_default_registry" . }}{{ include "cilium.image" .Values.hubble.relay.image | quote }}"
+           imagePullPolicy: {{ .Values.hubble.relay.image.pullPolicy }}
+           command:
+             - hubble-relay
