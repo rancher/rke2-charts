@@ -1,0 +1,20 @@
+--- charts-original/templates/hubble-ui/deployment.yaml
++++ charts/templates/hubble-ui/deployment.yaml
+@@ -42,7 +42,7 @@
+       {{- end }}
+       containers:
+       - name: frontend
+-        image: {{ include "cilium.image" .Values.hubble.ui.frontend.image | quote }}
++        image: "{{ template "system_default_registry" . }}{{ include "cilium.image" .Values.hubble.ui.frontend.image | quote }}"
+         imagePullPolicy: {{ .Values.hubble.ui.frontend.image.pullPolicy }}
+         ports:
+         - name: http
+@@ -63,7 +63,7 @@
+             mountPath: /tmp
+         terminationMessagePolicy: FallbackToLogsOnError
+       - name: backend
+-        image: {{ include "cilium.image" .Values.hubble.ui.backend.image | quote }}
++        image: "{{ template "system_default_registry" . }}{{ include "cilium.image" .Values.hubble.ui.backend.image | quote }}"
+         imagePullPolicy: {{ .Values.hubble.ui.backend.image.pullPolicy }}
+         env:
+         - name: EVENTS_SERVER_PORT
