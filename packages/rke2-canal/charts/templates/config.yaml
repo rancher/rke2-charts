@@ -89,6 +89,18 @@ data:
       "EnableIPv6": true,
 {{- end }}
       "Backend": {
+{{- if .Values.flannel.backendPort }}
+{{- if eq .Values.flannel.backend "vxlan" }}
+        "Type": {{ .Values.flannel.backend | quote }},
+        "Port": {{ .Values.flannel.backendPort }}
+{{- else if eq .Values.flannel.backend "wireguard" }}
+        "Type": {{ .Values.flannel.backend | quote }},
+        "ListenPort": {{ .Values.flannel.backendPort }}
+{{- else }}
         "Type": {{ .Values.flannel.backend | quote }}
+{{- end }}
+{{- else }}
+        "Type": {{ .Values.flannel.backend | quote }}
+{{- end }}
       }
     }

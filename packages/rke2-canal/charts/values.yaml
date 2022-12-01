@@ -20,6 +20,7 @@ flannel:
   # Backend for kube-flannel. Backend should not be changed
   # at runtime.
   backend: "vxlan"
+  backendPort: 0 # When 0 use default port
 
 calico:
   # CNI installation image.
