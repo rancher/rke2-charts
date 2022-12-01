@@ -4,16 +4,16 @@
  # Declare variables to be passed into your templates.
  
  image:
--  repository: docker.io/dougbtv/whereabouts
+-  repository: ghcr.io/k8snetworkplumbingwg/whereabouts
 +  repository: rancher/hardened-whereabouts
    pullPolicy: IfNotPresent
    # Overrides the image tag whose default is the chart appVersion.
--  tag: "latest"
+-  tag: "latest-amd64"
 +  tag: v0.5.3-build20221027
  
  updateStrategy: RollingUpdate
  imagePullSecrets: []
-@@ -40,7 +40,7 @@
+@@ -41,7 +41,7 @@
      memory: "50Mi"
  
  nodeSelector:
