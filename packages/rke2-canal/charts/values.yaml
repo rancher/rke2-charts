@@ -8,7 +8,7 @@ flannel:
   # kube-flannel image
   image:
     repository: rancher/hardened-flannel
-    tag: v0.19.1-build20221011
+    tag: v0.20.2-build20221201
   # The interface used by canal for host <-> host communication.
   # If left blank, then the interface is chosen using the node's
   # default route.
@@ -25,19 +25,19 @@ calico:
   # CNI installation image.
   cniImage:
     repository: rancher/hardened-calico
-    tag: v3.24.1-build20221011
+    tag: v3.24.5-build20221201
   # Canal node image.
   nodeImage:
     repository: rancher/hardened-calico
-    tag: v3.24.1-build20221011
+    tag: v3.24.5-build20221201
   # Flexvol Image.
   flexvolImage:
     repository: rancher/hardened-calico
-    tag: v3.24.1-build20221011
+    tag: v3.24.5-build20221201
   # kubecontroller image
   kubeControllerImage:
     repository: rancher/hardened-calico
-    tag: v3.24.1-build20221011
+    tag: v3.24.5-build20221201
 
   # Datastore type for canal. It can be either kuberentes or etcd.
   datastoreType: kubernetes
