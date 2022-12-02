@@ -61,27 +61,3 @@
          {{- if .Values.pod.resources.multus }}
          resources: {{- toYaml .Values.pod.resources.multus | nindent 10 }}
          {{- end }}
-@@ -73,9 +82,11 @@
-           mountPath: /host/etc/cni/net.d
-         - name: cnibin
-           mountPath: /host/opt/cni/bin
-+{{- if .Values.manifests.configMap }}
-         - name: multus-cfg
-           mountPath: /tmp/multus-conf/00-multus.conf.template
-           subPath: "cni-conf.json"
-+{{- end }}
-       volumes:
-         - name: cni
-           hostPath:
-@@ -83,8 +94,10 @@
-         - name: cnibin
-           hostPath:
-             path: /opt/cni/bin
-+{{- if .Values.manifests.configMap }}
-         - name: multus-cfg
-           configMap:
--            name: {{ .Release.Name }}-{{ .Chart.Name }}-{{ .Chart.Version }}-config
-+            name: {{ .Release.Name }}-{{ .Chart.Version }}-config
-+{{- end }}
- {{- end }}
- {{- end }}
