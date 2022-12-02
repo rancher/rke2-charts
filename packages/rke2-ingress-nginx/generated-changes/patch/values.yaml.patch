@@ -13,7 +13,7 @@
 -    tag: "v1.2.0"
 -    digest: sha256:d8196e3bc1e72547c5dec66d6556c0ff92a23f6d0919b206be170bc90d5f9185
 -    digestChroot: sha256:fb17f1700b77d4fcc52ca6f83ffc2821861ae887dbb87149cf5cbc52bea425e5
-+    tag: "nginx-1.4.1-hardened1"
++    tag: "nginx-1.2.1-hardened9"
      pullPolicy: IfNotPresent
      # www-data -> uid 101
      runAsUser: 101
