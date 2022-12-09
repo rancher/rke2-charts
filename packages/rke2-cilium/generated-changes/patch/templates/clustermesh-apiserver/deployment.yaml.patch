@@ -5,7 +5,7 @@
        initContainers:
        - name: etcd-init
 -        image: {{ include "cilium.image" .Values.clustermesh.apiserver.etcd.image | quote }}
-+        image: "{{ template "system_default_registry" . }}{{ include "cilium.image" .Values.clustermesh.apiserver.etcd.image | quote }}"
++        image: "{{ template "system_default_registry" . }}{{ include "cilium.image" .Values.clustermesh.apiserver.etcd.image }}"
          imagePullPolicy: {{ .Values.clustermesh.apiserver.etcd.image.pullPolicy }}
          command: ["/bin/sh", "-c"]
          args:
@@ -14,7 +14,7 @@
        containers:
        - name: etcd
 -        image: {{ include "cilium.image" .Values.clustermesh.apiserver.etcd.image | quote }}
-+        image: "{{ template "system_default_registry" . }}{{ include "cilium.image" .Values.clustermesh.apiserver.etcd.image | quote }}"
++        image: "{{ template "system_default_registry" . }}{{ include "cilium.image" .Values.clustermesh.apiserver.etcd.image }}"
          imagePullPolicy: {{ .Values.clustermesh.apiserver.etcd.image.pullPolicy }}
          command:
          - /usr/local/bin/etcd
@@ -23,7 +23,7 @@
          terminationMessagePolicy: FallbackToLogsOnError
        - name: apiserver
 -        image: {{ include "cilium.image" .Values.clustermesh.apiserver.image | quote }}
-+        image: "{{ template "system_default_registry" . }}{{ include "cilium.image" .Values.clustermesh.apiserver.image | quote }}"
++        image: "{{ template "system_default_registry" . }}{{ include "cilium.image" .Values.clustermesh.apiserver.image }}"
          imagePullPolicy: {{ .Values.clustermesh.apiserver.image.pullPolicy }}
          command:
          - /usr/bin/clustermesh-apiserver
