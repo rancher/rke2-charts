@@ -1,0 +1,18 @@
+--- charts-original/templates/_helpers.tpl
++++ charts/templates/_helpers.tpl
+@@ -1,4 +1,15 @@
+ {{/*
++Support private registry.
++*/}}
++{{- define "system_default_registry" -}}
++{{- if .Values.global.systemDefaultRegistry -}}
++{{- printf "%s/" .Values.global.systemDefaultRegistry -}}
++{{- else -}}
++{{- "" -}}
++{{- end -}}
++{{- end -}}
++
++{{/*
+ Expand the name of the chart.
+ */}}
+ {{- define "whereabouts.name" -}}

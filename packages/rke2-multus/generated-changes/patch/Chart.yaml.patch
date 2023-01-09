@@ -3,7 +3,7 @@
 @@ -1,16 +1,17 @@
  apiVersion: v2
 -appVersion: 0.1.0
-+appVersion: 3.9
++appVersion: 3.9.3
  dependencies:
  - condition: rke2-whereabouts.enabled
    name: rke2-whereabouts
@@ -23,4 +23,4 @@
  - https://github.com/intel/multus-cni
  type: application
 -version: 0.1.2
-+version: v3.9-build20221028
++version: v3.9.3-build20230109
