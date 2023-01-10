@@ -262,6 +262,32 @@ entries:
       catalog.cattle.io/release-name: vsphere-cpi
     apiVersion: v1
     appVersion: 1.4.1
+    created: "2023-01-10T22:53:59.826184787Z"
+    description: vSphere Cloud Provider Interface (CPI)
+    digest: 9ead1e9978977aceabb0394a2033638b9abd373a5b49fa4b23b57dbdbd513d26
+    icon: https://charts.rancher.io/assets/logos/vsphere-cpi.svg
+    keywords:
+    - infrastructure
+    maintainers:
+    - email: jiaqi.luo@suse.com
+      name: Rancher
+    name: rancher-vsphere-cpi
+    sources:
+    - https://github.com/kubernetes/cloud-provider-vsphere
+    urls:
+    - assets/rancher-vsphere-cpi/rancher-vsphere-cpi-1.4.101.tgz
+    version: 1.4.101
+  - annotations:
+      catalog.cattle.io/certified: rancher
+      catalog.cattle.io/display-name: vSphere CPI
+      catalog.cattle.io/kube-version: '>= 1.18.0-0 < 1.26.0-0'
+      catalog.cattle.io/namespace: kube-system
+      catalog.cattle.io/os: linux
+      catalog.cattle.io/permits-os: linux,windows
+      catalog.cattle.io/rancher-version: '>= 2.6.0-0'
+      catalog.cattle.io/release-name: vsphere-cpi
+    apiVersion: v1
+    appVersion: 1.4.1
     created: "2022-11-08T23:23:35.214364877Z"
     description: vSphere Cloud Provider Interface (CPI)
     digest: d25c00bc6a6c14b5580b55b33059c2803c744f302b4ef99e5af286e8a4cd3904
