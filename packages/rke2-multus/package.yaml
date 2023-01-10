@@ -1,4 +1,4 @@
 url: https://github.com/k8snetworkplumbingwg/helm-charts.git
 subdirectory: multus 
-commit: 2f782b76912967f11694e3c44ba2e93817a0d6a2
-packageVersion: 05
+commit: ca7c0a7549952660eab8f4b12e7ec7be133b381c
+packageVersion: 01
