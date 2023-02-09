@@ -38,7 +38,7 @@
                  type: string
                kubernetesProvider:
                  description: KubernetesProvider specifies a particular provider of
-@@ -4345,10 +4330,6 @@
+@@ -4344,10 +4329,6 @@
                        or "OnDelete". Default is RollingUpdate.
                      type: string
                  type: object
@@ -49,7 +49,7 @@
                registry:
                  description: "Registry is the default Docker registry used for component
                    Docker images. If specified then the given value must end with a
-@@ -10313,13 +10294,6 @@
+@@ -10312,13 +10293,6 @@
                        plane nodes on which to run Calico components. This is globally
                        applied to all resources created by the operator excluding daemonsets.
                      type: object
@@ -63,7 +63,7 @@
                    controlPlaneTolerations:
                      description: ControlPlaneTolerations specify tolerations which
                        are then globally applied to all resources created by the operator.
-@@ -10362,14 +10336,6 @@
+@@ -10361,14 +10335,6 @@
                            type: string
                        type: object
                      type: array
@@ -78,7 +78,7 @@
                    flexVolumePath:
                      description: FlexVolumePath optionally specifies a custom path
                        for FlexVolume. If not specified, FlexVolume will be enabled
-@@ -10412,9 +10378,8 @@
+@@ -10411,9 +10377,8 @@
                      type: array
                    kubeletVolumePluginPath:
                      description: 'KubeletVolumePluginPath optionally specifies enablement
@@ -90,7 +90,7 @@
                      type: string
                    kubernetesProvider:
                      description: KubernetesProvider specifies a particular provider
-@@ -10507,10 +10472,6 @@
+@@ -10506,10 +10471,6 @@
                            or "OnDelete". Default is RollingUpdate.
                          type: string
                      type: object
