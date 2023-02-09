@@ -1,0 +1,15 @@
+apiVersion: crd.projectcalico.org/v1
+kind: FelixConfiguration
+metadata:
+  name: default
+spec:
+  wireguardEnabled: {{ .Values.felixConfiguration.wireguardEnabled }}
+  featureDetectOverride: {{ .Values.felixConfiguration.featureDetectOverride }}
+  healthPort: {{ .Values.felixConfiguration.healthPort }}
+  defaultEndpointToHostAction: {{ .Values.felixConfiguration.defaultEndpointToHostAction }}
+  failsafeInboundHostPorts: {{ .Values.felixConfiguration.failsafeInboundHostPorts }}
+  failsafeOutboundHostPorts: {{ .Values.felixConfiguration.failsafeOutboundHostPorts }}
+  iptablesRefreshInterval: {{ .Values.felixConfiguration.iptablesRefreshInterval }}
+  iptablesBackend: {{ .Values.felixConfiguration.iptablesBackend }}
+  logSeveritySys: {{ .Values.felixConfiguration.logSeveritySys }}
+  xdpEnabled: {{ .Values.felixConfiguration.xdpEnabled }}
