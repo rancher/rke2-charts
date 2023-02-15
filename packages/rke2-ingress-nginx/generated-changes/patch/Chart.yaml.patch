@@ -1,6 +1,6 @@
 --- charts-original/Chart.yaml
 +++ charts/Chart.yaml
-@@ -28,7 +28,7 @@
+@@ -19,7 +19,7 @@
  - name: rikatz
  - name: strongjz
  - name: tao12345666333
@@ -8,4 +8,4 @@
 +name: rke2-ingress-nginx
  sources:
  - https://github.com/kubernetes/ingress-nginx
- type: application
+ version: 4.3.0
