@@ -1,126 +1,125 @@
 --- charts-original/values.yaml
 +++ charts/values.yaml
 @@ -18,14 +18,11 @@
-   image:
-     ## Keep false as default for now!
-     chroot: false
--    registry: registry.k8s.io
--    image: ingress-nginx/controller
-+    repository: rancher/nginx-ingress-controller
-     ## for backwards compatibility consider setting the full image url via the repository value below
-     ## use *either* current default registry/image or repository format or installing chart by providing the values.yaml will fail
-     ## repository:
--    tag: "v1.4.0"
--    digest: sha256:34ee929b111ffc7aa426ffd409af44da48e5a0eea1eb2207994d9e0c0882d143
--    digestChroot: sha256:b67e889f1db8692de7e41d4d9aef8de56645bf048261f31fa7f8bfc6ea2222a0
-+    tag: "nginx-1.4.1-hardened2"
-     pullPolicy: IfNotPresent
-     # www-data -> uid 101
-     runAsUser: 101
-@@ -35,7 +32,7 @@
-   existingPsp: ""
- 
-   # -- Configures the controller container name
--  containerName: controller
-+  containerName: rke2-ingress-nginx-controller
- 
-   # -- Configures the ports that the nginx-controller listens on
-   containerPort:
-@@ -63,7 +60,7 @@
-   # -- Optionally change this to ClusterFirstWithHostNet in case you have 'hostNetwork: true'.
-   # By default, while using host network, name resolution uses the host's DNS. If you wish nginx-controller
-   # to keep resolving names inside the k8s network, use ClusterFirstWithHostNet.
--  dnsPolicy: ClusterFirst
-+  dnsPolicy: ClusterFirstWithHostNet
- 
-   # -- Bare-metal considerations via the host network https://kubernetes.github.io/ingress-nginx/deploy/baremetal/#via-the-host-network
-   # Ingress status was blank because there is no Service exposing the NGINX Ingress controller in a configuration using the host network, the default --publish-service flag used in standard cloud setups does not apply
-@@ -72,7 +69,7 @@
-   # -- Process Ingress objects without ingressClass annotation/ingressClassName field
-   # Overrides value for --watch-ingress-without-class flag of the controller binary
-   # Defaults to false
--  watchIngressWithoutClass: false
-+  watchIngressWithoutClass: true
- 
-   # -- Process IngressClass per name (additionally as per spec.controller).
-   ingressClassByName: false
-@@ -81,7 +78,7 @@
-   # their own *-snippet annotations, otherwise this is forbidden / dropped
-   # when users add those annotations.
-   # Global snippets in ConfigMap are still respected
--  allowSnippetAnnotations: true
-+  allowSnippetAnnotations: false
- 
-   # -- Required for use with CNI based kubernetes installations (such as ones set up by kubeadm),
-   # since CNI and hostport don't mix yet. Can be deprecated once https://github.com/kubernetes/kubernetes/issues/23920
-@@ -92,7 +89,7 @@
-   ## Disabled by default
-   hostPort:
-     # -- Enable 'hostPort' or not
--    enabled: false
-+    enabled: true
-     ports:
-       # -- 'hostPort' http port
-       http: 80
-@@ -141,7 +138,7 @@
-   # node or nodes where an ingress controller pod is running.
-   publishService:
-     # -- Enable 'publishService' or not
--    enabled: true
-+    enabled: false
-     # -- Allows overriding of the publish service to bind to
-     # Must be <namespace>/<service_name>
-     pathOverride: ""
-@@ -191,7 +188,7 @@
-   #         name: secret-resource
- 
-   # -- Use a `DaemonSet` or `Deployment`
--  kind: Deployment
-+  kind: DaemonSet
- 
-   # -- Annotations to be added to the controller Deployment or DaemonSet
-   ##
-@@ -441,7 +438,7 @@
-     configMapKey: ""
- 
-   service:
--    enabled: true
-+    enabled: false
- 
-     # -- If enabled is adding an appProtocol option for Kubernetes service. An appProtocol field replacing annotations that were
-     # using for setting a backend protocol. Here is an example for AWS: service.beta.kubernetes.io/aws-load-balancer-backend-protocol: http
-@@ -641,13 +638,11 @@
-     patch:
-       enabled: true
-       image:
+     image:
+         ## Keep false as default for now!
+         chroot: false
 -        registry: registry.k8s.io
--        image: ingress-nginx/kube-webhook-certgen
-+        repository: rancher/mirrored-jettech-kube-webhook-certgen
+-        image: ingress-nginx/controller
++        repository: rancher/nginx-ingress-controller
          ## for backwards compatibility consider setting the full image url via the repository value below
          ## use *either* current default registry/image or repository format or installing chart by providing the values.yaml will fail
          ## repository:
--        tag: v20220916-gd32f8c343
--        digest: sha256:39c5b2e3310dc4264d638ad28d9d1d96c4cbb2b2dcfb52368fe4e3c63f61e10f
-+        tag: v1.5.2
+-        tag: "v1.6.4"
+-        digest: sha256:15be4666c53052484dd2992efacf2f50ea77a78ae8aa21ccd91af6baaa7ea22f
+-        digestChroot: sha256:0de01e2c316c3ca7847ca13b32d077af7910d07f21a4a82f81061839764f8f81
++        tag: "nginx-1.6.4-hardened1"
          pullPolicy: IfNotPresent
-       # -- Provide a priority class name to the webhook patching job
-       ##
-@@ -772,12 +767,11 @@
+         # www-data -> uid 101
+         runAsUser: 101
+@@ -33,7 +30,7 @@
+     # -- Use an existing PSP instead of creating one
+     existingPsp: ""
+     # -- Configures the controller container name
+-    containerName: controller
++    containerName: rke2-ingress-nginx-controller
+     # -- Configures the ports that the nginx-controller listens on
+     containerPort:
+         http: 80
+@@ -53,14 +50,14 @@
+     # -- Optionally change this to ClusterFirstWithHostNet in case you have 'hostNetwork: true'.
+     # By default, while using host network, name resolution uses the host's DNS. If you wish nginx-controller
+     # to keep resolving names inside the k8s network, use ClusterFirstWithHostNet.
+-    dnsPolicy: ClusterFirst
++    dnsPolicy: ClusterFirstWithHostNet
+     # -- Bare-metal considerations via the host network https://kubernetes.github.io/ingress-nginx/deploy/baremetal/#via-the-host-network
+     # Ingress status was blank because there is no Service exposing the NGINX Ingress controller in a configuration using the host network, the default --publish-service flag used in standard cloud setups does not apply
+     reportNodeInternalIp: false
+     # -- Process Ingress objects without ingressClass annotation/ingressClassName field
+     # Overrides value for --watch-ingress-without-class flag of the controller binary
+     # Defaults to false
+-    watchIngressWithoutClass: false
++    watchIngressWithoutClass: true
+     # -- Process IngressClass per name (additionally as per spec.controller).
+     ingressClassByName: false
+     # -- This configuration enables Topology Aware Routing feature, used together with service annotation service.kubernetes.io/topology-aware-hints="auto"
+@@ -70,7 +67,7 @@
+     # their own *-snippet annotations, otherwise this is forbidden / dropped
+     # when users add those annotations.
+     # Global snippets in ConfigMap are still respected
+-    allowSnippetAnnotations: true
++    allowSnippetAnnotations: false
+     # -- Required for use with CNI based kubernetes installations (such as ones set up by kubeadm),
+     # since CNI and hostport don't mix yet. Can be deprecated once https://github.com/kubernetes/kubernetes/issues/23920
+     # is merged
+@@ -79,7 +76,7 @@
+     ## Disabled by default
+     hostPort:
+         # -- Enable 'hostPort' or not
+-        enabled: false
++        enabled: true
+         ports:
+             # -- 'hostPort' http port
+             http: 80
+@@ -122,7 +119,7 @@
+     # node or nodes where an ingress controller pod is running.
+     publishService:
+         # -- Enable 'publishService' or not
+-        enabled: true
++        enabled: false
+         # -- Allows overriding of the publish service to bind to
+         # Must be <namespace>/<service_name>
+         pathOverride: ""
+@@ -166,7 +163,7 @@
+     #         name: secret-resource
  
-   name: defaultbackend
-   image:
--    registry: registry.k8s.io
--    image: defaultbackend-amd64
-+    repository: rancher/nginx-ingress-controller-defaultbackend
-     ## for backwards compatibility consider setting the full image url via the repository value below
-     ## use *either* current default registry/image or repository format or installing chart by providing the values.yaml will fail
-     ## repository:
--    tag: "1.5"
-+    tag: "1.5-rancher1"
-     pullPolicy: IfNotPresent
-     # nobody user -> uid 65534
-     runAsUser: 65534
-@@ -943,3 +937,6 @@
+     # -- Use a `DaemonSet` or `Deployment`
+-    kind: Deployment
++    kind: DaemonSet
+     # -- Annotations to be added to the controller Deployment or DaemonSet
+     ##
+     annotations: {}
+@@ -405,7 +402,7 @@
+         configMapName: ""
+         configMapKey: ""
+     service:
+-        enabled: true
++        enabled: false
+         # -- If enabled is adding an appProtocol option for Kubernetes service. An appProtocol field replacing annotations that were
+         # using for setting a backend protocol. Here is an example for AWS: service.beta.kubernetes.io/aws-load-balancer-backend-protocol: http
+         # It allows choosing the protocol for each backend specified in the Kubernetes service.
+@@ -593,13 +590,11 @@
+         patch:
+             enabled: true
+             image:
+-                registry: registry.k8s.io
+-                image: ingress-nginx/kube-webhook-certgen
++                repository: rancher/mirrored-ingress-nginx-kube-webhook-certgen
+                 ## for backwards compatibility consider setting the full image url via the repository value below
+                 ## use *either* current default registry/image or repository format or installing chart by providing the values.yaml will fail
+                 ## repository:
+-                tag: v20220916-gd32f8c343
+-                digest: sha256:39c5b2e3310dc4264d638ad28d9d1d96c4cbb2b2dcfb52368fe4e3c63f61e10f
++                tag: v1.3.0
+                 pullPolicy: IfNotPresent
+             # -- Provide a priority class name to the webhook patching job
+             ##
+@@ -727,12 +722,11 @@
+     enabled: false
+     name: defaultbackend
+     image:
+-        registry: registry.k8s.io
+-        image: defaultbackend-amd64
++        repository: rancher/nginx-ingress-controller-defaultbackend
+         ## for backwards compatibility consider setting the full image url via the repository value below
+         ## use *either* current default registry/image or repository format or installing chart by providing the values.yaml will fail
+         ## repository:
+-        tag: "1.5"
++        tag: "1.5-rancher1"
+         pullPolicy: IfNotPresent
+         # nobody user -> uid 65534
+         runAsUser: 65534
+@@ -886,3 +880,6 @@
  # This can be generated with: `openssl dhparam 4096 2> /dev/null | base64`
  ## Ref: https://github.com/kubernetes/ingress-nginx/tree/main/docs/examples/customization/ssl-dh-param
  dhParam:
