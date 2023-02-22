@@ -1,26 +1,12 @@
 --- charts-original/templates/clusterrole.yaml
 +++ charts/templates/clusterrole.yaml
-@@ -82,6 +82,23 @@
-       - get
-       - list
-       - watch
-+  - apiGroups:
-+      - coordination.k8s.io
-+    resources:
-+      - leases
-+    verbs:
+@@ -34,6 +34,9 @@
+     resources:
+       - leases
+     verbs:
 +      - create
 +      - update
 +      - get
-+      - list
-+      - watch
-+  - apiGroups:
-+      - discovery.k8s.io
-+    resources:
-+      - endpointslices
-+    verbs:
-+      - list
-+      - watch
- {{- end }}
- 
- {{- end }}
+       - list
+       - watch
+ {{- if and .Values.controller.scope.enabled .Values.controller.scope.namespace }}
