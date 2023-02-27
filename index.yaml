@@ -7849,6 +7849,31 @@ entries:
         - url: https://artifacthub.io/packages/helm/piraeus-charts/snapshot-validation-webhook
     apiVersion: v2
     appVersion: v6.2.1
+    created: "2023-02-27T22:12:11.353449643Z"
+    description: |
+      Deploys a Snapshot Controller in a cluster. Snapshot Controllers are often bundled with the Kubernetes distribution,
+      this chart is meant for cases where it is not.
+    digest: 5f130f0820f4bd7d59d4ef2d8595f81ef8ad6617e69a0f991a7c4cd34873e36d
+    home: https://github.com/piraeusdatastore/helm-charts
+    icon: https://raw.githubusercontent.com/piraeusdatastore/piraeus/master/artwork/sandbox-artwork/icon/color.svg
+    keywords:
+    - storage
+    - snapshot
+    maintainers:
+    - name: The Piraeus Maintainers
+      url: https://github.com/piraeusdatastore/
+    name: rke2-snapshot-controller
+    sources:
+    - https://github.com/kubernetes-csi/external-snapshotter/
+    type: application
+    urls:
+    - assets/rke2-snapshot-controller/rke2-snapshot-controller-1.7.201.tgz
+    version: 1.7.201
+  - annotations:
+      artifacthub.io/recommendations: |
+        - url: https://artifacthub.io/packages/helm/piraeus-charts/snapshot-validation-webhook
+    apiVersion: v2
+    appVersion: v6.2.1
     created: "2023-02-24T22:23:51.284593686Z"
     description: |
       Deploys a Snapshot Controller in a cluster. Snapshot Controllers are often bundled with the Kubernetes distribution,
@@ -7870,6 +7895,16 @@ entries:
     - assets/rke2-snapshot-controller/rke2-snapshot-controller-1.7.200.tgz
     version: 1.7.200
   rke2-snapshot-controller-crd:
+  - apiVersion: v1
+    appVersion: v6.2.1
+    created: "2023-02-27T22:12:11.354174553Z"
+    description: Installs the CRDs for rke2-snapshot-controller
+    digest: 48a87963cf71a77ceaed81e45424b61c011c1e56e486421706e813bc5b525271
+    name: rke2-snapshot-controller-crd
+    type: application
+    urls:
+    - assets/rke2-snapshot-controller/rke2-snapshot-controller-crd-1.7.201.tgz
+    version: 1.7.201
   - apiVersion: v1
     appVersion: v6.2.1
     created: "2023-02-24T22:23:51.284914584Z"
