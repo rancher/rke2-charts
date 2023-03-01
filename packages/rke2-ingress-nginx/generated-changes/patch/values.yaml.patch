@@ -95,7 +95,7 @@
        image:
 -        registry: registry.k8s.io
 -        image: ingress-nginx/kube-webhook-certgen
-+        repository: rancher/mirrored-ingress-nginx-kube-webhook-certgen
++        repository: rancher/mirrored-jettech-kube-webhook-certgen
          ## for backwards compatibility consider setting the full image url via the repository value below
          ## use *either* current default registry/image or repository format or installing chart by providing the values.yaml will fail
          ## repository:
