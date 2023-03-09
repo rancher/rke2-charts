@@ -89,16 +89,51 @@ data:
       "EnableIPv6": true,
 {{- end }}
       "Backend": {
-{{- if .Values.flannel.backendPort }}
 {{- if eq .Values.flannel.backend "vxlan" }}
-        "Type": {{ .Values.flannel.backend | quote }},
-        "Port": {{ .Values.flannel.backendPort }}
-{{- else if eq .Values.flannel.backend "wireguard" }}
-        "Type": {{ .Values.flannel.backend | quote }},
-        "ListenPort": {{ .Values.flannel.backendPort }}
-{{- else }}
-        "Type": {{ .Values.flannel.backend | quote }}
+{{- if .Values.flannel.backendPort }}
+        "Port": {{ .Values.flannel.backendPort }},
 {{- end }}
+{{- if .Values.flannel.vni }}
+        "VNI": {{ .Values.flannel.vni }},
+{{- end }}
+{{- if .Values.flannel.GBP }}
+        "GBP": {{ .Values.flannel.GBP }},
+{{- end }}
+{{- if .Values.flannel.directRouting }}
+        "DirectRouting": {{ .Values.flannel.directRouting }},
+{{- end }}
+{{- if .Values.flannel.mtu }}
+        "MTU": {{ .Values.flannel.mtu }},
+{{- end }}
+{{- if .Values.flannel.macPrefix }}
+        "MacPrefix": {{ .Values.flannel.macPrefix | quote }},
+{{- end }}
+        "Type": {{ .Values.flannel.backend | quote }}
+{{- else if eq .Values.flannel.backend "wireguard" }}
+{{- if .Values.flannel.backendPort }}
+        "ListenPort": {{ .Values.flannel.backendPort }},
+{{- end }}
+{{- if .Values.flannel.backendPortv6 }}
+        "ListenPortV6": {{ .Values.flannel.backendPortv6 }},
+{{- end }}
+{{- if .Values.flannel.psk }}
+        "PSK": {{ .Values.flannel.psk }},
+{{- end }}
+{{- if .Values.flannel.mtu }}
+        "MTU": {{ .Values.flannel.mtu }},
+{{- end }}
+{{- if .Values.flannel.tunnelMode }}
+        "Mode": {{ .Values.flannel.tunnelMode | quote }},
+{{- end }}
+{{- if .Values.flannel.keepaliveInterval }}
+        "PersistentKeepaliveInterval": {{ .Values.flannel.keepaliveInterval }},
+{{- end }}
+        "Type": {{ .Values.flannel.backend | quote }}
+{{- else if eq .Values.flannel.backend "udp" }}
+{{- if .Values.flannel.backendPort }}
+        "Port": {{ .Values.flannel.backendPort }},
+{{- end }}
+        "Type": {{ .Values.flannel.backend | quote }}
 {{- else }}
         "Type": {{ .Values.flannel.backend | quote }}
 {{- end }}
