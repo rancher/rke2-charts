@@ -1,6 +1,6 @@
 --- charts-original/templates/cilium-preflight/deployment.yaml
 +++ charts/templates/cilium-preflight/deployment.yaml
-@@ -28,7 +28,7 @@
+@@ -33,7 +33,7 @@
        {{- end }}
        containers:
          - name: cnp-validator

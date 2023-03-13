@@ -1,6 +1,6 @@
 --- charts-original/templates/clustermesh-apiserver/deployment.yaml
 +++ charts/templates/clustermesh-apiserver/deployment.yaml
-@@ -33,7 +33,7 @@
+@@ -37,7 +37,7 @@
        {{- end }}
        initContainers:
        - name: etcd-init
@@ -9,8 +9,8 @@
          imagePullPolicy: {{ .Values.clustermesh.apiserver.etcd.image.pullPolicy }}
          command: ["/bin/sh", "-c"]
          args:
-@@ -70,7 +70,7 @@
-         terminationMessagePolicy: FallbackToLogsOnError
+@@ -78,7 +78,7 @@
+         {{- end }}
        containers:
        - name: etcd
 -        image: {{ include "cilium.image" .Values.clustermesh.apiserver.etcd.image | quote }}
@@ -18,9 +18,9 @@
          imagePullPolicy: {{ .Values.clustermesh.apiserver.etcd.image.pullPolicy }}
          command:
          - /usr/local/bin/etcd
-@@ -100,7 +100,7 @@
-           mountPath: /var/run/etcd
-         terminationMessagePolicy: FallbackToLogsOnError
+@@ -114,7 +114,7 @@
+           {{- toYaml . | nindent 10 }}
+         {{- end }}
        - name: apiserver
 -        image: {{ include "cilium.image" .Values.clustermesh.apiserver.image | quote }}
 +        image: "{{ template "system_default_registry" . }}{{ include "cilium.image" .Values.clustermesh.apiserver.image }}"
