@@ -1,6 +1,6 @@
 --- charts-original/templates/hubble-relay/deployment.yaml
 +++ charts/templates/hubble-relay/deployment.yaml
-@@ -42,7 +42,7 @@
+@@ -46,7 +46,7 @@
        {{- end }}
        containers:
          - name: hubble-relay

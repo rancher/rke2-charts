@@ -12,7 +12,7 @@
  {{- if and .Values.agent (not .Values.preflight.enabled) }}
  
  {{- /*  Default values with backwards compatibility */ -}}
-@@ -75,7 +83,7 @@
+@@ -79,7 +87,7 @@
        {{- end }}
        containers:
        - name: cilium-agent
@@ -21,7 +21,7 @@
          imagePullPolicy: {{ .Values.image.pullPolicy }}
          {{- if .Values.sleepAfterInit }}
          command:
-@@ -394,7 +402,7 @@
+@@ -372,7 +380,7 @@
          {{- end }}
        {{- if .Values.monitor.enabled }}
        - name: cilium-monitor
@@ -30,8 +30,8 @@
          imagePullPolicy: {{ .Values.image.pullPolicy }}
          command:
          - /bin/bash
-@@ -419,11 +427,21 @@
-         {{- end }}
+@@ -400,6 +408,16 @@
+       {{- toYaml .Values.extraContainers | nindent 6 }}
        {{- end }}
        initContainers:
 +      {{- if eq .Values.cni.chainingMode "portmap" }}
@@ -44,7 +44,10 @@
 +        - name: SKIP_CNI_BINARIES
 +          value: "bandwidth,bridge,dhcp,firewall,flannel,host-device,host-local,ipvlan,loopback,macvlan,ptp,sbr,static,tuning,vlan,vrf"
 +      {{- end }}
-       {{- if .Values.cgroup.autoMount.enabled }}
+       - name: config
+         image: {{ include "cilium.image" .Values.image | quote }}
+         imagePullPolicy: {{ .Values.image.pullPolicy }}
+@@ -442,7 +460,7 @@
        # Required to mount cgroup2 filesystem on the underlying Kubernetes node.
        # We use nsenter command with host's cgroup and mount namespaces enabled.
        - name: mount-cgroup
@@ -53,8 +56,8 @@
          imagePullPolicy: {{ .Values.image.pullPolicy }}
          env:
          - name: CGROUP_ROOT
-@@ -469,7 +487,7 @@
-               - SYS_PTRACE
+@@ -488,7 +506,7 @@
+               - ALL
            {{- end}}
        - name: apply-sysctl-overwrites
 -        image: {{ include "cilium.image" .Values.image | quote }}
@@ -62,7 +65,7 @@
          imagePullPolicy: {{ .Values.image.pullPolicy }}
          env:
          - name: BIN_PATH
-@@ -518,7 +536,7 @@
+@@ -533,7 +551,7 @@
        # from a privileged container because the mount propagation bidirectional
        # only works from privileged containers.
        - name: mount-bpf-fs
@@ -71,7 +74,7 @@
          imagePullPolicy: {{ .Values.image.pullPolicy }}
          args:
          - 'mount | grep "/sys/fs/bpf type bpf" || mount -t bpf bpf /sys/fs/bpf'
-@@ -539,7 +557,7 @@
+@@ -554,7 +572,7 @@
        {{- end }}
        {{- if and .Values.nodeinit.enabled .Values.nodeinit.bootstrapFile }}
        - name: wait-for-node-init
@@ -80,7 +83,7 @@
          imagePullPolicy: {{ .Values.image.pullPolicy }}
          command:
          - sh
-@@ -553,9 +571,11 @@
+@@ -568,9 +586,11 @@
          volumeMounts:
          - name: cilium-bootstrap-file-dir
            mountPath: "/tmp/cilium-bootstrap.d"
@@ -93,7 +96,7 @@
          imagePullPolicy: {{ .Values.image.pullPolicy }}
          command:
          - /init-container.sh
-@@ -636,7 +656,7 @@
+@@ -633,7 +653,7 @@
          {{- end }}
        {{- if and .Values.waitForKubeProxy (ne $kubeProxyReplacement "strict") }}
        - name: wait-for-kube-proxy
