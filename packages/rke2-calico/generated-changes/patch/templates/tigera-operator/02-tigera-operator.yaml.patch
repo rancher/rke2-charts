@@ -18,11 +18,3 @@
            imagePullPolicy: IfNotPresent
            command:
              - operator
-@@ -86,7 +86,6 @@
-           command:
-             - calicoctl
-           args:
--            - --allow-version-mismatch
-             - create
-             - --skip-exists
-             - --skip-empty
