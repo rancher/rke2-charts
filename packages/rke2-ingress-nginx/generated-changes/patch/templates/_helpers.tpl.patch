@@ -15,7 +15,7 @@
  {{- end }}
  {{- end -}}
  
-@@ -169,7 +169,7 @@
+@@ -179,7 +179,7 @@
  Check the ingress controller version tag is at most three versions behind the last release
  */}}
  {{- define "isControllerTagValid" -}}
@@ -24,9 +24,9 @@
  {{- fail "Controller container image tag should be 0.27.0 or higher" -}}
  {{- end -}}
  {{- end -}}
-@@ -183,3 +183,15 @@
- {{ toYaml .Values.controller.ingressClassResource.parameters | indent 4}}
-   {{ end }}
+@@ -210,3 +210,15 @@
+       mountPath: {{ toYaml "/modules_mount"}}
+ 
  {{- end -}}
 +
 +{{- define "system_default_registry" -}}
