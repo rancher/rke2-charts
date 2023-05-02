@@ -8,4 +8,4 @@
 +          image: "{{ template "system_default_registry" . }}{{ include "cilium.image" .Values.nodeinit.image }}"
            imagePullPolicy: {{ .Values.nodeinit.image.pullPolicy }}
            lifecycle:
-             {{- if .Values.eni.enabled }}
+             {{- if .Values.nodeinit.revertReconfigureKubelet }}

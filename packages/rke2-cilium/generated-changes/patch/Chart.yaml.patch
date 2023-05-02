@@ -2,7 +2,7 @@
 +++ charts/Chart.yaml
 @@ -105,8 +105,7 @@
  apiVersion: v2
- appVersion: 1.13.0
+ appVersion: 1.13.2
  description: eBPF-based Networking, Security, and Observability
 -home: https://cilium.io/
 -icon: https://cdn.jsdelivr.net/gh/cilium/cilium@v1.13/Documentation/images/logo-solo.svg
@@ -19,4 +19,4 @@
  sources:
 -- https://github.com/cilium/cilium
 +- https://github.com/rancher/rke2-charts
- version: 1.13.0
+ version: 1.13.2

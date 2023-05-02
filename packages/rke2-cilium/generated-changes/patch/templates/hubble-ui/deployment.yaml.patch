@@ -1,6 +1,6 @@
 --- charts-original/templates/hubble-ui/deployment.yaml
 +++ charts/templates/hubble-ui/deployment.yaml
-@@ -46,7 +46,7 @@
+@@ -51,7 +51,7 @@
        {{- end }}
        containers:
        - name: frontend
@@ -9,9 +9,9 @@
          imagePullPolicy: {{ .Values.hubble.ui.frontend.image.pullPolicy }}
          ports:
          - name: http
-@@ -67,7 +67,7 @@
-             mountPath: /tmp
-         terminationMessagePolicy: FallbackToLogsOnError
+@@ -79,7 +79,7 @@
+           {{- toYaml . | trim | nindent 10 }}
+         {{- end }}
        - name: backend
 -        image: {{ include "cilium.image" .Values.hubble.ui.backend.image | quote }}
 +        image: "{{ template "system_default_registry" . }}{{ include "cilium.image" .Values.hubble.ui.backend.image }}"
