@@ -9,7 +9,26 @@
    pullPolicy: IfNotPresent
    # Overrides the image tag whose default is the chart appVersion.
    tag: ""
-@@ -49,3 +49,6 @@
+@@ -63,9 +63,16 @@
+ 
+ resources: {}
+ 
+-nodeSelector: {}
++nodeSelector:
++  kubernetes.io/os: linux
+ 
+-tolerations: []
++tolerations:
++- key: "node-role.kubernetes.io/control-plane"
++  operator: "Exists"
++  effect: "NoSchedule"
++- key: "node-role.kubernetes.io/etcd"
++  operator: "Exists"
++  effect: "NoExecute"
+ 
+ affinity: {}
+ 
+@@ -75,3 +82,6 @@
  
  rbac:
    create: true

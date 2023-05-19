@@ -6,5 +6,5 @@
 -name: snapshot-validation-webhook
 +name: rke2-snapshot-validation-webhook
  version: 1.7.1
- appVersion: "v6.2.0"
+ appVersion: "v6.2.1"
  icon: https://raw.githubusercontent.com/piraeusdatastore/piraeus/master/artwork/sandbox-artwork/icon/color.svg
