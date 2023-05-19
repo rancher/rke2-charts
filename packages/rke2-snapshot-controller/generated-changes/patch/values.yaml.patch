@@ -9,7 +9,26 @@
    pullPolicy: IfNotPresent
    # Overrides the image tag whose default is the chart appVersion.
    tag: ""
-@@ -54,3 +54,6 @@
+@@ -27,9 +27,16 @@
+ 
+ resources: {}
+ 
+-nodeSelector: {}
++nodeSelector:
++  kubernetes.io/os: linux
+ 
+-tolerations: []
++tolerations:
++- key: "node-role.kubernetes.io/control-plane"
++  operator: "Exists"
++  effect: "NoSchedule"
++- key: "node-role.kubernetes.io/etcd"
++  operator: "Exists"
++  effect: "NoExecute"
+ 
+ affinity: {}
+ 
+@@ -54,3 +61,6 @@
  #      velero.io/csi-volumesnapshot-class: "true"
  #    driver: linstor.csi.linbit.com
  #    deletionPolicy: Delete
