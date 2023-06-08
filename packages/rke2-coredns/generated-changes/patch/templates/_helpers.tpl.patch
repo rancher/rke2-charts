@@ -1,14 +1,15 @@
 --- charts-original/templates/_helpers.tpl
 +++ charts/templates/_helpers.tpl
-@@ -150,6 +150,7 @@
-     {{- end -}}
+@@ -24,7 +24,7 @@
+ Allow k8s-app label to be overridden
+ */}}
+ {{- define "coredns.k8sapplabel" -}}
+-{{- default .Chart.Name .Values.k8sAppLabelOverride | trunc 63 | trimSuffix "-" -}}
++{{- .Values.k8sApp | default .Chart.Name .Values.k8sAppLabelOverride | trunc 63 | trimSuffix "-" -}}
  {{- end -}}
  
-+
  {{/*
- Create the name of the service account to use
- */}}
-@@ -160,3 +161,44 @@
+@@ -191,3 +191,44 @@
      {{ default "default" .Values.serviceAccount.name }}
  {{- end -}}
  {{- end -}}

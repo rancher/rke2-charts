@@ -1,9 +1,9 @@
 --- charts-original/Chart.yaml
 +++ charts/Chart.yaml
-@@ -14,7 +14,7 @@
- maintainers:
+@@ -16,7 +16,7 @@
  - name: mrueg
  - name: haad
+ - name: HagaiBarel
 -name: coredns
 +name: rke2-coredns
  sources:

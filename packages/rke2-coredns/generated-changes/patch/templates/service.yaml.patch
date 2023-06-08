@@ -1,26 +1,17 @@
 --- charts-original/templates/service.yaml
 +++ charts/templates/service.yaml
-@@ -9,7 +9,7 @@
-     app.kubernetes.io/instance: {{ .Release.Name | quote }}
-     helm.sh/chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
-     {{- if .Values.isClusterService }}
--    k8s-app: {{ .Chart.Name | quote }}
-+    k8s-app: {{ .Values.k8sApp | default .Chart.Name | quote }}
-     kubernetes.io/cluster-service: "true"
-     kubernetes.io/name: "CoreDNS"
-     {{- end }}
-@@ -30,12 +30,10 @@
-   selector:
-     app.kubernetes.io/instance: {{ .Release.Name | quote }}
-     {{- if .Values.isClusterService }}
--    k8s-app: {{ .Chart.Name | quote }}
-+    k8s-app: {{ .Values.k8sApp | default .Chart.Name | quote }}
+@@ -33,13 +33,7 @@
+     k8s-app: {{ template "coredns.k8sapplabel" . }}
      {{- end }}
      app.kubernetes.io/name: {{ template "coredns.name" . }}
 -  {{- if .Values.service.clusterIP }}
 -  clusterIP: {{ .Values.service.clusterIP }}
 -  {{- end }}
+-  {{- if .Values.service.clusterIPs }}
+-  clusterIPs:
+-  {{ toYaml .Values.service.clusterIPs | nindent 4 }}
+-  {{- end }}
 +  clusterIP: {{ template "clusterDNSServerIP" . }}
    {{- if .Values.service.externalIPs }}
    externalIPs:
-   {{ toYaml .Values.service.externalIPs | indent 4 }}
+   {{- toYaml .Values.service.externalIPs | nindent 4 }}
