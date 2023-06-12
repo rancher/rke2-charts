@@ -1,0 +1,60 @@
+{{- if .Values.nodelocal.enabled }}
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: node-local-dns
+  namespace: kube-system
+  labels:
+    addonmanager.kubernetes.io/mode: Reconcile
+data:
+  Corefile: |
+    {{ coalesce .Values.global.clusterDomain "cluster.local" }}:53 {
+        errors
+        cache {
+                success 9984 30
+                denial 9984 5
+        }
+        reload
+        loop
+        bind {{ .Values.nodelocal.ip_address }} {{ template "nodelocalUpstreamDNSServerIP" . }}
+        forward . {{ ternary (include "clusterDNSServerIP" .) "__PILLAR__CLUSTER__DNS__" .Values.nodelocal.ipvs  }} {
+                force_tcp
+        }
+        prometheus :9253
+        health {{ .Values.nodelocal.ip_address }}:8080
+        }
+    in-addr.arpa:53 {
+        errors
+        cache 30
+        reload
+        loop
+        bind {{ .Values.nodelocal.ip_address }} {{ template "nodelocalUpstreamDNSServerIP" . }}
+        forward . {{ ternary (include "clusterDNSServerIP" .) "__PILLAR__CLUSTER__DNS__" .Values.nodelocal.ipvs  }} {
+                force_tcp
+        }
+        prometheus :9253
+        }
+    ip6.arpa:53 {
+        errors
+        cache 30
+        reload
+        loop
+        bind {{ .Values.nodelocal.ip_address }} {{ template "nodelocalUpstreamDNSServerIP" . }}
+        forward . {{ ternary (include "clusterDNSServerIP" .) "__PILLAR__CLUSTER__DNS__" .Values.nodelocal.ipvs  }} {
+                force_tcp
+        }
+        prometheus :9253
+        }
+    .:53 {
+        errors
+        cache 30
+        reload
+        loop
+        bind {{ .Values.nodelocal.ip_address }} {{ template "nodelocalUpstreamDNSServerIP" . }}
+        forward . __PILLAR__UPSTREAM__SERVERS__ {
+                force_tcp
+        }
+        prometheus :9253
+        }
+{{- end }}
