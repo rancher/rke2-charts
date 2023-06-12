@@ -165,7 +165,7 @@
    ## Annotations for the coredns deployment
    annotations: {}
 +
-+k8sApp : "kube-dns"
++k8sApp: "kube-dns"
 +
 +nodelocal:
 +  enabled: false

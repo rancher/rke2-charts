@@ -5,7 +5,7 @@
  */}}
  {{- define "coredns.k8sapplabel" -}}
 -{{- default .Chart.Name .Values.k8sAppLabelOverride | trunc 63 | trimSuffix "-" -}}
-+{{- .Values.k8sApp | default .Chart.Name .Values.k8sAppLabelOverride | trunc 63 | trimSuffix "-" -}}
++{{- coalesce .Values.k8sApp .Values.k8sAppLabelOverride .Chart.Name | trunc 63 | trimSuffix "-" -}}
  {{- end -}}
  
  {{/*
