@@ -1853,6 +1853,23 @@ entries:
   rke2-canal:
   - apiVersion: v1
     appVersion: v3.25.1
+    created: "2023-06-12T23:08:00.679399253Z"
+    description: Install Canal Network Plugin.
+    digest: 7279a0858aa7386ec3dfb680f21633842d515ef1809e8a5e5bcc63dde99661c9
+    home: https://www.projectcalico.org/
+    keywords:
+    - canal
+    maintainers:
+    - email: charts@rancher.com
+      name: Rancher Labs
+    name: rke2-canal
+    sources:
+    - https://github.com/rancher/rke2-charts
+    urls:
+    - assets/rke2-canal/rke2-canal-v3.25.1-build2023051202.tgz
+    version: v3.25.1-build2023051202
+  - apiVersion: v1
+    appVersion: v3.25.1
     created: "2023-06-09T10:08:00.749905086Z"
     description: Install Canal Network Plugin.
     digest: 83becd6f10851932198552f79540a2bb5cefd9cab85d767ed4164586fa046ed3
@@ -5047,6 +5064,33 @@ entries:
           description: Added podSecurityContext
     apiVersion: v2
     appVersion: 1.10.1
+    created: "2023-06-12T23:08:00.942503661Z"
+    description: CoreDNS is a DNS server that chains plugins and provides Kubernetes
+      DNS Services
+    digest: b430b907e7112ad067fe00566bcba2dff6462d12256740355358abb626613eb1
+    home: https://coredns.io
+    icon: https://coredns.io/images/CoreDNS_Colour_Horizontal.png
+    keywords:
+    - coredns
+    - dns
+    - kubedns
+    maintainers:
+    - name: mrueg
+    - name: haad
+    - name: HagaiBarel
+    name: rke2-coredns
+    sources:
+    - https://github.com/coredns/coredns
+    type: application
+    urls:
+    - assets/rke2-coredns/rke2-coredns-1.24.003.tgz
+    version: 1.24.003
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: added
+          description: Added podSecurityContext
+    apiVersion: v2
+    appVersion: 1.10.1
     created: "2023-06-12T20:06:36.741052358Z"
     description: CoreDNS is a DNS server that chains plugins and provides Kubernetes
       DNS Services
@@ -5753,6 +5797,36 @@ entries:
     - assets/rke2-coredns/rke2-coredns-1.10.101-build2021022301.tgz
     version: 1.10.101-build2021022301
   rke2-ingress-nginx:
+  - annotations:
+      artifacthub.io/changes: |
+        - "add lint on chart before release (#9570)"
+        - "ci: remove setup-helm step (#9404)"
+        - "feat(helm): Optionally use cert-manager instead admission patch (#9279)"
+        - "run helm release on main only and when the chart/value changes only (#9290)"
+        - "Update Ingress-Nginx version controller-v1.6.4"
+      artifacthub.io/prerelease: "false"
+    apiVersion: v2
+    appVersion: 1.6.4
+    created: "2023-06-12T23:08:01.031317315Z"
+    description: Ingress controller for Kubernetes using NGINX as a reverse proxy
+      and load balancer
+    digest: 957caf77866154dc2ca39047b7ea5cb474636d15fe302899f1986039632a659d
+    home: https://github.com/kubernetes/ingress-nginx
+    icon: https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Nginx_logo.svg/500px-Nginx_logo.svg.png
+    keywords:
+    - ingress
+    - nginx
+    kubeVersion: '>=1.20.0-0'
+    maintainers:
+    - name: rikatz
+    - name: strongjz
+    - name: tao12345666333
+    name: rke2-ingress-nginx
+    sources:
+    - https://github.com/kubernetes/ingress-nginx
+    urls:
+    - assets/rke2-ingress-nginx/rke2-ingress-nginx-4.5.202.tgz
+    version: 4.5.202
   - annotations:
       artifacthub.io/changes: |
         - "add lint on chart before release (#9570)"
@@ -8149,6 +8223,25 @@ entries:
     version: 2.11.100
   - apiVersion: v1
     appVersion: 0.6.3
+    created: "2023-06-12T23:08:01.094655352Z"
+    description: Metrics Server is a cluster-wide aggregator of resource usage data.
+    digest: 4f84a0e47c2b711c67426c36abb4a4b084e5cd99089084cedcbfe6aa84772b0f
+    home: https://github.com/kubernetes-incubator/metrics-server
+    keywords:
+    - metrics-server
+    maintainers:
+    - email: o.with@sportradar.com
+      name: olemarkus
+    - email: k.aasan@sportradar.com
+      name: kennethaasan
+    name: rke2-metrics-server
+    sources:
+    - https://github.com/kubernetes-incubator/metrics-server
+    urls:
+    - assets/rke2-metrics-server/rke2-metrics-server-2.11.100-build2023051509.tgz
+    version: 2.11.100-build2023051509
+  - apiVersion: v1
+    appVersion: 0.6.3
     created: "2023-05-15T23:31:17.314277851Z"
     description: Metrics Server is a cluster-wide aggregator of resource usage data.
     digest: 1e812c6993ee63853448ca5203a48ae6c56ea7c5f0567ec244676e8bcd8c6189
@@ -8338,6 +8431,27 @@ entries:
     - assets/rke2-metrics-server/rke2-metrics-server-2.11.100-build2021022300.tgz
     version: 2.11.100-build2021022300
   rke2-multus:
+  - apiVersion: v2
+    appVersion: 3.9.3
+    created: "2023-06-12T23:08:01.105172924Z"
+    dependencies:
+    - condition: rke2-whereabouts.enabled
+      name: rke2-whereabouts
+      repository: file://./charts/rke2-whereabouts
+    description: Multus Helm chart for Kubernetes
+    digest: 314d921957b739ded8a1772fa66cae5186cc74a0065fc5a8cbd25908e440a6a4
+    home: https://github.com/k8snetworkplumbingwg/multus-cni
+    icon: https://raw.githubusercontent.com/k8snetworkplumbingwg/multus-cni/master/doc/images/Multus.png
+    maintainers:
+    - email: charts@rancher.com
+      name: Rancher Labs
+    name: rke2-multus
+    sources:
+    - https://github.com/intel/multus-cni
+    type: application
+    urls:
+    - assets/rke2-multus/rke2-multus-v3.9.3-build2023010903.tgz
+    version: v3.9.3-build2023010903
   - apiVersion: v2
     appVersion: 3.9.3
     created: "2023-03-31T08:18:19.309563307Z"
