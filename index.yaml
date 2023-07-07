@@ -1545,6 +1545,15 @@ entries:
     version: v3.18.1-101
   rke2-calico-crd:
   - apiVersion: v1
+    created: "2023-07-07T08:26:45.567898503Z"
+    description: Installs the CRDs for rke2-calico
+    digest: 08ba07e49f80f8d24cb3ba91a046eec9eaa0328f9e9566bd6ae1d9ac069d2a15
+    name: rke2-calico-crd
+    type: application
+    urls:
+    - assets/rke2-calico/rke2-calico-crd-v3.26.100.tgz
+    version: v3.26.100
+  - apiVersion: v1
     created: "2023-03-21T10:10:57.245510904Z"
     description: Installs the CRDs for rke2-calico
     digest: 245d4ae5ac1a75a4f7663ef37b19a878c37c5001db0c3b4a69c8197f0e1bf42f
