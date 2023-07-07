@@ -54,7 +54,7 @@
 -            sed "s|__KUBERNETES_NODE_NAME__|${KUBERNETES_NODE_NAME}|g" /tmp/multus-conf/00-multus.conf.template > /tmp/multus-conf/00-multus.conf
 -            /entrypoint.sh \
 -              --multus-conf-file=/tmp/multus-conf/00-multus.conf
-+        command: ["/entrypoint.sh"]
++        command: ["/thin_entrypoint"]
 +        args:
 +        - "--multus-conf-file=auto"
 +        - "--cni-version=0.3.1"
