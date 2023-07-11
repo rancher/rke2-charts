@@ -12,6 +12,7 @@ spec:
     listKind: KubeControllersConfigurationList
     plural: kubecontrollersconfigurations
     singular: kubecontrollersconfiguration
+  preserveUnknownFields: false
   scope: Cluster
   versions:
   - name: v1
@@ -102,6 +103,11 @@ spec:
                         type: string
                     type: object
                 type: object
+              debugProfilePort:
+                description: DebugProfilePort configures the port to serve memory
+                  and cpu profiles on. If not specified, profiling is disabled.
+                format: int32
+                type: integer
               etcdV3CompactionPeriod:
                 description: 'EtcdV3CompactionPeriod is the period between etcdv3
                   compaction requests. Set to 0 to disable. [Default: 10m]'
@@ -212,6 +218,11 @@ spec:
                             type: string
                         type: object
                     type: object
+                  debugProfilePort:
+                    description: DebugProfilePort configures the port to serve memory
+                      and cpu profiles on. If not specified, profiling is disabled.
+                    format: int32
+                    type: integer
                   etcdV3CompactionPeriod:
                     description: 'EtcdV3CompactionPeriod is the period between etcdv3
                       compaction requests. Set to 0 to disable. [Default: 10m]'
