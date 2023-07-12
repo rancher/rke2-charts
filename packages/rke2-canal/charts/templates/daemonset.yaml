@@ -181,9 +181,9 @@ spec:
 {{- end }}
           securityContext:
             privileged: true
-          resources:
-            requests:
-              cpu: 250m
+          {{- if .Values.calico.resources }}
+          resources: {{- toYaml .Values.calico.resources | nindent 12 }}
+          {{- end }}
           lifecycle:
             preStop:
               exec:
@@ -239,6 +239,9 @@ spec:
           {{- end }}
           securityContext:
             privileged: true
+          {{- if .Values.flannel.resources }}
+          resources: {{- toYaml .Values.flannel.resources | nindent 12 }}
+          {{- end }}
           env:
             - name: POD_NAME
               valueFrom:

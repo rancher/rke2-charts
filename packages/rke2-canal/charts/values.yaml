@@ -46,6 +46,14 @@ flannel:
   #tunnelMode: "separate"
   # Persistent keep interval to use
   keepaliveInterval: 0
+  # Resource bounds for the kube-flannel daemon container
+  resources: ~
+    # requests:
+    #   memory: 32Mi
+    #   cpu: 100m
+    # limits:
+    #   memory: 128Mi
+    #   cpu: 500m
 
 calico:
   # CNI installation image.
@@ -112,6 +120,14 @@ calico:
   ip6AutoDetectionMethod: "first-found"
   # Enable calico kube-controllers
   calicoKubeControllers: false
+  # Resource bounds for the calico-node daemon container
+  resources:
+    requests:
+      cpu: 250m
+    #   memory: 128Mi
+    # limits:
+    #   cpu: 250m
+    #   memory: 256Mi
 
 global:
   systemDefaultRegistry: ""
