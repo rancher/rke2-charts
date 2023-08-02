@@ -256,6 +256,11 @@ spec:
                 configMapKeyRef:
                   name: {{ .Release.Name }}-config
                   key: canal_iface
+            - name: FLANNELD_IFACE_REGEX
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Release.Name }}-config
+                  key: canal_iface_regex
             - name: FLANNELD_IP_MASQ
               valueFrom:
                 configMapKeyRef:
