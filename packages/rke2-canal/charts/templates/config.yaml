@@ -14,6 +14,8 @@ data:
   # default route.
   canal_iface: {{ .Values.flannel.iface | quote }}
 
+  canal_iface_regex: {{ .Values.flannel.regexIface | quote }}
+
   # Whether or not to masquerade traffic to destinations not within
   # the pod network.
   masquerade: {{ .Values.calico.masquerade | quote }}
