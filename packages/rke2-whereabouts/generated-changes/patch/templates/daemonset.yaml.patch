@@ -1,6 +1,6 @@
 --- charts-original/templates/daemonset.yaml
 +++ charts/templates/daemonset.yaml
-@@ -32,9 +32,15 @@
+@@ -32,11 +32,22 @@
          {{- toYaml .Values.podSecurityContext | nindent 8 }}
        containers:
          - name: {{ .Chart.Name }}
@@ -16,4 +16,11 @@
 +          image: {{ template "system_default_registry" . }}{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}
            imagePullPolicy: {{ .Values.image.pullPolicy }}
            env:
++          - name: NODENAME
++            valueFrom:
++              fieldRef:
++                apiVersion: v1
++                fieldPath: spec.nodeName
            - name: WHEREABOUTS_NAMESPACE
+             valueFrom:
+               fieldRef:

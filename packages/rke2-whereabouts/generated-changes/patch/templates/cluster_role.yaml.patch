@@ -1,0 +1,14 @@
+--- charts-original/templates/cluster_role.yaml
++++ charts/templates/cluster_role.yaml
+@@ -28,6 +28,11 @@
+   verbs:
+   - list
+   - watch
++- apiGroups: [""]
++  resources:
++  - nodes
++  verbs:
++  - get
+ - apiGroups: ["k8s.cni.cncf.io"]
+   resources:
+   - network-attachment-definitions
