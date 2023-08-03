@@ -1,0 +1,103 @@
+# Copyright 2020 K8s Network Plumbing Group
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+{{- if or ( gt .Capabilities.KubeVersion.Major "1" ) ( ge .Capabilities.KubeVersion.Minor "16" ) }}
+{{- if .Values.manifests.daemonSet }}
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: {{ .Release.Name }}-ds
+  namespace: {{ .Release.Namespace }}
+  labels:
+{{- include "multus.labels" . | indent 4 }}
+spec:
+  selector:
+    matchLabels:
+      app: {{ .Chart.Name }}
+  updateStrategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+  template:
+    metadata:
+      labels:
+{{- include "multus.labels" . | indent 8 }}
+      annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/configMap.yaml") . | sha256sum }}
+    spec:
+      priorityClassName: system-node-critical
+      hostNetwork: true
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      nodeSelector: {{- toYaml .Values.labels.nodeSelector | nindent 8 }}
+      tolerations:
+      - operator: Exists
+        effect: NoSchedule
+      - operator: Exists
+        effect: NoExecute
+      serviceAccountName: {{ .Values.serviceAccount.name }}
+      initContainers:
+      - name: cni-plugins
+        image: {{ template "system_default_registry" . }}{{ .Values.cniplugins.image.repository }}:{{ .Values.cniplugins.image.tag }}
+        securityContext:
+          privileged: true
+        volumeMounts:
+        - name: cnibin
+          mountPath: /host/opt/cni/bin
+        env:
+        - name: SKIP_CNI_BINARIES
+          value: {{ .Values.cniplugins.skipcnis }}
+      containers:
+      - name: kube-{{ .Chart.Name }}
+        image: {{ template "system_default_registry" . }}{{ .Values.image.repository }}:{{ .Values.image.tag }}
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        env:
+        - name: KUBERNETES_NODE_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: spec.nodeName
+        command: ["/thin_entrypoint"]
+        args:
+        - "--multus-conf-file=auto"
+        - "--cni-version=0.3.1"
+        {{- if .Values.pod.resources.multus }}
+        resources: {{- toYaml .Values.pod.resources.multus | nindent 10 }}
+        {{- end }}
+        securityContext:
+          privileged: true
+        volumeMounts:
+        - name: cni
+          mountPath: /host/etc/cni/net.d
+        - name: cnibin
+          mountPath: /host/opt/cni/bin
+        {{- if .Values.manifests.configMap }}
+        - name: multus-cfg
+          mountPath: /tmp/multus-conf/00-multus.conf.template
+          subPath: "cni-conf.json"
+        {{- end }}
+      volumes:
+        - name: cni
+          hostPath:
+            path: /etc/cni/net.d
+        - name: cnibin
+          hostPath:
+            path: /opt/cni/bin
+        {{- if .Values.manifests.configMap }}
+        - name: multus-cfg
+          configMap:
+            name: {{ .Release.Name }}-{{ .Chart.Name }}-{{ .Chart.Version }}-config
+        {{- end }}
+{{- end }}
+{{- end }}
