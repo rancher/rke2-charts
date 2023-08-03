@@ -1,9 +1,9 @@
 --- charts-original/templates/hubble-relay/deployment.yaml
 +++ charts/templates/hubble-relay/deployment.yaml
-@@ -46,7 +46,7 @@
-       {{- end }}
-       containers:
-         - name: hubble-relay
+@@ -49,7 +49,7 @@
+           securityContext:
+             {{- toYaml . | nindent 12 }}
+           {{- end }}
 -          image: {{ include "cilium.image" .Values.hubble.relay.image | quote }}
 +          image: "{{ template "system_default_registry" . }}{{ include "cilium.image" .Values.hubble.relay.image }}"
            imagePullPolicy: {{ .Values.hubble.relay.image.pullPolicy }}

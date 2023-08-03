@@ -1,6 +1,6 @@
 --- charts-original/templates/clustermesh-apiserver/deployment.yaml
 +++ charts/templates/clustermesh-apiserver/deployment.yaml
-@@ -41,7 +41,7 @@
+@@ -44,7 +44,7 @@
        {{- end }}
        initContainers:
        - name: etcd-init
@@ -9,7 +9,7 @@
          imagePullPolicy: {{ .Values.clustermesh.apiserver.etcd.image.pullPolicy }}
          command: ["/bin/sh", "-c"]
          args:
-@@ -82,7 +82,7 @@
+@@ -89,7 +89,7 @@
          {{- end }}
        containers:
        - name: etcd
@@ -18,7 +18,7 @@
          imagePullPolicy: {{ .Values.clustermesh.apiserver.etcd.image.pullPolicy }}
          command:
          - /usr/local/bin/etcd
-@@ -122,7 +122,7 @@
+@@ -142,7 +142,7 @@
            {{- toYaml . | nindent 10 }}
          {{- end }}
        - name: apiserver
@@ -27,3 +27,12 @@
          imagePullPolicy: {{ .Values.clustermesh.apiserver.image.pullPolicy }}
          command:
          - /usr/bin/clustermesh-apiserver
+@@ -220,7 +220,7 @@
+         {{- end }}
+       {{- if .Values.clustermesh.apiserver.kvstoremesh.enabled }}
+       - name: kvstoremesh
+-        image: {{ include "cilium.image" .Values.clustermesh.apiserver.kvstoremesh.image | quote }}
++        image: "{{ template "system_default_registry" . }}{{ include "cilium.image" .Values.clustermesh.apiserver.kvstoremesh.image }}"
+         imagePullPolicy: {{ .Values.clustermesh.apiserver.kvstoremesh.image.pullPolicy }}
+         command:
+         - /usr/bin/kvstoremesh
