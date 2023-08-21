@@ -1,0 +1,9 @@
+--- charts-original/values.yaml
++++ charts/values.yaml
+@@ -92,5 +92,4 @@
+     enabled: true
+ 
+ global:
+-  cattle:
+-    systemDefaultRegistry: ""
++  systemDefaultRegistry: ""
