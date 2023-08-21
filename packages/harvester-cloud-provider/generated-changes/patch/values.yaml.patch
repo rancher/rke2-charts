@@ -1,0 +1,10 @@
+--- charts-original/values.yaml
++++ charts/values.yaml
+@@ -87,3 +87,7 @@
+     svc_enable: "true"
+     vip_leaderelection: "false"
+     enable_service_security: "true"
++
++## RANCHER ADDDED INFO ##
++global:
++  systemDefaultRegistry: ""
