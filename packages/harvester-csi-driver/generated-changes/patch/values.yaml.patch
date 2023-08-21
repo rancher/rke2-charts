@@ -1,0 +1,9 @@
+--- charts-original/values.yaml
++++ charts/values.yaml
+@@ -50,5 +50,4 @@
+     effect: NoSchedule
+ 
+ global:
+-  cattle:
+-    systemDefaultRegistry: ""
++  systemDefaultRegistry: ""
