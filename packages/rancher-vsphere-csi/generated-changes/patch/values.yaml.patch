@@ -1,0 +1,12 @@
+--- charts-original/values.yaml
++++ charts/values.yaml
+@@ -118,8 +118,7 @@
+   datastoreURL: ""
+ 
+ global:
+-  cattle:
+-    systemDefaultRegistry: ""
++  systemDefaultRegistry: ""
+ 
+ # A list of Semver constraint strings (defined by https://github.com/Masterminds/semver) and values.yaml overrides.
+ #
