@@ -13,3 +13,4 @@ spec:
   iptablesBackend: {{ .Values.felixConfiguration.iptablesBackend }}
   logSeveritySys: {{ .Values.felixConfiguration.logSeveritySys }}
   xdpEnabled: {{ .Values.felixConfiguration.xdpEnabled }}
+  prometheusMetricsEnabled: {{ .Values.felixConfiguration.prometheusMetricsEnabled }}

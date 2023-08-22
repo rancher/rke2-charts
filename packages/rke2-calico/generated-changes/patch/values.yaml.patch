@@ -26,7 +26,7 @@
  
  certs:
    node:
-@@ -40,9 +53,30 @@
+@@ -40,9 +53,31 @@
  
  # Image and registry configuration for the tigera/operator pod.
  tigeraOperator:
@@ -60,3 +60,4 @@
 +  failsafeOutboundHostPorts: ""
 +  logSeveritySys: "Info"
 +  xdpEnabled: true
++  prometheusMetricsEnabled: false
