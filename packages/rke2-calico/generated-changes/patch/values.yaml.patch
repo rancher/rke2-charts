@@ -26,7 +26,7 @@
  
  certs:
    node:
-@@ -40,9 +53,30 @@
+@@ -40,9 +53,28 @@
  
  # Image and registry configuration for the tigera/operator pod.
  tigeraOperator:
@@ -56,7 +56,5 @@
 +  featureDetectOverride: "ChecksumOffloadBroken=true"
 +  healthPort: 9099
 +  defaultEndpointToHostAction: "Drop"
-+  failsafeInboundHostPorts: ""
-+  failsafeOutboundHostPorts: ""
 +  logSeveritySys: "Info"
 +  xdpEnabled: true
