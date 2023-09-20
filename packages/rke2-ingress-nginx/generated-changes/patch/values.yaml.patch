@@ -88,7 +88,15 @@
      # -- If enabled is adding an appProtocol option for Kubernetes service. An appProtocol field replacing annotations that were
      # using for setting a backend protocol. Here is an example for AWS: service.beta.kubernetes.io/aws-load-balancer-backend-protocol: http
      # It allows choosing the protocol for each backend specified in the Kubernetes service.
-@@ -604,13 +601,11 @@
+@@ -587,6 +584,7 @@
+       loadBalancerSourceRanges: []
+       servicePort: 443
+       type: ClusterIP
++      ipFamilyPolicy: "PreferDualStack"
+     createSecretJob:
+       securityContext:
+         allowPrivilegeEscalation: false
+@@ -604,13 +602,11 @@
      patch:
        enabled: true
        image:
@@ -103,7 +111,7 @@
          pullPolicy: IfNotPresent
        # -- Provide a priority class name to the webhook patching job
        ##
-@@ -738,12 +733,11 @@
+@@ -738,12 +734,11 @@
    enabled: false
    name: defaultbackend
    image:
@@ -118,11 +126,10 @@
      pullPolicy: IfNotPresent
      # nobody user -> uid 65534
      runAsUser: 65534
-@@ -898,3 +892,6 @@
+@@ -898,3 +893,6 @@
  # This can be generated with: `openssl dhparam 4096 2> /dev/null | base64`
  ## Ref: https://github.com/kubernetes/ingress-nginx/tree/main/docs/examples/customization/ssl-dh-param
  dhParam: ""
 +
 +global:
 +  systemDefaultRegistry: ""
-\ No newline at end of file

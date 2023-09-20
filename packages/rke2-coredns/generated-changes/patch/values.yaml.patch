@@ -12,7 +12,7 @@
    pullPolicy: IfNotPresent
    ## Optionally specify an array of imagePullSecrets.
    ## Secrets must be manually created in the namespace.
-@@ -54,7 +54,6 @@
+@@ -54,21 +54,20 @@
  
  service:
  # clusterIP: ""
@@ -20,7 +20,11 @@
  # loadBalancerIP: ""
  # externalIPs: []
  # externalTrafficPolicy: ""
-@@ -65,10 +64,10 @@
+-# ipFamilyPolicy: ""
++  ipFamilyPolicy: "PreferDualStack"
+   # The name of the Service
+   # If not set, a name is generated using the fullname template
+   name: ""
    annotations: {}
  
  serviceAccount:

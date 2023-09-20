@@ -1,0 +1,8 @@
+--- charts-original/templates/metric-server-service.yaml
++++ charts/templates/metric-server-service.yaml
+@@ -22,4 +22,5 @@
+     app: {{ template "metrics-server.name" . }}
+     release: {{ .Release.Name }}
+   type: {{ .Values.service.type }}
++  ipFamilyPolicy: {{ .Values.service.ipFamilyPolicy }}
+ 

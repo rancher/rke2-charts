@@ -36,7 +36,14 @@
  
  extraVolumeMounts: []
  #  - name: secrets
-@@ -107,3 +109,6 @@
+@@ -101,9 +103,13 @@
+   #  kubernetes.io/name: "Metrics-server"
+   port: 443
+   type: ClusterIP
++  ipFamilyPolicy: "PreferDualStack"
+ 
+ podDisruptionBudget:
+   # https://kubernetes.io/docs/tasks/run-application/configure-pdb/
    enabled: false
    minAvailable:
    maxUnavailable:
