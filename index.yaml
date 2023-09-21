@@ -5634,6 +5634,33 @@ entries:
           description: Added podSecurityContext
     apiVersion: v2
     appVersion: 1.10.1
+    created: "2023-09-21T12:20:16.569319832Z"
+    description: CoreDNS is a DNS server that chains plugins and provides Kubernetes
+      DNS Services
+    digest: 77426ad968b9af7b673fa1e8f82bb3efa6bdbf496dbcb0d7a0f04368a9b562c2
+    home: https://coredns.io
+    icon: https://coredns.io/images/CoreDNS_Colour_Horizontal.png
+    keywords:
+    - coredns
+    - dns
+    - kubedns
+    maintainers:
+    - name: mrueg
+    - name: haad
+    - name: HagaiBarel
+    name: rke2-coredns
+    sources:
+    - https://github.com/coredns/coredns
+    type: application
+    urls:
+    - assets/rke2-coredns/rke2-coredns-1.24.005.tgz
+    version: 1.24.005
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: added
+          description: Added podSecurityContext
+    apiVersion: v2
+    appVersion: 1.10.1
     created: "2023-06-13T20:24:54.896894031Z"
     description: CoreDNS is a DNS server that chains plugins and provides Kubernetes
       DNS Services
@@ -6394,6 +6421,34 @@ entries:
     - assets/rke2-coredns/rke2-coredns-1.10.101-build2021022301.tgz
     version: 1.10.101-build2021022301
   rke2-ingress-nginx:
+  - annotations:
+      artifacthub.io/changes: |
+        - "[helm] Support custom port configuration for internal service (#9846)"
+        - "Adding resource type to default HPA configuration to resolve issues with Terraform helm chart usage (#9803)"
+        - "Update Ingress-Nginx version controller-v1.7.1"
+      artifacthub.io/prerelease: "false"
+    apiVersion: v2
+    appVersion: 1.7.1
+    created: "2023-09-21T12:20:16.667499223Z"
+    description: Ingress controller for Kubernetes using NGINX as a reverse proxy
+      and load balancer
+    digest: 5b96efeedf61ee32bc81ef346e6cedafbfe72dbfd59ac848187dda0978b2af83
+    home: https://github.com/kubernetes/ingress-nginx
+    icon: https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Nginx_logo.svg/500px-Nginx_logo.svg.png
+    keywords:
+    - ingress
+    - nginx
+    kubeVersion: '>=1.20.0-0'
+    maintainers:
+    - name: rikatz
+    - name: strongjz
+    - name: tao12345666333
+    name: rke2-ingress-nginx
+    sources:
+    - https://github.com/kubernetes/ingress-nginx
+    urls:
+    - assets/rke2-ingress-nginx/rke2-ingress-nginx-4.6.101.tgz
+    version: 4.6.101
   - annotations:
       artifacthub.io/changes: |
         - "[helm] Support custom port configuration for internal service (#9846)"
@@ -8848,6 +8903,25 @@ entries:
     version: 2.11.100
   - apiVersion: v1
     appVersion: 0.6.3
+    created: "2023-09-21T12:20:16.733239819Z"
+    description: Metrics Server is a cluster-wide aggregator of resource usage data.
+    digest: bd4cef27aeebc59cb26f0a1332454c2f17843882c825514ca7d01cf3bf41e8bf
+    home: https://github.com/kubernetes-incubator/metrics-server
+    keywords:
+    - metrics-server
+    maintainers:
+    - email: o.with@sportradar.com
+      name: olemarkus
+    - email: k.aasan@sportradar.com
+      name: kennethaasan
+    name: rke2-metrics-server
+    sources:
+    - https://github.com/kubernetes-incubator/metrics-server
+    urls:
+    - assets/rke2-metrics-server/rke2-metrics-server-2.11.100-build2023051510.tgz
+    version: 2.11.100-build2023051510
+  - apiVersion: v1
+    appVersion: 0.6.3
     created: "2023-06-12T23:08:01.094655352Z"
     description: Metrics Server is a cluster-wide aggregator of resource usage data.
     digest: 4f84a0e47c2b711c67426c36abb4a4b084e5cd99089084cedcbfe6aa84772b0f
@@ -9569,6 +9643,32 @@ entries:
     - assets/rke2-snapshot-controller/rke2-snapshot-controller-crd-1.7.200.tgz
     version: 1.7.200
   rke2-snapshot-validation-webhook:
+  - annotations:
+      artifacthub.io/recommendations: |
+        - url: https://artifacthub.io/packages/helm/piraeus-charts/snapshot-controller
+    apiVersion: v2
+    appVersion: v6.2.2
+    created: "2023-09-21T12:20:16.757023062Z"
+    description: |
+      Deploys the snapshot-validation-webhook and configures your cluster to validate every `VolumeSnapshot` and
+      `VolumeSnapshotContent` resource by sending it to the webhook.
+    digest: d69853e66e100eaf077a9c3de6fa9a148b37f39b12217250b1ee6ad268d5ffb0
+    home: https://github.com/piraeusdatastore/helm-charts
+    icon: https://raw.githubusercontent.com/piraeusdatastore/piraeus/master/artwork/sandbox-artwork/icon/color.svg
+    keywords:
+    - storage
+    - snapshot
+    - validation
+    maintainers:
+    - name: The Piraeus Maintainers
+      url: https://github.com/piraeusdatastore/
+    name: rke2-snapshot-validation-webhook
+    sources:
+    - https://github.com/kubernetes-csi/external-snapshotter/
+    type: application
+    urls:
+    - assets/rke2-snapshot-validation-webhook/rke2-snapshot-validation-webhook-1.7.302.tgz
+    version: 1.7.302
   - annotations:
       artifacthub.io/recommendations: |
         - url: https://artifacthub.io/packages/helm/piraeus-charts/snapshot-controller
