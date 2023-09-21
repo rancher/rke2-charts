@@ -1,0 +1,10 @@
+--- charts-original/templates/controller-service-webhook.yaml
++++ charts/templates/controller-service-webhook.yaml
+@@ -37,4 +37,7 @@
+   selector:
+     {{- include "ingress-nginx.selectorLabels" . | nindent 4 }}
+     app.kubernetes.io/component: controller
++  {{- if .Values.controller.admissionWebhooks.service.ipFamilyPolicy }}
++  ipFamilyPolicy: {{ .Values.controller.admissionWebhooks.service.ipFamilyPolicy }}
++  {{- end }}
+ {{- end }}

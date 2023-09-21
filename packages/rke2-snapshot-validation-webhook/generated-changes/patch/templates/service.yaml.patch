@@ -1,0 +1,18 @@
+--- charts-original/templates/service.yaml
++++ charts/templates/service.yaml
+@@ -5,12 +5,13 @@
+   labels:
+     {{- include "snapshot-validation-webhook.labels" . | nindent 4 }}
+ spec:
+-  type: ClusterIP
++  type: {{ .Values.service.type }}
+   ports:
+-    - port: 443
++    - port: {{ .Values.service.port }}
+       targetPort: https
+       protocol: TCP
+       name: https
++  ipFamilyPolicy: {{ .Values.service.ipFamilyPolicy }}
+   selector:
+     {{- include "snapshot-validation-webhook.selectorLabels" . | nindent 4 }}
+ ---
