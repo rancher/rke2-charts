@@ -21,7 +21,7 @@
  # externalIPs: []
  # externalTrafficPolicy: ""
 -# ipFamilyPolicy: ""
-+  ipFamilyPolicy: "PreferDualStack"
++  ipFamilyPolicy: ""
    # The name of the Service
    # If not set, a name is generated using the fullname template
    name: ""
