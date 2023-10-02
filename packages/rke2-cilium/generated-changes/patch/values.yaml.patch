@@ -6,10 +6,10 @@
    override: ~
 -  repository: "quay.io/cilium/cilium"
 +  repository: "rancher/mirrored-cilium-cilium"
-   tag: "v1.14.1"
+   tag: "v1.14.2"
    pullPolicy: "IfNotPresent"
 -  # cilium-digest
--  digest: "sha256:edc1d05ea1365c4a8f6ac6982247d5c145181704894bb698619c3827b6963a72"
+-  digest: "sha256:6263f3a3d5d63b267b538298dbeb5ae87da3efacf09a2c620446c873ba807d35"
 -  useDigest: true
 +  useDigest: false
  
@@ -32,8 +32,8 @@
      override: ~
 -    repository: "quay.io/cilium/certgen"
 +    repository: "rancher/mirrored-cilium-certgen"
-     tag: "v0.1.8"
--    digest: "sha256:4a456552a5f192992a6edcec2febb1c54870d665173a33dc7d876129b199ddbd"
+     tag: "v0.1.9"
+-    digest: "sha256:89a0847753686444daabde9474b48340993bd19c7bea66a46e45b2974b82041f"
 -    useDigest: true
 +    useDigest: false
      pullPolicy: "IfNotPresent"
@@ -54,9 +54,9 @@
        override: ~
 -      repository: "quay.io/cilium/hubble-relay"
 +      repository: "rancher/mirrored-cilium-hubble-relay"
-       tag: "v1.14.1"
+       tag: "v1.14.2"
 -       # hubble-relay-digest
--      digest: "sha256:db30e85a7abc10589ce2a97d61ee18696a03dc5ea04d44b4d836d88bd75b59d8"
+-      digest: "sha256:a89030b31f333e8fb1c10d2473250399a1a537c27d022cd8becc1a65d1bef1d6"
 -      useDigest: true
 +      useDigest: false
        pullPolicy: "IfNotPresent"
@@ -112,9 +112,9 @@
      override: ~
 -    repository: "quay.io/cilium/cilium-envoy"
 +    repository: "rancher/mirrored-cilium-cilium-envoy"
-     tag: "v1.25.9-f039e2bd380b7eef2f2feea5750676bb36133699"
+     tag: "v1.25.9-e198a2824d309024cb91fb6a984445e73033291d"
      pullPolicy: "IfNotPresent"
--    digest: "sha256:023d09eeb8a44ae99b489f4af7ffed8b8b54f19a532e0bc6ab4c1e4b31acaab1"
+-    digest: "sha256:52541e1726041b050c5d475b3c527ca4b8da487a0bbb0309f72247e8127af0ec"
 -    useDigest: true
 +    useDigest: false
  
@@ -139,15 +139,15 @@
      override: ~
 -    repository: "quay.io/cilium/operator"
 +    repository: "rancher/mirrored-cilium-operator"
-     tag: "v1.14.1"
+     tag: "v1.14.2"
 -    # operator-generic-digest
--    genericDigest: "sha256:e061de0a930534c7e3f8feda8330976367971238ccafff42659f104effd4b5f7"
+-    genericDigest: "sha256:52f70250dea22e506959439a7c4ea31b10fe8375db62f5c27ab746e3a2af866d"
 -    # operator-azure-digest
--    azureDigest: "sha256:2cba2cee3463c9349c47b2deb8736ffe6d8589d5e4c29b7c442b992fe0ef1fb7"
+-    azureDigest: "sha256:55bbbf853a91e9ec0944749a67f3fa313afbd6c94dc0a7e2cae986407f8a7b1f"
 -    # operator-aws-digest
--    awsDigest: "sha256:ff57964aefd903456745e53a4697a4f6a026d8fffdb06f53f624a23d23ade37a"
+-    awsDigest: "sha256:8d514a9eaa06b7a704d1ccead8c7e663334975e6584a815efe2b8c15244493f1"
 -    # operator-alibabacloud-digest
--    alibabacloudDigest: "sha256:edecc162279afba4af27f38afc4bc716a2e91df6b5ca6f88714029b27fb5920b"
+-    alibabacloudDigest: "sha256:72b3e26735ff0e5dd5930a853607d1878c62b36e93eba9e1d83a4b9db3ea0f28"
 -    useDigest: true
 +    useDigest: false
      pullPolicy: "IfNotPresent"
@@ -168,9 +168,9 @@
      override: ~
 -    repository: "quay.io/cilium/cilium"
 +    repository: "rancher/mirrored-cilium-cilium"
-     tag: "v1.14.1"
+     tag: "v1.14.2"
 -    # cilium-digest
--    digest: "sha256:edc1d05ea1365c4a8f6ac6982247d5c145181704894bb698619c3827b6963a72"
+-    digest: "sha256:6263f3a3d5d63b267b538298dbeb5ae87da3efacf09a2c620446c873ba807d35"
 -    useDigest: true
 +    useDigest: false
      pullPolicy: "IfNotPresent"
@@ -182,9 +182,9 @@
        override: ~
 -      repository: "quay.io/cilium/clustermesh-apiserver"
 +      repository: "rancher/mirrored-cilium-clustermesh-apiserver"
-       tag: "v1.14.1"
+       tag: "v1.14.2"
 -      # clustermesh-apiserver-digest
--      digest: "sha256:a7353669b1f7cb96cd600d98c7dd12e909d876843a7a272a1bc407e114ed225c"
+-      digest: "sha256:0650beac6633a483261640b6539c9609f5a761f4ab4504fd1e6ffe7f2bb82e9a"
 -      useDigest: true
 +      useDigest: false
        pullPolicy: "IfNotPresent"
@@ -208,9 +208,9 @@
          override: ~
 -        repository: "quay.io/cilium/kvstoremesh"
 +        repository: "rancher/mirrored-cilium-kvstoremesh"
-         tag: "v1.14.1"
+         tag: "v1.14.2"
 -        # kvstoremesh-digest
--        digest: "sha256:6a4083b79290d1278462c4e1269e927e71c2df05cc80f999d58b66b6b501bc8e"
+-        digest: "sha256:9c7edc95320996b409ee77691591d9213e4e9e7b900f08fbd5ed5c827d020178"
 -        useDigest: true
 +        useDigest: false
          pullPolicy: "IfNotPresent"
