@@ -1,6 +1,13 @@
 --- charts-original/templates/service.yaml
 +++ charts/templates/service.yaml
-@@ -33,13 +33,7 @@
+@@ -1,4 +1,6 @@
+ {{- if .Values.deployment.enabled }}
++{{- $dnsIPs := split "," .Values.global.clusterDNS }}
++{{- $dnsCount := len $dnsIPs }}
+ ---
+ apiVersion: v1
+ kind: Service
+@@ -33,12 +35,12 @@
      k8s-app: {{ template "coredns.k8sapplabel" . }}
      {{- end }}
      app.kubernetes.io/name: {{ template "coredns.name" . }}
@@ -8,10 +15,22 @@
 -  clusterIP: {{ .Values.service.clusterIP }}
 -  {{- end }}
 -  {{- if .Values.service.clusterIPs }}
--  clusterIPs:
--  {{ toYaml .Values.service.clusterIPs | nindent 4 }}
--  {{- end }}
 +  clusterIP: {{ template "clusterDNSServerIP" . }}
++  {{- if gt $dnsCount 1 }}
+   clusterIPs:
+-  {{ toYaml .Values.service.clusterIPs | nindent 4 }}
++  {{- range $dnsIP := $dnsIPs }}
++  - {{ $dnsIP }}
++  {{- end }}
+   {{- end }}
    {{- if .Values.service.externalIPs }}
    externalIPs:
-   {{- toYaml .Values.service.externalIPs | nindent 4 }}
+@@ -53,7 +55,5 @@
+   ports:
+ {{ include "coredns.servicePorts" . | indent 2 -}}
+   type: {{ default "ClusterIP" .Values.serviceType }}
+-  {{- if .Values.service.ipFamilyPolicy }}
+-  ipFamilyPolicy: {{ .Values.service.ipFamilyPolicy }}
+-  {{- end }}
++  ipFamilyPolicy: {{ template "ipFamilyPolicy" . }}
+ {{- end }}

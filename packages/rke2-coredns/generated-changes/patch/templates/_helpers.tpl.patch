@@ -9,7 +9,7 @@
  {{- end -}}
  
  {{/*
-@@ -191,3 +191,44 @@
+@@ -191,3 +191,72 @@
      {{ default "default" .Values.serviceAccount.name }}
  {{- end -}}
  {{- end -}}
@@ -27,9 +27,19 @@
 +*/}}
 +{{- define "clusterDNSServerIP" -}}
 +{{- if .Values.service.clusterIP }}
-+{{- .Values.service.clusterIP }}
++    {{- .Values.service.clusterIP }}
 +{{ else }}
-+{{- coalesce .Values.global.clusterDNS "10.43.0.10" }}
++    {{- $dnsIPs := split "," .Values.global.clusterDNS }}
++    {{- $dnsCount := len $dnsIPs }}
++    {{- if eq $dnsCount 1 }}
++        {{- .Values.global.clusterDNS }}
++    {{- else }}
++        {{- if gt $dnsCount 1 }}
++            {{- $dnsIPs._0 }}
++        {{ else }}
++            {{- "10.43.0.10" }}
++        {{- end }}
++    {{- end }}
 +{{- end }}
 +{{- end }}
 +
@@ -54,3 +64,21 @@
 +{{- printf ",%s" (include "clusterDNSServerIP" .) -}}
 +{{- end }}
 +{{- end }}
++
++{{/*
++Fill the ipFamily correctly
++*/}}
++{{- define "ipFamilyPolicy" -}}
++{{- if .Values.service.ipFamilyPolicy }}
++    {{- .Values.service.ipFamilyPolicy }}
++{{ else }}
++    {{- $dnsIPs := split "," .Values.global.clusterDNS }}
++    {{- $dnsCount := len $dnsIPs }}
++    {{- if gt $dnsCount 1 }}
++        {{- "PreferDualStack" }}
++    {{ else }}
++        {{- "SingleStack" }}
++    {{- end }}
++{{- end }}
++{{- end }}
++    
