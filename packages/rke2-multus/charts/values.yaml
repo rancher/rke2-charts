@@ -118,7 +118,7 @@ manifests:
 cniplugins:
   image:
     repository: rancher/hardened-cni-plugins
-    tag: v1.2.0-build20230523
+    tag: v1.2.0-build20231009
 
   # skipcnis is a comma separated list of cni binaries to skip from
   # installing.
