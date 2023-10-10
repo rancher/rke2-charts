@@ -8,7 +8,7 @@
 +  repository: rancher/hardened-coredns
    # Overrides the image tag whose default is the chart appVersion.
 -  tag: ""
-+  tag: "v1.10.1-build20230607"
++  tag: "v1.10.1-build20231010"
    pullPolicy: IfNotPresent
    ## Optionally specify an array of imagePullSecrets.
    ## Secrets must be manually created in the namespace.
