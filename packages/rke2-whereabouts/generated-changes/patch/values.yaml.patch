@@ -9,7 +9,7 @@
    pullPolicy: IfNotPresent
    # Overrides the image tag whose default is the chart appVersion.
 -  tag: "latest-amd64"
-+  tag: v0.6.2-build20230717
++  tag: v0.6.2-build20231009
  
  updateStrategy: RollingUpdate
  imagePullSecrets: []
