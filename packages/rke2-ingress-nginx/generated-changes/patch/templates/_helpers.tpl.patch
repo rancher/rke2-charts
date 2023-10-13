@@ -24,9 +24,9 @@
  {{- fail "Controller container image tag should be 0.27.0 or higher" -}}
  {{- end -}}
  {{- end -}}
-@@ -210,3 +210,15 @@
+@@ -215,3 +215,15 @@
+     - name: {{ toYaml "modules"}}
        mountPath: {{ toYaml "/modules_mount"}}
- 
  {{- end -}}
 +
 +{{- define "system_default_registry" -}}

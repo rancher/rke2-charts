@@ -1,6 +1,6 @@
 --- charts-original/templates/controller-daemonset.yaml
 +++ charts/templates/controller-daemonset.yaml
-@@ -73,9 +73,7 @@
+@@ -76,9 +76,7 @@
      {{- end }}
        containers:
          - name: {{ .Values.controller.containerName }}

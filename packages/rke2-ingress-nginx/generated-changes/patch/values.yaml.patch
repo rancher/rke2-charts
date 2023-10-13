@@ -1,6 +1,6 @@
 --- charts-original/values.yaml
 +++ charts/values.yaml
-@@ -18,14 +18,11 @@
+@@ -19,22 +19,18 @@
    image:
      ## Keep false as default for now!
      chroot: false
@@ -10,14 +10,14 @@
      ## for backwards compatibility consider setting the full image url via the repository value below
      ## use *either* current default registry/image or repository format or installing chart by providing the values.yaml will fail
      ## repository:
--    tag: "v1.7.1"
--    digest: sha256:7244b95ea47bddcb8267c1e625fb163fc183ef55448855e3ac52a7b260a60407
--    digestChroot: sha256:e35d5ab487861b9d419c570e3530589229224a0762c7b4d2e2222434abb8d988
-+    tag: "nginx-1.7.1-hardened1"
-     pullPolicy: IfNotPresent
+-    tag: "v1.9.3"
+-    digest: sha256:8fd21d59428507671ce0fb47f818b1d859c92d2ad07bb7c947268d433030ba98
+-    digestChroot: sha256:df4931fd6859fbf1a71e785f02a44b2f9a16f010ae852c442e9bb779cbefdc86
+-    pullPolicy: IfNotPresent
++    tag: "nginx-1.9.3-hardened1"
      # www-data -> uid 101
      runAsUser: 101
-@@ -33,7 +30,7 @@
+     allowPrivilegeEscalation: true
    # -- Use an existing PSP instead of creating one
    existingPsp: ""
    # -- Configures the controller container name
@@ -26,14 +26,14 @@
    # -- Configures the ports that the nginx-controller listens on
    containerPort:
      http: 80
-@@ -53,14 +50,14 @@
+@@ -64,14 +60,14 @@
    # -- Optionally change this to ClusterFirstWithHostNet in case you have 'hostNetwork: true'.
    # By default, while using host network, name resolution uses the host's DNS. If you wish nginx-controller
    # to keep resolving names inside the k8s network, use ClusterFirstWithHostNet.
 -  dnsPolicy: ClusterFirst
 +  dnsPolicy: ClusterFirstWithHostNet
    # -- Bare-metal considerations via the host network https://kubernetes.github.io/ingress-nginx/deploy/baremetal/#via-the-host-network
-   # Ingress status was blank because there is no Service exposing the NGINX Ingress controller in a configuration using the host network, the default --publish-service flag used in standard cloud setups does not apply
+   # Ingress status was blank because there is no Service exposing the Ingress-Nginx Controller in a configuration using the host network, the default --publish-service flag used in standard cloud setups does not apply
    reportNodeInternalIp: false
    # -- Process Ingress objects without ingressClass annotation/ingressClassName field
    # Overrides value for --watch-ingress-without-class flag of the controller binary
@@ -42,17 +42,8 @@
 +  watchIngressWithoutClass: true
    # -- Process IngressClass per name (additionally as per spec.controller).
    ingressClassByName: false
-   # -- This configuration enables Topology Aware Routing feature, used together with service annotation service.kubernetes.io/topology-aware-hints="auto"
-@@ -70,7 +67,7 @@
-   # their own *-snippet annotations, otherwise this is forbidden / dropped
-   # when users add those annotations.
-   # Global snippets in ConfigMap are still respected
--  allowSnippetAnnotations: true
-+  allowSnippetAnnotations: false
-   # -- Required for use with CNI based kubernetes installations (such as ones set up by kubeadm),
-   # since CNI and hostport don't mix yet. Can be deprecated once https://github.com/kubernetes/kubernetes/issues/23920
-   # is merged
-@@ -79,7 +76,7 @@
+   # -- This configuration enables Topology Aware Routing feature, used together with service annotation service.kubernetes.io/topology-mode="auto"
+@@ -90,7 +86,7 @@
    ## Disabled by default
    hostPort:
      # -- Enable 'hostPort' or not
@@ -61,7 +52,7 @@
      ports:
        # -- 'hostPort' http port
        http: 80
-@@ -122,7 +119,7 @@
+@@ -137,7 +133,7 @@
    # node or nodes where an ingress controller pod is running.
    publishService:
      # -- Enable 'publishService' or not
@@ -70,7 +61,7 @@
      # -- Allows overriding of the publish service to bind to
      # Must be <namespace>/<service_name>
      pathOverride: ""
-@@ -166,7 +163,7 @@
+@@ -181,7 +177,7 @@
    #         name: secret-resource
  
    # -- Use a `DaemonSet` or `Deployment`
@@ -79,7 +70,7 @@
    # -- Annotations to be added to the controller Deployment or DaemonSet
    ##
    annotations: {}
-@@ -404,7 +401,7 @@
+@@ -432,7 +428,7 @@
      configMapName: ""
      configMapKey: ""
    service:
@@ -88,7 +79,7 @@
      # -- If enabled is adding an appProtocol option for Kubernetes service. An appProtocol field replacing annotations that were
      # using for setting a backend protocol. Here is an example for AWS: service.beta.kubernetes.io/aws-load-balancer-backend-protocol: http
      # It allows choosing the protocol for each backend specified in the Kubernetes service.
-@@ -587,6 +584,7 @@
+@@ -618,6 +614,7 @@
        loadBalancerSourceRanges: []
        servicePort: 443
        type: ClusterIP
@@ -96,7 +87,7 @@
      createSecretJob:
        securityContext:
          allowPrivilegeEscalation: false
-@@ -604,13 +602,11 @@
+@@ -635,13 +632,11 @@
      patch:
        enabled: true
        image:
@@ -106,12 +97,13 @@
          ## for backwards compatibility consider setting the full image url via the repository value below
          ## use *either* current default registry/image or repository format or installing chart by providing the values.yaml will fail
          ## repository:
-         tag: v20230312-helm-chart-4.5.2-28-g66a760794
--        digest: sha256:01d181618f270f2a96c04006f33b2699ad3ccb02da48d0f89b22abce084b292f
+-        tag: v20231011-8b53cabe0
+-        digest: sha256:a7943503b45d552785aa3b5e457f169a5661fb94d82b8a3373bcd9ebaf9aac80
++        tag: v20230312-helm-chart-4.5.2-28-g66a760794
          pullPolicy: IfNotPresent
        # -- Provide a priority class name to the webhook patching job
        ##
-@@ -738,12 +734,11 @@
+@@ -769,12 +764,11 @@
    enabled: false
    name: defaultbackend
    image:
@@ -126,7 +118,7 @@
      pullPolicy: IfNotPresent
      # nobody user -> uid 65534
      runAsUser: 65534
-@@ -898,3 +893,6 @@
+@@ -932,3 +926,6 @@
  # This can be generated with: `openssl dhparam 4096 2> /dev/null | base64`
  ## Ref: https://github.com/kubernetes/ingress-nginx/tree/main/docs/examples/customization/ssl-dh-param
  dhParam: ""
