@@ -224,7 +224,7 @@
 +portmapPlugin:
 +  image:
 +    repository: "rancher/hardened-cni-plugins"
-+    tag: "v1.2.0-build20230523"
++    tag: "v1.2.0-build20231009"
 +
 +global:
 +  systemDefaultRegistry: ""
