@@ -6781,6 +6781,33 @@ entries:
     version: 1.10.101-build2021022301
   rke2-ingress-nginx:
   - annotations:
+      artifacthub.io/changes: |-
+        - "update nginx base, httpbun, e2e, helm webhook cert gen (#10506)"
+        - "Update Ingress-Nginx version controller-v1.9.3"
+      artifacthub.io/prerelease: "false"
+    apiVersion: v2
+    appVersion: 1.9.3
+    created: "2023-10-25T16:37:38.115140032Z"
+    description: Ingress controller for Kubernetes using NGINX as a reverse proxy
+      and load balancer
+    digest: 41b2f949b2268adb2d2a9d51c3afad74eb3cd2a067c5e57ffb7541d42c63ffd5
+    home: https://github.com/kubernetes/ingress-nginx
+    icon: https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Nginx_logo.svg/500px-Nginx_logo.svg.png
+    keywords:
+    - ingress
+    - nginx
+    kubeVersion: '>=1.20.0-0'
+    maintainers:
+    - name: rikatz
+    - name: strongjz
+    - name: tao12345666333
+    name: rke2-ingress-nginx
+    sources:
+    - https://github.com/kubernetes/ingress-nginx
+    urls:
+    - assets/rke2-ingress-nginx/rke2-ingress-nginx-4.8.200.tgz
+    version: 4.8.200
+  - annotations:
       artifacthub.io/changes: |
         - "[helm] Support custom port configuration for internal service (#9846)"
         - "Adding resource type to default HPA configuration to resolve issues with Terraform helm chart usage (#9803)"
