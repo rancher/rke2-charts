@@ -6,10 +6,10 @@
    override: ~
 -  repository: "quay.io/cilium/cilium"
 +  repository: "rancher/mirrored-cilium-cilium"
-   tag: "v1.14.2"
+   tag: "v1.14.4"
    pullPolicy: "IfNotPresent"
 -  # cilium-digest
--  digest: "sha256:6263f3a3d5d63b267b538298dbeb5ae87da3efacf09a2c620446c873ba807d35"
+-  digest: "sha256:4981767b787c69126e190e33aee93d5a076639083c21f0e7c29596a519c64a2e"
 -  useDigest: true
 +  useDigest: false
  
@@ -26,7 +26,7 @@
  
    # -- A CNI network name in to which the Cilium plugin should be added as a chained plugin.
    # This will cause the agent to watch for a CNI network with this network name. When it is
-@@ -927,10 +927,9 @@
+@@ -933,10 +933,9 @@
  certgen:
    image:
      override: ~
@@ -39,7 +39,7 @@
      pullPolicy: "IfNotPresent"
    # -- Seconds after which the completed job pod will be deleted
    ttlSecondsAfterFinished: 1800
-@@ -952,7 +951,7 @@
+@@ -958,7 +957,7 @@
  
  hubble:
    # -- Enable Hubble (true by default).
@@ -48,47 +48,47 @@
  
    # -- Buffer size of the channel Hubble uses to receive monitor events. If this
    # value is not set, the queue size is set to the default monitor queue size.
-@@ -1103,11 +1102,9 @@
+@@ -1109,11 +1108,9 @@
      # -- Hubble-relay container image.
      image:
        override: ~
 -      repository: "quay.io/cilium/hubble-relay"
 +      repository: "rancher/mirrored-cilium-hubble-relay"
-       tag: "v1.14.2"
+       tag: "v1.14.4"
 -       # hubble-relay-digest
--      digest: "sha256:a89030b31f333e8fb1c10d2473250399a1a537c27d022cd8becc1a65d1bef1d6"
+-      digest: "sha256:ca81622fd9f04c1316bf4144bde5dbce613758810f6022f6c706b14c9c0815db"
 -      useDigest: true
 +      useDigest: false
        pullPolicy: "IfNotPresent"
  
      # -- Specifies the resources for the hubble-relay pods
-@@ -1325,10 +1322,9 @@
+@@ -1331,10 +1328,9 @@
        # -- Hubble-ui backend image.
        image:
          override: ~
 -        repository: "quay.io/cilium/hubble-ui-backend"
 +        repository: "rancher/mirrored-cilium-hubble-ui-backend"
-         tag: "v0.12.0"
--        digest: "sha256:8a79a1aad4fc9c2aa2b3e4379af0af872a89fcec9d99e117188190671c66fc2e"
+         tag: "v0.12.1"
+-        digest: "sha256:1f86f3400827a0451e6332262467f894eeb7caf0eb8779bd951e2caa9d027cbe"
 -        useDigest: true
 +        useDigest: false
          pullPolicy: "IfNotPresent"
  
        # -- Hubble-ui backend security context.
-@@ -1356,10 +1352,9 @@
+@@ -1362,10 +1358,9 @@
        # -- Hubble-ui frontend image.
        image:
          override: ~
 -        repository: "quay.io/cilium/hubble-ui"
 +        repository: "rancher/mirrored-cilium-hubble-ui"
-         tag: "v0.12.0"
--        digest: "sha256:1c876cfa1d5e35bc91e1025c9314f922041592a88b03313c22c1f97a5d2ba88f"
+         tag: "v0.12.1"
+-        digest: "sha256:9e5f81ee747866480ea1ac4630eb6975ff9227f9782b7c93919c081c33f38267"
 -        useDigest: true
 +        useDigest: false
          pullPolicy: "IfNotPresent"
  
        # -- Hubble-ui frontend security context.
-@@ -1485,7 +1480,7 @@
+@@ -1491,7 +1486,7 @@
  ipam:
    # -- Configure IP Address Management mode.
    # ref: https://docs.cilium.io/en/stable/network/concepts/ipam/
@@ -97,7 +97,7 @@
    # -- Maximum rate at which the CiliumNode custom resource is updated.
    ciliumNodeUpdateRate: "15s"
    operator:
-@@ -1763,7 +1758,7 @@
+@@ -1769,7 +1764,7 @@
  
  # -- Configure prometheus metrics on the configured port at /metrics
  prometheus:
@@ -106,21 +106,21 @@
    port: 9962
    serviceMonitor:
      # -- Enable service monitors.
-@@ -1841,11 +1836,10 @@
+@@ -1847,11 +1842,10 @@
    # -- Envoy container image.
    image:
      override: ~
 -    repository: "quay.io/cilium/cilium-envoy"
 +    repository: "rancher/mirrored-cilium-cilium-envoy"
-     tag: "v1.25.9-e198a2824d309024cb91fb6a984445e73033291d"
+     tag: "v1.26.6-ff0d5d3f77d610040e93c7c7a430d61a0c0b90c1"
      pullPolicy: "IfNotPresent"
--    digest: "sha256:52541e1726041b050c5d475b3c527ca4b8da487a0bbb0309f72247e8127af0ec"
+-    digest: "sha256:6b0f2591fef922bf17a46517d5152ea7d6270524bb0e307c77986986677dbcea"
 -    useDigest: true
 +    useDigest: false
  
    # -- Additional containers added to the cilium Envoy DaemonSet.
    extraContainers: []
-@@ -2123,10 +2117,9 @@
+@@ -2139,10 +2133,9 @@
    # -- cilium-etcd-operator image.
    image:
      override: ~
@@ -133,27 +133,27 @@
      pullPolicy: "IfNotPresent"
  
    # -- The priority class to use for cilium-etcd-operator
-@@ -2228,17 +2221,9 @@
+@@ -2244,17 +2237,9 @@
    # -- cilium-operator image.
    image:
      override: ~
 -    repository: "quay.io/cilium/operator"
 +    repository: "rancher/mirrored-cilium-operator"
-     tag: "v1.14.2"
+     tag: "v1.14.4"
 -    # operator-generic-digest
--    genericDigest: "sha256:52f70250dea22e506959439a7c4ea31b10fe8375db62f5c27ab746e3a2af866d"
+-    genericDigest: "sha256:f0f05e4ba3bb1fe0e4b91144fa4fea637701aba02e6c00b23bd03b4a7e1dfd55"
 -    # operator-azure-digest
--    azureDigest: "sha256:55bbbf853a91e9ec0944749a67f3fa313afbd6c94dc0a7e2cae986407f8a7b1f"
+-    azureDigest: "sha256:f9d1b8663b905fc2af656e61abc54667779081dde2fdbbb90a48200e7b05ff41"
 -    # operator-aws-digest
--    awsDigest: "sha256:8d514a9eaa06b7a704d1ccead8c7e663334975e6584a815efe2b8c15244493f1"
+-    awsDigest: "sha256:757966ce5c13055089b092a86c8322a0694b0461a19b65e545e61897f6c9446c"
 -    # operator-alibabacloud-digest
--    alibabacloudDigest: "sha256:72b3e26735ff0e5dd5930a853607d1878c62b36e93eba9e1d83a4b9db3ea0f28"
+-    alibabacloudDigest: "sha256:2b2c71930db7901e754d5aac119c166faad10e938f73294f1c840cf36d564a3e"
 -    useDigest: true
 +    useDigest: false
      pullPolicy: "IfNotPresent"
      suffix: ""
  
-@@ -2369,7 +2354,7 @@
+@@ -2385,7 +2370,7 @@
    # -- Enable prometheus metrics for cilium-operator on the configured port at
    # /metrics
    prometheus:
@@ -162,29 +162,29 @@
      port: 9963
      serviceMonitor:
        # -- Enable service monitors.
-@@ -2515,11 +2500,9 @@
+@@ -2531,11 +2516,9 @@
    # -- Cilium pre-flight image.
    image:
      override: ~
 -    repository: "quay.io/cilium/cilium"
 +    repository: "rancher/mirrored-cilium-cilium"
-     tag: "v1.14.2"
+     tag: "v1.14.4"
 -    # cilium-digest
--    digest: "sha256:6263f3a3d5d63b267b538298dbeb5ae87da3efacf09a2c620446c873ba807d35"
+-    digest: "sha256:4981767b787c69126e190e33aee93d5a076639083c21f0e7c29596a519c64a2e"
 -    useDigest: true
 +    useDigest: false
      pullPolicy: "IfNotPresent"
  
    # -- The priority class to use for the preflight pod.
-@@ -2665,21 +2648,18 @@
+@@ -2681,21 +2664,18 @@
      # -- Clustermesh API server image.
      image:
        override: ~
 -      repository: "quay.io/cilium/clustermesh-apiserver"
 +      repository: "rancher/mirrored-cilium-clustermesh-apiserver"
-       tag: "v1.14.2"
+       tag: "v1.14.4"
 -      # clustermesh-apiserver-digest
--      digest: "sha256:0650beac6633a483261640b6539c9609f5a761f4ab4504fd1e6ffe7f2bb82e9a"
+-      digest: "sha256:828a74eea2a15c4196633dc50e4b92ba3a5e3ed8418c2a33e255a9281a1ce42f"
 -      useDigest: true
 +      useDigest: false
        pullPolicy: "IfNotPresent"
@@ -202,21 +202,21 @@
          pullPolicy: "IfNotPresent"
  
        # -- Specifies the resources for etcd container in the apiserver
-@@ -2712,11 +2692,9 @@
+@@ -2728,11 +2708,9 @@
        # -- KVStoreMesh image.
        image:
          override: ~
 -        repository: "quay.io/cilium/kvstoremesh"
 +        repository: "rancher/mirrored-cilium-kvstoremesh"
-         tag: "v1.14.2"
+         tag: "v1.14.4"
 -        # kvstoremesh-digest
--        digest: "sha256:9c7edc95320996b409ee77691591d9213e4e9e7b900f08fbd5ed5c827d020178"
+-        digest: "sha256:492cde62cb2def832b3213211cb99d59bd9fe9789be32a181fb24554077368b0"
 -        useDigest: true
 +        useDigest: false
          pullPolicy: "IfNotPresent"
  
        # -- Additional KVStoreMesh arguments.
-@@ -3173,3 +3151,11 @@
+@@ -3200,3 +3178,11 @@
        agentSocketPath: /run/spire/sockets/agent/agent.sock
        # -- SPIRE connection timeout
        connectionTimeout: 30s
