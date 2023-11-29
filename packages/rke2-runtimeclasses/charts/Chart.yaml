@@ -1,0 +1,12 @@
+apiVersion: v2
+name: rke2-runtimeclasses
+description: Add the default runtime classes
+version: 0.1.0
+appVersion: 0.1.0
+keywords:
+  - runtimeclasses
+sources:
+  - https://github.com/rancher/rke2-charts
+maintainers:
+  - name: Rancher Labs
+    email: charts@rancher.com
