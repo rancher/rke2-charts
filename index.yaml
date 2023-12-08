@@ -10190,6 +10190,23 @@ entries:
     urls:
     - assets/rke2-multus/rke2-multus-v3.7.1-build2021041601.tgz
     version: v3.7.1-build2021041601
+  rke2-runtimeclasses:
+  - apiVersion: v2
+    appVersion: 0.1.0
+    created: "2023-12-08T19:13:18.15953377Z"
+    description: Add the default runtime classes
+    digest: 95da57c34753afbed13ded46adb960d799e50b02869eaa0598ac24fe34140ee2
+    keywords:
+    - runtimeclasses
+    maintainers:
+    - email: charts@rancher.com
+      name: Rancher Labs
+    name: rke2-runtimeclasses
+    sources:
+    - https://github.com/rancher/rke2-charts
+    urls:
+    - assets/rke2-runtimeclasses/rke2-runtimeclasses-0.1.000.tgz
+    version: 0.1.000
   rke2-snapshot-controller:
   - annotations:
       artifacthub.io/recommendations: |
