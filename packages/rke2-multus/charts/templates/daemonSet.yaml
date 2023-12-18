@@ -15,7 +15,7 @@
 apiVersion: apps/v1
 kind: DaemonSet
 metadata:
-  name: {{ .Release.Name }}-ds
+  name: {{ .Release.Name }}
   namespace: {{ .Release.Namespace }}
   labels:
 {{- include "multus.labels" . | indent 4 }}

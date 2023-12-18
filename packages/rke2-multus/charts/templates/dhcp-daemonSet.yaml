@@ -1,9 +1,8 @@
----
 {{- if .Values.manifests.dhcpDaemonSet }}
 apiVersion: apps/v1
 kind: DaemonSet
 metadata:
-  name: multus-dhcp-ds
+  name: {{ .Release.Name }}-dhcp
   namespace: {{ .Release.Namespace }}
   labels:
 {{- include "multus.labels" . | indent 4 }}
