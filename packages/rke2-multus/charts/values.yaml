@@ -108,6 +108,7 @@ manifests:
   configMap: false
   daemonSet: true
   customResourceDefinition: true
+  dhcpDaemonSet: false
 
 #tolerations: []
 
