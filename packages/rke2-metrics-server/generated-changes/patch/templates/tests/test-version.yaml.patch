@@ -5,7 +5,7 @@
    containers:
    - name: wget
 -    image: busybox
-+    image: {{ template "system_default_registry" . }}mirrored-library-busybox:1.36.1
++    image: {{ template "system_default_registry" . }}{{ .Values.tests.image.repository }}:{{ .Values.tests.image.tag }}
      command: ['/bin/sh']
      args:
      - -c

@@ -27,7 +27,7 @@ spec:
       nodeSelector: {{- toYaml .Values.labels.nodeSelector | nindent 8 }}
       initContainers:
       - name: kube-{{ .Chart.Name }}-dhcp-cleanup
-        image: {{ template "system_default_registry" . }}mirrored-library-busybox:1.36.1
+        image: {{ template "system_default_registry" . }}{{ .Values.dhcpDaemonSet.image.repository }}:{{ .Values.dhcpDaemonSet.image.tag }}
         command: ["rm", "-f", "/run/cni/dhcp.sock"]
         securityContext:
           privileged: true
@@ -36,7 +36,7 @@ spec:
           mountPath: /host/run/cni
       containers:
       - name: kube-{{ .Chart.Name }}-dhcp
-        image: {{ template "system_default_registry" . }}mirrored-library-busybox:1.36.1
+        image: {{ template "system_default_registry" . }}{{ .Values.dhcpDaemonSet.image.repository }}:{{ .Values.dhcpDaemonSet.image.tag }}
         command: ["/opt/cni/bin/dhcp", "daemon"]
         securityContext:
           privileged: true
