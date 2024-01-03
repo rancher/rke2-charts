@@ -1,0 +1,11 @@
+--- charts-original/templates/tests/test-version.yaml
++++ charts/templates/tests/test-version.yaml
+@@ -12,7 +12,7 @@
+ spec:
+   containers:
+   - name: wget
+-    image: busybox
++    image: {{ template "system_default_registry" . }}mirrored-library-busybox:1.36.1
+     command: ['/bin/sh']
+     args:
+     - -c
