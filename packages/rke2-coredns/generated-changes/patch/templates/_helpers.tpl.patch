@@ -35,7 +35,7 @@
 +        {{- .Values.global.clusterDNS }}
 +    {{- else }}
 +        {{- if gt $dnsCount 1 }}
-+            {{- $dnsIPs._0 }}
++            {{- $dnsIPs._0 -}}
 +        {{ else }}
 +            {{- "10.43.0.10" }}
 +        {{- end }}
