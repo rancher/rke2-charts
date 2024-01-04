@@ -9503,6 +9503,25 @@ entries:
     version: 2.11.100
   - apiVersion: v1
     appVersion: 0.6.3
+    created: "2024-01-04T09:36:19.431825935Z"
+    description: Metrics Server is a cluster-wide aggregator of resource usage data.
+    digest: b31bca2e5f7943431a37138c38f086a3298f8fe8cebac1ad8a06454d359467c1
+    home: https://github.com/kubernetes-incubator/metrics-server
+    keywords:
+    - metrics-server
+    maintainers:
+    - email: o.with@sportradar.com
+      name: olemarkus
+    - email: k.aasan@sportradar.com
+      name: kennethaasan
+    name: rke2-metrics-server
+    sources:
+    - https://github.com/kubernetes-incubator/metrics-server
+    urls:
+    - assets/rke2-metrics-server/rke2-metrics-server-2.11.100-build2023051513.tgz
+    version: 2.11.100-build2023051513
+  - apiVersion: v1
+    appVersion: 0.6.3
     created: "2024-01-03T14:54:59.195518712Z"
     description: Metrics Server is a cluster-wide aggregator of resource usage data.
     digest: ba388a5aee0715c45b8515628cad18c84254319e487d9f53a0d04fb7d99542df
@@ -9768,6 +9787,27 @@ entries:
     - assets/rke2-metrics-server/rke2-metrics-server-2.11.100-build2021022300.tgz
     version: 2.11.100-build2021022300
   rke2-multus:
+  - apiVersion: v2
+    appVersion: 4.0.2
+    created: "2024-01-04T09:36:19.44657455Z"
+    dependencies:
+    - condition: rke2-whereabouts.enabled
+      name: rke2-whereabouts
+      repository: file://./charts/rke2-whereabouts
+    description: Multus Helm chart for Kubernetes
+    digest: d526edba1db5451af44ff00e1b08c2a076e76c26f0dc96869344677c01673067
+    home: https://github.com/k8snetworkplumbingwg/multus-cni
+    icon: https://raw.githubusercontent.com/k8snetworkplumbingwg/multus-cni/master/doc/images/Multus.png
+    maintainers:
+    - email: charts@rancher.com
+      name: Rancher Labs
+    name: rke2-multus
+    sources:
+    - https://github.com/intel/multus-cni
+    type: application
+    urls:
+    - assets/rke2-multus/rke2-multus-v4.0.2-build2023081106.tgz
+    version: v4.0.2-build2023081106
   - apiVersion: v2
     appVersion: 4.0.2
     created: "2024-01-03T14:54:59.210320218Z"
