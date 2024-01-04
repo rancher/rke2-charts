@@ -36,7 +36,7 @@
  
  extraVolumeMounts: []
  #  - name: secrets
-@@ -101,9 +103,13 @@
+@@ -101,9 +103,18 @@
    #  kubernetes.io/name: "Metrics-server"
    port: 443
    type: ClusterIP
@@ -47,6 +47,11 @@
    enabled: false
    minAvailable:
    maxUnavailable:
++
++tests:
++  image:
++    repository: rancher/mirrored-library-busybox
++    tag: "1.36.1"
 +
 +global:
 +  systemDefaultRegistry: ""

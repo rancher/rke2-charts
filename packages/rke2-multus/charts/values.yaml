@@ -125,6 +125,11 @@ cniplugins:
   # installing.
   skipcnis: flannel
 
+dhcpDaemonSet:
+  image:
+    repository: rancher/mirrored-library-busybox
+    tag: "1.36.1"
+
 global:
   systemDefaultRegistry: ""
 
