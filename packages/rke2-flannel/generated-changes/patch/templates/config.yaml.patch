@@ -1,0 +1,20 @@
+--- charts-original/templates/config.yaml
++++ charts/templates/config.yaml
+@@ -29,13 +29,13 @@
+     }
+   net-conf.json: |
+     {
+-{{- if .Values.podCidr }}
+-      "Network": {{ .Values.podCidr | quote }},
++{{- if .Values.global.clusterCIDRv4 }}
++      "Network": {{ .Values.global.clusterCIDRv4 | quote }},
+ {{- else }}
+       "EnableIPv4": false,
+ {{- end }}
+-{{- if .Values.podCidrv6 }}
+-      "IPv6Network": {{ .Values.podCidrv6 | quote }},
++{{- if .Values.global.clusterCIDRv6 }}
++      "IPv6Network": {{ .Values.global.clusterCIDRv6 | quote }},
+       "EnableIPv6": true,
+ {{- end }}
+       "Backend": {
