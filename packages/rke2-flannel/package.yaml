@@ -1,0 +1,3 @@
+url: https://github.com/flannel-io/flannel.git
+subdirectory: chart/kube-flannel
+commit: v0.24.0
