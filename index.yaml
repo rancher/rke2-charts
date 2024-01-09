@@ -7007,6 +7007,20 @@ entries:
     urls:
     - assets/rke2-coredns/rke2-coredns-1.10.101-build2021022301.tgz
     version: 1.10.101-build2021022301
+  rke2-flannel:
+  - apiVersion: v1
+    appVersion: v0.24.0
+    created: "2024-01-09T11:48:33.946683264Z"
+    description: Install Flannel Network Plugin.
+    digest: 57d5e1824de576d322de65b1c8af9fbc9fd6310979aea20dee5773757e6ef15e
+    keywords:
+    - Flannel
+    name: rke2-flannel
+    sources:
+    - https://github.com/rancher/rke2-charts
+    urls:
+    - assets/rke2-flannel/rke2-flannel-v0.24.001.tgz
+    version: v0.24.001
   rke2-ingress-nginx:
   - annotations:
       artifacthub.io/changes: |-
