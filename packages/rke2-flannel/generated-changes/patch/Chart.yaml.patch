@@ -1,0 +1,12 @@
+--- charts-original/Chart.yaml
++++ charts/Chart.yaml
+@@ -3,7 +3,7 @@
+ description: Install Flannel Network Plugin.
+ keywords:
+ - Flannel
+-name: flannel
++name: rke2-flannel
+ sources:
+-- https://github.com/flannel-io/flannel
++- https://github.com/rancher/rke2-charts
+ version: v0.24.0
