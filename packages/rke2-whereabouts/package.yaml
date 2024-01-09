@@ -1,6 +1,5 @@
-url: https://github.com/k8snetworkplumbingwg/helm-charts.git
-commit: ca7c0a7549952660eab8f4b12e7ec7be133b381c
-subdirectory: whereabouts
-packageVersion: 03
+url: local
+workingDir: charts
+packageVersion: 00
 # whereabouts is only used as a dependency of multus
 doNotRelease: true
