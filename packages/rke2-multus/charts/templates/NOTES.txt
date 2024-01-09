@@ -7,14 +7,17 @@ Cluster Role: {{ .Values.serviceAccount.name }}
 Cluster Role Binding: {{ .Chart.Name }}
 {{- end }}
 {{- if .Values.manifests.configMap }}
-Config Map: {{ .Release.Name }}-{{ .Chart.Name }}-{{ .Chart.Version }}-config
+Config Map: {{ .Release.Name }}-{{ .Chart.Version }}-config
 {{- end }}
 {{- if .Values.manifests.customResourceDefinition }}
 Custom Resource Definition: network-attachment-definitions.k8s.cni.cncf.io
 {{- end }}
 {{- if .Values.manifests.daemonSet }}
-Daemon Set: {{ .Release.Name }}-{{ .Chart.Name }}-ds
+Daemon Set: {{ .Release.Name }}
 {{- end }}
+{{- if .Values.manifests.dhcpDaemonSet }}
+Daemon Set: {{ .Release.Name }}-dhcp
+{{- end}}
 {{- if .Values.manifests.serviceAccount }}
 Service Account: {{ .Values.serviceAccount.name }}
 {{- end }}
