@@ -42,9 +42,8 @@ spec:
               SLEEP=false /install-cni.sh &&
               /ip-control-loop -log-level debug
           securityContext:
-            # {{- toYaml .Values.securityContext | nindent 12 }}
-            privileged: true
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ template "system_default_registry" . }}{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
           - name: NODENAME
