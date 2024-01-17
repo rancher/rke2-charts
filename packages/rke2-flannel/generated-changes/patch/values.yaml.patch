@@ -15,9 +15,9 @@
    # kube-flannel image
    image:
 -    repository: docker.io/flannel/flannel
--    tag: v0.24.0
+-    tag: v0.24.1
 +    repository: rancher/hardened-flannel
-+    tag: v0.24.0-build20240108
++    tag: v0.24.1-build20240117
    image_cni:
 -    repository: docker.io/flannel/flannel-cni-plugin
 -    tag: v1.2.0
@@ -26,10 +26,45 @@
    # flannel command arguments
    args:
    - "--ip-masq"
-@@ -50,3 +42,10 @@
-   #tunnelMode: "separate"
+@@ -25,28 +17,35 @@
+   # Documentation at https://github.com/flannel-io/flannel/blob/master/Documentation/backends.md
+   backend: "vxlan"
+   # Port used by the backend 0 means default value (VXLAN: 8472, Wireguard: 51821, UDP: 8285)
+-  #backendPort: 0
++  backendPort: 0
+   # MTU to use for outgoing packets (VXLAN and Wiregurad) if not defined the MTU of the external interface is used.
+-  #mtu: 1500 
++  mtu: 1500 
+   #
+   # VXLAN Configs:
+   #
+   # VXLAN Identifier to be used. On Linux default is 1.
+-  #vni: 1
++  vni: 1
+   # Enable VXLAN Group Based Policy (Default false)
+-  #GBP: false
++  GBP: false
+   # Enable direct routes (default is false)
+-  #directRouting: false
++  directRouting: false
+   # MAC prefix to be used on Windows. (Defaults is 0E-2A)
+-  #macPrefix: "0E-2A"
++  macPrefix: "0E-2A"
+   #
+   # Wireguard Configs:
+   #
+   # UDP listen port used with IPv6
+-  #backendPortv6: 51821
++  backendPortv6: 51821
+   # Pre shared key to use
+-  #psk: 0
++  psk: 0
+   # IP version to use on Wireguard
+-  #tunnelMode: "separate"
++  tunnelMode: "separate"
    # Persistent keep interval to use
-   #keepaliveInterval: 0
+-  #keepaliveInterval: 0
++  keepaliveInterval: 0
 +  #
 +
 +global:
