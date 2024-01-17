@@ -7034,6 +7034,19 @@ entries:
     version: 1.10.101-build2021022301
   rke2-flannel:
   - apiVersion: v1
+    appVersion: v0.24.1
+    created: "2024-01-17T10:28:16.666574831Z"
+    description: Install Flannel Network Plugin.
+    digest: 7489f520c913ba40f40f26edde961c70c7e0b5f8807782e2a7eb5aeae5b0e79e
+    keywords:
+    - Flannel
+    name: rke2-flannel
+    sources:
+    - https://github.com/rancher/rke2-charts
+    urls:
+    - assets/rke2-flannel/rke2-flannel-v0.24.100.tgz
+    version: v0.24.100
+  - apiVersion: v1
     appVersion: v0.24.0
     created: "2024-01-09T11:48:33.946683264Z"
     description: Install Flannel Network Plugin.
@@ -9840,6 +9853,27 @@ entries:
     - assets/rke2-metrics-server/rke2-metrics-server-2.11.100-build2021022300.tgz
     version: 2.11.100-build2021022300
   rke2-multus:
+  - apiVersion: v2
+    appVersion: 4.0.2
+    created: "2024-01-17T10:28:16.805993675Z"
+    dependencies:
+    - condition: rke2-whereabouts.enabled
+      name: rke2-whereabouts
+      repository: file://./charts/rke2-whereabouts
+    description: Multus Helm chart for Kubernetes
+    digest: 9767501fd946e8d7606094ab0a46f0ca6242fda58821c53a7a97928cff908881
+    home: https://github.com/k8snetworkplumbingwg/multus-cni
+    icon: https://raw.githubusercontent.com/k8snetworkplumbingwg/multus-cni/master/doc/images/Multus.png
+    maintainers:
+    - email: charts@rancher.com
+      name: Rancher Labs
+    name: rke2-multus
+    sources:
+    - https://github.com/intel/multus-cni
+    type: application
+    urls:
+    - assets/rke2-multus/rke2-multus-v4.0.2-build2023081108.tgz
+    version: v4.0.2-build2023081108
   - apiVersion: v2
     appVersion: 4.0.2
     created: "2024-01-10T09:01:36.007243711Z"
