@@ -1,4 +1,2 @@
-url: https://github.com/flannel-io/flannel.git
-subdirectory: chart/kube-flannel
-commit: v0.24.0
-packageVersion: 01
+url: https://github.com/flannel-io/flannel/releases/download/v0.24.1/flannel.tgz
+packageVersion: 00
