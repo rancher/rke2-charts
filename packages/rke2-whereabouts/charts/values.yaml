@@ -45,3 +45,6 @@ tolerations:
     effect: NoSchedule
 
 affinity: {}
+
+global:
+  systemDefaultRegistry: ""
