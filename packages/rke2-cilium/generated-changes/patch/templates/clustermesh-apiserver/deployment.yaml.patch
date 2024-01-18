@@ -9,7 +9,7 @@
          imagePullPolicy: {{ .Values.clustermesh.apiserver.etcd.image.pullPolicy }}
          command: ["/bin/sh", "-c"]
          args:
-@@ -89,7 +89,7 @@
+@@ -92,7 +92,7 @@
          {{- end }}
        containers:
        - name: etcd
@@ -18,7 +18,7 @@
          imagePullPolicy: {{ .Values.clustermesh.apiserver.etcd.image.pullPolicy }}
          command:
          - /usr/local/bin/etcd
-@@ -142,7 +142,7 @@
+@@ -148,7 +148,7 @@
            {{- toYaml . | nindent 10 }}
          {{- end }}
        - name: apiserver
@@ -27,7 +27,7 @@
          imagePullPolicy: {{ .Values.clustermesh.apiserver.image.pullPolicy }}
          command:
          - /usr/bin/clustermesh-apiserver
-@@ -220,7 +220,7 @@
+@@ -226,7 +226,7 @@
          {{- end }}
        {{- if .Values.clustermesh.apiserver.kvstoremesh.enabled }}
        - name: kvstoremesh
