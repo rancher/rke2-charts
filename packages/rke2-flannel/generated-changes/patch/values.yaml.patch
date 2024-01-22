@@ -15,14 +15,14 @@
    # kube-flannel image
    image:
 -    repository: docker.io/flannel/flannel
--    tag: v0.24.1
+-    tag: v0.24.2
 +    repository: rancher/hardened-flannel
-+    tag: v0.24.1-build20240117
++    tag: v0.24.2-build20240122
    image_cni:
 -    repository: docker.io/flannel/flannel-cni-plugin
 -    tag: v1.2.0
 +    repository: rancher/hardened-cni-plugins
-+    tag: v1.2.0-build20240108
++    tag: v1.4.0-build20240122
    # flannel command arguments
    args:
    - "--ip-masq"
