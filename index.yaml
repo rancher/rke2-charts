@@ -6165,6 +6165,33 @@ entries:
           description: Added podSecurityContext
     apiVersion: v2
     appVersion: 1.10.1
+    created: "2024-01-23T15:05:14.849604186Z"
+    description: CoreDNS is a DNS server that chains plugins and provides Kubernetes
+      DNS Services
+    digest: d5d452b87da788ce92a7b5f162c64efd0d5c1d3acaafff278f3e5aa9ac431bd3
+    home: https://coredns.io
+    icon: https://coredns.io/images/CoreDNS_Colour_Horizontal.png
+    keywords:
+    - coredns
+    - dns
+    - kubedns
+    maintainers:
+    - name: mrueg
+    - name: haad
+    - name: HagaiBarel
+    name: rke2-coredns
+    sources:
+    - https://github.com/coredns/coredns
+    type: application
+    urls:
+    - assets/rke2-coredns/rke2-coredns-1.24.009.tgz
+    version: 1.24.009
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: added
+          description: Added podSecurityContext
+    apiVersion: v2
+    appVersion: 1.10.1
     created: "2024-01-03T09:04:17.926878281Z"
     description: CoreDNS is a DNS server that chains plugins and provides Kubernetes
       DNS Services
