@@ -32,7 +32,7 @@
 +    {{- $dnsIPs := split "," .Values.global.clusterDNS }}
 +    {{- $dnsCount := len $dnsIPs }}
 +    {{- if eq $dnsCount 1 }}
-+        {{- .Values.global.clusterDNS }}
++        {{- .Values.global.clusterDNS -}}
 +    {{- else }}
 +        {{- if gt $dnsCount 1 }}
 +            {{- $dnsIPs._0 -}}
