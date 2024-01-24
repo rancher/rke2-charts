@@ -26,7 +26,7 @@
    # flannel command arguments
    args:
    - "--ip-masq"
-@@ -25,28 +17,35 @@
+@@ -25,28 +17,36 @@
    # Documentation at https://github.com/flannel-io/flannel/blob/master/Documentation/backends.md
    backend: "vxlan"
    # Port used by the backend 0 means default value (VXLAN: 8472, Wireguard: 51821, UDP: 8285)
@@ -40,7 +40,7 @@
    #
    # VXLAN Identifier to be used. On Linux default is 1.
 -  #vni: 1
-+  vni: 1
++  vni: 4096
    # Enable VXLAN Group Based Policy (Default false)
 -  #GBP: false
 +  GBP: false
@@ -50,6 +50,7 @@
    # MAC prefix to be used on Windows. (Defaults is 0E-2A)
 -  #macPrefix: "0E-2A"
 +  macPrefix: "0E-2A"
++  vxlanBackendPort: 4789
    #
    # Wireguard Configs:
    #
