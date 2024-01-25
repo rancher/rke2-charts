@@ -7,7 +7,7 @@
  ---
  apiVersion: v1
  kind: Service
-@@ -33,12 +35,12 @@
+@@ -25,12 +27,12 @@
      k8s-app: {{ template "coredns.k8sapplabel" . }}
      {{- end }}
      app.kubernetes.io/name: {{ template "coredns.name" . }}
@@ -25,7 +25,7 @@
    {{- end }}
    {{- if .Values.service.externalIPs }}
    externalIPs:
-@@ -53,7 +55,5 @@
+@@ -45,7 +47,5 @@
    ports:
  {{ include "coredns.servicePorts" . | indent 2 -}}
    type: {{ default "ClusterIP" .Values.serviceType }}
