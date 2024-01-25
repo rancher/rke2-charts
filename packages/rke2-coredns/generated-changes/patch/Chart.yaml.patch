@@ -1,9 +1,9 @@
 --- charts-original/Chart.yaml
 +++ charts/Chart.yaml
-@@ -16,7 +16,7 @@
- - name: mrueg
+@@ -19,7 +19,7 @@
  - name: haad
- - name: HagaiBarel
+ - name: hagaibarel
+ - name: shubham-cmyk
 -name: coredns
 +name: rke2-coredns
  sources:

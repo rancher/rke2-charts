@@ -1,6 +1,6 @@
 --- charts-original/templates/configmap.yaml
 +++ charts/templates/configmap.yaml
-@@ -31,7 +31,7 @@
+@@ -23,7 +23,7 @@
      {{- if .port }}:{{ .port }} {{ end -}}
      {
        {{- range .plugins }}
