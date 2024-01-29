@@ -162,7 +162,17 @@
      port: 9963
      serviceMonitor:
        # -- Enable service monitors.
-@@ -2540,11 +2525,9 @@
+@@ -2430,8 +2415,7 @@
+ 
+   # -- Taint nodes where Cilium is scheduled but not running. This prevents pods
+   # from being scheduled to nodes where Cilium is not the default CNI provider.
+-  # @default -- same as removeNodeTaints
+-  setNodeTaints: ~
++  setNodeTaints: false
+ 
+   # -- Set Node condition NetworkUnavailable to 'false' with the reason
+   # 'CiliumIsUp' for nodes that have a healthy Cilium pod.
+@@ -2540,11 +2524,9 @@
    # -- Cilium pre-flight image.
    image:
      override: ~
@@ -176,7 +186,7 @@
      pullPolicy: "IfNotPresent"
  
    # -- The priority class to use for the preflight pod.
-@@ -2690,21 +2673,18 @@
+@@ -2690,21 +2672,18 @@
      # -- Clustermesh API server image.
      image:
        override: ~
@@ -202,7 +212,7 @@
          pullPolicy: "IfNotPresent"
  
        # -- Specifies the resources for etcd container in the apiserver
-@@ -2737,11 +2717,9 @@
+@@ -2737,11 +2716,9 @@
        # -- KVStoreMesh image.
        image:
          override: ~
@@ -216,7 +226,7 @@
          pullPolicy: "IfNotPresent"
  
        # -- Additional KVStoreMesh arguments.
-@@ -3222,3 +3200,11 @@
+@@ -3222,3 +3199,11 @@
        agentSocketPath: /run/spire/sockets/agent/agent.sock
        # -- SPIRE connection timeout
        connectionTimeout: 30s
