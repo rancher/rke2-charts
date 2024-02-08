@@ -20,7 +20,7 @@
 
 image:
   repository: rancher/hardened-multus-cni
-  tag: v4.0.2-build20231009
+  tag: v4.0.2-build20240208
   pullPolicy: IfNotPresent
 
 #imagePullSecrets: []
@@ -119,7 +119,7 @@ manifests:
 cniplugins:
   image:
     repository: rancher/hardened-cni-plugins
-    tag: v1.2.0-build20231009
+    tag: v1.4.0-build20240122
 
   # skipcnis is a comma separated list of cni binaries to skip from
   # installing.
