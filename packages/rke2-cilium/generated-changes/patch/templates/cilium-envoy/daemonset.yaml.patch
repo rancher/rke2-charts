@@ -1,6 +1,6 @@
 --- charts-original/templates/cilium-envoy/daemonset.yaml
 +++ charts/templates/cilium-envoy/daemonset.yaml
-@@ -58,7 +58,7 @@
+@@ -62,7 +62,7 @@
        {{- end }}
        containers:
        - name: cilium-envoy
@@ -8,4 +8,4 @@
 +        image: "{{ template "system_default_registry" . }}{{ include "cilium.image" .Values.envoy.image }}"
          imagePullPolicy: {{ .Values.envoy.image.pullPolicy }}
          command:
-         - /usr/bin/cilium-envoy
+         - /usr/bin/cilium-envoy-starter
