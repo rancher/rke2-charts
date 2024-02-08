@@ -8,7 +8,7 @@ flannel:
   # kube-flannel image
   image:
     repository: rancher/hardened-flannel
-    tag: v0.23.0-build20231109
+    tag: v0.24.2-build20240122
   # The interface used by canal for host <-> host communication.
   # If left blank, then the interface is chosen using the node's
   # default route.
@@ -17,8 +17,8 @@ flannel:
   regexIface: ""
   # kube-flannel command arguments
   args:
-  - "--ip-masq"
-  - "--kube-subnet-mgr"
+    - "--ip-masq"
+    - "--kube-subnet-mgr"
   # Backend for kube-flannel. Backend should not be changed
   # at runtime.
   backend: "vxlan"
@@ -50,13 +50,12 @@ flannel:
   keepaliveInterval: 0
   # Resource bounds for the kube-flannel daemon container
   resources: ~
-    # requests:
-    #   memory: 32Mi
-    #   cpu: 100m
-    # limits:
-    #   memory: 128Mi
-    #   cpu: 500m
-
+  # requests:
+  #   memory: 32Mi
+  #   cpu: 100m
+  # limits:
+  #   memory: 128Mi
+  #   cpu: 500m
 calico:
   # CNI installation image.
   cniImage:
@@ -74,7 +73,6 @@ calico:
   kubeControllerImage:
     repository: rancher/hardened-calico
     tag: v3.26.3-build20231109
-
   # Datastore type for canal. It can be either kuberentes or etcd.
   datastoreType: kubernetes
   # Wait for datastore to initialize.
@@ -130,7 +128,6 @@ calico:
     # limits:
     #   cpu: 250m
     #   memory: 256Mi
-
 global:
   systemDefaultRegistry: ""
   clusterCIDRv4: ""
