@@ -1,8 +1,8 @@
 apiVersion: v1
 name: rke2-canal
 description: Install Canal Network Plugin.
-version: v3.26.3-build20231109
-appVersion: v3.26.3
+version: v3.27.0-build20240206
+appVersion: v3.27.0
 home: https://www.projectcalico.org/
 keywords:
   - canal
