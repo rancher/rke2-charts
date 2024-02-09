@@ -1,6 +1,6 @@
 --- charts-original/templates/_helpers.tpl
 +++ charts/templates/_helpers.tpl
-@@ -1,7 +1,10 @@
+@@ -1,9 +1,12 @@
  {{/* generate the image name for a component*/}}
  {{- define "tigera-operator.image" -}}
 -{{- if .registry -}}
@@ -14,3 +14,5 @@
 +{{- end -}}
 +{{- .Values.tigeraOperator.image -}}:{{- .Values.tigeraOperator.version -}}
  {{- end -}}
+ 
+ {{/*

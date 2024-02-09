@@ -1,6 +1,6 @@
 --- charts-original/values.yaml
 +++ charts/values.yaml
-@@ -1,11 +1,24 @@
+@@ -6,8 +6,21 @@
  imagePullSecrets: {}
  
  installation:
@@ -13,12 +13,17 @@
 +    effect: "NoExecute"
    enabled: true
 +  kubeletVolumePluginPath: "None"
-   kubernetesProvider: ''
+   kubernetesProvider: ""
 +  calicoNetwork:
 +    bgp: Disabled
 +  imagePath: "rancher"
 +  imagePrefix: "mirrored-calico-"
 +  flexVolumePath: "/var/lib/kubelet/volumeplugins/"
+   # imagePullSecrets are configured on all images deployed by the tigera-operator.
+   # secrets specified here must exist in the tigera-operator namespace; they won't be created by the operator or helm.
+   # imagePullSecrets are a slice of LocalObjectReferences, which is the same format they appear as on deployments.
+@@ -16,7 +29,7 @@
+   imagePullSecrets: []
  
  apiServer:
 -  enabled: true
@@ -26,19 +31,21 @@
  
  certs:
    node:
-@@ -40,9 +53,28 @@
+@@ -51,11 +64,30 @@
  
  # Image and registry configuration for the tigera/operator pod.
  tigeraOperator:
 -  image: tigera/operator
 +  image: rancher/mirrored-calico-operator
-   version: v1.30.7
+   version: v1.32.3
 -  registry: quay.io
 +  registry: docker.io
  calicoctl:
 -  image: docker.io/calico/ctl
 +  image: rancher/mirrored-calico-ctl
-   tag: v3.26.3
+   tag: v3.27.0
+ 
+ kubeletVolumePluginPath: /var/lib/kubelet
 +
 +global:
 +  systemDefaultRegistry: ""
