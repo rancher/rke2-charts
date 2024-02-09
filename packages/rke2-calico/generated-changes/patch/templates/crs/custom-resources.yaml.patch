@@ -1,9 +1,9 @@
 --- charts-original/templates/crs/custom-resources.yaml
 +++ charts/templates/crs/custom-resources.yaml
-@@ -6,6 +6,33 @@
- {{ $secrets = append $secrets $item }}
- {{ end }}
- {{ $_ := set $installSpec "imagePullSecrets" $secrets }}
+@@ -2,6 +2,33 @@
+ {{ $installSpec := omit .Values.installation "enabled" }}
+ {{ $_ := set $installSpec "imagePullSecrets" (include "tigera-operator.imagePullSecrets" . | fromYamlArray) }}
+ {{ $_ := set $installSpec "kubeletVolumePluginPath" .Values.kubeletVolumePluginPath }}
 +{{ $defaultRegistry := get $installSpec "registry" }}
 +{{ $finalRegistry := coalesce .Values.global.systemDefaultRegistry $defaultRegistry }}
 +{{ $_ := set $installSpec "registry" $finalRegistry }}

@@ -9,7 +9,7 @@
    labels:
      k8s-app: tigera-operator
  spec:
-@@ -37,7 +37,7 @@
+@@ -40,7 +40,7 @@
        dnsPolicy: ClusterFirstWithHostNet
        containers:
          - name: tigera-operator
