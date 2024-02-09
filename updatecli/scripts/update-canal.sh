@@ -15,6 +15,7 @@ if [ -n "$CALICO_VERSION" ]; then
 		echo "Updating flannel image to $CALICO_VERSION"
 		yq -i ".calico.cniImage.tag = \"$CALICO_VERSION\" |
 			.calico.flexvolImage.tag = \"$CALICO_VERSION\" |
+			.calico.nodeImage.tag = \"$CALICO_VERSION\" |
 			.calico.kubeControllerImage.tag = \"$CALICO_VERSION\"" packages/rke2-canal/charts/values.yaml
 		app_version=$(echo "$CALICO_VERSION" | grep -Eo 'v[0-9]+.[0-9]+.[0-9+]')
 		yq -i ".version = \"$CALICO_VERSION\" |

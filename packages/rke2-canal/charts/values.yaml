@@ -64,7 +64,7 @@ calico:
   # Canal node image.
   nodeImage:
     repository: rancher/hardened-calico
-    tag: v3.26.3-build20231109
+    tag: v3.27.0-build20240206
   # Flexvol Image.
   flexvolImage:
     repository: rancher/hardened-calico
