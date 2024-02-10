@@ -1,6 +1,6 @@
 --- charts-original/templates/etcd-operator/cilium-etcd-operator-deployment.yaml
 +++ charts/templates/etcd-operator/cilium-etcd-operator-deployment.yaml
-@@ -90,7 +90,7 @@
+@@ -94,7 +94,7 @@
            value: "revision"
          - name: CILIUM_ETCD_META_ETCD_AUTO_COMPACTION_RETENTION
            value: "25000"
