@@ -31,7 +31,7 @@
  
  certs:
    node:
-@@ -51,11 +64,30 @@
+@@ -51,11 +64,28 @@
  
  # Image and registry configuration for the tigera/operator pod.
  tigeraOperator:
@@ -45,8 +45,7 @@
 +  image: rancher/mirrored-calico-ctl
    tag: v3.27.0
  
- kubeletVolumePluginPath: /var/lib/kubelet
-+
+-kubeletVolumePluginPath: /var/lib/kubelet
 +global:
 +  systemDefaultRegistry: ""
 +  clusterCIDRv4: ""
