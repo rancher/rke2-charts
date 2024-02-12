@@ -992,6 +992,23 @@ entries:
       catalog.cattle.io/namespace: tigera-operator
     apiVersion: v2
     appVersion: v3.27.0
+    created: "2024-02-12T18:08:10.972942033Z"
+    description: Installs the Tigera operator for Calico
+    digest: 8c871b92f4c734b64f3772f388acd2656fc4ed39ce3b33706fb7502181ec08d6
+    home: https://projectcalico.docs.tigera.io/about/about-calico
+    icon: https://projectcalico.docs.tigera.io/images/felix_icon.png
+    name: rke2-calico
+    sources:
+    - https://github.com/projectcalico/calico/tree/master/calico/_includes/charts/tigera-operator
+    - https://github.com/tigera/operator
+    - https://github.com/projectcalico/calico
+    urls:
+    - assets/rke2-calico/rke2-calico-v3.27.002.tgz
+    version: v3.27.002
+  - annotations:
+      catalog.cattle.io/namespace: tigera-operator
+    apiVersion: v2
+    appVersion: v3.27.0
     created: "2024-02-12T16:02:55.295165866Z"
     description: Installs the Tigera operator for Calico
     digest: 3d7540c98c7a5b16fb9e82c4e576deba41a7211ea8e93ab90720370ee519fbea
@@ -1651,6 +1668,15 @@ entries:
     - assets/rke2-calico/rke2-calico-v3.18.1-101.tgz
     version: v3.18.1-101
   rke2-calico-crd:
+  - apiVersion: v1
+    created: "2024-02-12T18:08:10.947729404Z"
+    description: Installs the CRDs for rke2-calico
+    digest: 13d76cb16298fed02130ec4a891f12d5edba4d88195004688489040d8d7537f2
+    name: rke2-calico-crd
+    type: application
+    urls:
+    - assets/rke2-calico/rke2-calico-crd-v3.27.002.tgz
+    version: v3.27.002
   - apiVersion: v1
     created: "2024-02-12T16:02:55.26813464Z"
     description: Installs the CRDs for rke2-calico
