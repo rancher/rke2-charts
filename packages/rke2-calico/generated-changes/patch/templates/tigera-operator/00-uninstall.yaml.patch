@@ -1,0 +1,18 @@
+--- charts-original/templates/tigera-operator/00-uninstall.yaml
++++ charts/templates/tigera-operator/00-uninstall.yaml
+@@ -2,7 +2,7 @@
+ kind: Job
+ metadata:
+   name: tigera-operator-uninstall
+-  namespace: {{.Release.Namespace}}
++  namespace: tigera-operator
+   labels:
+     k8s-app: tigera-operator-uninstall
+     helm.sh/chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+@@ -34,5 +34,5 @@
+       serviceAccountName: tigera-operator
+       containers:
+       - name: cleanup-job
+-        image: {{ template "tigera-operator.image" .Values.tigeraOperator}}
++        image: {{ template "tigera-operator.image" . }}
+         args: ["-pre-delete"]
