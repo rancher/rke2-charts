@@ -73,12 +73,6 @@ spec:
         {{- if .Values.config.cni_conf.cniVersion }}
         - "--cni-version={{ .Values.config.cni_conf.cniVersion }}"
         {{- end }}
-        {{- if .Values.config.cni_conf.confDir }}
-        - "--cni-conf-dir=={{ .Values.config.cni_conf.confDir }}"
-        {{- end }}
-        {{- if .Values.config.cni_conf.binDir }}
-        - "--cni-bin-dir={{ .Values.config.cni_conf.binDir }}"
-        {{- end }}
         {{- if .Values.config.cni_conf.multusAutoconfigDir }}
         - "--multus-autoconfig-dir={{ .Values.config.cni_conf.multusAutoconfigDir }}"
         {{- end }}
@@ -130,10 +124,10 @@ spec:
       volumes:
         - name: cni
           hostPath:
-            path: /etc/cni/net.d
+            path: {{ .Values.config.cni_conf.confDir }}
         - name: cnibin
           hostPath:
-            path: /opt/cni/bin
+            path: {{ .Values.config.cni_conf.binDir }}
         {{- if .Values.manifests.configMap }}
         - name: multus-cfg
           configMap:
