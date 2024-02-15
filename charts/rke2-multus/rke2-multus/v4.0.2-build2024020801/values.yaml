@@ -1,0 +1,138 @@
+# Copyright 2020 K8s Network Plumbing Group
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# Default values for multus.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+#replicaCount: 1
+
+image:
+  repository: rancher/hardened-multus-cni
+  tag: v4.0.2-build20240208
+  pullPolicy: IfNotPresent
+
+#imagePullSecrets: []
+#nameOverride: ""
+#fullnameOverride: ""
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  #create: true
+  # Annotations to add to the service account
+  #annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: multus
+
+pod:
+  resources:
+    enabled: false
+    multus:
+      requests:
+        memory: "128Mi"
+        cpu: "250m"
+      limits:
+        memory: "1024Mi"
+        cpu: "2000m"
+
+#podSecurityContext: {}
+  # fsGroup: 2000
+
+#securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+#service:
+  #type: ClusterIP
+  #port: 80
+
+#ingress:
+  #enabled: false
+  #annotations: {}
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+  #hosts:
+    #- host: chart-example.local
+    #  paths: []
+  #tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
+
+labels:
+  nodeSelector: 
+    kubernetes.io/os: linux
+    kubernetes.io/arch: amd64
+
+# Multus configuration
+# For more details, see https://github.com/k8snetworkplumbingwg/multus-cni/blob/master/docs/how-to-use.md#entrypoint-script-parameters
+config:
+  cni_conf:
+    confDir: /etc/cni/net.d
+    binDir: /opt/cni/bin
+    #namespaceIsolation: false
+    #globalNamespaces: default,foo,bar
+    #skipMultusBinaryCopy: false
+    #readinessIndicatorFile: ""
+    multusConfFile: auto #or specify a file to be copied on each node
+    #The following options can be used only when multusConfFile=auto
+    #multusAutoconfigDir: /host/etc/cni/net.d
+    kubeconfig: /etc/cni/net.d/multus.d/multus.kubeconfig
+    #masterCniFilename:
+    #logFile: /var/log/multus.log
+    #logLevel: panic
+    #cniVersion: 1.0.0
+    #cleanupConfigOnExit: true
+    #additionalBinDir: /opt/multus/bin
+
+manifests:
+  serviceAccount: true
+  clusterRole: true
+  clusterRoleBinding: true
+  configMap: false
+  daemonSet: true
+  customResourceDefinition: true
+  dhcpDaemonSet: false
+
+#tolerations: []
+
+#affinity: {}
+
+
+## RANCHER ADDDED INFO ##
+cniplugins:
+  image:
+    repository: rancher/hardened-cni-plugins
+    tag: v1.4.0-build20240122
+
+  # skipcnis is a comma separated list of cni binaries to skip from
+  # installing.
+  skipcnis: flannel
+
+dhcpDaemonSet:
+  image:
+    repository: rancher/mirrored-library-busybox
+    tag: "1.36.1"
+
+global:
+  systemDefaultRegistry: ""
+
+rke2-whereabouts:
+  enabled: false
+  

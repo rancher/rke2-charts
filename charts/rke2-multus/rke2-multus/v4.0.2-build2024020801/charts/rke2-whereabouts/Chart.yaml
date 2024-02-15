@@ -1,0 +1,10 @@
+apiVersion: v2
+appVersion: 0.6.3
+description: A Helm chart to deploy the whereabouts CNI
+home: https://github.com/k8snetworkplumbingwg/whereabouts
+maintainers:
+- email: charts@rancher.com
+  name: Rancher Labs
+name: rke2-whereabouts
+type: application
+version: 0.1.1
