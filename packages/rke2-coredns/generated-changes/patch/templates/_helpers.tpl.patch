@@ -1,6 +1,20 @@
 --- charts-original/templates/_helpers.tpl
 +++ charts/templates/_helpers.tpl
-@@ -57,7 +57,7 @@
+@@ -15,13 +15,9 @@
+ {{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" -}}
+ {{- else -}}
+ {{- $name := default .Chart.Name .Values.nameOverride -}}
+-{{- if contains $name .Release.Name }}
+-{{- .Release.Name | trunc 63 | trimSuffix "-" }}
+-{{- else }}
+ {{- printf "%s-%s" .Release.Name $name | trunc 63 | trimSuffix "-" -}}
+ {{- end -}}
+ {{- end -}}
+-{{- end -}}
+ 
+ {{/*
+ Common labels
+@@ -57,7 +53,7 @@
  Allow k8s-app label to be overridden
  */}}
  {{- define "coredns.k8sapplabel" -}}
@@ -9,7 +23,7 @@
  {{- end -}}
  
  {{/*
-@@ -224,3 +224,72 @@
+@@ -224,3 +220,72 @@
      {{ default "default" .Values.serviceAccount.name }}
  {{- end -}}
  {{- end -}}
