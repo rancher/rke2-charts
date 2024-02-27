@@ -17,7 +17,7 @@ RKE2 injects at runtime a number of cluster configuration values into values.yam
 If set this **must** be used as a registry prefix for all images used by the chart.
 
 The authoritative list of variables can be found within the
-[setChartValues function of boostrap.go](https://github.com/rancher/rke2/blob/master/pkg/bootstrap/bootstrap.go);
+[setChartValues function of bootstrap.go](https://github.com/rancher/rke2/blob/master/pkg/bootstrap/bootstrap.go);
 at the time this document was last updated it includes:
 * `global.clusterCIDR` - the CIDR range used for pod IP addresses.
 * `global.clusterDNS` - the cluster DNS (coredns) service address.
