@@ -1,6 +1,6 @@
 --- charts-original/templates/node/daemonset.yaml
 +++ charts/templates/node/daemonset.yaml
-@@ -91,7 +91,7 @@
+@@ -97,7 +97,7 @@
              {{- if semverCompare "< 1.24" $.Capabilities.KubeVersion.Version }}
              - "--use-gocsi=false"
              {{- end }}
