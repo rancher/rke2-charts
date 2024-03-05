@@ -1,0 +1,11 @@
+--- charts-original/values.yaml
++++ charts/values.yaml
+@@ -32,7 +32,7 @@
+ # Supported versions can be found at:
+ # https://github.com/kubernetes/cloud-provider-vsphere#compatibility-with-kubernetes
+ versionOverrides:
+-  - constraint: "~ 1.28"
++  - constraint: ">= 1.28 <= 1.29"
+     values:
+       cloudControllerManager:
+         repository: rancher/mirrored-cloud-provider-vsphere-cpi-release-manager
