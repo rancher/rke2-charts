@@ -76,9 +76,8 @@ pod:
   #      - chart-example.local
 
 labels:
-  nodeSelector: 
+  nodeSelector:
     kubernetes.io/os: linux
-    kubernetes.io/arch: amd64
 
 # Multus configuration
 # For more details, see https://github.com/k8snetworkplumbingwg/multus-cni/blob/master/docs/how-to-use.md#entrypoint-script-parameters
