@@ -166,6 +166,8 @@ spec:
               value: {{ .Values.calico.felixFailsafeInboundHostPorts | quote }}
             - name: FELIX_FAILSAFEOUTBOUNDHOSTPORTS
               value: {{ .Values.calico.felixFailsafeOutboundHostPorts | quote }}
+            - name: FELIX_IPTABLESMARKMASK
+              value: {{ .Values.calico.felixIptablesMarkMask | quote }}
 {{- if coalesce .Values.global.clusterCIDRv4 .Values.podCidr }}
             # The method to use to autodetect the IPv4 address for this host.
             - name: IP_AUTODETECTION_METHOD

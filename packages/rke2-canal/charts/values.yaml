@@ -99,6 +99,8 @@ calico:
   felixPrometheusMetricsEnabled: true
   # Disable XDP Acceleration as we do not support it with our ubi7 base image
   felixXDPEnabled: false
+  # Configure the mask that felix selects its iptables mark bits from
+  felixIptablesMarkMask: "0xffff0000"
   # Whether or not to masquerade traffic to destinations not within
   # the pod network.
   masquerade: true
