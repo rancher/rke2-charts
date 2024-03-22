@@ -1,7 +1,7 @@
 --- charts-original/templates/daemonset.yaml
 +++ charts/templates/daemonset.yaml
-@@ -32,19 +32,13 @@
-         effect: NoSchedule
+@@ -33,19 +33,13 @@
+       {{- end }}
        serviceAccountName: flannel
        initContainers:
 -      - name: install-cni-plugin
@@ -24,7 +24,7 @@
          command:
          - cp
          args:
-@@ -58,7 +52,7 @@
+@@ -59,7 +53,7 @@
            mountPath: /etc/kube-flannel/
        containers:
        - name: kube-flannel
@@ -33,7 +33,7 @@
          command:
          - "/opt/bin/flanneld"
          {{- range .Values.flannel.args }}
-@@ -97,6 +91,7 @@
+@@ -98,6 +92,7 @@
        - name: cni-plugin
          hostPath:
            path: /opt/cni/bin

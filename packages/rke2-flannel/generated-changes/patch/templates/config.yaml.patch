@@ -1,6 +1,6 @@
 --- charts-original/templates/config.yaml
 +++ charts/templates/config.yaml
-@@ -29,19 +29,19 @@
+@@ -29,13 +29,13 @@
      }
    net-conf.json: |
      {
@@ -18,20 +18,3 @@
        "EnableIPv6": true,
  {{- end }}
        "Backend": {
- {{- if eq .Values.flannel.backend "vxlan" }}
--{{- if .Values.flannel.backendPort }}
--        "Port": {{ .Values.flannel.backendPort }},
-+{{- if .Values.flannel.vxlanBackendPort }}
-+        "Port": {{ .Values.flannel.vxlanBackendPort }},
- {{- end }}
- {{- if .Values.flannel.vni }}
-         "VNI": {{ .Values.flannel.vni }},
-@@ -56,7 +56,7 @@
-         "MTU": {{ .Values.flannel.mtu }},
- {{- end }}
- {{- if .Values.flannel.macPrefix }}
--        "MacPrefix": {{ .Values.flannel.macPrefix }},
-+        "MacPrefix": {{ .Values.flannel.macPrefix | quote }},
- {{- end }}
-         "Type": {{ .Values.flannel.backend | quote }}
- {{- else if eq .Values.flannel.backend "wireguard" }}

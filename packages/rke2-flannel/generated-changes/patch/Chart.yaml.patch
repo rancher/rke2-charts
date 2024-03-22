@@ -9,4 +9,4 @@
  sources:
 -- https://github.com/flannel-io/flannel
 +- https://github.com/rancher/rke2-charts
- version: v0.24.2
+ version: v0.24.4
