@@ -14,4 +14,4 @@ name: rke2-multus
 sources:
 - https://github.com/intel/multus-cni
 type: application
-version: v4.0.2-build20240208
+version: v4.0.2
