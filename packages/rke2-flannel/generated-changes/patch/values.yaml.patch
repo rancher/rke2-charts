@@ -22,7 +22,7 @@
 -    repository: docker.io/flannel/flannel-cni-plugin
 -    tag: v1.4.0-flannel1
 +    repository: rancher/hardened-cni-plugins
-+    tag: v1.4.1-build20240322
++    tag: v1.4.1-build20240325
    # flannel command arguments
    args:
    - "--ip-masq"
