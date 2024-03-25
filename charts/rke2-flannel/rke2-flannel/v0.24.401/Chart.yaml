@@ -1,0 +1,9 @@
+apiVersion: v1
+appVersion: v0.24.4
+description: Install Flannel Network Plugin.
+keywords:
+- Flannel
+name: rke2-flannel
+sources:
+- https://github.com/rancher/rke2-charts
+version: v0.24.401
