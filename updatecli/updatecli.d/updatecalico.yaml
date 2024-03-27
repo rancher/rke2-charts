@@ -1,0 +1,54 @@
+---
+name: "Update Calico version" 
+
+sources:
+  calico:
+    name: Get calico version
+    kind: githubrelease
+    spec:
+      owner: projectcalico
+      repository: calico
+      token: '{{ requiredEnv .github.token }}'
+      typefilter:
+        release: true
+        draft: false
+        prerelease: false
+      versionfilter:
+        kind: latest
+
+targets:
+  calicoImage:
+    name: "Bump to latest calico version on the chart"
+    kind: shell
+    scmid: default
+    sourceid: calico
+    spec:
+      command: 'updatecli/scripts/update-calico.sh'
+      environments:
+        - name: CALICO_VERSION
+          value: '{{ source "calico" }}'
+
+
+scms:
+  default:
+    kind: github
+    spec:
+      token: '{{ requiredEnv .github.token }}'
+      username: '{{ requiredEnv .github.username }}'
+      user: '{{ .github.username }}'
+      email: '{{ .github.email }}'
+      owner: '{{ .github.owner }}'
+      repository: '{{ .github.repository }}'
+      branch: '{{ .github.branch }}'
+      
+actions:
+  default:
+    title: 'Update Calico version to {{ source "calico" }}'
+    kind: github/pullrequest
+    spec:
+      automerge: false
+      labels:
+        - chore
+        - skip-changelog
+        - status/auto-created 
+    scmid: default
