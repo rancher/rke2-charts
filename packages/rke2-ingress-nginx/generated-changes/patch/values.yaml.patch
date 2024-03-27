@@ -1,6 +1,6 @@
 --- charts-original/values.yaml
 +++ charts/values.yaml
-@@ -19,22 +19,18 @@
+@@ -21,15 +21,11 @@
    image:
      ## Keep false as default for now!
      chroot: false
@@ -10,14 +10,15 @@
      ## for backwards compatibility consider setting the full image url via the repository value below
      ## use *either* current default registry/image or repository format or installing chart by providing the values.yaml will fail
      ## repository:
--    tag: "v1.9.3"
--    digest: sha256:8fd21d59428507671ce0fb47f818b1d859c92d2ad07bb7c947268d433030ba98
--    digestChroot: sha256:df4931fd6859fbf1a71e785f02a44b2f9a16f010ae852c442e9bb779cbefdc86
+-    tag: "v1.9.6"
+-    digest: sha256:1405cc613bd95b2c6edd8b2a152510ae91c7e62aea4698500d23b2145960ab9c
+-    digestChroot: sha256:7eb46ff733429e0e46892903c7394aff149ac6d284d92b3946f3baf7ff26a096
 -    pullPolicy: IfNotPresent
-+    tag: "nginx-1.9.3-hardened1"
++    tag: "nginx-1.9.6-hardened1"
+     runAsNonRoot: true
      # www-data -> uid 101
      runAsUser: 101
-     allowPrivilegeEscalation: true
+@@ -40,7 +36,7 @@
    # -- Use an existing PSP instead of creating one
    existingPsp: ""
    # -- Configures the controller container name
@@ -26,7 +27,7 @@
    # -- Configures the ports that the nginx-controller listens on
    containerPort:
      http: 80
-@@ -64,14 +60,14 @@
+@@ -70,14 +66,14 @@
    # -- Optionally change this to ClusterFirstWithHostNet in case you have 'hostNetwork: true'.
    # By default, while using host network, name resolution uses the host's DNS. If you wish nginx-controller
    # to keep resolving names inside the k8s network, use ClusterFirstWithHostNet.
@@ -43,7 +44,7 @@
    # -- Process IngressClass per name (additionally as per spec.controller).
    ingressClassByName: false
    # -- This configuration enables Topology Aware Routing feature, used together with service annotation service.kubernetes.io/topology-mode="auto"
-@@ -90,7 +86,7 @@
+@@ -96,7 +92,7 @@
    ## Disabled by default
    hostPort:
      # -- Enable 'hostPort' or not
@@ -52,7 +53,7 @@
      ports:
        # -- 'hostPort' http port
        http: 80
-@@ -137,7 +133,7 @@
+@@ -145,7 +141,7 @@
    # node or nodes where an ingress controller pod is running.
    publishService:
      # -- Enable 'publishService' or not
@@ -61,7 +62,7 @@
      # -- Allows overriding of the publish service to bind to
      # Must be <namespace>/<service_name>
      pathOverride: ""
-@@ -181,7 +177,7 @@
+@@ -192,7 +188,7 @@
    #         name: secret-resource
  
    # -- Use a `DaemonSet` or `Deployment`
@@ -70,24 +71,24 @@
    # -- Annotations to be added to the controller Deployment or DaemonSet
    ##
    annotations: {}
-@@ -432,7 +428,7 @@
-     configMapName: ""
+@@ -444,7 +440,7 @@
      configMapKey: ""
    service:
+     # -- Enable controller services or not. This does not influence the creation of either the admission webhook or the metrics service.
 -    enabled: true
 +    enabled: false
-     # -- If enabled is adding an appProtocol option for Kubernetes service. An appProtocol field replacing annotations that were
-     # using for setting a backend protocol. Here is an example for AWS: service.beta.kubernetes.io/aws-load-balancer-backend-protocol: http
-     # It allows choosing the protocol for each backend specified in the Kubernetes service.
-@@ -618,6 +614,7 @@
+     external:
+       # -- Enable the external controller service or not. Useful for internal-only deployments.
+       enabled: true
+@@ -739,6 +735,7 @@
        loadBalancerSourceRanges: []
        servicePort: 443
        type: ClusterIP
 +      ipFamilyPolicy: "PreferDualStack"
      createSecretJob:
-       securityContext:
-         allowPrivilegeEscalation: false
-@@ -635,13 +632,11 @@
+       name: create
+       # -- Security context for secret creation containers
+@@ -776,13 +773,11 @@
      patch:
        enabled: true
        image:
@@ -97,13 +98,13 @@
          ## for backwards compatibility consider setting the full image url via the repository value below
          ## use *either* current default registry/image or repository format or installing chart by providing the values.yaml will fail
          ## repository:
--        tag: v20231011-8b53cabe0
--        digest: sha256:a7943503b45d552785aa3b5e457f169a5661fb94d82b8a3373bcd9ebaf9aac80
+-        tag: v20231226-1a7112e06
+-        digest: sha256:25d6a5f11211cc5c3f9f2bf552b585374af287b4debf693cacbe2da47daa5084
 +        tag: v20230312-helm-chart-4.5.2-28-g66a760794
          pullPolicy: IfNotPresent
        # -- Provide a priority class name to the webhook patching job
        ##
-@@ -769,12 +764,11 @@
+@@ -918,12 +913,11 @@
    enabled: false
    name: defaultbackend
    image:
@@ -116,9 +117,9 @@
 -    tag: "1.5"
 +    tag: "1.5-rancher1"
      pullPolicy: IfNotPresent
+     runAsNonRoot: true
      # nobody user -> uid 65534
-     runAsUser: 65534
-@@ -932,3 +926,6 @@
+@@ -1092,3 +1086,6 @@
  # This can be generated with: `openssl dhparam 4096 2> /dev/null | base64`
  ## Ref: https://github.com/kubernetes/ingress-nginx/tree/main/docs/examples/customization/ssl-dh-param
  dhParam: ""
