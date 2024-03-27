@@ -42,7 +42,7 @@ spec:
           privileged: true
         volumeMounts:
         - name: binpath
-          mountPath: /opt/cni
+          mountPath: /opt/cni/bin
         - name: socketpath
           mountPath: /run/cni
         - name: netnspath
@@ -51,7 +51,7 @@ spec:
       volumes:
         - name: binpath
           hostPath:
-            path: /opt/cni
+            path: {{ .Values.config.cni_conf.binDir }}
         - name: socketpath
           hostPath:
             path: /run/cni
