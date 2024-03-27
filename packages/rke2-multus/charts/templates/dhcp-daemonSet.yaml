@@ -24,6 +24,10 @@ spec:
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | trim | nindent 8 }}
+      {{- end }}
       nodeSelector: {{- toYaml .Values.labels.nodeSelector | nindent 8 }}
       initContainers:
       - name: kube-{{ .Chart.Name }}-dhcp-cleanup
@@ -42,7 +46,7 @@ spec:
           privileged: true
         volumeMounts:
         - name: binpath
-          mountPath: /opt/cni
+          mountPath: /opt/cni/bin
         - name: socketpath
           mountPath: /run/cni
         - name: netnspath
@@ -51,7 +55,7 @@ spec:
       volumes:
         - name: binpath
           hostPath:
-            path: /opt/cni
+            path: {{ .Values.config.cni_conf.binDir }}
         - name: socketpath
           hostPath:
             path: /run/cni

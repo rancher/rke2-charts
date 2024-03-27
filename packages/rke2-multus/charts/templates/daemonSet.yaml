@@ -41,11 +41,10 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       nodeSelector: {{- toYaml .Values.labels.nodeSelector | nindent 8 }}
+      {{- with .Values.tolerations }}
       tolerations:
-      - operator: Exists
-        effect: NoSchedule
-      - operator: Exists
-        effect: NoExecute
+        {{- toYaml . | trim | nindent 8 }}
+      {{- end }}
       serviceAccountName: {{ .Values.serviceAccount.name }}
       initContainers:
       - name: cni-plugins

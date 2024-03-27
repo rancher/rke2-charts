@@ -109,7 +109,11 @@ manifests:
   customResourceDefinition: true
   dhcpDaemonSet: false
 
-#tolerations: []
+tolerations:
+- operator: Exists 
+  effect: NoSchedule 
+- operator: Exists 
+  effect: NoExecute 
 
 #affinity: {}
 
