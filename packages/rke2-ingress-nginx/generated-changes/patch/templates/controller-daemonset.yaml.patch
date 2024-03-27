@@ -5,7 +5,7 @@
        containers:
          - name: {{ .Values.controller.containerName }}
 -          {{- with .Values.controller.image }}
--          image: "{{- if .repository -}}{{ .repository }}{{ else }}{{ .registry }}/{{ include "ingress-nginx.image" . }}{{- end -}}:{{ .tag }}{{ include "ingress-nginx.imageDigest" . }}"
+-          image: {{ if .repository }}{{ .repository }}{{ else }}{{ .registry }}/{{ include "ingress-nginx.image" . }}{{ end }}:{{ .tag }}{{ include "ingress-nginx.imageDigest" . }}
 -          {{- end }}
 +          image: "{{ template "system_default_registry" . }}{{ template "repository_or_registry_and_image" .Values.controller.image }}"
            imagePullPolicy: {{ .Values.controller.image.pullPolicy }}
