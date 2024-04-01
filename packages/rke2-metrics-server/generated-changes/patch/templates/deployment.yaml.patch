@@ -1,0 +1,11 @@
+--- charts-original/templates/deployment.yaml
++++ charts/templates/deployment.yaml
+@@ -100,7 +100,7 @@
+           securityContext:
+             {{- toYaml . | nindent 12 }}
+           {{- end }}
+-          image: {{ include "metrics-server.addonResizer.image" . }}
++          image: {{ template "system_default_registry" . }}{{ .Values.image.repository }}:{{ .Values.image.tag }}
+           env:
+             - name: MY_POD_NAME
+               valueFrom:
