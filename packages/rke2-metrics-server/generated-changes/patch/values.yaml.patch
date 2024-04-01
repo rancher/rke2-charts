@@ -1,25 +1,28 @@
 --- charts-original/values.yaml
 +++ charts/values.yaml
-@@ -27,20 +27,22 @@
-   enabled: false
+@@ -3,9 +3,9 @@
+ # Declare variables to be passed into your templates.
  
  image:
--  repository: k8s.gcr.io/metrics-server-amd64
--  tag: v0.3.6
+-  repository: registry.k8s.io/metrics-server/metrics-server
 +  repository: rancher/hardened-k8s-metrics-server
-+  tag: v0.6.3-build20231009
+   # Overrides the image tag whose default is v{{ .Chart.AppVersion }}
+-  tag: ""
++  tag: v0.7.1-build20240401
    pullPolicy: IfNotPresent
  
  imagePullSecrets: []
- # - registrySecretName
+@@ -121,6 +121,7 @@
+   port: 443
+   annotations: {}
+   labels: {}
++  ipFamilyPolicy: "PreferDualStack"
+   #  Add these labels to have metrics-server show up in `kubectl cluster-info`
+   #  kubernetes.io/cluster-service: "true"
+   #  kubernetes.io/name: "Metrics-server"
+@@ -180,7 +181,8 @@
  
--args: []
-+args:
- # enable this if you have self-signed certificates, see: https://github.com/kubernetes-incubator/metrics-server
- #  - --kubelet-insecure-tls
-+  - --kubelet-preferred-address-types=InternalIP
- 
- resources: {}
+ extraVolumes: []
  
 -nodeSelector: {}
 +nodeSelector:
@@ -27,31 +30,10 @@
  
  tolerations: []
  
-@@ -58,7 +60,7 @@
- #  scheduler.alpha.kubernetes.io/critical-pod: ''
+@@ -197,3 +199,6 @@
  
- ## Set a pod priorityClassName
--# priorityClassName: system-node-critical
-+priorityClassName: system-node-critical
- 
- extraVolumeMounts: []
- #  - name: secrets
-@@ -101,9 +103,18 @@
-   #  kubernetes.io/name: "Metrics-server"
-   port: 443
-   type: ClusterIP
-+  ipFamilyPolicy: "PreferDualStack"
- 
- podDisruptionBudget:
-   # https://kubernetes.io/docs/tasks/run-application/configure-pdb/
-   enabled: false
-   minAvailable:
-   maxUnavailable:
-+
-+tests:
-+  image:
-+    repository: rancher/mirrored-library-busybox
-+    tag: "1.36.1"
+ tmpVolume:
+   emptyDir: {}
 +
 +global:
 +  systemDefaultRegistry: ""
