@@ -7931,6 +7931,33 @@ entries:
   rke2-ingress-nginx:
   - annotations:
       artifacthub.io/changes: |-
+        - "update web hook cert gen to latest release v20231226-1a7112e06"
+        - "Update Ingress-Nginx version controller-v1.9.6"
+      artifacthub.io/prerelease: "false"
+    apiVersion: v2
+    appVersion: 1.9.6
+    created: "2024-04-02T16:40:59.618160715Z"
+    description: Ingress controller for Kubernetes using NGINX as a reverse proxy
+      and load balancer
+    digest: 5263efdc8127dceea2cc94f8e84c5aeab9b673b8bf2588fa72bfea1a9186da2b
+    home: https://github.com/kubernetes/ingress-nginx
+    icon: https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Nginx_logo.svg/500px-Nginx_logo.svg.png
+    keywords:
+    - ingress
+    - nginx
+    kubeVersion: '>=1.20.0-0'
+    maintainers:
+    - name: rikatz
+    - name: strongjz
+    - name: tao12345666333
+    name: rke2-ingress-nginx
+    sources:
+    - https://github.com/kubernetes/ingress-nginx
+    urls:
+    - assets/rke2-ingress-nginx/rke2-ingress-nginx-4.9.100.tgz
+    version: 4.9.100
+  - annotations:
+      artifacthub.io/changes: |-
         - "update nginx base, httpbun, e2e, helm webhook cert gen (#10506)"
         - "Update Ingress-Nginx version controller-v1.9.3"
       artifacthub.io/prerelease: "false"
