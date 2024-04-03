@@ -1,0 +1,58 @@
+---
+name: "Update Flannel version" 
+
+sources:
+  flannel:
+    name: Get flannel version
+    kind: githubrelease
+    spec:
+      owner: rancher
+      repository: image-build-flannel
+      token: '{{ requiredEnv .github.token }}'
+      username: '{{ requiredEnv .github.username }}'
+      typefilter:
+        latest: true
+        release: true
+        draft: false
+        prerelease: false
+      versionfilter:
+        kind: regex
+        # pattern accepts any semver constraint
+        pattern: "v[0-9]+.[0-9]+.[0-9]+-build[0-9]+"
+
+targets:
+  flannelImage:
+    name: "Bump to latest flannel version on the chart"
+    kind: shell
+    scmid: default
+    sourceid: flannel
+    spec:
+      command: 'updatecli/scripts/update-flannel.sh'
+      environments:
+        - name: FLANNEL_VERSION
+          value: '{{ source "flannel" }}'
+
+
+scms:
+  default:
+    kind: github
+    spec:
+      token: '{{ requiredEnv .github.token }}'
+      username: '{{ requiredEnv .github.username }}'
+      user: '{{ .github.username }}'
+      email: '{{ .github.email }}'
+      owner: '{{ .github.owner }}'
+      repository: '{{ .github.repository }}'
+      branch: '{{ .github.branch }}'
+      
+actions:
+  default:
+    title: 'Update Flannel version to {{ source "flannel" }}'
+    kind: github/pullrequest
+    spec:
+      automerge: false
+      labels:
+        - chore
+        - skip-changelog
+        - status/auto-created 
+    scmid: default
