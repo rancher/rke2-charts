@@ -1,0 +1,52 @@
+{{ if .Values.installation.enabled }}
+{{ $installSpec := omit .Values.installation "enabled" }}
+{{ $_ := set $installSpec "imagePullSecrets" (include "tigera-operator.imagePullSecrets" . | fromYamlArray) }}
+{{ $_ := set $installSpec "kubeletVolumePluginPath" .Values.kubeletVolumePluginPath }}
+{{ $defaultRegistry := get $installSpec "registry" }}
+{{ $finalRegistry := coalesce .Values.global.systemDefaultRegistry $defaultRegistry }}
+{{ $_ := set $installSpec "registry" $finalRegistry }}
+{{ if empty .Values.installation.calicoNetwork.ipPools }}
+{{ $calicoNetwork := get .Values.installation "calicoNetwork" }}
+{{ if not (empty .Values.global.clusterCIDRv4) }}
+{{ $myIP4Dict := dict "natOutgoing" "Enabled" "encapsulation" "VXLAN" "cidr" .Values.global.clusterCIDRv4 }}
+{{ if not (empty .Values.global.clusterCIDRv6) }}
+{{ $myIP6Dict := dict "natOutgoing" "Enabled" "encapsulation" "VXLAN" "cidr" .Values.global.clusterCIDRv6 }}
+{{ $ipPoolList := list $myIP4Dict }}
+{{ $finalIpPoolList := append $ipPoolList $myIP6Dict }}
+{{ $_ := set $calicoNetwork "ipPools" $finalIpPoolList }}
+{{ else }}
+{{ $finalIpPoolList := list $myIP4Dict }}
+{{ $_ := set $calicoNetwork "ipPools" $finalIpPoolList }}
+{{ end }}
+{{ else if not (empty .Values.global.clusterCIDRv6) }}
+{{ $myIP6Dict := dict "natOutgoing" "Enabled" "encapsulation" "VXLAN" "cidr" .Values.global.clusterCIDRv6 }}
+{{ $finalIpPoolList := list $myIP6Dict }}
+{{ $_ := set $calicoNetwork "ipPools" $finalIpPoolList }}
+{{ end }}
+{{ if empty .Values.installation.calicoNetwork.nodeAddressAutodetectionV4 }}
+{{ $calicoNetwork := get .Values.installation "calicoNetwork" }}
+{{ $autodetect := dict "firstFound" true }}
+{{ $_ := set $calicoNetwork "nodeAddressAutodetectionV4" $autodetect }}
+{{ end }}
+{{ end }}
+
+apiVersion: operator.tigera.io/v1
+kind: Installation
+metadata:
+  name: default
+spec:
+{{ $installSpec | toYaml | indent 2 }}
+
+{{ end }}
+
+{{ if .Values.apiServer.enabled }}
+{{ $apiServerSpec := omit .Values.apiServer "enabled" }}
+---
+
+apiVersion: operator.tigera.io/v1
+kind: APIServer
+metadata:
+  name: default
+spec:
+{{ $apiServerSpec | toYaml | indent 2 }}
+{{ end }}
