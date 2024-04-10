@@ -10478,6 +10478,38 @@ entries:
           description: "Updated the _addon-resizer_ OCI image to [v1.8.20](https://github.com/kubernetes/autoscaler/releases/tag/addon-resizer-1.8.20)."
     apiVersion: v2
     appVersion: 0.7.1
+    created: "2024-04-10T14:36:17.551966294Z"
+    description: Metrics Server is a scalable, efficient source of container resource
+      metrics for Kubernetes built-in autoscaling pipelines.
+    digest: 6e22ab83771c00a8e606966eca5072fb4561c908bc41708bfaf887914f70eaf5
+    home: https://github.com/kubernetes-sigs/metrics-server
+    icon: https://avatars.githubusercontent.com/u/36015203?s=400&v=4
+    keywords:
+    - kubernetes
+    - metrics-server
+    - metrics
+    maintainers:
+    - name: stevehipwell
+      url: https://github.com/stevehipwell
+    - name: krmichel
+      url: https://github.com/krmichel
+    - name: endrec
+      url: https://github.com/endrec
+    name: rke2-metrics-server
+    sources:
+    - https://github.com/kubernetes-sigs/metrics-server
+    type: application
+    urls:
+    - assets/rke2-metrics-server/rke2-metrics-server-3.12.001.tgz
+    version: 3.12.001
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: changed
+          description: "Updated the _Metrics Server_ OCI image to [v0.7.0](https://github.com/kubernetes-sigs/metrics-server/releases/tag/v0.7.0)."
+        - kind: changed
+          description: "Updated the _addon-resizer_ OCI image to [v1.8.20](https://github.com/kubernetes/autoscaler/releases/tag/addon-resizer-1.8.20)."
+    apiVersion: v2
+    appVersion: 0.7.1
     created: "2024-04-02T09:14:03.694597005Z"
     description: Metrics Server is a scalable, efficient source of container resource
       metrics for Kubernetes built-in autoscaling pipelines.
