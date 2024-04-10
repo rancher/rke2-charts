@@ -1,11 +1,20 @@
 --- charts-original/templates/deployment.yaml
 +++ charts/templates/deployment.yaml
+@@ -59,7 +59,7 @@
+           securityContext:
+             {{- toYaml . | nindent 12 }}
+           {{- end }}
+-          image: {{ include "metrics-server.image" . }}
++          image: {{ template "system_default_registry" . }}{{ .Values.image.repository }}:{{ .Values.image.tag }}
+           imagePullPolicy: {{ .Values.image.pullPolicy }}
+           args:
+             - {{ printf "--secure-port=%d" (int .Values.containerPort) }}
 @@ -100,7 +100,7 @@
            securityContext:
              {{- toYaml . | nindent 12 }}
            {{- end }}
 -          image: {{ include "metrics-server.addonResizer.image" . }}
-+          image: {{ template "system_default_registry" . }}{{ .Values.image.repository }}:{{ .Values.image.tag }}
++          image: {{ template "system_default_registry" . }}{{ .Values.addonResizer.image.repository }}:{{ .Values.addonResizer.image.tag }}
            env:
              - name: MY_POD_NAME
                valueFrom:

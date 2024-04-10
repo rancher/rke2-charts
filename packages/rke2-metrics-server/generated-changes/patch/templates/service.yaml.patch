@@ -4,6 +4,6 @@
        port: {{ .Values.service.port }}
        protocol: TCP
        targetPort: https
-+      ipFamilyPolicy: {{ .Values.service.ipFamilyPolicy }}
++  ipFamilyPolicy: {{ .Values.service.ipFamilyPolicy }}
    selector:
      {{- include "metrics-server.selectorLabels" . | nindent 4 }}
