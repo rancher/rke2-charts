@@ -2305,6 +2305,23 @@ entries:
   rke2-canal:
   - apiVersion: v1
     appVersion: v3.27.3
+    created: "2024-04-17T08:19:14.268139224Z"
+    description: Install Canal Network Plugin.
+    digest: 080d39898b5654e0fff37faf0064ceb1f7edcf8aeefa4131a5d8758e16d68688
+    home: https://www.projectcalico.org/
+    keywords:
+    - canal
+    maintainers:
+    - email: charts@rancher.com
+      name: Rancher Labs
+    name: rke2-canal
+    sources:
+    - https://github.com/rancher/rke2-charts
+    urls:
+    - assets/rke2-canal/rke2-canal-v3.27.3-build2024040301.tgz
+    version: v3.27.3-build2024040301
+  - apiVersion: v1
+    appVersion: v3.27.3
     created: "2024-04-11T13:57:31.849127326Z"
     description: Install Canal Network Plugin.
     digest: d05348c63cef3b576a0ae6bade771d2ed67bc4f8cad443ab75d24f109c318cb8
@@ -3324,6 +3341,23 @@ entries:
     urls:
     - assets/rke2-canal-1.19-1.20/rke2-canal-1.19-1.20-v3.13.3-build2021102202.tgz
     version: v3.13.3-build2021102202
+  rke2-canal-crd:
+  - apiVersion: v1
+    appVersion: v3.27.3
+    created: "2024-04-17T08:19:14.211716137Z"
+    description: Install CRDs for Canal Network Plugin.
+    digest: f03d38bdc3f497542fe5a3e28025695c7c1e776eb37584f4df3fe965cb94db3d
+    keywords:
+    - canal
+    maintainers:
+    - email: charts@rancher.com
+      name: Rancher Labs
+    name: rke2-canal-crd
+    sources:
+    - https://github.com/rancher/rke2-charts
+    urls:
+    - assets/rke2-canal/rke2-canal-crd-v3.27.3-build2024040301.tgz
+    version: v3.27.3-build2024040301
   rke2-cilium:
   - annotations:
       artifacthub.io/crds: "- kind: CiliumNetworkPolicy\n  version: v2\n  name: ciliumnetworkpolicies.cilium.io\n
