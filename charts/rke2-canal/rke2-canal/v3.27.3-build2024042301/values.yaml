@@ -1,0 +1,136 @@
+---
+
+# The IPv4 cidr pool to create on startup if none exists. Pod IPs will be
+# chosen from this range.
+#podCidr: "10.42.0.0/16"
+
+flannel:
+  # kube-flannel image
+  image:
+    repository: rancher/hardened-flannel
+    tag: v0.25.1-build20240423
+  # The interface used by canal for host <-> host communication.
+  # If left blank, then the interface is chosen using the node's
+  # default route.
+  iface: ""
+  # A regulare expression used to match the interface
+  regexIface: ""
+  # kube-flannel command arguments
+  args:
+    - "--ip-masq"
+    - "--kube-subnet-mgr"
+  # Backend for kube-flannel. Backend should not be changed
+  # at runtime.
+  backend: "vxlan"
+  # Port used by the backend 0 means default value (VXLAN: 8472, Wireguard: 51821, UDP: 8285)
+  backendPort: 0
+  # MTU to use for outgoing packets (VXLAN and Wireguard) if not defined the MTU of the external interface is used.
+  #mtu: 0 
+  #
+  # VXLAN Configs:
+  #
+  # VXLAN Identifier to be used. On Linux default is 1.
+  #vni: 1
+  # Enable VXLAN Group Based Policy (Default false)
+  GBP: false
+  # Enable direct routes (default is false)
+  directRouting: false
+  # MAC prefix to be used on Windows. (Defaults is 0E-2A)
+  #macPrefix: "0E-2A"
+  #
+  # Wireguard Configs:
+  #
+  # UDP listen port used with IPv6
+  backendPortv6: 0
+  # Pre shared key to use
+  psk: 0
+  # IP version to use on Wireguard
+  #tunnelMode: "separate"
+  # Persistent keep interval to use
+  keepaliveInterval: 0
+  # Resource bounds for the kube-flannel daemon container
+  resources: ~
+  # requests:
+  #   memory: 32Mi
+  #   cpu: 100m
+  # limits:
+  #   memory: 128Mi
+  #   cpu: 500m
+calico:
+  # CNI installation image.
+  cniImage:
+    repository: rancher/hardened-calico
+    tag: v3.27.3-build20240423
+  # Canal node image.
+  nodeImage:
+    repository: rancher/hardened-calico
+    tag: v3.27.3-build20240423
+  # Flexvol Image.
+  flexvolImage:
+    repository: rancher/hardened-calico
+    tag: v3.27.3-build20240423
+  # kubecontroller image
+  kubeControllerImage:
+    repository: rancher/hardened-calico
+    tag: v3.27.3-build20240423
+  # Datastore type for canal. It can be either kuberentes or etcd.
+  datastoreType: kubernetes
+  # Wait for datastore to initialize.
+  waitForDatastore: true
+  # Configure route aggregation based on pod CIDR.
+  usePodCIDR: true
+  # Disable BGP routing.
+  networkingBackend: none
+  # Cluster type to identify the deployment type.
+  clusterType: "k8s,canal"
+  # Disable file logging so `kubectl logs` works.
+  disableFileLogging: true
+  # Disable IPv6 on Kubernetes.
+  felixIpv6Support: false
+  # Period, in seconds, at which felix re-applies all iptables state
+  felixIptablesRefreshInterval: 60
+  # iptables backend to use for felix, defaults to auto but can also be set to nft or legacy
+  felixIptablesBackend: auto
+  # Set Felix logging to "info".
+  felixLogSeverityScreen: info
+  # Enable felix healthcheck.
+  felixHealthEnabled: true
+  # Enable prometheus metrics
+  felixPrometheusMetricsEnabled: true
+  # Disable XDP Acceleration as we do not support it with our ubi7 base image
+  felixXDPEnabled: false
+  # Configure the mask that felix selects its iptables mark bits from
+  felixIptablesMarkMask: "0xffff0000"
+  # Whether or not to masquerade traffic to destinations not within
+  # the pod network.
+  masquerade: true
+  # Set Felix endpoint to host default action to ACCEPT.
+  felixDefaultEndpointToHostAction: ACCEPT
+  # Configure the MTU to use.
+  vethuMTU: 1450
+  # Typha is disabled.
+  typhaServiceName: none
+  # Kubelet flex-volume-plugin-dir
+  flexVolumePluginDir: /var/lib/kubelet/volumeplugins
+  # calico inbound failsafe ports. Empty string means defaults. Use 'none' to disable failsafe if you have your own rules.
+  felixFailsafeInboundHostPorts: ""
+  # calico outbound failsafe ports. Empty string means defaults. Use 'none' to disable failsafe if you have your own rules.
+  felixFailsafeOutboundHostPorts: ""
+  # The method to use to autodetect the IPv4 address for this host.
+  ipAutoDetectionMethod: "first-found"
+  # The method to use to autodetect the IPv6 address for this host.
+  ip6AutoDetectionMethod: "first-found"
+  # Enable calico kube-controllers
+  calicoKubeControllers: false
+  # Resource bounds for the calico-node daemon container
+  resources:
+    requests:
+      cpu: 250m
+      #   memory: 128Mi
+      # limits:
+      #   cpu: 250m
+      #   memory: 256Mi
+global:
+  systemDefaultRegistry: ""
+  clusterCIDRv4: ""
+  clusterCIDRv6: ""
