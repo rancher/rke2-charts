@@ -129,14 +129,10 @@ spec:
             - name: CLUSTER_TYPE
               value: {{ .Values.calico.clusterType | quote}}
             # Period, in seconds, at which felix re-applies all iptables state
-{{- if .Values.calico.felixIptablesRefreshInterval }}
             - name: FELIX_IPTABLESREFRESHINTERVAL
               value: {{ .Values.calico.felixIptablesRefreshInterval | quote}}
-{{- end }}
-{{- if .Values.calico.felixIptablesBackend }}
             - name: FELIX_IPTABLESBACKEND
               value: {{ .Values.calico.felixIptablesBackend | quote}}
-{{- end }}
             # The default IPv4 pool to create on startup if none exists. Pod IPs will be
             # chosen from this range. Changing this value after installation will have
             # no effect. This should fall within `--cluster-cidr`.
@@ -146,50 +142,32 @@ spec:
             - name: CALICO_DISABLE_FILE_LOGGING
               value: "true"
             # Set Felix endpoint to host default action to ACCEPT.
-{{- if .Values.calico.felixDefaultEndpointToHostAction }}
             - name: FELIX_DEFAULTENDPOINTTOHOSTACTION
               value: {{ .Values.calico.felixDefaultEndpointToHostAction | quote }}
-{{- end }}
 {{- if coalesce .Values.global.clusterCIDRv6 .Values.podCidrv6 }}
             - name: FELIX_IPV6SUPPORT
               value: "true"
 {{- else }}
             # Disable IPv6 on Kubernetes.
-{{- if .Values.calico.felixIpv6Support }}
             - name: FELIX_IPV6SUPPORT
               value: {{ .Values.calico.felixIpv6Support | quote }}
 {{- end }}
-{{- end }}
             # Set Felix logging to "info"
-{{- if .Values.calico.felixLogSeverityScreen }}
             - name: FELIX_LOGSEVERITYSCREEN
               value: {{ .Values.calico.felixLogSeverityScreen | quote }}
-{{- end}}
-{{- if .Values.calico.felixHealthEnabled }}
             - name: FELIX_HEALTHENABLED
               value: {{ .Values.calico.felixHealthEnabled | quote }}
-{{- end}}
             # enable promentheus metrics
-{{- if .Values.calico.felixPrometheusMetricsEnabled }}
             - name: FELIX_PROMETHEUSMETRICSENABLED
               value: {{ .Values.calico.felixPrometheusMetricsEnabled | quote }}
-{{- end}}
-{{- if .Values.calico.felixXDPEnabled }}
             - name: FELIX_XDPENABLED
               value: {{ .Values.calico.felixXDPEnabled | quote }}
-{{- end}}
-{{- if .Values.calico.felixFailsafeInboundHostPorts }}
             - name: FELIX_FAILSAFEINBOUNDHOSTPORTS
               value: {{ .Values.calico.felixFailsafeInboundHostPorts | quote }}
-{{- end}}
-{{- if .Values.calico.felixFailsafeOutboundHostPorts }}
             - name: FELIX_FAILSAFEOUTBOUNDHOSTPORTS
               value: {{ .Values.calico.felixFailsafeOutboundHostPorts | quote }}
-{{- end}}
-{{- if .Values.calico.felixIptablesMarkMask }}
             - name: FELIX_IPTABLESMARKMASK
               value: {{ .Values.calico.felixIptablesMarkMask | quote }}
-{{- end}}
 {{- if coalesce .Values.global.clusterCIDRv4 .Values.podCidr }}
             # The method to use to autodetect the IPv4 address for this host.
             - name: IP_AUTODETECTION_METHOD
