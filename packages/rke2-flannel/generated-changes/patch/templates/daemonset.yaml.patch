@@ -33,6 +33,15 @@
          command:
          - "/opt/bin/flanneld"
          {{- range .Values.flannel.args }}
+@@ -70,7 +64,7 @@
+             cpu: "100m"
+             memory: "50Mi"
+         securityContext:
+-          privileged: false
++          privileged: true
+           capabilities:
+             add: ["NET_ADMIN", "NET_RAW"]
+         env:
 @@ -98,6 +92,7 @@
        - name: cni-plugin
          hostPath:
