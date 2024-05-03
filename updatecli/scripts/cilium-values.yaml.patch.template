@@ -1,0 +1,206 @@
+--- charts-original/values.yaml
++++ charts/values.yaml
+@@ -145,12 +145,10 @@
+ # -- Agent container image.
+ image:
+   override: ~
+-  repository: "quay.io/cilium/cilium"
++  repository: "rancher/mirrored-cilium-cilium"
+   tag: "CILIUM_IMAGE_VERSION"
+   pullPolicy: "IfNotPresent"
+-  # cilium-digest
+-  digest: "CILIUM_IMAGE_DIGEST"
+-  useDigest: true
++  useDigest: false
+ 
+ # -- Affinity for cilium-agent.
+ affinity:
+@@ -559,8 +557,10 @@
+   #  - flannel
+   #  - generic-veth
+   #  - portmap
+-  chainingMode: ~
+ 
++  # Otherwise rke2 hostPort does not work! Used for nginx
++  chainingMode: portmap
++
+   # -- A CNI network name in to which the Cilium plugin should be added as a chained plugin.
+   # This will cause the agent to watch for a CNI network with this network name. When it is
+   # found, this will be used as the basis for Cilium's CNI configuration file. If this is
+@@ -974,10 +974,9 @@
+ certgen:
+   image:
+     override: ~
+-    repository: "quay.io/cilium/certgen"
++    repository: "rancher/mirrored-cilium-certgen"
+     tag: "CILIUM_CERTGEN_VERSION"
+-    digest: "CILIUM_CERTGEN_DIGEST"
+-    useDigest: true
++    useDigest: false
+     pullPolicy: "IfNotPresent"
+   # -- Seconds after which the completed job pod will be deleted
+   ttlSecondsAfterFinished: 1800
+@@ -1002,7 +1001,7 @@
+ 
+ hubble:
+   # -- Enable Hubble (true by default).
+-  enabled: true
++  enabled: false
+ 
+   # -- Annotations to be added to all top-level hubble objects (resources under templates/hubble)
+   annotations: {}
+@@ -1233,11 +1232,9 @@
+     # -- Hubble-relay container image.
+     image:
+       override: ~
+-      repository: "quay.io/cilium/hubble-relay"
++      repository: "rancher/mirrored-cilium-hubble-relay"
+       tag: "CILIUM_HUBBLE_RELAY_VERSION"
+-       # hubble-relay-digest
+-      digest: "CILIUM_HUBBLE_RELAY_DIGEST"
+-      useDigest: true
++      useDigest: false
+       pullPolicy: "IfNotPresent"
+ 
+     # -- Specifies the resources for the hubble-relay pods
+@@ -1470,10 +1467,9 @@
+       # -- Hubble-ui backend image.
+       image:
+         override: ~
+-        repository: "quay.io/cilium/hubble-ui-backend"
++        repository: "rancher/mirrored-cilium-hubble-ui-backend"
+         tag: "CILIUM_HUBBLE_UI_BACKEND_VERSION"
+-        digest: "CILIUM_HUBBLE_UI_BACKEND_DIGEST"
+-        useDigest: true
++        useDigest: false
+         pullPolicy: "IfNotPresent"
+ 
+       # -- Hubble-ui backend security context.
+@@ -1509,10 +1505,9 @@
+       # -- Hubble-ui frontend image.
+       image:
+         override: ~
+-        repository: "quay.io/cilium/hubble-ui"
++        repository: "rancher/mirrored-cilium-hubble-ui"
+         tag: "CILIUM_HUBBLE_UI_VERSION"
+-        digest: "CILIUM_HUBBLE_UI_DIGEST"
+-        useDigest: true
++        useDigest: false
+         pullPolicy: "IfNotPresent"
+ 
+       # -- Hubble-ui frontend security context.
+@@ -1690,7 +1685,7 @@
+ ipam:
+   # -- Configure IP Address Management mode.
+   # ref: https://docs.cilium.io/en/stable/network/concepts/ipam/
+-  mode: "cluster-pool"
++  mode: "kubernetes"
+   # -- Maximum rate at which the CiliumNode custom resource is updated.
+   ciliumNodeUpdateRate: "15s"
+   operator:
+@@ -1984,7 +1979,7 @@
+ 
+ # -- Configure prometheus metrics on the configured port at /metrics
+ prometheus:
+-  enabled: false
++  enabled: true
+   port: 9962
+   serviceMonitor:
+     # -- Enable service monitors.
+@@ -2073,11 +2068,10 @@
+   # -- Envoy container image.
+   image:
+     override: ~
+-    repository: "quay.io/cilium/cilium-envoy"
++    repository: "rancher/mirrored-cilium-cilium-envoy"
+     tag: "CILIUM_ENVOY_VERSION"
+     pullPolicy: "IfNotPresent"
+-    digest: "CILIUM_ENVOY_DIGEST"
+-    useDigest: true
++    useDigest: false
+ 
+   # -- Additional containers added to the cilium Envoy DaemonSet.
+   extraContainers: []
+@@ -2386,10 +2380,9 @@
+   # -- cilium-etcd-operator image.
+   image:
+     override: ~
+-    repository: "quay.io/cilium/cilium-etcd-operator"
++    repository: "rancher/mirrored-cilium-cilium-etcd-operator"
+     tag: "CILIUM_ETCD_OPERATOR_VERSION"
+-    digest: "CILIUM_ETCD_OPERATOR_DIGEST"
+-    useDigest: true
++    useDigest: false
+     pullPolicy: "IfNotPresent"
+ 
+   # -- The priority class to use for cilium-etcd-operator
+@@ -2494,17 +2487,9 @@
+   # -- cilium-operator image.
+   image:
+     override: ~
+-    repository: "quay.io/cilium/operator"
++    repository: "rancher/mirrored-cilium-operator"
+     tag: "CILIUM_OPERATOR_VERSION"
+-    # operator-generic-digest
+-    genericDigest: "CILIUM_OPERATOR_DIGEST"
+-    # operator-azure-digest
+-    azureDigest: "CILIUM_AZURE_OPERATOR_DIGEST"
+-    # operator-aws-digest
+-    awsDigest: "CILIUM_AWS_OPERATOR_DIGEST"
+-    # operator-alibabacloud-digest
+-    alibabacloudDigest: "CILIUM_ALIBA_OPERATOR_DIGEST"
+-    useDigest: true
++    useDigest: false
+     pullPolicy: "IfNotPresent"
+     suffix: ""
+ 
+@@ -2676,8 +2661,7 @@
+ 
+   # -- Taint nodes where Cilium is scheduled but not running. This prevents pods
+   # from being scheduled to nodes where Cilium is not the default CNI provider.
+-  # @default -- same as removeNodeTaints
+-  setNodeTaints: ~
++  setNodeTaints: false
+ 
+   # -- Set Node condition NetworkUnavailable to 'false' with the reason
+   # 'CiliumIsUp' for nodes that have a healthy Cilium pod.
+@@ -2791,11 +2775,9 @@
+   # -- Cilium pre-flight image.
+   image:
+     override: ~
+-    repository: "quay.io/cilium/cilium"
++    repository: "rancher/mirrored-cilium-cilium"
+     tag: "CILIUM_IMAGE_VERSION"
+-    # cilium-digest
+-    digest: "CILIUM_IMAGE_DIGEST"
+-    useDigest: true
++    useDigest: false
+     pullPolicy: "IfNotPresent"
+ 
+   # -- The priority class to use for the preflight pod.
+@@ -2953,11 +2935,9 @@
+     # -- Clustermesh API server image.
+     image:
+       override: ~
+-      repository: "quay.io/cilium/clustermesh-apiserver"
++      repository: "rancher/mirrored-cilium-clustermesh-apiserver"
+       tag: "CILIUM_CLUSTERMESH_VERSION"
+-      # clustermesh-apiserver-digest
+-      digest: "CILIUM_CLUSTERMESH_DIGEST"
+-      useDigest: true
++      useDigest: false
+       pullPolicy: "IfNotPresent"
+ 
+     etcd:
+@@ -3526,3 +3506,11 @@
+       agentSocketPath: /run/spire/sockets/agent/agent.sock
+       # -- SPIRE connection timeout
+       connectionTimeout: 30s
++
++portmapPlugin:
++  image:
++    repository: "rancher/hardened-cni-plugins"
++    tag: "v1.4.1-build20240325"
++
++global:
++  systemDefaultRegistry: ""
