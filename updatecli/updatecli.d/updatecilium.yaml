@@ -1,0 +1,54 @@
+---
+name: "Update Cilium version" 
+
+sources:
+  cilium:
+    name: Get cilium version
+    kind: githubrelease
+    spec:
+      owner: cilium
+      repository: cilium
+      token: '{{ requiredEnv .github.token }}'
+      typefilter:
+        release: true
+        draft: false
+        prerelease: false
+      versionfilter:
+        kind: latest
+
+targets:
+  ciliumImage:
+    name: "Bump to latest cilium version on the chart"
+    kind: shell
+    scmid: default
+    sourceid: cilium
+    spec:
+      command: 'updatecli/scripts/update-cilium.sh'
+      environments:
+        - name: CILIUM_VERSION
+          value: '{{ source "cilium" }}'
+
+
+scms:
+  default:
+    kind: github
+    spec:
+      token: '{{ requiredEnv .github.token }}'
+      username: '{{ requiredEnv .github.username }}'
+      user: '{{ .github.username }}'
+      email: '{{ .github.email }}'
+      owner: '{{ .github.owner }}'
+      repository: '{{ .github.repository }}'
+      branch: '{{ .github.branch }}'
+      
+actions:
+  default:
+    title: 'Update Cilium version to {{ source "cilium" }}'
+    kind: github/pullrequest
+    spec:
+      automerge: false
+      labels:
+        - chore
+        - skip-changelog
+        - status/auto-created 
+    scmid: default
