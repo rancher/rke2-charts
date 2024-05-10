@@ -1,14 +1,15 @@
 #!/bin/bash
 if [ -n "$CILIUM_VERSION" ]; then
-	current_cilium_version=$(sed -nr 's/^\ version: ('[0-9]+.[0-9]+.[0-9+]')/\1/p' packages/rke2-cilium/generated-changes/patch/Chart.yaml.patch)
-	if [ "$current_cilium_version" != "$CILIUM_VERSION" ]; then
+	current_cilium_version=$(sed -nr 's/^\ version: ('[0-9]+.[0-9]+.[0-9]+')/\1/p' packages/rke2-cilium/generated-changes/patch/Chart.yaml.patch)
+	if [ "v$current_cilium_version" != "$CILIUM_VERSION" ]; then
 		echo "Updating Cilium chart to $CILIUM_VERSION"
 		cilium_major=$(echo "$CILIUM_VERSION" | grep -Eo '[0-9]+.[0-9]+')
+		cilium_num_version=$(echo "$CILIUM_VERSION" | grep -Eo '[0-9]+.[0-9]+.[0-9]+')
 		mkdir workdir
-		sed -i "s/ appVersion: .*/ appVersion: $CILIUM_VERSION/g" packages/rke2-cilium/generated-changes/patch/Chart.yaml.patch
+		sed -i "s/ appVersion: .*/ appVersion: $cilium_num_version/g" packages/rke2-cilium/generated-changes/patch/Chart.yaml.patch
 		sed -i "s/-icon: .*/-icon: https:\/\/cdn.jsdelivr.net\/gh\/cilium\/cilium@v$cilium_major\/Documentation\/images\/logo-solo.svg/g" packages/rke2-cilium/generated-changes/patch/Chart.yaml.patch
-		sed -i "s/ version: .*/ version: $CILIUM_VERSION/g" packages/rke2-cilium/generated-changes/patch/Chart.yaml.patch
-		yq -i ".url = \"https://helm.cilium.io/cilium-$CILIUM_VERSION.tgz\" |
+		sed -i "s/ version: .*/ version: $cilium_num_version/g" packages/rke2-cilium/generated-changes/patch/Chart.yaml.patch
+		yq -i ".url = \"https://helm.cilium.io/cilium-$cilium_num_version.tgz\" |
 			.packageVersion = 00" packages/rke2-cilium/package.yaml
 		mv packages/rke2-cilium/generated-changes/patch/values.yaml.patch workdir
 		GOCACHE='/home/runner/.cache/go-build' GOPATH='/home/runner/go' PACKAGE='rke2-cilium' make prepare
