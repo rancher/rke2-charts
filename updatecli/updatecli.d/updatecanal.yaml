@@ -60,6 +60,7 @@ targets:
       environments:
         - name: CALICO_VERSION
           value: '{{ source "calico" }}'
+        - name: PATH
 
 
 scms:
