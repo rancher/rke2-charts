@@ -13,6 +13,7 @@ sources:
         release: true
         draft: false
         prerelease: false
+        latest: true
       versionfilter:
         kind: latest
 
@@ -27,6 +28,7 @@ targets:
       environments:
         - name: CILIUM_VERSION
           value: '{{ source "cilium" }}'
+        - name: PATH
 
 
 scms:

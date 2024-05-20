@@ -1,4 +1,5 @@
 #!/bin/bash
+set -eu
 if [ -n "$CALICO_VERSION" ]; then
 	current_calico_version=$(yq '.version' packages/rke2-calico/templates/crd-template/Chart.yaml)
 	if [ "$current_calico_version" != "$CALICO_VERSION" ]; then

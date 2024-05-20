@@ -1,4 +1,5 @@
 #!/bin/bash
+set -eu
 if [ -n "$FLANNEL_VERSION" ]; then
 	app_version=$(echo "$FLANNEL_VERSION" | grep -Eo 'v[0-9]+.[0-9]+.[0-9]+')
 	current_flannel_version=$(sed -nr 's/^\+    tag: ('v[0-9]+.[0-9]+.[0-9]+')/\1/p' packages/rke2-flannel/generated-changes/patch/values.yaml.patch  | head -1)

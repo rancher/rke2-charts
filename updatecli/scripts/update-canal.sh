@@ -1,4 +1,5 @@
 #!/bin/bash
+set -eu
 if [ -n "$FLANNEL_VERSION" ]; then
 	current_flannel_version=$(yq '.flannel.image.tag' packages/rke2-canal/charts/values.yaml)
 	if [ "$current_flannel_version" != "$FLANNEL_VERSION" ]; then
