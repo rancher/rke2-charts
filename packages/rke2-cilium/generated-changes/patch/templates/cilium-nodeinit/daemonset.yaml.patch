@@ -1,6 +1,6 @@
 --- charts-original/templates/cilium-nodeinit/daemonset.yaml
 +++ charts/templates/cilium-nodeinit/daemonset.yaml
-@@ -47,7 +47,7 @@
+@@ -58,7 +58,7 @@
        {{- end }}
        containers:
          - name: node-init

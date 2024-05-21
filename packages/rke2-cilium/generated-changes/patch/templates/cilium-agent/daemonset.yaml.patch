@@ -12,7 +12,7 @@
  {{- if and .Values.agent (not .Values.preflight.enabled) }}
  
  {{- /*  Default values with backwards compatibility */ -}}
-@@ -87,7 +95,7 @@
+@@ -94,7 +102,7 @@
        {{- end }}
        containers:
        - name: cilium-agent
@@ -21,7 +21,7 @@
          imagePullPolicy: {{ .Values.image.pullPolicy }}
          {{- if .Values.sleepAfterInit }}
          command:
-@@ -387,7 +395,7 @@
+@@ -394,7 +402,7 @@
          {{- end }}
        {{- if .Values.monitor.enabled }}
        - name: cilium-monitor
@@ -30,7 +30,7 @@
          imagePullPolicy: {{ .Values.image.pullPolicy }}
          command:
          - /bin/bash
-@@ -418,8 +426,18 @@
+@@ -425,8 +433,18 @@
        {{- toYaml .Values.extraContainers | nindent 6 }}
        {{- end }}
        initContainers:
@@ -50,7 +50,7 @@
          imagePullPolicy: {{ .Values.image.pullPolicy }}
          command:
          - cilium-dbg
-@@ -466,7 +484,7 @@
+@@ -481,7 +499,7 @@
        # Required to mount cgroup2 filesystem on the underlying Kubernetes node.
        # We use nsenter command with host's cgroup and mount namespaces enabled.
        - name: mount-cgroup
@@ -59,7 +59,7 @@
          imagePullPolicy: {{ .Values.image.pullPolicy }}
          env:
          - name: CGROUP_ROOT
-@@ -512,7 +530,7 @@
+@@ -527,7 +545,7 @@
                - ALL
            {{- end}}
        - name: apply-sysctl-overwrites
@@ -68,7 +68,7 @@
          imagePullPolicy: {{ .Values.image.pullPolicy }}
          {{- with .Values.initResources }}
          resources:
-@@ -561,7 +579,7 @@
+@@ -576,7 +594,7 @@
        # from a privileged container because the mount propagation bidirectional
        # only works from privileged containers.
        - name: mount-bpf-fs
@@ -77,7 +77,7 @@
          imagePullPolicy: {{ .Values.image.pullPolicy }}
          {{- with .Values.initResources }}
          resources:
-@@ -586,7 +604,7 @@
+@@ -601,7 +619,7 @@
        {{- end }}
        {{- if and .Values.nodeinit.enabled .Values.nodeinit.bootstrapFile }}
        - name: wait-for-node-init
@@ -86,7 +86,7 @@
          imagePullPolicy: {{ .Values.image.pullPolicy }}
          {{- with .Values.initResources }}
          resources:
-@@ -604,9 +622,11 @@
+@@ -619,9 +637,11 @@
          volumeMounts:
          - name: cilium-bootstrap-file-dir
            mountPath: "/tmp/cilium-bootstrap.d"
@@ -99,16 +99,16 @@
          imagePullPolicy: {{ .Values.image.pullPolicy }}
          command:
          - /init-container.sh
-@@ -678,7 +698,7 @@
+@@ -693,7 +713,7 @@
          {{- end }}
-       {{- if and .Values.waitForKubeProxy (and (ne $kubeProxyReplacement "strict") (ne $kubeProxyReplacement "true"))  }}
+       {{- if and .Values.waitForKubeProxy (and (ne (toString $kubeProxyReplacement) "strict") (ne (toString $kubeProxyReplacement) "true"))  }}
        - name: wait-for-kube-proxy
 -        image: {{ include "cilium.image" .Values.image | quote }}
 +        image: "{{ template "system_default_registry" . }}{{ include "cilium.image" .Values.image }}"
          imagePullPolicy: {{ .Values.image.pullPolicy }}
          {{- with .Values.initResources }}
          resources:
-@@ -716,7 +736,7 @@
+@@ -731,7 +751,7 @@
        {{- if .Values.cni.install }}
        # Install the CNI binaries in an InitContainer so we don't have a writable host mount in the agent
        - name: install-cni-binaries
