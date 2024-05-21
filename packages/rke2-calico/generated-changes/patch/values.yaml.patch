@@ -29,21 +29,21 @@
 -  enabled: true
 +  enabled: false
  
- certs:
-   node:
-@@ -51,11 +64,30 @@
+ defaultFelixConfiguration:
+   enabled: false
+@@ -60,14 +73,33 @@
  
  # Image and registry configuration for the tigera/operator pod.
  tigeraOperator:
 -  image: tigera/operator
 +  image: rancher/mirrored-calico-operator
-   version: v1.32.7
+   version: v1.34.0
 -  registry: quay.io
 +  registry: docker.io
  calicoctl:
 -  image: docker.io/calico/ctl
 +  image: rancher/mirrored-calico-ctl
-   tag: v3.27.3
+   tag: v3.28.0
  
 -kubeletVolumePluginPath: /var/lib/kubelet
 +kubeletVolumePluginPath: "None"
@@ -66,3 +66,6 @@
 +  defaultEndpointToHostAction: "Drop"
 +  logSeveritySys: "Info"
 +  xdpEnabled: true
+ 
+ # Optionally configure the host and port used to access the Kubernetes API server.
+ kubernetesServiceEndpoint:
