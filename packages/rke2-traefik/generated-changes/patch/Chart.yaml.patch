@@ -1,0 +1,19 @@
+--- charts-original/Chart.yaml
++++ charts/Chart.yaml
+@@ -11,6 +11,7 @@
+     update traefik docker tag to v2.10.5\"\n- \"chore(deps): update docker.io/helmunittest/helm-unittest
+     docker tag to v3.12.3\"\n- \"chore(ci): \U0001F527 \U0001F477 add e2e test when
+     releasing\"\n"
++  fleet.cattle.io/bundle-id: rke2
+ apiVersion: v2
+ appVersion: v2.10.5
+ description: A Traefik based Kubernetes ingress controller
+@@ -32,7 +33,7 @@
+   name: mloiseleur
+ - email: charlie.haley@traefik.io
+   name: charlie-haley
+-name: traefik
++name: rke2-traefik
+ sources:
+ - https://github.com/traefik/traefik
+ - https://github.com/traefik/traefik-helm-chart

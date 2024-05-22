@@ -1,0 +1,11 @@
+--- charts-original/templates/_podtemplate.tpl
++++ charts/templates/_podtemplate.tpl
+@@ -50,7 +50,7 @@
+       shareProcessNamespace: true
+       {{- end }}
+       containers:
+-      - image: {{ template "traefik.image-name" . }}
++      - image: "{{ template "system_default_registry" . }}{{ template "traefik.image-name" . }}"
+         imagePullPolicy: {{ .Values.image.pullPolicy }}
+         name: {{ template "traefik.fullname" . }}
+         resources:
