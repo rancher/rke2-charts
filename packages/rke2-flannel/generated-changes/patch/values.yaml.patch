@@ -26,7 +26,7 @@
    # flannel command arguments
    args:
    - "--ip-masq"
-@@ -25,7 +16,7 @@
+@@ -25,14 +16,14 @@
    # Documentation at https://github.com/flannel-io/flannel/blob/master/Documentation/backends.md
    backend: "vxlan"
    # Port used by the backend 0 means default value (VXLAN: 8472, Wireguard: 51821, UDP: 8285)
@@ -35,6 +35,14 @@
    # MTU to use for outgoing packets (VXLAN and Wiregurad) if not defined the MTU of the external interface is used.
    # mtu: 1500
    #
+   # VXLAN Configs:
+   #
+   # VXLAN Identifier to be used. On Linux default is 1.
+-  #vni: 1
++  vni: 4096
+   # Enable VXLAN Group Based Policy (Default false)
+   # GBP: false
+   # Enable direct routes (default is false)
 @@ -54,7 +45,18 @@
    # General daemonset configs
    #
