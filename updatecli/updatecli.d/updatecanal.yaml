@@ -38,8 +38,8 @@ sources:
         pattern: "v[0-9]+.[0-9]+.[0-9]+-build[0-9]+"
 
 targets:
-  flannelImage:
-    name: "Bump to latest flannel version on the chart"
+  canalImage:
+    name: "Bump to latest flannel and calico version on the chart"
     kind: shell
     scmid: default
     sourceid: flannel
@@ -48,20 +48,9 @@ targets:
       environments:
         - name: FLANNEL_VERSION
           value: '{{ source "flannel" }}'
-  calicoImage:
-    name: "Bump to latest calico version on the chart"
-    kind: shell
-    scmid: default
-    sourceid: calico
-    dependson:
-      - flannelImage
-    spec:
-      command: 'updatecli/scripts/update-canal.sh'
-      environments:
         - name: CALICO_VERSION
           value: '{{ source "calico" }}'
         - name: PATH
-
 
 scms:
   default:
