@@ -1,0 +1,110 @@
+--- charts-original/values.yaml
++++ charts/values.yaml
+@@ -1,11 +1,9 @@
+ # Default values for Traefik
+ image:
+-  # -- Traefik image host registry
+-  registry: docker.io
+   # -- Traefik image repository
+-  repository: traefik
++  repository: rancher/mirrored-library-traefik
+   # -- defaults to appVersion
+-  tag: ""
++  tag: "2.10.7"
+   # -- Traefik image pull policy
+   pullPolicy: IfNotPresent
+ 
+@@ -19,7 +17,7 @@
+   # -- Enable deployment
+   enabled: true
+   # -- Deployment or DaemonSet
+-  kind: Deployment
++  kind: DaemonSet
+   # -- Number of pods of the deployment (only applies when kind == Deployment)
+   replicas: 1
+   # -- Number of old history to retain to allow rollback (If not set, default Kubernetes value is set to 10)
+@@ -111,8 +109,8 @@
+ # -- Create a default IngressClass for Traefik
+ ingressClass:
+   enabled: true
+-  isDefaultClass: true
+-  # name: my-custom-class
++  isDefaultClass: false
++  name: "traefik"
+ 
+ # Traefik experimental features
+ experimental:
+@@ -180,8 +178,8 @@
+   # -- Customize updateStrategy: RollingUpdate or OnDelete
+   type: RollingUpdate
+   rollingUpdate:
+-    maxUnavailable: 0
+-    maxSurge: 1
++    maxUnavailable: 1
++    maxSurge: 0
+ 
+ readinessProbe:
+   # -- The number of consecutive failures allowed before considering the probe as failed.
+@@ -227,6 +225,8 @@
+     enabled: true
+     # -- Allows to reference ExternalName services in Ingress
+     allowExternalNameServices: false
++    # -- Only process Ingresses containing kubernetes.io/ingress.class annotation with this value
++    ingressClass: "traefik"
+     # -- Allows to return 503 when there is no endpoints available
+     allowEmptyServices: false
+     # ingressClass: traefik-internal
+@@ -236,7 +236,7 @@
+     # - "default"
+     # IP used for Kubernetes Ingress endpoints
+     publishedService:
+-      enabled: false
++      enabled: true
+       # Published Kubernetes Service to copy status from. Format: namespace/servicename
+       # By default this Traefik service
+       # pathOverride: ""
+@@ -602,7 +602,7 @@
+     ## -- Enable this entrypoint as a default entrypoint. When a service doesn't explicitly set an entrypoint it will only use this entrypoint.
+     # asDefault: true
+     port: 8000
+-    # hostPort: 8000
++    hostPort: 80
+     # containerPort: 8000
+     expose: true
+     exposedPort: 80
+@@ -634,7 +634,7 @@
+     ## -- Enable this entrypoint as a default entrypoint. When a service doesn't explicitly set an entrypoint it will only use this entrypoint.
+     # asDefault: true
+     port: 8443
+-    # hostPort: 8443
++    hostPort: 443
+     # containerPort: 8443
+     expose: true
+     exposedPort: 443
+@@ -735,7 +735,7 @@
+   ## -- Single service is using `MixedProtocolLBService` feature gate.
+   ## -- When set to false, it will create two Service, one for TCP and one for UDP.
+   single: true
+-  type: LoadBalancer
++  type: ClusterIP
+   # -- Additional annotations applied to both TCP and UDP services (e.g. for cloud provider specific config)
+   annotations: {}
+   # -- Additional annotations for TCP service only
+@@ -758,7 +758,7 @@
+   externalIPs: []
+   # - 1.2.3.4
+   ## One of SingleStack, PreferDualStack, or RequireDualStack.
+-  # ipFamilyPolicy: SingleStack
++  ipFamilyPolicy: PreferDualStack
+   ## List of IP families (e.g. IPv4 and/or IPv6).
+   ## ref: https://kubernetes.io/docs/concepts/services-networking/dual-stack/#services
+   # ipFamilies:
+@@ -945,3 +945,8 @@
+ #
+ ## -- This will override the default app.kubernetes.io/instance label for all Objects.
+ # instanceLabelOverride: traefik
++
++#
++global:
++  systemDefaultRegistry: ""
++  systemDefaultIngressClass: ""
