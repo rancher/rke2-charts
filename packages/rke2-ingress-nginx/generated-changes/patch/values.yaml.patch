@@ -27,7 +27,7 @@
    # -- Configures the ports that the nginx-controller listens on
    containerPort:
      http: 80
-@@ -70,14 +66,14 @@
+@@ -70,7 +66,7 @@
    # -- Optionally change this to ClusterFirstWithHostNet in case you have 'hostNetwork: true'.
    # By default, while using host network, name resolution uses the host's DNS. If you wish nginx-controller
    # to keep resolving names inside the k8s network, use ClusterFirstWithHostNet.
@@ -36,14 +36,6 @@
    # -- Bare-metal considerations via the host network https://kubernetes.github.io/ingress-nginx/deploy/baremetal/#via-the-host-network
    # Ingress status was blank because there is no Service exposing the Ingress-Nginx Controller in a configuration using the host network, the default --publish-service flag used in standard cloud setups does not apply
    reportNodeInternalIp: false
-   # -- Process Ingress objects without ingressClass annotation/ingressClassName field
-   # Overrides value for --watch-ingress-without-class flag of the controller binary
-   # Defaults to false
--  watchIngressWithoutClass: false
-+  watchIngressWithoutClass: true
-   # -- Process IngressClass per name (additionally as per spec.controller).
-   ingressClassByName: false
-   # -- This configuration enables Topology Aware Routing feature, used together with service annotation service.kubernetes.io/topology-mode="auto"
 @@ -96,7 +92,7 @@
    ## Disabled by default
    hostPort:
@@ -119,10 +111,11 @@
      pullPolicy: IfNotPresent
      runAsNonRoot: true
      # nobody user -> uid 65534
-@@ -1092,3 +1086,6 @@
+@@ -1092,3 +1086,7 @@
  # This can be generated with: `openssl dhparam 4096 2> /dev/null | base64`
  ## Ref: https://github.com/kubernetes/ingress-nginx/tree/main/docs/examples/customization/ssl-dh-param
  dhParam: ""
 +
 +global:
 +  systemDefaultRegistry: ""
++  systemDefaultIngressClass: ""
