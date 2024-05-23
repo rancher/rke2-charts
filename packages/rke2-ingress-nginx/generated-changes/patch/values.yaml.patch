@@ -10,11 +10,11 @@
      ## for backwards compatibility consider setting the full image url via the repository value below
      ## use *either* current default registry/image or repository format or installing chart by providing the values.yaml will fail
      ## repository:
--    tag: "v1.9.6"
--    digest: sha256:1405cc613bd95b2c6edd8b2a152510ae91c7e62aea4698500d23b2145960ab9c
--    digestChroot: sha256:7eb46ff733429e0e46892903c7394aff149ac6d284d92b3946f3baf7ff26a096
+-    tag: "v1.10.1"
+-    digest: sha256:e24f39d3eed6bcc239a56f20098878845f62baa34b9f2be2fd2c38ce9fb0f29e
+-    digestChroot: sha256:c155954116b397163c88afcb3252462771bd7867017e8a17623e83601bab7ac7
 -    pullPolicy: IfNotPresent
-+    tag: "nginx-1.9.6-hardened1"
++    tag: "v1.10.1-hardened1"
      runAsNonRoot: true
      # www-data -> uid 101
      runAsUser: 101
@@ -45,7 +45,7 @@
      ports:
        # -- 'hostPort' http port
        http: 80
-@@ -145,7 +141,7 @@
+@@ -154,7 +150,7 @@
    # node or nodes where an ingress controller pod is running.
    publishService:
      # -- Enable 'publishService' or not
@@ -54,7 +54,7 @@
      # -- Allows overriding of the publish service to bind to
      # Must be <namespace>/<service_name>
      pathOverride: ""
-@@ -192,7 +188,7 @@
+@@ -201,7 +197,7 @@
    #         name: secret-resource
  
    # -- Use a `DaemonSet` or `Deployment`
@@ -63,7 +63,7 @@
    # -- Annotations to be added to the controller Deployment or DaemonSet
    ##
    annotations: {}
-@@ -444,7 +440,7 @@
+@@ -453,7 +449,7 @@
      configMapKey: ""
    service:
      # -- Enable controller services or not. This does not influence the creation of either the admission webhook or the metrics service.
@@ -72,7 +72,7 @@
      external:
        # -- Enable the external controller service or not. Useful for internal-only deployments.
        enabled: true
-@@ -739,6 +735,7 @@
+@@ -748,6 +744,7 @@
        loadBalancerSourceRanges: []
        servicePort: 443
        type: ClusterIP
@@ -80,7 +80,7 @@
      createSecretJob:
        name: create
        # -- Security context for secret creation containers
-@@ -776,13 +773,11 @@
+@@ -785,13 +782,11 @@
      patch:
        enabled: true
        image:
@@ -90,13 +90,13 @@
          ## for backwards compatibility consider setting the full image url via the repository value below
          ## use *either* current default registry/image or repository format or installing chart by providing the values.yaml will fail
          ## repository:
--        tag: v20231226-1a7112e06
--        digest: sha256:25d6a5f11211cc5c3f9f2bf552b585374af287b4debf693cacbe2da47daa5084
+-        tag: v1.4.1
+-        digest: sha256:36d05b4077fb8e3d13663702fa337f124675ba8667cbd949c03a8e8ea6fa4366
 +        tag: v20230312-helm-chart-4.5.2-28-g66a760794
          pullPolicy: IfNotPresent
        # -- Provide a priority class name to the webhook patching job
        ##
-@@ -918,12 +913,11 @@
+@@ -927,12 +922,11 @@
    enabled: false
    name: defaultbackend
    image:
@@ -111,7 +111,7 @@
      pullPolicy: IfNotPresent
      runAsNonRoot: true
      # nobody user -> uid 65534
-@@ -1092,3 +1086,7 @@
+@@ -1101,3 +1095,7 @@
  # This can be generated with: `openssl dhparam 4096 2> /dev/null | base64`
  ## Ref: https://github.com/kubernetes/ingress-nginx/tree/main/docs/examples/customization/ssl-dh-param
  dhParam: ""
