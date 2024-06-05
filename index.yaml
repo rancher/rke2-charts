@@ -8437,6 +8437,19 @@ entries:
     version: 1.10.101-build2021022301
   rke2-flannel:
   - apiVersion: v1
+    appVersion: v0.25.3
+    created: "2024-06-05T07:20:31.928047502Z"
+    description: Install Flannel Network Plugin.
+    digest: 08f01d076cfb379d5b41fe3726bbd7a23833b794dc5a3d50d010bc557b507d3f
+    keywords:
+    - Flannel
+    name: rke2-flannel
+    sources:
+    - https://github.com/rancher/rke2-charts
+    urls:
+    - assets/rke2-flannel/rke2-flannel-v0.25.300.tgz
+    version: v0.25.300
+  - apiVersion: v1
     appVersion: v0.25.2
     created: "2024-05-28T13:37:53.721764429Z"
     description: Install Flannel Network Plugin.
