@@ -57,4 +57,14 @@ data:
         }
         prometheus :9253
         }
+    {{ range .Values.nodelocal.servers }}
+    {{- range $idx, $zone := .zones }}{{ $zone.zone }}{{ end -}}
+    {{- if .port }}:{{ .port }} {{ end -}}
+    {
+      {{- range .plugins }}
+        {{ .name }}
+          {{- end }}
+        bind {{ default $.Values.nodelocal.ip_address }} {{ template "nodelocalUpstreamDNSServerIP" }}
+    }
+    {{ end }}
 {{- end }}
