@@ -63,7 +63,7 @@ data:
     {
       {{- range .plugins }}
         {{ .name }}
-          {{- end }}
+      {{- end }}
         bind {{ default $.Values.nodelocal.ip_address }} {{ template "nodelocalUpstreamDNSServerIP" }}
     }
     {{ end }}
