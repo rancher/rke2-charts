@@ -1,0 +1,56 @@
+---
+name: "Update Multus version" 
+
+sources:
+  calico:
+    name: Get multus version
+    kind: githubrelease
+    spec:
+      owner: rancher
+      repository: image-build-multus
+      token: '{{ requiredEnv .github.token }}'
+      typefilter:
+        release: true
+        draft: false
+        prerelease: false
+        latest: true
+      versionfilter:
+        kind: latest
+
+targets:
+  multusImage:
+    name: "Bump to latest multus version in the chart"
+    kind: shell
+    scmid: default
+    sourceid: multus
+    spec:
+      command: 'updatecli/scripts/update-multus.sh'
+      environments:
+        - name: MULTUS_VERSION
+          value: '{{ source "multus" }}'
+        - name: PATH
+
+
+scms:
+  default:
+    kind: github
+    spec:
+      token: '{{ requiredEnv .github.token }}'
+      username: '{{ requiredEnv .github.username }}'
+      user: '{{ .github.username }}'
+      email: '{{ .github.email }}'
+      owner: '{{ .github.owner }}'
+      repository: '{{ .github.repository }}'
+      branch: '{{ .github.branch }}'
+      
+actions:
+  default:
+    title: 'Update Multus version to {{ source "multus" }}'
+    kind: github/pullrequest
+    spec:
+      automerge: false
+      labels:
+        - chore
+        - skip-changelog
+        - status/auto-created 
+    scmid: default
