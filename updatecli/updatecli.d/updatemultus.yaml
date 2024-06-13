@@ -2,7 +2,7 @@
 name: "Update Multus version" 
 
 sources:
-  calico:
+  multus:
     name: Get multus version
     kind: githubrelease
     spec:
