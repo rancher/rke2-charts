@@ -20,7 +20,7 @@
 
 image:
   repository: rancher/hardened-multus-cni
-  tag: v4.0.2-build20240418
+  tag: v4.0.2-build20240612
   pullPolicy: IfNotPresent
 
 #imagePullSecrets: []
