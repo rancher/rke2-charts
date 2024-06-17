@@ -29,7 +29,7 @@ spec:
       nodeSelector:
 {{ toYaml .Values.nodelocal.nodeSelector | indent 8 }}
 {{- end }}
-      hostNetwork: true
+      hostNetwork: {{not .Values.nodelocal.use_cilium_lrp }}
       dnsPolicy: Default  # Don't use cluster DNS.
       tolerations:
       - operator: Exists
@@ -46,7 +46,18 @@ spec:
           requests:
             cpu: 25m
             memory: 5Mi
-        args: [ "-localip", "{{.Values.nodelocal.ip_address}}{{ template "nodelocalLocalIPFlag" . }}", "-conf", "/etc/Corefile", "-upstreamsvc", "kube-dns-upstream" ]
+        args: 
+          - "-localip"
+          - "{{.Values.nodelocal.ip_address}}{{ template "nodelocalLocalIPFlag" . }}"
+          - "-conf"
+          - "/etc/Corefile"
+          - "-upstreamsvc"
+          - "kube-dns-upstream"
+{{- if .Values.nodelocal.use_cilium_lrp }}
+          - "-skipteardown=true"
+          - "-setupinterface=false"
+          - "-setupiptables=false"
+{{- end}}
         securityContext:
           privileged: true
         ports:
@@ -61,15 +72,19 @@ spec:
           protocol: TCP
         livenessProbe:
           httpGet:
+{{- if not .Values.nodelocal.use_cilium_lrp }}
             host: {{.Values.nodelocal.ip_address}}
+{{- end}}
             path: /health
             port: 8080
           initialDelaySeconds: 60
           timeoutSeconds: 5
         volumeMounts:
+{{- if not .Values.nodelocal.use_cilium_lrp }}
         - mountPath: /run/xtables.lock
           name: xtables-lock
           readOnly: false
+{{- end}}
         - name: config-volume
           mountPath: /etc/coredns
         - name: kube-dns-config
