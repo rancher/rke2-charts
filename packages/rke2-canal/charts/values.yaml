@@ -73,7 +73,7 @@ calico:
   kubeControllerImage:
     repository: rancher/hardened-calico
     tag: v3.28.0-build20240528
-  # Datastore type for canal. It can be either kuberentes or etcd.
+  # Datastore type for canal. It can be either kubernetes or etcd.
   datastoreType: kubernetes
   # Wait for datastore to initialize.
   waitForDatastore: true
