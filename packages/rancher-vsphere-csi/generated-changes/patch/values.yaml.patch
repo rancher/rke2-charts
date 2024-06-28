@@ -3,9 +3,9 @@
 @@ -150,7 +150,7 @@
  # https://docs.vmware.com/en/VMware-vSphere-Container-Storage-Plug-in/3.0/vmware-vsphere-csp-getting-started/GUID-D4AAD99E-9128-40CE-B89C-AD451DA8379D.html#kubernetes-versions-compatible-with-vsphere-container-storage-plugin-1
  versionOverrides:
-   # Versions from https://github.com/kubernetes-sigs/vsphere-csi-driver/blob/v3.1.2/manifests/vanilla/vsphere-csi-driver.yaml
--  - constraint: ">= 1.26 < 1.29"
-+  - constraint: ">= 1.26 <= 1.29"
+   # Versions from https://github.com/kubernetes-sigs/vsphere-csi-driver/blob/v3.2.0/manifests/vanilla/vsphere-csi-driver.yaml
+-  - constraint: ">= 1.27 < 1.30"
++  - constraint: ">= 1.27 <= 1.30"
      values:
        csiController:
          image:
