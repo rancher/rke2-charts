@@ -59,16 +59,16 @@
          imagePullPolicy: {{ .Values.image.pullPolicy }}
          env:
          - name: CGROUP_ROOT
-@@ -527,7 +545,7 @@
-               - ALL
-           {{- end}}
+@@ -529,7 +547,7 @@
+       {{- end }}
+       {{- if .Values.sysctlfix.enabled }}
        - name: apply-sysctl-overwrites
 -        image: {{ include "cilium.image" .Values.image | quote }}
 +        image: "{{ template "system_default_registry" . }}{{ include "cilium.image" .Values.image }}"
          imagePullPolicy: {{ .Values.image.pullPolicy }}
          {{- with .Values.initResources }}
          resources:
-@@ -576,7 +594,7 @@
+@@ -578,7 +596,7 @@
        # from a privileged container because the mount propagation bidirectional
        # only works from privileged containers.
        - name: mount-bpf-fs
@@ -77,7 +77,7 @@
          imagePullPolicy: {{ .Values.image.pullPolicy }}
          {{- with .Values.initResources }}
          resources:
-@@ -601,7 +619,7 @@
+@@ -603,7 +621,7 @@
        {{- end }}
        {{- if and .Values.nodeinit.enabled .Values.nodeinit.bootstrapFile }}
        - name: wait-for-node-init
@@ -86,7 +86,7 @@
          imagePullPolicy: {{ .Values.image.pullPolicy }}
          {{- with .Values.initResources }}
          resources:
-@@ -619,9 +637,11 @@
+@@ -621,9 +639,11 @@
          volumeMounts:
          - name: cilium-bootstrap-file-dir
            mountPath: "/tmp/cilium-bootstrap.d"
@@ -99,7 +99,7 @@
          imagePullPolicy: {{ .Values.image.pullPolicy }}
          command:
          - /init-container.sh
-@@ -693,7 +713,7 @@
+@@ -695,7 +715,7 @@
          {{- end }}
        {{- if and .Values.waitForKubeProxy (and (ne (toString $kubeProxyReplacement) "strict") (ne (toString $kubeProxyReplacement) "true"))  }}
        - name: wait-for-kube-proxy
@@ -108,7 +108,7 @@
          imagePullPolicy: {{ .Values.image.pullPolicy }}
          {{- with .Values.initResources }}
          resources:
-@@ -731,7 +751,7 @@
+@@ -733,7 +753,7 @@
        {{- if .Values.cni.install }}
        # Install the CNI binaries in an InitContainer so we don't have a writable host mount in the agent
        - name: install-cni-binaries
