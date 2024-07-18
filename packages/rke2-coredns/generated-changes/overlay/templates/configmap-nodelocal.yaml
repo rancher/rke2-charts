@@ -17,19 +17,33 @@ data:
         }
         reload
         loop
+{{- if .Values.nodelocal.use_cilium_lrp }}
+        bind 0.0.0.0
+{{- else }}
         bind {{ .Values.nodelocal.ip_address }} {{ template "nodelocalUpstreamDNSServerIP" . }}
+{{- end}}
         forward . {{ ternary (include "clusterDNSServerIP" .) "__PILLAR__CLUSTER__DNS__" .Values.nodelocal.ipvs  }} {
                 force_tcp
         }
         prometheus :9253
+{{- if .Values.nodelocal.use_cilium_lrp }}
+        health
+{{- else }}
         health {{ .Values.nodelocal.ip_address }}:8080
+{{- end}}
+
+        
         }
     in-addr.arpa:53 {
         errors
         cache 30
         reload
         loop
+{{- if .Values.nodelocal.use_cilium_lrp }}
+        bind 0.0.0.0
+{{- else }}
         bind {{ .Values.nodelocal.ip_address }} {{ template "nodelocalUpstreamDNSServerIP" . }}
+{{- end}}
         forward . {{ ternary (include "clusterDNSServerIP" .) "__PILLAR__CLUSTER__DNS__" .Values.nodelocal.ipvs  }} {
                 force_tcp
         }
@@ -40,7 +54,11 @@ data:
         cache 30
         reload
         loop
+{{- if .Values.nodelocal.use_cilium_lrp }}
+        bind 0.0.0.0
+{{- else }}
         bind {{ .Values.nodelocal.ip_address }} {{ template "nodelocalUpstreamDNSServerIP" . }}
+{{- end}}
         forward . {{ ternary (include "clusterDNSServerIP" .) "__PILLAR__CLUSTER__DNS__" .Values.nodelocal.ipvs  }} {
                 force_tcp
         }
@@ -51,7 +69,11 @@ data:
         cache 30
         reload
         loop
+{{- if .Values.nodelocal.use_cilium_lrp }}
+        bind 0.0.0.0
+{{- else }}
         bind {{ .Values.nodelocal.ip_address }} {{ template "nodelocalUpstreamDNSServerIP" . }}
+{{- end}}
         forward . __PILLAR__UPSTREAM__SERVERS__ {
                 force_tcp
         }
