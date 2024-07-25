@@ -1,6 +1,6 @@
 --- charts-original/templates/cilium-configmap.yaml
 +++ charts/templates/cilium-configmap.yaml
-@@ -1,3 +1,11 @@
+@@ -1,3 +1,10 @@
 +{{- if empty .Values.global.clusterCIDRv4 }}
 +{{- $_ := set .Values.ipv4 "enabled" false -}}
 +{{- end }}
@@ -8,11 +8,10 @@
 +{{- if not (empty .Values.global.clusterCIDRv6) }}
 +{{- $_ := set .Values.ipv6 "enabled" true -}}
 +{{- end }}
-+
- {{- if and (.Values.agent) (not .Values.preflight.enabled) }}
+ {{- if and ( or (.Values.agent) (.Values.operator.enabled) .Values.externalWorkloads.enabled .Values.clustermesh.useAPIServer) (not .Values.preflight.enabled) }}
  {{- /*  Default values with backwards compatibility */ -}}
  {{- $defaultBpfMapDynamicSizeRatio := 0.0 -}}
-@@ -289,7 +297,11 @@
+@@ -292,7 +299,11 @@
  
    # Enable IPv6 addressing. If enabled, all endpoints are allocated an IPv6
    # address.
@@ -25,7 +24,7 @@
  
  {{- if .Values.cleanState }}
    # If a serious issue occurs during Cilium startup, this
-@@ -468,6 +480,8 @@
+@@ -471,6 +482,8 @@
    tunnel-protocol: "vxlan"
  {{- else if .Values.routingMode }}
    routing-mode: {{ .Values.routingMode | quote }}
@@ -34,7 +33,7 @@
  {{- else }}
    # Default case
    routing-mode: "tunnel"
-@@ -662,6 +676,8 @@
+@@ -673,6 +686,8 @@
  
  {{- if .Values.ipv6NativeRoutingCIDR }}
    ipv6-native-routing-cidr: {{ .Values.ipv6NativeRoutingCIDR }}

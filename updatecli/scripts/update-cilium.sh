@@ -27,8 +27,6 @@ if [ -n "$CILIUM_VERSION" ]; then
 		CILIUM_HUBBLE_UI_DIGEST=$(yq ".hubble.ui.frontend.image.digest" workdir/values.yaml)
 		CILIUM_ENVOY_VERSION=$(yq ".envoy.image.tag" workdir/values.yaml)
 		CILIUM_ENVOY_DIGEST=$(yq ".envoy.image.digest" workdir/values.yaml)
-		CILIUM_ETCD_OPERATOR_VERSION=$(yq ".etcd.image.tag" workdir/values.yaml)
-		CILIUM_ETCD_OPERATOR_DIGEST=$(yq ".etcd.image.digest" workdir/values.yaml)
 		CILIUM_OPERATOR_VERSION=$(yq ".operator.image.tag" workdir/values.yaml)
 		CILIUM_OPERATOR_DIGEST=$(yq ".operator.image.genericDigest" workdir/values.yaml)
 		CILIUM_AZURE_OPERATOR_DIGEST=$(yq ".operator.image.azureDigest" workdir/values.yaml)
@@ -48,8 +46,6 @@ if [ -n "$CILIUM_VERSION" ]; then
 		sed -ie "s/CILIUM_HUBBLE_UI_DIGEST/$CILIUM_HUBBLE_UI_DIGEST/g" workdir/cilium-values.yaml.patch.template
 		sed -ie "s/CILIUM_ENVOY_VERSION/$CILIUM_ENVOY_VERSION/g" workdir/cilium-values.yaml.patch.template
 		sed -ie "s/CILIUM_ENVOY_DIGEST/$CILIUM_ENVOY_DIGEST/g" workdir/cilium-values.yaml.patch.template
-		sed -ie "s/CILIUM_ETCD_OPERATOR_VERSION/$CILIUM_ETCD_OPERATOR_VERSION/g" workdir/cilium-values.yaml.patch.template
-		sed -ie "s/CILIUM_ETCD_OPERATOR_DIGEST/$CILIUM_ETCD_OPERATOR_DIGEST/g" workdir/cilium-values.yaml.patch.template
 		sed -ie "s/CILIUM_OPERATOR_VERSION/$CILIUM_OPERATOR_VERSION/g" workdir/cilium-values.yaml.patch.template
 		sed -ie "s/CILIUM_OPERATOR_DIGEST/$CILIUM_OPERATOR_DIGEST/g" workdir/cilium-values.yaml.patch.template
 		sed -ie "s/CILIUM_AZURE_OPERATOR_DIGEST/$CILIUM_AZURE_OPERATOR_DIGEST/g" workdir/cilium-values.yaml.patch.template

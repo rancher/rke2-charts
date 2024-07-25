@@ -12,7 +12,7 @@
  {{- if and .Values.agent (not .Values.preflight.enabled) }}
  
  {{- /*  Default values with backwards compatibility */ -}}
-@@ -94,7 +102,7 @@
+@@ -95,7 +103,7 @@
        {{- end }}
        containers:
        - name: cilium-agent
@@ -21,7 +21,7 @@
          imagePullPolicy: {{ .Values.image.pullPolicy }}
          {{- if .Values.sleepAfterInit }}
          command:
-@@ -394,7 +402,7 @@
+@@ -397,7 +405,7 @@
          {{- end }}
        {{- if .Values.monitor.enabled }}
        - name: cilium-monitor
@@ -30,7 +30,7 @@
          imagePullPolicy: {{ .Values.image.pullPolicy }}
          command:
          - /bin/bash
-@@ -425,8 +433,18 @@
+@@ -428,8 +436,18 @@
        {{- toYaml .Values.extraContainers | nindent 6 }}
        {{- end }}
        initContainers:
@@ -50,7 +50,7 @@
          imagePullPolicy: {{ .Values.image.pullPolicy }}
          command:
          - cilium-dbg
-@@ -481,7 +499,7 @@
+@@ -482,7 +500,7 @@
        # Required to mount cgroup2 filesystem on the underlying Kubernetes node.
        # We use nsenter command with host's cgroup and mount namespaces enabled.
        - name: mount-cgroup
@@ -59,7 +59,7 @@
          imagePullPolicy: {{ .Values.image.pullPolicy }}
          env:
          - name: CGROUP_ROOT
-@@ -529,7 +547,7 @@
+@@ -530,7 +548,7 @@
        {{- end }}
        {{- if .Values.sysctlfix.enabled }}
        - name: apply-sysctl-overwrites
@@ -68,7 +68,7 @@
          imagePullPolicy: {{ .Values.image.pullPolicy }}
          {{- with .Values.initResources }}
          resources:
-@@ -578,7 +596,7 @@
+@@ -579,7 +597,7 @@
        # from a privileged container because the mount propagation bidirectional
        # only works from privileged containers.
        - name: mount-bpf-fs
@@ -99,7 +99,7 @@
          imagePullPolicy: {{ .Values.image.pullPolicy }}
          command:
          - /init-container.sh
-@@ -695,7 +715,7 @@
+@@ -692,7 +712,7 @@
          {{- end }}
        {{- if and .Values.waitForKubeProxy (and (ne (toString $kubeProxyReplacement) "strict") (ne (toString $kubeProxyReplacement) "true"))  }}
        - name: wait-for-kube-proxy
@@ -108,7 +108,7 @@
          imagePullPolicy: {{ .Values.image.pullPolicy }}
          {{- with .Values.initResources }}
          resources:
-@@ -733,7 +753,7 @@
+@@ -730,7 +750,7 @@
        {{- if .Values.cni.install }}
        # Install the CNI binaries in an InitContainer so we don't have a writable host mount in the agent
        - name: install-cni-binaries
