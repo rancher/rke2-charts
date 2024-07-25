@@ -1,6 +1,6 @@
 --- charts-original/templates/hubble-ui/deployment.yaml
 +++ charts/templates/hubble-ui/deployment.yaml
-@@ -53,7 +53,7 @@
+@@ -52,7 +52,7 @@
        {{- end }}
        containers:
        - name: frontend
@@ -9,7 +9,7 @@
          imagePullPolicy: {{ .Values.hubble.ui.frontend.image.pullPolicy }}
          ports:
          - name: http
-@@ -89,7 +89,7 @@
+@@ -88,7 +88,7 @@
            {{- toYaml . | trim | nindent 10 }}
          {{- end }}
        - name: backend
