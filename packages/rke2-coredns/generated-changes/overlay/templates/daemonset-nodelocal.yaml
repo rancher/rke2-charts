@@ -62,10 +62,10 @@ spec:
           privileged: true
         ports:
         - containerPort: 53
-          name: dns
+          name: udp-53
           protocol: UDP
         - containerPort: 53
-          name: dns-tcp
+          name: tcp-53
           protocol: TCP
         - containerPort: 9253
           name: metrics

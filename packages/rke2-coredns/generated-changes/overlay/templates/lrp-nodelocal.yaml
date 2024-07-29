@@ -6,7 +6,7 @@ metadata:
 spec:
   redirectFrontend:
     serviceMatcher:
-      serviceName: {{ template "coredns.fullname" . }}
+      serviceName: {{ default (include "coredns.fullname" .) .Values.service.name }}
       namespace: {{ .Release.Namespace }}
   redirectBackend:
     localEndpointSelector:
