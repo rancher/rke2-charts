@@ -11,11 +11,11 @@ metadata:
     kubernetes.io/name: "KubeDNSUpstream"
 spec:
   ports:
-  - name: dns
+  - name: udp-53
     port: 53
     protocol: UDP
     targetPort: 53
-  - name: dns-tcp
+  - name: tcp-53
     port: 53
     protocol: TCP
     targetPort: 53
