@@ -7900,6 +7900,36 @@ entries:
           description: Removed deprecated "engine: gotpl" from the Chart.yaml
     apiVersion: v2
     appVersion: 1.11.1
+    created: "2024-07-30T12:46:51.413645518Z"
+    description: CoreDNS is a DNS server that chains plugins and provides Kubernetes
+      DNS Services
+    digest: 001428c2d65072de35ff266ca23148f52c9d607b45d7167be823bbc3010254f5
+    home: https://coredns.io
+    icon: https://coredns.io/images/CoreDNS_Colour_Horizontal.png
+    keywords:
+    - coredns
+    - dns
+    - kubedns
+    maintainers:
+    - name: mrueg
+    - name: haad
+    - name: hagaibarel
+    - name: shubham-cmyk
+    name: rke2-coredns
+    sources:
+    - https://github.com/coredns/coredns
+    type: application
+    urls:
+    - assets/rke2-coredns/rke2-coredns-1.29.004.tgz
+    version: 1.29.004
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: changed
+          description: Ignore duplicate strings in the fullname helper template
+        - kind: removed
+          description: Removed deprecated "engine: gotpl" from the Chart.yaml
+    apiVersion: v2
+    appVersion: 1.11.1
     created: "2024-07-18T09:27:16.996109048Z"
     description: CoreDNS is a DNS server that chains plugins and provides Kubernetes
       DNS Services
