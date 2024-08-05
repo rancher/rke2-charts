@@ -1,0 +1,26 @@
+--- charts-original/templates/rbac.yaml
++++ charts/templates/rbac.yaml
+@@ -19,23 +19,6 @@
+   - nodes/status
+   verbs:
+   - patch
+-{{- if .Values.netpol.enabled }}
+-- apiGroups:
+-  - "networking.k8s.io"
+-  resources:
+-  - networkpolicies
+-  verbs:
+-  - list
+-  - watch
+-- apiGroups:
+-  - "policy.networking.k8s.io"
+-  resources:
+-  - adminnetworkpolicies
+-  - baselineadminnetworkpolicies
+-  verbs:
+-  - list
+-  - watch
+-{{- end }}
+ ---
+ kind: ClusterRoleBinding
+ apiVersion: rbac.authorization.k8s.io/v1

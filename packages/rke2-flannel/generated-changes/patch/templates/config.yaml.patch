@@ -17,4 +17,4 @@
 +      "IPv6Network": {{ .Values.global.clusterCIDRv6 | quote }},
        "EnableIPv6": true,
  {{- end }}
-       "Backend": {
+ {{- if .Values.flannel.enableNFTables }}
