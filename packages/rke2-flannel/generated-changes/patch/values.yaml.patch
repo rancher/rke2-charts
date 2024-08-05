@@ -15,18 +15,18 @@
    # kube-flannel image
    image:
 -    repository: docker.io/flannel/flannel
--    tag: v0.25.4
+-    tag: v0.25.5
 +    repository: rancher/hardened-flannel
-+    tag: v0.25.4-build20240610
++    tag: v0.25.5-build20240801
    image_cni:
 -    repository: docker.io/flannel/flannel-cni-plugin
--    tag: v1.4.1-flannel1
+-    tag: v1.5.1-flannel1
 +    repository: rancher/hardened-cni-plugins
-+    tag: v1.4.1-build20240430
++    tag: v1.5.1-build20240805
    # flannel command arguments
+   enableNFTables: false,
    args:
-   - "--ip-masq"
-@@ -25,14 +16,14 @@
+@@ -26,14 +17,14 @@
    # Documentation at https://github.com/flannel-io/flannel/blob/master/Documentation/backends.md
    backend: "vxlan"
    # Port used by the backend 0 means default value (VXLAN: 8472, Wireguard: 51821, UDP: 8285)
@@ -43,7 +43,7 @@
    # Enable VXLAN Group Based Policy (Default false)
    # GBP: false
    # Enable direct routes (default is false)
-@@ -54,7 +45,18 @@
+@@ -55,16 +46,18 @@
    # General daemonset configs
    #
    tolerations:
@@ -61,7 +61,15 @@
 +  - key: "node-role.kubernetes.io/etcd"
 +    operator: "Exists"
 +    effect: "NoExecute"
-+
+ 
+-netpol:
+-  enabled: false
+-  args:
+-  - "--hostname-override=$(MY_NODE_NAME)"
+-  - "--v=2"
+-  image:
+-    repository: registry.k8s.io/networking/kube-network-policies
+-    tag: v0.4.0
 +global:
 +  systemDefaultRegistry: ""
 +  clusterCIDRv4: ""
