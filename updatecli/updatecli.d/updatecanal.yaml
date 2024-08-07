@@ -11,14 +11,11 @@ sources:
       token: '{{ requiredEnv .github.token }}'
       username: '{{ requiredEnv .github.username }}'
       typefilter:
-        latest: true
         release: true
         draft: false
         prerelease: false
       versionfilter:
-        kind: regex
-        # pattern accepts any semver constraint
-        pattern: "v[0-9]+.[0-9]+.[0-9]+-build[0-9]+"
+        kind: semver
   calico:
     name: Get calico version
     kind: githubrelease
@@ -28,14 +25,11 @@ sources:
       token: '{{ requiredEnv .github.token }}'
       username: '{{ requiredEnv .github.username }}'
       typefilter:
-        latest: true
         release: true
         draft: false
         prerelease: false
       versionfilter:
-        kind: regex
-        # pattern accepts any semver constraint
-        pattern: "v[0-9]+.[0-9]+.[0-9]+-build[0-9]+"
+        kind: semver
 
 targets:
   canalImage:
@@ -63,7 +57,7 @@ scms:
       owner: '{{ .github.owner }}'
       repository: '{{ .github.repository }}'
       branch: '{{ .github.branch }}'
-      
+
 actions:
   default:
     title: 'Bump flannel version to {{ source "flannel" }} and Calico to {{ source "calico" }} on Canal'
