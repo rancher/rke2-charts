@@ -1,0 +1,11 @@
+--- charts-original/templates/_params.tpl
++++ charts/templates/_params.tpl
+@@ -51,7 +51,7 @@
+ {{- if .Values.controller.ingressClassByName }}
+ - --ingress-class-by-name=true
+ {{- end }}
+-{{- if .Values.controller.watchIngressWithoutClass }}
++{{- if or (.Values.controller.watchIngressWithoutClass) (eq .Values.global.systemDefaultIngressClass "ingress-nginx") }}
+ - --watch-ingress-without-class=true
+ {{- end }}
+ {{- if not .Values.controller.metrics.enabled }}
