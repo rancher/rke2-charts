@@ -1,6 +1,6 @@
 --- charts-original/templates/controller-deployment.yaml
 +++ charts/templates/controller-deployment.yaml
-@@ -79,9 +79,7 @@
+@@ -78,9 +78,7 @@
      {{- end }}
        containers:
          - name: {{ .Values.controller.containerName }}
