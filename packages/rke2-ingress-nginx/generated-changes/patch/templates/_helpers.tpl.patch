@@ -15,16 +15,7 @@
  {{- end }}
  {{- end -}}
  
-@@ -237,7 +237,7 @@
- Check the ingress controller version tag is at most three versions behind the last release
- */}}
- {{- define "isControllerTagValid" -}}
--{{- if not (semverCompare ">=0.27.0-0" .Values.controller.image.tag) -}}
-+{{- if not (semverCompare ">=0.27.0-0" (trimPrefix "nginx-" .Values.controller.image.tag)) -}}
- {{- fail "Controller container image tag should be 0.27.0 or higher" -}}
- {{- end -}}
- {{- end -}}
-@@ -268,3 +268,15 @@
+@@ -259,3 +259,15 @@
      - name: modules
        mountPath: /modules_mount
  {{- end -}}
