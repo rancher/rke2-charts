@@ -15,14 +15,14 @@
    # kube-flannel image
    image:
 -    repository: docker.io/flannel/flannel
--    tag: v0.25.5
+-    tag: v0.25.6
 +    repository: rancher/hardened-flannel
-+    tag: v0.25.5-build20240801
++    tag: v0.25.6-build20240828
    image_cni:
 -    repository: docker.io/flannel/flannel-cni-plugin
--    tag: v1.5.1-flannel1
+-    tag: v1.5.1-flannel2
 +    repository: rancher/hardened-cni-plugins
-+    tag: v1.5.1-build20240805
++    tag: v1.5.1-build20240830
    # flannel command arguments
    enableNFTables: false
    args:
