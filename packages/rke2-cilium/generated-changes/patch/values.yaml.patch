@@ -107,6 +107,19 @@
    port: 9962
    serviceMonitor:
      # -- Enable service monitors.
+@@ -2130,9 +2126,9 @@
+   # type: [null, boolean]
+   # @schema
+   # -- Enable Envoy Proxy in standalone DaemonSet.
+-  # This field is enabled by default for new installation.
+-  # @default -- `true` for new installation
+-  enabled: ~
++  # This field is disabled by default.
++  # @default -- `false`
++  enabled: false
+   # -- (int)
+   # Set Envoy'--base-id' to use when allocating shared memory regions.
+   # Only needs to be changed if multiple Envoy instances will run on the same node and may have conflicts. Supported values: 0 - 4294967295. Defaults to '0'
 @@ -2161,11 +2157,10 @@
      # type: [null, string]
      # @schema
