@@ -7,7 +7,7 @@ if [ -n "$MULTUS_VERSION" ]; then
 	if [ "$current_multus_version" != "$MULTUS_VERSION" ]; then
 		echo "Updating Multus chart to $MULTUS_VERSION"
 		if [ "$app_version" != "$current_app_version" ]; then
-			sed -i "s/version: .*/version: $app_version/g" packages/rke2-multus/charts/Chart.yaml
+			sed -i "s/version: .*/version: v$app_version/g" packages/rke2-multus/charts/Chart.yaml
 			sed -i "s/appVersion: .*/appVersion: $app_version/g" packages/rke2-multus/charts/Chart.yaml
 			sed -i "s/  tag: $current_multus_version/  tag: $MULTUS_VERSION/g" packages/rke2-multus/charts/values.yaml
 			sed -i "s/  tag: $current_app_version/  tag: $app_version/g" packages/rke2-multus/charts/values.yaml
