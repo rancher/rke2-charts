@@ -17,12 +17,12 @@
 -    repository: docker.io/flannel/flannel
 -    tag: v0.25.6
 +    repository: rancher/hardened-flannel
-+    tag: v0.25.6-build20240828
++    tag: v0.25.6-build20240910
    image_cni:
 -    repository: docker.io/flannel/flannel-cni-plugin
 -    tag: v1.5.1-flannel2
 +    repository: rancher/hardened-cni-plugins
-+    tag: v1.5.1-build20240830
++    tag: v1.5.1-build20240910
    # flannel command arguments
    enableNFTables: false
    args:
