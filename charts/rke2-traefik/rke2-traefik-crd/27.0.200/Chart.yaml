@@ -1,0 +1,8 @@
+annotations:
+  fleet.cattle.io/bundle-id: rke2
+apiVersion: v1
+appVersion: v2.11.10
+description: Installs the CRDs for rke2-traefik
+name: rke2-traefik-crd
+type: application
+version: 27.0.200
