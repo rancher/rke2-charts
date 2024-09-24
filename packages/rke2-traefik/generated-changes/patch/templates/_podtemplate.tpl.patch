@@ -1,7 +1,7 @@
 --- charts-original/templates/_podtemplate.tpl
 +++ charts/templates/_podtemplate.tpl
-@@ -50,7 +50,7 @@
-       shareProcessNamespace: true
+@@ -53,7 +53,7 @@
+       runtimeClassName: {{ . }}
        {{- end }}
        containers:
 -      - image: {{ template "traefik.image-name" . }}
