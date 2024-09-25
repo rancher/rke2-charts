@@ -5,7 +5,7 @@
      {
        {{- range .plugins }}
 -        {{ .name }}{{ if .parameters }} {{ .parameters }}{{ end }}{{ if .configBlock }} {
-+        {{ .name }} {{ if .parameters }} {{if eq .name "kubernetes" }} {{ coalesce $.Values.global.clusterDomain "cluster.local" }} {{ end }} {{.parameters}}{{ end }}{{ if .configBlock }} {
++        {{ .name }}{{ if .parameters }} {{if eq .name "kubernetes" }} {{ coalesce $.Values.global.clusterDomain "cluster.local" }} {{ end }} {{.parameters}}{{ end }}{{ if .configBlock }} {
  {{ .configBlock | indent 12 }}
          }{{ end }}
        {{- end }}
