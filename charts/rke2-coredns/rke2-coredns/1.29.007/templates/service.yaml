@@ -1,0 +1,51 @@
+{{- if .Values.deployment.enabled }}
+{{- $dnsIPs := split "," .Values.global.clusterDNS }}
+{{- $dnsCount := len $dnsIPs }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ default (include "coredns.fullname" .) .Values.service.name }}
+  namespace: {{ .Release.Namespace }}
+  labels: {{- include "coredns.labels" . | nindent 4 }}
+{{- if .Values.customLabels }}
+{{ toYaml .Values.customLabels | indent 4 }}
+{{- end }}
+  {{- if or .Values.service.annotations .Values.customAnnotations }}
+  annotations:
+    {{- if .Values.service.annotations }}
+    {{- toYaml .Values.service.annotations | nindent 4 }}
+    {{- end }}
+    {{- if .Values.customAnnotations }}
+    {{- toYaml .Values.customAnnotations | nindent 4 }}
+    {{- end }}
+  {{- end }}
+spec:
+  selector:
+    app.kubernetes.io/instance: {{ .Release.Name | quote }}
+    {{- if .Values.isClusterService }}
+    k8s-app: {{ template "coredns.k8sapplabel" . }}
+    {{- end }}
+    app.kubernetes.io/name: {{ template "coredns.name" . }}
+  clusterIP: {{ template "clusterDNSServerIP" . }}
+  {{- if gt $dnsCount 1 }}
+  clusterIPs:
+  {{- range $dnsIP := $dnsIPs }}
+  - {{ $dnsIP }}
+  {{- end }}
+  {{- end }}
+  {{- if .Values.service.externalIPs }}
+  externalIPs:
+  {{- toYaml .Values.service.externalIPs | nindent 4 }}
+  {{- end }}
+  {{- if .Values.service.externalTrafficPolicy }}
+  externalTrafficPolicy: {{ .Values.service.externalTrafficPolicy }}
+  {{- end }}
+  {{- if .Values.service.loadBalancerIP }}
+  loadBalancerIP: {{ .Values.service.loadBalancerIP }}
+  {{- end }}
+  ports:
+{{ include "coredns.servicePorts" . | indent 2 -}}
+  type: {{ default "ClusterIP" .Values.serviceType }}
+  ipFamilyPolicy: {{ template "ipFamilyPolicy" . }}
+{{- end }}
