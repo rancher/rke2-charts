@@ -8713,6 +8713,34 @@ entries:
   rke2-coredns:
   - annotations:
       artifacthub.io/changes: |
+        - kind: added
+          description: Add support for specifying the service loadBalancerClass.
+    apiVersion: v2
+    appVersion: 1.11.3
+    created: "2024-09-27T10:46:58.011550807Z"
+    description: CoreDNS is a DNS server that chains plugins and provides Kubernetes
+      DNS Services
+    digest: d5c11b97cc5fd39d951d25dcae39fcaeb5e1a826826494c688c8d1484931b46f
+    home: https://coredns.io
+    icon: https://coredns.io/images/CoreDNS_Colour_Horizontal.png
+    keywords:
+    - coredns
+    - dns
+    - kubedns
+    maintainers:
+    - name: mrueg
+    - name: haad
+    - name: hagaibarel
+    - name: shubham-cmyk
+    name: rke2-coredns
+    sources:
+    - https://github.com/coredns/coredns
+    type: application
+    urls:
+    - assets/rke2-coredns/rke2-coredns-1.33.000.tgz
+    version: 1.33.000
+  - annotations:
+      artifacthub.io/changes: |
         - kind: changed
           description: Ignore duplicate strings in the fullname helper template
         - kind: removed
