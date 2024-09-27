@@ -117,7 +117,7 @@ spec:
           mountPath: /host/opt/cni/bin
         {{- if .Values.manifests.configMap }}
         - name: multus-cfg
-          mountPath: /tmp/multus-conf/00-multus.conf.template
+          mountPath: /tmp/multus-conf/00-multus.conf
           subPath: "cni-conf.json"
         {{- end }}
       volumes:
@@ -130,6 +130,6 @@ spec:
         {{- if .Values.manifests.configMap }}
         - name: multus-cfg
           configMap:
-            name: {{ .Release.Name }}-{{ .Chart.Name }}-{{ .Chart.Version }}-config
+            name: {{ .Release.Name }}-{{ .Chart.Version }}-config
         {{- end }}
 {{- end }}
