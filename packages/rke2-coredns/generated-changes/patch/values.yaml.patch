@@ -12,12 +12,13 @@
    pullPolicy: IfNotPresent
    ## Optionally specify an array of imagePullSecrets.
    ## Secrets must be manually created in the namespace.
-@@ -50,21 +50,20 @@
+@@ -52,12 +52,11 @@
  
  service:
  # clusterIP: ""
 -# clusterIPs: []
  # loadBalancerIP: ""
+ # loadBalancerClass: ""
  # externalIPs: []
  # externalTrafficPolicy: ""
 -# ipFamilyPolicy: ""
@@ -25,7 +26,8 @@
    # The name of the Service
    # If not set, a name is generated using the fullname template
    name: ""
-   annotations: {}
+@@ -66,10 +65,10 @@
+   selector: {}
  
  serviceAccount:
 -  create: false
@@ -37,7 +39,7 @@
    annotations: {}
  
  rbac:
-@@ -80,7 +79,7 @@
+@@ -85,7 +84,7 @@
  isClusterService: true
  
  # Optional priority class to be used for the coredns pods. Used for autoscaler if autoscaler.priorityClassName not set.
@@ -46,20 +48,10 @@
  
  # Configure the pod level securityContext.
  podSecurityContext: {}
-@@ -168,17 +167,16 @@
-   successThreshold: 1
- 
- # expects input structure as per specification https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.11/#affinity-v1-core
--# for example:
--#   affinity:
--#     nodeAffinity:
--#      requiredDuringSchedulingIgnoredDuringExecution:
--#        nodeSelectorTerms:
--#        - matchExpressions:
--#          - key: foo.bar.com/role
--#            operator: In
--#            values:
--#            - master
+@@ -183,7 +182,16 @@
+ #            operator: In
+ #            values:
+ #            - master
 -affinity: {}
 +affinity:
 +  podAntiAffinity:
@@ -74,7 +66,7 @@
  
  # expects input structure as per specification https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.21/#topologyspreadconstraint-v1-core
  # and supports Helm templating.
-@@ -202,16 +200,17 @@
+@@ -207,7 +215,8 @@
  
  # Node labels for pod assignment
  # Ref: https://kubernetes.io/docs/user-guide/node-selection/
@@ -83,12 +75,11 @@
 +  kubernetes.io/os: linux
  
  # expects input structure as per specification https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.11/#toleration-v1-core
--# for example:
--#   tolerations:
--#   - key: foo.bar.com/role
--#     operator: Equal
--#     value: master
--#     effect: NoSchedule
+ # for example:
+@@ -216,7 +225,13 @@
+ #     operator: Equal
+ #     value: master
+ #     effect: NoSchedule
 -tolerations: []
 +tolerations:
 +- key: "node-role.kubernetes.io/control-plane"
@@ -100,7 +91,7 @@
  
  # https://kubernetes.io/docs/tasks/run-application/configure-pdb/#specifying-a-poddisruptionbudget
  podDisruptionBudget: {}
-@@ -293,7 +292,7 @@
+@@ -298,7 +313,7 @@
  # See https://github.com/kubernetes-incubator/cluster-proportional-autoscaler
  autoscaler:
    # Enabled the cluster-proportional-autoscaler
@@ -109,7 +100,7 @@
  
    # Number of cores in the cluster per coredns replica
    coresPerReplica: 256
-@@ -317,8 +316,8 @@
+@@ -322,8 +337,8 @@
    #   - --nodelabels=topology.kubernetes.io/zone=us-east-1a
  
    image:
@@ -120,7 +111,7 @@
      pullPolicy: IfNotPresent
      ## Optionally specify an array of imagePullSecrets.
      ## Secrets must be manually created in the namespace.
-@@ -336,19 +335,26 @@
+@@ -341,19 +356,26 @@
  
    # Node labels for pod assignment
    # Ref: https://kubernetes.io/docs/user-guide/node-selection/
@@ -153,7 +144,7 @@
  
    # Options for autoscaler configmap
    configmap:
-@@ -360,8 +366,8 @@
+@@ -365,8 +387,8 @@
    livenessProbe:
      enabled: true
      initialDelaySeconds: 10
@@ -164,10 +155,10 @@
      failureThreshold: 3
      successThreshold: 1
  
-@@ -376,3 +382,23 @@
-   name: ""
-   ## Annotations for the coredns deployment
+@@ -384,3 +406,25 @@
    annotations: {}
+   ## Pod selector
+   selector: {}
 +
 +k8sApp: "kube-dns"
 +
