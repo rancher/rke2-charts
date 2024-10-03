@@ -1,6 +1,6 @@
 --- charts-original/templates/cilium-envoy/daemonset.yaml
 +++ charts/templates/cilium-envoy/daemonset.yaml
-@@ -69,7 +69,7 @@
+@@ -65,7 +65,7 @@
        {{- end }}
        containers:
        - name: cilium-envoy
