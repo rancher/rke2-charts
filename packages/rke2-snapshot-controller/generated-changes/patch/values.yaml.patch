@@ -1,37 +1,88 @@
 --- charts-original/values.yaml
 +++ charts/values.yaml
-@@ -6,7 +6,7 @@
-   httpEndpoint: ":8080"
+@@ -11,7 +11,7 @@
+     httpEndpoint: ":8080"
  
- image:
--  repository: registry.k8s.io/sig-storage/snapshot-controller
-+  repository: rancher/mirrored-sig-storage-snapshot-controller
-   pullPolicy: IfNotPresent
-   # Overrides the image tag whose default is the chart appVersion.
-   tag: ""
-@@ -27,9 +27,16 @@
+   image:
+-    repository: registry.k8s.io/sig-storage/snapshot-controller
++    repository: rancher/mirrored-sig-storage-snapshot-controller
+     pullPolicy: IfNotPresent
+     # Overrides the image tag whose default is the chart appVersion.
+     tag: ""
+@@ -35,9 +35,16 @@
  
- resources: {}
+   resources: {}
  
--nodeSelector: {}
-+nodeSelector:
-+  kubernetes.io/os: linux
+-  nodeSelector: {}
++  nodeSelector:
++    kubernetes.io/os: linux
  
--tolerations: []
-+tolerations:
-+- key: "node-role.kubernetes.io/control-plane"
-+  operator: "Exists"
-+  effect: "NoSchedule"
-+- key: "node-role.kubernetes.io/etcd"
-+  operator: "Exists"
-+  effect: "NoExecute"
+-  tolerations: []
++  tolerations:
++    - key: "node-role.kubernetes.io/control-plane"
++      operator: "Exists"
++      effect: "NoSchedule"
++    - key: "node-role.kubernetes.io/etcd"
++      operator: "Exists"
++      effect: "NoExecute"
  
- affinity: {}
+   affinity: {}
  
-@@ -54,3 +61,6 @@
- #      velero.io/csi-volumesnapshot-class: "true"
- #    driver: linstor.csi.linbit.com
- #    deletionPolicy: Delete
+@@ -82,7 +89,7 @@
+   dnsPolicy: ClusterFirst
+ 
+ webhook:
+-  enabled: true
++  enabled: false
+ 
+   replicaCount: 1
+ 
+@@ -95,7 +102,7 @@
+     # enableVolumeGroupSnapshotWebhook: true
+ 
+   image:
+-    repository: registry.k8s.io/sig-storage/snapshot-validation-webhook
++    repository: rancher/mirrored-sig-storage-snapshot-validation-webhook
+     pullPolicy: IfNotPresent
+     # Overrides the image tag whose default is the chart appVersion.
+     tag: ""
+@@ -150,9 +157,16 @@
+ 
+   resources: {}
+ 
+-  nodeSelector: {}
++  nodeSelector:
++    kubernetes.io/os: linux
+ 
+-  tolerations: []
++  tolerations:
++    - key: "node-role.kubernetes.io/control-plane"
++      operator: "Exists"
++      effect: "NoSchedule"
++    - key: "node-role.kubernetes.io/etcd"
++      operator: "Exists"
++      effect: "NoExecute"
+ 
+   affinity: {}
+ 
+@@ -173,8 +187,18 @@
+   dnsPolicy: ClusterFirst
+ 
+   tests:
+-    nodeSelector: { }
++    nodeSelector:
++      kubernetes.io/os: linux
+ 
+-    tolerations: [ ]
++    tolerations:
++      - key: "node-role.kubernetes.io/control-plane"
++        operator: "Exists"
++        effect: "NoSchedule"
++      - key: "node-role.kubernetes.io/etcd"
++        operator: "Exists"
++        effect: "NoExecute"
+ 
+     affinity: { }
 +
 +global:
 +  systemDefaultRegistry: ""

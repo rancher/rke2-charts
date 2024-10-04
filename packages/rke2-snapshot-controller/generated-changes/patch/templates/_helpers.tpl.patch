@@ -1,9 +1,9 @@
 --- charts-original/templates/_helpers.tpl
 +++ charts/templates/_helpers.tpl
-@@ -55,3 +55,11 @@
-     {{ default "default" .Values.serviceAccount.name }}
- {{- end -}}
- {{- end -}}
+@@ -132,3 +132,11 @@
+ {{- include "snapshot-validation-webhook.fullname" . }}-tls
+ {{- end }}
+ {{- end }}
 +
 +{{- define "system_default_registry" -}}
 +{{- if .Values.global.systemDefaultRegistry -}}

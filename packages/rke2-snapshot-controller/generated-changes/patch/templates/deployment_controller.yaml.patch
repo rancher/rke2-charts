@@ -1,0 +1,11 @@
+--- charts-original/templates/deployment_controller.yaml
++++ charts/templates/deployment_controller.yaml
+@@ -34,7 +34,7 @@
+         - name: {{ .Chart.Name }}
+           securityContext:
+             {{- toYaml .Values.controller.securityContext | nindent 12 }}
+-          image: "{{ .Values.controller.image.repository }}:{{ .Values.controller.image.tag | default .Chart.AppVersion }}"
++          image: "{{ template "system_default_registry" . }}{{ .Values.controller.image.repository }}:{{ .Values.controller.image.tag | default .Chart.AppVersion }}"
+           imagePullPolicy: {{ .Values.controller.image.pullPolicy }}
+           args:
+             {{- range $flag, $val := .Values.controller.args }}
