@@ -1,7 +1,7 @@
 --- charts-original/values.yaml
 +++ charts/values.yaml
-@@ -6,7 +6,7 @@
-   port: 8443
+@@ -7,7 +7,7 @@
+   # enableVolumeGroupSnapshotWebhook: true
  
  image:
 -  repository: registry.k8s.io/sig-storage/snapshot-validation-webhook
@@ -9,7 +9,7 @@
    pullPolicy: IfNotPresent
    # Overrides the image tag whose default is the chart appVersion.
    tag: ""
-@@ -63,9 +63,16 @@
+@@ -65,9 +65,16 @@
  
  resources: {}
  
@@ -28,7 +28,7 @@
  
  affinity: {}
  
-@@ -75,3 +82,11 @@
+@@ -77,3 +84,11 @@
  
  rbac:
    create: true
