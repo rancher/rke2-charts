@@ -5,6 +5,6 @@
  type: application
 -name: snapshot-controller
 +name: rke2-snapshot-controller
- version: 1.7.2
- appVersion: "v6.2.1"
- icon: https://raw.githubusercontent.com/piraeusdatastore/piraeus/master/artwork/sandbox-artwork/icon/color.svg
+ version: 3.0.6
+ appVersion: "v8.1.0"
+ kubeVersion: ">= 1.25.0-0"
