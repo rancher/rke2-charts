@@ -1,10 +1,27 @@
 --- charts-original/Chart.yaml
 +++ charts/Chart.yaml
-@@ -1,6 +1,6 @@
+@@ -1,8 +1,8 @@
  apiVersion: v2
  type: application
 -name: snapshot-validation-webhook
 +name: rke2-snapshot-validation-webhook
- version: 1.7.3
- appVersion: "v6.2.2"
+ version: 1.9.0
+-appVersion: "v6.3.1"
++appVersion: "v8.1.0"
  icon: https://raw.githubusercontent.com/piraeusdatastore/piraeus/master/artwork/sandbox-artwork/icon/color.svg
+ maintainers:
+   - name: The Piraeus Maintainers
+@@ -10,8 +10,6 @@
+ description: |
+   Deploys the snapshot-validation-webhook and configures your cluster to validate every `VolumeSnapshot` and
+   `VolumeSnapshotContent` resource by sending it to the webhook.
+-
+-  NOTE: Please use the snapshot-controller chart instead: it also deploys the validation webhook.
+ keywords:
+   - storage
+   - snapshot
+@@ -22,4 +20,3 @@
+ annotations:
+   artifacthub.io/recommendations: |
+     - url: https://artifacthub.io/packages/helm/piraeus-charts/snapshot-controller
+-deprecated: true
