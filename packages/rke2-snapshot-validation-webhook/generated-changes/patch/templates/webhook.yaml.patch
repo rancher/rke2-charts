@@ -1,0 +1,26 @@
+--- charts-original/templates/webhook.yaml
++++ charts/templates/webhook.yaml
+@@ -62,14 +62,11 @@
+         - snapshot.storage.k8s.io
+         apiVersions:
+         - v1
+-        - v1beta1
+         operations:
+         - CREATE
+         - UPDATE
+         resources:
+-        - volumesnapshots
+         - volumesnapshotclasses
+-        - volumesnapshotcontents
+         scope: "*"
+     clientConfig:
+       service:
+@@ -95,8 +92,6 @@
+           - CREATE
+           - UPDATE
+         resources:
+-          - volumegroupsnapshots
+-          - volumegroupsnapshotcontents
+           - volumegroupsnapshotclasses
+         scope: "*"
+     clientConfig:
