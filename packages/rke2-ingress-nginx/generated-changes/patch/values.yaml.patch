@@ -92,7 +92,7 @@
          ## repository:
 -        tag: v1.4.3
 -        digest: sha256:a320a50cc91bd15fd2d6fa6de58bd98c1bd64b9a6f926ce23a600d87043455a3
-+        tag: v1.4.1
++        tag: v1.4.4
          pullPolicy: IfNotPresent
        # -- Provide a priority class name to the webhook patching job
        ##
