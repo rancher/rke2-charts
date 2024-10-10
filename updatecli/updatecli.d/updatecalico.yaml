@@ -13,9 +13,8 @@ sources:
         release: true
         draft: false
         prerelease: false
-        latest: true
       versionfilter:
-        kind: latest
+        kind: semver
 
 targets:
   calicoImage:
