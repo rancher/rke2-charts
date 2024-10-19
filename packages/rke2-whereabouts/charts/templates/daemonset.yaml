@@ -55,13 +55,17 @@ spec:
             valueFrom:
               fieldRef:
                 fieldPath: metadata.namespace
+          - name: CNI_CONF_DIR
+            value: /host{{ .Values.cniConf.confDir }}
+          - name: CNI_BIN_DIR
+            value: /host{{ .Values.cniConf.binDir }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           volumeMounts:
           - name: cnibin
-            mountPath: /host/opt/cni/bin
+            mountPath: /host{{ .Values.cniConf.binDir }}
           - name: cni-net-dir
-            mountPath: /host/etc/cni/net.d
+            mountPath: /host{{ .Values.cniConf.confDir }}
           - name: cron-scheduler-configmap
             mountPath: /cron-schedule
       volumes:
