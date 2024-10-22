@@ -107,7 +107,7 @@
 -    repository: registry.k8s.io/cpa/cluster-proportional-autoscaler
 -    tag: "1.8.5"
 +    repository: rancher/hardened-cluster-autoscaler
-+    tag: "v1.8.11-build20240910"
++    tag: "v1.8.11-build20241014"
      pullPolicy: IfNotPresent
      ## Optionally specify an array of imagePullSecrets.
      ## Secrets must be manually created in the namespace.
@@ -172,10 +172,10 @@
 +  use_cilium_lrp: false
 +  image:
 +    repository: rancher/hardened-dns-node-cache
-+    tag: "1.23.1-build20240910"
++    tag: "1.23.1-build20241008"
 +  initimage:
 +    repository: rancher/hardened-dns-node-cache
-+    tag: "1.23.1-build20240910"
++    tag: "1.23.1-build20241008"
 +  nodeSelector:
 +    kubernetes.io/os: linux
 +
