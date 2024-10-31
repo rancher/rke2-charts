@@ -96,6 +96,7 @@ rules:
       - clusterinformations
       - hostendpoints
       - blockaffinities
+      - bgpfilters
     verbs:
       - get
       - list
@@ -124,6 +125,7 @@ rules:
     resources:
       - bgpconfigurations
       - bgppeers
+      - bgpfilters
     verbs:
       - create
       - update
