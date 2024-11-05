@@ -1,0 +1,96 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: {{ include "whereabouts.fullname" . }}
+  {{- include "whereabouts.namespace" . | nindent 2 }}
+  labels:
+    {{- include "whereabouts.labels" . | nindent 4 }}
+spec:
+  selector:
+    matchLabels:
+      name: whereabouts
+      {{- include "whereabouts.selectorLabels" . | nindent 6 }}
+  updateStrategy:
+    type: {{ .Values.updateStrategy }}
+  template:
+    metadata:
+    {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+      labels:
+        name: whereabouts
+        {{- include "whereabouts.selectorLabels" . | nindent 8 }}
+    spec:
+      hostNetwork: true
+      serviceAccountName: {{ include "whereabouts.serviceAccountName" . }}
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      securityContext: #TODO still needed?
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      tolerations:
+      - operator: Exists
+        effect: NoSchedule
+      containers:
+        - name: {{ .Chart.Name }}
+          command: [ "/bin/sh" ]
+          args:
+            - -c
+            - >
+              SLEEP=false /install-cni.sh &&
+              /ip-control-loop -log-level debug
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ template "system_default_registry" . }}{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+          - name: NODENAME
+            valueFrom:
+              fieldRef:
+                apiVersion: v1
+                fieldPath: spec.nodeName
+          - name: WHEREABOUTS_NAMESPACE
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.namespace
+          - name: CNI_CONF_DIR
+            value: /host{{ .Values.cniConf.confDir }}
+          - name: CNI_BIN_DIR
+            value: /host{{ .Values.cniConf.binDir }}
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          volumeMounts:
+          - name: cnibin
+            mountPath: /host{{ .Values.cniConf.binDir }}
+          - name: cni-net-dir
+            mountPath: /host{{ .Values.cniConf.confDir }}
+          - name: cron-scheduler-configmap
+            mountPath: /cron-schedule
+      volumes:
+        - name: cnibin
+          hostPath:
+            path: {{ .Values.cniConf.binDir }}
+        - name: cni-net-dir
+          hostPath:
+            path: {{ .Values.cniConf.confDir }}
+        - name: cron-scheduler-configmap
+          configMap:
+            name: {{ include "whereabouts.fullname" . }}-config
+            defaultMode: 0744
+            items:
+            - key: "cron-expression"
+              path: "config"
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
