@@ -1,6 +1,25 @@
 --- charts-original/templates/config.yaml
 +++ charts/templates/config.yaml
-@@ -29,13 +29,13 @@
+@@ -16,6 +16,7 @@
+           "type": "flannel",
+           "delegate": {
+             "hairpinMode": true,
++            "forceAddress": true,
+             "isDefaultGateway": true
+           }
+         },
+@@ -24,18 +25,24 @@
+           "capabilities": {
+             "portMappings": true
+           }
++        },
++        {
++          "type": "bandwidth",
++          "capabilities": {
++            "bandwidth": true
++          }
+         }
+       ]
      }
    net-conf.json: |
      {
