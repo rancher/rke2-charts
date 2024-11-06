@@ -7,7 +7,7 @@
 -  namespace: {{.Release.Namespace}}
 +  namespace: tigera-operator
    labels:
-     k8s-app: tigera-operator
+     {{- include "tigera-operator.labels" (dict "context" .) | nindent 4 }}
  spec:
 @@ -47,7 +47,7 @@
        dnsPolicy: ClusterFirstWithHostNet
