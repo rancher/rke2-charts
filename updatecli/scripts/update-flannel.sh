@@ -1,5 +1,11 @@
 #!/bin/bash
 set -eu
+
+source $(dirname $0)/create-issue.sh
+
+ISSUE_TITLE="Updatecli failed for flannel ${FLANNEL_VERSION}"
+trap report-error EXIT INT
+
 if [ -n "$FLANNEL_VERSION" ]; then
 	app_version=$(echo "$FLANNEL_VERSION" | grep -Eo 'v[0-9]+.[0-9]+.[0-9]+')
 	current_flannel_version=$(sed -nr 's/^\+    tag: ('v[0-9]+.[0-9]+.[0-9]+')/\1/p' packages/rke2-flannel/generated-changes/patch/values.yaml.patch  | head -1)

@@ -51,6 +51,8 @@ targets:
         - name: CALICO_VERSION
           value: '{{ source "calico" }}'
         - name: PATH
+        - name: UPDATECLI_GITHUB_WORKFLOW_URL
+        - name: GH_TOKEN
 
 scms:
   default:

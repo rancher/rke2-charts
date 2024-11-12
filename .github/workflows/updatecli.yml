@@ -15,7 +15,8 @@ permissions:
 jobs:
   updatecli:
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main-source'
+    # if you want to testupdatecli on another branch, you also need to modify updatecli/values.yaml
+    if: ${{github.ref == 'refs/heads/main-source' && github.repository == 'rancher/rke2-charts'}}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -27,6 +28,16 @@ jobs:
 
       - name: Install Updatecli
         uses: updatecli/updatecli-action@v2
+
+      - name: Get token
+        id: get_token
+        uses: actions/create-github-app-token@5d869da34e18e7287c1daad50e0b8ea0f506ce69 # v1.11.0
+        with:
+            app-id: ${{ secrets.CREATE_ISSUE_APP_ID }}
+            private-key: ${{ secrets.CREATE_ISSUE_PRIVATE_KEY }}
+            owner: rancher
+            repositories: |
+              rke2
 
       - name: Delete leftover UpdateCLI branches
         run: |
@@ -53,3 +64,6 @@ jobs:
         env:
           UPDATECLI_GITHUB_ACTOR: ${{ github.actor }}
           UPDATECLI_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          UPDATECLI_GITHUB_WORKFLOW_URL: "https://github.com/${{github.repository}}/actions/runs/${{github.run_id}}"
+          GH_TOKEN: ${{ steps.get_token.outputs.token }}
+

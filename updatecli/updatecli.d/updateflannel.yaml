@@ -32,6 +32,8 @@ targets:
         - name: FLANNEL_VERSION
           value: '{{ source "flannel" }}'
         - name: PATH
+        - name: UPDATECLI_GITHUB_WORKFLOW_URL
+        - name: GH_TOKEN
 
 
 scms:
