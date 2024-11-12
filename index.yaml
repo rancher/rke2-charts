@@ -9511,6 +9511,34 @@ entries:
           description: Add support for specifying the service loadBalancerClass.
     apiVersion: v2
     appVersion: 1.11.3
+    created: "2024-11-12T16:31:44.21873664Z"
+    description: CoreDNS is a DNS server that chains plugins and provides Kubernetes
+      DNS Services
+    digest: b182688f8b2572774c6d18327c14ebda5092ca8e81a9598a2530867f787b39e1
+    home: https://coredns.io
+    icon: https://coredns.io/images/CoreDNS_Colour_Horizontal.png
+    keywords:
+    - coredns
+    - dns
+    - kubedns
+    maintainers:
+    - name: mrueg
+    - name: haad
+    - name: hagaibarel
+    - name: shubham-cmyk
+    name: rke2-coredns
+    sources:
+    - https://github.com/coredns/coredns
+    type: application
+    urls:
+    - assets/rke2-coredns/rke2-coredns-1.33.005.tgz
+    version: 1.33.005
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: added
+          description: Add support for specifying the service loadBalancerClass.
+    apiVersion: v2
+    appVersion: 1.11.3
     created: "2024-11-12T13:54:31.26502549Z"
     description: CoreDNS is a DNS server that chains plugins and provides Kubernetes
       DNS Services
