@@ -1,5 +1,11 @@
 #!/bin/bash
 set -eu
+
+source $(dirname $0)/create-issue.sh
+
+ISSUE_TITLE="Updatecli failed for canal ${CALICO_VERSION} / ${FLANNEL_VERSION}" 
+trap report-error EXIT INT
+
 if [ -n "$FLANNEL_VERSION" ]; then
 	current_flannel_version=$(yq '.flannel.image.tag' packages/rke2-canal/charts/values.yaml)
 	if [ "$current_flannel_version" != "$FLANNEL_VERSION" ]; then

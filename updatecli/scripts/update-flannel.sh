@@ -1,5 +1,11 @@
 #!/bin/bash
 set -eu
+
+source $(dirname $0)/create-issue.sh
+
+ISSUE_TITLE="Updatecli failed for flannel ${FLANNEL_VERSION}"
+trap report-error EXIT INT
+
 new_package=false
 if [ -n "$CNI_PLUGINS_VERSION" ]; then
 	current_cni_plugins_version=$(sed -nr 's/^\+    tag: ('v[0-9]+.[0-9]+.[0-9]+')/\1/p' packages/rke2-flannel/generated-changes/patch/values.yaml.patch  | tail -1)
