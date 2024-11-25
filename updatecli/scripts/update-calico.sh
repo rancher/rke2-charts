@@ -16,6 +16,8 @@ if [ -n "$CALICO_VERSION" ]; then
 		yq -i ".url = \"https://github.com/projectcalico/calico/releases/download/$CALICO_VERSION/tigera-operator-$CALICO_VERSION.tgz\" |
 			.packageVersion = 00" packages/rke2-calico/package.yaml
 		GOCACHE='/home/runner/.cache/go-build' GOPATH='/home/runner/go' PACKAGE='rke2-calico' make prepare
+		find packages/rke2-calico/charts -name '*.orig' -delete
+		find packages/rke2-calico/charts-crd -name '*.orig' -delete
 		GOCACHE='/home/runner/.cache/go-build' GOPATH='/home/runner/go' PACKAGE='rke2-calico' make patch
 		make clean
 	fi
