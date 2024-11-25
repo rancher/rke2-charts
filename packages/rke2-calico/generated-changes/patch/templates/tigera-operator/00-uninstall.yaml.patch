@@ -7,9 +7,9 @@
 -  namespace: {{.Release.Namespace}}
 +  namespace: tigera-operator
    labels:
-     k8s-app: tigera-operator-uninstall
      helm.sh/chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
-@@ -35,5 +35,5 @@
+     {{- include "tigera-operator.labels" (dict "context" .) | nindent 4 }}
+@@ -34,5 +34,5 @@
        serviceAccountName: tigera-operator
        containers:
        - name: cleanup-job
