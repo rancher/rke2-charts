@@ -1,4 +1,4 @@
-url: https://github.com/projectcalico/calico/releases/download/v3.29.0/tigera-operator-v3.29.0.tgz
+url: https://github.com/projectcalico/calico/releases/download/v3.29.1/tigera-operator-v3.29.1.tgz
 packageVersion: 00
 additionalCharts:
   - workingDir: charts-crd

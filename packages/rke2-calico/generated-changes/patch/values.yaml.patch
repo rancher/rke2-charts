@@ -37,13 +37,13 @@
  tigeraOperator:
 -  image: tigera/operator
 +  image: rancher/mirrored-calico-operator
-   version: v1.36.0
+   version: v1.36.2
 -  registry: quay.io
 +  registry: docker.io
  calicoctl:
 -  image: docker.io/calico/ctl
 +  image: rancher/mirrored-calico-ctl
-   tag: v3.29.0
+   tag: v3.29.1
  
 -kubeletVolumePluginPath: /var/lib/kubelet
 +kubeletVolumePluginPath: "None"
