@@ -19,6 +19,7 @@ if [ -n "$FLANNEL_VERSION" ]; then
 			yq -i ".packageVersion = $new_version" packages/rke2-flannel/package.yaml
 		fi
 		GOCACHE='/home/runner/.cache/go-build' GOPATH='/home/runner/go' PACKAGE='rke2-flannel' make prepare
+		find packages/rke2-flannel/charts -name '*.orig' -delete
 		GOCACHE='/home/runner/.cache/go-build' GOPATH='/home/runner/go' PACKAGE='rke2-flannel' make patch
 		make clean
 	fi
