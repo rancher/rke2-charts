@@ -23,13 +23,10 @@
  {{- end -}}
  
  {{/*
-@@ -234,4 +230,72 @@
- {{- else -}}
+@@ -236,3 +232,71 @@
      {{ template "coredns.fullname" . }}
  {{- end -}}
--{{- end -}}
-\ No newline at end of file
-+{{- end -}}
+ {{- end -}}
 +
 +{{- define "system_default_registry" -}}
 +{{- if .Values.global.systemDefaultRegistry -}}
@@ -97,4 +94,4 @@
 +        {{- "SingleStack" }}
 +    {{- end }}
 +{{- end }}
-+{{- end }} 
++{{- end }}
