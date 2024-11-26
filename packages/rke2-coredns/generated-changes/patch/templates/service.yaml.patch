@@ -25,7 +25,7 @@
    {{- end }}
    {{- if .Values.service.externalIPs }}
    externalIPs:
-@@ -52,7 +54,5 @@
+@@ -52,9 +54,7 @@
    ports:
  {{ include "coredns.servicePorts" . | indent 2 -}}
    type: {{ default "ClusterIP" .Values.serviceType }}
@@ -34,3 +34,5 @@
 -  {{- end }}
 +  ipFamilyPolicy: {{ template "ipFamilyPolicy" . }}
  {{- end }}
+   {{- if .Values.service.trafficDistribution }}
+   trafficDistribution: {{ .Values.service.trafficDistribution }}
