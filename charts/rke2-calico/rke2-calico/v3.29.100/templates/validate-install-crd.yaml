@@ -1,0 +1,37 @@
+#{{- if gt (len (lookup "rbac.authorization.k8s.io/v1" "ClusterRole" "" "")) 0 -}}
+# {{- $found := dict -}}
+# {{- set $found "crd.projectcalico.org/v1/BGPConfiguration" false -}}
+# {{- set $found "crd.projectcalico.org/v1/BGPFilter" false -}}
+# {{- set $found "crd.projectcalico.org/v1/BGPPeer" false -}}
+# {{- set $found "crd.projectcalico.org/v1/BlockAffinity" false -}}
+# {{- set $found "crd.projectcalico.org/v1/CalicoNodeStatus" false -}}
+# {{- set $found "crd.projectcalico.org/v1/ClusterInformation" false -}}
+# {{- set $found "crd.projectcalico.org/v1/FelixConfiguration" false -}}
+# {{- set $found "crd.projectcalico.org/v1/GlobalNetworkPolicy" false -}}
+# {{- set $found "crd.projectcalico.org/v1/GlobalNetworkSet" false -}}
+# {{- set $found "crd.projectcalico.org/v1/HostEndpoint" false -}}
+# {{- set $found "crd.projectcalico.org/v1/IPAMBlock" false -}}
+# {{- set $found "crd.projectcalico.org/v1/IPAMConfig" false -}}
+# {{- set $found "crd.projectcalico.org/v1/IPAMHandle" false -}}
+# {{- set $found "crd.projectcalico.org/v1/IPPool" false -}}
+# {{- set $found "crd.projectcalico.org/v1/IPReservation" false -}}
+# {{- set $found "crd.projectcalico.org/v1/KubeControllersConfiguration" false -}}
+# {{- set $found "crd.projectcalico.org/v1/NetworkPolicy" false -}}
+# {{- set $found "crd.projectcalico.org/v1/NetworkSet" false -}}
+# {{- set $found "crd.projectcalico.org/v1/Tier" false -}}
+# {{- set $found "policy.networking.k8s.io/v1alpha1/AdminNetworkPolicy" false -}}
+# {{- set $found "operator.tigera.io/v1/APIServer" false -}}
+# {{- set $found "operator.tigera.io/v1/ImageSet" false -}}
+# {{- set $found "operator.tigera.io/v1/Installation" false -}}
+# {{- set $found "operator.tigera.io/v1/TigeraStatus" false -}}
+# {{- range .Capabilities.APIVersions -}}
+# {{- if hasKey $found (toString .) -}}
+# 	{{- set $found (toString .) true -}}
+# {{- end -}}
+# {{- end -}}
+# {{- range $_, $exists := $found -}}
+# {{- if (eq $exists false) -}}
+# 	{{- required "Required CRDs are missing. Please install the corresponding CRD chart before installing this chart." "" -}}
+# {{- end -}}
+# {{- end -}}
+#{{- end -}}
