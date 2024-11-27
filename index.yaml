@@ -9680,6 +9680,34 @@ entries:
   rke2-coredns:
   - annotations:
       artifacthub.io/changes: |
+        - kind: fix
+          description: Add default values to chart to fix cluster role name templating issue
+    apiVersion: v2
+    appVersion: 1.11.3
+    created: "2024-11-27T08:55:47.035991353Z"
+    description: CoreDNS is a DNS server that chains plugins and provides Kubernetes
+      DNS Services
+    digest: ba5718eb88edbaeb5416a4de3fb2eec744203f8856bd81ea1a728daa50af9f73
+    home: https://coredns.io
+    icon: https://coredns.io/images/CoreDNS_Colour_Horizontal.png
+    keywords:
+    - coredns
+    - dns
+    - kubedns
+    maintainers:
+    - name: mrueg
+    - name: haad
+    - name: hagaibarel
+    - name: shubham-cmyk
+    name: rke2-coredns
+    sources:
+    - https://github.com/coredns/coredns
+    type: application
+    urls:
+    - assets/rke2-coredns/rke2-coredns-1.36.100.tgz
+    version: 1.36.100
+  - annotations:
+      artifacthub.io/changes: |
         - kind: added
           description: Add support for specifying the service loadBalancerClass.
     apiVersion: v2
