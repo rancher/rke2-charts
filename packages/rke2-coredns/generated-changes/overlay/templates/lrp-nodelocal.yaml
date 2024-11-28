@@ -8,15 +8,22 @@ spec:
     serviceMatcher:
       serviceName: {{ default (include "coredns.fullname" .) .Values.service.name }}
       namespace: {{ .Release.Namespace }}
+      toPorts:
+        - name: dns-tcp
+          port: "53"
+          protocol: TCP
+        - name: dns
+          port: "53"
+          protocol: UDP 
   redirectBackend:
     localEndpointSelector:
       matchLabels:
         k8s-app: node-local-dns
     toPorts:
-      - port: "53"
-        name: udp-53
+      - name: dns
+        port: "53"
         protocol: UDP
-      - port: "53"
-        name: tcp-53
+      - name: dns-tcp
+        port: "53"
         protocol: TCP
 {{- end }}
