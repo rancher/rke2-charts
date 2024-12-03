@@ -29,6 +29,8 @@ targets:
         - name: CILIUM_VERSION
           value: '{{ source "cilium" }}'
         - name: PATH
+        - name: UPDATECLI_GITHUB_WORKFLOW_URL
+        - name: GH_TOKEN
 
 
 scms:
