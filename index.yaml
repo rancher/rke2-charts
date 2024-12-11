@@ -9701,6 +9701,34 @@ entries:
           description: Add default values to chart to fix cluster role name templating issue
     apiVersion: v2
     appVersion: 1.11.3
+    created: "2024-12-11T22:38:32.698233301Z"
+    description: CoreDNS is a DNS server that chains plugins and provides Kubernetes
+      DNS Services
+    digest: 5348462fd60f6fc93a9a947ac4ce98cf8f451257ed54afeba754d8a472524c2c
+    home: https://coredns.io
+    icon: https://coredns.io/images/CoreDNS_Colour_Horizontal.png
+    keywords:
+    - coredns
+    - dns
+    - kubedns
+    maintainers:
+    - name: mrueg
+    - name: haad
+    - name: hagaibarel
+    - name: shubham-cmyk
+    name: rke2-coredns
+    sources:
+    - https://github.com/coredns/coredns
+    type: application
+    urls:
+    - assets/rke2-coredns/rke2-coredns-1.36.101.tgz
+    version: 1.36.101
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: fix
+          description: Add default values to chart to fix cluster role name templating issue
+    apiVersion: v2
+    appVersion: 1.11.3
     created: "2024-11-27T08:55:47.035991353Z"
     description: CoreDNS is a DNS server that chains plugins and provides Kubernetes
       DNS Services
