@@ -14,7 +14,7 @@
 -    digest: sha256:c84d11b1f7bd14ebbf49918a7f0dc01b31c0c6e757e0129520ea93453096315c
 -    digestChroot: sha256:030a43bdd5f0212a7e135cc4da76b15a6706ef65a6824eb4cc401f87a81c2987
 -    pullPolicy: IfNotPresent
-+    tag: "v1.10.5-hardened4"
++    tag: "v1.10.5-hardened6"
      runAsNonRoot: true
      # www-data -> uid 101
      runAsUser: 101
