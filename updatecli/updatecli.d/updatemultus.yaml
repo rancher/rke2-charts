@@ -29,6 +29,8 @@ targets:
         - name: MULTUS_VERSION
           value: '{{ source "multus" }}'
         - name: PATH
+        - name: UPDATECLI_GITHUB_WORKFLOW_URL
+        - name: GH_TOKEN
 
 
 scms:

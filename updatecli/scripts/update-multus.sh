@@ -1,5 +1,11 @@
 #!/bin/bash
-set -eu
+set -eux
+
+source $(dirname $0)/create-issue.sh
+
+ISSUE_TITLE="Updatecli failed for multus ${MULTUS_VERSION}"
+trap report-error EXIT INT
+
 if [ -n "$MULTUS_VERSION" ]; then
 	app_version=$(echo "$MULTUS_VERSION" | grep -Eo '^v*[0-9]+.[0-9]+.[0-9]+' | tr -d 'v')
 	current_multus_version=$(yq '.image.tag' packages/rke2-multus/charts/values.yaml)
