@@ -1,0 +1,14 @@
+--- charts-original/Chart.yaml
++++ charts/Chart.yaml
+@@ -11,8 +11,9 @@
+ apiVersion: v2
+ appVersion: v0.2.4
+ dependencies:
+-- condition: kube-vip.enabled
+-  name: kube-vip
++- name: kube-vip
++  condition: kube-vip.enabled
++  version: 0.6.4
+   repository: file://./charts/kube-vip
+ description: A Helm chart for Harvester Cloud Provider
+ keywords:
