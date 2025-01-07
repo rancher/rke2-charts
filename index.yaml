@@ -26,6 +26,36 @@ entries:
       catalog.cattle.io/ui-component: harvester-cloud-provider
       catalog.cattle.io/upstream-version: 0.2.0
     apiVersion: v2
+    appVersion: v0.2.4
+    created: "2025-01-07T01:47:30.734415528Z"
+    dependencies:
+    - condition: kube-vip.enabled
+      name: kube-vip
+      repository: file://./charts/kube-vip
+      version: 0.6.4
+    description: A Helm chart for Harvester Cloud Provider
+    digest: 979e45ec0f7c4350b7434986cb5ec8d8c0bb9de06b9e6980742dde7ff4d92bf4
+    keywords:
+    - infrastructure
+    - harvester
+    maintainers:
+    - name: harvester
+    name: harvester-cloud-provider
+    type: application
+    urls:
+    - assets/harvester-cloud-provider/harvester-cloud-provider-0.2.700.tgz
+    version: 0.2.700
+  - annotations:
+      catalog.cattle.io/certified: rancher
+      catalog.cattle.io/display-name: Harvester Cloud Provider
+      catalog.cattle.io/kube-version: '>= 1.23.0-0 < 1.29.0-0'
+      catalog.cattle.io/namespace: kube-system
+      catalog.cattle.io/os: linux
+      catalog.cattle.io/rancher-version: '>= 2.7.0-0 < 2.10.0-0'
+      catalog.cattle.io/release-name: harvester-cloud-provider
+      catalog.cattle.io/ui-component: harvester-cloud-provider
+      catalog.cattle.io/upstream-version: 0.2.0
+    apiVersion: v2
     appVersion: v0.2.0
     created: "2024-08-29T15:18:17.808689901Z"
     dependencies:
