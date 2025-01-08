@@ -1,13 +1,11 @@
 --- charts-original/templates/controller-daemonset.yaml
 +++ charts/templates/controller-daemonset.yaml
-@@ -75,9 +75,7 @@
-     {{- end }}
+@@ -76,7 +76,7 @@
        containers:
          - name: {{ .Values.controller.containerName }}
--          {{- with .Values.controller.image }}
+           {{- with (merge .Values.controller.image .Values.global.image) }}
 -          image: {{ if .repository }}{{ .repository }}{{ else }}{{ .registry }}/{{ include "ingress-nginx.image" . }}{{ end }}:{{ .tag }}{{ include "ingress-nginx.imageDigest" . }}
--          {{- end }}
 +          image: "{{ template "system_default_registry" . }}{{ template "repository_or_registry_and_image" .Values.controller.image }}"
+           {{- end }}
            imagePullPolicy: {{ .Values.controller.image.pullPolicy }}
          {{- if .Values.controller.lifecycle }}
-           lifecycle: {{ toYaml .Values.controller.lifecycle | nindent 12 }}
