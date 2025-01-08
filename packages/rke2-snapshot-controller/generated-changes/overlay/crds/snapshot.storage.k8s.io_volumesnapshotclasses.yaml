@@ -132,7 +132,7 @@ spec:
         - deletionPolicy
         - driver
         type: object
-    served: true
+    served: false
     storage: false
     subresources: {}
 status:
