@@ -5,7 +5,7 @@
  
    image:
 -    repository: registry.k8s.io/sig-storage/snapshot-controller
-+    repository: rancher/mirrored-sig-storage-snapshot-controller
++    repository: rancher/mirrored-sig-storage-snapshot-validation-webhook
      pullPolicy: IfNotPresent
      # Overrides the image tag whose default is the chart appVersion.
      tag: ""
@@ -28,61 +28,10 @@
  
    affinity: {}
  
-@@ -82,7 +89,7 @@
+@@ -80,3 +87,6 @@
+   # DNS Policy for controller pod. For Pods running with hostNetwork, set to `ClusterFirstWithHostNet`
+   # For further reference: https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/#pod-s-dns-policy.
    dnsPolicy: ClusterFirst
- 
- webhook:
--  enabled: true
-+  enabled: false
- 
-   replicaCount: 1
- 
-@@ -95,7 +102,7 @@
-     # enableVolumeGroupSnapshotWebhook: true
- 
-   image:
--    repository: registry.k8s.io/sig-storage/snapshot-validation-webhook
-+    repository: rancher/mirrored-sig-storage-snapshot-validation-webhook
-     pullPolicy: IfNotPresent
-     # Overrides the image tag whose default is the chart appVersion.
-     tag: ""
-@@ -150,9 +157,16 @@
- 
-   resources: {}
- 
--  nodeSelector: {}
-+  nodeSelector:
-+    kubernetes.io/os: linux
- 
--  tolerations: []
-+  tolerations:
-+    - key: "node-role.kubernetes.io/control-plane"
-+      operator: "Exists"
-+      effect: "NoSchedule"
-+    - key: "node-role.kubernetes.io/etcd"
-+      operator: "Exists"
-+      effect: "NoExecute"
- 
-   affinity: {}
- 
-@@ -173,8 +187,18 @@
-   dnsPolicy: ClusterFirst
- 
-   tests:
--    nodeSelector: { }
-+    nodeSelector:
-+      kubernetes.io/os: linux
- 
--    tolerations: [ ]
-+    tolerations:
-+      - key: "node-role.kubernetes.io/control-plane"
-+        operator: "Exists"
-+        effect: "NoSchedule"
-+      - key: "node-role.kubernetes.io/etcd"
-+        operator: "Exists"
-+        effect: "NoExecute"
- 
-     affinity: { }
 +
 +global:
 +  systemDefaultRegistry: ""
