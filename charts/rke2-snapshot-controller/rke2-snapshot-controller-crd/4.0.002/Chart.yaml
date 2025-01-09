@@ -1,0 +1,6 @@
+apiVersion: v1
+appVersion: v8.2.0
+description: Installs the CRDs for rke2-snapshot-controller
+name: rke2-snapshot-controller-crd
+type: application
+version: 4.0.002
