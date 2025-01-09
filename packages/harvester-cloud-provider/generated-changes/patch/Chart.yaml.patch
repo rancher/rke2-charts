@@ -1,14 +1,24 @@
 --- charts-original/Chart.yaml
 +++ charts/Chart.yaml
-@@ -11,8 +11,9 @@
+@@ -4,16 +4,17 @@
+   catalog.cattle.io/kube-version: '>= 1.23.0-0'
+   catalog.cattle.io/namespace: kube-system
+   catalog.cattle.io/os: linux
+-  catalog.cattle.io/rancher-version: '>= 2.7.0-0 < 2.10.0-0'
++  catalog.cattle.io/rancher-version: '>= 2.7.0-0'
+   catalog.cattle.io/release-name: harvester-cloud-provider
+   catalog.cattle.io/ui-component: harvester-cloud-provider
+   catalog.cattle.io/upstream-version: 0.2.0
  apiVersion: v2
  appVersion: v0.2.4
  dependencies:
 -- condition: kube-vip.enabled
 -  name: kube-vip
+-  repository: file://./charts/kube-vip
 +- name: kube-vip
 +  condition: kube-vip.enabled
 +  version: 0.6.4
-   repository: file://./charts/kube-vip
++  repository: file://dependency_charts/kube-vip
  description: A Helm chart for Harvester Cloud Provider
  keywords:
+ - infrastructure
