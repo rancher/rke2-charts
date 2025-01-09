@@ -8,4 +8,4 @@
 +{{- if or (.Values.controller.watchIngressWithoutClass) (eq .Values.global.systemDefaultIngressClass "ingress-nginx") }}
  - --watch-ingress-without-class=true
  {{- end }}
- {{- if not .Values.controller.metrics.enabled }}
+ {{- if .Values.controller.metrics.enabled }}

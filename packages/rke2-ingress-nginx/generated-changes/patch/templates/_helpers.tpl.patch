@@ -1,6 +1,6 @@
 --- charts-original/templates/_helpers.tpl
 +++ charts/templates/_helpers.tpl
-@@ -69,11 +69,11 @@
+@@ -70,11 +70,11 @@
  {{/*
  Get specific image
  */}}
@@ -15,7 +15,7 @@
  {{- end }}
  {{- end -}}
  
-@@ -259,3 +259,15 @@
+@@ -261,3 +261,15 @@
      - name: modules
        mountPath: /modules_mount
  {{- end -}}
