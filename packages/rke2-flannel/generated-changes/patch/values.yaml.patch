@@ -15,9 +15,9 @@
    # kube-flannel image
    image:
 -    repository: docker.io/flannel/flannel
--    tag: v0.26.2
+-    tag: v0.26.3
 +    repository: rancher/hardened-flannel
-+    tag: v0.26.2-build20241212
++    tag: v0.26.3-build20250108
    image_cni:
 -    repository: docker.io/flannel/flannel-cni-plugin
 -    tag: v1.6.0-flannel1
