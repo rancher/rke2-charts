@@ -1,6 +1,6 @@
 --- charts-original/templates/deployment.yaml
 +++ charts/templates/deployment.yaml
-@@ -59,7 +59,7 @@
+@@ -61,7 +61,7 @@
            securityContext:
              {{- toYaml . | nindent 12 }}
            {{- end }}
@@ -9,7 +9,7 @@
            imagePullPolicy: {{ .Values.image.pullPolicy }}
            args:
              - {{ printf "--secure-port=%d" (int .Values.containerPort) }}
-@@ -100,7 +100,7 @@
+@@ -102,7 +102,7 @@
            securityContext:
              {{- toYaml . | nindent 12 }}
            {{- end }}
