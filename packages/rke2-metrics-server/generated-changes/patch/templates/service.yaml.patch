@@ -1,9 +1,9 @@
 --- charts-original/templates/service.yaml
 +++ charts/templates/service.yaml
-@@ -19,5 +19,6 @@
-       port: {{ .Values.service.port }}
+@@ -20,5 +20,6 @@
        protocol: TCP
        targetPort: https
+       appProtocol: https
 +  ipFamilyPolicy: {{ .Values.service.ipFamilyPolicy }}
    selector:
      {{- include "metrics-server.selectorLabels" . | nindent 4 }}

@@ -1,2 +1,2 @@
-url: https://github.com/kubernetes-sigs/metrics-server/releases/download/metrics-server-helm-chart-3.12.0/metrics-server-3.12.0.tgz
-packageVersion: 05
+url: https://github.com/kubernetes-sigs/metrics-server/releases/download/metrics-server-helm-chart-3.12.2/metrics-server-3.12.2.tgz
+packageVersion: 00
