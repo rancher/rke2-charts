@@ -11,14 +11,11 @@ sources:
       token: '{{ requiredEnv .github.token }}'
       username: '{{ requiredEnv .github.username }}'
       typefilter:
-        latest: true
         release: true
         draft: false
         prerelease: false
       versionfilter:
-        kind: regex
-        # pattern accepts any semver constraint
-        pattern: "v[0-9]+.[0-9]+.[0-9]+-build[0-9]+"
+        kind: semver
 
 targets:
   flannelImage:
