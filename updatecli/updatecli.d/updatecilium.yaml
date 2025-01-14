@@ -16,6 +16,23 @@ sources:
         latest: true
       versionfilter:
         kind: latest
+  cni_plugins:
+    name: Get CNI plugins version
+    kind: githubrelease
+    spec:
+      owner: rancher
+      repository: image-build-cni-plugins
+      token: '{{ requiredEnv .github.token }}'
+      username: '{{ requiredEnv .github.username }}'
+      typefilter:
+        latest: true
+        release: true
+        draft: false
+        prerelease: false
+      versionfilter:
+        kind: regex
+        # pattern accepts any semver constraint
+        pattern: "v[0-9]+.[0-9]+.[0-9]+-build[0-9]+"
 
 targets:
   ciliumImage:
@@ -28,6 +45,8 @@ targets:
       environments:
         - name: CILIUM_VERSION
           value: '{{ source "cilium" }}'
+        - name: CNI_PLUGINS_VERSION
+          value: '{{ source "cni_plugins" }}'
         - name: PATH
 
 
@@ -45,7 +64,7 @@ scms:
       
 actions:
   default:
-    title: 'Update Cilium version to {{ source "cilium" }}'
+    title: 'Update Cilium version to {{ source "cilium" }} and CNI plugins image to {{ source "cni_plugins" }}'
     kind: github/pullrequest
     spec:
       automerge: false

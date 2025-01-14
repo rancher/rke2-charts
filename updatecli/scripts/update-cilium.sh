@@ -1,5 +1,15 @@
 #!/bin/bash
 set -eu
+if [ -n "$CNI_PLUGINS_VERSION" ]; then
+	current_cni_plugins_version=$(sed -nr 's/\+    tag: \"(v'[0-9]+.[0-9]+.[0-9]+-build[0-9]+')\"/\1/p' packages/rke2-cilium/generated-changes/patch/values.yaml.patch)
+	if [ "$current_cni_plugins_version" != "$CNI_PLUGINS_VERSION" ]; then
+		sed -ie "s/$current_cni_plugins_version/$CNI_PLUGINS_VERSION/g" packages/rke2-cilium/generated-changes/patch/values.yaml.patch
+		sed -ie "s/$current_cni_plugins_version/$CNI_PLUGINS_VERSION/g" updatecli/scripts/cilium-values.yaml.patch.template
+		package_version=$(yq '.packageVersion' packages/rke2-cilium/package.yaml)
+		new_version=$(printf "%02d" $(($package_version + 1)))
+		yq -i ".packageVersion = $new_version" packages/rke2-cilium/package.yaml
+	fi
+fi
 if [ -n "$CILIUM_VERSION" ]; then
 	current_cilium_version=$(sed -nr 's/^\ version: ('[0-9]+.[0-9]+.[0-9]+')/\1/p' packages/rke2-cilium/generated-changes/patch/Chart.yaml.patch)
 	if [ "v$current_cilium_version" != "$CILIUM_VERSION" ]; then
