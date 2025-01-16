@@ -4,8 +4,8 @@ if [ -n "$CNI_PLUGINS_VERSION" ]; then
 	current_cni_plugins_version=$(sed -nr 's/\+    tag: \"(v'[0-9]+.[0-9]+.[0-9]+-build[0-9]+')\"/\1/p' packages/rke2-cilium/generated-changes/patch/values.yaml.patch)
 	if [ "$current_cni_plugins_version" != "$CNI_PLUGINS_VERSION" ]; then
 		echo "Updating CNI plugin version to $CNI_PLUGINS_VERSION"
-		sed -ie "s/$current_cni_plugins_version/$CNI_PLUGINS_VERSION/g" packages/rke2-cilium/generated-changes/patch/values.yaml.patch
-		sed -ie "s/$current_cni_plugins_version/$CNI_PLUGINS_VERSION/g" updatecli/scripts/cilium-values.yaml.patch.template
+		sed -i "s/$current_cni_plugins_version/$CNI_PLUGINS_VERSION/g" packages/rke2-cilium/generated-changes/patch/values.yaml.patch
+		sed -i "s/$current_cni_plugins_version/$CNI_PLUGINS_VERSION/g" updatecli/scripts/cilium-values.yaml.patch.template
 		package_version=$(yq '.packageVersion' packages/rke2-cilium/package.yaml)
 		new_version=$(printf "%02d" $(($package_version + 1)))
 		yq -i ".packageVersion = $new_version" packages/rke2-cilium/package.yaml
@@ -45,25 +45,25 @@ if [ -n "$CILIUM_VERSION" ]; then
 		CILIUM_ALIBA_OPERATOR_DIGEST=$(yq ".operator.image.alibabacloudDigest" workdir/values.yaml)
 		CILIUM_CLUSTERMESH_VERSION=$(yq ".clustermesh.apiserver.image.tag" workdir/values.yaml)
 		CILIUM_CLUSTERMESH_DIGEST=$(yq ".clustermesh.apiserver.image.digest" workdir/values.yaml)
-		sed -ie "s/CILIUM_IMAGE_VERSION/$CILIUM_IMAGE_VERSION/g" workdir/cilium-values.yaml.patch.template
-		sed -ie "s/CILIUM_IMAGE_DIGEST/$CILIUM_IMAGE_DIGEST/g" workdir/cilium-values.yaml.patch.template
-		sed -ie "s/CILIUM_CERTGEN_VERSION/$CILIUM_CERTGEN_VERSION/g" workdir/cilium-values.yaml.patch.template
-		sed -ie "s/CILIUM_CERTGEN_DIGEST/$CILIUM_CERTGEN_DIGEST/g" workdir/cilium-values.yaml.patch.template
-		sed -ie "s/CILIUM_HUBBLE_RELAY_VERSION/$CILIUM_HUBBLE_RELAY_VERSION/g" workdir/cilium-values.yaml.patch.template
-		sed -ie "s/CILIUM_HUBBLE_RELAY_DIGEST/$CILIUM_HUBBLE_RELAY_DIGEST/g" workdir/cilium-values.yaml.patch.template
-		sed -ie "s/CILIUM_HUBBLE_UI_BACKEND_VERSION/$CILIUM_HUBBLE_UI_BACKEND_VERSION/g" workdir/cilium-values.yaml.patch.template
-		sed -ie "s/CILIUM_HUBBLE_UI_BACKEND_DIGEST/$CILIUM_HUBBLE_UI_BACKEND_DIGEST/g" workdir/cilium-values.yaml.patch.template
-		sed -ie "s/CILIUM_HUBBLE_UI_VERSION/$CILIUM_HUBBLE_UI_VERSION/g" workdir/cilium-values.yaml.patch.template
-		sed -ie "s/CILIUM_HUBBLE_UI_DIGEST/$CILIUM_HUBBLE_UI_DIGEST/g" workdir/cilium-values.yaml.patch.template
-		sed -ie "s/CILIUM_ENVOY_VERSION/$CILIUM_ENVOY_VERSION/g" workdir/cilium-values.yaml.patch.template
-		sed -ie "s/CILIUM_ENVOY_DIGEST/$CILIUM_ENVOY_DIGEST/g" workdir/cilium-values.yaml.patch.template
-		sed -ie "s/CILIUM_OPERATOR_VERSION/$CILIUM_OPERATOR_VERSION/g" workdir/cilium-values.yaml.patch.template
-		sed -ie "s/CILIUM_OPERATOR_DIGEST/$CILIUM_OPERATOR_DIGEST/g" workdir/cilium-values.yaml.patch.template
-		sed -ie "s/CILIUM_AZURE_OPERATOR_DIGEST/$CILIUM_AZURE_OPERATOR_DIGEST/g" workdir/cilium-values.yaml.patch.template
-		sed -ie "s/CILIUM_AWS_OPERATOR_DIGEST/$CILIUM_AWS_OPERATOR_DIGEST/g" workdir/cilium-values.yaml.patch.template
-		sed -ie "s/CILIUM_ALIBA_OPERATOR_DIGEST/$CILIUM_ALIBA_OPERATOR_DIGEST/g" workdir/cilium-values.yaml.patch.template
-		sed -ie "s/CILIUM_CLUSTERMESH_VERSION/$CILIUM_CLUSTERMESH_VERSION/g" workdir/cilium-values.yaml.patch.template
-		sed -ie "s/CILIUM_CLUSTERMESH_DIGEST/$CILIUM_CLUSTERMESH_DIGEST/g" workdir/cilium-values.yaml.patch.template
+		sed -i "s/CILIUM_IMAGE_VERSION/$CILIUM_IMAGE_VERSION/g" workdir/cilium-values.yaml.patch.template
+		sed -i "s/CILIUM_IMAGE_DIGEST/$CILIUM_IMAGE_DIGEST/g" workdir/cilium-values.yaml.patch.template
+		sed -i "s/CILIUM_CERTGEN_VERSION/$CILIUM_CERTGEN_VERSION/g" workdir/cilium-values.yaml.patch.template
+		sed -i "s/CILIUM_CERTGEN_DIGEST/$CILIUM_CERTGEN_DIGEST/g" workdir/cilium-values.yaml.patch.template
+		sed -i "s/CILIUM_HUBBLE_RELAY_VERSION/$CILIUM_HUBBLE_RELAY_VERSION/g" workdir/cilium-values.yaml.patch.template
+		sed -i "s/CILIUM_HUBBLE_RELAY_DIGEST/$CILIUM_HUBBLE_RELAY_DIGEST/g" workdir/cilium-values.yaml.patch.template
+		sed -i "s/CILIUM_HUBBLE_UI_BACKEND_VERSION/$CILIUM_HUBBLE_UI_BACKEND_VERSION/g" workdir/cilium-values.yaml.patch.template
+		sed -i "s/CILIUM_HUBBLE_UI_BACKEND_DIGEST/$CILIUM_HUBBLE_UI_BACKEND_DIGEST/g" workdir/cilium-values.yaml.patch.template
+		sed -i "s/CILIUM_HUBBLE_UI_VERSION/$CILIUM_HUBBLE_UI_VERSION/g" workdir/cilium-values.yaml.patch.template
+		sed -i "s/CILIUM_HUBBLE_UI_DIGEST/$CILIUM_HUBBLE_UI_DIGEST/g" workdir/cilium-values.yaml.patch.template
+		sed -i "s/CILIUM_ENVOY_VERSION/$CILIUM_ENVOY_VERSION/g" workdir/cilium-values.yaml.patch.template
+		sed -i "s/CILIUM_ENVOY_DIGEST/$CILIUM_ENVOY_DIGEST/g" workdir/cilium-values.yaml.patch.template
+		sed -i "s/CILIUM_OPERATOR_VERSION/$CILIUM_OPERATOR_VERSION/g" workdir/cilium-values.yaml.patch.template
+		sed -i "s/CILIUM_OPERATOR_DIGEST/$CILIUM_OPERATOR_DIGEST/g" workdir/cilium-values.yaml.patch.template
+		sed -i "s/CILIUM_AZURE_OPERATOR_DIGEST/$CILIUM_AZURE_OPERATOR_DIGEST/g" workdir/cilium-values.yaml.patch.template
+		sed -i "s/CILIUM_AWS_OPERATOR_DIGEST/$CILIUM_AWS_OPERATOR_DIGEST/g" workdir/cilium-values.yaml.patch.template
+		sed -i "s/CILIUM_ALIBA_OPERATOR_DIGEST/$CILIUM_ALIBA_OPERATOR_DIGEST/g" workdir/cilium-values.yaml.patch.template
+		sed -i "s/CILIUM_CLUSTERMESH_VERSION/$CILIUM_CLUSTERMESH_VERSION/g" workdir/cilium-values.yaml.patch.template
+		sed -i "s/CILIUM_CLUSTERMESH_DIGEST/$CILIUM_CLUSTERMESH_DIGEST/g" workdir/cilium-values.yaml.patch.template
 		make clean
 		cp workdir/cilium-values.yaml.patch.template packages/rke2-cilium/generated-changes/patch/values.yaml.patch
 		rm -fr workdir
