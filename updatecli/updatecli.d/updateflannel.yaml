@@ -19,6 +19,23 @@ sources:
         kind: regex
         # pattern accepts any semver constraint
         pattern: "v[0-9]+.[0-9]+.[0-9]+-build[0-9]+"
+  cni_plugins:
+    name: Get CNI plugins version
+    kind: githubrelease
+    spec:
+      owner: rancher
+      repository: image-build-cni-plugins
+      token: '{{ requiredEnv .github.token }}'
+      username: '{{ requiredEnv .github.username }}'
+      typefilter:
+        latest: true
+        release: true
+        draft: false
+        prerelease: false
+      versionfilter:
+        kind: regex
+        # pattern accepts any semver constraint
+        pattern: "v[0-9]+.[0-9]+.[0-9]+-build[0-9]+"
 
 targets:
   flannelImage:
@@ -31,6 +48,8 @@ targets:
       environments:
         - name: FLANNEL_VERSION
           value: '{{ source "flannel" }}'
+        - name: CNI_PLUGINS_VERSION
+          value: '{{ source "cni_plugins" }}'
         - name: PATH
 
 
@@ -48,7 +67,7 @@ scms:
       
 actions:
   default:
-    title: 'Update Flannel version to {{ source "flannel" }}'
+    title: 'Update Flannel version to {{ source "flannel" }} and CNI plugins image to {{ source "cni_plugins" }}'
     kind: github/pullrequest
     spec:
       automerge: false
