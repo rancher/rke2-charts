@@ -1,0 +1,56 @@
+---
+name: "Update Whereabouts version" 
+
+sources:
+  whereabouts:
+    name: Get whereabouts version
+    kind: githubrelease
+    spec:
+      owner: rancher
+      repository: image-build-whereabouts
+      token: '{{ requiredEnv .github.token }}'
+      typefilter:
+        release: true
+        draft: false
+        prerelease: false
+        latest: true
+      versionfilter:
+        kind: latest
+
+targets:
+  whereaboutsImage:
+    name: "Bump to latest whereabouts version in the chart"
+    kind: shell
+    scmid: default
+    sourceid: whereabouts
+    spec:
+      command: 'updatecli/scripts/update-whereabouts.sh'
+      environments:
+        - name: WHEREABOUTS_VERSION
+          value: '{{ source "whereabouts" }}'
+        - name: PATH
+
+
+scms:
+  default:
+    kind: github
+    spec:
+      token: '{{ requiredEnv .github.token }}'
+      username: '{{ requiredEnv .github.username }}'
+      user: '{{ .github.username }}'
+      email: '{{ .github.email }}'
+      owner: '{{ .github.owner }}'
+      repository: '{{ .github.repository }}'
+      branch: '{{ .github.branch }}'
+      
+actions:
+  default:
+    title: 'Update whereabouts version to {{ source "whereabouts" }}'
+    kind: github/pullrequest
+    spec:
+      automerge: false
+      labels:
+        - chore
+        - skip-changelog
+        - status/auto-created 
+    scmid: default
