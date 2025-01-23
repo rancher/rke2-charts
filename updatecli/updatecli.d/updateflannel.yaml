@@ -51,6 +51,8 @@ targets:
         - name: CNI_PLUGINS_VERSION
           value: '{{ source "cni_plugins" }}'
         - name: PATH
+        - name: UPDATECLI_GITHUB_WORKFLOW_URL
+        - name: GH_TOKEN
 
 
 scms:

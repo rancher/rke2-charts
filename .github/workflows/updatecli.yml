@@ -11,11 +11,13 @@ permissions:
   contents: write
   issues: write
   pull-requests: write
+  id-token: write # for vault authentication
 
 jobs:
   updatecli:
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main-source'
+    # if you want to testupdatecli on another branch, you also need to modify updatecli/values.yaml
+    if: ${{github.ref == 'refs/heads/main-source' && github.repository == 'rancher/rke2-charts'}}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -27,6 +29,23 @@ jobs:
 
       - name: Install Updatecli
         uses: updatecli/updatecli-action@v2
+
+      - name: Read Secrets for the Github App
+        uses: rancher-eio/read-vault-secrets@main
+        with:
+          secrets: |
+            secret/data/github/repo/${{ github.repository }}/issues-manager/github/app-credentials appId | CREATE_ISSUE_APP_ID ;
+            secret/data/github/repo/${{ github.repository }}/issues-manager/github/app-credentials privateKey | CREATE_ISSUE_PRIVATE_KEY
+
+      - name: Get Github App token
+        id: get_token
+        uses: actions/create-github-app-token@c1a285145b9d317df6ced56c09f525b5c2b6f755 # v1.11.1
+        with:
+            app-id: ${{ env.CREATE_ISSUE_APP_ID }}
+            private-key: ${{ env.CREATE_ISSUE_PRIVATE_KEY }}
+            owner: rancher
+            repositories: |
+              rke2
 
       - name: Delete leftover UpdateCLI branches
         run: |
@@ -53,3 +72,6 @@ jobs:
         env:
           UPDATECLI_GITHUB_ACTOR: ${{ github.actor }}
           UPDATECLI_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          UPDATECLI_GITHUB_WORKFLOW_URL: "https://github.com/${{github.repository}}/actions/runs/${{github.run_id}}"
+          GH_TOKEN: ${{ steps.get_token.outputs.token }}
+

@@ -1,5 +1,11 @@
 #!/bin/bash
-set -eu
+set -eux
+
+source $(dirname $0)/create-issue.sh
+
+ISSUE_TITLE="Updatecli failed for multus ${MULTUS_VERSION}"
+trap report-error EXIT INT
+
 new_package=false
 if [ -n "$CNI_PLUGINS_VERSION" ]; then
 	current_cni_plugins_version=$(yq '.cniplugins.image.tag' packages/rke2-multus/charts/values.yaml)
