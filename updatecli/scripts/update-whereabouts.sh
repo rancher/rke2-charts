@@ -1,5 +1,11 @@
 #!/bin/bash
 set -eu
+
+source $(dirname $0)/create-issue.sh
+
+ISSUE_TITLE="Updatecli failed for whereabouts ${WHEREABOUTS_VERSION}"
+trap report-error EXIT INT
+
 if [ -n "$WHEREABOUTS_VERSION" ]; then
 	app_version=$(echo "$WHEREABOUTS_VERSION" | grep -Eo '^v*[0-9]+.[0-9]+.[0-9]+' | tr -d 'v')
 	current_whereabouts_version=$(yq '.image.tag' packages/rke2-whereabouts/charts/values.yaml)

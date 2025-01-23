@@ -29,6 +29,8 @@ targets:
         - name: WHEREABOUTS_VERSION
           value: '{{ source "whereabouts" }}'
         - name: PATH
+        - name: UPDATECLI_GITHUB_WORKFLOW_URL
+        - name: GH_TOKEN
 
 
 scms:
