@@ -66,7 +66,7 @@ scms:
       
 actions:
   default:
-    title: 'Update Multus version to {{ source "multus" }}'
+    title: 'Update Multus version to {{ source "multus" }} and CNI plugins to {{ source "cni_plugins" }}'
     kind: github/pullrequest
     spec:
       automerge: false
