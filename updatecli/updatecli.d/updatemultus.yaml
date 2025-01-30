@@ -13,9 +13,11 @@ sources:
         release: true
         draft: false
         prerelease: false
-        latest: true
       versionfilter:
-        kind: latest
+        kind: regex
+        # pattern accepts any semver constraint
+        pattern: "v[0-9]+.[0-9]+.[0-9]+-build[0-9]+"
+
   cni_plugins:
     name: Get CNI plugins version
     kind: githubrelease
@@ -25,7 +27,6 @@ sources:
       token: '{{ requiredEnv .github.token }}'
       username: '{{ requiredEnv .github.username }}'
       typefilter:
-        latest: true
         release: true
         draft: false
         prerelease: false
@@ -50,7 +51,6 @@ targets:
         - name: PATH
         - name: UPDATECLI_GITHUB_WORKFLOW_URL
         - name: GH_TOKEN
-
 
 scms:
   default:
