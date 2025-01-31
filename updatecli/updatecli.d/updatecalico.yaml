@@ -13,9 +13,8 @@ sources:
         release: true
         draft: false
         prerelease: false
-        latest: true
       versionfilter:
-        kind: latest
+        kind: semver
 
 targets:
   calicoImage:
@@ -31,7 +30,6 @@ targets:
         - name: PATH
         - name: UPDATECLI_GITHUB_WORKFLOW_URL
         - name: GH_TOKEN
-
 
 scms:
   default:
