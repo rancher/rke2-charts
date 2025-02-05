@@ -14,7 +14,7 @@ report-error() {
                     --app rke2-issues-updatecli --json number --jq ".[].number" | wc -l)
 
         if [[ $issues = 0 ]]; then
-            echo "Creating issue for: $title"
+            echo "Creating issue for: ${ISSUE_TITLE}"
             gh issue create -R ${TARGET_REPOSITORY} \
                 --title "${ISSUE_TITLE}" \
                 --body "${BODY}"
