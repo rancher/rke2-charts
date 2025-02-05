@@ -37,7 +37,7 @@ if [ -n "$FLANNEL_VERSION" ]; then
 			current_netpol_version=$(yq '.netpol.image.tag' workdir/flannel/values.yaml)
 			new_netpol_version=$(yq '.netpol.image.tag' workdir/flannel/values_new.yaml)
 			sed -i "s/ version: .*/ version: $app_version/g" packages/rke2-flannel/generated-changes/patch/Chart.yaml.patch
-			sed -i ":a;N;\$!ba;s/-    repository: docker.io\\/flannel\\/flannel\\n-    tag: $current_app_version/-    repository: docker.io\\/flannel\\/flannel\\
+			sed -i ":a;N;\$!ba;s/-    repository: ghcr.io\\/flannel-io\\/flannel\\n-    tag: $current_app_version/-    repository: ghcr.io\\/flannel-io\\/flannel\\
 -    tag: $app_version/g" packages/rke2-flannel/generated-changes/patch/values.yaml.patch
 			sed -i "s/+    tag: $current_flannel_version/+    tag: $FLANNEL_VERSION/g" packages/rke2-flannel/generated-changes/patch/values.yaml.patch
 			sed -i "s/-    tag: $current_flannel_plugins_version/-    tag: $new_flannel_plugins_version/g" packages/rke2-flannel/generated-changes/patch/values.yaml.patch

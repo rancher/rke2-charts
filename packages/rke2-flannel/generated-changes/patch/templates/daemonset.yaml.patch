@@ -1,6 +1,6 @@
 --- charts-original/templates/daemonset.yaml
 +++ charts/templates/daemonset.yaml
-@@ -33,19 +33,13 @@
+@@ -33,20 +33,13 @@
        {{- end }}
        serviceAccountName: flannel
        initContainers:
@@ -17,6 +17,7 @@
          volumeMounts:
          - name: cni-plugin
 -          mountPath: /opt/cni/bin
+-      {{- if not .Values.flannel.skipCNIConfigInstallation }}
 +          mountPath: /host/opt/cni/bin
        - name: install-cni
 -        image: {{ .Values.flannel.image.repository }}:{{ .Values.flannel.image.tag }}
@@ -24,8 +25,11 @@
          command:
          - cp
          args:
-@@ -59,7 +53,7 @@
+@@ -58,10 +51,9 @@
+           mountPath: /etc/cni/net.d
+         - name: flannel-cfg
            mountPath: /etc/kube-flannel/
+-      {{- end }}
        containers:
        - name: kube-flannel
 -        image: {{ .Values.flannel.image.repository }}:{{ .Values.flannel.image.tag }}
@@ -33,7 +37,7 @@
          command:
          - "/opt/bin/flanneld"
          {{- range .Values.flannel.args }}
-@@ -70,7 +64,7 @@
+@@ -72,7 +64,7 @@
              cpu: "100m"
              memory: "50Mi"
          securityContext:
@@ -42,7 +46,7 @@
            capabilities:
              add: ["NET_ADMIN", "NET_RAW"]
          env:
-@@ -91,39 +85,14 @@
+@@ -93,44 +85,14 @@
            mountPath: /etc/kube-flannel/
          - name: xtables-lock
            mountPath: /run/xtables.lock
@@ -54,6 +58,11 @@
 -        {{- range .Values.netpol.args }}
 -        - {{ . | quote }}
 -        {{- end }}
+-        env:
+-        - name: MY_NODE_NAME
+-          valueFrom:
+-            fieldRef:
+-              fieldPath: spec.nodeName
 -        volumeMounts:
 -        - name: lib-modules
 -          mountPath: /lib/modules

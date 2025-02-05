@@ -1,6 +1,6 @@
 --- charts-original/values.yaml
 +++ charts/values.yaml
-@@ -1,21 +1,12 @@
+@@ -1,24 +1,12 @@
  ---
 -global:
 -  imagePullSecrets:
@@ -14,19 +14,22 @@
  flannel:
    # kube-flannel image
    image:
--    repository: docker.io/flannel/flannel
--    tag: v0.26.3
+-    repository: ghcr.io/flannel-io/flannel
+-    tag: v0.26.4
 +    repository: rancher/hardened-flannel
-+    tag: v0.26.3-build20250108
++    tag: v0.26.4-build20250205
    image_cni:
--    repository: docker.io/flannel/flannel-cni-plugin
--    tag: v1.6.0-flannel1
-+    repository: rancher/hardened-cni-plugins
+-    repository: ghcr.io/flannel-io/flannel-cni-plugin
+-    tag: v1.6.2-flannel1
+-  # skipCNIConfigInstallation skips the installation of the flannel CNI config. This is useful when the CNI config is
+-  # provided externally.
+-  skipCNIConfigInstallation: false
++    repository: rancher/cni-plugins
 +    tag: v1.6.2-build20250124
    # flannel command arguments
    enableNFTables: false
    args:
-@@ -26,14 +17,14 @@
+@@ -29,14 +17,14 @@
    # Documentation at https://github.com/flannel-io/flannel/blob/master/Documentation/backends.md
    backend: "vxlan"
    # Port used by the backend 0 means default value (VXLAN: 8472, Wireguard: 51821, UDP: 8285)
@@ -43,7 +46,7 @@
    # Enable VXLAN Group Based Policy (Default false)
    # GBP: false
    # Enable direct routes (default is false)
-@@ -55,16 +46,18 @@
+@@ -58,16 +46,18 @@
    # General daemonset configs
    #
    tolerations:
@@ -69,7 +72,7 @@
 -  - "--v=2"
 -  image:
 -    repository: registry.k8s.io/networking/kube-network-policies
--    tag: v0.4.0
+-    tag: v0.7.0
 +global:
 +  systemDefaultRegistry: ""
 +  clusterCIDRv4: ""
