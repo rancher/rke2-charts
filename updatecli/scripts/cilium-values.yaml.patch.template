@@ -1,6 +1,6 @@
 --- charts-original/values.yaml
 +++ charts/values.yaml
-@@ -152,12 +152,10 @@
+@@ -190,12 +190,10 @@
    # type: [null, string]
    # @schema
    override: ~
@@ -12,10 +12,10 @@
 -  digest: "CILIUM_IMAGE_DIGEST"
 -  useDigest: true
 +  useDigest: false
- # -- Affinity for cilium-agent.
- affinity:
-   podAntiAffinity:
-@@ -581,7 +579,10 @@
+ # -- Scheduling configurations for cilium pods
+ scheduling:
+   # @schema
+@@ -663,7 +661,10 @@
    #  - flannel
    #  - generic-veth
    #  - portmap
@@ -27,7 +27,7 @@
    # @schema
    # type: [null, string]
    # @schema
-@@ -1011,10 +1012,9 @@
+@@ -1111,10 +1112,9 @@
      # type: [null, string]
      # @schema
      override: ~
@@ -40,7 +40,7 @@
      pullPolicy: "IfNotPresent"
    # -- Seconds after which the completed job pod will be deleted
    ttlSecondsAfterFinished: 1800
-@@ -1035,7 +1035,7 @@
+@@ -1141,7 +1141,7 @@
    affinity: {}
  hubble:
    # -- Enable Hubble (true by default).
@@ -49,7 +49,7 @@
    # -- Annotations to be added to all top-level hubble objects (resources under templates/hubble)
    annotations: {}
    # -- Buffer size of the channel Hubble uses to receive monitor events. If this
-@@ -1312,11 +1312,9 @@
+@@ -1436,11 +1436,9 @@
        # type: [null, string]
        # @schema
        override: ~
@@ -63,7 +63,16 @@
        pullPolicy: "IfNotPresent"
      # -- Specifies the resources for the hubble-relay pods
      resources: {}
-@@ -1561,10 +1559,9 @@
+@@ -1605,7 +1603,7 @@
+     # -- Enable prometheus metrics for hubble-relay on the configured port at
+     # /metrics
+     prometheus:
+-      enabled: false
++      enabled: true
+       port: 9966
+       serviceMonitor:
+         # -- Enable service monitors.
+@@ -1687,10 +1685,9 @@
          # type: [null, string]
          # @schema
          override: ~
@@ -76,7 +85,7 @@
          pullPolicy: "IfNotPresent"
        # -- Hubble-ui backend security context.
        securityContext: {}
-@@ -1595,10 +1592,9 @@
+@@ -1721,10 +1718,9 @@
          # type: [null, string]
          # @schema
          override: ~
@@ -89,7 +98,7 @@
          pullPolicy: "IfNotPresent"
        # -- Hubble-ui frontend security context.
        securityContext: {}
-@@ -1772,7 +1768,7 @@
+@@ -1900,7 +1896,7 @@
  ipam:
    # -- Configure IP Address Management mode.
    # ref: https://docs.cilium.io/en/stable/network/concepts/ipam/
@@ -97,17 +106,8 @@
 +  mode: "kubernetes"
    # -- Maximum rate at which the CiliumNode custom resource is updated.
    ciliumNodeUpdateRate: "15s"
-   operator:
-@@ -2066,7 +2062,7 @@
-   port: 6060
- # -- Configure prometheus metrics on the configured port at /metrics
- prometheus:
--  enabled: false
-+  enabled: true
-   port: 9962
-   serviceMonitor:
-     # -- Enable service monitors.
-@@ -2130,9 +2126,9 @@
+   # -- Pre-allocation settings for IPAM in Multi-Pool mode
+@@ -2272,9 +2268,9 @@
    # type: [null, boolean]
    # @schema
    # -- Enable Envoy Proxy in standalone DaemonSet.
@@ -120,7 +120,7 @@
    # -- (int)
    # Set Envoy'--base-id' to use when allocating shared memory regions.
    # Only needs to be changed if multiple Envoy instances will run on the same node and may have conflicts. Supported values: 0 - 4294967295. Defaults to '0'
-@@ -2161,11 +2157,10 @@
+@@ -2342,11 +2338,10 @@
      # type: [null, string]
      # @schema
      override: ~
@@ -134,7 +134,7 @@
    # -- Additional containers added to the cilium Envoy DaemonSet.
    extraContainers: []
    # -- Additional envoy container arguments.
-@@ -2477,17 +2472,9 @@
+@@ -2696,17 +2691,9 @@
      # type: [null, string]
      # @schema
      override: ~
@@ -154,7 +154,7 @@
      pullPolicy: "IfNotPresent"
      suffix: ""
    # -- Number of replicas to run for the cilium-operator deployment
-@@ -2656,8 +2643,7 @@
+@@ -2876,8 +2863,7 @@
    # @schema
    # -- Taint nodes where Cilium is scheduled but not running. This prevents pods
    # from being scheduled to nodes where Cilium is not the default CNI provider.
@@ -164,7 +164,7 @@
    # -- Set Node condition NetworkUnavailable to 'false' with the reason
    # 'CiliumIsUp' for nodes that have a healthy Cilium pod.
    setNodeNetworkStatus: true
-@@ -2761,11 +2747,9 @@
+@@ -2981,11 +2967,9 @@
      # type: [null, string]
      # @schema
      override: ~
@@ -178,7 +178,7 @@
      pullPolicy: "IfNotPresent"
    # -- The priority class to use for the preflight pod.
    priorityClassName: ""
-@@ -2910,11 +2894,9 @@
+@@ -3130,11 +3114,9 @@
        # type: [null, string]
        # @schema
        override: ~
@@ -192,10 +192,10 @@
        pullPolicy: "IfNotPresent"
      # -- TCP port for the clustermesh-apiserver health API.
      healthPort: 9880
-@@ -3555,3 +3537,11 @@
-       agentSocketPath: /run/spire/sockets/agent/agent.sock
-       # -- SPIRE connection timeout
-       connectionTimeout: 30s
+@@ -3795,3 +3777,11 @@
+ enableInternalTrafficPolicy: true
+ # -- Enable LoadBalancer IP Address Management
+ enableLBIPAM: true
 +
 +portmapPlugin:
 +  image:

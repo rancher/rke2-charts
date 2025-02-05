@@ -1,6 +1,6 @@
 --- charts-original/templates/clustermesh-apiserver/deployment.yaml
 +++ charts/templates/clustermesh-apiserver/deployment.yaml
-@@ -48,7 +48,7 @@
+@@ -54,7 +54,7 @@
        {{- end }}
        initContainers:
        - name: etcd-init
@@ -9,7 +9,7 @@
          imagePullPolicy: {{ .Values.clustermesh.apiserver.image.pullPolicy }}
          command:
          - /usr/bin/clustermesh-apiserver
-@@ -101,7 +101,7 @@
+@@ -107,7 +107,7 @@
        containers:
        - name: etcd
          # The clustermesh-apiserver container image includes an etcd binary.
@@ -18,7 +18,7 @@
          imagePullPolicy: {{ .Values.clustermesh.apiserver.image.pullPolicy }}
          command:
          - /usr/bin/etcd
-@@ -165,7 +165,7 @@
+@@ -171,7 +171,7 @@
            {{- toYaml . | nindent 10 }}
          {{- end }}
        - name: apiserver
@@ -27,7 +27,7 @@
          imagePullPolicy: {{ .Values.clustermesh.apiserver.image.pullPolicy }}
          command:
          - /usr/bin/clustermesh-apiserver
-@@ -259,7 +259,7 @@
+@@ -268,7 +268,7 @@
          {{- end }}
        {{- if .Values.clustermesh.apiserver.kvstoremesh.enabled }}
        - name: kvstoremesh
