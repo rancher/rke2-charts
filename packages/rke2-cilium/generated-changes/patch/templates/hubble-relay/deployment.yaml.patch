@@ -1,6 +1,6 @@
 --- charts-original/templates/hubble-relay/deployment.yaml
 +++ charts/templates/hubble-relay/deployment.yaml
-@@ -57,7 +57,7 @@
+@@ -64,7 +64,7 @@
            securityContext:
              {{- toYaml . | nindent 12 }}
            {{- end }}

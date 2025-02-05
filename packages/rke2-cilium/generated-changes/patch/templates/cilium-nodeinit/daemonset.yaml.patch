@@ -1,6 +1,6 @@
 --- charts-original/templates/cilium-nodeinit/daemonset.yaml
 +++ charts/templates/cilium-nodeinit/daemonset.yaml
-@@ -28,7 +28,7 @@
+@@ -31,7 +31,7 @@
          {{- toYaml . | nindent 8 }}
          {{- end }}
          {{- if not .Values.securityContext.privileged }}
@@ -9,7 +9,7 @@
          # Set app AppArmor's profile to "unconfined". The value of this annotation
          # can be modified as long users know which profiles they have available
          # in AppArmor.
-@@ -48,8 +48,8 @@
+@@ -54,8 +54,8 @@
          {{- toYaml . | nindent 8 }}
        {{- end }}
        {{- /* K8s version lower than 1.30.0 don't support the "appArmorProfile" field, */}}
@@ -20,7 +20,7 @@
          {{- $_ := unset .Values.nodeinit.podSecurityContext "appArmorProfile" }}
        {{- end }}
        {{- with .Values.nodeinit.podSecurityContext }}
-@@ -58,7 +58,7 @@
+@@ -64,7 +64,7 @@
        {{- end }}
        containers:
          - name: node-init
