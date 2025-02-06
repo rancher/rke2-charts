@@ -24,7 +24,7 @@
 -  # skipCNIConfigInstallation skips the installation of the flannel CNI config. This is useful when the CNI config is
 -  # provided externally.
 -  skipCNIConfigInstallation: false
-+    repository: rancher/cni-plugins
++    repository: rancher/hardened-cni-plugins
 +    tag: v1.6.2-build20250124
    # flannel command arguments
    enableNFTables: false
