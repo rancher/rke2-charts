@@ -1,18 +1,18 @@
 --- charts-original/templates/_helpers.tpl
 +++ charts/templates/_helpers.tpl
-@@ -19,7 +19,7 @@
+@@ -18,7 +18,7 @@
+ Create the chart image name.
  */}}
- 
  {{- define "traefik.image-name" -}}
 -{{- printf "%s/%s:%s" .Values.image.registry .Values.image.repository (.Values.image.tag | default .Chart.AppVersion) }}
 +{{- printf "%s:%s" .Values.image.repository (.Values.image.tag | default .Chart.AppVersion) }}
  {{- end -}}
- {{/*
- Create a default fully qualified app name.
-@@ -129,3 +129,11 @@
- {{ (split "@" (default $.Chart.AppVersion $.Values.image.tag))._0 }}
- {{- end -}}
  
+ {{/*
+@@ -192,3 +192,11 @@
+     {{- end -}}
+     {{- $found -}}
+ {{- end -}}
 +
 +{{- define "system_default_registry" -}}
 +{{- if .Values.global.systemDefaultRegistry -}}
