@@ -1,6 +1,6 @@
 --- charts-original/templates/ingressclass.yaml
 +++ charts/templates/ingressclass.yaml
-@@ -12,7 +12,7 @@
+@@ -3,7 +3,7 @@
  kind: IngressClass
  metadata:
    annotations:

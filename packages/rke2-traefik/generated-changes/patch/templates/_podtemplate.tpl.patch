@@ -1,6 +1,6 @@
 --- charts-original/templates/_podtemplate.tpl
 +++ charts/templates/_podtemplate.tpl
-@@ -53,7 +53,7 @@
+@@ -58,7 +58,7 @@
        runtimeClassName: {{ . }}
        {{- end }}
        containers:
