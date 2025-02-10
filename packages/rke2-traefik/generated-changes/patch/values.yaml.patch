@@ -10,7 +10,7 @@
 +  repository: rancher/mirrored-library-traefik
    # -- defaults to appVersion
 -  tag: ""
-+  tag: "2.10.7"
++  tag: "2.11.20"
    # -- Traefik image pull policy
    pullPolicy: IfNotPresent
  
