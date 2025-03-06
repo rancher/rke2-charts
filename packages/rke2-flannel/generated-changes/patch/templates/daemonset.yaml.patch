@@ -87,8 +87,8 @@
            path: /run/flannel
        - name: cni-plugin
          hostPath:
-           path: /opt/cni/bin
+           path: {{ .Values.flannel.cniBinDir }}
 +          type: DirectoryOrCreate
        - name: cni
          hostPath:
-           path: /etc/cni/net.d
+           path: {{ .Values.flannel.cniConfDir }}
