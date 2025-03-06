@@ -1,7 +1,7 @@
 --- charts-original/templates/config.yaml
 +++ charts/templates/config.yaml
-@@ -29,13 +29,13 @@
-     }
+@@ -10,13 +10,13 @@
+   cni-conf.json: {{ .Values.flannel.cniConf | toJson }}
    net-conf.json: |
      {
 -{{- if .Values.podCidr }}
