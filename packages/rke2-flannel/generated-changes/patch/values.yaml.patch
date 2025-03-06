@@ -50,7 +50,20 @@
    # Enable VXLAN Group Based Policy (Default false)
    # GBP: false
    # Enable direct routes (default is false)
-@@ -83,16 +71,18 @@
+@@ -76,6 +64,12 @@
+           "capabilities": {
+             "portMappings": true
+           }
++        },
++        {
++          "type":"bandwidth",
++          "capabilities": {
++            "bandwidth": true
++          }
+         }
+       ]
+     }
+@@ -83,16 +77,18 @@
    # General daemonset configs
    #
    tolerations:
