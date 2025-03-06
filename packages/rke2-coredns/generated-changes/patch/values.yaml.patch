@@ -39,7 +39,7 @@
    annotations: {}
  
  rbac:
-@@ -91,7 +90,7 @@
+@@ -86,7 +85,7 @@
  isClusterService: true
  
  # Optional priority class to be used for the coredns pods. Used for autoscaler if autoscaler.priorityClassName not set.
@@ -48,7 +48,7 @@
  
  # Configure the pod level securityContext.
  podSecurityContext: {}
-@@ -191,7 +190,16 @@
+@@ -190,7 +189,16 @@
  #            operator: In
  #            values:
  #            - master
@@ -66,7 +66,7 @@
  
  # expects input structure as per specification https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.21/#topologyspreadconstraint-v1-core
  # and supports Helm templating.
-@@ -215,7 +223,8 @@
+@@ -214,7 +222,8 @@
  
  # Node labels for pod assignment
  # Ref: https://kubernetes.io/docs/user-guide/node-selection/
@@ -76,7 +76,7 @@
  
  # expects input structure as per specification https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.11/#toleration-v1-core
  # for example:
-@@ -224,7 +233,13 @@
+@@ -223,7 +232,13 @@
  #     operator: Equal
  #     value: master
  #     effect: NoSchedule
@@ -91,7 +91,7 @@
  
  # https://kubernetes.io/docs/tasks/run-application/configure-pdb/#specifying-a-poddisruptionbudget
  podDisruptionBudget: {}
-@@ -317,7 +332,7 @@
+@@ -316,7 +331,7 @@
  # See https://github.com/kubernetes-incubator/cluster-proportional-autoscaler
  autoscaler:
    # Enabled the cluster-proportional-autoscaler
@@ -100,7 +100,7 @@
  
    # Number of cores in the cluster per coredns replica
    coresPerReplica: 256
-@@ -341,8 +356,8 @@
+@@ -340,8 +355,8 @@
    #   - --nodelabels=topology.kubernetes.io/zone=us-east-1a
  
    image:
@@ -111,7 +111,7 @@
      pullPolicy: IfNotPresent
      ## Optionally specify an array of imagePullSecrets.
      ## Secrets must be manually created in the namespace.
-@@ -360,19 +375,26 @@
+@@ -359,19 +374,26 @@
  
    # Node labels for pod assignment
    # Ref: https://kubernetes.io/docs/user-guide/node-selection/
@@ -144,7 +144,7 @@
  
    # Options for autoscaler configmap
    configmap:
-@@ -384,8 +406,8 @@
+@@ -383,8 +405,8 @@
    livenessProbe:
      enabled: true
      initialDelaySeconds: 10
@@ -155,7 +155,7 @@
      failureThreshold: 3
      successThreshold: 1
  
-@@ -403,3 +425,25 @@
+@@ -402,3 +424,25 @@
    annotations: {}
    ## Pod selector
    selector: {}
