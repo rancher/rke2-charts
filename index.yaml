@@ -10860,6 +10860,34 @@ entries:
   rke2-coredns:
   - annotations:
       artifacthub.io/changes: |
+        - kind: fixed
+          description: align imagePullSecrets in Deployment and ServiceAccount
+    apiVersion: v2
+    appVersion: 1.12.0
+    created: "2025-03-06T15:42:08.370054164Z"
+    description: CoreDNS is a DNS server that chains plugins and provides Kubernetes
+      DNS Services
+    digest: 3b1fa400d9e0a83527197c7114172b06a404f4295c8de41306048950ad843fd4
+    home: https://coredns.io
+    icon: https://coredns.io/images/CoreDNS_Colour_Horizontal.png
+    keywords:
+    - coredns
+    - dns
+    - kubedns
+    maintainers:
+    - name: mrueg
+    - name: haad
+    - name: hagaibarel
+    - name: shubham-cmyk
+    name: rke2-coredns
+    sources:
+    - https://github.com/coredns/coredns
+    type: application
+    urls:
+    - assets/rke2-coredns/rke2-coredns-1.39.100.tgz
+    version: 1.39.100
+  - annotations:
+      artifacthub.io/changes: |
         - kind: fix
           description: Add default values to chart to fix cluster role name templating issue
     apiVersion: v2
