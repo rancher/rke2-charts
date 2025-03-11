@@ -1,0 +1,114 @@
+---
+name: "Update coredns version" 
+
+sources:
+  coredns_chart:
+    name: Get coredns chart version
+    kind: githubrelease
+    spec:
+      owner: coredns
+      repository: helm
+      token: '{{ requiredEnv .github.token }}'
+      typefilter:
+        release: true
+        draft: false
+        prerelease: false
+      versionfilter:
+        kind: regex
+        # pattern accepts any semver constraint without leading 'v'
+        pattern: "[0-9]+.[0-9]+.[0-9]"
+    transformers:
+      - trimprefix: "coredns-"
+  coredns:
+    name: Get coredns image version
+    kind: githubrelease
+    spec:
+      owner: rancher
+      repository: image-build-coredns
+      token: '{{ requiredEnv .github.token }}'
+      username: '{{ requiredEnv .github.username }}'
+      typefilter:
+        release: true
+        draft: false
+        prerelease: false
+      versionfilter:
+        kind: regex
+        # pattern accepts any semver constraint
+        pattern: "v[0-9]+.[0-9]+.[0-9]+-build[0-9]+"
+  autoscaler:
+    name: Get autoscaler image version
+    kind: githubrelease
+    spec:
+      owner: rancher
+      repository: image-build-cluster-proportional-autoscaler
+      token: '{{ requiredEnv .github.token }}'
+      username: '{{ requiredEnv .github.username }}'
+      typefilter:
+        release: true
+        draft: false
+        prerelease: false
+      versionfilter:
+        kind: regex
+        # pattern accepts any semver constraint
+        pattern: "v[0-9]+.[0-9]+.[0-9]+-build[0-9]+"
+  nodecache:
+    name: Get nodecache image version
+    kind: githubrelease
+    spec:
+      owner: rancher
+      repository: image-build-dns-nodecache
+      token: '{{ requiredEnv .github.token }}'
+      username: '{{ requiredEnv .github.username }}'
+      typefilter:
+        release: true
+        draft: false
+        prerelease: false
+      versionfilter:
+        kind: regex
+        # pattern accepts any semver constraint  without leading 'v'
+        pattern: "[0-9]+.[0-9]+.[0-9]+-build[0-9]+"
+
+targets:
+  coredns:
+    name: "Bump to latest coredns chart and images version"
+    kind: shell
+    scmid: default
+    sourceid: coredns_chart
+    spec:
+      command: 'updatecli/scripts/update-coredns.sh'
+      environments:
+        - name: COREDNS_CHART_VERSION
+          value: '{{ source "coredns_chart" }}'
+        - name: COREDNS_VERSION
+          value: '{{ source "coredns" }}'
+        - name: AUTOSCALER_VERSION
+          value: '{{ source "autoscaler" }}'
+        - name: NODECACHE_VERSION
+          value: '{{ source "nodecache" }}'
+        - name: PATH
+        - name: UPDATECLI_GITHUB_WORKFLOW_URL
+        - name: GH_TOKEN
+
+scms:
+  default:
+    kind: github
+    spec:
+      token: '{{ requiredEnv .github.token }}'
+      username: '{{ requiredEnv .github.username }}'
+      user: '{{ .github.username }}'
+      email: '{{ .github.email }}'
+      owner: '{{ .github.owner }}'
+      repository: '{{ .github.repository }}'
+      branch: '{{ .github.branch }}'
+      
+actions:
+  default:
+    title: 'Update Coredns chart version to {{ source "coredns" }}'
+    kind: github/pullrequest
+    spec:
+      automerge: false
+      labels:
+        - chore
+        - skip-changelog
+        - status/auto-created 
+    scmid: default
