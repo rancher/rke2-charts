@@ -24,7 +24,7 @@
  
  {{- if .Values.cleanState }}
    # If a serious issue occurs during Cilium startup, this
-@@ -507,7 +518,7 @@
+@@ -508,7 +519,7 @@
    {{- end }}
  {{- end }}
  
@@ -33,7 +33,7 @@
    tunnel-protocol: {{ .Values.tunnelProtocol | default "vxlan" | quote }}
  
  {{- if .Values.tunnelPort }}
-@@ -699,6 +710,8 @@
+@@ -703,6 +714,8 @@
  
  {{- if .Values.ipv6NativeRoutingCIDR }}
    ipv6-native-routing-cidr: {{ .Values.ipv6NativeRoutingCIDR }}
