@@ -20,7 +20,7 @@ if [ -n "$COREDNS_CHART_VERSION" ]; then
 			.packageVersion = 00" packages/rke2-coredns/package.yaml
 		CHART_UPDATED=true
 	fi
-	GOCACHE="${HOME}/.cache/go-build" GOPATH="${HOME}/go" PACKAGE="rke2-coredns" make prepare
+	GOCACHE="/home/runner/.cache/go-build" GOPATH="/home/runner/go" PACKAGE="rke2-coredns" make prepare
 
 	# 2 - check if the images have been updated
 	if [ -n "$COREDNS_VERSION" ]; then
@@ -57,7 +57,7 @@ if [ -n "$COREDNS_CHART_VERSION" ]; then
 	fi
 	# prepare patch
 	find packages/rke2-coredns/charts -name '*.orig' -delete
-	GOCACHE="${HOME}/.cache/go-build" GOPATH="${HOME}/go" PACKAGE="rke2-coredns" make patch
+	GOCACHE="/home/runner/.cache/go-build" GOPATH="/home/runner/go" PACKAGE="rke2-coredns" make patch
 	# clean-up
-	GOCACHE="${HOME}/.cache/go-build" GOPATH="${HOME}/go" PACKAGE="rke2-coredns" make clean
+	GOCACHE="/home/runner/.cache/go-build" GOPATH="/home/runner/go" PACKAGE="rke2-coredns" make clean
 fi
