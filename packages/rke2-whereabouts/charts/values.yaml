@@ -46,6 +46,9 @@ tolerations:
 
 affinity: {}
 
+manifests:
+  customResourceDefinition: true
+
 cniConf:
   confDir: /etc/cni/net.d
   binDir: /opt/cni/bin
