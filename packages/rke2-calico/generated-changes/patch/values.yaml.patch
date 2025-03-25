@@ -1,6 +1,6 @@
 --- charts-original/values.yaml
 +++ charts/values.yaml
-@@ -6,8 +6,21 @@
+@@ -6,8 +6,23 @@
  imagePullSecrets: {}
  
  installation:
@@ -14,6 +14,8 @@
    enabled: true
 +  kubeletVolumePluginPath: "None"
    kubernetesProvider: ""
++  natOutgoing: "Enabled"
++  backend: "VXLAN"
 +  calicoNetwork:
 +    bgp: Disabled
 +  imagePath: "rancher"
@@ -22,7 +24,7 @@
    # imagePullSecrets are configured on all images deployed by the tigera-operator.
    # secrets specified here must exist in the tigera-operator namespace; they won't be created by the operator or helm.
    # imagePullSecrets are a slice of LocalObjectReferences, which is the same format they appear as on deployments.
-@@ -16,7 +29,7 @@
+@@ -16,7 +31,7 @@
    imagePullSecrets: []
  
  apiServer:
@@ -31,7 +33,7 @@
  
  defaultFelixConfiguration:
    enabled: false
-@@ -63,14 +76,33 @@
+@@ -63,14 +78,33 @@
  
  # Image and registry configuration for the tigera/operator pod.
  tigeraOperator:

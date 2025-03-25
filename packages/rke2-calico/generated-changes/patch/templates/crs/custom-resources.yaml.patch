@@ -11,9 +11,9 @@
 +{{ if empty .Values.installation.calicoNetwork.ipPools }}
 +{{ $calicoNetwork := get .Values.installation "calicoNetwork" }}
 +{{ if not (empty .Values.global.clusterCIDRv4) }}
-+{{ $myIP4Dict := dict "natOutgoing" "Enabled" "encapsulation" "VXLAN" "cidr" .Values.global.clusterCIDRv4 }}
++{{ $myIP4Dict := dict "natOutgoing" .Values.installation.natOutgoing "encapsulation" .Values.installation.backend "cidr" .Values.global.clusterCIDRv4 }}
 +{{ if not (empty .Values.global.clusterCIDRv6) }}
-+{{ $myIP6Dict := dict "natOutgoing" "Enabled" "encapsulation" "VXLAN" "cidr" .Values.global.clusterCIDRv6 }}
++{{ $myIP6Dict := dict "natOutgoing" .Values.installation.natOutgoing "encapsulation" .Values.installation.backend "cidr" .Values.global.clusterCIDRv6 }}
 +{{ $ipPoolList := list $myIP4Dict }}
 +{{ $finalIpPoolList := append $ipPoolList $myIP6Dict }}
 +{{ $_ := set $calicoNetwork "ipPools" $finalIpPoolList }}
@@ -22,7 +22,7 @@
 +{{ $_ := set $calicoNetwork "ipPools" $finalIpPoolList }}
 +{{ end }}
 +{{ else if not (empty .Values.global.clusterCIDRv6) }}
-+{{ $myIP6Dict := dict "natOutgoing" "Enabled" "encapsulation" "VXLAN" "cidr" .Values.global.clusterCIDRv6 }}
++{{ $myIP6Dict := dict "natOutgoing" .Values.installation.natOutgoing "encapsulation" .Values.installation.backend "cidr" .Values.global.clusterCIDRv6 }}
 +{{ $finalIpPoolList := list $myIP6Dict }}
 +{{ $_ := set $calicoNetwork "ipPools" $finalIpPoolList }}
 +{{ end }}
