@@ -83,6 +83,9 @@ spec:
               name: cni-net-dir
           securityContext:
             privileged: true
+          {{- if .Values.calico_init.resources }}
+          resources: {{- toYaml .Values.calico_init.resources | nindent 12 }}
+          {{- end }}
         # Adds a Flex Volume Driver that creates a per-pod Unix Domain Socket to allow Dikastes
         # to communicate with Felix over the Policy Sync API.
         - name: flexvol-driver
@@ -93,6 +96,10 @@ spec:
             mountPath: /host/driver
           securityContext:
             privileged: true
+          {{- if .Values.flexvol.resources }}
+          resources: {{- toYaml .Values.flexvol.resources | nindent 12 }}
+          {{- end }}
+
       containers:
         # Runs canal container on each Kubernetes node.  This
         # container programs network policy and routes on each
@@ -192,22 +199,8 @@ spec:
                 command:
                 - /usr/bin/calico-node
                 - -shutdown
-          livenessProbe:
-            exec:
-              command:
-              - /usr/bin/calico-node
-              - -felix-live
-            periodSeconds: 10
-            initialDelaySeconds: 10
-            failureThreshold: 6
-            timeoutSeconds: 10
-          readinessProbe:
-            httpGet:
-              path: /readiness
-              port: 9099
-              host: localhost
-            periodSeconds: 10
-            timeoutSeconds: 10
+          livenessProbe: {{- toYaml .Values.calico.livenessProbe | nindent 12 }}
+          readinessProbe: {{- toYaml .Values.calico.readinessProbe | nindent 12 }}
           volumeMounts:
             # For maintaining CNI plugin API credentials.
             - mountPath: /host/etc/cni/net.d

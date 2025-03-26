@@ -130,6 +130,40 @@ calico:
       # limits:
       #   cpu: 250m
       #   memory: 256Mi
+  livenessProbe:
+    exec:
+      command:
+      - /usr/bin/calico-node
+      - -felix-live
+    periodSeconds: 10
+    initialDelaySeconds: 10
+    failureThreshold: 6
+    timeoutSeconds: 10
+  readinessProbe:
+    httpGet:
+      path: /readiness
+      port: 9099
+      host: localhost
+    periodSeconds: 10
+    timeoutSeconds: 10
+# configuration for the calico-init initContainer
+calico_init:
+  resources: ~
+    # requests:
+    #   memory: 256Mi
+    #   cpu: 100m
+    # limits:
+    #   memory: 256Mi
+    #   cpu: 100m
+# configuration for the flexvol-driver initContainer
+flexvol:
+  resources: ~
+    # requests:
+    #   memory: 64Mi
+    #   cpu: 100m
+    # limits:
+    #   memory: 64Mi
+    #   cpu: 100m
 global:
   systemDefaultRegistry: ""
   clusterCIDRv4: ""
