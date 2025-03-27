@@ -57,6 +57,7 @@ if [ -n "$COREDNS_CHART_VERSION" ]; then
 		current_autoscaler_version=$(yq '.autoscaler.image.tag' workdir/coredns/values.yaml)
 		new_autoscaler_version=$(yq '.autoscaler.image.tag' workdir/coredns/values_new.yaml)
 		sed -i "s/$current_autoscaler_version/$new_autoscaler_version/g" packages/rke2-coredns/generated-changes/patch/values.yaml.patch
+		rm -fr workdir
 		# prepare patch
 		GOCACHE="/home/runner/.cache/go-build" GOPATH="/home/runner/go" PACKAGE="rke2-coredns" make prepare
 		find packages/rke2-coredns/charts -name '*.orig' -delete
