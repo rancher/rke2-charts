@@ -1,14 +1,17 @@
 --- charts-original/Chart.yaml
 +++ charts/Chart.yaml
-@@ -1,7 +1,5 @@
+@@ -1,9 +1,7 @@
  annotations:
 -  artifacthub.io/changes: "- \"fix: :bug: permanent redirect should be disableable\"\n-
 -    \"feat: :sparkles: add hub tracing capabilities\"\n- \"docs: \U0001F4DA️ fix typo
 -    in Guidelines.md\"\n- \"chore(release): publish v34.2.0\"\n"
 +  fleet.cattle.io/bundle-id: rke2
  apiVersion: v2
- appVersion: v3.3.2
+-appVersion: v3.3.2
++appVersion: v3.3.5
  description: A Traefik based Kubernetes ingress controller
+ home: https://traefik.io/
+ icon: https://raw.githubusercontent.com/traefik/traefik/v2.3/docs/content/assets/img/traefik.logo.png
 @@ -20,7 +18,7 @@
  - email: remi.buisson@traefik.io
    name: darkweaver87
