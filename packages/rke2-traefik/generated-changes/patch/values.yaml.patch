@@ -11,7 +11,7 @@
 +  repository: rancher/mirrored-library-traefik
    # -- defaults to appVersion
 -  tag:  # @schema type:[string, null]
-+  tag:  "3.3.2"
++  tag:  "3.3.5"
    # -- Traefik image pull policy
    pullPolicy: IfNotPresent
  
