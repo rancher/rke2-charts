@@ -1,0 +1,66 @@
+{{- $version := include "imageVersion" $ }}
+{{- if (ne $version "experimental-v3.0") }}
+  {{- if (semverCompare "<v3.0.0-0" $version) }}
+    {{- fail "ERROR: This version of the Chart only supports Traefik Proxy v3" -}}
+  {{- end }}
+{{- end }}
+
+{{- if .Values.certResolvers }}
+  {{- fail "ERROR: certResolvers setting has been removed. See v33.0.0 Changelog." }}
+{{- end }}
+
+{{- if and .Values.hub.enabled (not (contains "traefik-hub" .Values.image.repository)) }}
+  {{- fail "ERROR: traefik-hub image is required when enabling Traefik Hub" -}}
+{{- end }}
+
+{{- if and (.Values.providers.kubernetesGateway).enabled (and (semverCompare "<v3.1.0-rc3" $version) (not .Values.experimental.kubernetesGateway.enabled)) }}
+  {{- fail "ERROR: Before traefik v3.1.0-rc3, kubernetesGateway is experimental. Enable it by setting experimental.kubernetesGateway.enabled to true" -}}
+{{- end }}
+
+{{- if .Values.hub.token }}
+  {{- if and .Values.hub.apimanagement.enabled (and .Values.rbac.enabled .Values.rbac.namespaced) }}
+    {{- fail "ERROR: Currently Traefik Hub doesn't support namespaced RBACs" -}}
+  {{- end }}
+{{- end }}
+
+{{- if .Values.rbac.namespaced }}
+  {{- if .Values.providers.kubernetesGateway.enabled }}
+    {{- fail "ERROR: Kubernetes Gateway provider requires ClusterRole. RBAC cannot be namespaced." }}
+  {{- end }}
+  {{- if and (not .Values.providers.kubernetesIngress.enabled) (not .Values.providers.kubernetesCRD.enabled) }}
+    {{- fail "ERROR: namespaced rbac requires Kubernetes CRD or Kubernetes Ingress provider." }}
+  {{- end }}
+{{- end }}
+
+{{- if and (semverCompare "<v3.2.0-0" $version) (.Values.experimental.fastProxy.enabled)}}
+  {{- fail "ERROR: fastProxy is an experimental feature only available for traefik >= v3.2.0." }}
+{{- end }}
+
+{{- if and (semverCompare "<v3.3.0-0" $version) (.Values.experimental.abortOnPluginFailure)}}
+  {{- fail "ERROR: abortOnPluginFailure is an experimental feature only available for traefik >= v3.3.0." }}
+{{- end }}
+
+{{- if and (semverCompare "<3.2.0-0" $version) (.Values.providers.kubernetesGateway.nativeLBByDefault)}}
+  {{- fail "ERROR: nativeLBByDefault has been introduced in Kubernetes Gateway provider in v3.2.0" }}
+{{- end }}
+
+{{- if and (semverCompare "<v3.1.0-0" $version) .Values.tracing.safeQueryParams }}
+  {{ fail "ERROR: safeQueryParams is a feature only available for traefik >= v3.1.0."}}
+{{- end }}
+
+
+{{- if $.Values.hub.token -}}
+  {{ if not $.Values.image.tag }}
+    {{ fail "When using Traefik Hub image tag needs to be specified !" }}
+  {{- end -}}
+
+  {{ $hubVersion := (split "@" (default "v3" $.Values.image.tag))._0 | replace "latest-" "" }}
+
+  {{- if and (semverCompare "<v3.9.0" $hubVersion) .Values.hub.tracing.additionalTraceHeaders.enabled }}
+    {{ fail "ERROR: additionalTraceHeaders is a feature only available for traefik-hub >= v3.9.0."}}
+  {{- end }}
+
+  {{- if and (not $.Values.tracing.otlp.enabled) .Values.hub.tracing.additionalTraceHeaders.enabled }}
+    {{ fail "ERROR: additionalTraceHeaders needs tracing.otlp to be enabled."}}
+  {{- end }}
+{{- end }}
