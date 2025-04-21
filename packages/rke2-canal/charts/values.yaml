@@ -107,7 +107,7 @@ calico:
   # Set Felix endpoint to host default action to ACCEPT.
   felixDefaultEndpointToHostAction: ACCEPT
   # Configure the MTU to use.
-  vethuMTU: 1450
+  vethuMTU: 0
   # Typha is disabled.
   typhaServiceName: none
   # Kubelet flex-volume-plugin-dir
