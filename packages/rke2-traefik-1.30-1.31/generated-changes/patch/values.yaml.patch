@@ -1,17 +1,16 @@
 --- charts-original/values.yaml
 +++ charts/values.yaml
-@@ -3,12 +3,10 @@
- # Declare variables to be passed into templates
- 
- image:  # @schema additionalProperties: false
+@@ -1,11 +1,9 @@
+ # Default values for Traefik
+ image:
 -  # -- Traefik image host registry
 -  registry: docker.io
    # -- Traefik image repository
 -  repository: traefik
 +  repository: rancher/mirrored-library-traefik
    # -- defaults to appVersion
--  tag:  # @schema type:[string, null]
-+  tag:  "3.3.6"
+-  tag: ""
++  tag: "2.11.24"
    # -- Traefik image pull policy
    pullPolicy: IfNotPresent
  
@@ -24,47 +23,47 @@
    # -- Number of pods of the deployment (only applies when kind == Deployment)
    replicas: 1
    # -- Number of old history to retain to allow rollback (If not set, default Kubernetes value is set to 10)
-@@ -110,8 +108,8 @@
+@@ -117,8 +115,8 @@
  # -- Create a default IngressClass for Traefik
- ingressClass:  # @schema additionalProperties: false
+ ingressClass:
    enabled: true
 -  isDefaultClass: true
--  name: ""
+-  # name: my-custom-class
 +  isDefaultClass: false
 +  name: "traefik"
  
- core:  # @schema additionalProperties: false
-   # -- Can be used to use globally v2 router syntax
-@@ -231,8 +229,8 @@
-   # -- Customize updateStrategy of Deployment or DaemonSet
+ # Traefik experimental features
+ experimental:
+@@ -188,8 +186,8 @@
+   # -- Customize updateStrategy: RollingUpdate or OnDelete
    type: RollingUpdate
    rollingUpdate:
--    maxUnavailable: 0  # @schema type:[integer, string, null]
--    maxSurge: 1        # @schema type:[integer, string, null]
-+    maxUnavailable: 1  # @schema type:[integer, string, null]
-+    maxSurge: 0        # @schema type:[integer, string, null]
+-    maxUnavailable: 0
+-    maxSurge: 1
++    maxUnavailable: 1
++    maxSurge: 0
  
- readinessProbe:  # @schema additionalProperties: false
+ readinessProbe:
    # -- The number of consecutive failures allowed before considering the probe as failed.
-@@ -271,7 +269,7 @@
-     # -- Allows to return 503 when there is no endpoints available
-     allowEmptyServices: true
-     # -- When the parameter is set, only resources containing an annotation with the same value are processed. Otherwise, resources missing the annotation, having an empty value, or the value traefik are processed. It will also set required annotation on Dashboard and Healthcheck IngressRoute when enabled.
--    ingressClass: ""
+@@ -246,6 +244,8 @@
+     enabled: true
+     # -- Allows to reference ExternalName services in Ingress
+     allowExternalNameServices: false
++    # -- Only process Ingresses containing kubernetes.io/ingress.class annotation with this value
 +    ingressClass: "traefik"
-     # labelSelector: environment=production,method=traefik
-     # -- Array of namespaces to watch. If left empty, Traefik watches all namespaces.
-     namespaces: []
-@@ -286,7 +284,7 @@
      # -- Allows to return 503 when there is no endpoints available
-     allowEmptyServices: true
-     # -- When ingressClass is set, only Ingresses containing an annotation with the same value are processed. Otherwise, Ingresses missing the annotation, having an empty value, or the value traefik are processed.
--    ingressClass:  # @schema type:[string, null]
-+    ingressClass:  "traefik" # @schema type:[string, null]
-     # labelSelector: environment=production,method=traefik
-     # -- Array of namespaces to watch. If left empty, Traefik watches all namespaces.
-     namespaces: []
-@@ -637,7 +635,7 @@
+     allowEmptyServices: false
+     # ingressClass: traefik-internal
+@@ -258,7 +258,7 @@
+     disableIngressClassLookup: false
+     # IP used for Kubernetes Ingress endpoints
+     publishedService:
+-      enabled: false
++      enabled: true
+       # Published Kubernetes Service to copy status from. Format: namespace/servicename
+       # By default this Traefik service
+       # pathOverride: ""
+@@ -642,7 +642,7 @@
      ## -- Enable this entrypoint as a default entrypoint. When a service doesn't explicitly set an entrypoint it will only use this entrypoint.
      # asDefault: true
      port: 8000
@@ -73,16 +72,16 @@
      # containerPort: 8000
      expose:
        default: true
-@@ -678,7 +676,7 @@
+@@ -675,7 +675,7 @@
      ## -- Enable this entrypoint as a default entrypoint. When a service doesn't explicitly set an entrypoint it will only use this entrypoint.
      # asDefault: true
      port: 8443
--    hostPort:  # @schema type:[integer, null]; minimum:0
-+    hostPort:  443 # @schema type:[integer, null]; minimum:0
-     containerPort:  # @schema type:[integer, null]; minimum:0
+-    # hostPort: 8443
++    hostPort: 443
+     # containerPort: 8443
      expose:
        default: true
-@@ -762,7 +760,7 @@
+@@ -778,7 +778,7 @@
    ## -- Single service is using `MixedProtocolLBService` feature gate.
    ## -- When set to false, it will create two Service, one for TCP and one for UDP.
    single: true
@@ -91,7 +90,7 @@
    # -- Additional annotations applied to both TCP and UDP services (e.g. for cloud provider specific config)
    annotations: {}
    # -- Additional annotations for TCP service only
-@@ -785,7 +783,7 @@
+@@ -801,7 +801,7 @@
    externalIPs: []
    # - 1.2.3.4
    ## One of SingleStack, PreferDualStack, or RequireDualStack.
@@ -100,11 +99,12 @@
    ## List of IP families (e.g. IPv4 and/or IPv6).
    ## ref: https://kubernetes.io/docs/concepts/services-networking/dual-stack/#services
    # ipFamilies:
-@@ -993,3 +991,7 @@
-         traceParent: ""
-         # -- Name of the header that will contain the tracestate copy.
-         traceState: ""
+@@ -992,3 +992,8 @@
+ #
+ ## -- This will override the default app.kubernetes.io/instance label for all Objects.
+ # instanceLabelOverride: traefik
 +
++#
 +global:
 +  systemDefaultRegistry: ""
 +  systemDefaultIngressClass: ""

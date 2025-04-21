@@ -1,0 +1,11 @@
+--- charts-original/templates/ingressclass.yaml
++++ charts/templates/ingressclass.yaml
+@@ -12,7 +12,7 @@
+ kind: IngressClass
+ metadata:
+   annotations:
+-    ingressclass.kubernetes.io/is-default-class: {{ .Values.ingressClass.isDefaultClass | quote }}
++    ingressclass.kubernetes.io/is-default-class: {{ or (.Values.ingressClass.isDefaultClass) (eq .Values.global.systemDefaultIngressClass "traefik") | quote }}
+   labels:
+     {{- include "traefik.labels" . | nindent 4 }}
+   name: {{ .Values.ingressClass.name | default (include "traefik.fullname" .) }}
