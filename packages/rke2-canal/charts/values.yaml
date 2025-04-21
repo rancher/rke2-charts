@@ -106,7 +106,7 @@ calico:
   masquerade: true
   # Set Felix endpoint to host default action to ACCEPT.
   felixDefaultEndpointToHostAction: ACCEPT
-  # Configure the MTU to use.
+  # Configure the MTU to use. A positive value overrides Calico's auto-detected MTU value.
   vethuMTU: 0
   # Typha is disabled.
   typhaServiceName: none
