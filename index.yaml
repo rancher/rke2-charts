@@ -11205,6 +11205,34 @@ entries:
   rke2-coredns:
   - annotations:
       artifacthub.io/changes: |
+        - kind: added
+          description: add https:// to tcp-only scheme list
+    apiVersion: v2
+    appVersion: 1.12.0
+    created: "2025-04-28T08:30:02.485664923Z"
+    description: CoreDNS is a DNS server that chains plugins and provides Kubernetes
+      DNS Services
+    digest: a2a234e72131f5d1148afc8928e97de8160f9f9454226add0eaf51fb7c389bec
+    home: https://coredns.io
+    icon: https://coredns.io/images/CoreDNS_Colour_Horizontal.png
+    keywords:
+    - coredns
+    - dns
+    - kubedns
+    maintainers:
+    - name: mrueg
+    - name: haad
+    - name: hagaibarel
+    - name: shubham-cmyk
+    name: rke2-coredns
+    sources:
+    - https://github.com/coredns/coredns
+    type: application
+    urls:
+    - assets/rke2-coredns/rke2-coredns-1.40.001.tgz
+    version: 1.40.001
+  - annotations:
+      artifacthub.io/changes: |
         - kind: fixed
           description: improve default readiness probe config for shutdown
     apiVersion: v2

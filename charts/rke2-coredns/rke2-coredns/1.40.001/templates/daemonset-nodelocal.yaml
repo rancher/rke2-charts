@@ -1,0 +1,107 @@
+{{- if .Values.nodelocal.enabled }}
+---
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: node-local-dns
+  namespace: kube-system
+  labels:
+    k8s-app: node-local-dns
+    kubernetes.io/cluster-service: "true"
+    addonmanager.kubernetes.io/mode: Reconcile
+spec:
+  updateStrategy:
+    rollingUpdate:
+      maxUnavailable: 1
+  selector:
+    matchLabels:
+      k8s-app: node-local-dns
+  template:
+    metadata:
+       labels:
+          k8s-app: node-local-dns
+    spec:
+      priorityClassName: system-node-critical
+{{- if .Values.rbac.create }}
+      serviceAccountName: node-local-dns
+{{- end }}
+{{- if .Values.nodelocal.nodeSelector }}
+      nodeSelector:
+{{ toYaml .Values.nodelocal.nodeSelector | indent 8 }}
+{{- end }}
+      hostNetwork: {{not .Values.nodelocal.use_cilium_lrp }}
+      dnsPolicy: Default  # Don't use cluster DNS.
+      tolerations:
+      - operator: Exists
+{{- if eq .Values.nodelocal.ipvs false }}
+      initContainers:
+      - name: wait-coredns
+        image: {{ template "system_default_registry" . }}{{ .Values.nodelocal.initimage.repository }}:{{ .Values.nodelocal.initimage.tag }}
+        command: ['sh', '-c', "until nc -zv {{ template "clusterDNSServerIP" . }} 53; do echo waiting for dns service; sleep 2; done"]
+{{- end }}
+      containers:
+      - name: node-cache
+        image: {{ template "system_default_registry" . }}{{ .Values.nodelocal.image.repository }}:{{ .Values.nodelocal.image.tag }}
+        resources:
+          requests:
+            cpu: 25m
+            memory: 5Mi
+        args: 
+          - "-localip"
+          - "{{.Values.nodelocal.ip_address}}{{ template "nodelocalLocalIPFlag" . }}"
+          - "-conf"
+          - "/etc/Corefile"
+          - "-upstreamsvc"
+          - "kube-dns-upstream"
+{{- if .Values.nodelocal.use_cilium_lrp }}
+          - "-skipteardown=true"
+          - "-setupinterface=false"
+          - "-setupiptables=false"
+{{- end}}
+        securityContext:
+          privileged: true
+        ports:
+        - containerPort: 53
+          name: udp-53
+          protocol: UDP
+        - containerPort: 53
+          name: tcp-53
+          protocol: TCP
+        - containerPort: 9253
+          name: metrics
+          protocol: TCP
+        livenessProbe:
+          httpGet:
+{{- if not .Values.nodelocal.use_cilium_lrp }}
+            host: {{.Values.nodelocal.ip_address}}
+{{- end}}
+            path: /health
+            port: 8080
+          initialDelaySeconds: 60
+          timeoutSeconds: 5
+        volumeMounts:
+{{- if not .Values.nodelocal.use_cilium_lrp }}
+        - mountPath: /run/xtables.lock
+          name: xtables-lock
+          readOnly: false
+{{- end}}
+        - name: config-volume
+          mountPath: /etc/coredns
+        - name: kube-dns-config
+          mountPath: /etc/kube-dns
+      volumes:
+      - name: xtables-lock
+        hostPath:
+          path: /run/xtables.lock
+          type: FileOrCreate
+      - name: kube-dns-config
+        configMap:
+          name: kube-dns
+          optional: true
+      - name: config-volume
+        configMap:
+          name: node-local-dns
+          items:
+            - key: Corefile
+              path: Corefile.base
+{{- end }}
