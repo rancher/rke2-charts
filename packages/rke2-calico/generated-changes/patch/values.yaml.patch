@@ -24,28 +24,28 @@
    # imagePullSecrets are configured on all images deployed by the tigera-operator.
    # secrets specified here must exist in the tigera-operator namespace; they won't be created by the operator or helm.
    # imagePullSecrets are a slice of LocalObjectReferences, which is the same format they appear as on deployments.
-@@ -16,7 +31,7 @@
-   imagePullSecrets: []
- 
+@@ -18,7 +33,7 @@
+ # apiServer configures the Calico API server, needed for interacting with
+ # the projectcalico.org/v3 suite of APIs.
  apiServer:
 -  enabled: true
 +  enabled: false
  
- defaultFelixConfiguration:
-   enabled: false
-@@ -63,14 +78,33 @@
+ # goldmane configures the Calico Goldmane flow aggregator.
+ goldmane:
+@@ -77,14 +92,33 @@
  
  # Image and registry configuration for the tigera/operator pod.
  tigeraOperator:
 -  image: tigera/operator
 +  image: rancher/mirrored-calico-operator
-   version: v1.36.7
+   version: v1.38.0
 -  registry: quay.io
 +  registry: docker.io
  calicoctl:
 -  image: docker.io/calico/ctl
 +  image: rancher/mirrored-calico-ctl
-   tag: v3.29.3
+   tag: v3.30.0
  
 -kubeletVolumePluginPath: /var/lib/kubelet
 +kubeletVolumePluginPath: "None"
