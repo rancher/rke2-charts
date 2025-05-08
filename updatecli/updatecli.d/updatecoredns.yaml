@@ -1,9 +1,9 @@
 ---
-name: "Update coredns version" 
+name: "Update CoreDNS Chart"
 
 sources:
   coredns_chart:
-    name: Get coredns chart version
+    name: Get CoreDNS chart version
     kind: githubrelease
     spec:
       owner: coredns
@@ -20,7 +20,7 @@ sources:
     transformers:
       - trimprefix: "coredns-"
   coredns:
-    name: Get coredns image version
+    name: Get CoreDNS image version
     kind: githubrelease
     spec:
       owner: rancher
@@ -36,7 +36,7 @@ sources:
         # pattern accepts any semver constraint
         pattern: "v[0-9]+.[0-9]+.[0-9]+-build[0-9]+"
   autoscaler:
-    name: Get autoscaler image version
+    name: Get cluster-proportional-autoscaler image version
     kind: githubrelease
     spec:
       owner: rancher
@@ -52,7 +52,7 @@ sources:
         # pattern accepts any semver constraint
         pattern: "v[0-9]+.[0-9]+.[0-9]+-build[0-9]+"
   nodecache:
-    name: Get nodecache image version
+    name: Get dns-node-cache image version
     kind: githubrelease
     spec:
       owner: rancher
@@ -70,7 +70,7 @@ sources:
 
 targets:
   coredns:
-    name: "Bump to latest coredns chart and images version"
+    name: Update chart and images
     kind: shell
     scmid: default
     sourceid: coredns_chart
@@ -103,10 +103,17 @@ scms:
       
 actions:
   default:
-    title: 'Update Coredns chart version to {{ source "coredns" }}'
+    title: Update CoreDNS chart {{ source "coredns_chart" }}
     kind: github/pullrequest
     spec:
       automerge: false
+      description:
+        <h3>Chart Images</h3>
+        <ul>
+          <li>rancher/hardened-coredns:{{ source "coredns" }}</li>
+          <li>rancher/hardened-cluster-autoscaler:{{ source "autoscaler" }}</li>
+          <li>rancher/hardened-dns-node-cache:{{ source "nodecache" }}</li>
+        </ul>
       labels:
         - chore
         - skip-changelog
