@@ -15,14 +15,14 @@
    # kube-flannel image
    image:
 -    repository: ghcr.io/flannel-io/flannel
--    tag: v0.26.6
+-    tag: v0.26.7
 +    repository: rancher/hardened-flannel
-+    tag: v0.26.6-build20250414
++    tag: v0.26.7-build20250509
    image_cni:
 -    repository: ghcr.io/flannel-io/flannel-cni-plugin
 -    tag: v1.6.2-flannel1
 +    repository: rancher/hardened-cni-plugins
-+    tag: v1.6.2-build20250306
++    tag: v1.7.1-build20250509
    # cniBinDir is the directory to which the flannel CNI binary is installed.
    cniBinDir: "/opt/cni/bin"
    # cniConfDir is the directory where the CNI configuration is located.
