@@ -66,6 +66,7 @@ rules:
   - apiGroups: ["policy.networking.k8s.io"]
     resources:
       - adminnetworkpolicies
+      - baselineadminnetworkpolicies
     verbs:
       - watch
       - list
@@ -104,6 +105,9 @@ rules:
       - hostendpoints
       - blockaffinities
       - tiers
+      - stagednetworkpolicies
+      - stagedglobalnetworkpolicies
+      - stagedkubernetesnetworkpolicies
     verbs:
       - get
       - list
