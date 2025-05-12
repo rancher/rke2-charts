@@ -24,7 +24,7 @@
    # imagePullSecrets are configured on all images deployed by the tigera-operator.
    # secrets specified here must exist in the tigera-operator namespace; they won't be created by the operator or helm.
    # imagePullSecrets are a slice of LocalObjectReferences, which is the same format they appear as on deployments.
-@@ -18,7 +33,7 @@
+@@ -18,15 +33,15 @@
  # apiServer configures the Calico API server, needed for interacting with
  # the projectcalico.org/v3 suite of APIs.
  apiServer:
@@ -33,6 +33,25 @@
  
  # goldmane configures the Calico Goldmane flow aggregator.
  goldmane:
+-  enabled: true
++  enabled: false
+ 
+ # whisker configures the Calico Whisker observability UI.
+ whisker:
+-  enabled: true
++  enabled: false
+ 
+ defaultFelixConfiguration:
+   enabled: false
+@@ -44,7 +59,7 @@
+ 
+ # Whether or not the tigera/operator should manange CustomResourceDefinitions
+ # needed to run itself and Calico. If disabled, you must manage these resources out-of-band.
+-manageCRDs: true
++manageCRDs: false
+ 
+ # Resource requests and limits for the tigera/operator pod.
+ resources: {}
 @@ -77,14 +92,33 @@
  
  # Image and registry configuration for the tigera/operator pod.
