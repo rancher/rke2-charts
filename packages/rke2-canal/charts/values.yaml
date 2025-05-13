@@ -60,19 +60,19 @@ calico:
   # CNI installation image.
   cniImage:
     repository: rancher/hardened-calico
-    tag: v3.30.0-build20250509
+    tag: v3.30.0-build20250513
   # Canal node image.
   nodeImage:
     repository: rancher/hardened-calico
-    tag: v3.30.0-build20250509
+    tag: v3.30.0-build20250513
   # Flexvol Image.
   flexvolImage:
     repository: rancher/hardened-calico
-    tag: v3.30.0-build20250509
+    tag: v3.30.0-build20250513
   # kubecontroller image
   kubeControllerImage:
     repository: rancher/hardened-calico
-    tag: v3.30.0-build20250509
+    tag: v3.30.0-build20250513
   # Datastore type for canal. It can be either kuberentes or etcd.
   datastoreType: kubernetes
   # Wait for datastore to initialize.
