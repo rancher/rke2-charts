@@ -172,10 +172,10 @@
 +  use_cilium_lrp: false
 +  image:
 +    repository: rancher/hardened-dns-node-cache
-+    tag: "1.25.0-build20250507"
++    tag: "1.26.0-build20250515"
 +  initimage:
 +    repository: rancher/hardened-dns-node-cache
-+    tag: "1.25.0-build20250507"
++    tag: "1.26.0-build20250515"
 +  nodeSelector:
 +    kubernetes.io/os: linux
 +
