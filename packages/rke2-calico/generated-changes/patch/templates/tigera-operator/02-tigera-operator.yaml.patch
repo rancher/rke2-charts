@@ -9,8 +9,8 @@
    labels:
      {{- include "tigera-operator.labels" (dict "context" .) | nindent 4 }}
  spec:
-@@ -47,7 +47,7 @@
-       dnsPolicy: ClusterFirstWithHostNet
+@@ -51,7 +51,7 @@
+       {{- end }}
        containers:
          - name: tigera-operator
 -          image: {{ template "tigera-operator.image" .Values.tigeraOperator}}
