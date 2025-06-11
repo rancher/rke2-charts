@@ -15,10 +15,11 @@ flannel:
   iface: ""
   # A regulare expression used to match the interface
   regexIface: ""
-  # kube-flannel command arguments
+  # kube-flannel command arguments with forward rules disabled because with Calico the packets for pod IPs that doesn't exist are forwarded to the default GW
   args:
     - "--ip-masq"
     - "--kube-subnet-mgr"
+    - "--iptables-forward-rules=false"
   # Backend for kube-flannel. Backend should not be changed
   # at runtime.
   backend: "vxlan"
