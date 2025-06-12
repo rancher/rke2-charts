@@ -1,0 +1,102 @@
+---
+name: "Update Kubernetes Metrics Server Chart"
+
+sources:
+  metrics_server_chart:
+    name: Get Kubernetes Metrics Server chart version
+    kind: githubrelease
+    spec:
+      owner: kubernetes-sigs
+      repository: metrics-server
+      token: '{{ requiredEnv .github.token }}'
+      typefilter:
+        release: true
+        draft: false
+        prerelease: false
+      versionfilter:
+        kind: regex
+        # pattern accepts any semver constraint without leading 'v'
+        pattern: "[0-9]+.[0-9]+.[0-9]"
+    transformers:
+      - trimprefix: "metrics-server-helm-chart-"
+  metrics_server_image:
+    name: Get Kubernetes Metrics Server image version
+    kind: githubrelease
+    spec:
+      owner: rancher
+      repository: image-build-k8s-metrics-server
+      token: '{{ requiredEnv .github.token }}'
+      username: '{{ requiredEnv .github.username }}'
+      typefilter:
+        release: true
+        draft: false
+        prerelease: false
+      versionfilter:
+        kind: regex
+        # pattern accepts any semver constraint
+        pattern: "v[0-9]+.[0-9]+.[0-9]+-build[0-9]+"
+  addon_resizer_image:
+    name: Get addon-resizer image version
+    kind: githubrelease
+    spec:
+      owner: rancher
+      repository: image-build-addon-resizer
+      token: '{{ requiredEnv .github.token }}'
+      username: '{{ requiredEnv .github.username }}'
+      typefilter:
+        release: true
+        draft: false
+        prerelease: false
+      versionfilter:
+        kind: regex
+        # pattern accepts any semver constraint
+        pattern: "[0-9]+.[0-9]+.[0-9]+-build[0-9]+"
+
+targets:
+  metrics_server:
+    name: Update chart and images
+    kind: shell
+    scmid: default
+    sourceid: metrics_server_chart
+    spec:
+      command: 'updatecli/scripts/update-metrics-server.sh'
+      environments:
+        - name: METRICS_SERVER_CHART_VERSION
+          value: '{{ source "metrics_server_chart" }}'
+        - name: METRICS_SERVER_IMAGE_VERSION
+          value: '{{ source "metrics_server_image" }}'
+        - name: ADDON_RESIZER_IMAGE_VERSION
+          value: '{{ source "addon_resizer_image" }}'
+        - name: PATH
+        - name: UPDATECLI_GITHUB_WORKFLOW_URL
+        - name: GH_TOKEN
+
+scms:
+  default:
+    kind: github
+    spec:
+      token: '{{ requiredEnv .github.token }}'
+      username: '{{ requiredEnv .github.username }}'
+      user: '{{ .github.username }}'
+      email: '{{ .github.email }}'
+      owner: '{{ .github.owner }}'
+      repository: '{{ .github.repository }}'
+      branch: '{{ .github.branch }}'
+
+actions:
+  default:
+    title: Update Kubernetes Metrics Server chart {{ source "metrics_server_chart" }}
+    kind: github/pullrequest
+    spec:
+      automerge: false
+      description:
+        <h3>Chart Images</h3>
+        <ul>
+          <li>rancher/hardened-k8s-metrics-server:{{ source "metrics_server_image" }}</li>
+          <li>rancher/hardened-addon-resizer:{{ source "addon_resizer_image" }}</li>
+        </ul>
+      labels:
+        - chore
+        - skip-changelog
+        - status/auto-created
+    scmid: default
