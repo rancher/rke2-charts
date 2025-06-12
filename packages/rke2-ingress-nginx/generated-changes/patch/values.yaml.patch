@@ -23,7 +23,7 @@
 -    digest: sha256:03497ee984628e95eca9b2279e3f3a3c1685dd48635479e627d219f00c8eefa9
 -    digestChroot: sha256:a697e2bfa419768315250d079ccbbca45f6099c60057769702b912d20897a574
 -    pullPolicy: IfNotPresent
-+    tag: "v1.12.2-hardened1"
++    tag: "v1.12.2-hardened2"
      runAsNonRoot: true
      # -- This value must not be changed using the official image.
      # uid=101(www-data) gid=82(www-data) groups=82(www-data)
