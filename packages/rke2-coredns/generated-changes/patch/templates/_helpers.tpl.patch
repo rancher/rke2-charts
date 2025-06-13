@@ -23,7 +23,31 @@
  {{- end -}}
  
  {{/*
-@@ -234,3 +230,71 @@
+@@ -99,9 +95,10 @@
+             {{- end -}}
+         {{- end -}}
+ 
+-        {{/* If none of the zones specify scheme, default to dns:// udp */}}
++        {{/* If none of the zones specify scheme, default to dns:// on both tcp & udp */}}
+         {{- if and (not (index $innerdict "istcp")) (not (index $innerdict "isudp")) -}}
+             {{- $innerdict := set $innerdict "isudp" true -}}
++            {{- $innerdict := set $innerdict "istcp" true -}}
+         {{- end -}}
+ 
+         {{- if .nodePort -}}
+@@ -170,9 +167,10 @@
+             {{- end -}}
+         {{- end -}}
+ 
+-        {{/* If none of the zones specify scheme, default to dns:// udp */}}
++        {{/* If none of the zones specify scheme, default to dns:// on both tcp & udp */}}
+         {{- if and (not (index $innerdict "istcp")) (not (index $innerdict "isudp")) -}}
+             {{- $innerdict := set $innerdict "isudp" true -}}
++            {{- $innerdict := set $innerdict "istcp" true -}}
+         {{- end -}}
+ 
+         {{- if .hostPort -}}
+@@ -234,3 +232,71 @@
      {{ template "coredns.fullname" . }}
  {{- end -}}
  {{- end -}}
