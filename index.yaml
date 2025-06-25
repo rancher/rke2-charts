@@ -11947,6 +11947,34 @@ entries:
   rke2-coredns:
   - annotations:
       artifacthub.io/changes: |
+        - kind: added
+          description: Added support for initContainers in the deployment.
+    apiVersion: v2
+    appVersion: 1.12.2
+    created: "2025-06-25T14:16:14.836017165Z"
+    description: CoreDNS is a DNS server that chains plugins and provides Kubernetes
+      DNS Services
+    digest: 2801e14e9d789ca36c7ef2a7860f698a5a95111c0261baf321c0eec06392ea8e
+    home: https://coredns.io
+    icon: https://coredns.io/images/CoreDNS_Colour_Horizontal.png
+    keywords:
+    - coredns
+    - dns
+    - kubedns
+    maintainers:
+    - name: mrueg
+    - name: haad
+    - name: hagaibarel
+    - name: shubham-cmyk
+    name: rke2-coredns
+    sources:
+    - https://github.com/coredns/coredns
+    type: application
+    urls:
+    - assets/rke2-coredns/rke2-coredns-1.43.000.tgz
+    version: 1.43.000
+  - annotations:
+      artifacthub.io/changes: |
         - kind: fixed
           description: Fix service port removal if `scheme` is not defined, and enable use_tcp for default configuration.
     apiVersion: v2
