@@ -11947,6 +11947,34 @@ entries:
   rke2-coredns:
   - annotations:
       artifacthub.io/changes: |
+        - kind: fixed
+          description: Fix service port removal if `scheme` is not defined, and enable use_tcp for default configuration.
+    apiVersion: v2
+    appVersion: 1.12.2
+    created: "2025-06-25T12:34:50.768395386Z"
+    description: CoreDNS is a DNS server that chains plugins and provides Kubernetes
+      DNS Services
+    digest: 6fd0ab49d859526ea3d060222adfffc639a0e22de03ceb6830e79215907edd81
+    home: https://coredns.io
+    icon: https://coredns.io/images/CoreDNS_Colour_Horizontal.png
+    keywords:
+    - coredns
+    - dns
+    - kubedns
+    maintainers:
+    - name: mrueg
+    - name: haad
+    - name: hagaibarel
+    - name: shubham-cmyk
+    name: rke2-coredns
+    sources:
+    - https://github.com/coredns/coredns
+    type: application
+    urls:
+    - assets/rke2-coredns/rke2-coredns-1.42.400.tgz
+    version: 1.42.400
+  - annotations:
+      artifacthub.io/changes: |
         - kind: changed
           description: Upgrade CoreDNS to 1.12.2
     apiVersion: v2
