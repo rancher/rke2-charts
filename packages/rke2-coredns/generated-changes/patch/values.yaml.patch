@@ -155,10 +155,10 @@
      failureThreshold: 3
      successThreshold: 1
  
-@@ -403,3 +425,25 @@
-   annotations: {}
-   ## Pod selector
-   selector: {}
+@@ -406,3 +428,25 @@
+ 
+ # Configures initcontainers for the coredns deployment.
+ initContainers: []
 +
 +k8sApp: "kube-dns"
 +

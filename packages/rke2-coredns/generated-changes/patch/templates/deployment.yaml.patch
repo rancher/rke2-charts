@@ -27,7 +27,7 @@
        {{- end }}
        {{- if .Values.nodeSelector }}
        nodeSelector:
-@@ -94,7 +97,7 @@
+@@ -98,7 +101,7 @@
        {{- end }}
        containers:
        - name: "coredns"
