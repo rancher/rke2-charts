@@ -20,7 +20,7 @@
 
 image:
   repository: rancher/hardened-multus-cni
-  tag: v4.2.1-build20250607
+  tag: v4.2.1-build20250627
   pullPolicy: IfNotPresent
 
 #imagePullSecrets: []
@@ -99,12 +99,21 @@ config:
     #cniVersion: 1.0.0
     #cleanupConfigOnExit: true
     #additionalBinDir: /opt/multus/bin
+  daemon_conf:
+    "chrootDir": "/hostroot"
+    "cniVersion": "0.3.1"
+    "logLevel": "verbose"
+    "logToStderr": true
+    "cniConfigDir": "/host/etc/cni/net.d"
+    "multusAutoconfigDir": "/host/etc/cni/net.d"
+    "multusConfigFile": "auto"
+    "socketDir": "/host/run/multus/"
 
 manifests:
   serviceAccount: true
   clusterRole: true
   clusterRoleBinding: true
-  configMap: false
+  configMap: true
   daemonSet: true
   customResourceDefinition: true
   dhcpDaemonSet: false
@@ -139,3 +148,11 @@ global:
 rke2-whereabouts:
   enabled: false
   
+# When using the thick plugin, manifests.configMap MUST be set to true
+thickPlugin:
+  enabled: false
+  image:
+    repository: rancher/hardened-multus-thick
+    tag: v4.2.1-build20250627
+    pullPolicy: IfNotPresent
+

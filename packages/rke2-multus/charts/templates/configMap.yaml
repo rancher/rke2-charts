@@ -20,6 +20,11 @@ metadata:
   labels:
 {{- include "multus.labels" . | indent 4 }}
 data:
+{{- if .Values.thickPlugin.enabled }}
+  daemon-config.json: |-
+{{ toJson .Values.config.daemon_conf | indent 4 }}
+{{- else }}
   cni-conf.json: |-
 {{ toJson .Values.config.cni_conf | indent 4 }}
+{{- end }}
 {{- end }}
