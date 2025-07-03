@@ -12,6 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 {{- if .Values.manifests.daemonSet }}
+{{- if not (.Values.thickPlugin.enabled) }}
+
 apiVersion: apps/v1
 kind: DaemonSet
 metadata:
@@ -132,4 +134,5 @@ spec:
           configMap:
             name: {{ .Release.Name }}-{{ .Chart.Version }}-config
         {{- end }}
+{{- end }}
 {{- end }}

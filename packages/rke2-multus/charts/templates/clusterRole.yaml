@@ -29,7 +29,9 @@ rules:
       - pods/status
     verbs:
       - get
+      - list
       - update
+      - watch
   - apiGroups:
       - ""
     resources:
