@@ -92,3 +92,11 @@ spec:
     served: true
     storage: true
     subresources: {}
+  - name: v1alpha1
+    schema:
+      openAPIV3Schema:
+        description: to not break compatibility when upgrading from previous versions
+          of the CRD
+        type: object
+    served: false
+    storage: false
