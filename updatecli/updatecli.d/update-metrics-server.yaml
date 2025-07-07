@@ -15,8 +15,8 @@ sources:
         prerelease: false
       versionfilter:
         kind: regex
-        # pattern accepts any semver constraint without leading 'v'
-        pattern: "[0-9]+.[0-9]+.[0-9]"
+        # pattern accepts any semver constraint after chart prefix
+        pattern: "metrics-server-helm-chart-[0-9]+.[0-9]+.[0-9]"
     transformers:
       - trimprefix: "metrics-server-helm-chart-"
   metrics_server_image:
