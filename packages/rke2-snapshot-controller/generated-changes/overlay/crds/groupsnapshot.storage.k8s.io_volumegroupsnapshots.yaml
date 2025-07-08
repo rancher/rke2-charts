@@ -240,8 +240,7 @@ spec:
   - name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: to not break compatibility when upgrading from previous versions
-          of the CRD
+        description: v1alpha1 is deprecated and no longer served.
         type: object
     served: false
     storage: false
