@@ -54,12 +54,28 @@ app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{- end }}
 
+{{- define "controller.labels" -}}
+app: whereabouts-controller
+helm.sh/chart: {{ include "whereabouts.chart" . }}
+{{ include "controller.selectorLabels" . }}
+{{- if .Chart.AppVersion }}
+app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
+{{- end }}
+app.kubernetes.io/managed-by: {{ .Release.Service }}
+{{- end }}
+
 {{/*
 Selector labels
 */}}
 {{- define "whereabouts.selectorLabels" -}}
 app: {{ include "whereabouts.name" . }}
 app.kubernetes.io/name: {{ include "whereabouts.name" . }}
+app.kubernetes.io/instance: {{ .Release.Name }}
+{{- end }}
+
+{{- define "controller.selectorLabels" -}}
+app: {{ include "whereabouts.name" . }}-controller
+app.kubernetes.io/name: {{ include "whereabouts.name" . }}-controller
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 

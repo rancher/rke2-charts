@@ -6,7 +6,7 @@ image:
   repository: rancher/hardened-whereabouts
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: v0.9.1-build20250702
+  tag: v0.9.1-build20250704
 
 updateStrategy: RollingUpdate
 imagePullSecrets: []
@@ -46,12 +46,16 @@ tolerations:
 
 affinity: {}
 
+priorityClassName: ""
+
 cniConf:
   confDir: /etc/cni/net.d
   binDir: /opt/cni/bin
 
 nodeSliceController:
-  enabled: true
+  enabled: false
+  podAnnotations: {}
 
 global:
   systemDefaultRegistry: ""
+  priorityClassName: ""

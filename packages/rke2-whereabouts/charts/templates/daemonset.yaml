@@ -23,7 +23,10 @@ spec:
         {{- include "whereabouts.selectorLabels" . | nindent 8 }}
     spec:
       hostNetwork: true
-      serviceAccountName: {{ include "whereabouts.serviceAccountName" . }}
+      serviceAccountName: {{ include "whereabouts.serviceAccountName" . }}  
+      {{- with .Values.priorityClassName }}
+      priorityClassName: {{ . }}
+      {{- end }}
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
