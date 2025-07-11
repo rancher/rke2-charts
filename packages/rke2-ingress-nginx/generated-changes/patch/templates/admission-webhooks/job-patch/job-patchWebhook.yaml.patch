@@ -1,6 +1,6 @@
 --- charts-original/templates/admission-webhooks/job-patch/job-patchWebhook.yaml
 +++ charts/templates/admission-webhooks/job-patch/job-patchWebhook.yaml
-@@ -42,9 +42,7 @@
+@@ -39,9 +39,7 @@
      {{- end }}
        containers:
          - name: patch
