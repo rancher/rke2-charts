@@ -18,6 +18,11 @@ tier: node
 app: {{ .Chart.Name }}
 {{- end }}
 
+{{- define "dynamicNetworksController.labels" }}
+tier: node
+app: {{ .Chart.Name }}-dnc
+{{- end }}
+
 {{- define "system_default_registry" -}}
 {{- if .Values.global.systemDefaultRegistry -}}
 {{- printf "%s/" .Values.global.systemDefaultRegistry -}}

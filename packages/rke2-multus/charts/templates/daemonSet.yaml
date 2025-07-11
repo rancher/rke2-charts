@@ -107,8 +107,8 @@ spec:
         {{- if .Values.config.cni_conf.cleanupConfigOnExit }}
         - "--cleanup-config-on-exit={{ .Values.config.cni_conf.cleanupConfigOnExit }}"
         {{- end }}
-        {{- if .Values.pod.resources.multus }}
-        resources: {{- toYaml .Values.pod.resources.multus | nindent 10 }}
+        {{- if .Values.pod.resources.enabled }}
+        resources: {{- toYaml .Values.pod.resources.multus.enabled | nindent 10 }}
         {{- end }}
         securityContext:
           privileged: true
