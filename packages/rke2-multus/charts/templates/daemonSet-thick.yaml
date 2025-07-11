@@ -79,7 +79,7 @@ spec:
         image: {{ template "system_default_registry" . }}{{ .Values.thickPlugin.image.repository }}:{{ .Values.thickPlugin.image.tag }}
         imagePullPolicy: {{ .Values.thickPlugin.image.pullPolicy }}
         command: [ "/usr/src/multus-cni/bin/multus-daemon" ]
-        {{- if .Values.pod.resources.multus }}
+        {{- if .Values.pod.resources.enabled }}
         resources: {{- toYaml .Values.pod.resources.multus | nindent 10 }}
         {{- end }}
         securityContext:

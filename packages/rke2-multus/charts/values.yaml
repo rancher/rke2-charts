@@ -46,6 +46,10 @@ pod:
       limits:
         memory: "1024Mi"
         cpu: "2000m"
+    dynamicNetworksController:
+      requests:
+        cpu: "100m"
+        memory: "50Mi"
 
 #podSecurityContext: {}
   # fsGroup: 2000
@@ -156,3 +160,15 @@ thickPlugin:
     tag: v4.2.1-build20250627
     pullPolicy: IfNotPresent
 
+# This deploys the dynamic networks controller add-on.
+# It can only be used with thickPlugin.enabled=true.
+# See https://github.com/k8snetworkplumbingwg/multus-dynamic-networks-controller/ for more details
+dynamicNetworksController:
+  enabled: false
+  image:
+    repository: rancher/hardened-multus-dynamic-networks-controller
+    tag: v0.3.7-build20250711
+    pullPolicy: IfNotPresent
+  sockets:
+    containerd: /run/k3s/containerd/containerd.sock
+    multus: /run/multus/multus.sock
