@@ -15,9 +15,9 @@
    # kube-flannel image
    image:
 -    repository: ghcr.io/flannel-io/flannel
--    tag: v0.27.0
+-    tag: v0.27.1
 +    repository: rancher/hardened-flannel
-+    tag: v0.27.0-build20250611
++    tag: v0.27.1-build20250710
    image_cni:
 -    repository: ghcr.io/flannel-io/flannel-cni-plugin
 -    tag: v1.7.1-flannel1
@@ -63,9 +63,9 @@
          }
        ]
      }
-@@ -83,16 +77,18 @@
-   # General daemonset configs
-   #
+@@ -87,17 +81,19 @@
+       cpu: 100m
+       memory: 50Mi
    tolerations:
 -  - effect: NoExecute
 -    operator: Exists
@@ -81,6 +81,7 @@
 +  - key: "node-role.kubernetes.io/etcd"
 +    operator: "Exists"
 +    effect: "NoExecute"
+   nodeSelector: {}
  
 -netpol:
 -  enabled: false

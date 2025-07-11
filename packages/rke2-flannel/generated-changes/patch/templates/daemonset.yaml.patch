@@ -1,6 +1,6 @@
 --- charts-original/templates/daemonset.yaml
 +++ charts/templates/daemonset.yaml
-@@ -33,20 +33,13 @@
+@@ -37,20 +37,13 @@
        {{- end }}
        serviceAccountName: flannel
        initContainers:
@@ -25,7 +25,7 @@
          command:
          - cp
          args:
-@@ -58,10 +51,9 @@
+@@ -62,10 +55,9 @@
            mountPath: /etc/cni/net.d
          - name: flannel-cfg
            mountPath: /etc/kube-flannel/
@@ -37,16 +37,16 @@
          command:
          - "/opt/bin/flanneld"
          {{- range .Values.flannel.args }}
-@@ -72,7 +64,7 @@
-             cpu: "100m"
-             memory: "50Mi"
+@@ -76,7 +68,7 @@
+           {{- toYaml . | trim | nindent 10 }}
+         {{- end }}
          securityContext:
 -          privileged: false
 +          privileged: true
            capabilities:
              add: ["NET_ADMIN", "NET_RAW"]
          env:
-@@ -93,44 +85,14 @@
+@@ -99,44 +91,14 @@
            mountPath: /etc/kube-flannel/
          - name: xtables-lock
            mountPath: /run/xtables.lock
