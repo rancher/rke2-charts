@@ -87,19 +87,25 @@ labels:
 # For more details, see https://github.com/k8snetworkplumbingwg/multus-cni/blob/master/docs/how-to-use.md#entrypoint-script-parameters
 config:
   cni_conf:
-    confDir: /etc/cni/net.d
-    binDir: /opt/cni/bin
+    confDir: /etc/cni/net.d #path on the host, not inside the container
+    binDir: /opt/cni/bin # path on the host, not inside the container
     #namespaceIsolation: false
     #globalNamespaces: default,foo,bar
+    #skipConfigWatch: false
     #skipMultusBinaryCopy: false
     #readinessIndicatorFile: ""
     multusConfFile: auto #or specify a file to be copied on each node
+    #multusBinFile: /usr/src/multus-cni/bin/multus
+    #multusCniConfDir: /host/etc/cni/multus/net.d
     #The following options can be used only when multusConfFile=auto
     #multusAutoconfigDir: /host/etc/cni/net.d
     kubeconfig: /etc/cni/net.d/multus.d/multus.kubeconfig
     #masterCniFilename:
+    #overrideNetworkName: 
+    #renameConfFile: 
     #logFile: /var/log/multus.log
     #logLevel: panic
+    #logToStderr: true
     #cniVersion: 1.0.0
     #cleanupConfigOnExit: true
     #additionalBinDir: /opt/multus/bin
