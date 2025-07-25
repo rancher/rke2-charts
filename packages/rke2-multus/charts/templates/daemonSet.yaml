@@ -74,8 +74,20 @@ spec:
         {{- if .Values.config.cni_conf.cniVersion }}
         - "--cni-version={{ .Values.config.cni_conf.cniVersion }}"
         {{- end }}
+        {{- if .Values.config.cni_conf.confDir }}
+        - "--cni-conf-dir=/host{{ .Values.config.cni_conf.confDir }}"
+        {{- end }}
+        {{- if .Values.config.cni_conf.binDir }}
+        - "--cni-bin-dir=/host{{ .Values.config.cni_conf.binDir }}"
+        {{- end }}
         {{- if .Values.config.cni_conf.multusAutoconfigDir }}
         - "--multus-autoconfig-dir={{ .Values.config.cni_conf.multusAutoconfigDir }}"
+        {{- end }}
+        {{- if .Values.config.cni_conf.multusCniConfDir }}
+        - "--multus-cni-conf-dir={{ .Values.config.cni_conf.multusCniConfDir }}"
+        {{- end }}
+        {{- if .Values.config.cni_conf.multusBinFile }}
+        - "--multus-bin-file={{ .Values.config.cni_conf.multusBinFile }}"
         {{- end }}
         {{- if .Values.config.cni_conf.kubeconfig }}
         - "--multus-kubeconfig-file-host={{ .Values.config.cni_conf.kubeconfig }}"
@@ -86,23 +98,35 @@ spec:
         {{- if .Values.config.cni_conf.additionalBinDir }}
         - "--additional-bin-dir={{ .Values.config.cni_conf.additionalBinDir }}"
         {{- end }}
-        {{- if .Values.config.cni_conf.skipMultusBinaryCopy }}
-        - "--skip-multus-binary-copy={{ .Values.config.cni_conf.skipMultusBinaryCopy }}"
+        {{- if eq .Values.config.cni_conf.skipConfigWatch true }}
+        - "--skip-config-watch"
+        {{- end }}
+        {{- if eq .Values.config.cni_conf.skipMultusBinaryCopy true }}
+        - "--skip-multus-binary-copy"
         {{- end }}
         {{- if .Values.config.cni_conf.readinessIndicatorFile }}
         - "--readiness-indicator-file={{ .Values.config.cni_conf.readinessIndicatorFile }}"
         {{- end }}
-        {{- if .Values.config.cni_conf.namespaceIsolation }}
-        - "--cni-namespace-isolation={{ .Values.config.cni_conf.namespaceIsolation }}"
+        {{- if eq .Values.config.cni_conf.renameConfFile true }}
+        - "--rename-conf-file"
+        {{- end }}
+        {{- if eq .Values.config.cni_conf.namespaceIsolation true }}
+        - "--namespace-isolation"
         {{- end }}
         {{- if .Values.config.cni_conf.globalNamespaces }}
         - "--global-namespaces={{ .Values.config.cni_conf.globalNamespaces }}"
+        {{- end }}
+        {{- if eq .Values.config.cni_conf.overrideNetworkName true }}
+        - "--override-network-name"
         {{- end }}
         {{- if .Values.config.cni_conf.logLevel }}
         - "--multus-log-level={{ .Values.config.cni_conf.logLevel }}"
         {{- end }}
         {{- if .Values.config.cni_conf.logFile }}
         - "--multus-log-file={{ .Values.config.cni_conf.logFile }}"
+        {{- end }}
+        {{- if eq .Values.config.cni_conf.logToStderr true }}
+        - "-multus-log-to-stderr"
         {{- end }}
         {{- if .Values.config.cni_conf.cleanupConfigOnExit }}
         - "--cleanup-config-on-exit={{ .Values.config.cni_conf.cleanupConfigOnExit }}"
