@@ -97,8 +97,9 @@ config:
     multusConfFile: auto #or specify a file to be copied on each node
     #multusBinFile: /usr/src/multus-cni/bin/multus
     #multusCniConfDir: /host/etc/cni/multus/net.d
-    #The following options can be used only when multusConfFile=auto
-    #multusAutoconfigDir: /host/etc/cni/net.d
+    # The following options can be used only when multusConfFile=auto
+    # multusAutoconfigDir is mandatory when multusConfFile=auto 
+    multusAutoconfigDir: /etc/cni/net.d #path on the host, not inside the container
     kubeconfig: /etc/cni/net.d/multus.d/multus.kubeconfig
     #masterCniFilename:
     #overrideNetworkName: 

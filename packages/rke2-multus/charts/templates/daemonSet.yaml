@@ -81,7 +81,7 @@ spec:
         - "--cni-bin-dir=/host{{ .Values.config.cni_conf.binDir }}"
         {{- end }}
         {{- if .Values.config.cni_conf.multusAutoconfigDir }}
-        - "--multus-autoconfig-dir={{ .Values.config.cni_conf.multusAutoconfigDir }}"
+        - "--multus-autoconfig-dir=/host{{ .Values.config.cni_conf.multusAutoconfigDir }}"
         {{- end }}
         {{- if .Values.config.cni_conf.multusCniConfDir }}
         - "--multus-cni-conf-dir={{ .Values.config.cni_conf.multusCniConfDir }}"
@@ -138,9 +138,13 @@ spec:
           privileged: true
         volumeMounts:
         - name: cni
-          mountPath: /host/etc/cni/net.d
+          mountPath: /host{{ .Values.config.cni_conf.confDir }}
         - name: cnibin
-          mountPath: /host/opt/cni/bin
+          mountPath: /host{{ .Values.config.cni_conf.binDir }}
+        {{- if .Values.config.cni_conf.multusAutoconfigDir }}
+        - name: multusautoconfig
+          mountPath: /host{{ .Values.config.cni_conf.multusAutoconfigDir }}
+        {{- end }}
         {{- if .Values.manifests.configMap }}
         - name: multus-cfg
           mountPath: /tmp/multus-conf/00-multus.conf
@@ -153,6 +157,11 @@ spec:
         - name: cnibin
           hostPath:
             path: {{ .Values.config.cni_conf.binDir }}
+        {{- if .Values.config.cni_conf.multusAutoconfigDir }}
+        - name: multusautoconfig
+          hostPath:
+            path: {{ .Values.config.cni_conf.multusAutoconfigDir }}
+        {{- end }}
         {{- if .Values.manifests.configMap }}
         - name: multus-cfg
           configMap:
