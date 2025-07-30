@@ -141,7 +141,7 @@ spec:
           mountPath: /host{{ .Values.config.cni_conf.confDir }}
         - name: cnibin
           mountPath: /host{{ .Values.config.cni_conf.binDir }}
-        {{- if .Values.config.cni_conf.multusAutoconfigDir }}
+        {{- if and .Values.config.cni_conf.multusAutoconfigDir (ne .Values.config.cni_conf.confDir .Values.config.cni_conf.multusAutoconfigDir) }}
         - name: multusautoconfig
           mountPath: /host{{ .Values.config.cni_conf.multusAutoconfigDir }}
         {{- end }}
@@ -157,7 +157,7 @@ spec:
         - name: cnibin
           hostPath:
             path: {{ .Values.config.cni_conf.binDir }}
-        {{- if .Values.config.cni_conf.multusAutoconfigDir }}
+        {{- if and .Values.config.cni_conf.multusAutoconfigDir (ne .Values.config.cni_conf.confDir .Values.config.cni_conf.multusAutoconfigDir) }}
         - name: multusautoconfig
           hostPath:
             path: {{ .Values.config.cni_conf.multusAutoconfigDir }}
