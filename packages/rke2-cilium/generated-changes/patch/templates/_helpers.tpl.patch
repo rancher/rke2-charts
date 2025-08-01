@@ -1,12 +1,9 @@
 --- charts-original/templates/_helpers.tpl
 +++ charts/templates/_helpers.tpl
-@@ -209,4 +209,12 @@
-       {{- false }}
-     {{- end }}
-   {{- end }}
--{{- end }}
-\ No newline at end of file
-+{{- end }}
+@@ -217,3 +217,11 @@
+ {{- define "identityAllocationCRD" }}
+   {{- list "crd" "doublewrite-readkvstore" "doublewrite-readcrd" | has .Values.identityAllocationMode }}
+ {{- end }}
 +
 +{{- define "system_default_registry" -}}
 +{{- if .Values.global.systemDefaultRegistry -}}
