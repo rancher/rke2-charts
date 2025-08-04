@@ -1,7 +1,7 @@
 --- charts-original/templates/clustermesh-apiserver/deployment.yaml
 +++ charts/templates/clustermesh-apiserver/deployment.yaml
-@@ -54,7 +54,7 @@
-       {{- end }}
+@@ -63,7 +63,7 @@
+       {{- if eq .Values.clustermesh.apiserver.kvstoremesh.kvstoreMode "internal" }}
        initContainers:
        - name: etcd-init
 -        image: {{ include "cilium.image" .Values.clustermesh.apiserver.image | quote }}
@@ -9,8 +9,8 @@
          imagePullPolicy: {{ .Values.clustermesh.apiserver.image.pullPolicy }}
          command:
          - /usr/bin/clustermesh-apiserver
-@@ -107,7 +107,7 @@
-       containers:
+@@ -118,7 +118,7 @@
+       {{- if eq .Values.clustermesh.apiserver.kvstoremesh.kvstoreMode "internal" }}
        - name: etcd
          # The clustermesh-apiserver container image includes an etcd binary.
 -        image: {{ include "cilium.image" .Values.clustermesh.apiserver.image | quote }}
@@ -18,17 +18,17 @@
          imagePullPolicy: {{ .Values.clustermesh.apiserver.image.pullPolicy }}
          command:
          - /usr/bin/etcd
-@@ -171,7 +171,7 @@
-           {{- toYaml . | nindent 10 }}
-         {{- end }}
+@@ -184,7 +184,7 @@
+       {{- end }}
+       {{- if eq "true" (include "identityAllocationCRD" .) }}
        - name: apiserver
 -        image: {{ include "cilium.image" .Values.clustermesh.apiserver.image | quote }}
 +        image: "{{ template "system_default_registry" . }}{{ include "cilium.image" .Values.clustermesh.apiserver.image }}"
          imagePullPolicy: {{ .Values.clustermesh.apiserver.image.pullPolicy }}
          command:
          - /usr/bin/clustermesh-apiserver
-@@ -268,7 +268,7 @@
-         {{- end }}
+@@ -284,7 +284,7 @@
+       {{- end }}
        {{- if .Values.clustermesh.apiserver.kvstoremesh.enabled }}
        - name: kvstoremesh
 -        image: {{ include "cilium.image" .Values.clustermesh.apiserver.image | quote }}
