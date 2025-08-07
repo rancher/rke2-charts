@@ -12373,6 +12373,34 @@ entries:
           description: ServiceAccount now applies the `customLabels` field if set.
     apiVersion: v2
     appVersion: 1.12.2
+    created: "2025-08-07T15:42:56.551038017Z"
+    description: CoreDNS is a DNS server that chains plugins and provides Kubernetes
+      DNS Services
+    digest: ded17e9e28082c6b39c637d81d2dc9b448f7c34b1e5224d794522bfc96373fa1
+    home: https://coredns.io
+    icon: https://coredns.io/images/CoreDNS_Colour_Horizontal.png
+    keywords:
+    - coredns
+    - dns
+    - kubedns
+    maintainers:
+    - name: mrueg
+    - name: haad
+    - name: hagaibarel
+    - name: shubham-cmyk
+    name: rke2-coredns
+    sources:
+    - https://github.com/coredns/coredns
+    type: application
+    urls:
+    - assets/rke2-coredns/rke2-coredns-1.43.101.tgz
+    version: 1.43.101
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: changed
+          description: ServiceAccount now applies the `customLabels` field if set.
+    apiVersion: v2
+    appVersion: 1.12.2
     created: "2025-08-05T13:23:35.352703134Z"
     description: CoreDNS is a DNS server that chains plugins and provides Kubernetes
       DNS Services
