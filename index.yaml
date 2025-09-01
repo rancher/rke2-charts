@@ -12370,6 +12370,34 @@ entries:
   - annotations:
       artifacthub.io/changes: |
         - kind: changed
+          description: Use tpl function for affinity values
+    apiVersion: v2
+    appVersion: 1.12.3
+    created: "2025-09-01T11:16:00.467519128Z"
+    description: CoreDNS is a DNS server that chains plugins and provides Kubernetes
+      DNS Services
+    digest: 8b619638ca77fa1e215a41ba1c1807db51a0cbf12c63227879f3ed9d2d32e518
+    home: https://coredns.io
+    icon: https://coredns.io/images/CoreDNS_Colour_Horizontal.png
+    keywords:
+    - coredns
+    - dns
+    - kubedns
+    maintainers:
+    - name: mrueg
+    - name: haad
+    - name: hagaibarel
+    - name: shubham-cmyk
+    name: rke2-coredns
+    sources:
+    - https://github.com/coredns/coredns
+    type: application
+    urls:
+    - assets/rke2-coredns/rke2-coredns-1.43.300.tgz
+    version: 1.43.300
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: changed
           description: ServiceAccount now applies the `customLabels` field if set.
     apiVersion: v2
     appVersion: 1.12.2
