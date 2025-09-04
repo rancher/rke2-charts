@@ -1,11 +1,28 @@
 --- charts-original/templates/configmap.yaml
 +++ charts/templates/configmap.yaml
-@@ -24,7 +24,7 @@
+@@ -23,13 +23,22 @@
+     {{- range $idx, $zone := .zones }}{{ if $idx }} {{ else }}{{ end }}{{ default "" $zone.scheme }}{{ default "." $zone.zone }}{{ else }}.{{ end -}}
      {{- if .port }}:{{ .port }} {{ end -}}
      {
++      {{- $domain := coalesce $.Values.global.clusterDomain "cluster.local" -}}
        {{- range .plugins }}
 -        {{ .name }}{{ if .parameters }} {{ .parameters }}{{ end }}{{ if .configBlock }} {
-+        {{ .name }}{{ if .parameters }} {{if eq .name "kubernetes" }} {{ coalesce $.Values.global.clusterDomain "cluster.local" }} {{ end }} {{.parameters}}{{ end }}{{ if .configBlock }} {
++      {{ .name }}
++      {{- if and (eq .name "kubernetes") (not (contains $domain (toString .parameters))) -}}
++      {{- " " -}}{{- $domain -}}
++      {{- end -}}
++      {{- if .parameters -}}
++      {{- " " -}}{{- .parameters -}}
++      {{- end }}
++      {{- if .configBlock }} {
  {{ .configBlock | indent 12 }}
-         }{{ end }}
+-        }{{ end }}
++      }
++      {{- end }}
        {{- end }}
+     }
+-    {{ end }}
++    {{- end }}
+   {{- range .Values.zoneFiles }}
+   {{ .filename }}: {{ toYaml .contents | indent 4 }}
+   {{- end }}
