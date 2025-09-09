@@ -1,23 +1,32 @@
 --- charts-original/Chart.yaml
 +++ charts/Chart.yaml
-@@ -1,9 +1,7 @@
+@@ -1,19 +1,5 @@
  annotations:
--  artifacthub.io/changes: "- \"fix: :bug: permanent redirect should be disableable\"\n-
--    \"feat: :sparkles: add hub tracing capabilities\"\n- \"docs: \U0001F4DA️ fix typo
--    in Guidelines.md\"\n- \"chore(release): publish v34.2.0\"\n"
+-  artifacthub.io/changes: |
+-    - "refactor: remove `$root` hacks in favor of using `$`"
+-    - "refactor: only render `--global.checkNewVersion` when it differs from default"
+-    - "fix: prevent blank lines in args"
+-    - "fix(deployment): allow to disable checkNewVersion via values.yaml"
+-    - "feat: support custom monitoring api"
+-    - "feat: support Traefik v3.5 features"
+-    - "feat(hub): add annotations for webhook admission"
+-    - "feat(hooks): use now stable prestop command syntax"
+-    - "feat(deps): update traefik docker tag to v3.5.1"
+-    - "feat(deployment): add chart value timezone that auomatically configures access logs timezone"
+-    - "feat(CRDs): update Traefik Hub to v1.21.1"
+-    - "feat(CRDs): add gatewayAPI experimental channel option"
+-    - "docs(plugins): Sync VALUES.md"
+-    - "chore(release): :rocket: Publish 37.1.0 and 1.11.0"
 +  fleet.cattle.io/bundle-id: rke2
  apiVersion: v2
--appVersion: v3.3.2
-+appVersion: v3.3.6
+ appVersion: v3.5.1
  description: A Traefik based Kubernetes ingress controller
- home: https://traefik.io/
- icon: https://raw.githubusercontent.com/traefik/traefik/v2.3/docs/content/assets/img/traefik.logo.png
-@@ -20,7 +18,7 @@
+@@ -30,7 +16,7 @@
  - email: remi.buisson@traefik.io
    name: darkweaver87
  - name: jnoordsij
 -name: traefik
 +name: rke2-traefik
  sources:
- - https://github.com/traefik/traefik
  - https://github.com/traefik/traefik-helm-chart
+ - https://github.com/traefik/traefik
