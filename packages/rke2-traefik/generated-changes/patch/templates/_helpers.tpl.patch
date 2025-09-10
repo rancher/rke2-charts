@@ -1,23 +1,24 @@
 --- charts-original/templates/_helpers.tpl
 +++ charts/templates/_helpers.tpl
-@@ -18,7 +18,7 @@
- Create the chart image name.
- */}}
- {{- define "traefik.image-name" -}}
+@@ -31,7 +31,7 @@
+ {{- printf "%s/%s:%s" .Values.global.azure.images.proxy.registry .Values.global.azure.images.proxy.image .Values.global.azure.images.proxy.tag }}
+  {{- end -}}
+ {{- else -}}
 -{{- printf "%s/%s:%s" .Values.image.registry .Values.image.repository (.Values.image.tag | default .Chart.AppVersion) }}
 +{{- printf "%s:%s" .Values.image.repository (.Values.image.tag | default .Chart.AppVersion) }}
  {{- end -}}
- 
- {{/*
-@@ -192,3 +192,11 @@
-     {{- end -}}
-     {{- $found -}}
  {{- end -}}
+ 
+@@ -327,3 +327,12 @@
+ {{- $memlimitBytes := include "traefik.convertMemToBytes" .memory | mulf $percentage -}}
+ {{- printf "%dMiB" (divf $memlimitBytes 0x1p20 | floor | int64) -}}
+ {{- end }}
 +
-+{{- define "system_default_registry" -}}
-+{{- if .Values.global.systemDefaultRegistry -}}
-+{{- printf "%s/" .Values.global.systemDefaultRegistry -}}
-+{{- else -}}
-+{{- "" -}}
-+{{- end -}}
-+{{- end -}}
+++
+++{{- define "system_default_registry" -}}
+++{{- if .Values.global.systemDefaultRegistry -}}
+++{{- printf "%s/" .Values.global.systemDefaultRegistry -}}
+++{{- else -}}
+++{{- "" -}}
+++{{- end -}}
+++{{- end -}}

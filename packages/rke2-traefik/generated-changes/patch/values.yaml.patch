@@ -1,21 +1,19 @@
 --- charts-original/values.yaml
 +++ charts/values.yaml
-@@ -3,12 +3,10 @@
- # Declare variables to be passed into templates
- 
- image:  # @schema additionalProperties: false
--  # -- Traefik image host registry
--  registry: docker.io
+@@ -6,10 +6,10 @@
+   # -- Traefik image host registry
+   registry: docker.io
    # -- Traefik image repository
 -  repository: traefik
-+  repository: rancher/mirrored-library-traefik
-   # -- defaults to appVersion
++  repository: rancher/hardened-traefik
+   # -- defaults to appVersion. It's used for version checking, even prefixed with experimental- or latest-.
+   # When a digest is required, `versionOverride` can be used to set the version.
 -  tag:  # @schema type:[string, null]
-+  tag:  "3.3.6"
++  tag:  "v3.5.1-build20250908"
    # -- Traefik image pull policy
    pullPolicy: IfNotPresent
  
-@@ -19,7 +17,7 @@
+@@ -20,7 +20,7 @@
    # -- Enable deployment
    enabled: true
    # -- Deployment or DaemonSet
@@ -24,7 +22,7 @@
    # -- Number of pods of the deployment (only applies when kind == Deployment)
    replicas: 1
    # -- Number of old history to retain to allow rollback (If not set, default Kubernetes value is set to 10)
-@@ -110,8 +108,8 @@
+@@ -115,8 +115,8 @@
  # -- Create a default IngressClass for Traefik
  ingressClass:  # @schema additionalProperties: false
    enabled: true
@@ -34,8 +32,8 @@
 +  name: "traefik"
  
  core:  # @schema additionalProperties: false
-   # -- Can be used to use globally v2 router syntax
-@@ -231,8 +229,8 @@
+   # -- Can be used to use globally v2 router syntax. Deprecated since v3.4 /!\.
+@@ -236,8 +236,8 @@
    # -- Customize updateStrategy of Deployment or DaemonSet
    type: RollingUpdate
    rollingUpdate:
@@ -46,25 +44,25 @@
  
  readinessProbe:  # @schema additionalProperties: false
    # -- The number of consecutive failures allowed before considering the probe as failed.
-@@ -271,7 +269,7 @@
+@@ -276,7 +276,7 @@
      # -- Allows to return 503 when there is no endpoints available
      allowEmptyServices: true
      # -- When the parameter is set, only resources containing an annotation with the same value are processed. Otherwise, resources missing the annotation, having an empty value, or the value traefik are processed. It will also set required annotation on Dashboard and Healthcheck IngressRoute when enabled.
 -    ingressClass: ""
 +    ingressClass: "traefik"
      # labelSelector: environment=production,method=traefik
-     # -- Array of namespaces to watch. If left empty, Traefik watches all namespaces.
+     # -- Array of namespaces to watch. If left empty, Traefik watches all namespaces. . When using `rbac.namespaced`, it will watch helm release namespace and namespaces listed in this array.
      namespaces: []
-@@ -286,7 +284,7 @@
+@@ -291,7 +291,7 @@
      # -- Allows to return 503 when there is no endpoints available
      allowEmptyServices: true
      # -- When ingressClass is set, only Ingresses containing an annotation with the same value are processed. Otherwise, Ingresses missing the annotation, having an empty value, or the value traefik are processed.
 -    ingressClass:  # @schema type:[string, null]
 +    ingressClass:  "traefik" # @schema type:[string, null]
      # labelSelector: environment=production,method=traefik
-     # -- Array of namespaces to watch. If left empty, Traefik watches all namespaces.
+     # -- Array of namespaces to watch. If left empty, Traefik watches all namespaces. . When using `rbac.namespaced`, it will watch helm release namespace and namespaces listed in this array.
      namespaces: []
-@@ -637,7 +635,7 @@
+@@ -674,7 +674,7 @@
      ## -- Enable this entrypoint as a default entrypoint. When a service doesn't explicitly set an entrypoint it will only use this entrypoint.
      # asDefault: true
      port: 8000
@@ -73,7 +71,7 @@
      # containerPort: 8000
      expose:
        default: true
-@@ -678,7 +676,7 @@
+@@ -715,7 +715,7 @@
      ## -- Enable this entrypoint as a default entrypoint. When a service doesn't explicitly set an entrypoint it will only use this entrypoint.
      # asDefault: true
      port: 8443
@@ -82,7 +80,7 @@
      containerPort:  # @schema type:[integer, null]; minimum:0
      expose:
        default: true
-@@ -762,7 +760,7 @@
+@@ -799,7 +799,7 @@
    ## -- Single service is using `MixedProtocolLBService` feature gate.
    ## -- When set to false, it will create two Service, one for TCP and one for UDP.
    single: true
@@ -91,7 +89,7 @@
    # -- Additional annotations applied to both TCP and UDP services (e.g. for cloud provider specific config)
    annotations: {}
    # -- Additional annotations for TCP service only
-@@ -785,7 +783,7 @@
+@@ -822,7 +822,7 @@
    externalIPs: []
    # - 1.2.3.4
    ## One of SingleStack, PreferDualStack, or RequireDualStack.
@@ -100,10 +98,10 @@
    ## List of IP families (e.g. IPv4 and/or IPv6).
    ## ref: https://kubernetes.io/docs/concepts/services-networking/dual-stack/#services
    # ipFamilies:
-@@ -993,3 +991,7 @@
-         traceParent: ""
-         # -- Name of the header that will contain the tracestate copy.
-         traceState: ""
+@@ -1160,3 +1160,7 @@
+     hub:
+       image: traefik-hub
+       tag: latest
 +
 +global:
 +  systemDefaultRegistry: ""
