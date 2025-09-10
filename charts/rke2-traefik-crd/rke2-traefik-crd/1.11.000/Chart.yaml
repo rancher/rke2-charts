@@ -1,0 +1,26 @@
+annotations:
+  artifacthub.io/changes: |
+    - "feat(CRDs): update Traefik Hub to v1.21.1"
+    - "feat(CRDs): add gatewayAPI experimental channel option"
+    - "chore(release): :rocket: Publish 37.1.0 and 1.11.0"
+apiVersion: v2
+description: A Traefik based Kubernetes ingress controller
+home: https://traefik.io/
+icon: https://raw.githubusercontent.com/traefik/traefik/v2.3/docs/content/assets/img/traefik.logo.png
+keywords:
+- traefik
+- ingress
+- networking
+kubeVersion: '>=1.22.0-0'
+maintainers:
+- email: michel.loiseleur@traefik.io
+  name: mloiseleur
+- email: remi.buisson@traefik.io
+  name: darkweaver87
+- name: jnoordsij
+name: rke2-traefik-crd
+sources:
+- https://github.com/traefik/traefik-helm-chart
+- https://github.com/traefik/traefik
+type: application
+version: 1.11.000

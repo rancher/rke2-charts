@@ -21492,6 +21492,34 @@ entries:
   - annotations:
       fleet.cattle.io/bundle-id: rke2
     apiVersion: v2
+    appVersion: v3.5.1
+    created: "2025-09-10T16:48:07.527152021Z"
+    description: A Traefik based Kubernetes ingress controller
+    digest: 80125c086daa565f0f8a051f5d0d9d542bf4569461b047a6b6bcaa06f54dd2ba
+    home: https://traefik.io/
+    icon: https://raw.githubusercontent.com/traefik/traefik/master/docs/content/assets/img/traefik.logo.png
+    keywords:
+    - traefik
+    - ingress
+    - networking
+    kubeVersion: '>=1.22.0-0'
+    maintainers:
+    - email: michel.loiseleur@traefik.io
+      name: mloiseleur
+    - email: remi.buisson@traefik.io
+      name: darkweaver87
+    - name: jnoordsij
+    name: rke2-traefik
+    sources:
+    - https://github.com/traefik/traefik-helm-chart
+    - https://github.com/traefik/traefik
+    type: application
+    urls:
+    - assets/rke2-traefik/rke2-traefik-37.1.000.tgz
+    version: 37.1.000
+  - annotations:
+      fleet.cattle.io/bundle-id: rke2
+    apiVersion: v2
     appVersion: v3.3.6
     created: "2025-04-21T19:20:07.774503472Z"
     description: A Traefik based Kubernetes ingress controller
@@ -21799,4 +21827,34 @@ entries:
     urls:
     - assets/rke2-traefik/rke2-traefik-crd-25.0.000.tgz
     version: 25.0.000
+  - annotations:
+      artifacthub.io/changes: |
+        - "feat(CRDs): update Traefik Hub to v1.21.1"
+        - "feat(CRDs): add gatewayAPI experimental channel option"
+        - "chore(release): :rocket: Publish 37.1.0 and 1.11.0"
+    apiVersion: v2
+    created: "2025-09-10T16:48:07.551663446Z"
+    description: A Traefik based Kubernetes ingress controller
+    digest: 3470f8bcb593b04a09221c45c7c193e5113410790db1a8a21616bef335e9a493
+    home: https://traefik.io/
+    icon: https://raw.githubusercontent.com/traefik/traefik/v2.3/docs/content/assets/img/traefik.logo.png
+    keywords:
+    - traefik
+    - ingress
+    - networking
+    kubeVersion: '>=1.22.0-0'
+    maintainers:
+    - email: michel.loiseleur@traefik.io
+      name: mloiseleur
+    - email: remi.buisson@traefik.io
+      name: darkweaver87
+    - name: jnoordsij
+    name: rke2-traefik-crd
+    sources:
+    - https://github.com/traefik/traefik-helm-chart
+    - https://github.com/traefik/traefik
+    type: application
+    urls:
+    - assets/rke2-traefik-crd/rke2-traefik-crd-1.11.000.tgz
+    version: 1.11.000
 generated: "2021-02-25T17:59:12.927381-08:00"
