@@ -62,7 +62,16 @@
      # labelSelector: environment=production,method=traefik
      # -- Array of namespaces to watch. If left empty, Traefik watches all namespaces. . When using `rbac.namespaced`, it will watch helm release namespace and namespaces listed in this array.
      namespaces: []
-@@ -674,7 +674,7 @@
+@@ -614,6 +614,8 @@
+         insecureSkipVerify: false
+ 
+ global:
++  systemDefaultRegistry: ""
++  systemDefaultIngressClass: ""
+   checkNewVersion: true
+   # -- Please take time to consider whether or not you wish to share anonymous data with us
+   # See https://doc.traefik.io/traefik/contributing/data-collection/
+@@ -674,7 +676,7 @@
      ## -- Enable this entrypoint as a default entrypoint. When a service doesn't explicitly set an entrypoint it will only use this entrypoint.
      # asDefault: true
      port: 8000
@@ -71,7 +80,7 @@
      # containerPort: 8000
      expose:
        default: true
-@@ -715,7 +715,7 @@
+@@ -715,7 +717,7 @@
      ## -- Enable this entrypoint as a default entrypoint. When a service doesn't explicitly set an entrypoint it will only use this entrypoint.
      # asDefault: true
      port: 8443
@@ -80,7 +89,7 @@
      containerPort:  # @schema type:[integer, null]; minimum:0
      expose:
        default: true
-@@ -799,7 +799,7 @@
+@@ -799,7 +801,7 @@
    ## -- Single service is using `MixedProtocolLBService` feature gate.
    ## -- When set to false, it will create two Service, one for TCP and one for UDP.
    single: true
@@ -89,7 +98,7 @@
    # -- Additional annotations applied to both TCP and UDP services (e.g. for cloud provider specific config)
    annotations: {}
    # -- Additional annotations for TCP service only
-@@ -822,7 +822,7 @@
+@@ -822,7 +824,7 @@
    externalIPs: []
    # - 1.2.3.4
    ## One of SingleStack, PreferDualStack, or RequireDualStack.
@@ -98,11 +107,8 @@
    ## List of IP families (e.g. IPv4 and/or IPv6).
    ## ref: https://kubernetes.io/docs/concepts/services-networking/dual-stack/#services
    # ipFamilies:
-@@ -1160,3 +1160,7 @@
+@@ -1160,3 +1162,4 @@
      hub:
        image: traefik-hub
        tag: latest
 +
-+global:
-+  systemDefaultRegistry: ""
-+  systemDefaultIngressClass: ""
