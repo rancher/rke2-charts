@@ -1,6 +1,6 @@
 apiVersion: v1
-version: 34.2.0
-appVersion: v3.3.6
+version: 37.1.0
+appVersion: v3.5.1
 description: Installs the CRDs for rke2-traefik
 name: rke2-traefik-crd
 type: application
