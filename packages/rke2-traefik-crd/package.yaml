@@ -1,4 +1,0 @@
-url: https://traefik.github.io/charts/traefik-crds/traefik-crds-1.11.0.tgz
-packageVersion: 00
-# This repository does not use releaseCandidateVersions, so you can leave this as 00.
-releaseCandidateVersion: 00
