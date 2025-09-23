@@ -21550,6 +21550,34 @@ entries:
       fleet.cattle.io/bundle-id: rke2
     apiVersion: v2
     appVersion: v3.5.1
+    created: "2025-09-23T17:59:47.395627702Z"
+    description: A Traefik based Kubernetes ingress controller
+    digest: de677c67bafb4499e31d8a816fae6622f3ee5edceca82c27bbec7b2f136adeac
+    home: https://traefik.io/
+    icon: https://raw.githubusercontent.com/traefik/traefik/master/docs/content/assets/img/traefik.logo.png
+    keywords:
+    - traefik
+    - ingress
+    - networking
+    kubeVersion: '>=1.22.0-0'
+    maintainers:
+    - email: michel.loiseleur@traefik.io
+      name: mloiseleur
+    - email: remi.buisson@traefik.io
+      name: darkweaver87
+    - name: jnoordsij
+    name: rke2-traefik
+    sources:
+    - https://github.com/traefik/traefik-helm-chart
+    - https://github.com/traefik/traefik
+    type: application
+    urls:
+    - assets/rke2-traefik/rke2-traefik-37.1.002.tgz
+    version: 37.1.002
+  - annotations:
+      fleet.cattle.io/bundle-id: rke2
+    apiVersion: v2
+    appVersion: v3.5.1
     created: "2025-09-22T21:08:50.100828062Z"
     description: A Traefik based Kubernetes ingress controller
     digest: 8b7b70801a03b6303de203e7ef1aa287613fd81d05353d1e807d24ca521416ad
