@@ -19,11 +19,11 @@
      ## for backwards compatibility consider setting the full image url via the repository value below
      ## use *either* current default registry/image or repository format or installing chart by providing the values.yaml will fail
      ## repository:
--    tag: "v1.12.6"
--    digest: sha256:c371fbf42b4f23584ce879d99303463131f4f31612f0875482b983354eeca7e6
--    digestChroot: sha256:7ff9cdb081b18f9431b84d4c3ccd3db9d921ed5f5b7682a45f6a351bfc4ceed4
+-    tag: "v1.13.3"
+-    digest: sha256:1b044f6dcac3afbb59e05d98463f1dec6f3d3fb99940bc12ca5d80270358e3bd
+-    digestChroot: sha256:27de15aea4ec7639f7cec6ae96bff11ce57bb1171040351a0b0eedf66655d0dd
 -    pullPolicy: IfNotPresent
-+    tag: "v1.12.6-hardened1"
++    tag: "v1.13.3-hardened1"
      runAsNonRoot: true
      # -- This value must not be changed using the official image.
      # uid=101(www-data) gid=82(www-data) groups=82(www-data)
@@ -42,10 +42,10 @@
    # to keep resolving names inside the k8s network, use ClusterFirstWithHostNet.
 -  dnsPolicy: ClusterFirst
 +  dnsPolicy: ClusterFirstWithHostNet
+   # -- Instruct the kubelet to use the named RuntimeClass to run the pod
+   runtimeClassName: ""
    # -- Bare-metal considerations via the host network https://kubernetes.github.io/ingress-nginx/deploy/baremetal/#via-the-host-network
-   # Ingress status was blank because there is no Service exposing the Ingress-Nginx Controller in a configuration using the host network, the default --publish-service flag used in standard cloud setups does not apply
-   reportNodeInternalIp: false
-@@ -107,7 +107,7 @@
+@@ -109,7 +109,7 @@
    ## Disabled by default
    hostPort:
      # -- Enable 'hostPort' or not
@@ -54,7 +54,7 @@
      ports:
        # -- 'hostPort' http port
        http: 80
-@@ -174,7 +174,7 @@
+@@ -176,7 +176,7 @@
    # node or nodes where an ingress controller pod is running.
    publishService:
      # -- Enable 'publishService' or not
@@ -63,7 +63,7 @@
      # -- Allows overriding of the publish service to bind to
      # Must be <namespace>/<service_name>
      pathOverride: ""
-@@ -221,7 +221,7 @@
+@@ -223,7 +223,7 @@
    #         name: secret-resource
  
    # -- Use a `DaemonSet` or `Deployment`
@@ -72,7 +72,7 @@
    # -- Annotations to be added to the controller Deployment or DaemonSet
    ##
    annotations: {}
-@@ -482,7 +482,7 @@
+@@ -484,7 +484,7 @@
      configMapKey: ""
    service:
      # -- Enable controller services or not. This does not influence the creation of either the admission webhook or the metrics service.
@@ -81,15 +81,15 @@
      external:
        # -- Enable the external controller service or not. Useful for internal-only deployments.
        enabled: true
-@@ -752,6 +752,7 @@
+@@ -772,6 +772,7 @@
        loadBalancerSourceRanges: []
        servicePort: 443
        type: ClusterIP
 +      ipFamilyPolicy: "PreferDualStack"
      createSecretJob:
        name: create
-       # -- Security context for secret creation containers
-@@ -792,12 +793,11 @@
+       # -- Deadline in seconds for the job to complete. Must be greater than 0 to enforce. If unset or 0, no deadline is enforced.
+@@ -816,12 +817,11 @@
        enabled: true
        image:
          # registry: registry.k8s.io
@@ -98,12 +98,12 @@
          ## for backwards compatibility consider setting the full image url via the repository value below
          ## use *either* current default registry/image or repository format or installing chart by providing the values.yaml will fail
          ## repository:
-         tag: v1.6.2
--        digest: sha256:050a34002d5bb4966849c880c56c91f5320372564245733b33d4b3461b4dbd24
+         tag: v1.6.3
+-        digest: sha256:3d671cf20a35cd94efc5dcd484970779eb21e7938c98fbc3673693b8a117cf39
          pullPolicy: IfNotPresent
        # -- Provide a priority class name to the webhook patching job
        ##
-@@ -951,11 +951,11 @@
+@@ -993,11 +993,11 @@
    name: defaultbackend
    image:
      # registry: registry.k8s.io

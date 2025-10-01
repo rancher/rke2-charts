@@ -1,6 +1,6 @@
 --- charts-original/templates/default-backend-deployment.yaml
 +++ charts/templates/default-backend-deployment.yaml
-@@ -50,9 +50,7 @@
+@@ -53,9 +53,7 @@
      {{- end }}
        containers:
          - name: {{ template "ingress-nginx.name" . }}-default-backend
