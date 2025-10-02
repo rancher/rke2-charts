@@ -170,3 +170,29 @@ global:
   systemDefaultRegistry: ""
   clusterCIDRv4: ""
   clusterCIDRv6: ""
+
+
+installation:
+  controlPlaneTolerations:
+  - key: "node-role.kubernetes.io/control-plane"
+    operator: "Exists"
+    effect: "NoSchedule"
+  - key: "node-role.kubernetes.io/etcd"
+    operator: "Exists"
+    effect: "NoExecute"
+  enabled: true
+  kubeletVolumePluginPath: "None"
+  kubernetesProvider: ""
+  natOutgoing: "Enabled"
+  backend: "VXLAN"
+  calicoNetwork:
+    bgp: Disabled
+  imagePath: "rancher"
+  imagePrefix: "mirrored-calico-"
+  flexVolumePath: "/var/lib/kubelet/volumeplugins/"
+  # imagePullSecrets are configured on all images deployed by the tigera-operator.
+  # secrets specified here must exist in the tigera-operator namespace; they won't be created by the operator or helm.
+  # imagePullSecrets are a slice of LocalObjectReferences, which is the same format they appear as on deployments.
+  #
+  # Example: --set installation.imagePullSecrets[0].name=my-existing-secret
+  imagePullSecrets: []
