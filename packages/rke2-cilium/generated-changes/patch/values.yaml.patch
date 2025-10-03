@@ -154,7 +154,16 @@
      pullPolicy: "IfNotPresent"
      suffix: ""
    # -- Number of replicas to run for the cilium-operator deployment
-@@ -3045,8 +3032,7 @@
+@@ -2907,6 +2894,8 @@
+       operator: Exists
+     - key: "node.cloudprovider.kubernetes.io/uninitialized"
+       operator: Exists
++    - key: "node-role.kubernetes.io/etcd"
++      operator: Exists
+   # -- Additional cilium-operator container arguments.
+   extraArgs: []
+   # -- Additional cilium-operator environment variables.
+@@ -3045,8 +3034,7 @@
    # @schema
    # -- Taint nodes where Cilium is scheduled but not running. This prevents pods
    # from being scheduled to nodes where Cilium is not the default CNI provider.
@@ -164,7 +173,7 @@
    # -- Set Node condition NetworkUnavailable to 'false' with the reason
    # 'CiliumIsUp' for nodes that have a healthy Cilium pod.
    setNodeNetworkStatus: true
-@@ -3151,11 +3137,9 @@
+@@ -3151,11 +3139,9 @@
      # type: [null, string]
      # @schema
      override: ~
@@ -178,7 +187,21 @@
      pullPolicy: "IfNotPresent"
    envoy:
      # -- Envoy pre-flight image.
-@@ -3320,11 +3304,9 @@
+@@ -3164,11 +3150,10 @@
+       # type: [null, string]
+       # @schema
+       override: ~
+-      repository: "quay.io/cilium/cilium-envoy"
++      repository: "rancher/mirrored-cilium-cilium-envoy"
+       tag: "v1.34.7-1757592137-1a52bb680a956879722f48c591a2ca90f7791324"
+       pullPolicy: "IfNotPresent"
+-      digest: "sha256:7932d656b63f6f866b6732099d33355184322123cfe1182e6f05175a3bc2e0e0"
+-      useDigest: true
++      useDigest: false
+   # -- The priority class to use for the preflight pod.
+   priorityClassName: ""
+   # -- preflight update strategy
+@@ -3320,11 +3305,9 @@
        # type: [null, string]
        # @schema
        override: ~
@@ -192,7 +215,7 @@
        pullPolicy: "IfNotPresent"
      # -- TCP port for the clustermesh-apiserver health API.
      healthPort: 9880
-@@ -4008,3 +3990,11 @@
+@@ -4008,3 +3991,11 @@
  enableInternalTrafficPolicy: true
  # -- Enable LoadBalancer IP Address Management
  enableLBIPAM: true
