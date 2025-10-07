@@ -148,6 +148,22 @@ calico:
       host: localhost
     periodSeconds: 10
     timeoutSeconds: 10
+
+  felixConfiguration:
+    wireguardEnabled: false
+    # Config required to fix SURE-6954
+    featureDetectOverride: "ChecksumOffloadBroken=true"
+    healthPort: 9099
+    logSeveritySys: "Info"
+    ipv6Support: false
+    #disabled by default for backward compatibility with previous charts
+    xdpEnabled: false
+    # Enable felix healthcheck.
+    healthEnabled: true
+    # Enable prometheus metrics
+    prometheusMetricsEnabled: true
+    nftablesMode: Disabled
+
 # configuration for the calico-init initContainer
 calico_init:
   resources: ~
@@ -166,33 +182,11 @@ flexvol:
   # limits:
   #   memory: 64Mi
   #   cpu: 100m
+
 global:
   systemDefaultRegistry: ""
   clusterCIDRv4: ""
   clusterCIDRv6: ""
 
 
-installation:
-  controlPlaneTolerations:
-  - key: "node-role.kubernetes.io/control-plane"
-    operator: "Exists"
-    effect: "NoSchedule"
-  - key: "node-role.kubernetes.io/etcd"
-    operator: "Exists"
-    effect: "NoExecute"
-  enabled: true
-  kubeletVolumePluginPath: "None"
-  kubernetesProvider: ""
-  natOutgoing: "Enabled"
-  backend: "VXLAN"
-  calicoNetwork:
-    bgp: Disabled
-  imagePath: "rancher"
-  imagePrefix: "mirrored-calico-"
-  flexVolumePath: "/var/lib/kubelet/volumeplugins/"
-  # imagePullSecrets are configured on all images deployed by the tigera-operator.
-  # secrets specified here must exist in the tigera-operator namespace; they won't be created by the operator or helm.
-  # imagePullSecrets are a slice of LocalObjectReferences, which is the same format they appear as on deployments.
-  #
-  # Example: --set installation.imagePullSecrets[0].name=my-existing-secret
-  imagePullSecrets: []
+
