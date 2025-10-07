@@ -124,6 +124,9 @@ calico:
   ip6AutoDetectionMethod: "first-found"
   # Enable calico kube-controllers
   calicoKubeControllers: false
+  # Used to override feature detection based on auto-detected platform capabilities.
+  # ex: "ChecksumOffloadBroken=true"
+  felixFeatureDetectOverride: ""
   # Resource bounds for the calico-node daemon container
   resources:
     requests:

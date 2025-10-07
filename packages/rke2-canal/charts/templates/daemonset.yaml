@@ -138,6 +138,9 @@ spec:
             # Period, in seconds, at which felix re-applies all iptables state
             - name: FELIX_IPTABLESREFRESHINTERVAL
               value: {{ .Values.calico.felixIptablesRefreshInterval | quote}}
+            # Period, in seconds, at which felix re-applies all nftables state
+            - name: FELIX_NFTABLESREFRESHINTERVAL
+              value: {{ .Values.calico.felixIptablesRefreshInterval | quote}}
             - name: FELIX_IPTABLESBACKEND
               value: {{ .Values.calico.felixIptablesBackend | quote}}
             # The default IPv4 pool to create on startup if none exists. Pod IPs will be
@@ -175,6 +178,8 @@ spec:
               value: {{ .Values.calico.felixFailsafeOutboundHostPorts | quote }}
             - name: FELIX_IPTABLESMARKMASK
               value: {{ .Values.calico.felixIptablesMarkMask | quote }}
+            - name: FELIX_NFTABLESMARKMASK
+              value: {{ .Values.calico.felixIptablesMarkMask | quote }}
 {{- if coalesce .Values.global.clusterCIDRv4 .Values.podCidr }}
             # The method to use to autodetect the IPv4 address for this host.
             - name: IP_AUTODETECTION_METHOD
@@ -188,6 +193,8 @@ spec:
             - name: IP6_AUTODETECTION_METHOD
               value: {{ .Values.calico.ip6AutoDetectionMethod | quote }}
 {{- end }}
+            - name: FELIX_FEATUREDETECTOVERRIDE
+              value: {{ .Values.calico.felixFeatureDetectOverride | quote }}
           securityContext:
             privileged: true
           {{- if .Values.calico.resources }}
