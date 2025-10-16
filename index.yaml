@@ -13573,6 +13573,36 @@ entries:
       artifacthub.io/changes: |
         - kind: changed
           description: Use tpl function for affinity values
+        - kind: added
+          description: Add kubernetes plugin multicluster required RBAC
+    apiVersion: v2
+    appVersion: 1.12.3
+    created: "2025-10-16T21:28:08.413622323Z"
+    description: CoreDNS is a DNS server that chains plugins and provides Kubernetes
+      DNS Services
+    digest: 9db0d4bc515baabc2eb94700e92c78079de6e416380429d6989419bdd8e9853b
+    home: https://coredns.io
+    icon: https://coredns.io/images/CoreDNS_Colour_Horizontal.png
+    keywords:
+    - coredns
+    - dns
+    - kubedns
+    maintainers:
+    - name: mrueg
+    - name: haad
+    - name: hagaibarel
+    - name: shubham-cmyk
+    name: rke2-coredns
+    sources:
+    - https://github.com/coredns/coredns
+    type: application
+    urls:
+    - assets/rke2-coredns/rke2-coredns-1.44.300.tgz
+    version: 1.44.300
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: changed
+          description: Use tpl function for affinity values
     apiVersion: v2
     appVersion: 1.12.3
     created: "2025-09-09T19:52:29.350532312Z"
