@@ -1,27 +1,18 @@
 --- charts-original/Chart.yaml
 +++ charts/Chart.yaml
-@@ -1,19 +1,5 @@
+@@ -1,10 +1,5 @@
  annotations:
 -  artifacthub.io/changes: |
--    - "refactor: remove `$root` hacks in favor of using `$`"
--    - "refactor: only render `--global.checkNewVersion` when it differs from default"
--    - "fix: prevent blank lines in args"
--    - "fix(deployment): allow to disable checkNewVersion via values.yaml"
--    - "feat: support custom monitoring api"
--    - "feat: support Traefik v3.5 features"
--    - "feat(hub): add annotations for webhook admission"
--    - "feat(hooks): use now stable prestop command syntax"
--    - "feat(deps): update traefik docker tag to v3.5.1"
--    - "feat(deployment): add chart value timezone that auomatically configures access logs timezone"
--    - "feat(CRDs): update Traefik Hub to v1.21.1"
--    - "feat(CRDs): add gatewayAPI experimental channel option"
--    - "docs(plugins): Sync VALUES.md"
--    - "chore(release): :rocket: Publish 37.1.0 and 1.11.0"
+-    - "fix(observability): tracer creation warning with default security context"
+-    - "fix(CRDs): ✨ update for Traefik Proxy v3.5.2"
+-    - "feat(deps): update traefik docker tag to v3.5.3 + add plugin hash option"
+-    - "feat(CRDs): update for Traefik to v3.5.3"
+-    - "chore(release): :rocket: publish traefik 37.1.2 and crds 1.11.1"
 +  fleet.cattle.io/bundle-id: rke2
  apiVersion: v2
- appVersion: v3.5.1
+ appVersion: v3.5.3
  description: A Traefik based Kubernetes ingress controller
-@@ -30,7 +16,7 @@
+@@ -21,7 +16,7 @@
  - email: remi.buisson@traefik.io
    name: darkweaver87
  - name: jnoordsij
