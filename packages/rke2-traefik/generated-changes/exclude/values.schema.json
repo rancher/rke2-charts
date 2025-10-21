@@ -370,6 +370,9 @@
                                 },
                                 "secretName": {
                                     "type": "string"
+                                },
+                                "selfManagedCertificate": {
+                                    "type": "boolean"
                                 }
                             }
                         },
@@ -884,6 +887,7 @@
                             ],
                             "enum": [
                                 "common",
+                                "genericCLF",
                                 "json",
                                 null
                             ]
