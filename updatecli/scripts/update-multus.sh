@@ -37,8 +37,8 @@ if [ -n "$MULTUS_VERSION" ]; then
 			sed -i "s/  tag: $current_multus_version/  tag: $MULTUS_VERSION/g" packages/rke2-multus/charts/values.yaml
 			if [ "$new_package" = false ]; then
 				package_version=$(yq '.packageVersion' packages/rke2-multus/package.yaml)
-				new_version=$(printf "%02d" $(($package_version + 1)))
-				sed -i "s/packageVersion:.*/packageVersion: $new_version /g" packages/rke2-multus/package.yaml
+				new_version=$(printf "%02d" $((10#$package_version + 1)))
+				sed -i "s/packageVersion:.*/packageVersion: $new_version/g" packages/rke2-multus/package.yaml
 			fi
 		fi
 	fi
