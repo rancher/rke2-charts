@@ -20,7 +20,7 @@
 
 image:
   repository: rancher/hardened-multus-cni
-  tag: v4.2.2-build20251022
+  tag: v4.2.3-build20251031
   pullPolicy: IfNotPresent
 
 #imagePullSecrets: []
@@ -164,7 +164,7 @@ thickPlugin:
   enabled: false
   image:
     repository: rancher/hardened-multus-thick
-    tag: v4.2.2-build20251022
+    tag: v4.2.3-build20251031
     pullPolicy: IfNotPresent
 
 # This deploys the dynamic networks controller add-on.
