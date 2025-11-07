@@ -27,7 +27,22 @@
    # @schema
    # type: [null, string]
    # @schema
-@@ -1168,10 +1169,9 @@
+@@ -733,11 +734,12 @@
+   # set, it assumes a chaining mode of generic-veth. As a special case, a chaining mode
+   # of aws-cni implies a chainingTarget of aws-cni.
+   chainingTarget: ~
+-  # -- Make Cilium take ownership over the `/etc/cni/net.d` directory on the
++  # -- When enabled, this makes Cilium take ownership over the `/etc/cni/net.d` directory on the
+   # node, renaming all non-Cilium CNI configurations to `*.cilium_bak`.
+   # This ensures no Pods can be scheduled using other CNI plugins during Cilium
+   # agent downtime.
+-  exclusive: true
++  # We disable it by default since it prevents Multus from working.
++  exclusive: false
+   # -- Configure the log file for CNI logging with retention policy of 7 days.
+   # Disable CNI file logging by setting this field to empty explicitly.
+   logFile: /var/run/cilium/cilium-cni.log
+@@ -1168,10 +1170,9 @@
      # type: [null, string]
      # @schema
      override: ~
@@ -40,7 +55,7 @@
      pullPolicy: "IfNotPresent"
    # -- Seconds after which the completed job pod will be deleted
    ttlSecondsAfterFinished: 1800
-@@ -1201,7 +1201,7 @@
+@@ -1201,7 +1202,7 @@
    affinity: {}
  hubble:
    # -- Enable Hubble (true by default).
@@ -49,7 +64,7 @@
    # -- Annotations to be added to all top-level hubble objects (resources under templates/hubble)
    annotations: {}
    # -- Buffer size of the channel Hubble uses to receive monitor events. If this
-@@ -1506,11 +1506,9 @@
+@@ -1506,11 +1507,9 @@
        # type: [null, string]
        # @schema
        override: ~
@@ -63,7 +78,7 @@
        pullPolicy: "IfNotPresent"
      # -- Specifies the resources for the hubble-relay pods
      resources: {}
-@@ -1678,7 +1676,7 @@
+@@ -1678,7 +1677,7 @@
      # -- Enable prometheus metrics for hubble-relay on the configured port at
      # /metrics
      prometheus:
@@ -72,7 +87,7 @@
        port: 9966
        serviceMonitor:
          # -- Enable service monitors.
-@@ -1765,10 +1763,9 @@
+@@ -1765,10 +1764,9 @@
          # type: [null, string]
          # @schema
          override: ~
@@ -85,7 +100,7 @@
          pullPolicy: "IfNotPresent"
        # -- Hubble-ui backend security context.
        securityContext:
-@@ -1800,10 +1797,9 @@
+@@ -1800,10 +1798,9 @@
          # type: [null, string]
          # @schema
          override: ~
@@ -98,7 +113,7 @@
          pullPolicy: "IfNotPresent"
        # -- Hubble-ui frontend security context.
        securityContext:
-@@ -1995,7 +1991,7 @@
+@@ -1995,7 +1992,7 @@
  ipam:
    # -- Configure IP Address Management mode.
    # ref: https://docs.cilium.io/en/stable/network/concepts/ipam/
@@ -107,7 +122,7 @@
    # -- Maximum rate at which the CiliumNode custom resource is updated.
    ciliumNodeUpdateRate: "15s"
    # -- Pre-allocation settings for IPAM in Multi-Pool mode
-@@ -2386,9 +2382,9 @@
+@@ -2388,9 +2385,9 @@
    # type: [null, boolean]
    # @schema
    # -- Enable Envoy Proxy in standalone DaemonSet.
@@ -120,7 +135,7 @@
    # -- (int)
    # Set Envoy'--base-id' to use when allocating shared memory regions.
    # Only needs to be changed if multiple Envoy instances will run on the same node and may have conflicts. Supported values: 0 - 4294967295. Defaults to '0'
-@@ -2466,11 +2462,10 @@
+@@ -2468,11 +2465,10 @@
      # type: [null, string]
      # @schema
      override: ~
@@ -134,7 +149,7 @@
    # -- Additional containers added to the cilium Envoy DaemonSet.
    extraContainers: []
    # -- Additional envoy container arguments.
-@@ -2842,17 +2837,9 @@
+@@ -2844,17 +2840,9 @@
      # type: [null, string]
      # @schema
      override: ~
@@ -154,7 +169,7 @@
      pullPolicy: "IfNotPresent"
      suffix: ""
    # -- Number of replicas to run for the cilium-operator deployment
-@@ -2907,6 +2894,8 @@
+@@ -2909,6 +2897,8 @@
        operator: Exists
      - key: "node.cloudprovider.kubernetes.io/uninitialized"
        operator: Exists
@@ -163,7 +178,7 @@
    # -- Additional cilium-operator container arguments.
    extraArgs: []
    # -- Additional cilium-operator environment variables.
-@@ -3045,8 +3034,7 @@
+@@ -3047,8 +3037,7 @@
    # @schema
    # -- Taint nodes where Cilium is scheduled but not running. This prevents pods
    # from being scheduled to nodes where Cilium is not the default CNI provider.
@@ -173,7 +188,7 @@
    # -- Set Node condition NetworkUnavailable to 'false' with the reason
    # 'CiliumIsUp' for nodes that have a healthy Cilium pod.
    setNodeNetworkStatus: true
-@@ -3151,11 +3139,9 @@
+@@ -3153,11 +3142,9 @@
      # type: [null, string]
      # @schema
      override: ~
@@ -187,7 +202,7 @@
      pullPolicy: "IfNotPresent"
    envoy:
      # -- Envoy pre-flight image.
-@@ -3164,7 +3150,7 @@
+@@ -3166,11 +3153,10 @@
        # type: [null, string]
        # @schema
        override: ~
@@ -201,7 +216,7 @@
    # -- The priority class to use for the preflight pod.
    priorityClassName: ""
    # -- preflight update strategy
-@@ -3320,11 +3305,9 @@
+@@ -3322,11 +3308,9 @@
        # type: [null, string]
        # @schema
        override: ~
@@ -215,7 +230,7 @@
        pullPolicy: "IfNotPresent"
      # -- TCP port for the clustermesh-apiserver health API.
      healthPort: 9880
-@@ -4008,3 +3992,11 @@
+@@ -4010,3 +3994,11 @@
  enableInternalTrafficPolicy: true
  # -- Enable LoadBalancer IP Address Management
  enableLBIPAM: true
