@@ -1,11 +1,11 @@
 --- charts-original/templates/tigera-operator/02-rolebinding-tigera-operator.yaml
 +++ charts/templates/tigera-operator/02-rolebinding-tigera-operator.yaml
-@@ -7,7 +7,7 @@
+@@ -6,7 +6,7 @@
  subjects:
- - kind: ServiceAccount
-   name: tigera-operator
--  namespace: {{.Release.Namespace}}
-+  namespace: tigera-operator
+   - kind: ServiceAccount
+     name: tigera-operator
+-    namespace: {{ .Release.Namespace }}
++    namespace: tigera-operator
  roleRef:
    kind: ClusterRole
    name: tigera-operator

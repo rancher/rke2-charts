@@ -1,11 +1,14 @@
 --- charts-original/README.md
 +++ charts/README.md
-@@ -162,7 +162,7 @@
+@@ -162,9 +162,9 @@
  # Configuration for the tigera operator images to deploy.
  tigeraOperator:
    image: tigera/operator
 -  registry: quay.io
 +  registry: docker.io
  calicoctl:
-   image: docker.io/calico/ctl
+-  image: quay.io/calico/ctl
++  image: docker.io/rancher/mirrored-calico-ctl
  
+ # Configuration for the Calico CSI plugin - setting to None will disable the plugin, default: /var/lib/kubelet
+ kubeletVolumePluginPath: None   

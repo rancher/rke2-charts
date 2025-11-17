@@ -1,6 +1,6 @@
 --- charts-original/values.yaml
 +++ charts/values.yaml
-@@ -6,27 +6,43 @@
+@@ -6,14 +6,30 @@
  imagePullSecrets: {}
  
  installation:
@@ -12,7 +12,6 @@
 +    operator: "Exists"
 +    effect: "NoExecute"
    enabled: true
-+  kubeletVolumePluginPath: "None"
    kubernetesProvider: ""
 +  natOutgoing: "Enabled"
 +  backend: "VXLAN"
@@ -21,6 +20,7 @@
 +  imagePath: "rancher"
 +  imagePrefix: "mirrored-calico-"
 +  flexVolumePath: "/var/lib/kubelet/volumeplugins/"
++
    # imagePullSecrets are configured on all images deployed by the tigera-operator.
    # secrets specified here must exist in the tigera-operator namespace; they won't be created by the operator or helm.
    # imagePullSecrets are a slice of LocalObjectReferences, which is the same format they appear as on deployments.
@@ -29,6 +29,9 @@
    imagePullSecrets: []
 +  registry: "docker.io"
  
+   # Disable CSI driver by default.
+   kubeletVolumePluginPath: "None"
+@@ -21,15 +37,15 @@
  # apiServer configures the Calico API server, needed for interacting with
  # the projectcalico.org/v3 suite of APIs.
  apiServer:
@@ -47,7 +50,7 @@
  
  defaultFelixConfiguration:
    enabled: false
-@@ -44,7 +60,7 @@
+@@ -47,7 +63,7 @@
  
  # Whether or not the tigera/operator should manange CustomResourceDefinitions
  # needed to run itself and Calico. If disabled, you must manage these resources out-of-band.
@@ -56,23 +59,20 @@
  
  # Resource requests and limits for the tigera/operator pod.
  resources: {}
-@@ -79,14 +95,33 @@
+@@ -82,13 +98,32 @@
  dnsConfig: {}
  # Image and registry configuration for the tigera/operator pod.
  tigeraOperator:
 -  image: tigera/operator
 +  image: rancher/mirrored-calico-operator
-   version: v1.38.7
+   version: v1.40.2
 -  registry: quay.io
 +  registry: docker.io
  calicoctl:
--  image: docker.io/calico/ctl
+-  image: quay.io/calico/ctl
 +  image: rancher/mirrored-calico-ctl
-   tag: v3.30.4
+   tag: v3.31.2
  
--kubeletVolumePluginPath: /var/lib/kubelet
-+kubeletVolumePluginPath: "None"
-+
 +global:
 +  systemDefaultRegistry: ""
 +  clusterCIDRv4: ""
@@ -91,6 +91,7 @@
 +  defaultEndpointToHostAction: "Drop"
 +  logSeveritySys: "Info"
 +  xdpEnabled: true
- 
++
  # Optionally configure the host and port used to access the Kubernetes API server.
  kubernetesServiceEndpoint:
+   host: ""
