@@ -9,7 +9,7 @@
    tag: "CILIUM_IMAGE_VERSION"
    pullPolicy: "IfNotPresent"
 -  # cilium-digest
--  digest: "CILIUM_IMAGE_DIGEST"
+-  digest: CILIUM_IMAGE_DIGEST
 -  useDigest: true
 +  useDigest: false
  # -- Scheduling configurations for cilium pods
@@ -72,7 +72,7 @@
 +      repository: "rancher/mirrored-cilium-hubble-relay"
        tag: "CILIUM_HUBBLE_RELAY_VERSION"
 -      # hubble-relay-digest
--      digest: "CILIUM_HUBBLE_RELAY_DIGEST"
+-      digest: CILIUM_HUBBLE_RELAY_DIGEST
 -      useDigest: true
 +      useDigest: false
        pullPolicy: "IfNotPresent"
@@ -157,13 +157,13 @@
 +    repository: "rancher/mirrored-cilium-operator"
      tag: "CILIUM_OPERATOR_VERSION"
 -    # operator-generic-digest
--    genericDigest: "CILIUM_OPERATOR_DIGEST"
+-    genericDigest: CILIUM_OPERATOR_DIGEST
 -    # operator-azure-digest
--    azureDigest: "CILIUM_AZURE_OPERATOR_DIGEST"
+-    azureDigest: CILIUM_AZURE_OPERATOR_DIGEST
 -    # operator-aws-digest
--    awsDigest: "CILIUM_AWS_OPERATOR_DIGEST"
+-    awsDigest: CILIUM_AWS_OPERATOR_DIGEST
 -    # operator-alibabacloud-digest
--    alibabacloudDigest: "CILIUM_ALIBA_OPERATOR_DIGEST"
+-    alibabacloudDigest: CILIUM_ALIBA_OPERATOR_DIGEST
 -    useDigest: true
 +    useDigest: false
      pullPolicy: "IfNotPresent"
@@ -196,7 +196,7 @@
 +    repository: "rancher/mirrored-cilium-cilium"
      tag: "CILIUM_IMAGE_VERSION"
 -    # cilium-digest
--    digest: "CILIUM_IMAGE_DIGEST"
+-    digest: CILIUM_IMAGE_DIGEST
 -    useDigest: true
 +    useDigest: false
      pullPolicy: "IfNotPresent"
@@ -224,7 +224,7 @@
 +      repository: "rancher/mirrored-cilium-clustermesh-apiserver"
        tag: "CILIUM_CLUSTERMESH_VERSION"
 -      # clustermesh-apiserver-digest
--      digest: "CILIUM_CLUSTERMESH_DIGEST"
+-      digest: CILIUM_CLUSTERMESH_DIGEST
 -      useDigest: true
 +      useDigest: false
        pullPolicy: "IfNotPresent"
@@ -238,7 +238,7 @@
 +portmapPlugin:
 +  image:
 +    repository: "rancher/hardened-cni-plugins"
-+    tag: "v1.8.0-build20251014"
++    tag: "v1.8.0-build20251110"
 +
 +global:
 +  systemDefaultRegistry: ""
