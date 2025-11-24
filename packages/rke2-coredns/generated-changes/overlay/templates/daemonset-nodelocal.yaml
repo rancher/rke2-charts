@@ -33,11 +33,11 @@ spec:
       dnsPolicy: Default  # Don't use cluster DNS.
       tolerations:
       - operator: Exists
-{{- if eq .Values.nodelocal.ipvs false }}
+{{- if and (eq .Values.nodelocal.ipvs false) (eq .Values.nodelocal.use_cilium_lrp false) }}
       initContainers:
       - name: wait-coredns
         image: {{ template "system_default_registry" . }}{{ .Values.nodelocal.initimage.repository }}:{{ .Values.nodelocal.initimage.tag }}
-        command: ['sh', '-c', "until nc -zv -u {{ template "clusterDNSServerIP" . }} 53; do echo waiting for dns service; sleep 2; done"]
+        command: ['sh', '-c', 'until nc -zv -u {{ template "clusterDNSServerIP" . }} 53; do echo waiting for dns service; sleep 2; done']
 {{- end }}
       containers:
       - name: node-cache
@@ -62,10 +62,10 @@ spec:
           privileged: true
         ports:
         - containerPort: 53
-          name: udp-53
+          name: dns
           protocol: UDP
         - containerPort: 53
-          name: tcp-53
+          name: dns-tcp
           protocol: TCP
         - containerPort: 9253
           name: metrics
