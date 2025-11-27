@@ -108,7 +108,7 @@ config:
     #logLevel: panic
     #logToStderr: true
     #cniVersion: 1.0.0
-    #cleanupConfigOnExit: true
+    cleanupConfigOnExit: true
     #additionalBinDir: /opt/multus/bin
   daemon_conf:
     "chrootDir": "/hostroot"
