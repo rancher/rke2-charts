@@ -3574,6 +3574,23 @@ entries:
     version: v1.0.001
   rke2-canal:
   - apiVersion: v1
+    appVersion: v3.31.2
+    created: "2025-11-28T14:49:12.56330861Z"
+    description: Install Canal Network Plugin.
+    digest: 59ab1918d358c30bc6f47c6924bde4d9da7fe7d749ac75f30c570e8cdc9ec70a
+    home: https://www.projectcalico.org/
+    keywords:
+    - canal
+    maintainers:
+    - email: charts@rancher.com
+      name: Rancher Labs
+    name: rke2-canal
+    sources:
+    - https://github.com/rancher/rke2-charts
+    urls:
+    - assets/rke2-canal/rke2-canal-v3.31.2-build2025111800.tgz
+    version: v3.31.2-build2025111800
+  - apiVersion: v1
     appVersion: v3.30.3
     created: "2025-10-16T08:32:48.715151914Z"
     description: Install Canal Network Plugin.
