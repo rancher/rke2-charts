@@ -9,7 +9,7 @@
    # -- defaults to appVersion. It's used for version checking, even prefixed with experimental- or latest-.
    # When a digest is required, `versionOverride` can be used to set the version.
 -  tag:  # @schema type:[string, null]
-+  tag:  "v3.5.4-build20251103"
++  tag: "v3.6.4-build20251208"
    # -- Traefik image pull policy
    pullPolicy: IfNotPresent
  
@@ -33,7 +33,7 @@
  
  core:  # @schema additionalProperties: false
    # -- Can be used to use globally v2 router syntax. Deprecated since v3.4 /!\.
-@@ -236,8 +236,8 @@
+@@ -246,8 +246,8 @@
    # -- Customize updateStrategy of Deployment or DaemonSet
    type: RollingUpdate
    rollingUpdate:
@@ -44,8 +44,8 @@
  
  readinessProbe:  # @schema additionalProperties: false
    # -- The number of consecutive failures allowed before considering the probe as failed.
-@@ -276,7 +276,7 @@
-     # -- Allows to return 503 when there is no endpoints available
+@@ -286,7 +286,7 @@
+     # -- Allows to return 503 when there are no endpoints available
      allowEmptyServices: true
      # -- When the parameter is set, only resources containing an annotation with the same value are processed. Otherwise, resources missing the annotation, having an empty value, or the value traefik are processed. It will also set required annotation on Dashboard and Healthcheck IngressRoute when enabled.
 -    ingressClass: ""
@@ -53,8 +53,8 @@
      # labelSelector: environment=production,method=traefik
      # -- Array of namespaces to watch. If left empty, Traefik watches all namespaces. . When using `rbac.namespaced`, it will watch helm release namespace and namespaces listed in this array.
      namespaces: []
-@@ -291,7 +291,7 @@
-     # -- Allows to return 503 when there is no endpoints available
+@@ -301,7 +301,7 @@
+     # -- Allows to return 503 when there are no endpoints available
      allowEmptyServices: true
      # -- When ingressClass is set, only Ingresses containing an annotation with the same value are processed. Otherwise, Ingresses missing the annotation, having an empty value, or the value traefik are processed.
 -    ingressClass:  # @schema type:[string, null]
@@ -62,7 +62,7 @@
      # labelSelector: environment=production,method=traefik
      # -- Array of namespaces to watch. If left empty, Traefik watches all namespaces. . When using `rbac.namespaced`, it will watch helm release namespace and namespaces listed in this array.
      namespaces: []
-@@ -614,6 +614,8 @@
+@@ -752,6 +752,8 @@
          insecureSkipVerify: false
  
  global:
@@ -71,7 +71,7 @@
    checkNewVersion: true
    # -- Please take time to consider whether or not you wish to share anonymous data with us
    # See https://doc.traefik.io/traefik/contributing/data-collection/
-@@ -674,7 +676,7 @@
+@@ -821,7 +823,7 @@
      ## -- Enable this entrypoint as a default entrypoint. When a service doesn't explicitly set an entrypoint it will only use this entrypoint.
      # asDefault: true
      port: 8000
@@ -80,7 +80,7 @@
      # containerPort: 8000
      expose:
        default: true
-@@ -715,7 +717,7 @@
+@@ -871,7 +873,7 @@
      ## -- Enable this entrypoint as a default entrypoint. When a service doesn't explicitly set an entrypoint it will only use this entrypoint.
      # asDefault: true
      port: 8443
@@ -89,7 +89,7 @@
      containerPort:  # @schema type:[integer, null]; minimum:0
      expose:
        default: true
-@@ -799,7 +801,7 @@
+@@ -973,7 +975,7 @@
    ## -- Single service is using `MixedProtocolLBService` feature gate.
    ## -- When set to false, it will create two Service, one for TCP and one for UDP.
    single: true
@@ -98,7 +98,7 @@
    # -- Additional annotations applied to both TCP and UDP services (e.g. for cloud provider specific config)
    annotations: {}
    # -- Additional annotations for TCP service only
-@@ -822,7 +824,7 @@
+@@ -996,7 +998,7 @@
    externalIPs: []
    # - 1.2.3.4
    ## One of SingleStack, PreferDualStack, or RequireDualStack.
@@ -107,7 +107,7 @@
    ## List of IP families (e.g. IPv4 and/or IPv6).
    ## ref: https://kubernetes.io/docs/concepts/services-networking/dual-stack/#services
    # ipFamilies:
-@@ -1162,3 +1164,4 @@
+@@ -1346,3 +1348,4 @@
      hub:
        image: traefik-hub
        tag: latest
