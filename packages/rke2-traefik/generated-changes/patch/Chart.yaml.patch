@@ -1,18 +1,17 @@
 --- charts-original/Chart.yaml
 +++ charts/Chart.yaml
-@@ -1,10 +1,5 @@
+@@ -1,9 +1,5 @@
  annotations:
--  artifacthub.io/changes: |
--    - "fix(observability): tracer creation warning with default security context"
--    - "fix(CRDs): ✨ update for Traefik Proxy v3.5.2"
--    - "feat(deps): update traefik docker tag to v3.5.3 + add plugin hash option"
--    - "feat(CRDs): update for Traefik to v3.5.3"
--    - "chore(release): :rocket: publish traefik 37.1.2 and crds 1.11.1"
+-  artifacthub.io/changes: "- \"feat: allow `publishedService` to be set without service
+-    being enabled\"\n- \"feat: :rocket: add support of Nginx provider\"\n- \"feat(plugins):
+-    support ConfigMap inline local plugins alongside hostPath\"\n- \"feat(deps): update
+-    traefik docker tag to v3.6.2\"\n- \"feat(deps): update traefik docker tag to v3.6.1\"\n-
+-    \"chore(release): \U0001F680 publish traefik 37.4.0\"\n"
 +  fleet.cattle.io/bundle-id: rke2
  apiVersion: v2
- appVersion: v3.5.3
+ appVersion: v3.6.2
  description: A Traefik based Kubernetes ingress controller
-@@ -21,7 +16,7 @@
+@@ -20,7 +16,7 @@
  - email: remi.buisson@traefik.io
    name: darkweaver87
  - name: jnoordsij
