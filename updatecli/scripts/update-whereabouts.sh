@@ -19,18 +19,18 @@ if [ -n "$WHEREABOUTS_VERSION" ]; then
 			sed -i "s/version: .*/version: $app_version/g" packages/rke2-whereabouts/charts/Chart.yaml
 			sed -i "s/appVersion: .*/appVersion: $app_version/g" packages/rke2-whereabouts/charts/Chart.yaml
 			sed -i "s/  tag: $current_whereabouts_version/  tag: $WHEREABOUTS_VERSION/g" packages/rke2-whereabouts/charts/values.yaml
-			sed -i "s/packageVersion:.*/packageVersion: 00 /g" packages/rke2-whereabouts/package.yaml
+			sed -i "s/packageVersion:.*/packageVersion: 00/g" packages/rke2-whereabouts/package.yaml
 			multus_package_version=$(yq '.packageVersion' packages/rke2-multus/package.yaml)
 			multus_new_version=$(printf "%02d" $(($multus_package_version + 1)))
-			sed -i "s/packageVersion:.*/packageVersion: $multus_new_version /g" packages/rke2-multus/package.yaml
+			sed -i "s/packageVersion:.*/packageVersion: $multus_new_version/g" packages/rke2-multus/package.yaml
 		else
 			sed -i "s/  tag: $current_whereabouts_version/  tag: $WHEREABOUTS_VERSION/g" packages/rke2-whereabouts/charts/values.yaml
 			package_version=$(yq '.packageVersion' packages/rke2-whereabouts/package.yaml)
 			new_version=$(printf "%02d" $(($package_version + 1)))
-			sed -i "s/packageVersion:.*/packageVersion: $new_version /g" packages/rke2-whereabouts/package.yaml
+			sed -i "s/packageVersion:.*/packageVersion: $new_version/g" packages/rke2-whereabouts/package.yaml
 			multus_package_version=$(yq '.packageVersion' packages/rke2-multus/package.yaml)
 			multus_new_version=$(printf "%02d" $(($multus_package_version + 1)))
-			sed -i "s/packageVersion:.*/packageVersion: $multus_new_version /g" packages/rke2-multus/package.yaml
+			sed -i "s/packageVersion:.*/packageVersion: $multus_new_version/g" packages/rke2-multus/package.yaml
 		fi
 	fi
 fi
