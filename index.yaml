@@ -14016,6 +14016,34 @@ entries:
           description: Bump to CoreDNS 1.13.1
     apiVersion: v2
     appVersion: 1.13.1
+    created: "2025-12-05T03:13:23.240038775Z"
+    description: CoreDNS is a DNS server that chains plugins and provides Kubernetes
+      DNS Services
+    digest: 7ac293563d0ae37f2caf1b74263e3a22734e574ecb0e1a8e7631b7869f55d298
+    home: https://coredns.io
+    icon: https://coredns.io/images/CoreDNS_Colour_Horizontal.png
+    keywords:
+    - coredns
+    - dns
+    - kubedns
+    maintainers:
+    - name: mrueg
+    - name: haad
+    - name: hagaibarel
+    - name: shubham-cmyk
+    name: rke2-coredns
+    sources:
+    - https://github.com/coredns/coredns
+    type: application
+    urls:
+    - assets/rke2-coredns/rke2-coredns-1.45.003.tgz
+    version: 1.45.003
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: changed
+          description: Bump to CoreDNS 1.13.1
+    apiVersion: v2
+    appVersion: 1.13.1
     created: "2025-11-24T15:46:04.453410804Z"
     description: CoreDNS is a DNS server that chains plugins and provides Kubernetes
       DNS Services
@@ -20175,6 +20203,42 @@ entries:
     - assets/rke2-kube-proxy/rke2-kube-proxy-v1.18.4.tgz
     version: v1.18.4
   rke2-metrics-server:
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: added
+          description: "Add chart options to secure the connection between Metrics Server and the Kubernetes API Server."
+        - kind: added
+          description: "Add `unhealthyPodEvictionPolicy` to the Metrics Server PDB as a user enabled feature."
+        - kind: changed
+          description: "Update the _Addon Resizer_ OCI image to [`1.8.23`](https://github.com/kubernetes/autoscaler/releases/tag/addon-resizer-1.8.23)."
+        - kind: changed
+          description: "Update the _Metrics Server_ OCI image to [`0.8.0`](https://github.com/kubernetes-sigs/metrics-server/releases/tag/v0.8.0)."
+    apiVersion: v2
+    appVersion: 0.8.0
+    created: "2025-12-05T03:13:23.514187862Z"
+    description: Metrics Server is a scalable, efficient source of container resource
+      metrics for Kubernetes built-in autoscaling pipelines.
+    digest: 0c8ed163da5ce3e59e8dee9ad31112ca89487372a7a803ccc62f7b303a13315e
+    home: https://github.com/kubernetes-sigs/metrics-server
+    icon: https://avatars.githubusercontent.com/u/36015203?s=400&v=4
+    keywords:
+    - kubernetes
+    - metrics-server
+    - metrics
+    maintainers:
+    - name: stevehipwell
+      url: https://github.com/stevehipwell
+    - name: krmichel
+      url: https://github.com/krmichel
+    - name: endrec
+      url: https://github.com/endrec
+    name: rke2-metrics-server
+    sources:
+    - https://github.com/kubernetes-sigs/metrics-server
+    type: application
+    urls:
+    - assets/rke2-metrics-server/rke2-metrics-server-3.13.004.tgz
+    version: 3.13.004
   - annotations:
       artifacthub.io/changes: |
         - kind: added
