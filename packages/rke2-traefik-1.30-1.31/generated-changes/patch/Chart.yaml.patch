@@ -7,7 +7,7 @@
 +  fleet.cattle.io/bundle-id: rke2
  apiVersion: v2
 -appVersion: v2.11.2
-+appVersion: v2.11.30
++appVersion: v2.11.32
  description: A Traefik based Kubernetes ingress controller
  home: https://traefik.io/
  icon: https://raw.githubusercontent.com/traefik/traefik/v2.3/docs/content/assets/img/traefik.logo.png
