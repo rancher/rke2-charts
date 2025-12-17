@@ -31,10 +31,12 @@ if [ -n "$MULTUS_VERSION" ]; then
 			yq -i ".version = \"v\" + strenv(app_version)" packages/rke2-multus/charts/Chart.yaml
 			yq -i ".appVersion = strenv(app_version)" packages/rke2-multus/charts/Chart.yaml
 			yq -i ".image.tag = strenv(MULTUS_VERSION)" packages/rke2-multus/charts/values.yaml
+			yq -i ".thickPlugin.image.tag = strenv(MULTUS_VERSION)" packages/rke2-multus/charts/values.yaml
 			yq -i ".packageVersion = \"00\"" packages/rke2-multus/package.yaml
 		else
 			export MULTUS_VERSION
 			yq -i ".image.tag = strenv(MULTUS_VERSION)" packages/rke2-multus/charts/values.yaml
+			yq -i ".thickPlugin.image.tag = strenv(MULTUS_VERSION)" packages/rke2-multus/charts/values.yaml
 			if [ "$new_package" = false ]; then
 				package_version=$(yq '.packageVersion' packages/rke2-multus/package.yaml)
 				new_version=$(printf "%02d" $((10#$package_version + 1)))
