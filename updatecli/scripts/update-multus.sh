@@ -15,8 +15,7 @@ if [ -n "$CNI_PLUGINS_VERSION" ]; then
 		yq -i ".cniplugins.image.tag = strenv(CNI_PLUGINS_VERSION)" packages/rke2-multus/charts/values.yaml
 		package_version=$(yq '.packageVersion' packages/rke2-multus/package.yaml)
 		new_version=$(printf "%02d" $(($package_version + 1)))
-		export new_version
-		yq -i ".packageVersion = strenv(new_version)" packages/rke2-multus/package.yaml
+		sed -i "s/packageVersion:.*/packageVersion: $new_version/g" packages/rke2-multus/package.yaml
 		new_package=true
 	fi
 fi
@@ -33,7 +32,7 @@ if [ -n "$MULTUS_VERSION" ]; then
 			yq -i ".image.tag = strenv(MULTUS_VERSION)" packages/rke2-multus/charts/values.yaml
 			yq -i ".thickPlugin.image.tag = strenv(MULTUS_VERSION)" packages/rke2-multus/charts/values.yaml
 			yq -i ".dynamicNetworksController.image.tag = strenv(MULTUS_VERSION)" packages/rke2-multus/charts/values.yaml
-			yq -i ".packageVersion = \"00\"" packages/rke2-multus/package.yaml
+			sed -i "s/packageVersion:.*/packageVersion: 00/g" packages/rke2-multus/package.yaml
 		else
 			export MULTUS_VERSION
 			yq -i ".image.tag = strenv(MULTUS_VERSION)" packages/rke2-multus/charts/values.yaml
@@ -42,8 +41,7 @@ if [ -n "$MULTUS_VERSION" ]; then
 			if [ "$new_package" = false ]; then
 				package_version=$(yq '.packageVersion' packages/rke2-multus/package.yaml)
 				new_version=$(printf "%02d" $((10#$package_version + 1)))
-				export new_version
-				yq -i ".packageVersion = strenv(new_version)" packages/rke2-multus/package.yaml
+				sed -i "s/packageVersion:.*/packageVersion: $new_version/g" packages/rke2-multus/package.yaml
 			fi
 		fi
 	fi
