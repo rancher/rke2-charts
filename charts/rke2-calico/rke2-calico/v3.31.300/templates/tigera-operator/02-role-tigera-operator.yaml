@@ -1,0 +1,562 @@
+# Permissions required when running the operator for a Calico cluster.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: tigera-operator
+  labels:
+    {{- include "tigera-operator.labels" (dict "context" .) | nindent 4 }}
+rules:
+  # The tigera/operator installs CustomResourceDefinitions necessary for itself
+  # and Calico more broadly to function.
+  - apiGroups:
+      - apiextensions.k8s.io
+    resources:
+      - customresourcedefinitions
+    verbs:
+      - get
+      - list
+      - watch
+      - create
+  # We only allow update access to our own CRDs.
+  - apiGroups:
+      - apiextensions.k8s.io
+    resources:
+      - customresourcedefinitions
+    verbs:
+      - update
+    resourceNames:
+      - apiservers.operator.tigera.io
+      - gatewayapis.operator.tigera.io
+      - imagesets.operator.tigera.io
+      - installations.operator.tigera.io
+      - tigerastatuses.operator.tigera.io
+      - bgpconfigurations.crd.projectcalico.org
+      - bgpfilters.crd.projectcalico.org
+      - bgppeers.crd.projectcalico.org
+      - blockaffinities.crd.projectcalico.org
+      - caliconodestatuses.crd.projectcalico.org
+      - clusterinformations.crd.projectcalico.org
+      - felixconfigurations.crd.projectcalico.org
+      - globalnetworkpolicies.crd.projectcalico.org
+      - stagedglobalnetworkpolicies.crd.projectcalico.org
+      - globalnetworksets.crd.projectcalico.org
+      - hostendpoints.crd.projectcalico.org
+      - ipamblocks.crd.projectcalico.org
+      - ipamconfigs.crd.projectcalico.org
+      - ipamhandles.crd.projectcalico.org
+      - ippools.crd.projectcalico.org
+      - ipreservations.crd.projectcalico.org
+      - kubecontrollersconfigurations.crd.projectcalico.org
+      - networkpolicies.crd.projectcalico.org
+      - stagednetworkpolicies.crd.projectcalico.org
+      - stagedkubernetesnetworkpolicies.crd.projectcalico.org
+      - networksets.crd.projectcalico.org
+      - tiers.crd.projectcalico.org
+      - whiskers.operator.tigera.io
+      - goldmanes.operator.tigera.io
+      - managementclusterconnections.operator.tigera.io
+  # We need update and delete access for ANP/BANP CRDs to set owner refs when assuming control of pre-existing CRDs, for example on OCP.
+  - apiGroups:
+      - apiextensions.k8s.io
+    resources:
+      - customresourcedefinitions
+    verbs:
+      - update
+      - delete
+    resourceNames:
+      - adminnetworkpolicies.policy.networking.k8s.io
+      - baselineadminnetworkpolicies.policy.networking.k8s.io
+  - apiGroups:
+      - ""
+    resources:
+      - namespaces
+      - pods
+      - podtemplates
+      - services
+      - endpoints
+      - events
+      - configmaps
+      - serviceaccounts
+    verbs:
+      - create
+      - get
+      - list
+      - update
+      - delete
+      - watch
+  - apiGroups:
+      - ""
+    resources:
+      - resourcequotas
+      - secrets
+    verbs:
+      - list
+      - get
+      - watch
+  - apiGroups:
+      - ""
+    resources:
+      - resourcequotas
+    verbs:
+      - create
+      - get
+      - list
+      - update
+      - delete
+      - watch
+    resourceNames:
+      - calico-critical-pods
+      - tigera-critical-pods
+  - apiGroups:
+      - ""
+    resources:
+      - nodes
+    verbs:
+      # Need to update node labels when migrating nodes.
+      - get
+      - patch
+      - list
+      # We need this for Typha autoscaling
+      - watch
+  - apiGroups:
+      - authentication.k8s.io
+    resources:
+      # The operator creates a token review to learn its identity.
+      - tokenreviews
+    verbs:
+      - create
+  - apiGroups:
+      - rbac.authorization.k8s.io
+    resources:
+      - clusterroles
+      - clusterrolebindings
+      - rolebindings
+      - roles
+    verbs:
+      - create
+      - get
+      - list
+      - update
+      - delete
+      - watch
+      - bind
+      - escalate
+  - apiGroups:
+      - apps
+    resources:
+      - deployments
+      - daemonsets
+      - statefulsets
+    verbs:
+      - create
+      - get
+      - list
+      - patch
+      - update
+      - delete
+      - watch
+  - apiGroups:
+      - apps
+    resourceNames:
+      - tigera-operator
+    resources:
+      - deployments/finalizers
+    verbs:
+      - update
+  # The operator needs read and update permissions on the APIs that it controls.
+  - apiGroups:
+      - operator.tigera.io
+    resources:
+      # Note: any resources used by the operator within an OwnerReference for resources
+      # it creates requires permissions to <resource>/finalizers.
+      - apiservers
+      - apiservers/finalizers
+      - apiservers/status
+      - gatewayapis
+      - gatewayapis/finalizers
+      - goldmanes
+      - goldmanes/finalizers
+      - goldmanes/status
+      - imagesets
+      - installations
+      - installations/finalizers
+      - installations/status
+      - managementclusterconnections
+      - managementclusterconnections/finalizers
+      - managementclusterconnections/status
+      - tigerastatuses
+      - tigerastatuses/status
+      - tigerastatuses/finalizers
+      - whiskers
+      - whiskers/finalizers
+      - whiskers/status
+    verbs:
+      - get
+      - list
+      - update
+      - patch
+      - watch
+  # In addition to the above, the operator creates and deletes TigeraStatus resources.
+  - apiGroups:
+      - operator.tigera.io
+    resources:
+      - tigerastatuses
+    verbs:
+      - create
+      - delete
+  # In addition to the above, the operator should have the ability to delete their own resources during uninstallation.
+  - apiGroups:
+      - operator.tigera.io
+    resources:
+      - installations
+      - apiservers
+      - whiskers
+      - goldmanes
+    verbs:
+      - delete
+  - apiGroups:
+      - networking.k8s.io
+    resources:
+      - networkpolicies
+    verbs:
+      - create
+      - update
+      - delete
+      - get
+      - list
+      - watch
+  - apiGroups:
+      - crd.projectcalico.org
+    resources:
+      - felixconfigurations
+      - ippools
+    verbs:
+      - create
+      - patch
+      - list
+      - get
+      - watch
+  - apiGroups:
+      - crd.projectcalico.org
+    resources:
+      - kubecontrollersconfigurations
+      - bgpconfigurations
+      - clusterinformations
+    verbs:
+      - get
+      - list
+      - watch
+  - apiGroups:
+      - projectcalico.org
+    resources:
+      - ippools
+    verbs:
+      - create
+      - update
+      - delete
+      - patch
+      - get
+      - list
+      - watch
+  - apiGroups:
+      - projectcalico.org
+    resources:
+      - ipamconfigurations
+      - clusterinformations
+    verbs:
+      - get
+      - list
+      - watch
+  - apiGroups:
+      - scheduling.k8s.io
+    resources:
+      - priorityclasses
+    verbs:
+      - create
+      - get
+      - list
+      - update
+      - delete
+      - watch
+  - apiGroups:
+      - policy
+    resources:
+      - poddisruptionbudgets
+    verbs:
+      - create
+      - get
+      - list
+      - update
+      - delete
+      - watch
+  - apiGroups:
+      - apiregistration.k8s.io
+    resources:
+      - apiservices
+    verbs:
+      - list
+      - watch
+      - create
+      - update
+  - apiGroups:
+      - discovery.k8s.io
+    resources:
+      - endpointslices
+    verbs:
+      - get
+      - list
+      - watch
+  - apiGroups:
+      - admissionregistration.k8s.io
+    resources:
+      - mutatingwebhookconfigurations
+    verbs:
+      - create
+      - delete
+      - get
+      - list
+      - watch
+  - apiGroups:
+      - admissionregistration.k8s.io
+    resources:
+      - mutatingwebhookconfigurations
+    resourceNames:
+      - envoy-gateway-topology-injector.tigera-gateway
+    verbs:
+      - update
+  # Needed for operator lock
+  - apiGroups:
+      - coordination.k8s.io
+    resources:
+      - leases
+    verbs:
+      - create
+      - get
+      - list
+      - update
+      - delete
+      - watch
+  - apiGroups:
+      - storage.k8s.io
+    resources:
+      - csidrivers
+    verbs:
+      - list
+      - watch
+      - update
+      - get
+      - create
+      - delete
+  # Add the permissions to monitor the status of certificate signing requests when certificate management is enabled.
+  - apiGroups:
+      - certificates.k8s.io
+    resources:
+      - certificatesigningrequests
+    verbs:
+      - list
+      - watch
+{{- if eq (lower .Values.installation.kubernetesProvider) "openshift" }}
+  # When running in OpenShift, we need to update networking config.
+  - apiGroups:
+      - config.openshift.io
+    resources:
+      - networks/status
+    verbs:
+      - get
+      - list
+      - update
+  - apiGroups:
+      - config.openshift.io
+    resources:
+      - networks
+      - infrastructures
+    verbs:
+      - get
+      - list
+      - patch
+      - watch
+  # On OpenShift, we need to modify SCCs.
+  - apiGroups:
+      - security.openshift.io
+    resources:
+      - securitycontextconstraints
+    verbs:
+      - create
+      - get
+      - list
+      - update
+      - delete
+      - watch
+  # The following rule is only for operator certification purposes.
+  # The operator normally runs in a namespace with openshift.io/run-level=0 which bypasses SCC.
+  # However in certification tests, the operator is run in a normal namespace so this
+  # rule is needed for host networking and hostPath volume access.
+  - apiGroups:
+      - security.openshift.io
+    resources:
+      - securitycontextconstraints
+    resourceNames:
+      - hostaccess
+    verbs:
+      - use
+  # Need these permissions for the calicoctl init container.
+  - apiGroups:
+      - crd.projectcalico.org
+    resources:
+      - bgpconfigurations
+      - bgppeers
+      - felixconfigurations
+      - kubecontrollersconfigurations
+      - globalnetworkpolicies
+      - globalnetworksets
+      - hostendpoints
+      - ippools
+      - networkpolicies
+      - networksets
+    verbs:
+      - create
+  - apiGroups:
+      - crd.projectcalico.org
+    resources:
+      - ipamblocks
+    verbs:
+      - list
+  # For AWS security group setup.
+  - apiGroups:
+      - batch
+    resources:
+      - jobs
+      - cronjobs
+    verbs:
+      - create
+      - update
+      - list
+      - watch
+      - delete
+{{- else }}
+  # Add the appropriate pod security policy permissions
+  - apiGroups:
+      - policy
+    resources:
+      - podsecuritypolicies
+    resourceNames:
+      - tigera-operator
+    verbs:
+      - use
+  - apiGroups:
+      - policy
+    resources:
+      - podsecuritypolicies
+    verbs:
+      - get
+      - list
+      - watch
+      - create
+      - update
+      - delete
+{{- end }}
+  # For tiered network policy actions, tigera-apiserver requires that we authorize the operator for the tier.networkpolicies and tier.globalnetworkpolicies pseudo-kinds.
+  - apiGroups:
+      - projectcalico.org
+    resourceNames:
+      - allow-tigera.*
+    resources:
+      - tier.networkpolicies
+      - tier.globalnetworkpolicies
+    verbs:
+      - list
+      - watch
+      - get
+      - create
+      - update
+      - delete
+  # For tiered network policy actions, tigera-apiserver requires get authorization on the associated tier.
+  - apiGroups:
+      - projectcalico.org
+    resourceNames:
+      - allow-tigera
+    resources:
+      - tiers
+    verbs:
+      - get
+      - delete
+      - update
+  # Separated from the above rule since resourceNames does not support the create verb, and requires a field selector for list/watch verbs.
+  - apiGroups:
+      - projectcalico.org
+    resources:
+      - tiers
+    verbs:
+      - create
+      - list
+      - watch
+  # Additions for Gateway API support.
+  # 1. The operator needs to reconcile gateway.networking.k8s.io and gateway.envoyproxy.io CRDs.
+  - apiGroups:
+      - apiextensions.k8s.io
+    resources:
+      - customresourcedefinitions
+    verbs:
+      - update
+    resourceNames:
+      - backendlbpolicies.gateway.networking.k8s.io
+      - backendtlspolicies.gateway.networking.k8s.io
+      - gatewayclasses.gateway.networking.k8s.io
+      - gateways.gateway.networking.k8s.io
+      - grpcroutes.gateway.networking.k8s.io
+      - httproutes.gateway.networking.k8s.io
+      - referencegrants.gateway.networking.k8s.io
+      - tcproutes.gateway.networking.k8s.io
+      - tlsroutes.gateway.networking.k8s.io
+      - udproutes.gateway.networking.k8s.io
+      - xbackendtrafficpolicies.gateway.networking.x-k8s.io
+      - xlistenersets.gateway.networking.x-k8s.io
+      - backends.gateway.envoyproxy.io
+      - backendtrafficpolicies.gateway.envoyproxy.io
+      - clienttrafficpolicies.gateway.envoyproxy.io
+      - envoyextensionpolicies.gateway.envoyproxy.io
+      - envoypatchpolicies.gateway.envoyproxy.io
+      - envoyproxies.gateway.envoyproxy.io
+      - httproutefilters.gateway.envoyproxy.io
+      - securitypolicies.gateway.envoyproxy.io
+  # 2. GatewayClasses and EnvoyProxy configurations.
+  - apiGroups:
+      - gateway.networking.k8s.io
+    resources:
+      - gatewayclasses
+    verbs:
+      - create
+      - update
+      - delete
+      - list
+      - get
+      - watch
+  - apiGroups:
+      - gateway.envoyproxy.io
+    resources:
+      - envoyproxies
+    verbs:
+      - create
+      - update
+      - delete
+      - list
+      - get
+      - watch
+  # 3. For Gateway API the operator needs to be able to create and reconcile a certificate
+  # generation job.
+  - apiGroups:
+      - batch
+    resources:
+      - jobs
+    verbs:
+      - create
+      - list
+      - watch
+  - apiGroups:
+      - batch
+    resources:
+      - jobs
+    verbs:
+      - update
+    resourceNames:
+      - tigera-gateway-api-gateway-helm-certgen
