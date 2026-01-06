@@ -1,0 +1,181 @@
+# Copyright 2020 K8s Network Plumbing Group
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# Default values for multus.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+#replicaCount: 1
+
+image:
+  repository: rancher/hardened-multus-cni
+  tag: v4.2.3-build20260106
+  pullPolicy: IfNotPresent
+
+#imagePullSecrets: []
+#nameOverride: ""
+#fullnameOverride: ""
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  #create: true
+  # Annotations to add to the service account
+  #annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: multus
+
+pod:
+  resources:
+    enabled: false
+    multus:
+      requests:
+        memory: "128Mi"
+        cpu: "250m"
+      limits:
+        memory: "1024Mi"
+        cpu: "2000m"
+    dynamicNetworksController:
+      requests:
+        cpu: "100m"
+        memory: "50Mi"
+
+#podSecurityContext: {}
+  # fsGroup: 2000
+
+#securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+#service:
+  #type: ClusterIP
+  #port: 80
+
+#ingress:
+  #enabled: false
+  #annotations: {}
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+  #hosts:
+    #- host: chart-example.local
+    #  paths: []
+  #tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
+
+labels:
+  nodeSelector:
+    kubernetes.io/os: linux
+
+# Multus configuration
+# For more details, see https://github.com/k8snetworkplumbingwg/multus-cni/blob/master/docs/how-to-use.md#entrypoint-script-parameters
+config:
+  cni_conf:
+    confDir: /etc/cni/net.d #path on the host, not inside the container
+    binDir: /opt/cni/bin # path on the host, not inside the container
+    #namespaceIsolation: false
+    #globalNamespaces: default,foo,bar
+    #skipConfigWatch: false
+    #skipMultusBinaryCopy: false
+    #readinessIndicatorFile: ""
+    multusConfFile: auto #or specify a file to be copied on each node
+    #multusBinFile: /usr/src/multus-cni/bin/multus
+    #multusCniConfDir: /host/etc/cni/multus/net.d
+    # The following options can be used only when multusConfFile=auto
+    # multusAutoconfigDir is mandatory when multusConfFile=auto 
+    multusAutoconfigDir: /etc/cni/net.d #path on the host, not inside the container
+    kubeconfig: /etc/cni/net.d/multus.d/multus.kubeconfig
+    #masterCniFilename:
+    #overrideNetworkName: 
+    #renameConfFile: 
+    #logFile: /var/log/multus.log
+    #logLevel: panic
+    #logToStderr: true
+    #cniVersion: 1.0.0
+    cleanupConfigOnExit: true
+    #additionalBinDir: /opt/multus/bin
+  daemon_conf:
+    "chrootDir": "/hostroot"
+    "cniVersion": "0.3.1"
+    "logLevel": "verbose"
+    "logToStderr": true
+    "cniConfigDir": "/host/etc/cni/net.d"
+    "multusAutoconfigDir": "/host/etc/cni/net.d"
+    "multusConfigFile": "auto"
+    "socketDir": "/host/run/multus/"
+
+manifests:
+  serviceAccount: true
+  clusterRole: true
+  clusterRoleBinding: true
+  configMap: true
+  daemonSet: true
+  customResourceDefinition: true
+  dhcpDaemonSet: false
+
+tolerations:
+- operator: Exists 
+  effect: NoSchedule 
+- operator: Exists 
+  effect: NoExecute 
+
+#affinity: {}
+
+
+## RANCHER ADDDED INFO ##
+cniplugins:
+  image:
+    repository: rancher/hardened-cni-plugins
+    tag: v1.9.0-build20260106
+
+  # skipcnis is a comma separated list of cni binaries to skip from
+  # installing.
+  skipcnis: flannel
+
+dhcpDaemonSet:
+  image:
+    repository: rancher/mirrored-library-busybox
+    tag: "1.36.1"
+
+global:
+  systemDefaultRegistry: ""
+
+rke2-whereabouts:
+  enabled: false
+  
+# When using the thick plugin, manifests.configMap MUST be set to true
+thickPlugin:
+  enabled: false
+  image:
+    repository: rancher/hardened-multus-thick
+    tag: v4.2.3-build20260106
+    pullPolicy: IfNotPresent
+
+# This deploys the dynamic networks controller add-on.
+# It can only be used with thickPlugin.enabled=true.
+# See https://github.com/k8snetworkplumbingwg/multus-dynamic-networks-controller/ for more details
+dynamicNetworksController:
+  enabled: false
+  image:
+    repository: rancher/hardened-multus-dynamic-networks-controller
+    tag: v0.3.7-build20251209
+    pullPolicy: IfNotPresent
+  sockets:
+    containerd: /run/k3s/containerd/containerd.sock
+    multus: /run/multus/multus.sock
