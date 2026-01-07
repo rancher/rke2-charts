@@ -17000,6 +17000,33 @@ entries:
   rke2-ingress-nginx:
   - annotations:
       artifacthub.io/changes: |
+        - Update Ingress-Nginx version controller-v1.14.1
+      artifacthub.io/prerelease: "false"
+    apiVersion: v2
+    appVersion: 1.14.1
+    created: "2026-01-07T19:52:10.464188147Z"
+    description: Ingress controller for Kubernetes using NGINX as a reverse proxy
+      and load balancer
+    digest: 189dbf5074e4fc38d53ea9c424b5fe454dec36fedeb25b33ca8b10c4a732efc6
+    home: https://github.com/kubernetes/ingress-nginx
+    icon: https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Nginx_logo.svg/500px-Nginx_logo.svg.png
+    keywords:
+    - ingress
+    - nginx
+    kubeVersion: '>=1.21.0-0'
+    maintainers:
+    - name: cpanato
+    - name: Gacko
+    - name: strongjz
+    - name: tao12345666333
+    name: rke2-ingress-nginx
+    sources:
+    - https://github.com/kubernetes/ingress-nginx
+    urls:
+    - assets/rke2-ingress-nginx/rke2-ingress-nginx-4.14.100.tgz
+    version: 4.14.100
+  - annotations:
+      artifacthub.io/changes: |
         - Update Ingress-Nginx version controller-v1.13.5
       artifacthub.io/prerelease: "false"
     apiVersion: v2
@@ -23557,6 +23584,37 @@ entries:
     version: v1.0.001
   rke2-traefik:
   - annotations:
+      artifacthub.io/changes: "- \"fix(ports): \U0001F41B add missing `http.maxHeaderBytes`
+        option\"\n- \"fix(ports): \U0001F41B `http.encodedCharacters` on custom entrypoints\"\n-
+        \"chore(release): \U0001F680 publish traefik 38.0.1\"\n"
+      fleet.cattle.io/bundle-id: rke2
+    apiVersion: v2
+    appVersion: v3.6.5
+    created: "2026-01-07T19:52:10.688659187Z"
+    description: A Traefik based Kubernetes ingress controller
+    digest: 4d7d537f8a1734d9314b4cbfff9852e930f70b2f25ce4780f4dfa1a9bf0139d2
+    home: https://traefik.io/
+    icon: https://raw.githubusercontent.com/traefik/traefik/master/docs/content/assets/img/traefik.logo.png
+    keywords:
+    - traefik
+    - ingress
+    - networking
+    kubeVersion: '>=1.22.0-0'
+    maintainers:
+    - email: michel.loiseleur@traefik.io
+      name: mloiseleur
+    - email: remi.buisson@traefik.io
+      name: darkweaver87
+    - name: jnoordsij
+    name: rke2-traefik
+    sources:
+    - https://github.com/traefik/traefik-helm-chart
+    - https://github.com/traefik/traefik
+    type: application
+    urls:
+    - assets/rke2-traefik/rke2-traefik-38.0.101.tgz
+    version: 38.0.101
+  - annotations:
       fleet.cattle.io/bundle-id: rke2
     apiVersion: v2
     appVersion: v3.6.2
@@ -24038,6 +24096,18 @@ entries:
     - assets/rke2-traefik/rke2-traefik-25.0.000.tgz
     version: 25.0.000
   rke2-traefik-crd:
+  - annotations:
+      fleet.cattle.io/bundle-id: rke2
+    apiVersion: v1
+    appVersion: v3.6.5
+    created: "2026-01-07T19:52:10.719251845Z"
+    description: Installs the CRDs for rke2-traefik
+    digest: db9a18bfda8cd70fa000fff13752839f6d15d56644632c8981741e68887fe202
+    name: rke2-traefik-crd
+    type: application
+    urls:
+    - assets/rke2-traefik/rke2-traefik-crd-38.0.101.tgz
+    version: 38.0.101
   - annotations:
       fleet.cattle.io/bundle-id: rke2
     apiVersion: v1
