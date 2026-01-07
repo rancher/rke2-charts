@@ -19,11 +19,11 @@
      ## for backwards compatibility consider setting the full image url via the repository value below
      ## use *either* current default registry/image or repository format or installing chart by providing the values.yaml will fail
      ## repository:
--    tag: "v1.13.5"
--    digest: sha256:5b346855be6752fa2a40f91983fa35a0c004b41493f36be6068a3d4350e69db8
--    digestChroot: sha256:eb6665ca10761ac2b5d1b94959b5cf77e2f6d2bb54178fca16c194933b44c770
+-    tag: "v1.14.1"
+-    digest: sha256:f95a79b85fb93ac3de752c71a5c27d5ceae10a18b61904dec224c1c6a4581e47
+-    digestChroot: sha256:29840e06768457b82ef0a9f70bdde03b3b9c42e84a9d78dd6f179326848c1a88
 -    pullPolicy: IfNotPresent
-+    tag: "v1.13.5-hardened2"
++    tag: "v1.14.1-hardened1"
      runAsNonRoot: true
      # -- This value must not be changed using the official image.
      # uid=101(www-data) gid=82(www-data) groups=82(www-data)
@@ -72,7 +72,7 @@
    # -- Annotations to be added to the controller Deployment or DaemonSet
    ##
    annotations: {}
-@@ -484,7 +484,7 @@
+@@ -491,7 +491,7 @@
      configMapKey: ""
    service:
      # -- Enable controller services or not. This does not influence the creation of either the admission webhook or the metrics service.
@@ -81,7 +81,7 @@
      external:
        # -- Enable the external controller service or not. Useful for internal-only deployments.
        enabled: true
-@@ -772,6 +772,7 @@
+@@ -785,6 +785,7 @@
        loadBalancerSourceRanges: []
        servicePort: 443
        type: ClusterIP
@@ -89,7 +89,7 @@
      createSecretJob:
        name: create
        # -- Deadline in seconds for the job to complete. Must be greater than 0 to enforce. If unset or 0, no deadline is enforced.
-@@ -816,12 +817,11 @@
+@@ -849,12 +850,11 @@
        enabled: true
        image:
          # registry: registry.k8s.io
@@ -103,7 +103,7 @@
          pullPolicy: IfNotPresent
        # -- Provide a priority class name to the webhook patching job
        ##
-@@ -993,11 +993,11 @@
+@@ -1028,11 +1028,11 @@
    name: defaultbackend
    image:
      # registry: registry.k8s.io
