@@ -1,17 +1,14 @@
 --- charts-original/Chart.yaml
 +++ charts/Chart.yaml
-@@ -1,9 +1,5 @@
- annotations:
--  artifacthub.io/changes: "- \"feat: allow `publishedService` to be set without service
--    being enabled\"\n- \"feat: :rocket: add support of Nginx provider\"\n- \"feat(plugins):
--    support ConfigMap inline local plugins alongside hostPath\"\n- \"feat(deps): update
--    traefik docker tag to v3.6.2\"\n- \"feat(deps): update traefik docker tag to v3.6.1\"\n-
--    \"chore(release): \U0001F680 publish traefik 37.4.0\"\n"
+@@ -2,6 +2,7 @@
+   artifacthub.io/changes: "- \"fix(ports): \U0001F41B add missing `http.maxHeaderBytes`
+     option\"\n- \"fix(ports): \U0001F41B `http.encodedCharacters` on custom entrypoints\"\n-
+     \"chore(release): \U0001F680 publish traefik 38.0.1\"\n"
 +  fleet.cattle.io/bundle-id: rke2
  apiVersion: v2
- appVersion: v3.6.2
+ appVersion: v3.6.5
  description: A Traefik based Kubernetes ingress controller
-@@ -20,7 +16,7 @@
+@@ -18,7 +19,7 @@
  - email: remi.buisson@traefik.io
    name: darkweaver87
  - name: jnoordsij
