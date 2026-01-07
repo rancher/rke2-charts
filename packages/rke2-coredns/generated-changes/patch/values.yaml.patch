@@ -85,9 +85,6 @@
 +- key: "node-role.kubernetes.io/control-plane"
 +  operator: "Exists"
 +  effect: "NoSchedule"
-+- key: "node-role.kubernetes.io/etcd"
-+  operator: "Exists"
-+  effect: "NoExecute"
  
  # https://kubernetes.io/docs/tasks/run-application/configure-pdb/#specifying-a-poddisruptionbudget
  podDisruptionBudget: {}
