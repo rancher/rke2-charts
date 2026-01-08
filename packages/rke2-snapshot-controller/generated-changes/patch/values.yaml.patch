@@ -1,14 +1,18 @@
 --- charts-original/values.yaml
 +++ charts/values.yaml
-@@ -11,7 +11,7 @@
+@@ -11,10 +11,10 @@
      httpEndpoint: ":8080"
  
    image:
 -    repository: registry.k8s.io/sig-storage/snapshot-controller
-+    repository: rancher/mirrored-sig-storage-snapshot-controller
++    repository: rancher/hardened-snapshot-controller
      pullPolicy: IfNotPresent
      # Overrides the image tag whose default is the chart appVersion.
-     tag: ""
+-    tag: ""
++    tag: "v8.4.0-build20260108"
+ 
+   imagePullSecrets: []
+ 
 @@ -35,9 +35,16 @@
  
    resources: {}
@@ -28,7 +32,7 @@
  
    affinity: {}
  
-@@ -80,3 +87,6 @@
+@@ -89,3 +96,6 @@
    # DNS Policy for controller pod. For Pods running with hostNetwork, set to `ClusterFirstWithHostNet`
    # For further reference: https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/#pod-s-dns-policy.
    dnsPolicy: ClusterFirst
