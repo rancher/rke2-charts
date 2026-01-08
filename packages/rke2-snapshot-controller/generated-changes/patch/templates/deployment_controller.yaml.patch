@@ -1,6 +1,6 @@
 --- charts-original/templates/deployment_controller.yaml
 +++ charts/templates/deployment_controller.yaml
-@@ -34,7 +34,7 @@
+@@ -35,7 +35,7 @@
          - name: {{ .Chart.Name }}
            securityContext:
              {{- toYaml .Values.controller.securityContext | nindent 12 }}
