@@ -9,21 +9,21 @@ spec:
     addressMatcher:
       ip: "{{ template "clusterDNSServerIP" . }}"
       toPorts:
-        - name: tcp-53
-          port: "53"
-          protocol: TCP
-        - name: udp-53
+        - name: dns
           port: "53"
           protocol: UDP
+        - name: dns-tcp
+          port: "53"
+          protocol: TCP
   redirectBackend:
     localEndpointSelector:
       matchLabels:
         k8s-app: node-local-dns
     toPorts:
-      - port: "53"
-        name: dns
+      - name: dns
+        port: "53"
         protocol: UDP
-      - port: "53"
-        name: dns-tcp
+      - name: dns-tcp
+        port: "53"
         protocol: TCP
 {{- end }}
