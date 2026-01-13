@@ -24,21 +24,3 @@
  
  {{- if .Values.cleanState }}
    # If a serious issue occurs during Cilium startup, this
-@@ -526,7 +537,7 @@
-   {{- end }}
- {{- end }}
- 
--  routing-mode: {{ .Values.routingMode | default (ternary "native" "tunnel" .Values.gke.enabled) | quote }}
-+  routing-mode: {{ .Values.routingMode | default (ternary "native" "tunnel" (or .Values.gke.enabled (not .Values.ipv4.enabled))) | quote }}
-   tunnel-protocol: {{ .Values.tunnelProtocol | default "vxlan" | quote }}
- 
- {{- if eq .Values.routingMode "native" }}
-@@ -741,6 +752,8 @@
- 
- {{- if .Values.ipv6NativeRoutingCIDR }}
-   ipv6-native-routing-cidr: {{ .Values.ipv6NativeRoutingCIDR }}
-+{{- else if not .Values.ipv4.enabled }}
-+  ipv6-native-routing-cidr: {{ .Values.global.clusterCIDRv6 }}
- {{- end }}
- 
- {{- if hasKey .Values "fragmentTracking" }}
