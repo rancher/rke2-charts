@@ -33,9 +33,6 @@ spec:
       {{- end }}
       securityContext: #TODO still needed?
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
-      tolerations:
-      - operator: Exists
-        effect: NoSchedule
       containers:
         - name: {{ .Chart.Name }}
           command: [ "/bin/sh" ]
