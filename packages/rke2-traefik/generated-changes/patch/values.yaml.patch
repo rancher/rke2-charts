@@ -9,7 +9,7 @@
    # -- defaults to appVersion. It's used for version checking, even prefixed with experimental- or latest-.
    # When a digest is required, `versionOverride` can be used to set the version.
 -  tag:  # @schema type:[string, null]
-+  tag: "v3.6.6-build20260107"
++  tag: "v3.6.7-build20260115"
    # -- Traefik image pull policy
    pullPolicy: IfNotPresent
  
@@ -107,7 +107,7 @@
    ## List of IP families (e.g. IPv4 and/or IPv6).
    ## ref: https://kubernetes.io/docs/concepts/services-networking/dual-stack/#services
    # ipFamilies:
-@@ -1372,3 +1374,4 @@
+@@ -1374,3 +1376,4 @@
      hub:
        image: traefik-hub
        tag: latest
