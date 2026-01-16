@@ -23910,6 +23910,40 @@ entries:
     version: v1.0.001
   rke2-traefik:
   - annotations:
+      artifacthub.io/changes: |
+        - "revert(CRDs): use Traefik Hub v3.18.0 compatible crds"
+        - "fix(security): set the seccomp profile to RuntimeDefault"
+        - "fix(CRDs): enforce the fact that this Chart does not support Traefik Hub v3.19.0"
+        - "feat(deps): update traefik docker tag to v3.6.6"
+        - "chore(release): publish traefik 38.0.2 and crds 1.13.1"
+      fleet.cattle.io/bundle-id: rke2
+    apiVersion: v2
+    appVersion: v3.6.6
+    created: "2026-01-16T11:05:55.313374994Z"
+    description: A Traefik based Kubernetes ingress controller
+    digest: f0382091f639d9a06847bef2aedaa9a1186fc200929820dc580f64c99f2e6f8c
+    home: https://traefik.io/
+    icon: https://raw.githubusercontent.com/traefik/traefik/master/docs/content/assets/img/traefik.logo.png
+    keywords:
+    - traefik
+    - ingress
+    - networking
+    kubeVersion: '>=1.22.0-0'
+    maintainers:
+    - email: michel.loiseleur@traefik.io
+      name: mloiseleur
+    - email: remi.buisson@traefik.io
+      name: darkweaver87
+    - name: jnoordsij
+    name: rke2-traefik
+    sources:
+    - https://github.com/traefik/traefik-helm-chart
+    - https://github.com/traefik/traefik
+    type: application
+    urls:
+    - assets/rke2-traefik/rke2-traefik-38.0.201.tgz
+    version: 38.0.201
+  - annotations:
       artifacthub.io/changes: "- \"fix(ports): \U0001F41B add missing `http.maxHeaderBytes`
         option\"\n- \"fix(ports): \U0001F41B `http.encodedCharacters` on custom entrypoints\"\n-
         \"chore(release): \U0001F680 publish traefik 38.0.1\"\n"
@@ -24422,6 +24456,18 @@ entries:
     - assets/rke2-traefik/rke2-traefik-25.0.000.tgz
     version: 25.0.000
   rke2-traefik-crd:
+  - annotations:
+      fleet.cattle.io/bundle-id: rke2
+    apiVersion: v1
+    appVersion: v3.6.6
+    created: "2026-01-16T11:05:55.346005532Z"
+    description: Installs the CRDs for rke2-traefik
+    digest: e929a966bc726e5f31dfc482a09dc7f969e896618816e93d0997175823c40159
+    name: rke2-traefik-crd
+    type: application
+    urls:
+    - assets/rke2-traefik/rke2-traefik-crd-38.0.201.tgz
+    version: 38.0.201
   - annotations:
       fleet.cattle.io/bundle-id: rke2
     apiVersion: v1

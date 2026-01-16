@@ -1,0 +1,30 @@
+annotations:
+  artifacthub.io/changes: |
+    - "revert(CRDs): use Traefik Hub v3.18.0 compatible crds"
+    - "fix(security): set the seccomp profile to RuntimeDefault"
+    - "fix(CRDs): enforce the fact that this Chart does not support Traefik Hub v3.19.0"
+    - "feat(deps): update traefik docker tag to v3.6.6"
+    - "chore(release): publish traefik 38.0.2 and crds 1.13.1"
+  fleet.cattle.io/bundle-id: rke2
+apiVersion: v2
+appVersion: v3.6.6
+description: A Traefik based Kubernetes ingress controller
+home: https://traefik.io/
+icon: https://raw.githubusercontent.com/traefik/traefik/master/docs/content/assets/img/traefik.logo.png
+keywords:
+- traefik
+- ingress
+- networking
+kubeVersion: '>=1.22.0-0'
+maintainers:
+- email: michel.loiseleur@traefik.io
+  name: mloiseleur
+- email: remi.buisson@traefik.io
+  name: darkweaver87
+- name: jnoordsij
+name: rke2-traefik
+sources:
+- https://github.com/traefik/traefik-helm-chart
+- https://github.com/traefik/traefik
+type: application
+version: 38.0.201
