@@ -8,7 +8,7 @@
 +  repository: rancher/hardened-k8s-metrics-server
    # Overrides the image tag whose default is v{{ .Chart.AppVersion }}
 -  tag: ""
-+  tag: v0.8.0-build20251204
++  tag: v0.8.0-build20260116
    pullPolicy: IfNotPresent
  
  imagePullSecrets: []
@@ -27,7 +27,7 @@
 -    repository: registry.k8s.io/autoscaling/addon-resizer
 -    tag: 1.8.23
 +    repository: rancher/hardened-addon-resizer
-+    tag: 1.8.23-build20251204
++    tag: 1.8.23-build20260114
    securityContext:
      allowPrivilegeEscalation: false
      readOnlyRootFilesystem: true
