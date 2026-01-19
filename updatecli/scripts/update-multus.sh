@@ -13,7 +13,7 @@ if [ -n "$CNI_PLUGINS_VERSION" ]; then
 		echo "Updating CNI plugin version to $CNI_PLUGINS_VERSION"
 		sed -i "s/$current_cni_plugins_version/$CNI_PLUGINS_VERSION/g" packages/rke2-multus/charts/values.yaml
 		package_version=$(yq '.packageVersion' packages/rke2-multus/package.yaml)
-		new_version=$(printf "%02d" $(($package_version + 1)))
+		new_version=$(printf "%02d" $((10#$package_version + 1)))
 		yq -i ".packageVersion = $new_version" packages/rke2-multus/package.yaml
 		new_package=true
 	fi
