@@ -27,8 +27,8 @@ if [ -n "$ADDON_RESIZER_IMAGE_VERSION" ]; then
 fi
 if [ "$IMAGES_UPDATED" = true  ]; then
 	package_version=$(yq '.packageVersion' packages/rke2-metrics-server/package.yaml)
-	new_version=$(printf "%02d" $(($package_version + 1)))
-	yq -i ".packageVersion = $new_version" packages/rke2-metrics-server/package.yaml
+	new_version=$(printf "%02d" $((10#$package_version + 1)))
+	sed -i "s/packageVersion:.*/packageVersion: $new_version/g" packages/rke2-metrics-server/package.yaml
 fi
 if [ -n "$METRICS_SERVER_CHART_VERSION" ]; then
 	# 1 - check if there is a new upstream chart
