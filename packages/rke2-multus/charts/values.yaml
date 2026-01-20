@@ -20,7 +20,7 @@
 
 image:
   repository: rancher/hardened-multus-cni
-  tag: v4.2.3-build20260106
+  tag: v4.2.3-build20260120
   pullPolicy: IfNotPresent
 
 #imagePullSecrets: []
@@ -142,7 +142,7 @@ tolerations:
 cniplugins:
   image:
     repository: rancher/hardened-cni-plugins
-    tag: v1.9.0-build20260106
+    tag: v1.9.0-build20260116
 
   # skipcnis is a comma separated list of cni binaries to skip from
   # installing.
@@ -164,7 +164,7 @@ thickPlugin:
   enabled: false
   image:
     repository: rancher/hardened-multus-thick
-    tag: v4.2.3-build20260106
+    tag: v4.2.3-build20260120
     pullPolicy: IfNotPresent
 
 # This deploys the dynamic networks controller add-on.
