@@ -35,8 +35,8 @@ if [ -n "$NODECACHE_VERSION" ]; then
 fi
 if [ "$IMAGES_UPDATED" = true  ]; then
 	package_version=$(yq '.packageVersion' packages/rke2-coredns/package.yaml)
-	new_version=$(printf "%02d" $(($package_version + 1)))
-	yq -i ".packageVersion = $new_version" packages/rke2-coredns/package.yaml
+	new_version=$(printf "%02d" $((10#$package_version + 1)))
+	sed -i "s/packageVersion:.*/packageVersion: $new_version/g" packages/rke2-coredns/package.yaml
 fi
 if [ -n "$COREDNS_CHART_VERSION" ]; then
 	# 1 - check if there is a new upstream chart

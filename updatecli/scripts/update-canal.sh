@@ -12,8 +12,8 @@ if [ -n "$FLANNEL_VERSION" ]; then
 		echo "Updating flannel image to $FLANNEL_VERSION"
 		yq -i ".flannel.image.tag = \"$FLANNEL_VERSION\"" packages/rke2-canal/charts/values.yaml
 		package_version=$(yq '.packageVersion' packages/rke2-canal/package.yaml)
-		new_version=$(printf "%02d" $(($package_version + 1)))
-		yq -i ".packageVersion = $new_version" packages/rke2-canal/package.yaml
+		new_version=$(printf "%02d" $((10#$package_version + 1)))
+		sed -i "s/packageVersion:.*/packageVersion: $new_version/g" packages/rke2-canal/package.yaml
 	fi
 fi
 if [ -n "$CALICO_VERSION" ]; then
@@ -27,6 +27,6 @@ if [ -n "$CALICO_VERSION" ]; then
 		app_version=$(echo "$CALICO_VERSION" | grep -Eo 'v[0-9]+.[0-9]+.[0-9]+')
 		yq -i ".version = \"$CALICO_VERSION\" |
 			.appVersion = \"$app_version\"" packages/rke2-canal/charts/Chart.yaml
-		yq -i ".packageVersion = 00" packages/rke2-canal/package.yaml
+		sed -i "s/packageVersion:.*/packageVersion: 00/g" packages/rke2-canal/package.yaml
 	fi
 fi
