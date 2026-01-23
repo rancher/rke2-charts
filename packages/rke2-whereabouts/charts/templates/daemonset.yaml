@@ -38,7 +38,7 @@ spec:
           command: [ "/bin/sh" ]
           args:
             - -c
-            - >
+            - |
               SLEEP=false source /install-cni.sh 
               /token-watcher.sh &
               /ip-control-loop -log-level debug
