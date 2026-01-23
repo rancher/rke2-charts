@@ -1,6 +1,6 @@
 --- charts-original/templates/deployment.yaml
 +++ charts/templates/deployment.yaml
-@@ -52,9 +52,6 @@
+@@ -55,9 +55,6 @@
  {{- end }}
        annotations:
          checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
@@ -10,7 +10,7 @@
  {{- if .Values.podAnnotations }}
  {{ toYaml .Values.podAnnotations | indent 8 }}
  {{- end }}
-@@ -80,9 +77,15 @@
+@@ -93,9 +90,15 @@
        topologySpreadConstraints:
  {{ tpl (toYaml .Values.topologySpreadConstraints) $ | indent 8 }}
        {{- end }}
@@ -27,7 +27,7 @@
        {{- end }}
        {{- if .Values.nodeSelector }}
        nodeSelector:
-@@ -98,7 +101,7 @@
+@@ -111,7 +114,7 @@
        {{- end }}
        containers:
        - name: "coredns"
