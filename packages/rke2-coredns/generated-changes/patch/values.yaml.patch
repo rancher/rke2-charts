@@ -8,11 +8,11 @@
 +  repository: rancher/hardened-coredns
    # Overrides the image tag whose default is the chart appVersion.
 -  tag: ""
-+  tag: "v1.14.1-build20260116"
++  tag: "v1.14.1-build20260203"
    pullPolicy: IfNotPresent
    ## Optionally specify an array of imagePullSecrets.
    ## Secrets must be manually created in the namespace.
-@@ -52,12 +52,11 @@
+@@ -54,12 +54,11 @@
  
  service:
  # clusterIP: ""
@@ -26,7 +26,7 @@
  # trafficDistribution: PreferClose
    # The name of the Service
    # If not set, a name is generated using the fullname template
-@@ -67,10 +66,10 @@
+@@ -69,10 +68,10 @@
    selector: {}
  
  serviceAccount:
@@ -39,7 +39,7 @@
    annotations: {}
  
  rbac:
-@@ -86,7 +85,7 @@
+@@ -88,7 +87,7 @@
  isClusterService: true
  
  # Optional priority class to be used for the coredns pods. Used for autoscaler if autoscaler.priorityClassName not set.
@@ -48,7 +48,7 @@
  
  # Configure the pod level securityContext.
  podSecurityContext: {}
-@@ -191,7 +190,16 @@
+@@ -193,7 +192,16 @@
  #            operator: In
  #            values:
  #            - master
@@ -66,7 +66,7 @@
  
  # expects input structure as per specification https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.21/#topologyspreadconstraint-v1-core
  # and supports Helm templating.
-@@ -215,7 +223,8 @@
+@@ -217,7 +225,8 @@
  
  # Node labels for pod assignment
  # Ref: https://kubernetes.io/docs/user-guide/node-selection/
@@ -76,7 +76,7 @@
  
  # expects input structure as per specification https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.11/#toleration-v1-core
  # for example:
-@@ -224,7 +233,13 @@
+@@ -226,7 +235,13 @@
  #     operator: Equal
  #     value: master
  #     effect: NoSchedule
@@ -91,7 +91,7 @@
  
  # https://kubernetes.io/docs/tasks/run-application/configure-pdb/#specifying-a-poddisruptionbudget
  podDisruptionBudget: {}
-@@ -317,7 +332,7 @@
+@@ -319,7 +334,7 @@
  # See https://github.com/kubernetes-incubator/cluster-proportional-autoscaler
  autoscaler:
    # Enabled the cluster-proportional-autoscaler
@@ -100,7 +100,7 @@
  
    # Number of cores in the cluster per coredns replica
    coresPerReplica: 256
-@@ -341,8 +356,8 @@
+@@ -343,8 +358,8 @@
    #   - --nodelabels=topology.kubernetes.io/zone=us-east-1a
  
    image:
@@ -111,7 +111,7 @@
      pullPolicy: IfNotPresent
      ## Optionally specify an array of imagePullSecrets.
      ## Secrets must be manually created in the namespace.
-@@ -360,19 +375,26 @@
+@@ -362,19 +377,26 @@
  
    # Node labels for pod assignment
    # Ref: https://kubernetes.io/docs/user-guide/node-selection/
@@ -144,7 +144,7 @@
  
    # Options for autoscaler configmap
    configmap:
-@@ -384,8 +406,8 @@
+@@ -386,8 +408,8 @@
    livenessProbe:
      enabled: true
      initialDelaySeconds: 10
@@ -155,7 +155,7 @@
      failureThreshold: 3
      successThreshold: 1
  
-@@ -406,3 +428,25 @@
+@@ -425,3 +447,25 @@
  
  # Configures initcontainers for the coredns deployment.
  initContainers: []
@@ -172,10 +172,10 @@
 +  use_cilium_lrp: false
 +  image:
 +    repository: rancher/hardened-dns-node-cache
-+    tag: "1.26.7-build20260119"
++    tag: "1.26.7-build20260203"
 +  initimage:
 +    repository: rancher/hardened-dns-node-cache
-+    tag: "1.26.7-build20260119"
++    tag: "1.26.7-build20260203"
 +  nodeSelector:
 +    kubernetes.io/os: linux
 +
