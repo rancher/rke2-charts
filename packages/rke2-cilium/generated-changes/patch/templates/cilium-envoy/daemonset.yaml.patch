@@ -1,6 +1,6 @@
 --- charts-original/templates/cilium-envoy/daemonset.yaml
 +++ charts/templates/cilium-envoy/daemonset.yaml
-@@ -34,7 +34,7 @@
+@@ -31,7 +31,7 @@
          cilium.io/cilium-envoy-configmap-checksum: {{ include (print $.Template.BasePath "/cilium-envoy/configmap.yaml") . | sha256sum | quote }}
          {{- end }}
          {{- if not .Values.envoy.securityContext.privileged }}
@@ -9,7 +9,7 @@
          # Set app AppArmor's profile to "unconfined". The value of this annotation
          # can be modified as long users know which profiles they have available
          # in AppArmor.
-@@ -61,8 +61,8 @@
+@@ -58,8 +58,8 @@
          {{- toYaml . | nindent 8 }}
        {{- end }}
        {{- /* K8s version lower than 1.30.0 don't support the "appArmorProfile" field, */}}
@@ -20,8 +20,8 @@
          {{- $_ := unset .Values.envoy.podSecurityContext "appArmorProfile" }}
        {{- end }}
        {{- with .Values.envoy.podSecurityContext }}
-@@ -71,7 +71,7 @@
-       {{- end }}
+@@ -69,7 +69,7 @@
+       {{- include "envoy.initContainers" . | nindent 6 }}
        containers:
        - name: cilium-envoy
 -        image: {{ include "cilium.image" .Values.envoy.image | quote }}
