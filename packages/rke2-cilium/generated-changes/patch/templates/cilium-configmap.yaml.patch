@@ -11,7 +11,7 @@
  {{- if and ( or (.Values.agent) (.Values.operator.enabled) .Values.clustermesh.useAPIServer) (not .Values.preflight.enabled) }}
  {{- /*  Default values with backwards compatibility */ -}}
  {{- $defaultBpfMapDynamicSizeRatio := 0.0 -}}
-@@ -325,7 +332,11 @@
+@@ -330,7 +337,11 @@
  
    # Enable IPv6 addressing. If enabled, all endpoints are allocated an IPv6
    # address.

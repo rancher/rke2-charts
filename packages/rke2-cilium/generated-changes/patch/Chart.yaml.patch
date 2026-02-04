@@ -1,8 +1,8 @@
 --- charts-original/Chart.yaml
 +++ charts/Chart.yaml
-@@ -81,8 +81,7 @@
+@@ -78,8 +78,7 @@
  apiVersion: v2
- appVersion: 1.18.6
+ appVersion: 1.19.0
  description: eBPF-based Networking, Security, and Observability
 -home: https://cilium.io/
 -icon: https://cdn.jsdelivr.net/gh/cilium/cilium@main/Documentation/images/logo-solo.svg
@@ -10,7 +10,7 @@
  keywords:
  - BPF
  - eBPF
-@@ -92,7 +91,7 @@
+@@ -89,7 +88,7 @@
  - Observability
  - Troubleshooting
  kubeVersion: '>= 1.21.0-0'
@@ -19,4 +19,4 @@
  sources:
 -- https://github.com/cilium/cilium
 +- https://github.com/rancher/rke2-charts
- version: 1.18.6
+ version: 1.19.0
