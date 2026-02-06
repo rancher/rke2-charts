@@ -241,6 +241,17 @@
                 "annotations": {
                     "type": "object"
                 },
+                "defaultScope": {
+                    "type": [
+                        "string",
+                        "null"
+                    ],
+                    "enum": [
+                        "All",
+                        "None",
+                        null
+                    ]
+                },
                 "enabled": {
                     "type": "boolean"
                 },
@@ -1596,27 +1607,49 @@
                                 "type": "object",
                                 "properties": {
                                     "allowEncodedBackSlash": {
-                                        "type": "boolean"
+                                        "type": [
+                                            "boolean",
+                                            "null"
+                                        ]
                                     },
                                     "allowEncodedHash": {
-                                        "type": "boolean"
+                                        "type": [
+                                            "boolean",
+                                            "null"
+                                        ]
                                     },
                                     "allowEncodedNullCharacter": {
-                                        "type": "boolean"
+                                        "type": [
+                                            "boolean",
+                                            "null"
+                                        ]
                                     },
                                     "allowEncodedPercent": {
-                                        "type": "boolean"
+                                        "type": [
+                                            "boolean",
+                                            "null"
+                                        ]
                                     },
                                     "allowEncodedQuestionMark": {
-                                        "type": "boolean"
+                                        "type": [
+                                            "boolean",
+                                            "null"
+                                        ]
                                     },
                                     "allowEncodedSemicolon": {
-                                        "type": "boolean"
+                                        "type": [
+                                            "boolean",
+                                            "null"
+                                        ]
                                     },
                                     "allowEncodedSlash": {
-                                        "type": "boolean"
+                                        "type": [
+                                            "boolean",
+                                            "null"
+                                        ]
                                     }
-                                }
+                                },
+                                "additionalProperties": false
                             },
                             "maxHeaderBytes": {
                                 "type": [
@@ -1625,11 +1658,42 @@
                                 ],
                                 "minimum": 0
                             },
+                            "middlewares": {
+                                "type": [
+                                    "array",
+                                    "null"
+                                ]
+                            },
+                            "redirections": {
+                                "type": "object",
+                                "properties": {
+                                    "entryPoint": {
+                                        "type": "object"
+                                    }
+                                }
+                            },
                             "sanitizePath": {
                                 "type": [
                                     "boolean",
                                     "null"
                                 ]
+                            },
+                            "tls": {
+                                "type": "object",
+                                "properties": {
+                                    "certResolver": {
+                                        "type": "string"
+                                    },
+                                    "domains": {
+                                        "type": "array"
+                                    },
+                                    "enabled": {
+                                        "type": "boolean"
+                                    },
+                                    "options": {
+                                        "type": "string"
+                                    }
+                                }
                             }
                         }
                     },
@@ -1647,12 +1711,6 @@
                                 "type": "boolean"
                             }
                         }
-                    },
-                    "middlewares": {
-                        "type": [
-                            "array",
-                            "null"
-                        ]
                     },
                     "nodePort": {
                         "type": [
@@ -1717,14 +1775,6 @@
                             }
                         }
                     },
-                    "redirections": {
-                        "type": "object",
-                        "properties": {
-                            "entryPoint": {
-                                "type": "object"
-                            }
-                        }
-                    },
                     "targetPort": {
                         "type": [
                             "string",
@@ -1732,23 +1782,6 @@
                             "null"
                         ],
                         "minimum": 0
-                    },
-                    "tls": {
-                        "type": "object",
-                        "properties": {
-                            "certResolver": {
-                                "type": "string"
-                            },
-                            "domains": {
-                                "type": "array"
-                            },
-                            "enabled": {
-                                "type": "boolean"
-                            },
-                            "options": {
-                                "type": "string"
-                            }
-                        }
                     },
                     "transport": {
                         "type": "object",
@@ -2311,5 +2344,5 @@
             "type": "array"
         }
     },
-    "additionalProperties": true
+    "additionalProperties": false
 }
