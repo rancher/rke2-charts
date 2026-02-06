@@ -3711,6 +3711,23 @@ entries:
   rke2-canal:
   - apiVersion: v1
     appVersion: v3.31.3
+    created: "2026-02-06T03:59:07.695593014Z"
+    description: Install Canal Network Plugin.
+    digest: 46ef3051d4c1d97606a0def081a3673219273f1e138c27cc5ec4ac155dc957df
+    home: https://www.projectcalico.org/
+    keywords:
+    - canal
+    maintainers:
+    - email: charts@rancher.com
+      name: Rancher Labs
+    name: rke2-canal
+    sources:
+    - https://github.com/rancher/rke2-charts
+    urls:
+    - assets/rke2-canal/rke2-canal-v3.31.3-build2026020400.tgz
+    version: v3.31.3-build2026020400
+  - apiVersion: v1
+    appVersion: v3.31.3
     created: "2026-01-19T15:31:18.842910667Z"
     description: Install Canal Network Plugin.
     digest: c98d43f9e2764d39a9d9e07026f68e03c8e6dbf21852ab392acc1ea877eb67ed
@@ -16764,6 +16781,19 @@ entries:
     - assets/rke2-coredns/rke2-coredns-1.10.101-build2021022301.tgz
     version: 1.10.101-build2021022301
   rke2-flannel:
+  - apiVersion: v1
+    appVersion: v0.28.1
+    created: "2026-02-06T03:59:08.540867755Z"
+    description: Install Flannel Network Plugin.
+    digest: 0164e0f6daab64c2dda710ef75bddda287c843e2a10819de9ce0f04983f37c0d
+    keywords:
+    - Flannel
+    name: rke2-flannel
+    sources:
+    - https://github.com/rancher/rke2-charts
+    urls:
+    - assets/rke2-flannel/rke2-flannel-v0.28.100.tgz
+    version: v0.28.100
   - apiVersion: v1
     appVersion: v0.28.0
     created: "2026-01-19T15:50:43.715891756Z"
