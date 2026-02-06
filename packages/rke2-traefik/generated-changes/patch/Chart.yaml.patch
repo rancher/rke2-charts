@@ -1,14 +1,20 @@
 --- charts-original/Chart.yaml
 +++ charts/Chart.yaml
-@@ -5,6 +5,7 @@
-     - "fix(CRDs): enforce the fact that this Chart does not support Traefik Hub v3.19.0"
-     - "feat(deps): update traefik docker tag to v3.6.6"
-     - "chore(release): publish traefik 38.0.2 and crds 1.13.1"
+@@ -1,12 +1,5 @@
+ annotations:
+-  artifacthub.io/changes: "- \"refactor(chart): clean output on Deployment & Daemonset\"\n-
+-    \"fix(security)!: add support for request path options of Traefik 3.6.7+\"\n-
+-    \"fix(ports)!: \U0001F41B entrypoints `http` options\"\n- \"feat(gateway-api):
+-    add support for defaultScope experimental feature\"\n- \"feat(deps)!: update traefik
+-    docker tag to v3.6.7\"\n- \"feat(chart): enforce schema\"\n- \"feat(CRDs)!: support
+-    Traefik Hub v3.19.0\"\n- \"docs(values): avoid unbreakable lines in table output
+-    of VALUES.md\"\n- \"chore(release): \U0001F680 publish traefik 39.0.0 and crds
+-    1.14.0\"\n"
 +  fleet.cattle.io/bundle-id: rke2
  apiVersion: v2
- appVersion: v3.6.6
+ appVersion: v3.6.7
  description: A Traefik based Kubernetes ingress controller
-@@ -21,7 +22,7 @@
+@@ -23,7 +16,7 @@
  - email: remi.buisson@traefik.io
    name: darkweaver87
  - name: jnoordsij
