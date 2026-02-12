@@ -107,7 +107,17 @@
    ## List of IP families (e.g. IPv4 and/or IPv6).
    ## ref: https://kubernetes.io/docs/concepts/services-networking/dual-stack/#services
    # ipFamilies:
-@@ -1383,3 +1385,4 @@
+@@ -1138,7 +1140,8 @@
+ #        topologyKey: kubernetes.io/hostname
+
+ # -- nodeSelector is the simplest recommended form of node selection constraint.
+-nodeSelector: {}
++nodeSelector:
++  kubernetes.io/os: linux
+ # -- Tolerations allow the scheduler to schedule pods with matching taints.
+ tolerations: []
+ # -- You can use topology spread constraints to control
+@@ -1383,3 +1386,4 @@
      hub:
        image: traefik-hub
        tag: latest
