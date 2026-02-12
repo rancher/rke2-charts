@@ -91,6 +91,11 @@ spec:
       labels:
 {{- include "dynamicNetworksController.labels" . | indent 8 }}
     spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      nodeSelector: {{- toYaml .Values.labels.nodeSelector | nindent 8 }}
       {{- with .Values.tolerations }}
       tolerations:
         {{- toYaml . | trim | nindent 8 }}
