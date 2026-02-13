@@ -1,33 +1,35 @@
 --- charts-original/values.yaml
 +++ charts/values.yaml
-@@ -6,6 +6,9 @@
+@@ -6,6 +6,10 @@
    image:
      # -- Registry host to pull images from.
      registry: registry.k8s.io
 +  systemDefaultRegistry: ""
 +  systemDefaultIngressClass: ""
++  prime: ""
 +
  ## Overrides for generated resource names
  # See templates/_helpers.tpl
  # nameOverride:
-@@ -26,14 +29,11 @@
+@@ -26,14 +30,11 @@
      ## Keep false as default for now!
      chroot: false
      # registry: registry.k8s.io
 -    image: ingress-nginx/controller
-+    repository: rancher/nginx-ingress-controller
      ## for backwards compatibility consider setting the full image url via the repository value below
      ## use *either* current default registry/image or repository format or installing chart by providing the values.yaml will fail
-     ## repository:
+-    ## repository:
 -    tag: "v1.14.3"
 -    digest: sha256:82917be97c0939f6ada1717bb39aa7e66c229d6cfb10dcfc8f1bd42f9efe0f81
 -    digestChroot: sha256:ffdab64d0e0556f810d82d618a0fa97c4fc8dc2bc5717c51bfe83b5d4252c73e
 -    pullPolicy: IfNotPresent
++    repository: rancher/nginx-ingress-controller
 +    tag: "v1.14.3-hardened2"
++    prime-tag: "v1.14.3-prime2"
      runAsNonRoot: true
      # -- This value must not be changed using the official image.
      # uid=101(www-data) gid=82(www-data) groups=82(www-data)
-@@ -46,7 +46,7 @@
+@@ -46,7 +47,7 @@
        type: RuntimeDefault
      readOnlyRootFilesystem: false
    # -- Configures the controller container name
@@ -36,7 +38,7 @@
    # -- Configures the ports that the nginx-controller listens on
    containerPort:
      http: 80
-@@ -77,7 +77,7 @@
+@@ -77,7 +78,7 @@
    # -- Optionally change this to ClusterFirstWithHostNet in case you have 'hostNetwork: true'.
    # By default, while using host network, name resolution uses the host's DNS. If you wish nginx-controller
    # to keep resolving names inside the k8s network, use ClusterFirstWithHostNet.
@@ -45,7 +47,7 @@
    # -- Instruct the kubelet to use the named RuntimeClass to run the pod
    runtimeClassName: ""
    # -- Bare-metal considerations via the host network https://kubernetes.github.io/ingress-nginx/deploy/baremetal/#via-the-host-network
-@@ -109,7 +109,7 @@
+@@ -109,7 +110,7 @@
    ## Disabled by default
    hostPort:
      # -- Enable 'hostPort' or not
@@ -54,7 +56,7 @@
      ports:
        # -- 'hostPort' http port
        http: 80
-@@ -176,7 +176,7 @@
+@@ -176,7 +177,7 @@
    # node or nodes where an ingress controller pod is running.
    publishService:
      # -- Enable 'publishService' or not
@@ -63,7 +65,7 @@
      # -- Allows overriding of the publish service to bind to
      # Must be <namespace>/<service_name>
      pathOverride: ""
-@@ -223,7 +223,7 @@
+@@ -223,7 +224,7 @@
    #         name: secret-resource
  
    # -- Use a `DaemonSet` or `Deployment`
@@ -72,7 +74,7 @@
    # -- Annotations to be added to the controller Deployment or DaemonSet
    ##
    annotations: {}
-@@ -491,7 +491,7 @@
+@@ -491,7 +492,7 @@
      configMapKey: ""
    service:
      # -- Enable controller services or not. This does not influence the creation of either the admission webhook or the metrics service.
@@ -81,7 +83,7 @@
      external:
        # -- Enable the external controller service or not. Useful for internal-only deployments.
        enabled: true
-@@ -785,6 +785,7 @@
+@@ -785,6 +786,7 @@
        loadBalancerSourceRanges: []
        servicePort: 443
        type: ClusterIP
@@ -89,7 +91,7 @@
      createSecretJob:
        name: create
        # -- Deadline in seconds for the job to complete. Must be greater than 0 to enforce. If unset or 0, no deadline is enforced.
-@@ -849,12 +850,11 @@
+@@ -849,12 +851,11 @@
        enabled: true
        image:
          # registry: registry.k8s.io
@@ -103,7 +105,7 @@
          pullPolicy: IfNotPresent
        # -- Provide a priority class name to the webhook patching job
        ##
-@@ -1028,11 +1028,11 @@
+@@ -1028,11 +1029,11 @@
    name: defaultbackend
    image:
      # registry: registry.k8s.io
