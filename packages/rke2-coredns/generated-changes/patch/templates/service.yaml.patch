@@ -1,7 +1,8 @@
 --- charts-original/templates/service.yaml
 +++ charts/templates/service.yaml
 @@ -1,4 +1,6 @@
- {{- if .Values.deployment.enabled }}
+-{{- if .Values.deployment.enabled }}
++{{- if and .Values.deployment.enabled (not .Values.nodelocal.enabled) }}
 +{{- $dnsIPs := split "," .Values.global.clusterDNS }}
 +{{- $dnsCount := len $dnsIPs }}
  ---
