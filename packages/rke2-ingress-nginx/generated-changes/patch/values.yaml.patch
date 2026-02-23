@@ -25,7 +25,7 @@
 -    pullPolicy: IfNotPresent
 +    repository: rancher/nginx-ingress-controller
 +    tag: "v1.14.3-hardened2"
-+    prime-tag: "v1.14.3-prime2"
++    prime-tag: "v1.14.3-prime3"
      runAsNonRoot: true
      # -- This value must not be changed using the official image.
      # uid=101(www-data) gid=82(www-data) groups=82(www-data)
