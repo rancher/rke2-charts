@@ -155,29 +155,38 @@
      failureThreshold: 3
      successThreshold: 1
  
-@@ -425,3 +447,30 @@
+@@ -425,3 +447,39 @@
  
  # Configures initcontainers for the coredns deployment.
  initContainers: []
 +
 +k8sApp: "kube-dns"
 +
++## Configure a node-local-dns cache
++# See https://kubernetes.io/docs/tasks/administer-cluster/nodelocaldns/
 +nodelocal:
 +  enabled: false
 +  ip_address: "169.254.20.10"
 +  ipvs: false
++
 +  # set to true, if you wish to use nodelocal with cilium in kube-proxy replacement mode.
 +  # This sets up a Cilium Local Redirect Policy (LRP) to steer DNS traffic to the nodelocal dns cache.
 +  # See https://docs.cilium.io/en/v1.15/network/kubernetes/local-redirect-policy/#node-local-dns-cache for reference
 +  use_cilium_lrp: false
++
 +  image:
 +    repository: rancher/hardened-dns-node-cache
 +    tag: "1.26.7-build20260206"
++
 +  initimage:
 +    repository: rancher/hardened-dns-node-cache
 +    tag: "1.26.7-build20260206"
++
++  # Node labels for pod assignment
++  # Ref: https://kubernetes.io/docs/user-guide/node-selection/
 +  nodeSelector:
 +    kubernetes.io/os: linux
++
 +  # resources for the node-local-dns pods
 +  resources:
 +    requests:
