@@ -155,7 +155,7 @@
      failureThreshold: 3
      successThreshold: 1
  
-@@ -425,3 +447,25 @@
+@@ -425,3 +447,30 @@
  
  # Configures initcontainers for the coredns deployment.
  initContainers: []
@@ -178,6 +178,11 @@
 +    tag: "1.26.7-build20260206"
 +  nodeSelector:
 +    kubernetes.io/os: linux
++  # resources for the node-local-dns pods
++  resources:
++    requests:
++      cpu: 25m
++      memory: 5Mi
 +
 +global:
 +  systemDefaultRegistry: ""
