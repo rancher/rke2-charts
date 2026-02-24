@@ -6,7 +6,7 @@ image:
   repository: rancher/hardened-whereabouts
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: v0.9.2-build20260206
+  tag: v0.9.3-build20260223
 
 updateStrategy: RollingUpdate
 imagePullSecrets: []
