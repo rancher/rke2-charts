@@ -14982,6 +14982,34 @@ entries:
           description: Add configurable dnsPolicy for deployment
     apiVersion: v2
     appVersion: 1.13.1
+    created: "2026-02-24T10:13:12.010564382Z"
+    description: CoreDNS is a DNS server that chains plugins and provides Kubernetes
+      DNS Services
+    digest: 6814eb3aba9448c914508fd716f7bdfffb8ebb84e52545b78b7b2c272a19562b
+    home: https://coredns.io
+    icon: https://coredns.io/images/CoreDNS_Colour_Horizontal.png
+    keywords:
+    - coredns
+    - dns
+    - kubedns
+    maintainers:
+    - name: mrueg
+    - name: haad
+    - name: hagaibarel
+    - name: shubham-cmyk
+    name: rke2-coredns
+    sources:
+    - https://github.com/coredns/coredns
+    type: application
+    urls:
+    - assets/rke2-coredns/rke2-coredns-1.45.202.tgz
+    version: 1.45.202
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: added
+          description: Add configurable dnsPolicy for deployment
+    apiVersion: v2
+    appVersion: 1.13.1
     created: "2026-02-06T21:13:15.02738312Z"
     description: CoreDNS is a DNS server that chains plugins and provides Kubernetes
       DNS Services
