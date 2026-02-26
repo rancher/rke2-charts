@@ -1,6 +1,6 @@
 --- charts-original/Chart.yaml
 +++ charts/Chart.yaml
-@@ -1,12 +1,5 @@
+@@ -1,14 +1,7 @@
  annotations:
 -  artifacthub.io/changes: "- \"refactor(chart): clean output on Deployment & Daemonset\"\n-
 -    \"fix(security)!: add support for request path options of Traefik 3.6.7+\"\n-
@@ -12,8 +12,11 @@
 -    1.14.0\"\n"
 +  fleet.cattle.io/bundle-id: rke2
  apiVersion: v2
- appVersion: v3.6.7
+-appVersion: v3.6.7
++appVersion: v3.6.9
  description: A Traefik based Kubernetes ingress controller
+ home: https://traefik.io/
+ icon: https://raw.githubusercontent.com/traefik/traefik/master/docs/content/assets/img/traefik.logo.png
 @@ -23,7 +16,7 @@
  - email: remi.buisson@traefik.io
    name: darkweaver87
