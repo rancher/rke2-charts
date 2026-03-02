@@ -29,5 +29,5 @@
 +{{- end -}}
 +
 +{{- define "repository_or_registry_and_image" -}}
-+{{ if .repository }}{{ .repository }}{{ else }}{{ .registry }}/{{ .image }}{{ end }}:{{ if and .prime .prime.enabled .prime-tag}}{{ .prime-tag }}{{ else }}{{ .tag }}{{ end }}{{ if .digest }}@{{ .digest }}{{ end }}
++{{ if .repository }}{{ .repository }}{{ else }}{{ .registry }}/{{ .image }}{{ end }}:{{ if and .prime .prime.enabled .primeTag}}{{ .primeTag }}{{ else }}{{ .tag }}{{ end }}{{ if .digest }}@{{ .digest }}{{ end }}
 +{{- end -}}
