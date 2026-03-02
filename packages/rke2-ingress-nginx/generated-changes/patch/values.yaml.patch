@@ -1,6 +1,6 @@
 --- charts-original/values.yaml
 +++ charts/values.yaml
-@@ -6,6 +6,12 @@
+@@ -6,6 +6,11 @@
    image:
      # -- Registry host to pull images from.
      registry: registry.k8s.io
@@ -8,12 +8,11 @@
 +  systemDefaultIngressClass: ""
 +  prime:
 +    enabled: false
-+    tag: "v1.14.3-prime5"
 +
  ## Overrides for generated resource names
  # See templates/_helpers.tpl
  # nameOverride:
-@@ -26,14 +32,10 @@
+@@ -26,14 +31,11 @@
      ## Keep false as default for now!
      chroot: false
      # registry: registry.k8s.io
@@ -27,6 +26,7 @@
 -    pullPolicy: IfNotPresent
 +    repository: rancher/nginx-ingress-controller
 +    tag: "v1.14.3-hardened3"
++    prime-tag: "v1.14.3-prime5"
      runAsNonRoot: true
      # -- This value must not be changed using the official image.
      # uid=101(www-data) gid=82(www-data) groups=82(www-data)
