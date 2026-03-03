@@ -7,7 +7,7 @@
 -          {{- with (merge .Values.controller.image .Values.global.image) }}
 -          image: {{ if .repository }}{{ .repository }}{{ else }}{{ .registry }}/{{ include "ingress-nginx.image" . }}{{ end }}:{{ .tag }}{{ include "ingress-nginx.imageDigest" . }}
 -          {{- end }}
-+          image: "{{ template "system_default_registry" . }}{{ template "repository_or_registry_and_image" (dict "prime" .Values.global.prime "image" .Values.controller.image) }}"
++          image: "{{ template "system_default_registry" . }}{{ template "repository_or_registry_and_image" (merge (dict "prime" .Values.global.prime) .Values.controller.image) }}"
            imagePullPolicy: {{ .Values.controller.image.pullPolicy }}
          {{- if .Values.controller.lifecycle }}
            lifecycle: {{ toYaml .Values.controller.lifecycle | nindent 12 }}

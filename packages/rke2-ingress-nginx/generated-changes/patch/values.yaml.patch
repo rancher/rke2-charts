@@ -92,30 +92,30 @@
      createSecretJob:
        name: create
        # -- Deadline in seconds for the job to complete. Must be greater than 0 to enforce. If unset or 0, no deadline is enforced.
-@@ -849,12 +852,11 @@
+@@ -849,12 +852,10 @@
        enabled: true
        image:
          # registry: registry.k8s.io
 -        image: ingress-nginx/kube-webhook-certgen
-+        repository: rancher/kube-webhook-certgen
          ## for backwards compatibility consider setting the full image url via the repository value below
          ## use *either* current default registry/image or repository format or installing chart by providing the values.yaml will fail
-         ## repository:
+-        ## repository:
++        repository: rancher/kube-webhook-certgen
          tag: v1.6.7
 -        digest: sha256:7c74a715af2c94cb734785b4d3ea1357b4f02b88e1e123c622a9cb68b62f669c
          pullPolicy: IfNotPresent
        # -- Provide a priority class name to the webhook patching job
        ##
-@@ -1028,11 +1030,11 @@
+@@ -1028,11 +1029,10 @@
    name: defaultbackend
    image:
      # registry: registry.k8s.io
 -    image: defaultbackend-amd64
-+    repository: rancher/nginx-ingress-controller-defaultbackend
      ## for backwards compatibility consider setting the full image url via the repository value below
      ## use *either* current default registry/image or repository format or installing chart by providing the values.yaml will fail
-     ## repository:
+-    ## repository:
 -    tag: "1.5"
++    repository: rancher/nginx-ingress-controller-defaultbackend
 +    tag: "1.5-rancher1"
      pullPolicy: IfNotPresent
      runAsNonRoot: true
