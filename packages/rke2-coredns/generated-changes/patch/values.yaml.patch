@@ -48,6 +48,15 @@
  
  # Configure the pod level securityContext.
  podSecurityContext: {}
+@@ -126,7 +125,7 @@
+   - name: ready
+   # Required to query kubernetes API for data
+   - name: kubernetes
+-    parameters: cluster.local in-addr.arpa ip6.arpa
++    parameters: in-addr.arpa ip6.arpa
+     configBlock: |-
+       pods insecure
+       fallthrough in-addr.arpa ip6.arpa
 @@ -193,7 +192,16 @@
  #            operator: In
  #            values:
