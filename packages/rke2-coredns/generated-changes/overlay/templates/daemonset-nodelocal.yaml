@@ -43,9 +43,7 @@ spec:
       - name: node-cache
         image: {{ template "system_default_registry" . }}{{ .Values.nodelocal.image.repository }}:{{ .Values.nodelocal.image.tag }}
         resources:
-          requests:
-            cpu: 25m
-            memory: 5Mi
+{{ toYaml .Values.nodelocal.resources | indent 10 }}
         args: 
           - "-localip"
           - "{{.Values.nodelocal.ip_address}}{{ template "nodelocalLocalIPFlag" . }}"
