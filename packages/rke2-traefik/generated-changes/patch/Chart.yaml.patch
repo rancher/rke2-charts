@@ -1,23 +1,18 @@
 --- charts-original/Chart.yaml
 +++ charts/Chart.yaml
-@@ -1,14 +1,7 @@
+@@ -1,10 +1,5 @@
  annotations:
--  artifacthub.io/changes: "- \"refactor(chart): clean output on Deployment & Daemonset\"\n-
--    \"fix(security)!: add support for request path options of Traefik 3.6.7+\"\n-
--    \"fix(ports)!: \U0001F41B entrypoints `http` options\"\n- \"feat(gateway-api):
--    add support for defaultScope experimental feature\"\n- \"feat(deps)!: update traefik
--    docker tag to v3.6.7\"\n- \"feat(chart): enforce schema\"\n- \"feat(CRDs)!: support
--    Traefik Hub v3.19.0\"\n- \"docs(values): avoid unbreakable lines in table output
--    of VALUES.md\"\n- \"chore(release): \U0001F680 publish traefik 39.0.0 and crds
--    1.14.0\"\n"
+-  artifacthub.io/changes: |
+-    - "fix: :bug: handle experimental-master and fail gracefully"
+-    - "fix(nginx): add required RBAC for v3.7"
+-    - "fix(gateway): setting port value for `websecure` listener can fail"
+-    - "feat: upgrade traefik to version v3.6.10"
+-    - "chore(release): publish v39.0.5"
 +  fleet.cattle.io/bundle-id: rke2
  apiVersion: v2
--appVersion: v3.6.7
-+appVersion: v3.6.9
+ appVersion: v3.6.10
  description: A Traefik based Kubernetes ingress controller
- home: https://traefik.io/
- icon: https://raw.githubusercontent.com/traefik/traefik/master/docs/content/assets/img/traefik.logo.png
-@@ -23,7 +16,7 @@
+@@ -21,7 +16,7 @@
  - email: remi.buisson@traefik.io
    name: darkweaver87
  - name: jnoordsij
