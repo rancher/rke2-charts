@@ -5,7 +5,7 @@
  | deployment.imagePullSecrets | list | `[]` | Pull secret for fetching traefik container image |
  | deployment.initContainers | list | `[]` | Additional initContainers (e.g. for setting file permission as shown below) |
 -| deployment.kind | string | `"Deployment"` | Deployment or DaemonSet |
-+| deployment.kind | string | `"Daemonset"` | Deployment or DaemonSet |
++| deployment.kind | string | `"DaemonSet"` | Deployment or DaemonSet |
  | deployment.labels | object | `{}` | Additional deployment labels (e.g. for filtering deployment by custom labels) |
  | deployment.lifecycle | object | `{}` | Pod lifecycle actions |
  | deployment.livenessPath | string | `""` | Override the liveness path. Default: /ping |
