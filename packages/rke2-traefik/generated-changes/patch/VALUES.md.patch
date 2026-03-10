@@ -1,0 +1,53 @@
+--- charts-original/VALUES.md
++++ charts/VALUES.md
+@@ -1,6 +1,6 @@
+ # traefik
+ 
+-![Version: 39.0.0](https://img.shields.io/badge/Version-39.0.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v3.6.7](https://img.shields.io/badge/AppVersion-v3.6.7-informational?style=flat-square)
++![Version: 39.0.002](https://img.shields.io/badge/Version-39.0.002-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v3.6.9](https://img.shields.io/badge/AppVersion-v3.6.9-informational?style=flat-square)
+ 
+ A Traefik based Kubernetes ingress controller
+ 
+@@ -54,7 +54,7 @@
+ | deployment.hostAliases | list | `[]` | Custom [host aliases](https://kubernetes.io/docs/tasks/network/customize-hosts-file-for-pods/) |
+ | deployment.imagePullSecrets | list | `[]` | Pull secret for fetching traefik container image |
+ | deployment.initContainers | list | `[]` | Additional initContainers (e.g. for setting file permission as shown below) |
+-| deployment.kind | string | `"Deployment"` | Deployment or DaemonSet |
++| deployment.kind | string | `"DaemonSet"` | Deployment or DaemonSet |
+ | deployment.labels | object | `{}` | Additional deployment labels (e.g. for filtering deployment by custom labels) |
+ | deployment.lifecycle | object | `{}` | Pod lifecycle actions |
+ | deployment.livenessPath | string | `""` | Override the liveness path. Default: /ping |
+@@ -171,11 +171,11 @@
+ | hub.tracing.additionalTraceHeaders.traceContext.traceState | string | `""` | Name of the header that will contain the tracestate copy. |
+ | image.pullPolicy | string | `"IfNotPresent"` | Traefik image pull policy |
+ | image.registry | string | `"docker.io"` | Traefik image host registry |
+-| image.repository | string | `"traefik"` | Traefik image repository |
+-| image.tag | string | `nil` | defaults to appVersion. It's used for version checking, even prefixed with experimental- or latest-. When a digest is required, `versionOverride` can be used to set the version. |
++| image.repository | string | `"rancher/hardened-traefik"` | Traefik image repository |
++| image.tag | string | `"v3.6.9-build20260226"` | defaults to appVersion. It's used for version checking, even prefixed with experimental- or latest-. When a digest is required, `versionOverride` can be used to set the version. |
+ | ingressClass.enabled | bool | `true` | Create a default IngressClass for Traefik |
+-| ingressClass.isDefaultClass | bool | `true` |  |
+-| ingressClass.name | string | `""` |  |
++| ingressClass.isDefaultClass | bool | `false` |  |
++| ingressClass.name | string | `"traefik"` |  |
+ | ingressRoute | object | See _values.yaml_ | Only dashboard & healthcheck IngressRoute are supported. It's recommended to create workloads CR outside of this Chart. |
+ | ingressRoute.dashboard.annotations | object | `{}` | Additional ingressRoute annotations (e.g. for kubernetes.io/ingress.class) |
+ | ingressRoute.dashboard.enabled | bool | `false` | Create an IngressRoute for the dashboard |
+@@ -397,7 +397,7 @@
+ | providers.kubernetesCRD.allowEmptyServices | bool | `true` | Allows to return 503 when there are no endpoints available |
+ | providers.kubernetesCRD.allowExternalNameServices | bool | `false` | Allows to reference ExternalName services in IngressRoute |
+ | providers.kubernetesCRD.enabled | bool | `true` | Load Kubernetes IngressRoute provider |
+-| providers.kubernetesCRD.ingressClass | string | `""` | When the parameter is set, only resources containing an annotation with the same value are processed. Otherwise, resources missing the annotation, having an empty value, or the value traefik are processed. It will also set required annotation on Dashboard and Healthcheck IngressRoute when enabled. |
++| providers.kubernetesCRD.ingressClass | string | `"traefik"` | When the parameter is set, only resources containing an annotation with the same value are processed. Otherwise, resources missing the annotation, having an empty value, or the value traefik are processed. It will also set required annotation on Dashboard and Healthcheck IngressRoute when enabled. |
+ | providers.kubernetesCRD.labelSelector | string | `""` | See [upstream documentation](https://doc.traefik.io/traefik/reference/install-configuration/providers/kubernetes/kubernetes-ingress/#opt-providers-kubernetesIngress-labelselector) |
+ | providers.kubernetesCRD.namespaces | list | `[]` | Array of namespaces to watch. If left empty, Traefik watches all namespaces. . When using `rbac.namespaced`, it will watch helm release namespace and namespaces listed in this array. |
+ | providers.kubernetesCRD.nativeLBByDefault | bool | `false` | Defines whether to use Native Kubernetes load-balancing mode by default. |
+@@ -415,7 +415,7 @@
+ | providers.kubernetesIngress.allowExternalNameServices | bool | `false` | Allows to reference ExternalName services in Ingress |
+ | providers.kubernetesIngress.disableIngressClassLookup | bool | `false` | Only for Traefik v3.0, Deprecated since v3.1. See [upstream documentation](https://doc.traefik.io/traefik/v3.0/providers/kubernetes-ingress/#disableingressclasslookup) |
+ | providers.kubernetesIngress.enabled | bool | `true` | Load Kubernetes Ingress provider |
+-| providers.kubernetesIngress.ingressClass | string | `nil` | When ingressClass is set, only Ingresses containing an annotation with the same value are processed. Otherwise, Ingresses missing the annotation, having an empty value, or the value traefik are processed. |
++| providers.kubernetesIngress.ingressClass | string | `"traefik"` | When ingressClass is set, only Ingresses containing an annotation with the same value are processed. Otherwise, Ingresses missing the annotation, having an empty value, or the value traefik are processed. |
+ | providers.kubernetesIngress.labelSelector | string | `nil` |  |
+ | providers.kubernetesIngress.namespaces | list | `[]` | Array of namespaces to watch. If left empty, Traefik watches all namespaces. . When using `rbac.namespaced`, it will watch helm release namespace and namespaces listed in this array. |
+ | providers.kubernetesIngress.nativeLBByDefault | bool | `false` | Defines whether to use Native Kubernetes load-balancing mode by default. |
