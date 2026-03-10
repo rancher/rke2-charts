@@ -9,7 +9,7 @@
    # -- defaults to appVersion. It's used for version checking, even prefixed with experimental- or latest-.
    # When a digest is required, `versionOverride` can be used to set the version.
 -  tag:  # @schema type:[string, null]
-+  tag: "v3.6.9-build20260226"
++  tag: v3.6.10-build20260309
    # -- Traefik image pull policy
    pullPolicy: IfNotPresent
  
@@ -18,7 +18,7 @@
    enabled: true
    # -- Deployment or DaemonSet
 -  kind: Deployment
-+  kind: DaemonSet
++  kind: Daemonset
    # -- Number of pods of the deployment (only applies when kind == Deployment)
    replicas: 1
    # -- Number of old history to retain to allow rollback (If not set, default Kubernetes value is set to 10)
@@ -58,7 +58,7 @@
      disableIngressClassLookup: false
      # -- When ingressClass is set, only Ingresses containing an annotation with the same value are processed. Otherwise, Ingresses missing the annotation, having an empty value, or the value traefik are processed.
 -    ingressClass:  # @schema type:[string, null]
-+    ingressClass: "traefik" # @schema type:[string, null]
++    ingressClass: "traefik"  # @schema type:[string, null]
      labelSelector:  # @schema type:[string, null]
      # -- Array of namespaces to watch. If left empty, Traefik watches all namespaces. . When using `rbac.namespaced`, it will watch helm release namespace and namespaces listed in this array.
      namespaces: []
@@ -85,7 +85,7 @@
      # asDefault: true
      port: 8443
 -    hostPort:  # @schema type:[integer, null]; minimum:0
-+    hostPort:  443 # @schema type:[integer, null]; minimum:0
++    hostPort: 443 # @schema type:[integer, null]; minimum:0
      containerPort:  # @schema type:[integer, null]; minimum:0
      expose:
        default: true

@@ -1,0 +1,11 @@
+--- charts-original/EXAMPLES.md
++++ charts/EXAMPLES.md
+@@ -2,7 +2,7 @@
+ 
+ ## Install as a DaemonSet
+ 
+-Default install is using a `Deployment` but it's possible to use `DaemonSet`
++Upstream default install is using a `Deployment` but in RKE2 we use a `DaemonSet`
+ 
+ ```yaml
+ deployment:
