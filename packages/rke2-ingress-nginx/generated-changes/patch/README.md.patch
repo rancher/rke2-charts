@@ -1,0 +1,64 @@
+--- charts-original/README.md
++++ charts/README.md
+@@ -6,7 +6,7 @@
+ 
+ To use, add `ingressClassName: nginx` spec field or the `kubernetes.io/ingress.class: nginx` annotation to your Ingress resources.
+ 
+-This chart bootstraps an ingress-nginx deployment on a [Kubernetes](http://kubernetes.io) cluster using the [Helm](https://helm.sh) package manager.
++This chart bootstraps an ingress-nginx daemonset on a [Kubernetes](http://kubernetes.io) cluster using the [Helm](https://helm.sh) package manager.
+ 
+ ## Requirements
+ 
+@@ -319,14 +319,14 @@
+ | controller.config | object | `{}` | Global configuration passed to the ConfigMap consumed by the controller. Values may contain Helm templates. Ref.: https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/ |
+ | controller.configAnnotations | object | `{}` | Annotations to be added to the controller config configuration configmap. |
+ | controller.configMapNamespace | string | `""` | Allows customization of the configmap / nginx-configmap namespace; defaults to $(POD_NAMESPACE) |
+-| controller.containerName | string | `"controller"` | Configures the controller container name |
++| controller.containerName | string | `"rke2-ingress-nginx-controller"` | Configures the controller container name |
+ | controller.containerPort | object | `{"http":80,"https":443}` | Configures the ports that the nginx-controller listens on |
+ | controller.containerSecurityContext | object | `{}` | Security context for controller containers |
+ | controller.customTemplate.configMapKey | string | `""` |  |
+ | controller.customTemplate.configMapName | string | `""` |  |
+ | controller.disableLeaderElection | bool | `false` | This configuration disable Nginx Controller Leader Election |
+ | controller.dnsConfig | object | `{}` | Optionally customize the pod dnsConfig. |
+-| controller.dnsPolicy | string | `"ClusterFirst"` | Optionally change this to ClusterFirstWithHostNet in case you have 'hostNetwork: true'. By default, while using host network, name resolution uses the host's DNS. If you wish nginx-controller to keep resolving names inside the k8s network, use ClusterFirstWithHostNet. |
++| controller.dnsPolicy | string | `"ClusterFirstWithHostNet"` | Optionally change this to ClusterFirstWithHostNet in case you have 'hostNetwork: true'. By default, while using host network, name resolution uses the host's DNS. If you wish nginx-controller to keep resolving names inside the k8s network, use ClusterFirstWithHostNet. |
+ | controller.electionID | string | `""` | Election ID to use for status update, by default it uses the controller name combined with a suffix of 'leader' |
+ | controller.electionTTL | string | `""` | Duration a leader election is valid before it's getting re-elected, e.g. `15s`, `10m` or `1h`. (Default: 30s) |
+ | controller.enableAnnotationValidations | bool | `true` |  |
+@@ -343,7 +343,7 @@
+ | controller.healthCheckPath | string | `"/healthz"` | Path of the health check endpoint. All requests received on the port defined by the healthz-port parameter are forwarded internally to this path. |
+ | controller.hostAliases | list | `[]` | Optionally customize the pod hostAliases. |
+ | controller.hostNetwork | bool | `false` | Required for use with CNI based kubernetes installations (such as ones set up by kubeadm), since CNI and hostport don't mix yet. Can be deprecated once https://github.com/kubernetes/kubernetes/issues/23920 is merged |
+-| controller.hostPort.enabled | bool | `false` | Enable 'hostPort' or not |
++| controller.hostPort.enabled | bool | `true` | Enable 'hostPort' or not |
+ | controller.hostPort.ports.http | int | `80` | 'hostPort' http port |
+ | controller.hostPort.ports.https | int | `443` | 'hostPort' https port |
+ | controller.hostname | object | `{}` | Optionally customize the pod hostname. |
+@@ -379,7 +379,7 @@
+ | controller.keda.restoreToOriginalReplicaCount | bool | `false` |  |
+ | controller.keda.scaledObject.annotations | object | `{}` |  |
+ | controller.keda.triggers | list | `[]` |  |
+-| controller.kind | string | `"Deployment"` | Use a `DaemonSet` or `Deployment` |
++| controller.kind | string | `"Daemonset"` | Use a `DaemonSet` or `Deployment` |
+ | controller.labels | object | `{}` | Labels to be added to the controller Deployment or DaemonSet and other resources that do not have option to specify labels # |
+ | controller.lifecycle | object | `{"preStop":{"exec":{"command":["/wait-shutdown"]}}}` | Improve connection draining when ingress controller pod is deleted using a lifecycle hook: With this new hook, we increased the default terminationGracePeriodSeconds from 30 seconds to 300, allowing the draining of connections up to five minutes. If the active connections end before that, the pod will terminate gracefully at that time. To effectively take advantage of this feature, the Configmap feature worker-shutdown-timeout new value is 240s instead of 10s. # |
+ | controller.livenessProbe.failureThreshold | int | `5` |  |
+@@ -399,7 +399,7 @@
+ | controller.metrics.prometheusRule.enabled | bool | `false` |  |
+ | controller.metrics.prometheusRule.rules | list | `[]` |  |
+ | controller.metrics.service.annotations | object | `{}` |  |
+-| controller.metrics.service.enabled | bool | `true` | Enable the metrics service or not. |
++| controller.metrics.service.enabled | bool | `false` | Enable the metrics service or not. |
+ | controller.metrics.service.externalIPs | list | `[]` | List of IP addresses at which the stats-exporter service is available # Ref: https://kubernetes.io/docs/concepts/services-networking/service/#external-ips # |
+ | controller.metrics.service.labels | object | `{}` | Labels to be added to the metrics service resource |
+ | controller.metrics.service.loadBalancerSourceRanges | list | `[]` |  |
+@@ -432,7 +432,7 @@
+ | controller.progressDeadlineSeconds | int | `0` | Specifies the number of seconds you want to wait for the controller deployment to progress before the system reports back that it has failed. Ref.: https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#progress-deadline-seconds |
+ | controller.proxySetHeaders | object | `{}` | Will add custom headers before sending traffic to backends according to https://github.com/kubernetes/ingress-nginx/tree/main/docs/examples/customization/custom-headers |
+ | controller.publishService | object | `{"enabled":true,"pathOverride":""}` | Allows customization of the source of the IP address or FQDN to report in the ingress status field. By default, it reads the information provided by the service. If disable, the status field reports the IP address of the node or nodes where an ingress controller pod is running. |
+-| controller.publishService.enabled | bool | `true` | Enable 'publishService' or not |
++| controller.publishService.enabled | bool | `false` | Enable 'publishService' or not |
+ | controller.publishService.pathOverride | string | `""` | Allows overriding of the publish service to bind to Must be <namespace>/<service_name> |
+ | controller.readinessProbe.failureThreshold | int | `3` |  |
+ | controller.readinessProbe.httpGet.path | string | `"/healthz"` |  |
