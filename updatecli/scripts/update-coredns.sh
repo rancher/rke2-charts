@@ -6,6 +6,16 @@ source $(dirname $0)/create-issue.sh
 ISSUE_TITLE="Updatecli failed for coredns ${COREDNS_CHART_VERSION}" 
 trap report-error EXIT INT
 
+coredns_chart_sha256() {
+	case "$1" in
+		1.45.2) echo "fc1919f05b8640862d86965a2ee7065f2ddf0d4b39b94627263bb8ab490d678d" ;;
+		*)
+			echo "No pinned SHA256 for CoreDNS chart version: $1" >&2
+			return 1
+			;;
+	esac
+}
+
 CHART_UPDATED=false
 IMAGES_UPDATED=false
 
@@ -44,15 +54,19 @@ if [ -n "$COREDNS_CHART_VERSION" ]; then
 	current_coredns_chart_version=$(awk -F'/coredns-|.tgz' '{print $2}' <<< $current_coredns_url)
 	if [ "$current_coredns_chart_version" != "$COREDNS_CHART_VERSION" ]; then
 		echo "Updating Coredns chart to $COREDNS_CHART_VERSION"
+		new_coredns_chart_sha256=$(coredns_chart_sha256 "$COREDNS_CHART_VERSION")
+		current_coredns_chart_sha256=$(coredns_chart_sha256 "$current_coredns_chart_version")
 		# if there is a new chart, reset the package version to 00 even if the images are also updated
 		yq -i ".url = \"https://github.com/coredns/helm/releases/download/coredns-${COREDNS_CHART_VERSION}/coredns-${COREDNS_CHART_VERSION}.tgz\" |
 			.packageVersion = 00" packages/rke2-coredns/package.yaml
 		mkdir workdir
 		wget -P workdir/ https://github.com/coredns/helm/releases/download/coredns-${COREDNS_CHART_VERSION}/coredns-${COREDNS_CHART_VERSION}.tgz
+		echo "$new_coredns_chart_sha256  workdir/coredns-${COREDNS_CHART_VERSION}.tgz" | sha256sum -c -
 		tar --directory=workdir -xf workdir/coredns-${COREDNS_CHART_VERSION}.tgz coredns/values.yaml
 		mv workdir/coredns/values.yaml workdir/coredns/values_new.yaml
 		rm workdir/coredns-${COREDNS_CHART_VERSION}.tgz
 		wget -P workdir/ https://github.com/coredns/helm/releases/download/coredns-${current_coredns_chart_version}/coredns-${current_coredns_chart_version}.tgz
+		echo "$current_coredns_chart_sha256  workdir/coredns-${current_coredns_chart_version}.tgz" | sha256sum -c -
 		tar --directory=workdir -xf workdir/coredns-${current_coredns_chart_version}.tgz coredns/values.yaml
 		current_autoscaler_version=$(yq '.autoscaler.image.tag' workdir/coredns/values.yaml)
 		new_autoscaler_version=$(yq '.autoscaler.image.tag' workdir/coredns/values_new.yaml)
