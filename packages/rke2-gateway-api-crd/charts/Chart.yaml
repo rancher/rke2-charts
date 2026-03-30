@@ -1,0 +1,6 @@
+apiVersion: v2
+name: rke2-gateway-api-crd
+description: RKE2 Helm chart for Gateway API CRDs
+version: 1.5.1
+appVersion: v1.5.1
+type: application
