@@ -1,0 +1,6 @@
+{{- if eq (.Values.gatewayAPIExperimental | toString) "true" -}}
+{{- range $path, $_ := .Files.Glob "experimentalcrds/*.yaml" }}
+---
+{{ $.Files.Get $path }}
+{{- end }}
+{{- end }}
