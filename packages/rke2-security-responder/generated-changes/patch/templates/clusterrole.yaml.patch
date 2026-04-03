@@ -1,0 +1,12 @@
+--- charts-original/templates/clusterrole.yaml
++++ charts/templates/clusterrole.yaml
+@@ -1,3 +1,4 @@
++{{- if .Values.enabled }}
+ apiVersion: rbac.authorization.k8s.io/v1
+ kind: ClusterRole
+ metadata:
+@@ -21,3 +22,4 @@
+   - apiGroups: [""]
+     resources: ["services"]
+     verbs: ["get"]
++{{- end }}

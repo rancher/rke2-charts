@@ -1,0 +1,21 @@
+--- charts-original/values.yaml
++++ charts/values.yaml
+@@ -2,6 +2,9 @@
+ # This is a YAML-formatted file.
+ # Declare variables to be passed into your templates.
+ 
++# Enable the security responder. Off by default; enable via HelmChartConfig.
++enabled: false
++
+ # Global values injected by RKE2 at runtime
+ global:
+   systemDefaultRegistry: ""
+@@ -29,7 +32,7 @@
+ 
+ # Security check endpoint configuration
+ check:
+-  endpoint: "https://security-responder.rke2.io/v1/check"
++  endpoint: "https://security-responder.rke2.io/v1/checkupgrade"
+ 
+ # Resource limits
+ resources:
