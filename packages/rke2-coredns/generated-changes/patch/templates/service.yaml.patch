@@ -2,7 +2,7 @@
 +++ charts/templates/service.yaml
 @@ -1,4 +1,6 @@
 -{{- if .Values.deployment.enabled }}
-+{{- if and .Values.deployment.enabled (not .Values.nodelocal.enabled) }}
++{{- if and .Values.deployment.enabled (not .Values.nodelocal.use_cilium_lrp) }}
 +{{- $dnsIPs := split "," .Values.global.clusterDNS }}
 +{{- $dnsCount := len $dnsIPs }}
  ---
