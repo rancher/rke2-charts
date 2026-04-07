@@ -1,1 +1,2 @@
-gatewayAPIExperimental: false
+experimental:
+  enabled: false
