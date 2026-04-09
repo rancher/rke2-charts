@@ -1,18 +1,14 @@
 --- charts-original/Chart.yaml
 +++ charts/Chart.yaml
-@@ -1,10 +1,5 @@
+@@ -1,6 +1,5 @@
  annotations:
--  artifacthub.io/changes: |
--    - "fix: :bug: handle experimental-master and fail gracefully"
--    - "fix(nginx): add required RBAC for v3.7"
--    - "fix(gateway): setting port value for `websecure` listener can fail"
--    - "feat: upgrade traefik to version v3.6.10"
--    - "chore(release): publish v39.0.5"
+-  artifacthub.io/changes: "- \"feat(deps): update traefik docker tag to v3.6.12 (v39.0)\"\n-
+-    \"chore(release): \U0001F680 publish v39.0.7\"\n"
 +  fleet.cattle.io/bundle-id: rke2
  apiVersion: v2
- appVersion: v3.6.10
+ appVersion: v3.6.12
  description: A Traefik based Kubernetes ingress controller
-@@ -21,7 +16,7 @@
+@@ -17,7 +16,7 @@
  - email: remi.buisson@traefik.io
    name: darkweaver87
  - name: jnoordsij
