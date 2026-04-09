@@ -1,0 +1,50 @@
+--- charts-original/crds/gateway-standard-install.yaml
++++ charts/crds/gateway-standard-install.yaml
+@@ -26,6 +26,7 @@
+     api-approved.kubernetes.io: https://github.com/kubernetes-sigs/gateway-api/pull/3328
+     gateway.networking.k8s.io/bundle-version: v1.4.0
+     gateway.networking.k8s.io/channel: standard
++    helm.sh/resource-policy: keep
+   labels:
+     gateway.networking.k8s.io/policy: Direct
+   name: backendtlspolicies.gateway.networking.k8s.io
+@@ -1348,6 +1349,7 @@
+     api-approved.kubernetes.io: https://github.com/kubernetes-sigs/gateway-api/pull/3328
+     gateway.networking.k8s.io/bundle-version: v1.4.0
+     gateway.networking.k8s.io/channel: standard
++    helm.sh/resource-policy: keep
+   name: gatewayclasses.gateway.networking.k8s.io
+ spec:
+   group: gateway.networking.k8s.io
+@@ -1867,6 +1869,7 @@
+     api-approved.kubernetes.io: https://github.com/kubernetes-sigs/gateway-api/pull/3328
+     gateway.networking.k8s.io/bundle-version: v1.4.0
+     gateway.networking.k8s.io/channel: standard
++    helm.sh/resource-policy: keep
+   name: gateways.gateway.networking.k8s.io
+ spec:
+   group: gateway.networking.k8s.io
+@@ -4124,6 +4127,7 @@
+     api-approved.kubernetes.io: https://github.com/kubernetes-sigs/gateway-api/pull/3328
+     gateway.networking.k8s.io/bundle-version: v1.4.0
+     gateway.networking.k8s.io/channel: standard
++    helm.sh/resource-policy: keep
+   name: grpcroutes.gateway.networking.k8s.io
+ spec:
+   group: gateway.networking.k8s.io
+@@ -6198,6 +6202,7 @@
+     api-approved.kubernetes.io: https://github.com/kubernetes-sigs/gateway-api/pull/3328
+     gateway.networking.k8s.io/bundle-version: v1.4.0
+     gateway.networking.k8s.io/channel: standard
++    helm.sh/resource-policy: keep
+   name: httproutes.gateway.networking.k8s.io
+ spec:
+   group: gateway.networking.k8s.io
+@@ -11845,6 +11850,7 @@
+     api-approved.kubernetes.io: https://github.com/kubernetes-sigs/gateway-api/pull/3328
+     gateway.networking.k8s.io/bundle-version: v1.4.0
+     gateway.networking.k8s.io/channel: standard
++    helm.sh/resource-policy: keep
+   name: referencegrants.gateway.networking.k8s.io
+ spec:
+   group: gateway.networking.k8s.io
