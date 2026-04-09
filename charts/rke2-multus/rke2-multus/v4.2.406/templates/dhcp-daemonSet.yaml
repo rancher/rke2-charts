@@ -1,0 +1,65 @@
+{{- if .Values.manifests.dhcpDaemonSet }}
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: {{ .Release.Name }}-dhcp
+  namespace: {{ .Release.Namespace }}
+  labels:
+{{- include "multus.labels" . | indent 4 }}
+spec:
+  selector:
+    matchLabels:
+      app: {{ .Chart.Name }}
+  updateStrategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+  template:
+    metadata:
+      labels:
+{{- include "multus.labels" . | indent 8 }}
+    spec:
+      hostNetwork: true
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | trim | nindent 8 }}
+      {{- end }}
+      nodeSelector: {{- toYaml .Values.labels.nodeSelector | nindent 8 }}
+      initContainers:
+      - name: kube-{{ .Chart.Name }}-dhcp-cleanup
+        image: {{ template "system_default_registry" . }}{{ .Values.dhcpDaemonSet.image.repository }}:{{ .Values.dhcpDaemonSet.image.tag }}
+        command: ["rm", "-f", "/run/cni/dhcp.sock"]
+        securityContext:
+          privileged: true
+        volumeMounts:
+        - name: socketpath
+          mountPath: /host/run/cni
+      containers:
+      - name: kube-{{ .Chart.Name }}-dhcp
+        image: {{ template "system_default_registry" . }}{{ .Values.dhcpDaemonSet.image.repository }}:{{ .Values.dhcpDaemonSet.image.tag }}
+        command: ["/opt/cni/bin/dhcp", "daemon"]
+        securityContext:
+          privileged: true
+        volumeMounts:
+        - name: binpath
+          mountPath: /opt/cni/bin
+        - name: socketpath
+          mountPath: /run/cni
+        - name: netnspath
+          mountPath: /var/run/netns
+          mountPropagation: HostToContainer
+      volumes:
+        - name: binpath
+          hostPath:
+            path: {{ .Values.config.cni_conf.binDir }}
+        - name: socketpath
+          hostPath:
+            path: /run/cni
+        - name: netnspath
+          hostPath:
+            path: /run/netns
+{{- end }}
