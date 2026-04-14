@@ -4,6 +4,7 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.14.0
+    helm.sh/resource-policy: keep
   name: nodeslicepools.whereabouts.cni.cncf.io
 spec:
   group: whereabouts.cni.cncf.io
