@@ -15,9 +15,9 @@
    # kube-flannel image
    image:
 -    repository: ghcr.io/flannel-io/flannel
--    tag: v0.28.3
+-    tag: v0.28.4
 +    repository: rancher/hardened-flannel
-+    tag: v0.28.3-build20260415
++    tag: v0.28.4-build20260415
    flannel_cni:
      image:
 -      repository: ghcr.io/flannel-io/flannel-cni-plugin
