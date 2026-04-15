@@ -1,0 +1,143 @@
+---
+# Source: calico/templates/calico-config.yaml
+# This ConfigMap is used to configure a self-hosted Canal installation.
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: {{ .Release.Name }}-config
+  namespace: kube-system
+data:
+  # Typha is disabled.
+  typha_service_name: {{ .Values.calico.typhaServiceName | quote }}
+  # The interface used by canal for host <-> host communication.
+  # If left blank, then the interface is chosen using the node's
+  # default route.
+  canal_iface: {{ .Values.flannel.iface | quote }}
+
+  canal_iface_regex: {{ .Values.flannel.regexIface | quote }}
+
+  # Whether or not to masquerade traffic to destinations not within
+  # the pod network.
+  masquerade: {{ .Values.calico.masquerade | quote }}
+
+  # Configure the MTU to use
+  veth_mtu: {{ .Values.calico.vethuMTU | quote }}
+
+  # The CNI network configuration to install on each node.  The special
+  # values in this config will be automatically populated.
+  cni_network_config: |-
+    {
+      "name": "k8s-pod-network",
+      "cniVersion": "0.3.1",
+      "plugins": [
+        {
+          "type": "calico",
+          "log_level": "info",
+          "datastore_type": "kubernetes",
+          "nodename": "__KUBERNETES_NODE_NAME__",
+          "mtu": __CNI_MTU__,
+          "ipam": {
+              "type": "host-local",
+              "ranges": [
+{{- if coalesce .Values.global.clusterCIDRv4 .Values.podCidr }}
+                  [
+                      {
+                          "subnet": "usePodCidr"
+                      }
+{{- if coalesce .Values.global.clusterCIDRv6 .Values.podCidrv6 }}
+                  ],
+{{- else }}
+                  ]
+{{- end }}
+{{- end }}
+{{- if coalesce .Values.global.clusterCIDRv6 .Values.podCidrv6 }}
+                  [
+                      {
+                          "subnet": "usePodCidrIPv6"
+                      }
+                  ]
+{{- end }}
+              ]
+          },
+          "policy": {
+              "type": "k8s"
+          },
+          "kubernetes": {
+              "kubeconfig": "__KUBECONFIG_FILEPATH__"
+          }
+        },
+        {
+          "type": "portmap",
+          "snat": true,
+          "capabilities": {"portMappings": true}
+        },
+        {
+          "type": "bandwidth",
+          "capabilities": {"bandwidth": true}
+        }
+      ]
+    }
+
+  # Flannel network configuration. Mounted into the flannel container.
+  net-conf.json: |
+    {
+{{- if coalesce .Values.global.clusterCIDRv4 .Values.podCidr }}
+      "Network": {{ coalesce .Values.global.clusterCIDRv4 .Values.podCidr | quote }},
+{{- else }}
+      "EnableIPv4": false,
+{{- end }}
+{{- if coalesce .Values.global.clusterCIDRv6 .Values.podCidrv6 }}
+      "IPv6Network": {{ coalesce .Values.global.clusterCIDRv6 .Values.podCidrv6 | quote }},
+      "EnableIPv6": true,
+{{- end }}
+      "Backend": {
+{{- if eq .Values.flannel.backend "vxlan" }}
+{{- if .Values.flannel.backendPort }}
+        "Port": {{ .Values.flannel.backendPort }},
+{{- end }}
+{{- if .Values.flannel.vni }}
+        "VNI": {{ .Values.flannel.vni }},
+{{- end }}
+{{- if .Values.flannel.GBP }}
+        "GBP": {{ .Values.flannel.GBP }},
+{{- end }}
+{{- if .Values.flannel.directRouting }}
+        "DirectRouting": {{ .Values.flannel.directRouting }},
+{{- end }}
+{{- if .Values.flannel.mtu }}
+        "MTU": {{ .Values.flannel.mtu }},
+{{- end }}
+{{- if .Values.flannel.macPrefix }}
+        "MacPrefix": {{ .Values.flannel.macPrefix | quote }},
+{{- end }}
+        "Type": {{ .Values.flannel.backend | quote }}
+{{- else if eq .Values.flannel.backend "wireguard" }}
+{{- if .Values.flannel.backendPort }}
+        "ListenPort": {{ .Values.flannel.backendPort }},
+{{- end }}
+{{- if .Values.flannel.backendPortv6 }}
+        "ListenPortV6": {{ .Values.flannel.backendPortv6 }},
+{{- end }}
+{{- if .Values.flannel.psk }}
+        "PSK": {{ .Values.flannel.psk }},
+{{- end }}
+{{- if .Values.flannel.mtu }}
+        "MTU": {{ .Values.flannel.mtu }},
+{{- end }}
+{{- if .Values.flannel.tunnelMode }}
+        "Mode": {{ .Values.flannel.tunnelMode | quote }},
+{{- end }}
+{{- if .Values.flannel.keepaliveInterval }}
+        "PersistentKeepaliveInterval": {{ .Values.flannel.keepaliveInterval }},
+{{- end }}
+        "Type": {{ .Values.flannel.backend | quote }}
+{{- else if eq .Values.flannel.backend "udp" }}
+{{- if .Values.flannel.backendPort }}
+        "Port": {{ .Values.flannel.backendPort }},
+{{- end }}
+        "Type": {{ .Values.flannel.backend | quote }}
+{{- else }}
+        "Type": {{ .Values.flannel.backend | quote }}
+{{- end }}
+      }
+    }
