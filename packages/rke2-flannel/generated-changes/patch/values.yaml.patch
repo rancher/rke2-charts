@@ -1,6 +1,6 @@
 --- charts-original/values.yaml
 +++ charts/values.yaml
-@@ -1,28 +1,16 @@
+@@ -1,29 +1,17 @@
  ---
 -global:
 -  imagePullSecrets:
@@ -15,14 +15,15 @@
    # kube-flannel image
    image:
 -    repository: ghcr.io/flannel-io/flannel
--    tag: v0.28.2
+-    tag: v0.28.3
 +    repository: rancher/hardened-flannel
-+    tag: v0.28.2-build20260414
-   image_cni:
--    repository: ghcr.io/flannel-io/flannel-cni-plugin
--    tag: v1.9.0-flannel1
-+    repository: rancher/hardened-cni-plugins
-+    tag: v1.9.1-build20260408
++    tag: v0.28.3-build20260415
+   flannel_cni:
+     image:
+-      repository: ghcr.io/flannel-io/flannel-cni-plugin
+-      tag: v1.9.1-flannel1
++      repository: rancher/hardened-cni-plugins
++      tag: v1.9.1-build20260415
    # cniBinDir is the directory to which the flannel CNI binary is installed.
    cniBinDir: "/opt/cni/bin"
    # cniConfDir is the directory where the CNI configuration is located.
@@ -33,7 +34,7 @@
    # flannel command arguments
    enableNFTables: false
    args:
-@@ -33,14 +21,14 @@
+@@ -34,14 +22,14 @@
    # Documentation at https://github.com/flannel-io/flannel/blob/master/Documentation/backends.md
    backend: "vxlan"
    # Port used by the backend 0 means default value (VXLAN: 8472, Wireguard: 51821, UDP: 8285)
@@ -50,7 +51,7 @@
    # Enable VXLAN Group Based Policy (Default false)
    # GBP: false
    # Enable direct routes (default is false)
-@@ -76,6 +64,12 @@
+@@ -77,6 +65,12 @@
            "capabilities": {
              "portMappings": true
            }
@@ -63,7 +64,7 @@
          }
        ]
      }
-@@ -87,17 +81,19 @@
+@@ -88,17 +82,19 @@
        cpu: 100m
        memory: 50Mi
    tolerations:
