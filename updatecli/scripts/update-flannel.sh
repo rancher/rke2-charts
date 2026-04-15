@@ -8,7 +8,7 @@ trap report-error EXIT INT
 
 new_package=false
 if [ -n "$CNI_PLUGINS_VERSION" ]; then
-	current_cni_plugins_version=$(sed -nr 's/^\+    tag: ('v[0-9]+.[0-9]+.[0-9]+')/\1/p' packages/rke2-flannel/generated-changes/patch/values.yaml.patch  | tail -1)
+	current_cni_plugins_version=$(sed -nr 's/^\+      tag: ('v[0-9]+.[0-9]+.[0-9]+')/\1/p' packages/rke2-flannel/generated-changes/patch/values.yaml.patch  | tail -1)
 	if [ "$current_cni_plugins_version" != "$CNI_PLUGINS_VERSION" ]; then
 		echo "Updating CNI plugin version to $CNI_PLUGINS_VERSION"
 		sed -i "s/$current_cni_plugins_version/$CNI_PLUGINS_VERSION/g" packages/rke2-flannel/generated-changes/patch/values.yaml.patch
@@ -32,8 +32,8 @@ if [ -n "$FLANNEL_VERSION" ]; then
 			rm workdir/flannel.tgz
 			wget -P workdir/ https://github.com/flannel-io/flannel/releases/download/$current_app_version/flannel.tgz
 			tar --directory=workdir -xf workdir/flannel.tgz flannel/values.yaml
-			current_flannel_plugins_version=$(yq '.flannel.image_cni.tag' workdir/flannel/values.yaml)
-			new_flannel_plugins_version=$(yq '.flannel.image_cni.tag' workdir/flannel/values_new.yaml)
+			current_flannel_plugins_version=$(yq '.flannel.flannel_cni.image.tag' workdir/flannel/values.yaml)
+			new_flannel_plugins_version=$(yq '.flannel.flannel_cni.image.tag' workdir/flannel/values_new.yaml)
 			current_netpol_version=$(yq '.netpol.image.tag' workdir/flannel/values.yaml)
 			new_netpol_version=$(yq '.netpol.image.tag' workdir/flannel/values_new.yaml)
 			sed -i "s/ version: .*/ version: $app_version/g" packages/rke2-flannel/generated-changes/patch/Chart.yaml.patch
