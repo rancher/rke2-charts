@@ -13,7 +13,7 @@
 -        - /flannel
 -        - /opt/cni/bin/flannel
 +      - name: install-cni-plugins
-+        image: {{ template "system_default_registry" . }}{{ .Values.flannel.image_cni.repository }}:{{ .Values.flannel.image_cni.tag }}
++        image: {{ template "system_default_registry" . }}{{ .Values.flannel.flannel_cni.image.repository }}:{{ .Values.flannel.flannel_cni.image.tag }}
          volumeMounts:
          - name: cni-plugin
 -          mountPath: /opt/cni/bin
