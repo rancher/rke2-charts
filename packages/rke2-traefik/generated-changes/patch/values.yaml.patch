@@ -9,7 +9,7 @@
    # -- defaults to appVersion. It's used for version checking, even prefixed with experimental- or latest-.
    # When a digest is required, `versionOverride` can be used to set the version.
 -  tag:  # @schema type:[string, null]
-+  tag: v3.6.12-build20260409
++  tag: v3.6.13-build20260416
    # -- Traefik image pull policy
    pullPolicy: IfNotPresent
  
