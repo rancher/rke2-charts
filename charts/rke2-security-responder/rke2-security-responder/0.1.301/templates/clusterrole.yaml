@@ -1,0 +1,23 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: {{ include "rke2-security-responder.fullname" . }}
+  labels:
+    {{- include "rke2-security-responder.labels" . | nindent 4 }}
+rules:
+  # Need to read nodes to collect node information
+  - apiGroups: [""]
+    resources: ["nodes"]
+    verbs: ["get", "list"]
+  # Need to read namespaces to get cluster UUID
+  - apiGroups: [""]
+    resources: ["namespaces"]
+    verbs: ["get"]
+  # Need to read daemonsets and deployments to detect CNI and ingress controller
+  - apiGroups: ["apps"]
+    resources: ["daemonsets", "deployments"]
+    verbs: ["get", "list"]
+  # Need to read services to detect IP stack configuration (IPv4/IPv6/dual-stack)
+  - apiGroups: [""]
+    resources: ["services"]
+    verbs: ["get"]

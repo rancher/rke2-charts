@@ -1,0 +1,14 @@
+apiVersion: v2
+appVersion: 0.1.3
+description: RKE2 Security Responder for in-cluster CVE/security notifications and
+  telemetry
+keywords:
+- rke2
+- security
+- telemetry
+maintainers:
+- email: rke2-maintainers@suse.com
+  name: RKE2 Team
+name: rke2-security-responder
+type: application
+version: 0.1.301
