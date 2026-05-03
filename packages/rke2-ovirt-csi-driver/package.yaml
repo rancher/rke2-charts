@@ -1,0 +1,4 @@
+url: https://github.com/oracle-cne/catalog.git
+subdirectory: charts/ovirt-csi-driver-4.21.0
+commit: 4eff0ec9866e3c7b2c5fce7feee97c5c1d91744e  # ovirt-csi-driver-4.21.0
+packageVersion: 00

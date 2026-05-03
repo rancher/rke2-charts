@@ -1,0 +1,100 @@
+--- charts-original/values.yaml
++++ charts/values.yaml
+@@ -3,7 +3,7 @@
+     containerSecurityContext:
+       privileged: true
+     image:
+-      repository: olcne/csi-attacher
++      repository: registry.k8s.io/sig-storage/csi-attacher
+       tag: v4.10.0
+     resources:
+       limits:
+@@ -16,7 +16,7 @@
+     containerSecurityContext:
+       privileged: true
+     image:
+-      repository: olcne/csi-provisioner
++      repository: registry.k8s.io/sig-storage/csi-provisioner
+       tag: v6.0.0
+     resources:
+       limits:
+@@ -29,7 +29,7 @@
+     containerSecurityContext:
+       privileged: true
+     image:
+-      repository: olcne/csi-resizer
++      repository: registry.k8s.io/sig-storage/csi-resizer
+       tag: v1.14.0
+     resources:
+       limits:
+@@ -40,7 +40,7 @@
+         memory: 64Mi
+   livenessProbe:
+     image:
+-      repository: olcne/livenessprobe
++      repository: registry.k8s.io/sig-storage/livenessprobe
+       tag: v2.17.0
+     resources:
+       limits:
+@@ -57,8 +57,8 @@
+       csiEndpoint: unix:///csi-socket/csi.sock
+       ovirtConfig: /tmp/config/ovirt-config.yaml
+     image:
+-      repository: olcne/ovirt-csi-driver
+-      tag: v4.21.0-2
++      repository: quay.io/ovirt/csi-driver
++      tag: latest
+     imagePullPolicy: Always
+     resources:
+       limits:
+@@ -71,8 +71,8 @@
+     env:
+       ovirtCafile: /tmp/config/ovirt-engine-ca.pem
+     image:
+-      repository: olcne/ovirt-csi-driver
+-      tag: v4.21.0-2
++      repository: quay.io/ovirt/csi-driver
++      tag: latest
+     imagePullPolicy: IfNotPresent
+     resources:
+       requests:
+@@ -82,7 +82,7 @@
+ csiNode:
+   csiDriverRegistrar:
+     image:
+-      repository: olcne/csi-node-driver-registrar
++      repository: registry.k8s.io/sig-storage/csi-node-driver-registrar
+       tag: v2.15.0
+     resources:
+       limits:
+@@ -93,7 +93,7 @@
+         memory: 64Mi
+   livenessProbe:
+     image:
+-      repository: olcne/livenessprobe
++      repository: registry.k8s.io/sig-storage/livenessprobe
+       tag: v2.17.0
+     resources:
+       limits:
+@@ -110,8 +110,8 @@
+       csiEndpoint: unix:///csi-socket/csi.sock
+       ovirtConfig: /tmp/config/ovirt-config.yaml
+     image:
+-      repository: olcne/ovirt-csi-driver
+-      tag: v4.21.0-2
++      repository: quay.io/ovirt/csi-driver
++      tag: latest
+     imagePullPolicy: Always
+     resources:
+       limits:
+@@ -124,8 +124,8 @@
+     env:
+       ovirtCafile: /tmp/config/ovirt-engine-ca.pem
+     image:
+-      repository: olcne/ovirt-csi-driver
+-      tag: v4.21.0-2
++      repository: quay.io/ovirt/csi-driver
++      tag: latest
+     imagePullPolicy: IfNotPresent
+     resources:
+       requests:
