@@ -1,6 +1,6 @@
 --- charts-original/README.md
 +++ charts/README.md
-@@ -162,9 +162,9 @@
+@@ -166,9 +166,9 @@
  # Configuration for the tigera operator images to deploy.
  tigeraOperator:
    image: tigera/operator
@@ -10,5 +10,5 @@
 -  image: quay.io/calico/ctl
 +  image: docker.io/rancher/mirrored-calico-ctl
  
- # Configuration for the Calico CSI plugin - setting to None will disable the plugin, default: /var/lib/kubelet
- kubeletVolumePluginPath: None   
+ # Optionally configure the host and port used to access the Kubernetes API server.
+ kubernetesServiceEndpoint:

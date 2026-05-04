@@ -1,8 +1,8 @@
 --- charts-original/values.yaml
 +++ charts/values.yaml
-@@ -6,14 +6,30 @@
- imagePullSecrets: {}
- 
+@@ -9,6 +9,13 @@
+ # on the operator.tigera.io/Installation API documented
+ # here: https://docs.tigera.io/calico/latest/reference/installation/api#installationspec
  installation:
 +  controlPlaneTolerations:
 +  - key: "node-role.kubernetes.io/control-plane"
@@ -12,7 +12,13 @@
 +    operator: "Exists"
 +    effect: "NoExecute"
    enabled: true
-   kubernetesProvider: ""
+   # Uncomment to enable prometheus metrics reporting for node and typha.
+   # nodeMetricsPort: 9090
+@@ -16,7 +23,13 @@
+   # Path to the kubelet volume plugin directory used by the Calico CSI driver.
+   # Set to "None" to disable the CSI driver. If unset, defaults to /var/lib/kubelet (CSI enabled).
+   kubeletVolumePluginPath: "None"
+-
 +  natOutgoing: "Enabled"
 +  backend: "VXLAN"
 +  calicoNetwork:
@@ -20,18 +26,18 @@
 +  imagePath: "rancher"
 +  imagePrefix: "mirrored-calico-"
 +  flexVolumePath: "/var/lib/kubelet/volumeplugins/"
-+
-   # imagePullSecrets are configured on all images deployed by the tigera-operator.
-   # secrets specified here must exist in the tigera-operator namespace; they won't be created by the operator or helm.
-   # imagePullSecrets are a slice of LocalObjectReferences, which is the same format they appear as on deployments.
+   # --- General Image Settings ---
+   # registry: <custom-registry>
+   # imagePath: <optional-path>
+@@ -28,6 +41,7 @@
    #
    # Example: --set installation.imagePullSecrets[0].name=my-existing-secret
    imagePullSecrets: []
 +  registry: "docker.io"
  
-   # Disable CSI driver by default.
-   kubeletVolumePluginPath: "None"
-@@ -21,15 +37,15 @@
+   # Valid options: EKS, GKE, AKS, RKE2, OpenShift, DockerEnterprise, TKG, Kind.
+   # If empty the operator will attempt to automatically determine the current provider.
+@@ -85,15 +99,15 @@
  # apiServer configures the Calico API server, needed for interacting with
  # the projectcalico.org/v3 suite of APIs.
  apiServer:
@@ -50,7 +56,7 @@
  
  defaultFelixConfiguration:
    enabled: false
-@@ -47,7 +63,7 @@
+@@ -111,7 +125,7 @@
  
  # Whether or not the tigera/operator should manange CustomResourceDefinitions
  # needed to run itself and Calico. If disabled, you must manage these resources out-of-band.
@@ -59,19 +65,19 @@
  
  # Resource requests and limits for the tigera/operator pod.
  resources: {}
-@@ -82,13 +98,32 @@
+@@ -146,13 +160,32 @@
  dnsConfig: {}
  # Image and registry configuration for the tigera/operator pod.
  tigeraOperator:
 -  image: tigera/operator
 +  image: rancher/mirrored-calico-operator
-   version: v1.40.8
+   version: v1.42.0
 -  registry: quay.io
 +  registry: docker.io
  calicoctl:
 -  image: quay.io/calico/ctl
 +  image: rancher/mirrored-calico-ctl
-   tag: v3.31.5
+   tag: v3.32.0
  
 +global:
 +  systemDefaultRegistry: ""

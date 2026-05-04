@@ -9,7 +9,7 @@
    labels:
      {{- include "tigera-operator.labels" (dict "context" .) | nindent 4 }}
  spec:
-@@ -51,7 +51,7 @@
+@@ -55,7 +55,7 @@
        {{- end }}
        containers:
          - name: tigera-operator
