@@ -1,8 +1,6 @@
-url: https://github.com/projectcalico/calico/releases/download/v3.31.5/tigera-operator-v3.31.5.tgz
+url: https://github.com/projectcalico/calico/releases/download/v3.32.0/tigera-operator-v3.32.0.tgz
 packageVersion: 00
 additionalCharts:
   - workingDir: charts-crd
-    crdOptions:
-      templateDirectory: crd-template
-      crdDirectory: templates
-      addCRDValidationToMainChart: true
+    upstreamOptions:
+      url: https://github.com/projectcalico/calico/releases/download/v3.32.0/crd.projectcalico.org.v1-v3.32.0.tgz

@@ -20,7 +20,8 @@ if [ -n "$CALICO_VERSION" ]; then
 		sed -i "s/   tag: .*/   tag: $CALICO_VERSION/g" packages/rke2-calico/generated-changes/patch/values.yaml.patch
 		yq -i ".version = \"$CALICO_VERSION\"" packages/rke2-calico/templates/crd-template/Chart.yaml
 		yq -i ".url = \"https://github.com/projectcalico/calico/releases/download/$CALICO_VERSION/tigera-operator-$CALICO_VERSION.tgz\" |
-			.packageVersion = 00" packages/rke2-calico/package.yaml
+			.packageVersion = 00 |
+		        .additionalCharts[].upstreamOptions.url = \"https://github.com/projectcalico/calico/releases/download/$CALICO_VERSION/crd.projectcalico.org.v1-$CALICO_VERSION.tgz\"" packages/rke2-calico/package.yaml
 		GOCACHE='/home/runner/.cache/go-build' GOPATH='/home/runner/go' PACKAGE='rke2-calico' make prepare
 		find packages/rke2-calico/charts -name '*.orig' -delete
 		find packages/rke2-calico/charts-crd -name '*.orig' -delete
