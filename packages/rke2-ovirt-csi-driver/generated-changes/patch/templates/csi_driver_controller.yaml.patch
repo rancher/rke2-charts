@@ -44,7 +44,7 @@
          volumeMounts:
          - mountPath: /csi-socket
            name: socket-dir
-+      {{- if .Values.csiController.csiResizer.enable }}
++      {{- if .Values.csiController.csiResizer.enabled }}
        - args:
          - -csi-address=/csi-socket/csi.sock
          - -v=5

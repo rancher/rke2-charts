@@ -5,7 +5,7 @@
        privileged: true
      image:
 -      repository: olcne/csi-attacher
-+      repository: registry.k8s.io/sig-storage/csi-attacher
++      repository: rancher/mirrored-sig-storage-csi-attacher
        tag: v4.10.0
      resources:
        limits:
@@ -14,7 +14,7 @@
        privileged: true
      image:
 -      repository: olcne/csi-provisioner
-+      repository: registry.k8s.io/sig-storage/csi-provisioner
++      repository: rancher/mirrored-sig-storage-csi-provisioner
        tag: v6.0.0
      resources:
        limits:
@@ -22,12 +22,12 @@
          cpu: 80m
          memory: 64Mi
    csiResizer:
-+    enable: true
++    enabled: false
      containerSecurityContext:
        privileged: true
      image:
 -      repository: olcne/csi-resizer
-+      repository: registry.k8s.io/sig-storage/csi-resizer
++      repository: rancher/mirrored-sig-storage-csi-resizer
        tag: v1.14.0
      resources:
        limits:
@@ -36,7 +36,7 @@
    livenessProbe:
      image:
 -      repository: olcne/livenessprobe
-+      repository: registry.k8s.io/sig-storage/livenessprobe
++      repository: rancher/mirrored-sig-storage-livenessprobe
        tag: v2.17.0
      resources:
        limits:
@@ -46,8 +46,8 @@
      image:
 -      repository: olcne/ovirt-csi-driver
 -      tag: v4.21.0-2
-+      repository: quay.io/ovirt/csi-driver
-+      tag: latest
++      repository: rancher/mirrored-ovirt-csi-driver
++      tag: 4.21.0
      imagePullPolicy: Always
      resources:
        limits:
@@ -57,8 +57,8 @@
      image:
 -      repository: olcne/ovirt-csi-driver
 -      tag: v4.21.0-2
-+      repository: quay.io/ovirt/csi-driver
-+      tag: latest
++      repository: rancher/mirrored-ovirt-csi-driver
++      tag: 4.21.0
      imagePullPolicy: IfNotPresent
      resources:
        requests:
@@ -67,7 +67,7 @@
    csiDriverRegistrar:
      image:
 -      repository: olcne/csi-node-driver-registrar
-+      repository: registry.k8s.io/sig-storage/csi-node-driver-registrar
++      repository: rancher/mirrored-sig-storage-csi-node-driver-registrar
        tag: v2.15.0
      resources:
        limits:
@@ -76,7 +76,7 @@
    livenessProbe:
      image:
 -      repository: olcne/livenessprobe
-+      repository: registry.k8s.io/sig-storage/livenessprobe
++      repository: rancher/mirrored-sig-storage-livenessprobe
        tag: v2.17.0
      resources:
        limits:
@@ -86,8 +86,8 @@
      image:
 -      repository: olcne/ovirt-csi-driver
 -      tag: v4.21.0-2
-+      repository: quay.io/ovirt/csi-driver
-+      tag: latest
++      repository: rancher/mirrored-ovirt-csi-driver
++      tag: 4.21.0
      imagePullPolicy: Always
      resources:
        limits:
@@ -97,8 +97,8 @@
      image:
 -      repository: olcne/ovirt-csi-driver
 -      tag: v4.21.0-2
-+      repository: quay.io/ovirt/csi-driver
-+      tag: latest
++      repository: rancher/mirrored-ovirt-csi-driver
++      tag: 4.21.0
      imagePullPolicy: IfNotPresent
      resources:
        requests:
