@@ -1,6 +1,6 @@
 --- charts-original/templates/csi_driver_controller.yaml
 +++ charts/templates/csi_driver_controller.yaml
-@@ -37,7 +37,7 @@
+@@ -37,10 +37,10 @@
                apiVersion: v1
                fieldPath: spec.nodeName
          - name: OVIRT_CONFIG
@@ -8,4 +8,68 @@
 +          value: {{ quote .Values.csiController.ovirtController.env.ovirtConfig }}
          - name: KUBERNETES_CLUSTER_DOMAIN
            value: {{ quote .Values.kubernetesClusterDomain }}
-         image: {{ .Values.csiController.ovirtController.image.repository }}:{{ .Values.csiController.ovirtController.image.tag
+-        image: {{ .Values.csiController.ovirtController.image.repository }}:{{ .Values.csiController.ovirtController.image.tag
++        image: {{ template "system_default_registry" . }}{{ .Values.csiController.ovirtController.image.repository }}:{{ .Values.csiController.ovirtController.image.tag
+           | default .Chart.AppVersion }}
+         imagePullPolicy: {{ .Values.csiController.ovirtController.imagePullPolicy }}
+         livenessProbe:
+@@ -70,7 +70,7 @@
+         env:
+         - name: KUBERNETES_CLUSTER_DOMAIN
+           value: {{ quote .Values.kubernetesClusterDomain }}
+-        image: {{ .Values.csiController.livenessProbe.image.repository }}:{{ .Values.csiController.livenessProbe.image.tag
++        image: {{ template "system_default_registry" . }}{{ .Values.csiController.livenessProbe.image.repository }}:{{ .Values.csiController.livenessProbe.image.tag
+           | default .Chart.AppVersion }}
+         name: liveness-probe
+         resources: {{- toYaml .Values.csiController.livenessProbe.resources | nindent
+@@ -84,7 +84,7 @@
+         env:
+         - name: KUBERNETES_CLUSTER_DOMAIN
+           value: {{ quote .Values.kubernetesClusterDomain }}
+-        image: {{ .Values.csiController.csiAttacher.image.repository }}:{{ .Values.csiController.csiAttacher.image.tag
++        image: {{ template "system_default_registry" . }}{{ .Values.csiController.csiAttacher.image.repository }}:{{ .Values.csiController.csiAttacher.image.tag
+           | default .Chart.AppVersion }}
+         name: csi-attacher
+         resources: {{- toYaml .Values.csiController.csiAttacher.resources | nindent 10
+@@ -101,7 +101,7 @@
+         env:
+         - name: KUBERNETES_CLUSTER_DOMAIN
+           value: {{ quote .Values.kubernetesClusterDomain }}
+-        image: {{ .Values.csiController.csiProvisioner.image.repository }}:{{ .Values.csiController.csiProvisioner.image.tag
++        image: {{ template "system_default_registry" . }}{{ .Values.csiController.csiProvisioner.image.repository }}:{{ .Values.csiController.csiProvisioner.image.tag
+           | default .Chart.AppVersion }}
+         name: csi-provisioner
+         resources: {{- toYaml .Values.csiController.csiProvisioner.resources | nindent
+@@ -111,13 +111,14 @@
+         volumeMounts:
+         - mountPath: /csi-socket
+           name: socket-dir
++      {{- if .Values.csiController.csiResizer.enable }}
+       - args:
+         - -csi-address=/csi-socket/csi.sock
+         - -v=5
+         env:
+         - name: KUBERNETES_CLUSTER_DOMAIN
+           value: {{ quote .Values.kubernetesClusterDomain }}
+-        image: {{ .Values.csiController.csiResizer.image.repository }}:{{ .Values.csiController.csiResizer.image.tag
++        image: {{ template "system_default_registry" . }}{{ .Values.csiController.csiResizer.image.repository }}:{{ .Values.csiController.csiResizer.image.tag
+           | default .Chart.AppVersion }}
+         name: csi-resizer
+         resources: {{- toYaml .Values.csiController.csiResizer.resources | nindent 10
+@@ -127,6 +128,7 @@
+         volumeMounts:
+         - mountPath: /csi-socket
+           name: socket-dir
++      {{- end }}
+       initContainers:
+       - command:
+         - /bin/sh
+@@ -169,7 +171,7 @@
+ {{ end }}
+         - name: KUBERNETES_CLUSTER_DOMAIN
+           value: {{ quote .Values.kubernetesClusterDomain }}
+-        image: {{ .Values.csiController.prepareOvirtConfig.image.repository }}:{{ .Values.csiController.prepareOvirtConfig.image.tag
++        image: {{ template "system_default_registry" . }}{{ .Values.csiController.prepareOvirtConfig.image.repository }}:{{ .Values.csiController.prepareOvirtConfig.image.tag
+           | default .Chart.AppVersion }}
+         imagePullPolicy: {{ .Values.csiController.prepareOvirtConfig.imagePullPolicy }}
+         name: prepare-ovirt-config

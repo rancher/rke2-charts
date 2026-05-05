@@ -1,0 +1,38 @@
+--- charts-original/templates/csi_driver_node.yaml
++++ charts/templates/csi_driver_node.yaml
+@@ -40,7 +40,7 @@
+           value: {{ quote .Values.csiNode.ovirtNode.env.ovirtConfig }}
+         - name: KUBERNETES_CLUSTER_DOMAIN
+           value: {{ quote .Values.kubernetesClusterDomain }}
+-        image: {{ .Values.csiNode.ovirtNode.image.repository }}:{{ .Values.csiNode.ovirtNode.image.tag
++        image: {{ template "system_default_registry" . }}{{ .Values.csiNode.ovirtNode.image.repository }}:{{ .Values.csiNode.ovirtNode.image.tag
+           | default .Chart.AppVersion }}
+         imagePullPolicy: {{ .Values.csiNode.ovirtNode.imagePullPolicy }}
+         livenessProbe:
+@@ -75,7 +75,7 @@
+         env:
+         - name: KUBERNETES_CLUSTER_DOMAIN
+           value: {{ quote .Values.kubernetesClusterDomain }}
+-        image: {{ .Values.csiNode.livenessProbe.image.repository }}:{{ .Values.csiNode.livenessProbe.image.tag
++        image: {{ template "system_default_registry" . }}{{ .Values.csiNode.livenessProbe.image.repository }}:{{ .Values.csiNode.livenessProbe.image.tag
+           | default .Chart.AppVersion }}
+         name: liveness-probe
+         resources: {{- toYaml .Values.csiNode.livenessProbe.resources | nindent
+@@ -90,7 +90,7 @@
+         env:
+         - name: KUBERNETES_CLUSTER_DOMAIN
+           value: {{ quote .Values.kubernetesClusterDomain }}
+-        image: {{ .Values.csiNode.csiDriverRegistrar.image.repository }}:{{
++        image: {{ template "system_default_registry" . }}{{ .Values.csiNode.csiDriverRegistrar.image.repository }}:{{
+           .Values.csiNode.csiDriverRegistrar.image.tag | default .Chart.AppVersion
+           }}
+         livenessProbe:
+@@ -152,7 +152,7 @@
+ {{ end }}
+         - name: KUBERNETES_CLUSTER_DOMAIN
+           value: {{ quote .Values.kubernetesClusterDomain }}
+-        image: {{ .Values.csiNode.prepareOvirtConfig.image.repository }}:{{
++        image: {{ template "system_default_registry" . }}{{ .Values.csiNode.prepareOvirtConfig.image.repository }}:{{
+           .Values.csiNode.prepareOvirtConfig.image.tag | default .Chart.AppVersion
+           }}
+         imagePullPolicy: {{ .Values.csiNode.prepareOvirtConfig.imagePullPolicy

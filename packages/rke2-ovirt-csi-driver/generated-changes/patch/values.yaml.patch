@@ -18,7 +18,11 @@
        tag: v6.0.0
      resources:
        limits:
-@@ -29,7 +29,7 @@
+@@ -26,10 +26,11 @@
+         cpu: 80m
+         memory: 64Mi
+   csiResizer:
++    enable: true
      containerSecurityContext:
        privileged: true
      image:
@@ -27,7 +31,7 @@
        tag: v1.14.0
      resources:
        limits:
-@@ -40,7 +40,7 @@
+@@ -40,7 +41,7 @@
          memory: 64Mi
    livenessProbe:
      image:
@@ -36,7 +40,7 @@
        tag: v2.17.0
      resources:
        limits:
-@@ -57,8 +57,8 @@
+@@ -57,8 +58,8 @@
        csiEndpoint: unix:///csi-socket/csi.sock
        ovirtConfig: /tmp/config/ovirt-config.yaml
      image:
@@ -47,7 +51,7 @@
      imagePullPolicy: Always
      resources:
        limits:
-@@ -71,8 +71,8 @@
+@@ -71,8 +72,8 @@
      env:
        ovirtCafile: /tmp/config/ovirt-engine-ca.pem
      image:
@@ -58,7 +62,7 @@
      imagePullPolicy: IfNotPresent
      resources:
        requests:
-@@ -82,7 +82,7 @@
+@@ -82,7 +83,7 @@
  csiNode:
    csiDriverRegistrar:
      image:
@@ -67,7 +71,7 @@
        tag: v2.15.0
      resources:
        limits:
-@@ -93,7 +93,7 @@
+@@ -93,7 +94,7 @@
          memory: 64Mi
    livenessProbe:
      image:
@@ -76,7 +80,7 @@
        tag: v2.17.0
      resources:
        limits:
-@@ -110,8 +110,8 @@
+@@ -110,8 +111,8 @@
        csiEndpoint: unix:///csi-socket/csi.sock
        ovirtConfig: /tmp/config/ovirt-config.yaml
      image:
@@ -87,7 +91,7 @@
      imagePullPolicy: Always
      resources:
        limits:
-@@ -124,8 +124,8 @@
+@@ -124,8 +125,8 @@
      env:
        ovirtCafile: /tmp/config/ovirt-engine-ca.pem
      image:
@@ -98,3 +102,10 @@
      imagePullPolicy: IfNotPresent
      resources:
        requests:
+@@ -153,3 +154,6 @@
+ 
+ ## Ref: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
+ imagePullSecrets: []
++
++global:
++  systemDefaultRegistry: ""
