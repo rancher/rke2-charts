@@ -1,0 +1,11 @@
+--- charts-original/templates/csi_driver_controller.yaml
++++ charts/templates/csi_driver_controller.yaml
+@@ -37,7 +37,7 @@
+               apiVersion: v1
+               fieldPath: spec.nodeName
+         - name: OVIRT_CONFIG
+-          value: /tmp/config/ovirt-config.yaml
++          value: {{ quote .Values.csiController.ovirtController.env.ovirtConfig }}
+         - name: KUBERNETES_CLUSTER_DOMAIN
+           value: {{ quote .Values.kubernetesClusterDomain }}
+         image: {{ .Values.csiController.ovirtController.image.repository }}:{{ .Values.csiController.ovirtController.image.tag
