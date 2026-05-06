@@ -1,0 +1,46 @@
+--- charts-original/templates/csi_driver_node.yaml
++++ charts/templates/csi_driver_node.yaml
+@@ -39,8 +39,8 @@
+         - name: OVIRT_CONFIG
+           value: {{ quote .Values.csiNode.ovirtNode.env.ovirtConfig }}
+         - name: KUBERNETES_CLUSTER_DOMAIN
+-          value: {{ quote .Values.kubernetesClusterDomain }}
+-        image: {{ .Values.csiNode.ovirtNode.image.repository }}:{{ .Values.csiNode.ovirtNode.image.tag
++          value: {{ coalesce .Values.global.clusterDomain .Values.kubernetesClusterDomain | quote }}
++        image: {{ template "system_default_registry" . }}{{ .Values.csiNode.ovirtNode.image.repository }}:{{ .Values.csiNode.ovirtNode.image.tag
+           | default .Chart.AppVersion }}
+         imagePullPolicy: {{ .Values.csiNode.ovirtNode.imagePullPolicy }}
+         livenessProbe:
+@@ -74,8 +74,8 @@
+         - --health-port=9898
+         env:
+         - name: KUBERNETES_CLUSTER_DOMAIN
+-          value: {{ quote .Values.kubernetesClusterDomain }}
+-        image: {{ .Values.csiNode.livenessProbe.image.repository }}:{{ .Values.csiNode.livenessProbe.image.tag
++          value: {{ coalesce .Values.global.clusterDomain .Values.kubernetesClusterDomain | quote }}
++        image: {{ template "system_default_registry" . }}{{ .Values.csiNode.livenessProbe.image.repository }}:{{ .Values.csiNode.livenessProbe.image.tag
+           | default .Chart.AppVersion }}
+         name: liveness-probe
+         resources: {{- toYaml .Values.csiNode.livenessProbe.resources | nindent
+@@ -89,8 +89,8 @@
+         - --kubelet-registration-path=/var/lib/kubelet/plugins/csi.ovirt.org/csi.sock
+         env:
+         - name: KUBERNETES_CLUSTER_DOMAIN
+-          value: {{ quote .Values.kubernetesClusterDomain }}
+-        image: {{ .Values.csiNode.csiDriverRegistrar.image.repository }}:{{
++          value: {{ coalesce .Values.global.clusterDomain .Values.kubernetesClusterDomain | quote }}
++        image: {{ template "system_default_registry" . }}{{ .Values.csiNode.csiDriverRegistrar.image.repository }}:{{
+           .Values.csiNode.csiDriverRegistrar.image.tag | default .Chart.AppVersion
+           }}
+         livenessProbe:
+@@ -151,8 +151,8 @@
+               name: {{ .Values.ovirt.caConfigMapName }}
+ {{ end }}
+         - name: KUBERNETES_CLUSTER_DOMAIN
+-          value: {{ quote .Values.kubernetesClusterDomain }}
+-        image: {{ .Values.csiNode.prepareOvirtConfig.image.repository }}:{{
++          value: {{ coalesce .Values.global.clusterDomain .Values.kubernetesClusterDomain | quote }}
++        image: {{ template "system_default_registry" . }}{{ .Values.csiNode.prepareOvirtConfig.image.repository }}:{{
+           .Values.csiNode.prepareOvirtConfig.image.tag | default .Chart.AppVersion
+           }}
+         imagePullPolicy: {{ .Values.csiNode.prepareOvirtConfig.imagePullPolicy

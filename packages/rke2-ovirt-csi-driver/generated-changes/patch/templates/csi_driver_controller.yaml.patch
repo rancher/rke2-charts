@@ -1,0 +1,82 @@
+--- charts-original/templates/csi_driver_controller.yaml
++++ charts/templates/csi_driver_controller.yaml
+@@ -39,8 +39,8 @@
+         - name: OVIRT_CONFIG
+           value: /tmp/config/ovirt-config.yaml
+         - name: KUBERNETES_CLUSTER_DOMAIN
+-          value: {{ quote .Values.kubernetesClusterDomain }}
+-        image: {{ .Values.csiController.ovirtController.image.repository }}:{{ .Values.csiController.ovirtController.image.tag
++          value: {{ coalesce .Values.global.clusterDomain .Values.kubernetesClusterDomain | quote }}
++        image: {{ template "system_default_registry" . }}{{ .Values.csiController.ovirtController.image.repository }}:{{ .Values.csiController.ovirtController.image.tag
+           | default .Chart.AppVersion }}
+         imagePullPolicy: {{ .Values.csiController.ovirtController.imagePullPolicy }}
+         livenessProbe:
+@@ -69,8 +69,8 @@
+         - --health-port=9898
+         env:
+         - name: KUBERNETES_CLUSTER_DOMAIN
+-          value: {{ quote .Values.kubernetesClusterDomain }}
+-        image: {{ .Values.csiController.livenessProbe.image.repository }}:{{ .Values.csiController.livenessProbe.image.tag
++          value: {{ coalesce .Values.global.clusterDomain .Values.kubernetesClusterDomain | quote }}
++        image: {{ template "system_default_registry" . }}{{ .Values.csiController.livenessProbe.image.repository }}:{{ .Values.csiController.livenessProbe.image.tag
+           | default .Chart.AppVersion }}
+         name: liveness-probe
+         resources: {{- toYaml .Values.csiController.livenessProbe.resources | nindent
+@@ -83,8 +83,8 @@
+         - --v=5
+         env:
+         - name: KUBERNETES_CLUSTER_DOMAIN
+-          value: {{ quote .Values.kubernetesClusterDomain }}
+-        image: {{ .Values.csiController.csiAttacher.image.repository }}:{{ .Values.csiController.csiAttacher.image.tag
++          value: {{ coalesce .Values.global.clusterDomain .Values.kubernetesClusterDomain | quote }}
++        image: {{ template "system_default_registry" . }}{{ .Values.csiController.csiAttacher.image.repository }}:{{ .Values.csiController.csiAttacher.image.tag
+           | default .Chart.AppVersion }}
+         name: csi-attacher
+         resources: {{- toYaml .Values.csiController.csiAttacher.resources | nindent 10
+@@ -100,8 +100,8 @@
+         - -v=5
+         env:
+         - name: KUBERNETES_CLUSTER_DOMAIN
+-          value: {{ quote .Values.kubernetesClusterDomain }}
+-        image: {{ .Values.csiController.csiProvisioner.image.repository }}:{{ .Values.csiController.csiProvisioner.image.tag
++          value: {{ coalesce .Values.global.clusterDomain .Values.kubernetesClusterDomain | quote }}
++        image: {{ template "system_default_registry" . }}{{ .Values.csiController.csiProvisioner.image.repository }}:{{ .Values.csiController.csiProvisioner.image.tag
+           | default .Chart.AppVersion }}
+         name: csi-provisioner
+         resources: {{- toYaml .Values.csiController.csiProvisioner.resources | nindent
+@@ -111,13 +111,14 @@
+         volumeMounts:
+         - mountPath: /csi-socket
+           name: socket-dir
++      {{- if .Values.csiController.csiResizer.enabled }}
+       - args:
+         - -csi-address=/csi-socket/csi.sock
+         - -v=5
+         env:
+         - name: KUBERNETES_CLUSTER_DOMAIN
+-          value: {{ quote .Values.kubernetesClusterDomain }}
+-        image: {{ .Values.csiController.csiResizer.image.repository }}:{{ .Values.csiController.csiResizer.image.tag
++          value: {{ coalesce .Values.global.clusterDomain .Values.kubernetesClusterDomain | quote }}
++        image: {{ template "system_default_registry" . }}{{ .Values.csiController.csiResizer.image.repository }}:{{ .Values.csiController.csiResizer.image.tag
+           | default .Chart.AppVersion }}
+         name: csi-resizer
+         resources: {{- toYaml .Values.csiController.csiResizer.resources | nindent 10
+@@ -127,6 +128,7 @@
+         volumeMounts:
+         - mountPath: /csi-socket
+           name: socket-dir
++      {{- end }}
+       initContainers:
+       - command:
+         - /bin/sh
+@@ -168,8 +170,8 @@
+               name:  {{ .Values.ovirt.caConfigMapName }}
+ {{ end }}
+         - name: KUBERNETES_CLUSTER_DOMAIN
+-          value: {{ quote .Values.kubernetesClusterDomain }}
+-        image: {{ .Values.csiController.prepareOvirtConfig.image.repository }}:{{ .Values.csiController.prepareOvirtConfig.image.tag
++          value: {{ coalesce .Values.global.clusterDomain .Values.kubernetesClusterDomain | quote }}
++        image: {{ template "system_default_registry" . }}{{ .Values.csiController.prepareOvirtConfig.image.repository }}:{{ .Values.csiController.prepareOvirtConfig.image.tag
+           | default .Chart.AppVersion }}
+         imagePullPolicy: {{ .Values.csiController.prepareOvirtConfig.imagePullPolicy }}
+         name: prepare-ovirt-config
