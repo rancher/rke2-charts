@@ -1,0 +1,6 @@
+apiVersion: v2
+appVersion: 4.15.0
+description: Implementation of a CSI driver for oVirt.
+name: rke2-ovirt-csi-driver
+type: application
+version: 4.15.000

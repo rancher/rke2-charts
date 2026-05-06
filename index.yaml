@@ -26076,6 +26076,17 @@ entries:
     urls:
     - assets/rke2-multus/rke2-multus-v3.7.1-build2021041601.tgz
     version: v3.7.1-build2021041601
+  rke2-ovirt-csi-driver:
+  - apiVersion: v2
+    appVersion: 4.15.0
+    created: "2026-05-06T19:56:57.397605945Z"
+    description: Implementation of a CSI driver for oVirt.
+    digest: a991348c5318e1400c05f939dfbcdad65169057d7d6d742f6f92e361de3562d3
+    name: rke2-ovirt-csi-driver
+    type: application
+    urls:
+    - assets/rke2-ovirt-csi-driver/rke2-ovirt-csi-driver-4.15.000.tgz
+    version: 4.15.000
   rke2-runtimeclasses:
   - apiVersion: v2
     appVersion: 0.1.0
