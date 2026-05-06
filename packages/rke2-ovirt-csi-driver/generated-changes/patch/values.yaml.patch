@@ -47,7 +47,7 @@
 -      repository: olcne/ovirt-csi-driver
 -      tag: v4.21.0-2
 +      repository: rancher/mirrored-ovirt-csi-driver
-+      tag: 4.21.0
++      tag: 4.15.0
      imagePullPolicy: Always
      resources:
        limits:
@@ -58,7 +58,7 @@
 -      repository: olcne/ovirt-csi-driver
 -      tag: v4.21.0-2
 +      repository: rancher/mirrored-ovirt-csi-driver
-+      tag: 4.21.0
++      tag: 4.15.0
      imagePullPolicy: IfNotPresent
      resources:
        requests:
@@ -87,7 +87,7 @@
 -      repository: olcne/ovirt-csi-driver
 -      tag: v4.21.0-2
 +      repository: rancher/mirrored-ovirt-csi-driver
-+      tag: 4.21.0
++      tag: 4.15.0
      imagePullPolicy: Always
      resources:
        limits:
@@ -98,7 +98,7 @@
 -      repository: olcne/ovirt-csi-driver
 -      tag: v4.21.0-2
 +      repository: rancher/mirrored-ovirt-csi-driver
-+      tag: 4.21.0
++      tag: 4.15.0
      imagePullPolicy: IfNotPresent
      resources:
        requests:
