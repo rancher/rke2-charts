@@ -26624,6 +26624,30 @@ entries:
   rke2-snapshot-controller:
   - apiVersion: v2
     appVersion: v8.5.0
+    created: "2026-05-12T18:17:18.847265709Z"
+    description: |
+      Deploys a Snapshot Controller in a cluster. Snapshot Controllers are often bundled with the Kubernetes distribution,
+      this chart is meant for cases where it is not.
+    digest: 009eba6faed651fb1322ad414e5920497069f5fd22d4dc4b87e3571be785b3b4
+    home: https://github.com/piraeusdatastore/helm-charts
+    icon: https://raw.githubusercontent.com/piraeusdatastore/piraeus/master/artwork/sandbox-artwork/icon/color.svg
+    keywords:
+    - storage
+    - snapshot
+    - validation
+    kubeVersion: '>= 1.25.0-0'
+    maintainers:
+    - name: The Piraeus Maintainers
+      url: https://github.com/piraeusdatastore/
+    name: rke2-snapshot-controller
+    sources:
+    - https://github.com/kubernetes-csi/external-snapshotter/
+    type: application
+    urls:
+    - assets/rke2-snapshot-controller/rke2-snapshot-controller-4.2.004.tgz
+    version: 4.2.004
+  - apiVersion: v2
+    appVersion: v8.5.0
     created: "2026-04-15T19:33:12.577955104Z"
     description: |
       Deploys a Snapshot Controller in a cluster. Snapshot Controllers are often bundled with the Kubernetes distribution,
@@ -26918,6 +26942,16 @@ entries:
     - assets/rke2-snapshot-controller/rke2-snapshot-controller-1.7.200.tgz
     version: 1.7.200
   rke2-snapshot-controller-crd:
+  - apiVersion: v1
+    appVersion: v8.5.0
+    created: "2026-05-12T18:17:18.853040255Z"
+    description: Installs the CRDs for rke2-snapshot-controller
+    digest: 72e48b36ab01c356e5ef472bd34b2b6a75dbf78db5db556e617713279178e9fa
+    name: rke2-snapshot-controller-crd
+    type: application
+    urls:
+    - assets/rke2-snapshot-controller/rke2-snapshot-controller-crd-4.2.004.tgz
+    version: 4.2.004
   - apiVersion: v1
     appVersion: v8.5.0
     created: "2026-04-15T19:33:12.583148073Z"
@@ -27276,6 +27310,34 @@ entries:
     - assets/rke2-sriov/rke2-sriov-crd-v1.0.001.tgz
     version: v1.0.001
   rke2-traefik:
+  - annotations:
+      fleet.cattle.io/bundle-id: rke2
+    apiVersion: v2
+    appVersion: v3.6.12
+    created: "2026-05-12T18:17:18.997831508Z"
+    description: A Traefik based Kubernetes ingress controller
+    digest: 254a607945532b73eb83d6b8e051dfa4309bd194a99b4c8da2cb3da6184433f2
+    home: https://traefik.io/
+    icon: https://raw.githubusercontent.com/traefik/traefik/master/docs/content/assets/img/traefik.logo.png
+    keywords:
+    - traefik
+    - ingress
+    - networking
+    kubeVersion: '>=1.22.0-0'
+    maintainers:
+    - email: michel.loiseleur@traefik.io
+      name: mloiseleur
+    - email: remi.buisson@traefik.io
+      name: darkweaver87
+    - name: jnoordsij
+    name: rke2-traefik
+    sources:
+    - https://github.com/traefik/traefik-helm-chart
+    - https://github.com/traefik/traefik
+    type: application
+    urls:
+    - assets/rke2-traefik/rke2-traefik-39.0.703.tgz
+    version: 39.0.703
   - annotations:
       fleet.cattle.io/bundle-id: rke2
     apiVersion: v2
@@ -28075,6 +28137,18 @@ entries:
     - assets/rke2-traefik/rke2-traefik-25.0.000.tgz
     version: 25.0.000
   rke2-traefik-crd:
+  - annotations:
+      fleet.cattle.io/bundle-id: rke2
+    apiVersion: v1
+    appVersion: v3.6.12
+    created: "2026-05-12T18:17:19.072043733Z"
+    description: Installs the CRDs for rke2-traefik
+    digest: 9a00e7971699b05fb29f7859ac2cad2aed484ee59e14652fcaf7725f6f1f0ba5
+    name: rke2-traefik-crd
+    type: application
+    urls:
+    - assets/rke2-traefik/rke2-traefik-crd-39.0.703.tgz
+    version: 39.0.703
   - annotations:
       fleet.cattle.io/bundle-id: rke2
     apiVersion: v1
