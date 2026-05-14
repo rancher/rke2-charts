@@ -19490,6 +19490,33 @@ entries:
       artifacthub.io/prerelease: "false"
     apiVersion: v2
     appVersion: 1.14.5
+    created: "2026-05-14T16:55:57.893724265Z"
+    description: Ingress controller for Kubernetes using NGINX as a reverse proxy
+      and load balancer
+    digest: eca811fac4ae1290994a3ee0a822a5cda672701352ef4994b66b8cd910c0c4ec
+    home: https://github.com/kubernetes/ingress-nginx
+    icon: https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Nginx_logo.svg/500px-Nginx_logo.svg.png
+    keywords:
+    - ingress
+    - nginx
+    kubeVersion: '>=1.21.0-0'
+    maintainers:
+    - name: cpanato
+    - name: Gacko
+    - name: strongjz
+    - name: tao12345666333
+    name: rke2-ingress-nginx
+    sources:
+    - https://github.com/kubernetes/ingress-nginx
+    urls:
+    - assets/rke2-ingress-nginx/rke2-ingress-nginx-4.14.508.tgz
+    version: 4.14.508
+  - annotations:
+      artifacthub.io/changes: |
+        - Update Ingress-Nginx version controller-v1.14.5
+      artifacthub.io/prerelease: "false"
+    apiVersion: v2
+    appVersion: 1.14.5
     created: "2026-05-12T19:11:02.495241352Z"
     description: Ingress controller for Kubernetes using NGINX as a reverse proxy
       and load balancer
