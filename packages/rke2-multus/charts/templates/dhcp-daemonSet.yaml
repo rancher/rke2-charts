@@ -32,7 +32,7 @@ spec:
       initContainers:
       - name: kube-{{ .Chart.Name }}-dhcp-cleanup
         image: {{ template "system_default_registry" . }}{{ .Values.dhcpDaemonSet.image.repository }}:{{ .Values.dhcpDaemonSet.image.tag }}
-        command: ["rm", "-f", "/run/cni/dhcp.sock"]
+        command: ["rm", "-f", "/host/run/cni/dhcp.sock"]
         securityContext:
           privileged: true
         volumeMounts:
