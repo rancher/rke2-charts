@@ -7,7 +7,7 @@ ISSUE_TITLE="Updatecli failed for calico ${CALICO_VERSION}"
 trap report-error EXIT INT
 
 if [ -n "$CALICO_VERSION" ]; then
-	current_calico_version=$(yq '.version' packages/rke2-calico/templates/crd-template/Chart.yaml)
+	current_calico_version=$(sed -n 's|^url: .*/\(v[0-9.]\+\)/.*|\1|p' packages/rke2-calico/package.yaml)
 	if [ "$current_calico_version" != "$CALICO_VERSION" ]; then
 		echo "Updating Calico chart to $CALICO_VERSION"
 		mkdir workdir
