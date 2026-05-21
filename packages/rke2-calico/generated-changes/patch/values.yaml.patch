@@ -1,20 +1,6 @@
 --- charts-original/values.yaml
 +++ charts/values.yaml
-@@ -9,6 +9,13 @@
- # on the operator.tigera.io/Installation API documented
- # here: https://docs.tigera.io/calico/latest/reference/installation/api#installationspec
- installation:
-+  controlPlaneTolerations:
-+  - key: "node-role.kubernetes.io/control-plane"
-+    operator: "Exists"
-+    effect: "NoSchedule"
-+  - key: "node-role.kubernetes.io/etcd"
-+    operator: "Exists"
-+    effect: "NoExecute"
-   enabled: true
-   # Uncomment to enable prometheus metrics reporting for node and typha.
-   # nodeMetricsPort: 9090
-@@ -16,7 +23,13 @@
+@@ -16,7 +16,13 @@
    # Path to the kubelet volume plugin directory used by the Calico CSI driver.
    # Set to "None" to disable the CSI driver. If unset, defaults to /var/lib/kubelet (CSI enabled).
    kubeletVolumePluginPath: "None"
@@ -29,7 +15,7 @@
    # --- General Image Settings ---
    # registry: <custom-registry>
    # imagePath: <optional-path>
-@@ -28,6 +41,7 @@
+@@ -28,6 +34,7 @@
    #
    # Example: --set installation.imagePullSecrets[0].name=my-existing-secret
    imagePullSecrets: []
@@ -37,7 +23,22 @@
  
    # Valid options: EKS, GKE, AKS, RKE2, OpenShift, DockerEnterprise, TKG, Kind.
    # If empty the operator will attempt to automatically determine the current provider.
-@@ -85,15 +99,15 @@
+@@ -65,7 +72,13 @@
+ 
+   controlPlaneNodeSelector: {}
+ 
+-  controlPlaneTolerations: []
++  controlPlaneTolerations:
++  - key: "node-role.kubernetes.io/control-plane"
++    operator: "Exists"
++    effect: "NoSchedule"
++  - key: "node-role.kubernetes.io/etcd"
++    operator: "Exists"
++    effect: "NoExecute"
+ 
+   # Run Calico in non-privileged mode (Rootless)
+   nonPrivileged: "Disabled"
+@@ -85,15 +98,15 @@
  # apiServer configures the Calico API server, needed for interacting with
  # the projectcalico.org/v3 suite of APIs.
  apiServer:
@@ -56,7 +57,7 @@
  
  defaultFelixConfiguration:
    enabled: false
-@@ -111,7 +125,7 @@
+@@ -111,7 +124,7 @@
  
  # Whether or not the tigera/operator should manange CustomResourceDefinitions
  # needed to run itself and Calico. If disabled, you must manage these resources out-of-band.
@@ -65,7 +66,7 @@
  
  # Resource requests and limits for the tigera/operator pod.
  resources: {}
-@@ -146,13 +160,32 @@
+@@ -146,13 +159,32 @@
  dnsConfig: {}
  # Image and registry configuration for the tigera/operator pod.
  tigeraOperator:
