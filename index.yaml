@@ -24560,6 +24560,27 @@ entries:
   rke2-multus:
   - apiVersion: v2
     appVersion: 4.2.4
+    created: "2026-05-21T17:06:03.643397487Z"
+    dependencies:
+    - condition: rke2-whereabouts.enabled
+      name: rke2-whereabouts
+      repository: file://./charts/rke2-whereabouts
+    description: Multus Helm chart for Kubernetes
+    digest: 6360cd53435fe42e6620faa01bfc6a09e8df41c94604413f6bf3a44f0e37c5d6
+    home: https://github.com/k8snetworkplumbingwg/multus-cni
+    icon: https://raw.githubusercontent.com/k8snetworkplumbingwg/multus-cni/master/doc/images/Multus.png
+    maintainers:
+    - email: charts@rancher.com
+      name: Rancher Labs
+    name: rke2-multus
+    sources:
+    - https://github.com/intel/multus-cni
+    type: application
+    urls:
+    - assets/rke2-multus/rke2-multus-v4.2.414.tgz
+    version: v4.2.414
+  - apiVersion: v2
+    appVersion: 4.2.4
     created: "2026-05-11T20:26:05.449007674Z"
     dependencies:
     - condition: rke2-whereabouts.enabled
