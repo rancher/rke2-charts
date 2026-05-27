@@ -23,7 +23,7 @@
  
    # Valid options: EKS, GKE, AKS, RKE2, OpenShift, DockerEnterprise, TKG, Kind.
    # If empty the operator will attempt to automatically determine the current provider.
-@@ -65,7 +72,13 @@
+@@ -65,7 +72,16 @@
  
    controlPlaneNodeSelector: {}
  
@@ -35,10 +35,13 @@
 +  - key: "node-role.kubernetes.io/etcd"
 +    operator: "Exists"
 +    effect: "NoExecute"
++  - key: "node.kubernetes.io/network-unavailable"
++    operator: "Exists"
++    effect: "NoSchedule"
  
    # Run Calico in non-privileged mode (Rootless)
    nonPrivileged: "Disabled"
-@@ -85,15 +98,15 @@
+@@ -85,15 +101,15 @@
  # apiServer configures the Calico API server, needed for interacting with
  # the projectcalico.org/v3 suite of APIs.
  apiServer:
@@ -57,7 +60,7 @@
  
  defaultFelixConfiguration:
    enabled: false
-@@ -111,7 +124,7 @@
+@@ -111,7 +127,7 @@
  
  # Whether or not the tigera/operator should manange CustomResourceDefinitions
  # needed to run itself and Calico. If disabled, you must manage these resources out-of-band.
@@ -66,7 +69,7 @@
  
  # Resource requests and limits for the tigera/operator pod.
  resources: {}
-@@ -146,13 +159,32 @@
+@@ -146,13 +162,32 @@
  dnsConfig: {}
  # Image and registry configuration for the tigera/operator pod.
  tigeraOperator:
