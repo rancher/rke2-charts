@@ -1,14 +1,14 @@
 --- charts-original/Chart.yaml
 +++ charts/Chart.yaml
-@@ -1,6 +1,5 @@
- annotations:
--  artifacthub.io/changes: "- \"feat(deps): update traefik docker tag to v3.6.12 (v39.0)\"\n-
--    \"chore(release): \U0001F680 publish v39.0.7\"\n"
+@@ -5,6 +5,7 @@
+   traefik.io/hub-min-version: v3.19.3
+   traefik.io/proxy-max-version: v3.7.0
+   traefik.io/proxy-min-version: v3.6.0
 +  fleet.cattle.io/bundle-id: rke2
  apiVersion: v2
- appVersion: v3.6.12
+ appVersion: v3.7.0
  description: A Traefik based Kubernetes ingress controller
-@@ -17,7 +16,7 @@
+@@ -21,7 +22,7 @@
  - email: remi.buisson@traefik.io
    name: darkweaver87
  - name: jnoordsij

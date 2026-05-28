@@ -7,33 +7,22 @@
 -  repository: traefik
 +  repository: rancher/hardened-traefik
    # -- defaults to appVersion. It's used for version checking, even prefixed with experimental- or latest-.
-   # When a digest is required, `versionOverride` can be used to set the version.
+   # To pin by digest, prefer `image.digest`. A `<version>@<digest>` combo is also accepted here; in that case the digest is what Kubernetes verifies and the version is informational (and can drift from the underlying image).
 -  tag:  # @schema type:[string, null]
-+  tag: v3.6.16-build20260512
++  tag: v3.7.1-build20260528  # @schema type:[string, null]
+   # -- Traefik image digest (e.g. `sha256:abc...`). When set, takes precedence over `tag`. Set `versionOverride` alongside it so the chart's version-checking logic knows the version (it cannot be derived from the digest).
+   digest:  # @schema type:[string, null]; pattern:^sha256:[a-f0-9]{64}$
    # -- Traefik image pull policy
-   pullPolicy: IfNotPresent
- 
-@@ -20,7 +20,7 @@
+@@ -22,7 +22,7 @@
    # -- Enable deployment
    enabled: true
    # -- Deployment or DaemonSet
 -  kind: Deployment
-+  kind: DaemonSet
++  kind: Daemonset
    # -- Number of pods of the deployment (only applies when kind == Deployment)
    replicas: 1
    # -- Number of old history to retain to allow rollback (If not set, default Kubernetes value is set to 10)
-@@ -117,8 +117,8 @@
- ingressClass:  # @schema additionalProperties: false
-   # -- Create a default IngressClass for Traefik
-   enabled: true
--  isDefaultClass: true
--  name: ""
-+  isDefaultClass: false
-+  name: "traefik"
- 
- core:  # @schema additionalProperties: false
-   # -- Can be used to use globally v2 router syntax. Deprecated since v3.4 /!\.
-@@ -258,8 +258,8 @@
+@@ -266,8 +266,8 @@
    # -- Customize updateStrategy of Deployment or DaemonSet
    type: RollingUpdate
    rollingUpdate:
@@ -44,7 +33,7 @@
  
  readinessProbe:  # @schema additionalProperties: false
    # -- The number of consecutive failures allowed before considering the probe as failed.
-@@ -300,7 +300,7 @@
+@@ -310,7 +310,7 @@
      # -- Allows to return 503 when there are no endpoints available
      allowEmptyServices: true
      # -- When the parameter is set, only resources containing an annotation with the same value are processed. Otherwise, resources missing the annotation, having an empty value, or the value traefik are processed. It will also set required annotation on Dashboard and Healthcheck IngressRoute when enabled.
@@ -53,16 +42,7 @@
      # -- See [upstream documentation](https://doc.traefik.io/traefik/reference/install-configuration/providers/kubernetes/kubernetes-ingress/#opt-providers-kubernetesIngress-labelselector)
      labelSelector: ""
      # -- Array of namespaces to watch. If left empty, Traefik watches all namespaces. . When using `rbac.namespaced`, it will watch helm release namespace and namespaces listed in this array.
-@@ -319,7 +319,7 @@
-     # -- Only for Traefik v3.0, Deprecated since v3.1. See [upstream documentation](https://doc.traefik.io/traefik/v3.0/providers/kubernetes-ingress/#disableingressclasslookup)
-     disableIngressClassLookup: false
-     # -- When ingressClass is set, only Ingresses containing an annotation with the same value are processed. Otherwise, Ingresses missing the annotation, having an empty value, or the value traefik are processed.
--    ingressClass:  # @schema type:[string, null]
-+    ingressClass: "traefik"  # @schema type:[string, null]
-     labelSelector:  # @schema type:[string, null]
-     # -- Array of namespaces to watch. If left empty, Traefik watches all namespaces. . When using `rbac.namespaced`, it will watch helm release namespace and namespaces listed in this array.
-     namespaces: []
-@@ -775,6 +775,8 @@
+@@ -852,6 +852,8 @@
          insecureSkipVerify:  # @schema type:[boolean, null]
  
  global:
@@ -71,7 +51,7 @@
    checkNewVersion: true
    # -- Please take time to consider whether or not you wish to share anonymous data with us
    # See https://doc.traefik.io/traefik/contributing/data-collection/
-@@ -845,7 +847,7 @@
+@@ -924,7 +926,7 @@
      ## -- Enable this entrypoint as a default entrypoint. When a service doesn't explicitly set an entrypoint it will only use this entrypoint.
      asDefault:  # @schema type: [boolean, null]; default: null
      port: 8000
@@ -80,7 +60,7 @@
      # containerPort: 8000
      expose:
        default: true
-@@ -897,7 +899,7 @@
+@@ -982,7 +984,7 @@
      ## -- Enable this entrypoint as a default entrypoint. When a service doesn't explicitly set an entrypoint it will only use this entrypoint.
      # asDefault: true
      port: 8443
@@ -89,25 +69,17 @@
      containerPort:  # @schema type:[integer, null]; minimum:0
      expose:
        default: true
-@@ -1010,7 +1012,7 @@
-   ## -- Single service is using `MixedProtocolLBService` feature gate.
-   ## -- When set to false, it will create two Service, one for TCP and one for UDP.
-   single: true
--  type: LoadBalancer
-+  type: ClusterIP
-   # -- Additional annotations applied to both TCP and UDP services (e.g. for cloud provider specific config)
-   annotations: {}
-   # -- Additional annotations for TCP service only
-@@ -1033,7 +1035,7 @@
-   externalIPs: []
-   # - 1.2.3.4
-   ## One of SingleStack, PreferDualStack, or RequireDualStack.
--  # ipFamilyPolicy: SingleStack
-+  ipFamilyPolicy: PreferDualStack
-   ## List of IP families (e.g. IPv4 and/or IPv6).
-   ## ref: https://kubernetes.io/docs/concepts/services-networking/dual-stack/#services
-   # ipFamilies:
-@@ -1141,7 +1143,8 @@
+@@ -1110,7 +1112,8 @@
+   # -- Additional entries here will be added to the Service [spec](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.35/#servicespec-v1-core).
+   # Cannot contain selector or ports entries.
+   spec:
+-    type: LoadBalancer
++    type: ClusterIP
++    ipFamilyPolicy: PreferDualStack
+   # -- Can be used to create multiple Service.
+   # See EXAMPLES.md for more details.
+   additionalServices: {}
+@@ -1199,7 +1202,8 @@
  #        topologyKey: kubernetes.io/hostname
  
  # -- nodeSelector is the simplest recommended form of node selection constraint.
