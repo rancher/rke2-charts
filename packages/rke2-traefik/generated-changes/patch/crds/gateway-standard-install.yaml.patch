@@ -1,50 +1,66 @@
 --- charts-original/crds/gateway-standard-install.yaml
 +++ charts/crds/gateway-standard-install.yaml
 @@ -26,6 +26,7 @@
-     api-approved.kubernetes.io: https://github.com/kubernetes-sigs/gateway-api/pull/3328
-     gateway.networking.k8s.io/bundle-version: v1.4.0
+     api-approved.kubernetes.io: https://github.com/kubernetes-sigs/gateway-api/pull/4530
+     gateway.networking.k8s.io/bundle-version: v1.5.1
      gateway.networking.k8s.io/channel: standard
 +    helm.sh/resource-policy: keep
    labels:
      gateway.networking.k8s.io/policy: Direct
    name: backendtlspolicies.gateway.networking.k8s.io
-@@ -1348,6 +1349,7 @@
-     api-approved.kubernetes.io: https://github.com/kubernetes-sigs/gateway-api/pull/3328
-     gateway.networking.k8s.io/bundle-version: v1.4.0
+@@ -1412,6 +1413,7 @@
+     api-approved.kubernetes.io: https://github.com/kubernetes-sigs/gateway-api/pull/4530
+     gateway.networking.k8s.io/bundle-version: v1.5.1
      gateway.networking.k8s.io/channel: standard
 +    helm.sh/resource-policy: keep
    name: gatewayclasses.gateway.networking.k8s.io
  spec:
    group: gateway.networking.k8s.io
-@@ -1867,6 +1869,7 @@
-     api-approved.kubernetes.io: https://github.com/kubernetes-sigs/gateway-api/pull/3328
-     gateway.networking.k8s.io/bundle-version: v1.4.0
+@@ -1931,6 +1933,7 @@
+     api-approved.kubernetes.io: https://github.com/kubernetes-sigs/gateway-api/pull/4530
+     gateway.networking.k8s.io/bundle-version: v1.5.1
      gateway.networking.k8s.io/channel: standard
 +    helm.sh/resource-policy: keep
    name: gateways.gateway.networking.k8s.io
  spec:
    group: gateway.networking.k8s.io
-@@ -4124,6 +4127,7 @@
-     api-approved.kubernetes.io: https://github.com/kubernetes-sigs/gateway-api/pull/3328
-     gateway.networking.k8s.io/bundle-version: v1.4.0
+@@ -5218,6 +5221,7 @@
+     api-approved.kubernetes.io: https://github.com/kubernetes-sigs/gateway-api/pull/4530
+     gateway.networking.k8s.io/bundle-version: v1.5.1
      gateway.networking.k8s.io/channel: standard
 +    helm.sh/resource-policy: keep
    name: grpcroutes.gateway.networking.k8s.io
  spec:
    group: gateway.networking.k8s.io
-@@ -6198,6 +6202,7 @@
-     api-approved.kubernetes.io: https://github.com/kubernetes-sigs/gateway-api/pull/3328
-     gateway.networking.k8s.io/bundle-version: v1.4.0
+@@ -7292,6 +7296,7 @@
+     api-approved.kubernetes.io: https://github.com/kubernetes-sigs/gateway-api/pull/4530
+     gateway.networking.k8s.io/bundle-version: v1.5.1
      gateway.networking.k8s.io/channel: standard
 +    helm.sh/resource-policy: keep
    name: httproutes.gateway.networking.k8s.io
  spec:
    group: gateway.networking.k8s.io
-@@ -11845,6 +11850,7 @@
-     api-approved.kubernetes.io: https://github.com/kubernetes-sigs/gateway-api/pull/3328
-     gateway.networking.k8s.io/bundle-version: v1.4.0
+@@ -14225,6 +14230,7 @@
+     api-approved.kubernetes.io: https://github.com/kubernetes-sigs/gateway-api/pull/4530
+     gateway.networking.k8s.io/bundle-version: v1.5.1
+     gateway.networking.k8s.io/channel: standard
++    helm.sh/resource-policy: keep
+   name: listenersets.gateway.networking.k8s.io
+ spec:
+   group: gateway.networking.k8s.io
+@@ -15009,6 +15015,7 @@
+     api-approved.kubernetes.io: https://github.com/kubernetes-sigs/gateway-api/pull/4530
+     gateway.networking.k8s.io/bundle-version: v1.5.1
      gateway.networking.k8s.io/channel: standard
 +    helm.sh/resource-policy: keep
    name: referencegrants.gateway.networking.k8s.io
+ spec:
+   group: gateway.networking.k8s.io
+@@ -15366,6 +15373,7 @@
+     api-approved.kubernetes.io: https://github.com/kubernetes-sigs/gateway-api/pull/4530
+     gateway.networking.k8s.io/bundle-version: v1.5.1
+     gateway.networking.k8s.io/channel: standard
++    helm.sh/resource-policy: keep
+   name: tlsroutes.gateway.networking.k8s.io
  spec:
    group: gateway.networking.k8s.io

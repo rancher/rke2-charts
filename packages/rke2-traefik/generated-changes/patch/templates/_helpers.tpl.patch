@@ -1,18 +1,18 @@
 --- charts-original/templates/_helpers.tpl
 +++ charts/templates/_helpers.tpl
-@@ -31,7 +31,7 @@
- {{- printf "%s/%s:%s" .Values.global.azure.images.proxy.registry .Values.global.azure.images.proxy.image .Values.global.azure.images.proxy.tag }}
-  {{- end -}}
+@@ -33,7 +33,7 @@
+ {{- else if .Values.image.digest -}}
+ {{- printf "%s/%s@%s" .Values.image.registry .Values.image.repository .Values.image.digest }}
  {{- else -}}
 -{{- printf "%s/%s:%s" .Values.image.registry .Values.image.repository (.Values.image.tag | default .Chart.AppVersion) }}
 +{{- printf "%s:%s" .Values.image.repository (.Values.image.tag | default .Chart.AppVersion) }}
  {{- end -}}
  {{- end -}}
  
-@@ -459,3 +459,11 @@
-    {{- end }}
-   {{- end }}
- {{- end }}
+@@ -486,3 +486,11 @@
+ {{- define "traefik.hubTokenFilePath" }}
+ {{- printf "%s/%s" (.Values.hub.tokenMountPath | trimSuffix "/") "token" -}}
+ {{- end -}}
 +
 +{{- define "system_default_registry" -}}
 +{{- if .Values.global.systemDefaultRegistry -}}
