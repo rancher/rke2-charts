@@ -27638,6 +27638,40 @@ entries:
     version: v1.0.001
   rke2-traefik:
   - annotations:
+      artifacthub.io/changes: "- \"feat(hub): :rocket: support traefik hub v3.20.1\"\n-
+        \"chore(release): \U0001F680 publish 40.0.1\"\n"
+      fleet.cattle.io/bundle-id: rke2
+      traefik.io/hub-max-version: v3.20.1
+      traefik.io/hub-min-version: v3.19.3
+      traefik.io/proxy-max-version: v3.7.0
+      traefik.io/proxy-min-version: v3.6.0
+    apiVersion: v2
+    appVersion: v3.7.0
+    created: "2026-05-29T08:33:02.721365864Z"
+    description: A Traefik based Kubernetes ingress controller
+    digest: 845710b610a2af2e87040d13b6bd6e73fc782c16e11a6a643239dd6b505f53d8
+    home: https://traefik.io/
+    icon: https://raw.githubusercontent.com/traefik/traefik/master/docs/content/assets/img/traefik.logo.png
+    keywords:
+    - traefik
+    - ingress
+    - networking
+    kubeVersion: '>=1.25.0-0'
+    maintainers:
+    - email: michel.loiseleur@traefik.io
+      name: mloiseleur
+    - email: remi.buisson@traefik.io
+      name: darkweaver87
+    - name: jnoordsij
+    name: rke2-traefik
+    sources:
+    - https://github.com/traefik/traefik-helm-chart
+    - https://github.com/traefik/traefik
+    type: application
+    urls:
+    - assets/rke2-traefik/rke2-traefik-40.0.100.tgz
+    version: 40.0.100
+  - annotations:
       fleet.cattle.io/bundle-id: rke2
     apiVersion: v2
     appVersion: v3.6.12
@@ -28464,6 +28498,18 @@ entries:
     - assets/rke2-traefik/rke2-traefik-25.0.000.tgz
     version: 25.0.000
   rke2-traefik-crd:
+  - annotations:
+      fleet.cattle.io/bundle-id: rke2
+    apiVersion: v1
+    appVersion: v3.7.0
+    created: "2026-05-29T08:33:02.802957546Z"
+    description: Installs the CRDs for rke2-traefik
+    digest: 7cc76ccc2aa449e7e09fad2ec415029f24fcee5b5b924fd4525ae9dc7e29b9d3
+    name: rke2-traefik-crd
+    type: application
+    urls:
+    - assets/rke2-traefik/rke2-traefik-crd-40.0.100.tgz
+    version: 40.0.100
   - annotations:
       fleet.cattle.io/bundle-id: rke2
     apiVersion: v1
