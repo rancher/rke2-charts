@@ -22,7 +22,7 @@
    # -- Number of pods of the deployment (only applies when kind == Deployment)
    replicas: 1
    # -- Number of old history to retain to allow rollback (If not set, default Kubernetes value is set to 10)
-@@ -266,8 +266,8 @@
+@@ -268,8 +268,8 @@
    # -- Customize updateStrategy of Deployment or DaemonSet
    type: RollingUpdate
    rollingUpdate:
@@ -33,7 +33,7 @@
  
  readinessProbe:  # @schema additionalProperties: false
    # -- The number of consecutive failures allowed before considering the probe as failed.
-@@ -310,7 +310,7 @@
+@@ -312,7 +312,7 @@
      # -- Allows to return 503 when there are no endpoints available
      allowEmptyServices: true
      # -- When the parameter is set, only resources containing an annotation with the same value are processed. Otherwise, resources missing the annotation, having an empty value, or the value traefik are processed. It will also set required annotation on Dashboard and Healthcheck IngressRoute when enabled.
@@ -42,7 +42,7 @@
      # -- See [upstream documentation](https://doc.traefik.io/traefik/reference/install-configuration/providers/kubernetes/kubernetes-ingress/#opt-providers-kubernetesIngress-labelselector)
      labelSelector: ""
      # -- Array of namespaces to watch. If left empty, Traefik watches all namespaces. . When using `rbac.namespaced`, it will watch helm release namespace and namespaces listed in this array.
-@@ -852,6 +852,8 @@
+@@ -854,6 +854,8 @@
          insecureSkipVerify:  # @schema type:[boolean, null]
  
  global:
@@ -51,7 +51,7 @@
    checkNewVersion: true
    # -- Please take time to consider whether or not you wish to share anonymous data with us
    # See https://doc.traefik.io/traefik/contributing/data-collection/
-@@ -924,7 +926,7 @@
+@@ -926,7 +928,7 @@
      ## -- Enable this entrypoint as a default entrypoint. When a service doesn't explicitly set an entrypoint it will only use this entrypoint.
      asDefault:  # @schema type: [boolean, null]; default: null
      port: 8000
@@ -60,7 +60,7 @@
      # containerPort: 8000
      expose:
        default: true
-@@ -982,7 +984,7 @@
+@@ -984,7 +986,7 @@
      ## -- Enable this entrypoint as a default entrypoint. When a service doesn't explicitly set an entrypoint it will only use this entrypoint.
      # asDefault: true
      port: 8443
@@ -69,7 +69,7 @@
      containerPort:  # @schema type:[integer, null]; minimum:0
      expose:
        default: true
-@@ -1110,7 +1112,8 @@
+@@ -1112,7 +1114,8 @@
    # -- Additional entries here will be added to the Service [spec](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.35/#servicespec-v1-core).
    # Cannot contain selector or ports entries.
    spec:
@@ -79,7 +79,7 @@
    # -- Can be used to create multiple Service.
    # See EXAMPLES.md for more details.
    additionalServices: {}
-@@ -1199,7 +1202,8 @@
+@@ -1201,7 +1204,8 @@
  #        topologyKey: kubernetes.io/hostname
  
  # -- nodeSelector is the simplest recommended form of node selection constraint.
