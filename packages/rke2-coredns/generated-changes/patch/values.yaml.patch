@@ -12,7 +12,7 @@
    pullPolicy: IfNotPresent
    ## Optionally specify an array of imagePullSecrets.
    ## Secrets must be manually created in the namespace.
-@@ -54,12 +54,11 @@
+@@ -60,12 +60,11 @@
  
  service:
  # clusterIP: ""
@@ -26,7 +26,7 @@
  # trafficDistribution: PreferClose
    # The name of the Service
    # If not set, a name is generated using the fullname template
-@@ -69,10 +68,10 @@
+@@ -75,10 +74,10 @@
    selector: {}
  
  serviceAccount:
@@ -39,7 +39,7 @@
    annotations: {}
  
  rbac:
-@@ -88,7 +87,7 @@
+@@ -94,7 +93,7 @@
  isClusterService: true
  
  # Optional priority class to be used for the coredns pods. Used for autoscaler if autoscaler.priorityClassName not set.
@@ -48,7 +48,7 @@
  
  # Configure the pod level securityContext.
  podSecurityContext: {}
-@@ -126,7 +125,7 @@
+@@ -132,7 +131,7 @@
    - name: ready
    # Required to query kubernetes API for data
    - name: kubernetes
@@ -57,7 +57,7 @@
      configBlock: |-
        pods insecure
        fallthrough in-addr.arpa ip6.arpa
-@@ -193,7 +192,16 @@
+@@ -199,7 +198,16 @@
  #            operator: In
  #            values:
  #            - master
@@ -75,7 +75,7 @@
  
  # expects input structure as per specification https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.21/#topologyspreadconstraint-v1-core
  # and supports Helm templating.
-@@ -217,7 +225,8 @@
+@@ -223,7 +231,8 @@
  
  # Node labels for pod assignment
  # Ref: https://kubernetes.io/docs/user-guide/node-selection/
@@ -85,7 +85,7 @@
  
  # expects input structure as per specification https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.11/#toleration-v1-core
  # for example:
-@@ -226,7 +235,13 @@
+@@ -232,7 +241,13 @@
  #     operator: Equal
  #     value: master
  #     effect: NoSchedule
@@ -100,7 +100,7 @@
  
  # https://kubernetes.io/docs/tasks/run-application/configure-pdb/#specifying-a-poddisruptionbudget
  podDisruptionBudget: {}
-@@ -319,7 +334,7 @@
+@@ -325,7 +340,7 @@
  # See https://github.com/kubernetes-incubator/cluster-proportional-autoscaler
  autoscaler:
    # Enabled the cluster-proportional-autoscaler
@@ -109,7 +109,7 @@
  
    # Number of cores in the cluster per coredns replica
    coresPerReplica: 256
-@@ -343,8 +358,8 @@
+@@ -349,8 +364,8 @@
    #   - --nodelabels=topology.kubernetes.io/zone=us-east-1a
  
    image:
@@ -120,7 +120,7 @@
      pullPolicy: IfNotPresent
      ## Optionally specify an array of imagePullSecrets.
      ## Secrets must be manually created in the namespace.
-@@ -362,19 +377,26 @@
+@@ -368,19 +383,26 @@
  
    # Node labels for pod assignment
    # Ref: https://kubernetes.io/docs/user-guide/node-selection/
@@ -153,7 +153,7 @@
  
    # Options for autoscaler configmap
    configmap:
-@@ -386,8 +408,8 @@
+@@ -392,8 +414,8 @@
    livenessProbe:
      enabled: true
      initialDelaySeconds: 10
@@ -164,7 +164,7 @@
      failureThreshold: 3
      successThreshold: 1
  
-@@ -425,3 +447,39 @@
+@@ -431,3 +453,39 @@
  
  # Configures initcontainers for the coredns deployment.
  initContainers: []
