@@ -241,9 +241,7 @@ rules:
     verbs:
       - get
       - list
-       - update
-
-
+      - update
       - watch
   # IPAM resources are manipulated in response to node and block updates, as well as periodic triggers.
   - apiGroups: ["crd.projectcalico.org"]
@@ -306,6 +304,15 @@ rules:
       # update status
       - update
       # watch for changes
+      - watch
+  # Needs access to get, list and watch namespaces.
+  - apiGroups:
+      - ""
+    resources:
+    - namespaces
+    verbs:
+      - get
+      - list
       - watch
 ---
 kind: ClusterRoleBinding
