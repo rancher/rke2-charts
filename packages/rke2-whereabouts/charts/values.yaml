@@ -6,7 +6,7 @@ image:
   repository: rancher/hardened-whereabouts
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: v0.9.3-build20260511
+  tag: v0.9.4-build20260603
 
 updateStrategy: RollingUpdate
 imagePullSecrets: []
@@ -55,6 +55,16 @@ cniConf:
 nodeSliceController:
   enabled: false
   podAnnotations: {}
+
+reconciler:
+  logLevel: info
+  resources:
+    requests:
+      cpu: "100m"
+      memory: "50Mi"
+    limits:
+      cpu: "100m"
+      memory: "50Mi"
 
 global:
   systemDefaultRegistry: ""
