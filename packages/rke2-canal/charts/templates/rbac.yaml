@@ -305,6 +305,12 @@ rules:
       - update
       # watch for changes
       - watch
+  - apiGroups: ["projectcalico.org", "crd.projectcalico.org"]
+    resources:
+      - kubecontrollersconfigurations/status
+    verbs:
+      - get
+      - update
   # Needs access to get, list and watch namespaces.
   - apiGroups:
       - ""
