@@ -320,6 +320,15 @@ rules:
       - get
       - list
       - watch
+  # Needed for migration controller to watch calico-node and calico-typha status.
+  - apiGroups: ["apps"]
+    resources:
+      - daemonsets
+      - deployments
+    verbs:
+      - get
+      - list
+      - watch
 ---
 kind: ClusterRoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
