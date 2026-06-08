@@ -1,0 +1,267 @@
+{{- $version := include "traefik.proxyVersion" $ }}
+{{- if and .Values.rbac.enabled (not .Values.rbac.namespaced) }}
+---
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: {{ template "traefik.clusterRoleName" . }}
+  labels:
+    {{- include "traefik.labels" . | nindent 4 }}
+    {{- range .Values.rbac.aggregateTo }}
+    rbac.authorization.k8s.io/aggregate-to-{{ . }}: "true"
+    {{- end }}
+rules:
+  - apiGroups:
+      - ""
+    resources:
+      - configmaps
+      - nodes
+      - services
+    verbs:
+      - get
+      - list
+      - watch
+  - apiGroups:
+      - discovery.k8s.io
+    resources:
+      - endpointslices
+    verbs:
+      - list
+      - watch
+  - apiGroups:
+      - ""
+    resources:
+      - pods
+    verbs:
+      - get
+  - apiGroups:
+      - ""
+    resources:
+      - secrets
+    verbs:
+      - get
+      - list
+      - watch
+    {{- if and .Values.hub.token }}
+      - update
+      - create
+      - delete
+      - deletecollection
+    {{- end }}
+  {{- if or .Values.providers.kubernetesIngress.enabled .Values.providers.kubernetesIngressNGINX.enabled }}
+  - apiGroups:
+      - extensions
+      - networking.k8s.io
+    resources:
+      - ingressclasses
+      - ingresses
+    verbs:
+      - get
+      - list
+      - watch
+  - apiGroups:
+      - extensions
+      - networking.k8s.io
+    resources:
+      - ingresses/status
+    verbs:
+      - update
+  - apiGroups:
+      - ""
+    resources:
+      - namespaces
+    verbs:
+      - list
+      - watch
+  {{- end -}}
+  {{- if .Values.providers.kubernetesCRD.enabled }}
+   {{- if not .Values.providers.kubernetesIngress.enabled }}
+  - apiGroups:
+      - extensions
+      - networking.k8s.io
+    resources:
+      - ingressclasses
+    verbs:
+      - get
+      - list
+      - watch
+   {{- end }}
+  - apiGroups:
+      - traefik.io
+    resources:
+      - ingressroutes
+      - ingressroutetcps
+      - ingressrouteudps
+      - middlewares
+      - middlewaretcps
+      - serverstransports
+      - serverstransporttcps
+      - tlsoptions
+      - tlsstores
+      - traefikservices
+    verbs:
+      - get
+      - list
+      - watch
+  {{- end -}}
+  {{- if (.Values.providers.kubernetesGateway).enabled }}
+  - apiGroups:
+      - ""
+    resources:
+      - namespaces
+    verbs:
+      - list
+      - watch
+  - apiGroups:
+      - gateway.networking.k8s.io
+    resources:
+      - backendtlspolicies
+      - gatewayclasses
+      - gateways
+      - grpcroutes
+      - httproutes
+      - referencegrants
+      - tcproutes
+      - tlsroutes
+    verbs:
+      - get
+      - list
+      - watch
+  - apiGroups:
+      - gateway.networking.k8s.io
+    resources:
+      - backendtlspolicies/status
+      - gatewayclasses/status
+      - gateways/status
+      - grpcroutes/status
+      - httproutes/status
+      - tcproutes/status
+      - tlsroutes/status
+    verbs:
+      - update
+  {{- end }}
+  {{- if (.Values.providers.knative).enabled }}
+  - apiGroups:
+      - networking.internal.knative.dev
+    resources:
+      - ingresses
+    verbs:
+      - get
+      - list
+      - watch
+  - apiGroups:
+      - networking.internal.knative.dev
+    resources:
+      - ingresses/status
+    verbs:
+      - update
+  {{- end }}
+  {{- if .Values.hub.token }}
+  - apiGroups:
+      - coordination.k8s.io
+    resources:
+      - leases
+    verbs:
+      - get
+      - list
+      - watch
+      - create
+      - update
+      - patch
+      - delete
+  - apiGroups:
+      - hub.traefik.io
+    resources:
+      - aiservices
+    {{- if $.Values.hub.providers.multicluster.enabled }}
+      - uplinks
+    {{- end }}
+    verbs:
+      - list
+      - watch
+      - get
+    {{- if .Values.hub.apimanagement.enabled }}
+  - apiGroups:
+      - ""
+    resources:
+      - endpoints
+    verbs:
+      - list
+      - watch
+    {{- end }}
+  - apiGroups:
+      - ""
+    resources:
+      - namespaces
+    {{- if .Values.hub.apimanagement.enabled }}
+      - pods
+    {{- end }}
+    verbs:
+      - get
+      - list
+    {{- if .Values.hub.apimanagement.enabled }}
+      - watch
+    {{- end }}
+    {{- if .Values.hub.apimanagement.enabled }}
+  - apiGroups:
+      - hub.traefik.io
+    resources:
+      - accesscontrolpolicies
+      - apiauths
+      - apiportals
+      - apiportalauths
+      - apiratelimits
+      - apis
+      - apiversions
+      - apibundles
+      - apiplans
+      - apicatalogitems
+      - contentitems
+      - managedsubscriptions
+      - managedapplications
+    verbs:
+      - get
+      - list
+      - watch
+      {{- if not .Values.hub.offline }}
+      - create
+      - update
+      - patch
+      - delete
+      {{- end }}
+  - apiGroups:
+      - hub.traefik.io
+    resources:
+      - apiauths/status
+      - apiportals/status
+      - apiportalauths/status
+      - apis/status
+      - apiversions/status
+      - apibundles/status
+      - apiplans/status
+      - apicatalogitems/status
+      - contentitems/status
+      - managedsubscriptions/status
+      - managedapplications/status
+    verbs:
+      - get
+      - update
+      - patch
+  - apiGroups:
+      - ""
+    resources:
+      - events
+    verbs:
+      - create
+      - patch
+  - apiGroups:
+      - apps
+    resources:
+      - replicasets
+    verbs:
+      - get
+      - list
+      - watch
+    {{- end -}}
+  {{- end }}
+{{- end }}
