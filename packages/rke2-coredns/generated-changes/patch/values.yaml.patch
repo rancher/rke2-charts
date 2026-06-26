@@ -164,7 +164,7 @@
      failureThreshold: 3
      successThreshold: 1
  
-@@ -431,3 +453,39 @@
+@@ -431,3 +453,46 @@
  
  # Configures initcontainers for the coredns deployment.
  initContainers: []
@@ -177,6 +177,13 @@
 +  enabled: false
 +  ip_address: "169.254.20.10"
 +  ipvs: false
++
++  # Additional domains served from the same server block as the cluster domain
++  # in the node-local-dns cache. Each entry is appended to the cluster-domain
++  # block header and is therefore cached locally and forwarded to the cluster
++  # DNS over force_tcp, exactly like the cluster domain (e.g. "cluster.local").
++  # Defaults to [] (no extra domains, no change to the rendered Corefile).
++  extraClusterDomains: []
 +
 +  # set to true, if you wish to use nodelocal with cilium in kube-proxy replacement mode.
 +  # This sets up a Cilium Local Redirect Policy (LRP) to steer DNS traffic to the nodelocal dns cache.

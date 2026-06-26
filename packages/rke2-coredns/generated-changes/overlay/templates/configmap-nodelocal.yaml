@@ -9,7 +9,7 @@ metadata:
     addonmanager.kubernetes.io/mode: Reconcile
 data:
   Corefile: |
-    {{ coalesce .Values.global.clusterDomain "cluster.local" }}:53 {
+    {{ coalesce .Values.global.clusterDomain "cluster.local" }}:53{{ range .Values.nodelocal.extraClusterDomains }} {{ . }}:53{{ end }} {
         errors
         cache {
                 success 9984 30
