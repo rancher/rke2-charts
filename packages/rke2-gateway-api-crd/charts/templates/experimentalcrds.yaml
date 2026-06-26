@@ -1,0 +1,6 @@
+{{- if .Values.experimental.enabled -}}
+{{- range $path, $_ := .Files.Glob "experimentalcrds/*.yaml" }}
+---
+{{ $.Files.Get $path }}
+{{- end }}
+{{- end }}
