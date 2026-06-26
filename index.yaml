@@ -16608,6 +16608,34 @@ entries:
           description: Add scrapeTimeout, scheme, honorLabels, tlsConfig, relabelings, and metricRelabelings options to ServiceMonitor endpoint
     apiVersion: v2
     appVersion: 1.13.1
+    created: "2026-06-26T08:10:18.954299554Z"
+    description: CoreDNS is a DNS server that chains plugins and provides Kubernetes
+      DNS Services
+    digest: 8725c205533b311a9d9b78a191b46aac1ce7aab119566abdabc279c6fc771a56
+    home: https://coredns.io
+    icon: https://coredns.io/images/CoreDNS_Colour_Horizontal.png
+    keywords:
+    - coredns
+    - dns
+    - kubedns
+    maintainers:
+    - name: mrueg
+    - name: haad
+    - name: hagaibarel
+    - name: shubham-cmyk
+    name: rke2-coredns
+    sources:
+    - https://github.com/coredns/coredns
+    type: application
+    urls:
+    - assets/rke2-coredns/rke2-coredns-1.46.003.tgz
+    version: 1.46.003
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: added
+          description: Add scrapeTimeout, scheme, honorLabels, tlsConfig, relabelings, and metricRelabelings options to ServiceMonitor endpoint
+    apiVersion: v2
+    appVersion: 1.13.1
     created: "2026-06-10T16:21:36.567100426Z"
     description: CoreDNS is a DNS server that chains plugins and provides Kubernetes
       DNS Services
