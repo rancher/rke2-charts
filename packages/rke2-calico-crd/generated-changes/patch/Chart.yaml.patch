@@ -1,7 +1,7 @@
 --- charts-original/Chart.yaml
 +++ charts/Chart.yaml
 @@ -2,11 +2,5 @@
- appVersion: v3.32.0
+ appVersion: v3.32.1
  description: Installs crd.projectcalico.org and operator.tigera.io Custom Resource
    Definitions (CRDs)
 -home: https://docs.tigera.io/calico
@@ -12,4 +12,4 @@
 -- https://github.com/tigera/operator
 -- https://github.com/projectcalico/calico
 +name: rke2-calico-crd
- version: v3.32.0
+ version: v3.32.1
