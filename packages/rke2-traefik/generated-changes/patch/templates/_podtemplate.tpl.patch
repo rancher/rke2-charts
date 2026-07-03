@@ -9,3 +9,13 @@
          imagePullPolicy: {{ .Values.image.pullPolicy }}
          name: {{ template "traefik.fullname" . }}
          resources:
+@@ -596,7 +596,8 @@
+           {{- end }}
+           {{- end }}
+           {{- end }}
+-          {{- with .Values.providers.kubernetesIngressNGINX }}
++          {{- $kubernetesIngressNGINX := (include "providers.kubernetesIngressNGINX.values" . | fromYaml) }}
++          {{- with $kubernetesIngressNGINX }}
+            {{- if .enabled }}
+           - "--providers.kubernetesingressnginx"
+             {{- if or .watchNamespace (and $.Values.rbac.enabled $.Values.rbac.namespaced) }}
