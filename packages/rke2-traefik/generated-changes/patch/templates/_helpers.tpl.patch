@@ -9,7 +9,44 @@
  {{- end -}}
  {{- end -}}
  
-@@ -486,3 +486,11 @@
+@@ -147,9 +147,20 @@
+ {{- print $servicePath | trimSuffix "-" -}}
+ {{- end -}}
+ 
++{{- define "providers.kubernetesIngressNGINX.values" -}}
++{{- $new := default dict .Values.providers.kubernetesIngressNGINX -}}
++{{- $old := default dict .Values.providers.kubernetesIngressNginx -}}
++{{- $provider := $new -}}
++{{- if and $old.enabled (not $new.enabled) -}}
++{{- $provider = mergeOverwrite (dict) $new $old -}}
++{{- end -}}
++{{- toYaml $provider }}
++{{- end -}}
++
+ {{- define "providers.kubernetesIngressNGINX.publishServicePath" -}}
+ {{- $defServiceName := printf "%s/%s" (include "traefik.namespace" .) (include "traefik.fullname" .) -}}
+-{{- $servicePath := default $defServiceName .Values.providers.kubernetesIngressNGINX.publishService.pathOverride }}
++{{- $provider := (include "providers.kubernetesIngressNGINX.values" . | fromYaml) -}}
++{{- $servicePath := default $defServiceName (dig "publishService" "pathOverride" "" $provider) }}
+ {{- print $servicePath | trimSuffix "-" -}}
+ {{- end -}}
+ 
+@@ -166,7 +177,13 @@
+ {{- default (include "traefik.namespace" .) (join "," .Values.providers.kubernetesIngress.namespaces) }}
+ {{- end -}}
+ {{- define "providers.kubernetesIngressNGINX.namespaces" -}}
+-{{- default (include "traefik.namespace" .) (join "," .Values.providers.kubernetesIngressNGINX.watchNamespace) }}
++{{- $provider := (include "providers.kubernetesIngressNGINX.values" . | fromYaml) -}}
++{{- $watchNamespace := dig "watchNamespace" "" $provider -}}
++{{- if kindIs "slice" $watchNamespace -}}
++{{- default (include "traefik.namespace" .) (join "," $watchNamespace) }}
++{{- else -}}
++{{- default (include "traefik.namespace" .) $watchNamespace }}
++{{- end -}}
+ {{- end -}}
+ {{- define "providers.knative.namespaces" -}}
+ {{- default (include "traefik.namespace" .) (join "," .Values.providers.knative.namespaces) }}
+@@ -486,3 +503,11 @@
  {{- define "traefik.hubTokenFilePath" }}
  {{- printf "%s/%s" (.Values.hub.tokenMountPath | trimSuffix "/") "token" -}}
  {{- end -}}
