@@ -23,9 +23,7 @@ current=$(sed -nr 's/^\+ *primeTag: "?([^"]+)"?.*/\1/p' "${PATCH_FILE}" | head -
 
 if [ "${current}" != "${NEW_TAG}" ]; then
     echo "Updating ingress-nginx prime tag from ${current} to ${NEW_TAG}"
-    tmp=$(mktemp)
-    sed "s|${current}|${NEW_TAG}|g" "${PATCH_FILE}" > "${tmp}"
-    mv "${tmp}" "${PATCH_FILE}"
+    sed -i "s|${current}|${NEW_TAG}|g" "${PATCH_FILE}"
     UPDATED=true
 fi
 
@@ -33,9 +31,7 @@ if [ "${UPDATED}" = true ]; then
     package_version=$(yq '.packageVersion' "${PACKAGE_FILE}")
     new_version=$(printf "%02d" $((10#${package_version} + 1)))
     echo "Bumping packageVersion from ${package_version} to ${new_version}"
-    tmp=$(mktemp)
-    sed "s|packageVersion:.*|packageVersion: ${new_version}|g" "${PACKAGE_FILE}" > "${tmp}"
-    mv "${tmp}" "${PACKAGE_FILE}"
+    sed -i "s|packageVersion:.*|packageVersion: ${new_version}|g" "${PACKAGE_FILE}"
 else
     echo "ingress-nginx prime tag already at ${NEW_TAG}, nothing to do"
 fi

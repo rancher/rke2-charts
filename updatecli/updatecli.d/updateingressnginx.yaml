@@ -1,17 +1,31 @@
 ---
 name: "Update ingress-nginx prime image"
 # Bumps the rke2-ingress-nginx chart's primeTag whenever a newer -primeN
-# ingress-nginx image (CVE rebuild) is tagged in rancher/ingress-nginx for the
-# nginx base version currently pinned in the chart.
+# ingress-nginx image (CVE rebuild) is published in rancher/ingress-nginx for
+# the nginx base version currently pinned in the chart.
+#
+# The version pattern is pinned to the current nginx hardened line on purpose,
+# so a nginx minor/patch bump stays a deliberate human change. Update the
+# versionfilter pattern below when that line is bumped.
 
 sources:
   prime:
-    name: Get latest ingress-nginx prime tag
-    kind: shell
+    name: Get latest ingress-nginx prime image tag
+    kind: githubrelease
     spec:
-      command: 'updatecli/scripts/get-ingress-nginx-prime.sh'
-      environments:
-        - name: PATH
+      owner: rancher
+      repository: ingress-nginx
+      token: '{{ requiredEnv .github.token }}'
+      username: '{{ requiredEnv .github.username }}'
+      # Only consider published releases - never drafts or pre-releases.
+      typefilter:
+        release: true
+        draft: false
+        prerelease: false
+      versionfilter:
+        kind: regex
+        # -primeN CVE rebuilds of the pinned nginx v1.15.1 hardened line
+        pattern: 'v1\.15\.1-prime[0-9]+'
 
 targets:
   ingressNginx:
