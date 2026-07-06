@@ -1,0 +1,59 @@
+---
+name: "Update ingress-nginx prime image"
+# Bumps the rke2-ingress-nginx chart's primeTag whenever a newer -primeN
+# ingress-nginx image (CVE rebuild) is tagged in rancher/ingress-nginx for the
+# nginx base version currently pinned in the chart.
+
+sources:
+  prime:
+    name: Get latest ingress-nginx prime tag
+    kind: shell
+    spec:
+      command: 'updatecli/scripts/get-ingress-nginx-prime.sh'
+      environments:
+        - name: PATH
+
+targets:
+  ingressNginx:
+    name: Update prime tag and chart package version
+    kind: shell
+    scmid: default
+    sourceid: prime
+    spec:
+      command: 'updatecli/scripts/update-ingress-nginx.sh'
+      environments:
+        - name: INGRESS_NGINX_PRIME_TAG
+          value: '{{ source "prime" }}'
+        - name: PATH
+        - name: UPDATECLI_GITHUB_WORKFLOW_URL
+        - name: GH_TOKEN
+
+scms:
+  default:
+    kind: github
+    spec:
+      token: '{{ requiredEnv .github.token }}'
+      username: '{{ requiredEnv .github.username }}'
+      user: '{{ .github.username }}'
+      email: '{{ .github.email }}'
+      owner: '{{ .github.owner }}'
+      repository: '{{ .github.repository }}'
+      branch: '{{ .github.branch }}'
+
+actions:
+  default:
+    title: 'Update ingress-nginx prime image to {{ source "prime" }}'
+    kind: github/pullrequest
+    spec:
+      automerge: false
+      description: |
+        <h3>Chart Images</h3>
+        <ul>
+          <li>rancher/nginx-ingress-controller:{{ source "prime" }}</li>
+          <li>rancher/kube-webhook-certgen:{{ source "prime" }}</li>
+        </ul>
+      labels:
+        - chore
+        - skip-changelog
+        - status/auto-created
+    scmid: default
