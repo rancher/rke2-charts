@@ -23,9 +23,9 @@
 -        image: {{ .Values.flannel.image.repository }}:{{ .Values.flannel.image.tag }}
 +        image: {{ template "system_default_registry" . }}{{ .Values.flannel.image.repository }}:{{ .Values.flannel.image.tag }}
          command:
-         - cp
+         - /opt/bin/install-conf
          args:
-@@ -62,10 +55,9 @@
+@@ -61,10 +54,9 @@
            mountPath: /etc/cni/net.d
          - name: flannel-cfg
            mountPath: /etc/kube-flannel/
@@ -37,7 +37,7 @@
          command:
          - "/opt/bin/flanneld"
          {{- range .Values.flannel.args }}
-@@ -76,7 +68,7 @@
+@@ -75,7 +67,7 @@
            {{- toYaml . | trim | nindent 10 }}
          {{- end }}
          securityContext:
@@ -46,7 +46,7 @@
            capabilities:
              add: ["NET_ADMIN", "NET_RAW"]
          env:
-@@ -99,44 +91,14 @@
+@@ -98,44 +90,14 @@
            mountPath: /etc/kube-flannel/
          - name: xtables-lock
            mountPath: /run/xtables.lock
