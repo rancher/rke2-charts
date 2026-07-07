@@ -23,7 +23,7 @@ current=$(sed -nr 's/^\+ *primeTag: "?([^"]+)"?.*/\1/p' "${PATCH_FILE}" | head -
 
 if [ "${current}" != "${NEW_TAG}" ]; then
     echo "Updating ingress-nginx prime tag from ${current} to ${NEW_TAG}"
-    sed -i "s|${current}|${NEW_TAG}|g" "${PATCH_FILE}"
+    sed -i "/^\+ *primeTag:/s|${current}|${NEW_TAG}|g" "${PATCH_FILE}"
     UPDATED=true
 fi
 
