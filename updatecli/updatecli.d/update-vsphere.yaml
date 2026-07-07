@@ -1,0 +1,53 @@
+---
+name: "Update vSphere Charts"
+
+sources:
+  vsphere_commit:
+    name: Get latest vsphere-charts commit
+    kind: shell
+    spec:
+      command: git ls-remote https://github.com/rancher/vsphere-charts.git refs/heads/main | cut -f1
+      environments:
+        - name: PATH
+
+targets:
+  vsphere_cpi:
+    name: Bump rancher-vsphere-cpi commit
+    kind: yaml
+    scmid: default
+    sourceid: vsphere_commit
+    spec:
+      file: packages/rancher-vsphere-cpi/package.yaml
+      key: $.commit
+  vsphere_csi:
+    name: Bump rancher-vsphere-csi commit
+    kind: yaml
+    scmid: default
+    sourceid: vsphere_commit
+    spec:
+      file: packages/rancher-vsphere-csi/package.yaml
+      key: $.commit
+
+scms:
+  default:
+    kind: github
+    spec:
+      token: '{{ requiredEnv .github.token }}'
+      username: '{{ requiredEnv .github.username }}'
+      user: '{{ .github.username }}'
+      email: '{{ .github.email }}'
+      owner: '{{ .github.owner }}'
+      repository: '{{ .github.repository }}'
+      branch: '{{ .github.branch }}'
+
+actions:
+  default:
+    title: 'Bump vsphere charts'
+    kind: github/pullrequest
+    spec:
+      automerge: false
+      labels:
+        - chore
+        - skip-changelog
+        - status/auto-created
+    scmid: default
