@@ -41,6 +41,11 @@ targets:
         - name: PATH
         - name: UPDATECLI_GITHUB_WORKFLOW_URL
         - name: GH_TOKEN
+      changedif:
+        kind: file/checksum
+        spec:
+          files:
+            - packages/rke2-ingress-nginx/package.yaml
 
 scms:
   default:
