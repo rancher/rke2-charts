@@ -1,0 +1,6 @@
+apiVersion: v2
+appVersion: v3.32.1
+description: Installs crd.projectcalico.org and operator.tigera.io Custom Resource
+  Definitions (CRDs)
+name: rke2-calico-crd
+version: v3.32.100
