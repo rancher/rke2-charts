@@ -17,7 +17,7 @@
 -    repository: ghcr.io/flannel-io/flannel
 -    tag: v0.28.7
 +    repository: rancher/hardened-flannel
-+    tag: v0.28.7-build20260707
++    tag: v0.28.7-build20260708
    flannel_cni:
      image:
 -      repository: ghcr.io/flannel-io/flannel-cni-plugin
