@@ -4217,6 +4217,23 @@ entries:
   rke2-canal:
   - apiVersion: v1
     appVersion: v3.32.1
+    created: "2026-07-09T06:42:16.084667098Z"
+    description: Install Canal Network Plugin.
+    digest: f0b4542e33c7d71141059650219b7c2f837a82714be876ac01f461e2aa2ba3ec
+    home: https://www.projectcalico.org/
+    keywords:
+    - canal
+    maintainers:
+    - email: charts@rancher.com
+      name: Rancher Labs
+    name: rke2-canal
+    sources:
+    - https://github.com/rancher/rke2-charts
+    urls:
+    - assets/rke2-canal/rke2-canal-v3.32.1-build2026070900.tgz
+    version: v3.32.1-build2026070900
+  - apiVersion: v1
+    appVersion: v3.32.1
     created: "2026-07-08T13:08:51.575403621Z"
     description: Install Canal Network Plugin.
     digest: 03a8e55e7dd4b7c21fd230526f5eb888a2bde0c51e5b48ba89a5faf50c798080
@@ -25785,6 +25802,27 @@ entries:
     - assets/rke2-metrics-server/rke2-metrics-server-2.11.100-build2021022300.tgz
     version: 2.11.100-build2021022300
   rke2-multus:
+  - apiVersion: v2
+    appVersion: 4.3.0
+    created: "2026-07-09T06:42:17.591761891Z"
+    dependencies:
+    - condition: rke2-whereabouts.enabled
+      name: rke2-whereabouts
+      repository: file://./charts/rke2-whereabouts
+    description: Multus Helm chart for Kubernetes
+    digest: fa197143f70d462347c4032ede4db7d85e1ba38192560380eddd24afe8205a7a
+    home: https://github.com/k8snetworkplumbingwg/multus-cni
+    icon: https://raw.githubusercontent.com/k8snetworkplumbingwg/multus-cni/master/doc/images/Multus.png
+    maintainers:
+    - email: charts@rancher.com
+      name: Rancher Labs
+    name: rke2-multus
+    sources:
+    - https://github.com/intel/multus-cni
+    type: application
+    urls:
+    - assets/rke2-multus/rke2-multus-v4.3.002.tgz
+    version: v4.3.002
   - apiVersion: v2
     appVersion: 4.3.0
     created: "2026-07-09T05:52:50.069174142Z"
