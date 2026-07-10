@@ -92,7 +92,7 @@ To update your working copy of the charts-build-scripts after rebasing against u
 
 To check whether the new packages you are introducing will cause any issues with upstream that you will synchronize with, run:
 
-- `make validate`: Validates your current repository branch against all the repository branches indicated in your configuration.yaml
+- `make validate`: Validates your current repository branch against all the repository branches indicated in your config/configuration.yaml
 
 #### Common Workflow
 
