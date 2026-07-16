@@ -90,6 +90,9 @@ data:
       "IPv6Network": {{ coalesce .Values.global.clusterCIDRv6 .Values.podCidrv6 | quote }},
       "EnableIPv6": true,
 {{- end }}
+{{- if .Values.flannel.enableNFTables }}
+      "EnableNFTables": true,
+{{- end }}
       "Backend": {
 {{- if eq .Values.flannel.backend "vxlan" }}
 {{- if .Values.flannel.backendPort }}
