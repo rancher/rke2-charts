@@ -15,6 +15,9 @@ flannel:
   iface: ""
   # A regulare expression used to match the interface
   regexIface: ""
+  # Set to true to enable nftables support. This will cause flannel to use the nftables backend for iptables rules instead of the legacy iptables backend. 
+  # This is only supported on Linux kernels 3.13 and later.
+  enableNFTables: false
   # kube-flannel command arguments with forward rules disabled because with Calico the packets for pod IPs that doesn't exist are forwarded to the default GW
   args:
     - "--ip-masq"
