@@ -8,7 +8,7 @@
 +  repository: rancher/hardened-k8s-metrics-server
    # Overrides the image tag whose default is v{{ .Chart.AppVersion }}
 -  tag: ""
-+  tag: v0.9.0-build20260714
++  tag: v0.9.0-build20260716
    pullPolicy: IfNotPresent
  
  imagePullSecrets: []
