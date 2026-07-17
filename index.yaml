@@ -17110,6 +17110,34 @@ entries:
   rke2-coredns:
   - annotations:
       artifacthub.io/changes: |
+        - kind: fixed
+          description: Chart will no longer fail to render if ipv6 address is used in prometheus plugin parameters
+    apiVersion: v2
+    appVersion: 1.13.1
+    created: "2026-07-17T08:59:27.236144952Z"
+    description: CoreDNS is a DNS server that chains plugins and provides Kubernetes
+      DNS Services
+    digest: c76ae7cc4dd2b46addfca78e10a8ee8bd9679cc319541cafb2c5cdb714e0c44f
+    home: https://coredns.io
+    icon: https://coredns.io/images/CoreDNS_Colour_Horizontal.png
+    keywords:
+    - coredns
+    - dns
+    - kubedns
+    maintainers:
+    - name: mrueg
+    - name: haad
+    - name: hagaibarel
+    - name: shubham-cmyk
+    name: rke2-coredns
+    sources:
+    - https://github.com/coredns/coredns
+    type: application
+    urls:
+    - assets/rke2-coredns/rke2-coredns-1.46.100.tgz
+    version: 1.46.100
+  - annotations:
+      artifacthub.io/changes: |
         - kind: added
           description: Add scrapeTimeout, scheme, honorLabels, tlsConfig, relabelings, and metricRelabelings options to ServiceMonitor endpoint
     apiVersion: v2
