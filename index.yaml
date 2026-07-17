@@ -17215,6 +17215,34 @@ entries:
           description: Chart will no longer fail to render if ipv6 address is used in prometheus plugin parameters
     apiVersion: v2
     appVersion: 1.13.1
+    created: "2026-07-17T20:28:33.883987102Z"
+    description: CoreDNS is a DNS server that chains plugins and provides Kubernetes
+      DNS Services
+    digest: 66a6ccc9370e75e2ec12d4f40210c435aeeb24205d6a0622716455b8e1857697
+    home: https://coredns.io
+    icon: https://coredns.io/images/CoreDNS_Colour_Horizontal.png
+    keywords:
+    - coredns
+    - dns
+    - kubedns
+    maintainers:
+    - name: mrueg
+    - name: haad
+    - name: hagaibarel
+    - name: shubham-cmyk
+    name: rke2-coredns
+    sources:
+    - https://github.com/coredns/coredns
+    type: application
+    urls:
+    - assets/rke2-coredns/rke2-coredns-1.46.101.tgz
+    version: 1.46.101
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: fixed
+          description: Chart will no longer fail to render if ipv6 address is used in prometheus plugin parameters
+    apiVersion: v2
+    appVersion: 1.13.1
     created: "2026-07-17T08:59:27.236144952Z"
     description: CoreDNS is a DNS server that chains plugins and provides Kubernetes
       DNS Services
@@ -25088,6 +25116,40 @@ entries:
     - assets/rke2-kube-proxy/rke2-kube-proxy-v1.18.4.tgz
     version: v1.18.4
   rke2-metrics-server:
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: fixed
+          description: "Conditionally render `insecureSkipTLSVerify` field in APIService template to prevent GitOps sync drift when value is `false`."
+        - kind: fixed
+          description: "Do not render annotations as null in APIService template to prevent permanent OutOfSync in ArgoCD."
+        - kind: changed
+          description: "Update the Metrics Server OCI image to [`0.8.1`](https://github.com/kubernetes-sigs/metrics-server/releases/tag/v0.8.1)."
+    apiVersion: v2
+    appVersion: 0.8.1
+    created: "2026-07-17T20:28:34.273848489Z"
+    description: Metrics Server is a scalable, efficient source of container resource
+      metrics for Kubernetes built-in autoscaling pipelines.
+    digest: 9ea8475aef7098c65e861244569a3a1e2bd23b9b7d49eca2aec92018d6455b48
+    home: https://github.com/kubernetes-sigs/metrics-server
+    icon: https://avatars.githubusercontent.com/u/36015203?s=400&v=4
+    keywords:
+    - kubernetes
+    - metrics-server
+    - metrics
+    maintainers:
+    - name: stevehipwell
+      url: https://github.com/stevehipwell
+    - name: krmichel
+      url: https://github.com/krmichel
+    - name: endrec
+      url: https://github.com/endrec
+    name: rke2-metrics-server
+    sources:
+    - https://github.com/kubernetes-sigs/metrics-server
+    type: application
+    urls:
+    - assets/rke2-metrics-server/rke2-metrics-server-3.13.104.tgz
+    version: 3.13.104
   - annotations:
       artifacthub.io/changes: |
         - kind: fixed
