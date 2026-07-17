@@ -117,7 +117,7 @@
      ## use *either* current default registry/image or repository format or installing chart by providing the values.yaml will fail
 -    ## repository:
 -    tag: "1.5"
-+    repository: rancher/nginx-ingress-controller-defaultbackend
++    repository: rancher/mirrored-nginx-ingress-controller-defaultbackend
 +    tag: "1.5-rancher1"
      pullPolicy: IfNotPresent
      runAsNonRoot: true
