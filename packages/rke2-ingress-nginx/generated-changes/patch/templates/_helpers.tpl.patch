@@ -1,21 +1,6 @@
 --- charts-original/templates/_helpers.tpl
 +++ charts/templates/_helpers.tpl
-@@ -70,11 +70,11 @@
- {{/*
- Get specific image
- */}}
--{{- define "ingress-nginx.image" -}}
-+{{- define "ingress-nginx.repository" -}}
- {{- if .chroot -}}
--{{- printf "%s-chroot" .image -}}
-+{{- printf "%s-chroot" .repository -}}
- {{- else -}}
--{{- printf "%s" .image -}}
-+{{- printf "%s" .repository -}}
- {{- end }}
- {{- end -}}
- 
-@@ -261,3 +261,15 @@
+@@ -261,3 +261,28 @@
      - name: modules
        mountPath: /modules_mount
  {{- end -}}
@@ -25,6 +10,19 @@
 +{{- printf "%s/" .Values.global.systemDefaultRegistry -}}
 +{{- else -}}
 +{{- "" -}}
++{{- end -}}
++{{- end -}}
++
++{{/*
++If the repository value is not hostname or IP with at least one dot, or host:port, use the systemDefaultRegistry if defined.
++*/}}
++{{- define "registry_domain_prefix" -}}
++{{- $repository := .repository | default "" -}}
++{{- $firstComponent := (splitList "/" $repository | first) -}}
++{{- if or (eq $firstComponent "localhost") (contains "." $firstComponent) (contains ":" $firstComponent) -}}
++{{- "" -}}
++{{- else -}}
++{{- template "system_default_registry" . -}}
 +{{- end -}}
 +{{- end -}}
 +
