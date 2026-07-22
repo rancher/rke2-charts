@@ -4301,6 +4301,23 @@ entries:
   rke2-canal:
   - apiVersion: v1
     appVersion: v3.32.1
+    created: "2026-07-22T17:55:18.454250069Z"
+    description: Install Canal Network Plugin.
+    digest: 71eb83ffa287e482ec74d1d3a40dbba3308dccda3ac0fb8478463b025cac2ec2
+    home: https://www.projectcalico.org/
+    keywords:
+    - canal
+    maintainers:
+    - email: charts@rancher.com
+      name: Rancher Labs
+    name: rke2-canal
+    sources:
+    - https://github.com/rancher/rke2-charts
+    urls:
+    - assets/rke2-canal/rke2-canal-v3.32.1-build2026072200.tgz
+    version: v3.32.1-build2026072200
+  - apiVersion: v1
+    appVersion: v3.32.1
     created: "2026-07-17T20:43:45.778357895Z"
     description: Install Canal Network Plugin.
     digest: 829a2703c5e71133cd8cb81f162638a0621a967ec6f59e43c41ee0546048d1ea
@@ -17329,6 +17346,34 @@ entries:
   rke2-coredns:
   - annotations:
       artifacthub.io/changes: |
+        - kind: added
+          description: Added podSecurityContext and container securityContext to the autoscaler templates.
+    apiVersion: v2
+    appVersion: 1.13.1
+    created: "2026-07-22T17:55:19.576075627Z"
+    description: CoreDNS is a DNS server that chains plugins and provides Kubernetes
+      DNS Services
+    digest: 1b267b3c2af133d16eae557a2d552bd43255789a2e3974ba5d2f877e6a6a2819
+    home: https://coredns.io
+    icon: https://coredns.io/images/CoreDNS_Colour_Horizontal.png
+    keywords:
+    - coredns
+    - dns
+    - kubedns
+    maintainers:
+    - name: mrueg
+    - name: haad
+    - name: hagaibarel
+    - name: shubham-cmyk
+    name: rke2-coredns
+    sources:
+    - https://github.com/coredns/coredns
+    type: application
+    urls:
+    - assets/rke2-coredns/rke2-coredns-1.46.201.tgz
+    version: 1.46.201
+  - annotations:
+      artifacthub.io/changes: |
         - kind: fixed
           description: Chart will no longer fail to render if ipv6 address is used in prometheus plugin parameters
     apiVersion: v2
@@ -25284,6 +25329,40 @@ entries:
           description: "Update the Metrics Server OCI image to [`0.8.1`](https://github.com/kubernetes-sigs/metrics-server/releases/tag/v0.8.1)."
     apiVersion: v2
     appVersion: 0.8.1
+    created: "2026-07-22T17:55:19.978031654Z"
+    description: Metrics Server is a scalable, efficient source of container resource
+      metrics for Kubernetes built-in autoscaling pipelines.
+    digest: 8eb2813f2e22e30f5efcd3cf5d4f5ede7bcc0635ffdb5a831e07bc3e90fc45d8
+    home: https://github.com/kubernetes-sigs/metrics-server
+    icon: https://avatars.githubusercontent.com/u/36015203?s=400&v=4
+    keywords:
+    - kubernetes
+    - metrics-server
+    - metrics
+    maintainers:
+    - name: stevehipwell
+      url: https://github.com/stevehipwell
+    - name: krmichel
+      url: https://github.com/krmichel
+    - name: endrec
+      url: https://github.com/endrec
+    name: rke2-metrics-server
+    sources:
+    - https://github.com/kubernetes-sigs/metrics-server
+    type: application
+    urls:
+    - assets/rke2-metrics-server/rke2-metrics-server-3.13.105.tgz
+    version: 3.13.105
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: fixed
+          description: "Conditionally render `insecureSkipTLSVerify` field in APIService template to prevent GitOps sync drift when value is `false`."
+        - kind: fixed
+          description: "Do not render annotations as null in APIService template to prevent permanent OutOfSync in ArgoCD."
+        - kind: changed
+          description: "Update the Metrics Server OCI image to [`0.8.1`](https://github.com/kubernetes-sigs/metrics-server/releases/tag/v0.8.1)."
+    apiVersion: v2
+    appVersion: 0.8.1
     created: "2026-07-17T20:28:34.273848489Z"
     description: Metrics Server is a scalable, efficient source of container resource
       metrics for Kubernetes built-in autoscaling pipelines.
@@ -26485,6 +26564,27 @@ entries:
     - assets/rke2-metrics-server/rke2-metrics-server-2.11.100-build2021022300.tgz
     version: 2.11.100-build2021022300
   rke2-multus:
+  - apiVersion: v2
+    appVersion: 4.3.0
+    created: "2026-07-22T17:55:20.06193684Z"
+    dependencies:
+    - condition: rke2-whereabouts.enabled
+      name: rke2-whereabouts
+      repository: file://./charts/rke2-whereabouts
+    description: Multus Helm chart for Kubernetes
+    digest: 012a9f96e19198066471619b680b099a915aae551756a287e11931cf64d6ae67
+    home: https://github.com/k8snetworkplumbingwg/multus-cni
+    icon: https://raw.githubusercontent.com/k8snetworkplumbingwg/multus-cni/master/doc/images/Multus.png
+    maintainers:
+    - email: charts@rancher.com
+      name: Rancher Labs
+    name: rke2-multus
+    sources:
+    - https://github.com/intel/multus-cni
+    type: application
+    urls:
+    - assets/rke2-multus/rke2-multus-v4.3.007.tgz
+    version: v4.3.007
   - apiVersion: v2
     appVersion: 4.3.0
     created: "2026-07-17T20:53:32.423082773Z"
