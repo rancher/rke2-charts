@@ -11,20 +11,20 @@ jobs:
     steps:
     - uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # v3
 
-    - name: Pull scripts
-      run: sudo make pull-scripts
-
     - name: Pull in all relevant branches
       run: git fetch origin main-source main
 
     - name: Checkout live branch
-      run: git checkout main
+      run: git checkout -B main origin/main
 
     - name: Synchronize
-      run: sudo make sync
+      run: |
+        git checkout origin/main-source -- assets charts index.yaml release.yaml
       
     - name: Add assets to branch
-      run: git add . && git -c user.name="actions" -c user.email="actions@github.com" commit -m "$(git log -b main-source --oneline -n1 --pretty=format:'%B')" || true
+      run: |
+        git add assets charts index.yaml release.yaml
+        git -c user.name="actions" -c user.email="actions@github.com" commit -m "$(git log origin/main-source --oneline -n1 --pretty=format:'%B')" || true
 
     - name: Push assets
       run: git push origin main

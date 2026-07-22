@@ -32,7 +32,7 @@ For an example of a chart that uses systemdefaultregistry you can look at:
 
 ### Configuration
 
-This repository branch contains a `configuration.yaml` file that is used to specify how it interacts with other repository branches.
+This repository branch contains a `config/configuration.yaml` file that is used to specify how it interacts with other repository branches.
 
 #### Validate
 
@@ -101,6 +101,6 @@ If this `major.minor.patch` (e.g. `0.0.1`) version of the Chart has been release
 
 `make charts`: Runs `make prepare` and then exports your charts to `assets/` and `charts/` and generates or updates your `index.yaml`.
 
-`make validate`: Validates your current repository branch against all the repository branches indicated in your configuration.yaml
+`make validate`: Validates your current repository branch against all the repository branches indicated in your config/configuration.yaml
 
 `make docs`: Pulls in the latest docs, scripts, etc. from the charts-build-scripts repository

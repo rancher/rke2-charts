@@ -1,23 +1,19 @@
 #!/bin/bash
 set -e
 
-cd $(dirname $0)
+cd "$(dirname "$0")"
 
-source ./version
+CHARTS_BUILD_SCRIPT_VERSION=v1.9.25
+CHARTS_BUILD_SCRIPT_ASSET=charts-build-scripts_linux_amd64
 
 echo "Pulling in charts-build-scripts version ${CHARTS_BUILD_SCRIPT_VERSION}"
 
 rm -rf ../bin
 cd ..
 
-rm -rf charts-build-scripts
-git clone --depth 1 --branch $CHARTS_BUILD_SCRIPT_VERSION https://github.com/rancher/charts-build-scripts.git 2>/dev/null
-
-cd charts-build-scripts
-./scripts/build
-mv bin ../bin
-cd ..
-
-rm -rf charts-build-scripts
+mkdir -p ./bin
+curl -fsSL \
+	"https://github.com/rancher/charts-build-scripts/releases/download/${CHARTS_BUILD_SCRIPT_VERSION}/${CHARTS_BUILD_SCRIPT_ASSET}" \
+	-o ./bin/charts-build-scripts
 chmod +x ./bin/charts-build-scripts
 ./bin/charts-build-scripts --version
