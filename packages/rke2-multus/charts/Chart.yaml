@@ -1,4 +1,4 @@
-apiVersion: v2
+apiVersion: v1
 appVersion: 4.3.0
 dependencies:
 - condition: rke2-whereabouts.enabled
