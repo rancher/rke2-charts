@@ -1,4 +1,4 @@
-{{ if (index .Values "rke2-whereabouts").enabled }}
+{{ if dig "rke2-whereabouts" "enabled" false .Values }}
 apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
