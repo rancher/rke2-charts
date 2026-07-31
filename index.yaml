@@ -1704,6 +1704,34 @@ entries:
       catalog.cattle.io/release-name: vsphere-csi
     apiVersion: v1
     appVersion: 3.7.2
+    created: "2026-07-31T23:11:18.190293166Z"
+    description: vSphere Cloud Storage Interface (CSI)
+    digest: 71649860e4d65d04af9a8f0f0263bca3bd46eab88e10868f8c4306add83052a4
+    icon: https://charts.rancher.io/assets/logos/vsphere-csi.svg
+    keywords:
+    - infrastructure
+    maintainers:
+    - email: jiaqi.luo@suse.com
+      name: Jiaqi Luo
+    - email: brad.davidson@suse.com
+      name: Brad Davidson
+    name: rancher-vsphere-csi
+    sources:
+    - https://github.com/kubernetes-sigs/vsphere-csi-driver
+    urls:
+    - assets/rancher-vsphere-csi/rancher-vsphere-csi-3.7.2-rancher700.tgz
+    version: 3.7.2-rancher700
+  - annotations:
+      catalog.cattle.io/certified: rancher
+      catalog.cattle.io/display-name: vSphere CSI
+      catalog.cattle.io/kube-version: '>= 1.27.0-0 < 1.37.0-0'
+      catalog.cattle.io/namespace: kube-system
+      catalog.cattle.io/os: linux,windows
+      catalog.cattle.io/permits-os: linux,windows
+      catalog.cattle.io/rancher-version: '>= 2.9.0-0'
+      catalog.cattle.io/release-name: vsphere-csi
+    apiVersion: v1
+    appVersion: 3.7.2
     created: "2026-07-31T15:46:50.127718699Z"
     description: vSphere Cloud Storage Interface (CSI)
     digest: 159a516c18f0f99661713d81bf19055ba59978bbea3365fd5befb1fcd3ca1f6f
