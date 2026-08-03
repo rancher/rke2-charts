@@ -9,9 +9,7 @@ Cluster Role Binding: {{ .Chart.Name }}
 {{- if .Values.manifests.configMap }}
 Config Map: {{ .Release.Name }}-{{ .Chart.Version }}-config
 {{- end }}
-{{- if .Values.manifests.customResourceDefinition }}
 Custom Resource Definition: network-attachment-definitions.k8s.cni.cncf.io
-{{- end }}
 {{- if .Values.manifests.daemonSet }}
 Daemon Set: {{ .Release.Name }}
 {{- end }}

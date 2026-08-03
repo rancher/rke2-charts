@@ -1,4 +1,4 @@
----
+{{ if dig "rke2-whereabouts" "enabled" false .Values }}
 apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
@@ -78,3 +78,4 @@ spec:
         type: object
     served: true
     storage: true
+{{ end }}
