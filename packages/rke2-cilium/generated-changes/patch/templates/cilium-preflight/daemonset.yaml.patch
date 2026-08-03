@@ -18,3 +18,12 @@
            imagePullPolicy: {{ .Values.preflight.image.pullPolicy }}
            command: ["/bin/sh"]
            args:
+@@ -117,7 +117,7 @@
+           terminationMessagePolicy: FallbackToLogsOnError
+         {{- if $envoyDS }}
+         - name: cilium-pre-flight-envoy
+-          image: {{ include "cilium.image" .Values.preflight.envoy.image | quote }}
++          image: "{{ template "system_default_registry" . }}{{ include "cilium.image" .Values.preflight.envoy.image }}"
+           imagePullPolicy: {{ .Values.preflight.image.pullPolicy }}
+           command: ["/bin/sh"]
+           args:
