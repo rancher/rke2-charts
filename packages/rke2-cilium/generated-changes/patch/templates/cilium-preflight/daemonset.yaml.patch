@@ -1,6 +1,6 @@
 --- charts-original/templates/cilium-preflight/daemonset.yaml
 +++ charts/templates/cilium-preflight/daemonset.yaml
-@@ -52,7 +52,7 @@
+@@ -53,7 +53,7 @@
        {{- end }}
        initContainers:
          - name: clean-cilium-state
@@ -9,7 +9,7 @@
            imagePullPolicy: {{ .Values.preflight.image.pullPolicy }}
            command: ["/bin/echo"]
            args:
-@@ -60,7 +60,7 @@
+@@ -61,7 +61,7 @@
            terminationMessagePolicy: FallbackToLogsOnError
        containers:
          - name: cilium-pre-flight-check
@@ -18,12 +18,3 @@
            imagePullPolicy: {{ .Values.preflight.image.pullPolicy }}
            command: ["/bin/sh"]
            args:
-@@ -116,7 +116,7 @@
-           terminationMessagePolicy: FallbackToLogsOnError
-         {{- if ne .Values.preflight.tofqdnsPreCache "" }}
-         - name: cilium-pre-flight-fqdn-precache
--          image: {{ include "cilium.image" .Values.preflight.image | quote }}
-+          image: "{{ template "system_default_registry" . }}{{ include "cilium.image" .Values.preflight.image }}"
-           imagePullPolicy: {{ .Values.preflight.image.pullPolicy }}
-           name: cilium-pre-flight-fqdn-precache
-           command: ["/bin/sh"]

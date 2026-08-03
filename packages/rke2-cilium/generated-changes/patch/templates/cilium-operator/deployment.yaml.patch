@@ -12,7 +12,7 @@
  ---
  apiVersion: apps/v1
  kind: Deployment
-@@ -77,7 +84,7 @@
+@@ -79,7 +86,7 @@
        {{- end }}
        containers:
        - name: cilium-operator

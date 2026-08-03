@@ -11,7 +11,7 @@
  {{- if and ( or (.Values.agent) (.Values.operator.enabled) .Values.clustermesh.useAPIServer) (not .Values.preflight.enabled) }}
  {{- /*  Default values with backwards compatibility */ -}}
  {{- $defaultBpfMapDynamicSizeRatio := 0.0 -}}
-@@ -330,7 +337,11 @@
+@@ -336,7 +343,11 @@
  
    # Enable IPv6 addressing. If enabled, all endpoints are allocated an IPv6
    # address.
@@ -22,5 +22,5 @@
 +  enable-ipv6: "false"
 +{{- end }}
  
- {{- if .Values.cleanState }}
-   # If a serious issue occurs during Cilium startup, this
+ {{- if eq .Values.preferIpv6 true }}
+   prefer-ipv6: "true"

@@ -12,7 +12,7 @@
  {{- if and .Values.agent (not .Values.preflight.enabled) }}
  
  {{- /*  Default values with backwards compatibility */ -}}
-@@ -58,7 +66,7 @@
+@@ -62,7 +70,7 @@
          cilium.io/cilium-configmap-checksum: {{ include (print $.Template.BasePath "/cilium-configmap.yaml") . | sha256sum | quote }}
          {{- end }}
          {{- if not .Values.securityContext.privileged }}
@@ -21,7 +21,7 @@
          # Set app AppArmor's profile to "unconfined". The value of this annotation
          # can be modified as long users know which profiles they have available
          # in AppArmor.
-@@ -93,8 +101,8 @@
+@@ -98,8 +106,8 @@
          {{- toYaml . | nindent 8 }}
        {{- end }}
        {{- /* K8s version lower than 1.30.0 don't support the "appArmorProfile" field, */}}
@@ -32,7 +32,7 @@
          {{- $_ := unset .Values.podSecurityContext "appArmorProfile" }}
        {{- end }}
        {{- with .Values.podSecurityContext }}
-@@ -103,7 +111,7 @@
+@@ -108,7 +116,7 @@
        {{- end }}
        containers:
        - name: cilium-agent
@@ -41,7 +41,7 @@
          imagePullPolicy: {{ .Values.image.pullPolicy }}
          {{- if .Values.sleepAfterInit }}
          command:
-@@ -431,7 +439,7 @@
+@@ -436,7 +444,7 @@
          {{- include "cilium-agent.volumeMounts.extra" . | nindent 8 }}
        {{- if .Values.monitor.enabled }}
        - name: cilium-monitor
@@ -50,7 +50,7 @@
          imagePullPolicy: {{ .Values.image.pullPolicy }}
          command:
          - /bin/bash
-@@ -462,9 +470,19 @@
+@@ -467,9 +475,19 @@
        {{- toYaml .Values.extraContainers | nindent 6 }}
        {{- end }}
        initContainers:
@@ -71,7 +71,7 @@
          imagePullPolicy: {{ .Values.image.pullPolicy }}
          {{- with .Values.initResources }}
          resources:
-@@ -544,7 +562,7 @@
+@@ -549,7 +567,7 @@
        # Required to mount cgroup2 filesystem on the underlying Kubernetes node.
        # We use nsenter command with host's cgroup and mount namespaces enabled.
        - name: mount-cgroup
@@ -80,7 +80,7 @@
          imagePullPolicy: {{ .Values.image.pullPolicy }}
          env:
          - name: CGROUP_ROOT
-@@ -595,7 +613,7 @@
+@@ -600,7 +618,7 @@
        {{- end }}
        {{- if .Values.sysctlfix.enabled }}
        - name: apply-sysctl-overwrites
@@ -89,7 +89,7 @@
          imagePullPolicy: {{ .Values.image.pullPolicy }}
          {{- with .Values.initResources }}
          resources:
-@@ -644,7 +662,7 @@
+@@ -649,7 +667,7 @@
        # from a privileged container because the mount propagation bidirectional
        # only works from privileged containers.
        - name: mount-bpf-fs
@@ -98,7 +98,7 @@
          imagePullPolicy: {{ .Values.image.pullPolicy }}
          {{- with .Values.initResources }}
          resources:
-@@ -666,7 +684,7 @@
+@@ -671,7 +689,7 @@
        {{- end }}
        {{- if and .Values.nodeinit.enabled .Values.nodeinit.bootstrapFile }}
        - name: wait-for-node-init
@@ -107,7 +107,7 @@
          imagePullPolicy: {{ .Values.image.pullPolicy }}
          {{- with .Values.initResources }}
          resources:
-@@ -684,9 +702,11 @@
+@@ -689,9 +707,11 @@
          volumeMounts:
          - name: cilium-bootstrap-file-dir
            mountPath: "/tmp/cilium-bootstrap.d"
@@ -120,7 +120,7 @@
          imagePullPolicy: {{ .Values.image.pullPolicy }}
          command:
          - /init-container.sh
-@@ -762,7 +782,7 @@
+@@ -767,7 +787,7 @@
          {{- end }}
        {{- if and .Values.waitForKubeProxy (and (ne (toString $kubeProxyReplacement) "strict") (ne (toString $kubeProxyReplacement) "true"))  }}
        - name: wait-for-kube-proxy
@@ -129,7 +129,7 @@
          imagePullPolicy: {{ .Values.image.pullPolicy }}
          {{- with .Values.initResources }}
          resources:
-@@ -800,7 +820,7 @@
+@@ -805,7 +825,7 @@
        {{- if .Values.cni.install }}
        # Install the CNI binaries in an InitContainer so we don't have a writable host mount in the agent
        - name: install-cni-binaries
