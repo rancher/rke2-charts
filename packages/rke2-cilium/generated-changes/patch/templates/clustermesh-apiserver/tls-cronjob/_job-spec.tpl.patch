@@ -1,0 +1,11 @@
+--- charts-original/templates/clustermesh-apiserver/tls-cronjob/_job-spec.tpl
++++ charts/templates/clustermesh-apiserver/tls-cronjob/_job-spec.tpl
+@@ -14,7 +14,7 @@
+           type: RuntimeDefault
+       containers:
+         - name: certgen
+-          image: {{ include "cilium.image" .Values.certgen.image | quote }}
++          image: "{{ template "system_default_registry" . }}{{ include "cilium.image" .Values.certgen.image }}"
+           imagePullPolicy: {{ .Values.certgen.image.pullPolicy }}
+           securityContext:
+             capabilities:
