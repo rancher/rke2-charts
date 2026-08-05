@@ -9,11 +9,11 @@
  | deployment.labels | object | `{}` | Additional deployment labels (e.g. for filtering deployment by custom labels) |
  | deployment.lifecycle | object | `{}` | Pod lifecycle actions |
  | deployment.livenessPath | string | `""` | Override the liveness path. Default: /ping |
-@@ -217,7 +217,7 @@
+@@ -249,7 +249,7 @@
  | image.digest | string | `nil` | Traefik image digest (e.g. `sha256:abc...`). When set, takes precedence over `tag`. Set `versionOverride` alongside it so the chart's version-checking logic knows the version (it cannot be derived from the digest). |
  | image.pullPolicy | string | `"IfNotPresent"` | Traefik image pull policy |
- | image.registry | string | `"docker.io"` | Traefik image host registry |
--| image.repository | string | `"traefik"` | Traefik image repository |
+ | image.registry | string | `nil` | Traefik image host registry. Defaults to `docker.io` for Traefik Proxy and `ghcr.io` for Traefik Hub (when `hub.enabled` is true). |
+-| image.repository | string | `nil` | Traefik image repository. Defaults to `traefik` for Traefik Proxy and `traefik/traefik-hub` for Traefik Hub (when `hub.enabled` is true). |
 +| image.repository | string | `"rancher/hardened-traefik"` | Traefik image repository |
  | image.tag | string | `nil` | defaults to appVersion. It's used for version checking, even prefixed with experimental- or latest-. To pin by digest, prefer `image.digest`. A `<version>@<digest>` combo is also accepted here; in that case the digest is what Kubernetes verifies and the version is informational (and can drift from the underlying image). |
  | ingressClass.enabled | bool | `true` | Create a default IngressClass for Traefik |
@@ -36,10 +36,10 @@
  | providers.kubernetesIngress.ingressEndpoint.hostname | string | `""` | Hostname used for Kubernetes Ingress endpoints |
  | providers.kubernetesIngress.ingressEndpoint.ip | string | `""` | IP used for Kubernetes Ingress endpoints |
  | providers.kubernetesIngress.labelSelector | string | `nil` |  |
-@@ -545,7 +545,7 @@
+@@ -549,7 +549,7 @@
  | service.labels | object | `{}` | Additional service labels (e.g. for filtering Service by custom labels) |
  | service.nameOverride | string | `""` | Override the default Service name. Useful for adopting an existing Service (e.g., during migration from another ingress controller). |
- | service.single | bool | `true` |  |
+ | service.single | bool | `true` | Single service is using `MixedProtocolLBService` feature gate. When set to false, it will create two Service, one for TCP and one for UDP. |
 -| service.spec | object | `{"type":"LoadBalancer"}` | Additional entries here will be added to the Service [spec](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.35/#servicespec-v1-core). Cannot contain selector or ports entries. |
 +| service.spec | object | `{"type":"ClusterIP"}` | Additional entries here will be added to the Service [spec](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.35/#servicespec-v1-core). Cannot contain selector or ports entries. |
  | serviceAccount | object | `{"name":""}` | The service account the pods will use to interact with the Kubernetes API |
