@@ -1,6 +1,6 @@
 --- charts-original/templates/_helpers.tpl
 +++ charts/templates/_helpers.tpl
-@@ -62,6 +62,6 @@
+@@ -62,7 +62,7 @@
  {{- else if .Values.image.digest -}}
  {{- printf "%s/%s@%s" (include "traefik.imageRegistry" .) (include "traefik.imageRepository" .) .Values.image.digest }}
  {{- else -}}
@@ -8,7 +8,46 @@
 +{{- printf "%s:%s%s" .Values.image.repository (.Values.image.tag | default (include "traefik.defaultTag" .)) (ternary "-hardened" "" .Values.hub.hardened) }}
  {{- end -}}
  {{- end -}}
-@@ -567,3 +567,11 @@
+ 
+@@ -176,9 +176,20 @@
+ {{- print $servicePath | trimSuffix "-" -}}
+ {{- end -}}
+ 
++{{- define "providers.kubernetesIngressNGINX.values" -}}
++{{- $new := default dict .Values.providers.kubernetesIngressNGINX -}}
++{{- $old := default dict .Values.providers.kubernetesIngressNginx -}}
++{{- $provider := $new -}}
++{{- if and $old.enabled (not $new.enabled) -}}
++{{- $provider = mergeOverwrite (dict) $new $old -}}
++{{- end -}}
++{{- toYaml $provider }}
++{{- end -}}
++
+ {{- define "providers.kubernetesIngressNGINX.publishServicePath" -}}
+ {{- $defServiceName := printf "%s/%s" (include "traefik.namespace" .) (include "traefik.fullname" .) -}}
+-{{- $servicePath := default $defServiceName .Values.providers.kubernetesIngressNGINX.publishService.pathOverride }}
++{{- $provider := (include "providers.kubernetesIngressNGINX.values" . | fromYaml) -}}
++{{- $servicePath := default $defServiceName (dig "publishService" "pathOverride" "" $provider) }}
+ {{- print $servicePath | trimSuffix "-" -}}
+ {{- end -}}
+ 
+@@ -195,8 +206,14 @@
+ {{- default (include "traefik.namespace" .) (join "," .Values.providers.kubernetesIngress.namespaces) }}
+ {{- end -}}
+ {{- define "providers.kubernetesIngressNGINX.namespaces" -}}
+-{{- default (include "traefik.namespace" .) (join "," .Values.providers.kubernetesIngressNGINX.watchNamespace) }}
++{{- $provider := (include "providers.kubernetesIngressNGINX.values" . | fromYaml) -}}
++{{- $watchNamespace := dig "watchNamespace" "" $provider -}}
++{{- if kindIs "slice" $watchNamespace -}}
++{{- default (include "traefik.namespace" .) (join "," $watchNamespace) }}
++{{- else -}}
++{{- default (include "traefik.namespace" .) $watchNamespace }}
+ {{- end -}}
++{{- end -}}
+ {{- define "providers.knative.namespaces" -}}
+ {{- default (include "traefik.namespace" .) (join "," .Values.providers.knative.namespaces) }}
+ {{- end -}}
+@@ -567,3 +584,11 @@
  {{- define "traefik.hubTokenFilePath" }}
  {{- printf "%s/%s" (.Values.hub.tokenMountPath | trimSuffix "/") "token" -}}
  {{- end -}}
