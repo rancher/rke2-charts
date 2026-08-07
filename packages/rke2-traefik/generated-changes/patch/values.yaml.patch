@@ -1,27 +1,29 @@
 --- charts-original/values.yaml
 +++ charts/values.yaml
-@@ -6,10 +6,10 @@
-   # -- Traefik image host registry
-   registry: docker.io
-   # -- Traefik image repository
--  repository: traefik
-+  repository: rancher/hardened-traefik
+@@ -5,11 +5,11 @@
+ image:  # @schema additionalProperties: false
+   # -- Traefik image host registry. Defaults to `docker.io` for Traefik Proxy and `ghcr.io` for Traefik Hub (when `hub.enabled` is true).
+   registry:  # @schema type:[string, null]
+   # -- Traefik image repository. Defaults to `traefik` for Traefik Proxy and `traefik/traefik-hub` for Traefik Hub (when `hub.enabled` is true).
+-  repository:  # @schema type:[string, null]
++  repository: rancher/hardened-traefik  # @schema type:[string, null]
    # -- defaults to appVersion. It's used for version checking, even prefixed with experimental- or latest-.
    # To pin by digest, prefer `image.digest`. A `<version>@<digest>` combo is also accepted here; in that case the digest is what Kubernetes verifies and the version is informational (and can drift from the underlying image).
 -  tag:  # @schema type:[string, null]
-+  tag: v3.7.8-build20260717  # @schema type:[string, null]
++  tag: v3.7.10-build20260804  # @schema type:[string, null]
    # -- Traefik image digest (e.g. `sha256:abc...`). When set, takes precedence over `tag`. Set `versionOverride` alongside it so the chart's version-checking logic knows the version (it cannot be derived from the digest).
    digest:  # @schema type:[string, null]; pattern:^sha256:[a-f0-9]{64}$
    # -- Traefik image pull policy
-@@ -22,7 +22,7 @@
+@@ -21,8 +21,8 @@
+ deployment:
    # -- Enable deployment
    enabled: true
    # -- Deployment or DaemonSet
 -  kind: Deployment
 +  kind: DaemonSet
-   # -- Number of pods of the deployment (only applies when kind == Deployment)
-   replicas: 1
-   # -- Number of old history to retain to allow rollback (If not set, default Kubernetes value is set to 10)
+   # -- Number of pods of the deployment (only applies when kind == Deployment).
+   # Set to null to omit spec.replicas, e.g. when an external controller (HPA/KEDA) owns scaling.
+   replicas: 1  # @schema type:[integer, null];minimum:0
 @@ -123,8 +123,8 @@
  ingressClass:  # @schema additionalProperties: false
    # -- Create a default IngressClass for Traefik
@@ -71,15 +73,17 @@
      # containerPort: 8000
      expose:
        default: true
-@@ -984,7 +986,7 @@
+@@ -1002,8 +1004,8 @@
+   websecure:
      ## -- Enable this entrypoint as a default entrypoint. When a service doesn't explicitly set an entrypoint it will only use this entrypoint.
      # asDefault: true
      port: 8443
+-    # -- (int) Use hostPort if set.
 -    hostPort:  # @schema type:[integer, null]; minimum:0
++    # -- (int) Use hostPort if set.
 +    hostPort: 443 # @schema type:[integer, null]; minimum:0
+     # -- (int) Use containerPort if set.
      containerPort:  # @schema type:[integer, null]; minimum:0
-     expose:
-       default: true
 @@ -1112,7 +1114,8 @@
    # -- Additional entries here will be added to the Service [spec](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.35/#servicespec-v1-core).
    # Cannot contain selector or ports entries.

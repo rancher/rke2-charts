@@ -1,15 +1,15 @@
 --- charts-original/templates/_helpers.tpl
 +++ charts/templates/_helpers.tpl
-@@ -33,7 +33,7 @@
+@@ -62,7 +62,7 @@
  {{- else if .Values.image.digest -}}
- {{- printf "%s/%s@%s" .Values.image.registry .Values.image.repository .Values.image.digest }}
+ {{- printf "%s/%s@%s" (include "traefik.imageRegistry" .) (include "traefik.imageRepository" .) .Values.image.digest }}
  {{- else -}}
--{{- printf "%s/%s:%s" .Values.image.registry .Values.image.repository (.Values.image.tag | default .Chart.AppVersion) }}
-+{{- printf "%s:%s" .Values.image.repository (.Values.image.tag | default .Chart.AppVersion) }}
+-{{- printf "%s/%s:%s%s" (include "traefik.imageRegistry" .) (include "traefik.imageRepository" .) (.Values.image.tag | default (include "traefik.defaultTag" .)) (ternary "-hardened" "" .Values.hub.hardened) }}
++{{- printf "%s:%s%s" .Values.image.repository (.Values.image.tag | default (include "traefik.defaultTag" .)) (ternary "-hardened" "" .Values.hub.hardened) }}
  {{- end -}}
  {{- end -}}
  
-@@ -147,9 +147,20 @@
+@@ -176,9 +176,20 @@
  {{- print $servicePath | trimSuffix "-" -}}
  {{- end -}}
  
@@ -31,7 +31,7 @@
  {{- print $servicePath | trimSuffix "-" -}}
  {{- end -}}
  
-@@ -166,7 +177,13 @@
+@@ -195,8 +206,14 @@
  {{- default (include "traefik.namespace" .) (join "," .Values.providers.kubernetesIngress.namespaces) }}
  {{- end -}}
  {{- define "providers.kubernetesIngressNGINX.namespaces" -}}
@@ -42,11 +42,12 @@
 +{{- default (include "traefik.namespace" .) (join "," $watchNamespace) }}
 +{{- else -}}
 +{{- default (include "traefik.namespace" .) $watchNamespace }}
-+{{- end -}}
  {{- end -}}
++{{- end -}}
  {{- define "providers.knative.namespaces" -}}
  {{- default (include "traefik.namespace" .) (join "," .Values.providers.knative.namespaces) }}
-@@ -486,3 +503,11 @@
+ {{- end -}}
+@@ -567,3 +584,11 @@
  {{- define "traefik.hubTokenFilePath" }}
  {{- printf "%s/%s" (.Values.hub.tokenMountPath | trimSuffix "/") "token" -}}
  {{- end -}}
