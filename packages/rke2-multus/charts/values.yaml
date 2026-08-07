@@ -141,7 +141,7 @@ tolerations:
 cniplugins:
   image:
     repository: rancher/hardened-cni-plugins
-    tag: v1.9.1-build20260717
+    tag: v1.9.1-build20260807
 
   # skipcnis is a comma separated list of cni binaries to skip from
   # installing.
