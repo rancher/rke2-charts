@@ -1,6 +1,6 @@
 --- charts-original/templates/NOTES.txt
 +++ charts/templates/NOTES.txt
-@@ -120,6 +120,16 @@
+@@ -160,6 +160,16 @@
    {{- end -}}
  
  
