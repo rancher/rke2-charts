@@ -53,6 +53,16 @@ flannel:
   #tunnelMode: "separate"
   # Persistent keep interval to use
   keepaliveInterval: 0
+  # Health check server configuration. Set port to a non-zero value to enable.
+  # /healthz is the liveness endpoint; /readyz is the readiness endpoint.
+  healthz:
+    port: 8081
+    livenessProbe:
+      initialDelaySeconds: 10
+      periodSeconds: 30
+    readinessProbe:
+      initialDelaySeconds: 5
+      periodSeconds: 10
   # Resource bounds for the kube-flannel daemon container
   resources: ~
   # requests:
