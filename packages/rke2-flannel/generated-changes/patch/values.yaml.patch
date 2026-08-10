@@ -64,7 +64,7 @@
          }
        ]
      }
-@@ -98,17 +92,19 @@
+@@ -98,9 +92,17 @@
        initialDelaySeconds: 5
        periodSeconds: 10
    tolerations:
@@ -84,14 +84,6 @@
 +    effect: "NoExecute"
    nodeSelector: {}
  
--netpol:
--  enabled: false
--  args:
--  - "--hostname-override=$(MY_NODE_NAME)"
--  - "--v=2"
--  image:
--    repository: registry.k8s.io/networking/kube-network-policies
--    tag: v1.0.0
 +global:
 +  systemDefaultRegistry: ""
 +  clusterCIDRv4: ""
