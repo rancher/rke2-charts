@@ -37,8 +37,8 @@
          command:
          - "/opt/bin/flanneld"
          {{- range .Values.flannel.args }}
-@@ -75,7 +67,7 @@
-           {{- toYaml . | trim | nindent 10 }}
+@@ -98,7 +90,7 @@
+           {{- end }}
          {{- end }}
          securityContext:
 -          privileged: false
@@ -46,7 +46,7 @@
            capabilities:
              add: ["NET_ADMIN", "NET_RAW"]
          env:
-@@ -98,44 +90,14 @@
+@@ -121,44 +113,14 @@
            mountPath: /etc/kube-flannel/
          - name: xtables-lock
            mountPath: /run/xtables.lock
