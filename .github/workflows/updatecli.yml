@@ -20,15 +20,15 @@ jobs:
     if: ${{github.ref == 'refs/heads/main-source' && github.repository == 'rancher/rke2-charts'}}
     steps:
       - name: Checkout
-        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.0.0
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Install Go
-        uses: actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff # v5.0.0
+        uses: actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e # v7.0.0
         with:
           go-version: 'stable'
 
       - name: Install Updatecli
-        uses: updatecli/updatecli-action@4b17f4ea784de29f71f85f9bc4955402ba1ae53c # v2.100.0
+        uses: updatecli/updatecli-action@d422ba543720d01a96d4c3e3ab8544cc188cd711 # v3.5.0
 
       - name: Read Secrets for the Github App
         uses: rancher-eio/read-vault-secrets@0da85151ad1f19ed7986c41587e45aac1ace74b6 # v3
@@ -39,7 +39,7 @@ jobs:
 
       - name: Get Github App token
         id: get_token
-        uses: actions/create-github-app-token@c1a285145b9d317df6ced56c09f525b5c2b6f755 # v1.11.1
+        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
         with:
             app-id: ${{ env.CREATE_ISSUE_APP_ID }}
             private-key: ${{ env.CREATE_ISSUE_PRIVATE_KEY }}
