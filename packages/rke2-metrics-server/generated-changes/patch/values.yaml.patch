@@ -27,7 +27,7 @@
 -    repository: registry.k8s.io/autoscaling/addon-resizer
 -    tag: 1.8.23
 +    repository: rancher/hardened-addon-resizer
-+    tag: 1.8.23-build20260810
++    tag: 1.8.23-build20260814
    securityContext:
      allowPrivilegeEscalation: false
      readOnlyRootFilesystem: true
