@@ -164,7 +164,7 @@
      failureThreshold: 3
      successThreshold: 1
  
-@@ -437,3 +459,46 @@
+@@ -437,3 +459,110 @@
  
  # Configures initcontainers for the coredns deployment.
  initContainers: []
@@ -184,6 +184,70 @@
 +  # DNS over force_tcp, exactly like the cluster domain (e.g. "cluster.local").
 +  # Defaults to [] (no extra domains, no change to the rendered Corefile).
 +  extraClusterDomains: []
++
++  # Corefile customization for the node-local-dns cache.
++  # Three levels of customization are available:
++  #
++  # Level 1 - customPlugins: add plugins to existing zones (inserted before prometheus).
++  # Level 2 - pluginOverrides: replace cache or forward plugin config per zone.
++  # Level 3 - override: replace the entire Corefile (user owns LRP correctness).
++  #
++  # Zone keys: cluster, reverse (in-addr.arpa), ipv6Reverse (ip6.arpa), catchAll (.)
++  #
++  # NOTE: bind and health plugins are always controlled by use_cilium_lrp and cannot
++  # be overridden. prometheus port :9253 is fixed. errors/reload/loop are fixed.
++  # When using override with use_cilium_lrp:true the user must ensure the Corefile
++  # bind/health directives match the DaemonSet networking mode.
++  corefile:
++    # Full Corefile replacement. When set, all other corefile fields are ignored.
++    # Example:
++    #   override: |
++    #     cluster.local:53 {
++    #       errors
++    #       cache 30
++    #       bind 169.254.20.10
++    #       forward . 10.43.0.10
++    #     }
++    override: ""
++
++    # Add extra plugins to existing zones. Plugins are appended after forward,
++    # before prometheus. Each entry requires a name field and optional parameters
++    # and configBlock fields.
++    # Example:
++    #   customPlugins:
++    #     cluster:
++    #       - name: log
++    #       - name: rewrite
++    #         configBlock: |
++    #           name example.com internal.local
++    #     catchAll:
++    #       - name: log
++    customPlugins:
++      cluster: []
++      reverse: []
++      ipv6Reverse: []
++      catchAll: []
++
++    # Override cache or forward plugin configuration per zone.
++    # Supported plugins: cache, forward
++    # Each key is a zone name (cluster, reverse, ipv6Reverse, catchAll).
++    # Specify parameters (inline) or configBlock (braced block), or both.
++    # Example:
++    #   pluginOverrides:
++    #     cache:
++    #       cluster:
++    #         configBlock: |
++    #           success 9984 60
++    #           denial 9984 20
++    #           prefetch 10 60s 30%
++    #           serve_stale 5s
++    #           size 10000
++    #       reverse:
++    #         parameters: "60"
++    #     forward:
++    #       catchAll:
++    #         parameters: ". 8.8.8.8 8.8.4.4"
++    pluginOverrides: {}
 +
 +  # set to true, if you wish to use nodelocal with cilium in kube-proxy replacement mode.
 +  # This sets up a Cilium Local Redirect Policy (LRP) to steer DNS traffic to the nodelocal dns cache.
