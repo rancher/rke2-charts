@@ -70,9 +70,8 @@ actions:
     title: 'Bump flannel version to {{ source "flannel" }} and Calico to {{ source "calico" }} on Canal'
     kind: github/pullrequest
     spec:
-      automerge: false
+      strategy:
+        method: manual
       labels:
-        - chore
-        - skip-changelog
-        - status/auto-created 
+        - updatecli
     scmid: default

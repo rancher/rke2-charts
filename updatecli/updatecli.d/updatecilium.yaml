@@ -67,9 +67,8 @@ actions:
     title: 'Update Cilium version to {{ source "cilium" }} and CNI plugins image to {{ source "cni_plugins" }}'
     kind: github/pullrequest
     spec:
-      automerge: false
+      strategy:
+        method: manual
       labels:
-        - chore
-        - skip-changelog
-        - status/auto-created 
+        - updatecli
     scmid: default

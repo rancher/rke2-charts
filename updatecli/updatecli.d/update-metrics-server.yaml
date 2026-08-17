@@ -88,7 +88,8 @@ actions:
     title: Update Kubernetes Metrics Server chart {{ source "metrics_server_chart" }}
     kind: github/pullrequest
     spec:
-      automerge: false
+      strategy:
+        method: manual
       description:
         <h3>Chart Images</h3>
         <ul>
@@ -96,7 +97,5 @@ actions:
           <li>rancher/hardened-addon-resizer:{{ source "addon_resizer_image" }}</li>
         </ul>
       labels:
-        - chore
-        - skip-changelog
-        - status/auto-created
+        - updatecli
     scmid: default

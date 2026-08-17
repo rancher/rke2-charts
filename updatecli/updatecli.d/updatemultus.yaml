@@ -69,9 +69,8 @@ actions:
     title: 'Update Multus version to {{ source "multus" }} and CNI plugins to {{ source "cni_plugins" }}'
     kind: github/pullrequest
     spec:
-      automerge: false
+      strategy:
+        method: manual
       labels:
-        - chore
-        - skip-changelog
-        - status/auto-created 
+        - updatecli
     scmid: default

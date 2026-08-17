@@ -106,7 +106,8 @@ actions:
     title: Update CoreDNS chart {{ source "coredns_chart" }}
     kind: github/pullrequest
     spec:
-      automerge: false
+      strategy:
+        method: manual
       description:
         <h3>Chart Images</h3>
         <ul>
@@ -115,7 +116,5 @@ actions:
           <li>rancher/hardened-dns-node-cache:{{ source "nodecache" }}</li>
         </ul>
       labels:
-        - chore
-        - skip-changelog
-        - status/auto-created 
+        - updatecli
     scmid: default
