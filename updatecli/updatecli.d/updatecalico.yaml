@@ -48,9 +48,8 @@ actions:
     title: 'Update Calico version to {{ source "calico" }}'
     kind: github/pullrequest
     spec:
-      automerge: false
+      strategy:
+        method: manual
       labels:
-        - chore
-        - skip-changelog
-        - status/auto-created 
+        - updatecli
     scmid: default

@@ -50,9 +50,8 @@ actions:
     title: 'Update whereabouts version to {{ source "whereabouts" }}'
     kind: github/pullrequest
     spec:
-      automerge: false
+      strategy:
+        method: manual
       labels:
-        - chore
-        - skip-changelog
-        - status/auto-created 
+        - updatecli
     scmid: default

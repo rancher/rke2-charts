@@ -64,7 +64,8 @@ actions:
     title: 'Update ingress-nginx prime image to {{ source "prime" }}'
     kind: github/pullrequest
     spec:
-      automerge: false
+      strategy:
+        method: manual
       description: |
         <h3>Chart Images</h3>
         <ul>
@@ -72,7 +73,5 @@ actions:
           <li>rancher/kube-webhook-certgen:{{ source "prime" }}</li>
         </ul>
       labels:
-        - chore
-        - skip-changelog
-        - status/auto-created
+        - updatecli
     scmid: default
