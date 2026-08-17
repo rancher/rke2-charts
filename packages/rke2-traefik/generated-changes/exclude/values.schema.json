@@ -5,6 +5,224 @@
     "description": "The Cloud Native Application Proxy",
     "type": "object",
     "properties": {
+        "accessLog": {
+            "description": "See [access logs reference](https://doc.traefik.io/traefik/reference/install-configuration/observability/logs-and-accesslogs/)",
+            "type": "object",
+            "properties": {
+                "addInternals": {
+                    "description": "Enables accessLogs for internal resources. Default: false.",
+                    "type": "boolean"
+                },
+                "bufferingSize": {
+                    "description": "Set [bufferingSize](https://doc.traefik.io/traefik/reference/install-configuration/observability/logs-and-accesslogs/#opt-accesslog-bufferingSize)",
+                    "type": [
+                        "integer",
+                        "null"
+                    ]
+                },
+                "dualOutput": {
+                    "description": "Enables access log output alongside OTLP (v3.7+).",
+                    "type": "boolean"
+                },
+                "enabled": {
+                    "description": "To enable access logs",
+                    "type": "boolean"
+                },
+                "fields": {
+                    "type": "object",
+                    "properties": {
+                        "defaultMode": {
+                            "description": "Set default mode for fields.names",
+                            "default": "keep",
+                            "type": "string",
+                            "enum": [
+                                "keep",
+                                "drop",
+                                "redact"
+                            ]
+                        },
+                        "headers": {
+                            "type": "object",
+                            "properties": {
+                                "defaultMode": {
+                                    "description": "[Limit logged fields or headers](https://doc.traefik.io/traefik/observe/logs-and-access-logs/#log-fields-customization)",
+                                    "default": "drop",
+                                    "type": "string",
+                                    "enum": [
+                                        "keep",
+                                        "drop",
+                                        "redact"
+                                    ]
+                                },
+                                "names": {
+                                    "type": "object"
+                                }
+                            }
+                        },
+                        "names": {
+                            "description": "Names of the fields to limit.",
+                            "type": "object"
+                        },
+                        "queryParameters": {
+                            "type": "object",
+                            "properties": {
+                                "defaultMode": {
+                                    "description": "Keep or drop all query parameters in the RequestPath access log field (v3.7.3+).",
+                                    "type": [
+                                        "string",
+                                        "null"
+                                    ],
+                                    "enum": [
+                                        "keep",
+                                        "drop",
+                                        null
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "filters": {
+                    "description": "Set [filtering](https://doc.traefik.io/traefik/observe/logs-and-access-logs/#access-log-filters)",
+                    "type": "object",
+                    "properties": {
+                        "minDuration": {
+                            "description": "Set minDuration, to keep access logs when requests take longer than the specified duration",
+                            "type": "string"
+                        },
+                        "retryAttempts": {
+                            "description": "Set retryAttempts, to keep the access logs when at least one retry has happened",
+                            "type": "boolean"
+                        },
+                        "statusCodes": {
+                            "description": "Set statusCodes, to limit the access logs to requests with a status codes in the specified range",
+                            "type": "string"
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                "format": {
+                    "description": "Set [access log format](https://doc.traefik.io/traefik/reference/install-configuration/observability/logs-and-accesslogs/#opt-accesslog-format)",
+                    "default": "common",
+                    "type": [
+                        "string",
+                        "null"
+                    ],
+                    "enum": [
+                        "common",
+                        "genericCLF",
+                        "json",
+                        null
+                    ]
+                },
+                "otlp": {
+                    "type": "object",
+                    "properties": {
+                        "enabled": {
+                            "description": "Set to true in order to enable OpenTelemetry on access logs. Note that experimental.otlpLogs needs to be enabled.",
+                            "type": "boolean"
+                        },
+                        "grpc": {
+                            "type": "object",
+                            "properties": {
+                                "enabled": {
+                                    "description": "Set to true in order to send access logs to the OpenTelemetry Collector using gRPC",
+                                    "type": "boolean"
+                                },
+                                "endpoint": {
+                                    "description": "Format: \u003chost\u003e:\u003cport\u003e. Default: \"localhost:4317\"",
+                                    "type": "string"
+                                },
+                                "insecure": {
+                                    "description": "Allows reporter to send access logs to the OpenTelemetry Collector without using a secured protocol.",
+                                    "type": "boolean"
+                                },
+                                "tls": {
+                                    "type": "object",
+                                    "properties": {
+                                        "ca": {
+                                            "description": "The path to the certificate authority, it defaults to the system bundle.",
+                                            "type": "string"
+                                        },
+                                        "cert": {
+                                            "description": "The path to the public certificate. When using this option, setting the key option is required.",
+                                            "type": "string"
+                                        },
+                                        "insecureSkipVerify": {
+                                            "description": "When set to true, the TLS connection accepts any certificate presented by the server regardless of the hostnames it covers.",
+                                            "type": [
+                                                "boolean",
+                                                "null"
+                                            ]
+                                        },
+                                        "key": {
+                                            "description": "The path to the private key. When using this option, setting the cert option is required.",
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "http": {
+                            "type": "object",
+                            "properties": {
+                                "enabled": {
+                                    "description": "Set to true in order to send access logs to the OpenTelemetry Collector using HTTP.",
+                                    "type": "boolean"
+                                },
+                                "endpoint": {
+                                    "description": "Format: \u003cscheme\u003e://\u003chost\u003e:\u003cport\u003e\u003cpath\u003e. Default: https://localhost:4318/v1/logs",
+                                    "type": "string"
+                                },
+                                "headers": {
+                                    "description": "Additional headers sent with access logs by the reporter to the OpenTelemetry Collector.",
+                                    "type": "object"
+                                },
+                                "tls": {
+                                    "type": "object",
+                                    "properties": {
+                                        "ca": {
+                                            "description": "The path to the certificate authority, it defaults to the system bundle.",
+                                            "type": "string"
+                                        },
+                                        "cert": {
+                                            "description": "The path to the public certificate. When using this option, setting the key option is required.",
+                                            "type": "string"
+                                        },
+                                        "insecureSkipVerify": {
+                                            "description": "When set to true, the TLS connection accepts any certificate presented by the server regardless of the hostnames it covers.",
+                                            "type": [
+                                                "boolean",
+                                                "null"
+                                            ]
+                                        },
+                                        "key": {
+                                            "description": "The path to the private key. When using this option, setting the cert option is required.",
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "resourceAttributes": {
+                            "description": "Defines additional resource attributes to be sent to the collector.",
+                            "type": "object"
+                        },
+                        "serviceName": {
+                            "description": "Service name used in OTLP backend. Default: traefik.",
+                            "type": [
+                                "string",
+                                "null"
+                            ]
+                        }
+                    }
+                },
+                "timezone": {
+                    "description": "Set [timezone](https://doc.traefik.io/traefik/reference/install-configuration/observability/logs-and-accesslogs/#time-zones)",
+                    "type": "string"
+                }
+            }
+        },
         "additionalArguments": {
             "description": "Additional arguments to be passed at Traefik's binary See [CLI Reference](https://docs.traefik.io/reference/static-configuration/cli/)",
             "type": "array"
@@ -162,16 +380,20 @@
                     "type": "number"
                 },
                 "healthchecksHost": {
+                    "description": "Override the liveness/readiness host. Useful for getting ping to respond on non-default entryPoint.",
                     "type": "string"
                 },
                 "healthchecksPort": {
+                    "description": "Override the liveness/readiness port. This is useful to integrate traefik with an external Load Balancer that performs healthchecks.",
                     "type": [
+                        "string",
                         "integer",
                         "null"
                     ],
                     "minimum": 0
                 },
                 "healthchecksScheme": {
+                    "description": "Override the liveness/readiness scheme. Useful for getting ping to respond on websecure entryPoint.",
                     "default": "HTTP",
                     "type": [
                         "string",
@@ -215,7 +437,7 @@
                     "type": "object"
                 },
                 "livenessPath": {
-                    "description": "Override the liveness path. Default: /ping",
+                    "description": "Override the liveness path.",
                     "type": "string"
                 },
                 "minReadySeconds": {
@@ -231,11 +453,16 @@
                     "type": "object"
                 },
                 "readinessPath": {
+                    "description": "Override the readiness path.",
                     "type": "string"
                 },
                 "replicas": {
-                    "description": "Number of pods of the deployment (only applies when kind == Deployment)",
-                    "type": "integer"
+                    "description": "Number of pods of the deployment (only applies when kind == Deployment). Set to null to omit spec.replicas, e.g. when an external controller (HPA/KEDA) owns scaling.",
+                    "type": [
+                        "integer",
+                        "null"
+                    ],
+                    "minimum": 0
                 },
                 "revisionHistoryLimit": {
                     "description": "Number of old history to retain to allow rollback (If not set, default Kubernetes value is set to 10)",
@@ -256,6 +483,15 @@
                 "terminationGracePeriodSeconds": {
                     "description": "Amount of time (in seconds) before Kubernetes will send the SIGKILL signal if Traefik does not shut down",
                     "type": "integer"
+                },
+                "tmpVolume": {
+                    "type": "object",
+                    "properties": {
+                        "emptyDir": {
+                            "description": "[EmptyDir](https://kubernetes.io/docs/concepts/storage/volumes/#emptydir) options for the tmp volume.",
+                            "type": "object"
+                        }
+                    }
                 }
             }
         },
@@ -541,6 +777,17 @@
                         }
                     }
                 },
+                "enabled": {
+                    "description": "Install Traefik Hub. Without `hub.token`, it runs in proxy mode: a drop-in Traefik Proxy, which requires Traefik Hub \u003e= v3.21.0-ea.",
+                    "type": [
+                        "boolean",
+                        "null"
+                    ]
+                },
+                "hardened": {
+                    "description": "Use the hardened image variant. It appends `-hardened` to the tag and defaults the image to `registry.traefik.io/traefik-hub`. Requires `hub.enabled` and Traefik Hub \u003e= v3.21.0-ea.",
+                    "type": "boolean"
+                },
                 "mcpgateway": {
                     "type": "object",
                     "properties": {
@@ -710,6 +957,75 @@
                                     "type": "boolean"
                                 }
                             }
+                        },
+                        "ec2": {
+                            "type": "object",
+                            "properties": {
+                                "accessKeyID": {
+                                    "description": "AWS access key ID, set together with secretAccessKey. Readable from the Pod spec: prefer IRSA, the instance role or `env`.",
+                                    "type": "string"
+                                },
+                                "constraints": {
+                                    "description": "Expression matched against instance tags to determine whether to create routes for an instance.",
+                                    "type": "string"
+                                },
+                                "defaultRule": {
+                                    "description": "Default rule applied to instances that do not define a router rule tag.",
+                                    "type": "string"
+                                },
+                                "enabled": {
+                                    "description": "Enable AWS EC2 provider.",
+                                    "type": "boolean"
+                                },
+                                "exposedByDefault": {
+                                    "description": "Expose instances by default. When false, only instances with the `traefik.enable=true` tag are exposed.",
+                                    "type": "boolean"
+                                },
+                                "filters": {
+                                    "description": "EC2 API filters used to scope instance discovery. List of `{ name: \"\u003cfilter\u003e\", values: [\"\u003cvalue\u003e\"] }` entries.",
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object"
+                                    }
+                                },
+                                "ipMode": {
+                                    "description": "Default backend IP mode: private, public or ipv6. Overridable per instance with the `traefik.ec2.ipmode` tag.",
+                                    "type": "string",
+                                    "enum": [
+                                        "",
+                                        "private",
+                                        "public",
+                                        "ipv6"
+                                    ]
+                                },
+                                "refreshSeconds": {
+                                    "description": "Polling interval, in seconds, for the EC2 API.",
+                                    "type": "integer"
+                                },
+                                "region": {
+                                    "description": "AWS region used for EC2 API requests. When empty, the region is retrieved from the EC2 Instance Metadata Service.",
+                                    "type": "string"
+                                },
+                                "secretAccessKey": {
+                                    "description": "AWS secret access key, set together with accessKeyID. Readable from the Pod spec: prefer IRSA, the instance role or `env`.",
+                                    "type": "string"
+                                },
+                                "securityGroupPortDiscovery": {
+                                    "type": "object",
+                                    "properties": {
+                                        "enabled": {
+                                            "description": "Derive the backend port from the instance security-group rules when no port tag is set.",
+                                            "type": "boolean"
+                                        },
+                                        "excludedPorts": {
+                                            "description": "Ports excluded from security-group port discovery. When empty, the provider excludes privileged ports except 80 and 443.",
+                                            "type": "array"
+                                        }
+                                    },
+                                    "additionalProperties": false
+                                }
+                            },
+                            "additionalProperties": false
                         },
                         "microcks": {
                             "type": "object",
@@ -1015,9 +1331,9 @@
                             ]
                         },
                         "database": {
-                            "description": "Database used to store information. Default: \"0\".",
+                            "description": "Database used to store information. Default: 0.",
                             "type": [
-                                "string",
+                                "integer",
                                 "null"
                             ]
                         },
@@ -1078,6 +1394,7 @@
                     }
                 },
                 "sendlogs": {
+                    "description": "Enable export of error logs to the platform. Default: true.",
                     "type": [
                         "boolean",
                         "null"
@@ -1145,12 +1462,18 @@
                     "type": "string"
                 },
                 "registry": {
-                    "description": "Traefik image host registry",
-                    "type": "string"
+                    "description": "Traefik image host registry. Defaults to `docker.io` for Traefik Proxy and `ghcr.io` for Traefik Hub (when `hub.enabled` is true).",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
                 },
                 "repository": {
-                    "description": "Traefik image repository",
-                    "type": "string"
+                    "description": "Traefik image repository. Defaults to `traefik` for Traefik Proxy and `traefik/traefik-hub` for Traefik Hub (when `hub.enabled` is true).",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
                 },
                 "tag": {
                     "description": "defaults to appVersion. It's used for version checking, even prefixed with experimental- or latest-. To pin by digest, prefer `image.digest`. A `\u003cversion\u003e@\u003cdigest\u003e` combo is also accepted here; in that case the digest is what Kubernetes verifies and the version is informational (and can drift from the underlying image).",
@@ -1316,353 +1639,144 @@
             },
             "additionalProperties": false
         },
-        "logs": {
+        "log": {
+            "description": "See [logs reference](https://doc.traefik.io/traefik/reference/install-configuration/observability/logs-and-accesslogs/)",
             "type": "object",
             "properties": {
-                "access": {
+                "filePath": {
+                    "description": "To write the logs into a log file, use the filePath option.",
+                    "type": "string"
+                },
+                "format": {
+                    "description": "Set [logs format](https://doc.traefik.io/traefik/reference/install-configuration/observability/logs-and-accesslogs/#opt-log-format)",
+                    "default": "common",
+                    "type": [
+                        "string",
+                        "null"
+                    ],
+                    "enum": [
+                        "common",
+                        "json",
+                        null
+                    ]
+                },
+                "level": {
+                    "description": "Alternative logging levels are TRACE, DEBUG, INFO, WARN, ERROR, FATAL, and PANIC.",
+                    "default": "INFO",
+                    "type": "string",
+                    "enum": [
+                        "TRACE",
+                        "DEBUG",
+                        "INFO",
+                        "WARN",
+                        "ERROR",
+                        "FATAL",
+                        "PANIC"
+                    ]
+                },
+                "noColor": {
+                    "description": "When set to true and format is common, it disables the colorized output.",
+                    "type": "boolean"
+                },
+                "otlp": {
                     "type": "object",
                     "properties": {
-                        "addInternals": {
-                            "description": "Enables accessLogs for internal resources. Default: false.",
-                            "type": "boolean"
-                        },
-                        "bufferingSize": {
-                            "description": "Set [bufferingSize](https://doc.traefik.io/traefik/reference/install-configuration/observability/logs-and-accesslogs/#opt-accesslog-bufferingSize)",
-                            "type": [
-                                "integer",
-                                "null"
-                            ]
-                        },
-                        "dualOutput": {
-                            "description": "Enables access log output alongside OTLP (v3.7+).",
-                            "type": "boolean"
-                        },
                         "enabled": {
-                            "description": "To enable access logs",
+                            "description": "Set to true in order to enable OpenTelemetry on logs. Note that experimental.otlpLogs needs to be enabled.",
                             "type": "boolean"
                         },
-                        "fields": {
+                        "grpc": {
                             "type": "object",
                             "properties": {
-                                "general": {
+                                "enabled": {
+                                    "description": "Set to true in order to send logs  to the OpenTelemetry Collector using gRPC",
+                                    "type": "boolean"
+                                },
+                                "endpoint": {
+                                    "description": "Format: \u003chost\u003e:\u003cport\u003e. Default: \"localhost:4317\"",
+                                    "type": "string"
+                                },
+                                "insecure": {
+                                    "description": "Allows reporter to send logs to the OpenTelemetry Collector without using a secured protocol.",
+                                    "type": "boolean"
+                                },
+                                "tls": {
                                     "type": "object",
                                     "properties": {
-                                        "defaultmode": {
-                                            "description": "Set default mode for fields.names",
-                                            "default": "keep",
-                                            "type": "string",
-                                            "enum": [
-                                                "keep",
-                                                "drop",
-                                                "redact"
+                                        "ca": {
+                                            "description": "The path to the certificate authority, it defaults to the system bundle.",
+                                            "type": "string"
+                                        },
+                                        "cert": {
+                                            "description": "The path to the public certificate. When using this option, setting the key option is required.",
+                                            "type": "string"
+                                        },
+                                        "insecureSkipVerify": {
+                                            "description": "When set to true, the TLS connection accepts any certificate presented by the server regardless of the hostnames it covers.",
+                                            "type": [
+                                                "boolean",
+                                                "null"
                                             ]
                                         },
-                                        "names": {
-                                            "description": "Names of the fields to limit.",
-                                            "type": "object"
+                                        "key": {
+                                            "description": "The path to the private key. When using this option, setting the cert option is required.",
+                                            "type": "string"
                                         }
                                     }
+                                }
+                            }
+                        },
+                        "http": {
+                            "type": "object",
+                            "properties": {
+                                "enabled": {
+                                    "description": "Set to true in order to send logs to the OpenTelemetry Collector using HTTP.",
+                                    "type": "boolean"
+                                },
+                                "endpoint": {
+                                    "description": "Format: \u003cscheme\u003e://\u003chost\u003e:\u003cport\u003e\u003cpath\u003e. Default: https://localhost:4318/v1/logs",
+                                    "type": "string"
                                 },
                                 "headers": {
+                                    "description": "Additional headers sent with logs by the reporter to the OpenTelemetry Collector.",
+                                    "type": "object"
+                                },
+                                "tls": {
                                     "type": "object",
                                     "properties": {
-                                        "defaultmode": {
-                                            "description": "[Limit logged fields or headers](https://doc.traefik.io/traefik/observe/logs-and-access-logs/#log-fields-customization)",
-                                            "default": "drop",
-                                            "type": "string",
-                                            "enum": [
-                                                "keep",
-                                                "drop",
-                                                "redact"
+                                        "ca": {
+                                            "description": "The path to the certificate authority, it defaults to the system bundle.",
+                                            "type": "string"
+                                        },
+                                        "cert": {
+                                            "description": "The path to the public certificate. When using this option, setting the key option is required.",
+                                            "type": "string"
+                                        },
+                                        "insecureSkipVerify": {
+                                            "description": "When set to true, the TLS connection accepts any certificate presented by the server regardless of the hostnames it covers.",
+                                            "type": [
+                                                "boolean",
+                                                "null"
                                             ]
                                         },
-                                        "names": {
-                                            "type": "object"
+                                        "key": {
+                                            "description": "The path to the private key. When using this option, setting the cert option is required.",
+                                            "type": "string"
                                         }
                                     }
                                 }
                             }
                         },
-                        "filters": {
-                            "description": "Set [filtering](https://doc.traefik.io/traefik/observe/logs-and-access-logs/#access-log-filters)",
-                            "type": "object",
-                            "properties": {
-                                "minduration": {
-                                    "description": "Set minDuration, to keep access logs when requests take longer than the specified duration",
-                                    "type": "string"
-                                },
-                                "retryattempts": {
-                                    "description": "Set retryAttempts, to keep the access logs when at least one retry has happened",
-                                    "type": "boolean"
-                                },
-                                "statuscodes": {
-                                    "description": "Set statusCodes, to limit the access logs to requests with a status codes in the specified range",
-                                    "type": "string"
-                                }
-                            },
-                            "additionalProperties": false
+                        "resourceAttributes": {
+                            "description": "Defines additional resource attributes to be sent to the collector.",
+                            "type": "object"
                         },
-                        "format": {
-                            "description": "Set [access log format](https://doc.traefik.io/traefik/reference/install-configuration/observability/logs-and-accesslogs/#opt-accesslog-format)",
-                            "default": "common",
+                        "serviceName": {
+                            "description": "Service name used in OTLP backend. Default: traefik.",
                             "type": [
                                 "string",
                                 "null"
-                            ],
-                            "enum": [
-                                "common",
-                                "genericCLF",
-                                "json",
-                                null
                             ]
-                        },
-                        "otlp": {
-                            "type": "object",
-                            "properties": {
-                                "enabled": {
-                                    "description": "Set to true in order to enable OpenTelemetry on access logs. Note that experimental.otlpLogs needs to be enabled.",
-                                    "type": "boolean"
-                                },
-                                "grpc": {
-                                    "type": "object",
-                                    "properties": {
-                                        "enabled": {
-                                            "description": "Set to true in order to send access logs to the OpenTelemetry Collector using gRPC",
-                                            "type": "boolean"
-                                        },
-                                        "endpoint": {
-                                            "description": "Format: \u003chost\u003e:\u003cport\u003e. Default: \"localhost:4317\"",
-                                            "type": "string"
-                                        },
-                                        "insecure": {
-                                            "description": "Allows reporter to send access logs to the OpenTelemetry Collector without using a secured protocol.",
-                                            "type": "boolean"
-                                        },
-                                        "tls": {
-                                            "type": "object",
-                                            "properties": {
-                                                "ca": {
-                                                    "description": "The path to the certificate authority, it defaults to the system bundle.",
-                                                    "type": "string"
-                                                },
-                                                "cert": {
-                                                    "description": "The path to the public certificate. When using this option, setting the key option is required.",
-                                                    "type": "string"
-                                                },
-                                                "insecureSkipVerify": {
-                                                    "description": "When set to true, the TLS connection accepts any certificate presented by the server regardless of the hostnames it covers.",
-                                                    "type": [
-                                                        "boolean",
-                                                        "null"
-                                                    ]
-                                                },
-                                                "key": {
-                                                    "description": "The path to the private key. When using this option, setting the cert option is required.",
-                                                    "type": "string"
-                                                }
-                                            }
-                                        }
-                                    }
-                                },
-                                "http": {
-                                    "type": "object",
-                                    "properties": {
-                                        "enabled": {
-                                            "description": "Set to true in order to send access logs to the OpenTelemetry Collector using HTTP.",
-                                            "type": "boolean"
-                                        },
-                                        "endpoint": {
-                                            "description": "Format: \u003cscheme\u003e://\u003chost\u003e:\u003cport\u003e\u003cpath\u003e. Default: https://localhost:4318/v1/logs",
-                                            "type": "string"
-                                        },
-                                        "headers": {
-                                            "description": "Additional headers sent with access logs by the reporter to the OpenTelemetry Collector.",
-                                            "type": "object"
-                                        },
-                                        "tls": {
-                                            "type": "object",
-                                            "properties": {
-                                                "ca": {
-                                                    "description": "The path to the certificate authority, it defaults to the system bundle.",
-                                                    "type": "string"
-                                                },
-                                                "cert": {
-                                                    "description": "The path to the public certificate. When using this option, setting the key option is required.",
-                                                    "type": "string"
-                                                },
-                                                "insecureSkipVerify": {
-                                                    "description": "When set to true, the TLS connection accepts any certificate presented by the server regardless of the hostnames it covers.",
-                                                    "type": [
-                                                        "boolean",
-                                                        "null"
-                                                    ]
-                                                },
-                                                "key": {
-                                                    "description": "The path to the private key. When using this option, setting the cert option is required.",
-                                                    "type": "string"
-                                                }
-                                            }
-                                        }
-                                    }
-                                },
-                                "resourceAttributes": {
-                                    "description": "Defines additional resource attributes to be sent to the collector.",
-                                    "type": "object"
-                                },
-                                "serviceName": {
-                                    "description": "Service name used in OTLP backend. Default: traefik.",
-                                    "type": [
-                                        "string",
-                                        "null"
-                                    ]
-                                }
-                            }
-                        },
-                        "timezone": {
-                            "description": "Set [timezone](https://doc.traefik.io/traefik/reference/install-configuration/observability/logs-and-accesslogs/#time-zones)",
-                            "type": "string"
-                        }
-                    }
-                },
-                "general": {
-                    "type": "object",
-                    "properties": {
-                        "filePath": {
-                            "description": "To write the logs into a log file, use the filePath option.",
-                            "type": "string"
-                        },
-                        "format": {
-                            "description": "Set [logs format](https://doc.traefik.io/traefik/reference/install-configuration/observability/logs-and-accesslogs/#opt-log-format)",
-                            "default": "common",
-                            "type": [
-                                "string",
-                                "null"
-                            ],
-                            "enum": [
-                                "common",
-                                "json",
-                                null
-                            ]
-                        },
-                        "level": {
-                            "description": "Alternative logging levels are TRACE, DEBUG, INFO, WARN, ERROR, FATAL, and PANIC.",
-                            "default": "INFO",
-                            "type": "string",
-                            "enum": [
-                                "TRACE",
-                                "DEBUG",
-                                "INFO",
-                                "WARN",
-                                "ERROR",
-                                "FATAL",
-                                "PANIC"
-                            ]
-                        },
-                        "noColor": {
-                            "description": "When set to true and format is common, it disables the colorized output.",
-                            "type": "boolean"
-                        },
-                        "otlp": {
-                            "type": "object",
-                            "properties": {
-                                "enabled": {
-                                    "description": "Set to true in order to enable OpenTelemetry on logs. Note that experimental.otlpLogs needs to be enabled.",
-                                    "type": "boolean"
-                                },
-                                "grpc": {
-                                    "type": "object",
-                                    "properties": {
-                                        "enabled": {
-                                            "description": "Set to true in order to send logs  to the OpenTelemetry Collector using gRPC",
-                                            "type": "boolean"
-                                        },
-                                        "endpoint": {
-                                            "description": "Format: \u003chost\u003e:\u003cport\u003e. Default: \"localhost:4317\"",
-                                            "type": "string"
-                                        },
-                                        "insecure": {
-                                            "description": "Allows reporter to send logs to the OpenTelemetry Collector without using a secured protocol.",
-                                            "type": "boolean"
-                                        },
-                                        "tls": {
-                                            "type": "object",
-                                            "properties": {
-                                                "ca": {
-                                                    "description": "The path to the certificate authority, it defaults to the system bundle.",
-                                                    "type": "string"
-                                                },
-                                                "cert": {
-                                                    "description": "The path to the public certificate. When using this option, setting the key option is required.",
-                                                    "type": "string"
-                                                },
-                                                "insecureSkipVerify": {
-                                                    "description": "When set to true, the TLS connection accepts any certificate presented by the server regardless of the hostnames it covers.",
-                                                    "type": [
-                                                        "boolean",
-                                                        "null"
-                                                    ]
-                                                },
-                                                "key": {
-                                                    "description": "The path to the private key. When using this option, setting the cert option is required.",
-                                                    "type": "string"
-                                                }
-                                            }
-                                        }
-                                    }
-                                },
-                                "http": {
-                                    "type": "object",
-                                    "properties": {
-                                        "enabled": {
-                                            "description": "Set to true in order to send logs to the OpenTelemetry Collector using HTTP.",
-                                            "type": "boolean"
-                                        },
-                                        "endpoint": {
-                                            "description": "Format: \u003cscheme\u003e://\u003chost\u003e:\u003cport\u003e\u003cpath\u003e. Default: https://localhost:4318/v1/logs",
-                                            "type": "string"
-                                        },
-                                        "headers": {
-                                            "description": "Additional headers sent with logs by the reporter to the OpenTelemetry Collector.",
-                                            "type": "object"
-                                        },
-                                        "tls": {
-                                            "type": "object",
-                                            "properties": {
-                                                "ca": {
-                                                    "description": "The path to the certificate authority, it defaults to the system bundle.",
-                                                    "type": "string"
-                                                },
-                                                "cert": {
-                                                    "description": "The path to the public certificate. When using this option, setting the key option is required.",
-                                                    "type": "string"
-                                                },
-                                                "insecureSkipVerify": {
-                                                    "description": "When set to true, the TLS connection accepts any certificate presented by the server regardless of the hostnames it covers.",
-                                                    "type": [
-                                                        "boolean",
-                                                        "null"
-                                                    ]
-                                                },
-                                                "key": {
-                                                    "description": "The path to the private key. When using this option, setting the cert option is required.",
-                                                    "type": "string"
-                                                }
-                                            }
-                                        }
-                                    }
-                                },
-                                "resourceAttributes": {
-                                    "description": "Defines additional resource attributes to be sent to the collector.",
-                                    "type": "object"
-                                },
-                                "serviceName": {
-                                    "description": "Service name used in OTLP backend. Default: traefik.",
-                                    "type": [
-                                        "string",
-                                        "null"
-                                    ]
-                                }
-                            }
                         }
                     }
                 }
@@ -2023,6 +2137,10 @@
                 "annotations": {
                     "type": "object"
                 },
+                "emptyDir": {
+                    "description": "[EmptyDir](https://kubernetes.io/docs/concepts/storage/volumes/#emptydir) options when persistence is disabled",
+                    "type": "object"
+                },
                 "enabled": {
                     "description": "Enable persistence using Persistent Volume Claims ref: http://kubernetes.io/docs/user-guide/persistent-volumes/. It can be used to store TLS certificates along with `certificatesResolvers.\u003cname\u003e.acme.storage`  option",
                     "type": "boolean"
@@ -2120,12 +2238,14 @@
                         ]
                     },
                     "asDefault": {
+                        "description": "Enable this entrypoint as a default entrypoint. When a service doesn't explicitly set an entrypoint it will only use this entrypoint.",
                         "type": [
                             "boolean",
                             "null"
                         ]
                     },
                     "containerPort": {
+                        "description": "Use containerPort if set.",
                         "type": [
                             "integer",
                             "null"
@@ -2276,6 +2396,19 @@
                                         "type": "string"
                                     }
                                 }
+                            },
+                            "underscoreHeadersStrategy": {
+                                "description": "Defines how request headers with underscores in their names are handled (v3.7.6+). See [upstream documentation](https://doc.traefik.io/traefik/reference/install-configuration/entrypoints/#underscoreheadersstrategy)",
+                                "type": [
+                                    "string",
+                                    "null"
+                                ],
+                                "enum": [
+                                    "keep",
+                                    "delete",
+                                    "reject",
+                                    null
+                                ]
                             }
                         }
                     },
@@ -2283,6 +2416,7 @@
                         "type": "object",
                         "properties": {
                             "advertisedPort": {
+                                "description": "Defines the UDP port to advertise as the HTTP/3 authority.",
                                 "type": [
                                     "integer",
                                     "null"
@@ -2290,6 +2424,7 @@
                                 "minimum": 0
                             },
                             "enabled": {
+                                "description": "Enable HTTP/3 on the entrypoint. It also enables the http3 experimental feature. See [upstream documentation](https://doc.traefik.io/traefik/reference/install-configuration/entrypoints/#opt-http3). There are known limitations when trying to listen on same ports for TCP \u0026 UDP ([kubernetes#47249](https://github.com/kubernetes/kubernetes/issues/47249#issuecomment-587960741)): this chart works around it using a dual Service.",
                                 "type": "boolean"
                             }
                         }
@@ -2366,6 +2501,7 @@
                         }
                     },
                     "targetPort": {
+                        "description": "Different target traefik port on the cluster, useful for IP type LB",
                         "type": [
                             "string",
                             "integer",
@@ -2460,8 +2596,8 @@
                     "type": "object",
                     "properties": {
                         "content": {
-                            "description": "File content (YAML format, go template supported) (see https://doc.traefik.io/traefik/reference/install-configuration/providers/others/file/)",
-                            "type": "string"
+                            "description": "File content as an object (will be YAML-formatted, go template supported) (see https://doc.traefik.io/traefik/reference/install-configuration/providers/others/file/)",
+                            "type": "object"
                         },
                         "enabled": {
                             "description": "Create a file provider",
@@ -2507,6 +2643,10 @@
                             "description": "Allows to reference ExternalName services in IngressRoute",
                             "type": "boolean"
                         },
+                        "crossProviderNamespaces": {
+                            "description": "List of namespaces from which IngressRoute, IngressRouteTCP, IngressRouteUDP, and TraefikService are allowed to declare cross-provider references. Requires traefik v3.7.1+.",
+                            "type": "array"
+                        },
                         "enabled": {
                             "description": "Load Kubernetes IngressRoute provider",
                             "type": "boolean"
@@ -2533,6 +2673,17 @@
                 "kubernetesGateway": {
                     "type": "object",
                     "properties": {
+                        "burst": {
+                            "description": "Maximum burst of requests to the Kubernetes API server (v3.7.3+). Defaults to 100.",
+                            "type": [
+                                "integer",
+                                "null"
+                            ]
+                        },
+                        "crossProviderNamespaces": {
+                            "description": "List of namespaces from which Gateway API routes are allowed to declare TraefikService backendRef references. Requires traefik v3.7.1+.",
+                            "type": "array"
+                        },
                         "enabled": {
                             "description": "Enable Traefik Gateway provider for Gateway API",
                             "type": "boolean"
@@ -2552,6 +2703,13 @@
                         "nativeLBByDefault": {
                             "description": "Defines whether to use Native Kubernetes load-balancing mode by default.",
                             "type": "boolean"
+                        },
+                        "qps": {
+                            "description": "Maximum QPS to the Kubernetes API server. A negative value disables client-side ratelimiting (v3.7.3+). Defaults to 50.",
+                            "type": [
+                                "integer",
+                                "null"
+                            ]
                         },
                         "statusAddress": {
                             "type": "object",
@@ -2594,6 +2752,10 @@
                         "allowExternalNameServices": {
                             "description": "Allows to reference ExternalName services in Ingress",
                             "type": "boolean"
+                        },
+                        "crossProviderNamespaces": {
+                            "description": "List of namespaces from which Ingresses or Services are allowed to declare Middlewares, TLSOptions, or ServersTransport references. Requires traefik v3.7.1+.",
+                            "type": "array"
                         },
                         "disableIngressClassLookup": {
                             "description": "Only for Traefik v3.0, Deprecated since v3.1. See [upstream documentation](https://doc.traefik.io/traefik/v3.0/providers/kubernetes-ingress/#disableingressclasslookup)",
@@ -2854,10 +3016,11 @@
                             "type": "object",
                             "properties": {
                                 "enabled": {
-                                    "description": "Service fronting the Ingress controller. Takes the form 'namespace/name'",
+                                    "description": "Enable publishService. Service fronting the Ingress controller, used to set the load-balancer status of Ingress objects. Usually the Service provided by this Chart. It's possible to use it with an external Service using pathOverride.",
                                     "type": "boolean"
                                 },
                                 "pathOverride": {
+                                    "description": "Override path of Kubernetes Service used to copy status from. Format: namespace/servicename. Default to Service deployed with this Chart.",
                                     "type": "string"
                                 }
                             }
@@ -2897,7 +3060,7 @@
                             "type": "string"
                         },
                         "watchNamespaceSelector": {
-                            "description": "Select namespaces the controller watches for updates to Kubernetes objects. Mutually exclusive with watchNamespace.",
+                            "description": "Select namespaces the controller watches for updates to Kubernetes objects. Mutually exclusive with watchNamespace. It requires a ClusterRole to list and watch namespaces, and is therefore incompatible with `rbac.namespaced`.",
                             "type": "string"
                         }
                     },
@@ -3015,6 +3178,7 @@
                     ]
                 },
                 "single": {
+                    "description": "Single service is using `MixedProtocolLBService` feature gate. When set to false, it will create two Service, one for TCP and one for UDP.",
                     "type": "boolean"
                 },
                 "spec": {

@@ -1,14 +1,14 @@
 --- charts-original/Chart.yaml
 +++ charts/Chart.yaml
-@@ -6,6 +6,7 @@
-   traefik.io/hub-min-version: v3.19.3
-   traefik.io/proxy-max-version: v3.7.9
-   traefik.io/proxy-min-version: v3.6.0
+@@ -10,6 +10,7 @@
+     \ description: \"feat(deps): update ghcr.io/traefik/traefik-hub docker tag to
+     v3.20.8\"\n- kind: changed\n  description: \"ci(renovate): scope updates per chart
+     on VALUES.md & AppVersion\"\n"
 +  fleet.cattle.io/bundle-id: rke2
- apiVersion: v2
- appVersion: v3.7.9
- description: A Traefik based Kubernetes ingress controller
-@@ -22,7 +23,7 @@
+   traefik.io/hub-max-version: v3.20.8
+   traefik.io/hub-min-version: v3.19.3
+   traefik.io/proxy-max-version: v3.7.10
+@@ -30,7 +31,7 @@
  - email: remi.buisson@traefik.io
    name: darkweaver87
  - name: jnoordsij
