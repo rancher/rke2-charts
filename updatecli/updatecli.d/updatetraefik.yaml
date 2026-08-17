@@ -1,0 +1,56 @@
+---
+name: "Update Traefik Chart"
+
+sources:
+  traefik_chart:
+    name: Get Traefik chart version
+    kind: githubrelease
+    spec:
+      owner: traefik
+      repository: traefik-helm-chart
+      token: '{{ requiredEnv .github.token }}'
+      typefilter:
+        release: true
+        draft: false
+        prerelease: false
+      versionfilter:
+        kind: regex
+        pattern: 'v[0-9]+\.[0-9]+\.[0-9]+'
+    transformers:
+      - trimprefix: "v"
+
+targets:
+  traefik:
+    name: Update Traefik chart
+    kind: shell
+    scmid: default
+    sourceid: traefik_chart
+    spec:
+      command: 'updatecli/scripts/update-traefik.sh'
+      environments:
+        - name: TRAEFIK_CHART_VERSION
+          value: '{{ source "traefik_chart" }}'
+        - name: PATH
+
+scms:
+  default:
+    kind: github
+    spec:
+      token: '{{ requiredEnv .github.token }}'
+      username: '{{ requiredEnv .github.username }}'
+      user: '{{ .github.username }}'
+      email: '{{ .github.email }}'
+      owner: '{{ .github.owner }}'
+      repository: '{{ .github.repository }}'
+      branch: '{{ .github.branch }}'
+
+actions:
+  default:
+    title: Update Traefik chart {{ source "traefik_chart" }}
+    kind: github/pullrequest
+    spec:
+      strategy:
+        method: manual
+      labels:
+        - updatecli
+    scmid: default
