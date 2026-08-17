@@ -31,7 +31,7 @@
  {{- print $servicePath | trimSuffix "-" -}}
  {{- end -}}
  
-@@ -195,8 +206,14 @@
+@@ -195,7 +206,13 @@
  {{- default (include "traefik.namespace" .) (join "," .Values.providers.kubernetesIngress.namespaces) }}
  {{- end -}}
  {{- define "providers.kubernetesIngressNGINX.namespaces" -}}
@@ -42,12 +42,11 @@
 +{{- default (include "traefik.namespace" .) (join "," $watchNamespace) }}
 +{{- else -}}
 +{{- default (include "traefik.namespace" .) $watchNamespace }}
- {{- end -}}
 +{{- end -}}
+ {{- end -}}
  {{- define "providers.knative.namespaces" -}}
  {{- default (include "traefik.namespace" .) (join "," .Values.providers.knative.namespaces) }}
- {{- end -}}
-@@ -567,3 +584,11 @@
+@@ -571,3 +588,11 @@
  {{- define "traefik.hubTokenFilePath" }}
  {{- printf "%s/%s" (.Values.hub.tokenMountPath | trimSuffix "/") "token" -}}
  {{- end -}}

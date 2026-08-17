@@ -22,7 +22,7 @@
    # -- Number of pods of the deployment (only applies when kind == Deployment).
    # Set to null to omit spec.replicas, e.g. when an external controller (HPA/KEDA) owns scaling.
    replicas: 1  # @schema type:[integer, null];minimum:0
-@@ -123,8 +123,8 @@
+@@ -126,8 +126,8 @@
  ingressClass:  # @schema additionalProperties: false
    # -- Create a default IngressClass for Traefik
    enabled: true
@@ -33,7 +33,7 @@
  
  core:  # @schema additionalProperties: false
    # -- Can be used to use globally v2 router syntax. Deprecated since v3.4 /!\.
-@@ -268,8 +268,8 @@
+@@ -271,8 +271,8 @@
    # -- Customize updateStrategy of Deployment or DaemonSet
    type: RollingUpdate
    rollingUpdate:
@@ -44,7 +44,7 @@
  
  readinessProbe:  # @schema additionalProperties: false
    # -- The number of consecutive failures allowed before considering the probe as failed.
-@@ -314,7 +314,7 @@
+@@ -317,7 +317,7 @@
      # -- List of namespaces from which IngressRoute, IngressRouteTCP, IngressRouteUDP, and TraefikService are allowed to declare cross-provider references. Requires traefik v3.7.1+.
      crossProviderNamespaces: []
      # -- When the parameter is set, only resources containing an annotation with the same value are processed. Otherwise, resources missing the annotation, having an empty value, or the value traefik are processed. It will also set required annotation on Dashboard and Healthcheck IngressRoute when enabled.
@@ -53,7 +53,7 @@
      # -- See [upstream documentation](https://doc.traefik.io/traefik/reference/install-configuration/providers/kubernetes/kubernetes-ingress/#opt-providers-kubernetesIngress-labelselector)
      labelSelector: ""
      # -- Array of namespaces to watch. If left empty, Traefik watches all namespaces. . When using `rbac.namespaced`, it will watch helm release namespace and namespaces listed in this array.
-@@ -871,6 +871,8 @@
+@@ -874,6 +874,8 @@
          insecureSkipVerify:  # @schema type:[boolean, null]
  
  global:
@@ -62,7 +62,7 @@
    checkNewVersion: true
    # -- Please take time to consider whether or not you wish to share anonymous data with us
    # See https://doc.traefik.io/traefik/contributing/data-collection/
-@@ -943,7 +945,7 @@
+@@ -946,7 +948,7 @@
      # -- (bool) Enable this entrypoint as a default entrypoint. When a service doesn't explicitly set an entrypoint it will only use this entrypoint.
      asDefault:  # @schema type: [boolean, null]; default: null
      port: 8000
@@ -71,7 +71,7 @@
      # containerPort: 8000
      expose:
        default: true
-@@ -1002,7 +1004,7 @@
+@@ -1005,7 +1007,7 @@
      # asDefault: true
      port: 8443
      # -- (int) Use hostPort if set.
@@ -80,7 +80,7 @@
      # -- (int) Use containerPort if set.
      containerPort:  # @schema type:[integer, null]; minimum:0
      expose:
-@@ -1133,7 +1135,8 @@
+@@ -1136,7 +1138,8 @@
    # -- Additional entries here will be added to the Service [spec](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.35/#servicespec-v1-core).
    # Cannot contain selector or ports entries.
    spec:
@@ -90,7 +90,7 @@
    # -- Can be used to create multiple Service.
    # See EXAMPLES.md for more details.
    additionalServices: {}
-@@ -1222,7 +1225,8 @@
+@@ -1227,7 +1230,8 @@
  #        topologyKey: kubernetes.io/hostname
  
  # -- nodeSelector is the simplest recommended form of node selection constraint.

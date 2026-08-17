@@ -9,7 +9,7 @@
  | deployment.labels | object | `{}` | Additional deployment labels (e.g. for filtering deployment by custom labels) |
  | deployment.lifecycle | object | `{}` | Pod lifecycle actions |
  | deployment.livenessPath | string | `/ping` | Override the liveness path. |
-@@ -251,7 +251,7 @@
+@@ -264,7 +264,7 @@
  | image.digest | string | `nil` | Traefik image digest (e.g. `sha256:abc...`). When set, takes precedence over `tag`. Set `versionOverride` alongside it so the chart's version-checking logic knows the version (it cannot be derived from the digest). |
  | image.pullPolicy | string | `"IfNotPresent"` | Traefik image pull policy |
  | image.registry | string | `nil` | Traefik image host registry. Defaults to `docker.io` for Traefik Proxy and `ghcr.io` for Traefik Hub (when `hub.enabled` is true). |
@@ -18,7 +18,7 @@
  | image.tag | string | `nil` | defaults to appVersion. It's used for version checking, even prefixed with experimental- or latest-. To pin by digest, prefer `image.digest`. A `<version>@<digest>` combo is also accepted here; in that case the digest is what Kubernetes verifies and the version is informational (and can drift from the underlying image). |
  | ingressClass.enabled | bool | `true` | Create a default IngressClass for Traefik |
  | ingressClass.isDefaultClass | bool | `true` |  |
-@@ -455,7 +455,7 @@
+@@ -469,7 +469,7 @@
  | providers.kubernetesCRD.allowExternalNameServices | bool | `false` | Allows to reference ExternalName services in IngressRoute |
  | providers.kubernetesCRD.crossProviderNamespaces | list | `[]` | List of namespaces from which IngressRoute, IngressRouteTCP, IngressRouteUDP, and TraefikService are allowed to declare cross-provider references. Requires traefik v3.7.1+. |
  | providers.kubernetesCRD.enabled | bool | `true` | Load Kubernetes IngressRoute provider |
@@ -27,7 +27,7 @@
  | providers.kubernetesCRD.labelSelector | string | `""` | See [upstream documentation](https://doc.traefik.io/traefik/reference/install-configuration/providers/kubernetes/kubernetes-ingress/#opt-providers-kubernetesIngress-labelselector) |
  | providers.kubernetesCRD.namespaces | list | `[]` | Array of namespaces to watch. If left empty, Traefik watches all namespaces. . When using `rbac.namespaced`, it will watch helm release namespace and namespaces listed in this array. |
  | providers.kubernetesCRD.nativeLBByDefault | bool | `false` | Defines whether to use Native Kubernetes load-balancing mode by default. |
-@@ -477,7 +477,7 @@
+@@ -491,7 +491,7 @@
  | providers.kubernetesIngress.crossProviderNamespaces | list | `[]` | List of namespaces from which Ingresses or Services are allowed to declare Middlewares, TLSOptions, or ServersTransport references. Requires traefik v3.7.1+. |
  | providers.kubernetesIngress.disableIngressClassLookup | bool | `false` | Only for Traefik v3.0, Deprecated since v3.1. See [upstream documentation](https://doc.traefik.io/traefik/v3.0/providers/kubernetes-ingress/#disableingressclasslookup) |
  | providers.kubernetesIngress.enabled | bool | `true` | Load Kubernetes Ingress provider |
@@ -36,7 +36,7 @@
  | providers.kubernetesIngress.ingressEndpoint.hostname | string | `""` | Hostname used for Kubernetes Ingress endpoints |
  | providers.kubernetesIngress.ingressEndpoint.ip | string | `""` | IP used for Kubernetes Ingress endpoints |
  | providers.kubernetesIngress.labelSelector | string | `nil` |  |
-@@ -549,7 +549,7 @@
+@@ -563,7 +563,7 @@
  | service.labels | object | `{}` | Additional service labels (e.g. for filtering Service by custom labels) |
  | service.nameOverride | string | `""` | Override the default Service name. Useful for adopting an existing Service (e.g., during migration from another ingress controller). |
  | service.single | bool | `true` | Single service is using `MixedProtocolLBService` feature gate. When set to false, it will create two Service, one for TCP and one for UDP. |
