@@ -141,7 +141,7 @@ tolerations:
 cniplugins:
   image:
     repository: rancher/hardened-cni-plugins
-    tag: v1.9.1-build20260814
+    tag: v1.9.1-build20260818
 
   # skipcnis is a comma separated list of cni binaries to skip from
   # installing.
@@ -173,7 +173,7 @@ dynamicNetworksController:
   enabled: false
   image:
     repository: rancher/hardened-multus-dynamic-networks-controller
-    tag: v0.3.8-build20260722
+    tag: v0.3.8-build20260818
     pullPolicy: IfNotPresent
   sockets:
     containerd: /run/k3s/containerd/containerd.sock
