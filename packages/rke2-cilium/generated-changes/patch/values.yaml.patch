@@ -6,10 +6,10 @@
    override: ~
 -  repository: "quay.io/cilium/cilium"
 +  repository: "rancher/mirrored-cilium-cilium"
-   tag: "v1.20.0"
+   tag: "v1.20.1"
    pullPolicy: "IfNotPresent"
 -  # cilium-digest
--  digest: sha256:383968cd5e8873f7976fa76aa6196045643558f4cc9518a207b9335cb24a0e93
+-  digest: sha256:ae9ea21f7427fe24bc6ea7247eb552157a1b0a431744045d3f641545ca71d11b
 -  useDigest: true
 +  useDigest: false
  # -- Scheduling configurations for cilium pods
@@ -48,8 +48,8 @@
      override: ~
 -    repository: "quay.io/cilium/certgen"
 +    repository: "rancher/mirrored-cilium-certgen"
-     tag: "v0.4.8"
--    digest: "sha256:e65f1d15a0ffaf2df32797c8ad1c797fc64dad11c274cd96a2eafa89d712cdc3"
+     tag: "v0.4.9"
+-    digest: "sha256:6213a4c54a1f36e14a9280765f058aaa2017550c28bc122f5b09ad146fd0da2b"
 -    useDigest: true
 +    useDigest: false
      pullPolicy: "IfNotPresent"
@@ -70,9 +70,9 @@
        override: ~
 -      repository: "quay.io/cilium/hubble-relay"
 +      repository: "rancher/mirrored-cilium-hubble-relay"
-       tag: "v1.20.0"
+       tag: "v1.20.1"
 -      # hubble-relay-digest
--      digest: sha256:2ca16981c7eb98df0ba9c9d18896bb9ca628b5cbd40dc9801339f4741f91ee94
+-      digest: sha256:59be0ae7d475ab9011a5e954618c0f27b5778b17140381425b308b55ba4917f4
 -      useDigest: true
 +      useDigest: false
        pullPolicy: "IfNotPresent"
@@ -135,41 +135,41 @@
    # -- (int)
    # Set Envoy'--base-id' to use when allocating shared memory regions.
    # Only needs to be changed if multiple Envoy instances will run on the same node and may have conflicts. Supported values: 0 - 4294967295. Defaults to '0'
-@@ -2829,11 +2826,10 @@
+@@ -2832,11 +2829,10 @@
      # type: [null, string]
      # @schema
      override: ~
 -    repository: "quay.io/cilium/cilium-envoy"
 +    repository: "rancher/mirrored-cilium-cilium-envoy"
-     tag: "v1.37.5-1782911245-7cffc778c923f68a77954a53b1a98d6b5353f004"
+     tag: "v1.37.5-1786810558-766ccfb37260a43e9d228837aa84ce3faf9f64e7"
      pullPolicy: "IfNotPresent"
--    digest: "sha256:583057dd4f7d54cd41efff3c413aa0b148ac201f522e2c3336851fa89c78b039"
+-    digest: "sha256:75b8094c7127736a2ffd2dce3945e0931cb6df21b0372ff661940eca26730b91"
 -    useDigest: true
 +    useDigest: false
    # -- Init containers added to the cilium Envoy DaemonSet.
    initContainers: []
    # -- Additional containers added to the cilium Envoy DaemonSet.
-@@ -3236,17 +3232,9 @@
+@@ -3239,17 +3235,9 @@
      # type: [null, string]
      # @schema
      override: ~
 -    repository: "quay.io/cilium/operator"
 +    repository: "rancher/mirrored-cilium-operator"
-     tag: "v1.20.0"
+     tag: "v1.20.1"
 -    # operator-generic-digest
--    genericDigest: sha256:80744a8cc7c91c2f9e6347629406844eb35d79b30a732c6d41c15b17232a74f3
+-    genericDigest: sha256:6c3885fc7b629099fdbe2a5c87869c86feb825fa18fae299eac0f61918d16ecf
 -    # operator-azure-digest
--    azureDigest: sha256:4506f8d0c9f2dd187313f71b37a789986c1c1699f59c52973941df9eb5ccae0c
+-    azureDigest: sha256:13746a479ca60395df8d83580b49464c6c975cca6fdb21ba4791a076ab01b031
 -    # operator-aws-digest
--    awsDigest: sha256:a0e50fa611fa3e2e8b1c9521a3e813576034a0b3d626e9c128ac01f8f7dfd0fa
+-    awsDigest: sha256:7cf0cb0e6584f72ca8de951a1be03829f69fcaeba69dc6c7856fc4470545acd7
 -    # operator-alibabacloud-digest
--    alibabacloudDigest: sha256:52535dba067abf5b1cce2a666ee3f9430a1682ade3bf11db5f118436e84ad2e9
+-    alibabacloudDigest: sha256:2af5dd3d85649ea36d365363b8eca82ad06116c6259c4aace700a7c036348e4c
 -    useDigest: true
 +    useDigest: false
      pullPolicy: "IfNotPresent"
      suffix: ""
    # -- Number of replicas to run for the cilium-operator deployment
-@@ -3301,6 +3289,8 @@
+@@ -3304,6 +3292,8 @@
        operator: Exists
      - key: "node.cloudprovider.kubernetes.io/uninitialized"
        operator: Exists
@@ -178,7 +178,7 @@
    # -- Additional cilium-operator container arguments.
    extraArgs: []
    # -- Additional cilium-operator environment variables.
-@@ -3456,8 +3446,7 @@
+@@ -3459,8 +3449,7 @@
    # @schema
    # -- Taint nodes where Cilium is scheduled but not running. This prevents pods
    # from being scheduled to nodes where Cilium is not the default CNI provider.
@@ -188,49 +188,49 @@
    # -- Set Node condition NetworkUnavailable to 'false' with the reason
    # 'CiliumIsUp' for nodes that have a healthy Cilium pod.
    setNodeNetworkStatus: true
-@@ -3576,11 +3565,9 @@
+@@ -3579,11 +3568,9 @@
      # type: [null, string]
      # @schema
      override: ~
 -    repository: "quay.io/cilium/cilium"
 +    repository: "rancher/mirrored-cilium-cilium"
-     tag: "v1.20.0"
+     tag: "v1.20.1"
 -    # cilium-digest
--    digest: sha256:383968cd5e8873f7976fa76aa6196045643558f4cc9518a207b9335cb24a0e93
+-    digest: sha256:ae9ea21f7427fe24bc6ea7247eb552157a1b0a431744045d3f641545ca71d11b
 -    useDigest: true
 +    useDigest: false
      pullPolicy: "IfNotPresent"
    envoy:
      # -- Envoy pre-flight image.
-@@ -3589,11 +3576,10 @@
+@@ -3592,11 +3579,10 @@
        # type: [null, string]
        # @schema
        override: ~
 -      repository: "quay.io/cilium/cilium-envoy"
 +      repository: "rancher/mirrored-cilium-cilium-envoy"
-       tag: "v1.37.5-1782911245-7cffc778c923f68a77954a53b1a98d6b5353f004"
+       tag: "v1.37.5-1786810558-766ccfb37260a43e9d228837aa84ce3faf9f64e7"
        pullPolicy: "IfNotPresent"
--      digest: "sha256:583057dd4f7d54cd41efff3c413aa0b148ac201f522e2c3336851fa89c78b039"
+-      digest: "sha256:75b8094c7127736a2ffd2dce3945e0931cb6df21b0372ff661940eca26730b91"
 -      useDigest: true
 +      useDigest: false
    # -- The priority class to use for the preflight pod.
    priorityClassName: ""
    # -- preflight update strategy
-@@ -3858,11 +3844,9 @@
+@@ -3861,11 +3847,9 @@
        # type: [null, string]
        # @schema
        override: ~
 -      repository: "quay.io/cilium/clustermesh-apiserver"
 +      repository: "rancher/mirrored-cilium-clustermesh-apiserver"
-       tag: "v1.20.0"
+       tag: "v1.20.1"
 -      # clustermesh-apiserver-digest
--      digest: sha256:c791d0c334d4515d40041b2660d50a1b94b0179ef1d3c120bd350aebc9115e92
+-      digest: sha256:d905d614a332b2058cb81c193e481d1f460902b903f4eb57cc9764640b750fb5
 -      useDigest: true
 +      useDigest: false
        pullPolicy: "IfNotPresent"
      # -- TCP port for the clustermesh-apiserver health API.
      healthPort: 9880
-@@ -4586,3 +4570,11 @@
+@@ -4589,3 +4573,11 @@
      digest: ""
      useDigest: true
      pullPolicy: "IfNotPresent"
