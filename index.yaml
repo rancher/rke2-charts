@@ -26344,6 +26344,40 @@ entries:
           description: "Update the Metrics Server OCI image to [`0.8.1`](https://github.com/kubernetes-sigs/metrics-server/releases/tag/v0.8.1)."
     apiVersion: v2
     appVersion: 0.8.1
+    created: "2026-08-18T22:48:38.369302728Z"
+    description: Metrics Server is a scalable, efficient source of container resource
+      metrics for Kubernetes built-in autoscaling pipelines.
+    digest: 70e592bec043b954b757be1adea6011594600ac0d024ba43af8f9b3e8d317ccd
+    home: https://github.com/kubernetes-sigs/metrics-server
+    icon: https://avatars.githubusercontent.com/u/36015203?s=400&v=4
+    keywords:
+    - kubernetes
+    - metrics-server
+    - metrics
+    maintainers:
+    - name: stevehipwell
+      url: https://github.com/stevehipwell
+    - name: krmichel
+      url: https://github.com/krmichel
+    - name: endrec
+      url: https://github.com/endrec
+    name: rke2-metrics-server
+    sources:
+    - https://github.com/kubernetes-sigs/metrics-server
+    type: application
+    urls:
+    - assets/rke2-metrics-server/rke2-metrics-server-3.13.108.tgz
+    version: 3.13.108
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: fixed
+          description: "Conditionally render `insecureSkipTLSVerify` field in APIService template to prevent GitOps sync drift when value is `false`."
+        - kind: fixed
+          description: "Do not render annotations as null in APIService template to prevent permanent OutOfSync in ArgoCD."
+        - kind: changed
+          description: "Update the Metrics Server OCI image to [`0.8.1`](https://github.com/kubernetes-sigs/metrics-server/releases/tag/v0.8.1)."
+    apiVersion: v2
+    appVersion: 0.8.1
     created: "2026-08-17T18:26:11.352008755Z"
     description: Metrics Server is a scalable, efficient source of container resource
       metrics for Kubernetes built-in autoscaling pipelines.
