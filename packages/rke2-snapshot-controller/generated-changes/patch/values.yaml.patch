@@ -1,7 +1,7 @@
 --- charts-original/values.yaml
 +++ charts/values.yaml
-@@ -11,10 +11,10 @@
-     httpEndpoint: ":8080"
+@@ -16,10 +16,10 @@
+     featureGates: CSIVolumeGroupSnapshot=true
  
    image:
 -    repository: registry.k8s.io/sig-storage/snapshot-controller
@@ -9,11 +9,11 @@
      pullPolicy: IfNotPresent
      # Overrides the image tag whose default is the chart appVersion.
 -    tag: ""
-+    tag: "v8.6.0-build20260722"
++    tag: "v8.6.0-build20260818"
  
    imagePullSecrets: []
  
-@@ -35,9 +35,16 @@
+@@ -40,9 +40,16 @@
  
    resources: {}
  
@@ -32,10 +32,10 @@
  
    affinity: {}
  
-@@ -89,3 +96,6 @@
-   # DNS Policy for controller pod. For Pods running with hostNetwork, set to `ClusterFirstWithHostNet`
-   # For further reference: https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/#pod-s-dns-policy.
-   dnsPolicy: ClusterFirst
+@@ -179,3 +186,6 @@
+ #        velero.io/csi-volumegroupsnapshot-class: "true"
+ #      driver: linstor.csi.linbit.com
+ #      deletionPolicy: Delete
 +
 +global:
 +  systemDefaultRegistry: ""

@@ -1,9 +1,9 @@
 --- charts-original/templates/_helpers.tpl
 +++ charts/templates/_helpers.tpl
-@@ -59,3 +59,11 @@
-     {{ default "default" .Values.controller.serviceAccount.name }}
- {{- end -}}
- {{- end -}}
+@@ -138,3 +138,11 @@
+ {{- include "conversion-webhook.fullname" . }}
+ {{- end }}
+ {{- end }}
 +
 +{{- define "system_default_registry" -}}
 +{{- if .Values.global.systemDefaultRegistry -}}
