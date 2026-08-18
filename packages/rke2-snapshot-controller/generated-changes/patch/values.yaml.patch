@@ -1,5 +1,11 @@
 --- charts-original/values.yaml
 +++ charts/values.yaml
+@@ -1,4 +1,4 @@
+-installCRDs: true
++installCRDs: false
+ 
+ controller:
+    enabled: true
 @@ -16,10 +16,10 @@
      featureGates: CSIVolumeGroupSnapshot=true
  
