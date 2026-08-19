@@ -31599,6 +31599,49 @@ entries:
       traefik.io/proxy-min-version: v3.6.0
     apiVersion: v2
     appVersion: v3.7.10
+    created: "2026-08-19T22:12:12.991249567Z"
+    description: A Traefik based Kubernetes ingress controller
+    digest: 7f5b933e19c4b0ecbfff3af76b74187ce7a0af428e4557829d0ef6fab3693ad2
+    home: https://traefik.io/
+    icon: https://raw.githubusercontent.com/traefik/traefik/master/docs/content/assets/img/traefik.logo.png
+    keywords:
+    - traefik
+    - ingress
+    - networking
+    kubeVersion: '>=1.25.0-0'
+    maintainers:
+    - email: michel.loiseleur@traefik.io
+      name: mloiseleur
+    - email: remi.buisson@traefik.io
+      name: darkweaver87
+    - name: jnoordsij
+    name: rke2-traefik
+    sources:
+    - https://github.com/traefik/traefik-helm-chart
+    - https://github.com/traefik/traefik
+    type: application
+    urls:
+    - assets/rke2-traefik/rke2-traefik-41.2.001.tgz
+    version: 41.2.001
+  - annotations:
+      artifacthub.io/changes: "- kind: changed\n  description: \"test(service): LoadBalancer
+        node port opt-out\"\n- kind: fixed\n  description: \"fix(rbac): allow namespaced
+        rbac with only the knative provider\"\n- kind: fixed\n  description: \"fix(hub):
+        \U0001F41B enable providers with default config\"\n- kind: fixed\n  description:
+        \"fix(crds/middleware): add missing ErrorRequestHeaders field\"\n- kind: added\n
+        \ description: \"feat: allow setting emptyDir options for data and tmp volumes\"\n-
+        kind: added\n  description: \"feat(hub): support AWS EC2 provider\"\n- kind:
+        added\n  description: \"feat(deps): update traefik docker tag to v3.7.10\"\n-
+        kind: added\n  description: \"feat(deps): update ghcr.io/traefik/traefik-hub
+        docker tag to v3.20.8\"\n- kind: changed\n  description: \"ci(renovate): scope
+        updates per chart on VALUES.md & AppVersion\"\n"
+      fleet.cattle.io/bundle-id: rke2
+      traefik.io/hub-max-version: v3.20.8
+      traefik.io/hub-min-version: v3.19.3
+      traefik.io/proxy-max-version: v3.7.10
+      traefik.io/proxy-min-version: v3.6.0
+    apiVersion: v2
+    appVersion: v3.7.10
     created: "2026-08-17T19:27:10.547018494Z"
     description: A Traefik based Kubernetes ingress controller
     digest: c807c6820dd622337862a9ba6d17b9f1c6380921b35a222935d679d9d668abf6
@@ -32968,6 +33011,18 @@ entries:
     - assets/rke2-traefik/rke2-traefik-25.0.000.tgz
     version: 25.0.000
   rke2-traefik-crd:
+  - annotations:
+      fleet.cattle.io/bundle-id: rke2
+    apiVersion: v1
+    appVersion: v3.7.10
+    created: "2026-08-19T22:12:13.136898351Z"
+    description: Installs the CRDs for rke2-traefik
+    digest: a67c8dbe8be8849d148f4e98dcdb2b08ee2bffc18342526cea41484a5cde583e
+    name: rke2-traefik-crd
+    type: application
+    urls:
+    - assets/rke2-traefik/rke2-traefik-crd-41.2.001.tgz
+    version: 41.2.001
   - annotations:
       fleet.cattle.io/bundle-id: rke2
     apiVersion: v1
