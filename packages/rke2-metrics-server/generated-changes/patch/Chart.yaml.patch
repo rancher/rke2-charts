@@ -1,6 +1,6 @@
 --- charts-original/Chart.yaml
 +++ charts/Chart.yaml
-@@ -23,7 +23,7 @@
+@@ -29,7 +29,7 @@
    url: https://github.com/krmichel
  - name: endrec
    url: https://github.com/endrec
