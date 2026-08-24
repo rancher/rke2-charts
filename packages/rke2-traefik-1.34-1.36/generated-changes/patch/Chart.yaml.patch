@@ -1,0 +1,19 @@
+--- charts-original/Chart.yaml
++++ charts/Chart.yaml
+@@ -9,6 +9,7 @@
+   traefik.io/hub-min-version: v3.19.3
+   traefik.io/proxy-max-version: v3.7.1
+   traefik.io/proxy-min-version: v3.6.0
++  fleet.cattle.io/bundle-id: rke2
+ apiVersion: v2
+ appVersion: v3.7.1
+ description: A Traefik based Kubernetes ingress controller
+@@ -25,7 +26,7 @@
+ - email: remi.buisson@traefik.io
+   name: darkweaver87
+ - name: jnoordsij
+-name: traefik
++name: rke2-traefik
+ sources:
+ - https://github.com/traefik/traefik-helm-chart
+ - https://github.com/traefik/traefik

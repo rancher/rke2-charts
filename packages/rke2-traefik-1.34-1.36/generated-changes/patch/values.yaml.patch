@@ -1,0 +1,102 @@
+--- charts-original/values.yaml
++++ charts/values.yaml
+@@ -6,10 +6,10 @@
+   # -- Traefik image host registry
+   registry: docker.io
+   # -- Traefik image repository
+-  repository: traefik
++  repository: rancher/hardened-traefik
+   # -- defaults to appVersion. It's used for version checking, even prefixed with experimental- or latest-.
+   # To pin by digest, prefer `image.digest`. A `<version>@<digest>` combo is also accepted here; in that case the digest is what Kubernetes verifies and the version is informational (and can drift from the underlying image).
+-  tag:  # @schema type:[string, null]
++  tag: v3.7.11-build20260819  # @schema type:[string, null]
+   # -- Traefik image digest (e.g. `sha256:abc...`). When set, takes precedence over `tag`. Set `versionOverride` alongside it so the chart's version-checking logic knows the version (it cannot be derived from the digest).
+   digest:  # @schema type:[string, null]; pattern:^sha256:[a-f0-9]{64}$
+   # -- Traefik image pull policy
+@@ -22,7 +22,7 @@
+   # -- Enable deployment
+   enabled: true
+   # -- Deployment or DaemonSet
+-  kind: Deployment
++  kind: DaemonSet
+   # -- Number of pods of the deployment (only applies when kind == Deployment)
+   replicas: 1
+   # -- Number of old history to retain to allow rollback (If not set, default Kubernetes value is set to 10)
+@@ -123,8 +123,8 @@
+ ingressClass:  # @schema additionalProperties: false
+   # -- Create a default IngressClass for Traefik
+   enabled: true
+-  isDefaultClass: true
+-  name: ""
++  isDefaultClass: false
++  name: "traefik"
+ 
+ core:  # @schema additionalProperties: false
+   # -- Can be used to use globally v2 router syntax. Deprecated since v3.4 /!\.
+@@ -268,8 +268,8 @@
+   # -- Customize updateStrategy of Deployment or DaemonSet
+   type: RollingUpdate
+   rollingUpdate:
+-    maxUnavailable: 0  # @schema type:[integer, string, null]
+-    maxSurge: 1        # @schema type:[integer, string, null]
++    maxUnavailable: 1  # @schema type:[integer, string, null]
++    maxSurge: 0        # @schema type:[integer, string, null]
+ 
+ readinessProbe:  # @schema additionalProperties: false
+   # -- The number of consecutive failures allowed before considering the probe as failed.
+@@ -312,7 +312,7 @@
+     # -- Allows to return 503 when there are no endpoints available
+     allowEmptyServices: true
+     # -- When the parameter is set, only resources containing an annotation with the same value are processed. Otherwise, resources missing the annotation, having an empty value, or the value traefik are processed. It will also set required annotation on Dashboard and Healthcheck IngressRoute when enabled.
+-    ingressClass: ""
++    ingressClass: "traefik"
+     # -- See [upstream documentation](https://doc.traefik.io/traefik/reference/install-configuration/providers/kubernetes/kubernetes-ingress/#opt-providers-kubernetesIngress-labelselector)
+     labelSelector: ""
+     # -- Array of namespaces to watch. If left empty, Traefik watches all namespaces. . When using `rbac.namespaced`, it will watch helm release namespace and namespaces listed in this array.
+@@ -854,6 +854,8 @@
+         insecureSkipVerify:  # @schema type:[boolean, null]
+ 
+ global:
++  systemDefaultRegistry: ""
++  systemDefaultIngressClass: ""
+   checkNewVersion: true
+   # -- Please take time to consider whether or not you wish to share anonymous data with us
+   # See https://doc.traefik.io/traefik/contributing/data-collection/
+@@ -926,7 +928,7 @@
+     ## -- Enable this entrypoint as a default entrypoint. When a service doesn't explicitly set an entrypoint it will only use this entrypoint.
+     asDefault:  # @schema type: [boolean, null]; default: null
+     port: 8000
+-    # hostPort: 8000
++    hostPort: 80
+     # containerPort: 8000
+     expose:
+       default: true
+@@ -984,7 +986,7 @@
+     ## -- Enable this entrypoint as a default entrypoint. When a service doesn't explicitly set an entrypoint it will only use this entrypoint.
+     # asDefault: true
+     port: 8443
+-    hostPort:  # @schema type:[integer, null]; minimum:0
++    hostPort: 443 # @schema type:[integer, null]; minimum:0
+     containerPort:  # @schema type:[integer, null]; minimum:0
+     expose:
+       default: true
+@@ -1112,7 +1114,8 @@
+   # -- Additional entries here will be added to the Service [spec](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.35/#servicespec-v1-core).
+   # Cannot contain selector or ports entries.
+   spec:
+-    type: LoadBalancer
++    type: ClusterIP
++    ipFamilyPolicy: PreferDualStack
+   # -- Can be used to create multiple Service.
+   # See EXAMPLES.md for more details.
+   additionalServices: {}
+@@ -1201,7 +1204,8 @@
+ #        topologyKey: kubernetes.io/hostname
+ 
+ # -- nodeSelector is the simplest recommended form of node selection constraint.
+-nodeSelector: {}
++nodeSelector:
++  kubernetes.io/os: linux
+ # -- Tolerations allow the scheduler to schedule pods with matching taints.
+ tolerations: []
+ # -- You can use topology spread constraints to control
