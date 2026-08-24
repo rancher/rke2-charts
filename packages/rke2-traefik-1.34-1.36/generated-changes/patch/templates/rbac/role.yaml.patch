@@ -1,0 +1,17 @@
+--- charts-original/templates/rbac/role.yaml
++++ charts/templates/rbac/role.yaml
+@@ -1,4 +1,5 @@
+ {{- $version := include "traefik.proxyVersion" $ }}
++{{- $kubernetesIngressNGINX := (include "providers.kubernetesIngressNGINX.values" . | fromYaml) -}}
+ {{- $ingressNamespaces := concat (include "traefik.namespace" . | list) .Values.providers.kubernetesIngress.namespaces -}}
+ {{- $CRDNamespaces := concat (include "traefik.namespace" . | list) .Values.providers.kubernetesCRD.namespaces -}}
+ {{- $knativeNamespaces := concat (include "traefik.namespace" . | list) .Values.providers.knative.namespaces -}}
+@@ -47,7 +48,7 @@
+       - get
+       - list
+       - watch
+-{{- if or (and (has . $ingressNamespaces) $.Values.providers.kubernetesIngress.enabled) ($.Values.providers.kubernetesIngressNGINX.enabled) }}
++{{- if or (and (has . $ingressNamespaces) $.Values.providers.kubernetesIngress.enabled) ($kubernetesIngressNGINX.enabled) }}
+   - apiGroups:
+       - extensions
+       - networking.k8s.io

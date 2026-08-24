@@ -1,0 +1,54 @@
+--- charts-original/templates/requirements.yaml
++++ charts/templates/requirements.yaml
+@@ -1,4 +1,5 @@
+ {{- $version := include "traefik.proxyVersion" $ }}
++{{- $kubernetesIngressNGINX := (include "providers.kubernetesIngressNGINX.values" . | fromYaml) -}}
+ {{- $proxyMinVersion := index .Chart.Annotations "traefik.io/proxy-min-version" }}
+ {{- $proxyMaxVersion := index .Chart.Annotations "traefik.io/proxy-max-version" }}
+ {{- if (ne $version "experimental-v3.0") }}
+@@ -31,15 +32,15 @@
+   {{- end }}
+ {{- end }}
+ 
+-{{- if and (semverCompare "<v3.6.2-0" $version) (.Values.providers.kubernetesIngressNGINX).enabled}}
++{{- if and (semverCompare "<v3.6.2-0" $version) $kubernetesIngressNGINX.enabled}}
+   {{- fail "ERROR: Kubernetes Ingress NGINX provider is only available for traefik >= v3.6.2." }}
+ {{- end }}
+ 
+-{{- if and (.Values.providers.kubernetesIngressNGINX.modsec).enabled (not $.Values.hub.token) }}
++{{- if and ($kubernetesIngressNGINX.modsec).enabled (not $.Values.hub.token) }}
+   {{- fail "ERROR: Kubernetes Ingress NGINX provider modsec option requires Traefik Hub." }}
+ {{- end }}
+ 
+-{{- with .Values.providers.kubernetesIngressNGINX }}
++{{- with $kubernetesIngressNGINX }}
+   {{- if and (semverCompare "<v3.7.0-0" $version) .enabled (or
+     (ne .proxyRequestBuffering nil)
+     (gt (.clientBodyBufferSize | int) 0)
+@@ -65,7 +66,7 @@
+   {{- end }}
+ {{- end }}
+ 
+-{{- if and (semverCompare "<v3.7.0-ea.2" $version) (ne (.Values.providers.kubernetesIngressNGINX).strictValidatePathType nil) }}
++{{- if and (semverCompare "<v3.7.0-ea.2" $version) (ne ($kubernetesIngressNGINX).strictValidatePathType nil) }}
+   {{- fail "ERROR: Kubernetes Ingress NGINX provider strictValidatePathType option requires traefik >= v3.7.0-ea.2." }}
+ {{- end }}
+ 
+@@ -73,7 +74,7 @@
+   {{- fail "ERROR: providers.precedence option requires traefik >= v3.7.0-rc.1." }}
+ {{- end }}
+ 
+-{{- if and (semverCompare "<v3.7.0-rc.1" $version) (not (empty (.Values.providers.kubernetesIngressNGINX).globalAuthUrl)) }}
++{{- if and (semverCompare "<v3.7.0-rc.1" $version) (not (empty ($kubernetesIngressNGINX).globalAuthUrl)) }}
+   {{- fail "ERROR: Kubernetes Ingress NGINX provider globalAuthUrl option requires traefik >= v3.7.0-rc.1." }}
+ {{- end }}
+ 
+@@ -159,7 +160,7 @@
+     {{- end }}
+   {{- end }}
+ 
+-  {{- if and (.Values.providers.kubernetesIngressNGINX.modsec).enabled (semverCompare "<v3.20.0-ea.8" $hubVersion) }}
++  {{- if and ($kubernetesIngressNGINX.modsec).enabled (semverCompare "<v3.20.0-ea.8" $hubVersion) }}
+     {{ fail "ERROR: Kubernetes Ingress NGINX provider modsec option requires Traefik Hub >= v3.20.0-ea.8." }}
+   {{- end }}
+ 

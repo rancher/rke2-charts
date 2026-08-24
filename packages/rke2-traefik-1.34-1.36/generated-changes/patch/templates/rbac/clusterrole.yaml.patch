@@ -1,0 +1,17 @@
+--- charts-original/templates/rbac/clusterrole.yaml
++++ charts/templates/rbac/clusterrole.yaml
+@@ -1,4 +1,5 @@
+ {{- $version := include "traefik.proxyVersion" $ }}
++{{- $kubernetesIngressNGINX := (include "providers.kubernetesIngressNGINX.values" . | fromYaml) -}}
+ {{- if and .Values.rbac.enabled (not .Values.rbac.namespaced) }}
+ ---
+ kind: ClusterRole
+@@ -48,7 +49,7 @@
+       - delete
+       - deletecollection
+     {{- end }}
+-  {{- if or .Values.providers.kubernetesIngress.enabled .Values.providers.kubernetesIngressNGINX.enabled }}
++  {{- if or .Values.providers.kubernetesIngress.enabled $kubernetesIngressNGINX.enabled }}
+   - apiGroups:
+       - extensions
+       - networking.k8s.io

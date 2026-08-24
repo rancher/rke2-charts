@@ -1,0 +1,19 @@
+--- charts-original/templates/NOTES.txt
++++ charts/templates/NOTES.txt
+@@ -120,6 +120,16 @@
+   {{- end -}}
+ 
+ 
++{{/* Warn about legacy Kubernetes Ingress NGINX provider key */}}
++{{- if and (hasKey .Values.providers "kubernetesIngressNginx") (default false .Values.providers.kubernetesIngressNginx.enabled) }}
++{{- printf "\n" -}}
++⚠️ DEPRECATION WARNING: You are using providers.kubernetesIngressNginx (legacy key).
++Please migrate to providers.kubernetesIngressNGINX.
++The legacy key will be removed in a future version.
++{{- printf "\n" -}}
++{{- end -}}
++
++
+ {{/* Warn about Gateway API CRDs no longer shipped with this chart in future versions */}}
+ {{- if .Values.providers.kubernetesGateway.enabled }}
+ {{- printf "\n" -}}
