@@ -22,7 +22,7 @@ The upstream Gateway API release files are:
 We do not keep those full files as directly-rendered chart inputs for two reasons:
 
 1. `experimental-install.yaml` includes both stable and experimental resources.
-   - We only want the experimental-only CRDs to be gated by `gatewayAPIExperimental`.
+   - We only want the experimental-only CRDs to be gated by `experimental.enabled`.
    - Because of that, we split out just the experimental-only CRDs.
 
 2. Rendering the full upstream bundles directly makes the Helm release metadata much larger.
@@ -71,12 +71,12 @@ When updating this package to a new upstream Gateway API version:
    - [package.yaml](package.yaml)
 7. Validate renders:
    - `helm template test packages/rke2-gateway-api-crd/charts`
-   - `helm template test packages/rke2-gateway-api-crd/charts --set gatewayAPIExperimental=true`
+   - `helm template test packages/rke2-gateway-api-crd/charts --set experimental.enabled=true`
 8. Package/test the chart as needed.
 
 ## Notes on experimental CRDs
 
-`gatewayAPIExperimental` defaults to `false` in [charts/values.yaml](charts/values.yaml).
+`experimental.enabled` defaults to `false` in [charts/values.yaml](charts/values.yaml).
 
 When set to `true`, the chart renders the files in [charts/experimentalcrds](charts/experimentalcrds) in addition to the stable CRDs.
 
