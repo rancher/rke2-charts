@@ -22183,6 +22183,16 @@ entries:
     version: v0.24.001
   rke2-gateway-api-crd:
   - apiVersion: v2
+    appVersion: v1.6.1
+    created: "2026-08-26T21:08:17.109677933Z"
+    description: RKE2 Helm chart for Gateway API CRDs
+    digest: 26b7aefc3227a4cc4228b80d1633e11fe7b01982c8f395276c9781838ef18435
+    name: rke2-gateway-api-crd
+    type: application
+    urls:
+    - assets/rke2-gateway-api-crd/rke2-gateway-api-crd-1.6.100.tgz
+    version: 1.6.100
+  - apiVersion: v2
     appVersion: v1.5.1
     created: "2026-07-06T14:04:08.418708802Z"
     description: RKE2 Helm chart for Gateway API CRDs
