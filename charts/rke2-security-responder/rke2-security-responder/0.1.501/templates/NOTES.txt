@@ -1,0 +1,24 @@
+RKE2 Security Responder has been installed!
+
+The security responder will run as a CronJob on the following schedule:
+  {{ .Values.schedule }}
+
+Configuration:
+  - Endpoint: {{ .Values.check.endpoint }}
+
+To disable the security responder, add the following to your RKE2 config:
+
+  # /etc/rancher/rke2/config.yaml
+  disable:
+  - rke2-security-responder
+
+The CronJob will collect non-personally identifiable cluster metadata including:
+  - Kubernetes version
+  - Cluster UUID (random, based on kube-system namespace UID)
+  - Node counts (server/agent)
+  - CNI plugin
+  - Ingress controller
+  - OS information
+  - SELinux status
+
+For more information, see: https://github.com/rancher/rke2/blob/master/docs/adrs/010-security-responder.md
