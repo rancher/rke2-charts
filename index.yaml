@@ -18304,6 +18304,34 @@ entries:
           description: Bump to CoreDNS 1.14.6
     apiVersion: v2
     appVersion: 1.14.6
+    created: "2026-09-01T14:56:59.128542195Z"
+    description: CoreDNS is a DNS server that chains plugins and provides Kubernetes
+      DNS Services
+    digest: 25c277405a3bb81d73f10c47841020868cb0f33fb5f7f0ccf5e486ca3c8b2954
+    home: https://coredns.io
+    icon: https://coredns.io/images/CoreDNS_Colour_Horizontal.png
+    keywords:
+    - coredns
+    - dns
+    - kubedns
+    maintainers:
+    - name: mrueg
+    - name: haad
+    - name: hagaibarel
+    - name: shubham-cmyk
+    name: rke2-coredns
+    sources:
+    - https://github.com/coredns/coredns
+    type: application
+    urls:
+    - assets/rke2-coredns/rke2-coredns-1.47.004.tgz
+    version: 1.47.004
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: changed
+          description: Bump to CoreDNS 1.14.6
+    apiVersion: v2
+    appVersion: 1.14.6
     created: "2026-08-19T21:48:30.822635929Z"
     description: CoreDNS is a DNS server that chains plugins and provides Kubernetes
       DNS Services

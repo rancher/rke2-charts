@@ -1,0 +1,13 @@
+{{- if .Values.nodelocal.enabled }}
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: node-local-dns
+  namespace: kube-system
+  labels:
+    addonmanager.kubernetes.io/mode: Reconcile
+data:
+  Corefile: |
+{{- include "nodelocal.corefile" . | nindent 4 }}
+{{- end }}
