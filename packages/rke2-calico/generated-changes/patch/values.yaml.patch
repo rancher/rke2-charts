@@ -69,19 +69,19 @@
  
  # Resource requests and limits for the tigera/operator pod.
  resources: {}
-@@ -146,13 +162,32 @@
+@@ -151,13 +167,32 @@
  dnsConfig: {}
  # Image and registry configuration for the tigera/operator pod.
  tigeraOperator:
 -  image: tigera/operator
 +  image: rancher/mirrored-calico-operator
-   version: v1.42.3
+   version: v1.42.6
 -  registry: quay.io
 +  registry: docker.io
  calicoctl:
 -  image: quay.io/calico/ctl
 +  image: rancher/mirrored-calico-ctl
-   tag: v3.32.1
+   tag: v3.32.2
  
 +global:
 +  systemDefaultRegistry: ""
