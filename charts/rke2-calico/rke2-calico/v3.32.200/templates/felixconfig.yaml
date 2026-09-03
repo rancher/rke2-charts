@@ -1,0 +1,11 @@
+{{ $felixConfig := dict }}
+{{ range $key, $value := .Values.felixConfiguration }}
+{{ $_ := set $felixConfig $key $value }}
+{{ end }}
+
+apiVersion: crd.projectcalico.org/v1
+kind: FelixConfiguration
+metadata:
+  name: default
+spec:
+{{ $felixConfig | toYaml | indent 2 }}
