@@ -28198,6 +28198,27 @@ entries:
   rke2-multus:
   - apiVersion: v1
     appVersion: 4.3.0
+    created: "2026-09-08T23:13:07.404201477Z"
+    dependencies:
+    - condition: rke2-whereabouts.enabled
+      name: rke2-whereabouts
+      repository: file://./charts/rke2-whereabouts
+    description: Multus Helm chart for Kubernetes
+    digest: 25d5999f1e8496101415b423a43c8d7c9fdf2c0473b9cc1d6e895ee668c1121a
+    home: https://github.com/k8snetworkplumbingwg/multus-cni
+    icon: https://raw.githubusercontent.com/k8snetworkplumbingwg/multus-cni/master/doc/images/Multus.png
+    maintainers:
+    - email: charts@rancher.com
+      name: Rancher Labs
+    name: rke2-multus
+    sources:
+    - https://github.com/intel/multus-cni
+    type: application
+    urls:
+    - assets/rke2-multus/rke2-multus-v4.3.018.tgz
+    version: v4.3.018
+  - apiVersion: v1
+    appVersion: 4.3.0
     created: "2026-08-19T21:57:27.032342993Z"
     dependencies:
     - condition: rke2-whereabouts.enabled
@@ -30786,6 +30807,15 @@ entries:
     - assets/rke2-multus/rke2-multus-v3.7.1-build2021041601.tgz
     version: v3.7.1-build2021041601
   rke2-multus-crd:
+  - apiVersion: v1
+    created: "2026-09-08T23:13:07.328115479Z"
+    description: Installs the CRDs for rke2-multus
+    digest: ae72e10cb53dfefab11ca3861ab121bc68b26587d3f688bdf3d242fc975149bc
+    name: rke2-multus-crd
+    type: application
+    urls:
+    - assets/rke2-multus/rke2-multus-crd-4.3.018.tgz
+    version: 4.3.018
   - apiVersion: v1
     created: "2026-08-19T21:57:26.941639846Z"
     description: Installs the CRDs for rke2-multus
