@@ -14,7 +14,7 @@
  
  {{/*
  Common labels
-@@ -57,7 +53,7 @@
+@@ -81,7 +77,7 @@
  Allow k8s-app label to be overridden
  */}}
  {{- define "coredns.k8sapplabel" -}}
@@ -23,7 +23,7 @@
  {{- end -}}
  
  {{/*
-@@ -99,9 +95,10 @@
+@@ -123,9 +119,10 @@
              {{- end -}}
          {{- end -}}
  
@@ -35,7 +35,7 @@
          {{- end -}}
  
          {{- if .nodePort -}}
-@@ -170,9 +167,10 @@
+@@ -194,9 +191,10 @@
              {{- end -}}
          {{- end -}}
  
@@ -47,7 +47,7 @@
          {{- end -}}
  
          {{- if .hostPort -}}
-@@ -234,3 +232,233 @@
+@@ -258,3 +256,233 @@
      {{ template "coredns.fullname" . }}
  {{- end -}}
  {{- end -}}
