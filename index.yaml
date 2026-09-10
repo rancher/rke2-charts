@@ -31053,6 +31053,15 @@ entries:
     version: v3.7.1-build2021041601
   rke2-multus-crd:
   - apiVersion: v1
+    created: "2026-09-10T17:16:32.364539219Z"
+    description: Installs the CRDs for rke2-multus
+    digest: 59cd980c782d4e5ec3a9d60cb49b339e502b642f84011db27aefc977d1463f3b
+    name: rke2-multus-crd
+    type: application
+    urls:
+    - assets/rke2-multus/rke2-multus-crd-4.3.101.tgz
+    version: 4.3.101
+  - apiVersion: v1
     created: "2026-09-09T22:01:18.091005258Z"
     description: Installs the CRDs for rke2-multus
     digest: a5d6d11a7a787e7d35484deb99eb2f5744f09f52193774cda8267c4d1c665d3b
