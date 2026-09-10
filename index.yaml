@@ -31264,6 +31264,30 @@ entries:
   rke2-snapshot-controller:
   - apiVersion: v2
     appVersion: v8.6.0
+    created: "2026-09-10T23:00:17.391113923Z"
+    description: |
+      Deploys a Snapshot Controller in a cluster. Snapshot Controllers are often bundled with the Kubernetes distribution,
+      this chart is meant for cases where it is not.
+    digest: bed03d3daf91552cd69604fcd1371d60d3b1bd822074f03d00211486bdfccd0b
+    home: https://github.com/piraeusdatastore/helm-charts
+    icon: https://raw.githubusercontent.com/piraeusdatastore/piraeus/master/artwork/sandbox-artwork/icon/color.svg
+    keywords:
+    - storage
+    - snapshot
+    - validation
+    kubeVersion: '>= 1.25.0-0'
+    maintainers:
+    - name: The Piraeus Maintainers
+      url: https://github.com/piraeusdatastore/
+    name: rke2-snapshot-controller
+    sources:
+    - https://github.com/kubernetes-csi/external-snapshotter/
+    type: application
+    urls:
+    - assets/rke2-snapshot-controller/rke2-snapshot-controller-5.2.004.tgz
+    version: 5.2.004
+  - apiVersion: v2
+    appVersion: v8.6.0
     created: "2026-08-19T21:39:48.437140467Z"
     description: |
       Deploys a Snapshot Controller in a cluster. Snapshot Controllers are often bundled with the Kubernetes distribution,
@@ -31774,6 +31798,16 @@ entries:
     - assets/rke2-snapshot-controller/rke2-snapshot-controller-1.7.200.tgz
     version: 1.7.200
   rke2-snapshot-controller-crd:
+  - apiVersion: v1
+    appVersion: v8.6.0
+    created: "2026-09-10T23:00:17.398815576Z"
+    description: Installs the CRDs for rke2-snapshot-controller
+    digest: 7c5279e3309f34e878ae50f98bd86bd4c152a6b09ce20d234cce7d7276ca1e66
+    name: rke2-snapshot-controller-crd
+    type: application
+    urls:
+    - assets/rke2-snapshot-controller/rke2-snapshot-controller-crd-5.2.004.tgz
+    version: 5.2.004
   - apiVersion: v1
     appVersion: v8.6.0
     created: "2026-08-19T21:39:48.446200761Z"
