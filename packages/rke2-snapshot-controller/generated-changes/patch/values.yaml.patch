@@ -5,7 +5,7 @@
 +installCRDs: false
  
  controller:
-    enabled: true
+   enabled: true
 @@ -16,10 +16,10 @@
      featureGates: CSIVolumeGroupSnapshot=true
  
@@ -15,7 +15,7 @@
      pullPolicy: IfNotPresent
      # Overrides the image tag whose default is the chart appVersion.
 -    tag: ""
-+    tag: "v8.6.0-build20260819"
++    tag: "v8.6.0-build20260909"
  
    imagePullSecrets: []
  
