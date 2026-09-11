@@ -7,6 +7,7 @@ ISSUE_TITLE="Updatecli failed for multus ${MULTUS_VERSION}"
 trap report-error EXIT INT
 
 new_package=false
+new_package36=false
 if [ -n "$CNI_PLUGINS_VERSION" ]; then
 	current_cni_plugins_version=$(yq '.cniplugins.image.tag' packages/rke2-multus/charts/values.yaml)
 	if [ "$current_cni_plugins_version" != "$CNI_PLUGINS_VERSION" ]; then
@@ -16,6 +17,39 @@ if [ -n "$CNI_PLUGINS_VERSION" ]; then
 		new_version=$(printf "%02d" $((10#$package_version + 1)))
 		sed -i "s/packageVersion:.*/packageVersion: $new_version/g" packages/rke2-multus/package.yaml
 		new_package=true
+	fi
+        current_cni_plugins_version=$(yq '.cniplugins.image.tag' packages/rke2-multus-1.34-1.36/charts/values.yaml)
+	if [ "$current_cni_plugins_version" != "$CNI_PLUGINS_VERSION" ]; then
+		echo "Updating CNI plugin version to $CNI_PLUGINS_VERSION"
+		sed -i "s/$current_cni_plugins_version/$CNI_PLUGINS_VERSION/g" packages/rke2-multus-1.34-1.36/charts/values.yaml
+		package_version=$(yq '.packageVersion' packages/rke2-multus-1.34-1.36/package.yaml)
+		new_version=$(printf "%02d" $((10#$package_version + 1)))
+		sed -i "s/packageVersion:.*/packageVersion: $new_version/g" packages/rke2-multus-1.34-1.36/package.yaml
+		new_package36=true
+	fi
+fi
+if [ -n "$NETWORK_CONTROLLER_VERSION" ]; then
+	current_network_controller_version=$(yq '.dynamicNetworksController.image.tag' packages/rke2-multus/charts/values.yaml)
+	if [ "$current_network_controller_version" != "$NETWORK_CONTROLLER_VERSION" ]; then
+		echo "Updating dynamic network controller version to $NETWORK_CONTROLLER_VERSION"
+		sed -i "s/$current_network_controller_version/$NETWORK_CONTROLLER_VERSION/g" packages/rke2-multus/charts/values.yaml
+		if [ "$new_package" = false ]; then
+			package_version=$(yq '.packageVersion' packages/rke2-multus/package.yaml)
+			new_version=$(printf "%02d" $((10#$package_version + 1)))
+			sed -i "s/packageVersion:.*/packageVersion: $new_version/g" packages/rke2-multus/package.yaml
+			new_package=true
+		fi
+	fi
+	current_network_controller_version=$(yq '.dynamicNetworksController.image.tag' packages/rke2-multus-1.34-1.36/charts/values.yaml)
+	if [ "$current_network_controller_version" != "$NETWORK_CONTROLLER_VERSION" ]; then
+		echo "Updating dynamic network controller version to $NETWORK_CONTROLLER_VERSION"
+		sed -i "s/$current_network_controller_version/$NETWORK_CONTROLLER_VERSION/g" packages/rke2-multus-1.34-1.36/charts/values.yaml
+		if [ "$new_package36" = false ]; then
+			package_version=$(yq '.packageVersion' packages/rke2-multus-1.34-1.36/package.yaml)
+			new_version=$(printf "%02d" $((10#$package_version + 1)))
+			sed -i "s/packageVersion:.*/packageVersion: $new_version/g" packages/rke2-multus-1.34-1.36/package.yaml
+			new_package36=true
+		fi
 	fi
 fi
 # Note: we use sed instead of yq to update the packageVersion field
@@ -30,6 +64,7 @@ if [ -n "$MULTUS_VERSION" ]; then
 		if [ "$app_version" != "$current_app_version" ]; then
 			sed -i "s/version: .*/version: v$app_version/g" packages/rke2-multus/charts/Chart.yaml
 			sed -i "s/appVersion: .*/appVersion: $app_version/g" packages/rke2-multus/charts/Chart.yaml
+			sed -i "s/version: .*/version: $app_version/g" packages/rke2-multus/templates/crd-template/Chart.yaml
 			sed -i "s/  tag: $current_multus_version/  tag: $MULTUS_VERSION/g" packages/rke2-multus/charts/values.yaml
 			sed -i "s/  tag: $current_app_version/  tag: $app_version/g" packages/rke2-multus/charts/values.yaml
 			sed -i "s/packageVersion:.*/packageVersion: 00/g" packages/rke2-multus/package.yaml
@@ -39,6 +74,25 @@ if [ -n "$MULTUS_VERSION" ]; then
 				package_version=$(yq '.packageVersion' packages/rke2-multus/package.yaml)
 				new_version=$(printf "%02d" $((10#$package_version + 1)))
 				sed -i "s/packageVersion:.*/packageVersion: $new_version/g" packages/rke2-multus/package.yaml
+			fi
+		fi
+	fi
+	current_multus_version=$(yq '.image.tag' packages/rke2-multus-1.34-1.36/charts/values.yaml)
+	current_app_version=$(echo "$current_multus_version" | grep -Eo '^v*[0-9]+.[0-9]+.[0-9]+' | tr -d 'v')
+	if [ "$current_multus_version" != "$MULTUS_VERSION" ]; then
+		echo "Updating Multus chart to $MULTUS_VERSION"
+		if [ "$app_version" != "$current_app_version" ]; then
+			sed -i "s/version: .*/version: v$app_version/g" packages/rke2-multus-1.34-1.36/charts/Chart.yaml
+			sed -i "s/appVersion: .*/appVersion: $app_version/g" packages/rke2-multus-1.34-1.36/charts/Chart.yaml
+			sed -i "s/  tag: $current_multus_version/  tag: $MULTUS_VERSION/g" packages/rke2-multus-1.34-1.36/charts/values.yaml
+			sed -i "s/  tag: $current_app_version/  tag: $app_version/g" packages/rke2-multus-1.34-1.36/charts/values.yaml
+			sed -i "s/packageVersion:.*/packageVersion: 00/g" packages/rke2-multus-1.34-1.36/package.yaml
+		else
+			sed -i "s/  tag: $current_multus_version/  tag: $MULTUS_VERSION/g" packages/rke2-multus-1.34-1.36/charts/values.yaml
+			if [ "$new_package36" = false ]; then
+				package_version=$(yq '.packageVersion' packages/rke2-multus-1.34-1.36/package.yaml)
+				new_version=$(printf "%02d" $((10#$package_version + 1)))
+				sed -i "s/packageVersion:.*/packageVersion: $new_version/g" packages/rke2-multus-1.34-1.36/package.yaml
 			fi
 		fi
 	fi
