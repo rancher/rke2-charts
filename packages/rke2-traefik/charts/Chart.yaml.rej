@@ -1,0 +1,10 @@
+--- Chart.yaml
++++ Chart.yaml
+@@ -10,6 +10,7 @@
+     \ description: \"feat(deps): update ghcr.io/traefik/traefik-hub docker tag to
+     v3.20.8\"\n- kind: changed\n  description: \"ci(renovate): scope updates per chart
+     on VALUES.md & AppVersion\"\n"
++  fleet.cattle.io/bundle-id: rke2
+   traefik.io/hub-max-version: v3.20.8
+   traefik.io/hub-min-version: v3.19.3
+   traefik.io/proxy-max-version: v3.7.10
