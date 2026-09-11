@@ -35,6 +35,24 @@ sources:
         # pattern accepts any semver constraint
         pattern: "v[0-9]+.[0-9]+.[0-9]+-build[0-9]+"
 
+  network_controller:
+    name: Get dynamic network controller version
+    kind: githubrelease
+    spec:
+      owner: rancher
+      repository: image-build-multus-dynamic-networks-controller
+      token: '{{ requiredEnv .github.token }}'
+      username: '{{ requiredEnv .github.username }}'
+      typefilter:
+        release: true
+        draft: false
+        prerelease: false
+      versionfilter:
+        kind: regex
+        # pattern accepts any semver constraint
+        pattern: "v[0-9]+.[0-9]+.[0-9]+-build[0-9]+"
+
+
 targets:
   multusImage:
     name: "Bump to latest multus version in the chart"
@@ -48,6 +66,8 @@ targets:
           value: '{{ source "multus" }}'
         - name: CNI_PLUGINS_VERSION
           value: '{{ source "cni_plugins" }}'
+        - name: NETWORK_CONTROLLER_VERSION
+          value: '{{ source "network_controller" }}'
         - name: PATH
         - name: UPDATECLI_GITHUB_WORKFLOW_URL
         - name: GH_TOKEN
@@ -66,7 +86,7 @@ scms:
       
 actions:
   default:
-    title: 'Update Multus version to {{ source "multus" }} and CNI plugins to {{ source "cni_plugins" }}'
+    title: 'Update Multus version to {{ source "multus" }}, CNI plugins to {{ source "cni_plugins" }} and dynamic network controller to {{ source "network_controller" }}'
     kind: github/pullrequest
     spec:
       strategy:
