@@ -5,14 +5,14 @@
  {{- define "tigera-operator.image" -}}
 -{{- if .registry -}}
 -    {{- .registry | trimSuffix "/" -}}/
-+{{- if .Values.global.systemDefaultRegistry -}}
-+{{- $_ := set .Values.tigeraOperator "registry" .Values.global.systemDefaultRegistry -}}
++{{- if $.Values.global.systemDefaultRegistry -}}
++{{- $_ := set $.Values.tigeraOperator "registry" $.Values.global.systemDefaultRegistry -}}
  {{- end -}}
 -{{- .image -}}:{{- .version -}}
-+{{- if .Values.tigeraOperator.registry -}}
-+    {{- .Values.tigeraOperator.registry | trimSuffix "/" -}}/
++{{- if $.Values.tigeraOperator.registry -}}
++    {{- $.Values.tigeraOperator.registry | trimSuffix "/" -}}/
 +{{- end -}}
-+{{- .Values.tigeraOperator.image -}}:{{- .Values.tigeraOperator.version -}}
++{{- $.Values.tigeraOperator.image -}}:{{- $.Values.tigeraOperator.version -}}
  {{- end -}}
  
  {{/*
