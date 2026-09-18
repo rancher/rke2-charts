@@ -1,5 +1,9 @@
+{{- if lookup "apiextensions.k8s.io/v1" "CustomResourceDefinition" "" "felixconfigurations.projectcalico.org" }}
+apiVersion: projectcalico.org/v3
+{{- else }}
 apiVersion: crd.projectcalico.org/v1
-kind: IPAMConfig
+{{- end }}
+kind: IPAMConfiguration
 metadata:
   name: default
 spec:
