@@ -26,7 +26,7 @@ if [ -n "$AUTOSCALER_VERSION" ]; then
 	fi
 fi
 if [ -n "$NODECACHE_VERSION" ]; then
-	current_tag_nodecache_version=$(sed -nr 's/^\+    tag: \"('[0-9]+.[0-9]+.[0-9]+-build[0-9]+')\"/\1/p' packages/rke2-coredns/generated-changes/patch/values.yaml.patch | tail -1)
+	current_tag_nodecache_version=$(sed -nr 's/^\+    tag: \"('[0-9]+.[0-9]+.[0-9]+-r[0-9]+-build[0-9]+')\"/\1/p' packages/rke2-coredns/generated-changes/patch/values.yaml.patch | tail -1)
 	if [ "$current_tag_nodecache_version" != "$NODECACHE_VERSION" ]; then
 		echo "Updating nodecache image to $NODECACHE_VERSION"
 		sed -i "s/$current_tag_nodecache_version/$NODECACHE_VERSION/g" packages/rke2-coredns/generated-changes/patch/values.yaml.patch
