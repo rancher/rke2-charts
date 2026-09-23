@@ -18822,6 +18822,34 @@ entries:
           description: Allow separate labels and selector for the cluster-proportional-autoscaler Deployment
     apiVersion: v2
     appVersion: 1.14.6
+    created: "2026-09-23T17:43:13.870192616Z"
+    description: CoreDNS is a DNS server that chains plugins and provides Kubernetes
+      DNS Services
+    digest: 02dcd3423a83a3fbc7c01f84117046beef78fe06de806e72a98c586cdfb4adb2
+    home: https://coredns.io
+    icon: https://coredns.io/images/CoreDNS_Colour_Horizontal.png
+    keywords:
+    - coredns
+    - dns
+    - kubedns
+    maintainers:
+    - name: mrueg
+    - name: haad
+    - name: hagaibarel
+    - name: shubham-cmyk
+    name: rke2-coredns
+    sources:
+    - https://github.com/coredns/coredns
+    type: application
+    urls:
+    - assets/rke2-coredns/rke2-coredns-1.47.101.tgz
+    version: 1.47.101
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: added
+          description: Allow separate labels and selector for the cluster-proportional-autoscaler Deployment
+    apiVersion: v2
+    appVersion: 1.14.6
     created: "2026-09-09T20:07:35.099638576Z"
     description: CoreDNS is a DNS server that chains plugins and provides Kubernetes
       DNS Services
