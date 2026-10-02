@@ -1,0 +1,109 @@
+--- charts-original/values.yaml
++++ charts/values.yaml
+@@ -16,7 +16,13 @@
+   # Path to the kubelet volume plugin directory used by the Calico CSI driver.
+   # Set to "None" to disable the CSI driver. If unset, defaults to /var/lib/kubelet (CSI enabled).
+   kubeletVolumePluginPath: "None"
+-
++  natOutgoing: "Enabled"
++  backend: "VXLAN"
++  calicoNetwork:
++    bgp: Disabled
++  imagePath: "rancher"
++  imagePrefix: "mirrored-calico-"
++  flexVolumePath: "/var/lib/kubelet/volumeplugins/"
+   # --- General Image Settings ---
+   # registry: <custom-registry>
+   # imagePath: <optional-path>
+@@ -28,6 +34,7 @@
+   #
+   # Example: --set installation.imagePullSecrets[0].name=my-existing-secret
+   imagePullSecrets: []
++  registry: "docker.io"
+ 
+   # Valid options: EKS, GKE, AKS, RKE2, OpenShift, DockerEnterprise, TKG, Kind.
+   # If empty the operator will attempt to automatically determine the current provider.
+@@ -65,7 +72,16 @@
+ 
+   controlPlaneNodeSelector: {}
+ 
+-  controlPlaneTolerations: []
++  controlPlaneTolerations:
++  - key: "node-role.kubernetes.io/control-plane"
++    operator: "Exists"
++    effect: "NoSchedule"
++  - key: "node-role.kubernetes.io/etcd"
++    operator: "Exists"
++    effect: "NoExecute"
++  - key: "node.kubernetes.io/network-unavailable"
++    operator: "Exists"
++    effect: "NoSchedule"
+ 
+   # Run Calico in non-privileged mode (Rootless)
+   nonPrivileged: "Disabled"
+@@ -81,15 +97,15 @@
+ # apiServer configures the Calico API server, needed for interacting with
+ # the projectcalico.org/v3 suite of APIs.
+ apiServer:
+-  enabled: true
++  enabled: false
+ 
+ # goldmane configures the Calico Goldmane flow aggregator.
+ goldmane:
+-  enabled: true
++  enabled: false
+ 
+ # whisker configures the Calico Whisker observability UI.
+ whisker:
+-  enabled: true
++  enabled: false
+ 
+ # Deprecated: prefer applying FelixConfiguration (and other Calico resources)
+ # yourself after installing the CRDs and before installing this chart. See the
+@@ -111,7 +127,7 @@
+ 
+ # Whether or not the tigera/operator should manange CustomResourceDefinitions
+ # needed to run itself and Calico. If disabled, you must manage these resources out-of-band.
+-manageCRDs: true
++manageCRDs: false
+ 
+ # Whether to run the tigera/operator in zap development logging mode. When true, the operator
+ # logs at debug level using a human-readable console encoder and emits stacktraces on warnings.
+@@ -152,13 +168,34 @@
+
+ # Image and registry configuration for the tigera/operator pod.
+ tigeraOperator:
+-  image: tigera/operator
++  image: rancher/mirrored-calico-operator
+   version: v1.44.0
+-  registry: quay.io
++  registry: docker.io
+ calicoctl:
+-  image: quay.io/calico/calico
++  image: rancher/hardened-calico
+   tag: v3.33.0
+ 
++global:
++  systemDefaultRegistry: ""
++  clusterCIDRv4: ""
++  clusterCIDRv6: ""
++  prime:
++    enabled: false
++
++# Config required by Windows nodes
++ipamConfig:
++  strictAffinity: true
++  autoAllocateBlocks: true
++
++felixConfiguration:
++  wireguardEnabled: false
++  # Config required to fix RKE2 issue #1541
++  featureDetectOverride: "ChecksumOffloadBroken=true"
++  healthPort: 9099
++  defaultEndpointToHostAction: "Drop"
++  logSeveritySys: "Info"
++  xdpEnabled: true
++
+ # Optionally configure the host and port used to access the Kubernetes API server.
+ kubernetesServiceEndpoint:
+   host: ""

@@ -1,0 +1,29 @@
+--- charts-original/templates/tigera-operator/02-tigera-operator.yaml
++++ charts/templates/tigera-operator/02-tigera-operator.yaml
+@@ -2,7 +2,7 @@
+ kind: Deployment
+ metadata:
+   name: tigera-operator
+-  namespace: {{.Release.Namespace}}
++  namespace: tigera-operator
+   labels:
+     {{- include "tigera-operator.labels" (dict "context" .) | nindent 4 }}
+ spec:
+@@ -55,7 +55,7 @@
+       {{- end }}
+       containers:
+         - name: tigera-operator
+-          image: {{ template "tigera-operator.image" .Values.tigeraOperator}}
++          image: {{ template "tigera-operator.image" . }}
+           imagePullPolicy: {{ .Values.tigeraOperator.imagePullPolicy | default "IfNotPresent" }}
+           command:
+             - operator
+@@ -105,7 +105,7 @@
+       initContainers:
+         # Install CRDs first, so that APIs exist for calicoctl to use.
+         - name: bootstrap-crds
+-          image: {{ template "tigera-operator.image" .Values.tigeraOperator}}
++          image: {{ template "tigera-operator.image" . }}
+           command:
+             - operator
+           args:
