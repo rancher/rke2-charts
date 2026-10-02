@@ -1,6 +1,6 @@
 --- charts-original/templates/crs/custom-resources.yaml
 +++ charts/templates/crs/custom-resources.yaml
-@@ -1,6 +1,44 @@
+@@ -1,6 +1,45 @@
  {{ if .Values.installation.enabled }}
  {{ $installSpec := omit .Values.installation "enabled" }}
 +{{ $installSpec := omit $installSpec "backend" }}
@@ -9,6 +9,7 @@
 +{{ $defaultRegistry := get $installSpec "registry" }}
 +{{ $finalRegistry := coalesce .Values.global.systemDefaultRegistry $defaultRegistry }}
 +{{ $_ := set $installSpec "registry" $finalRegistry }}
++{{ $_ := set $installSpec "imagePrefix" (include "installation.imagePrefix" .) }}
 +{{ if empty .Values.installation.calicoNetwork.ipPools }}
 +{{ $calicoNetwork := get .Values.installation "calicoNetwork" }}
 +{{ if not (empty .Values.global.clusterCIDRv4) }}
