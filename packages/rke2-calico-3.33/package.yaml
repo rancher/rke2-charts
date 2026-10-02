@@ -1,0 +1,5 @@
+# Version 3.33.0 of calico dramatically reduced the suite of images. In addtion, we are adding PRIME support.
+# This package exists as a POC to test the integration of Calico v3.33.0 with PRIME support, and will be removed
+# once the integration has been validated.
+url: https://github.com/projectcalico/calico/releases/download/v3.33.0/tigera-operator-v3.33.0.tgz
+packageVersion: 00
