@@ -28,7 +28,7 @@ jobs:
           go-version: 'stable'
 
       - name: Install Updatecli
-        uses: updatecli/updatecli-action@d422ba543720d01a96d4c3e3ab8544cc188cd711 # v3.5.0
+        uses: updatecli/updatecli-action@2efa15cbae1751f532f9bfc88f56adafd6d1faed # v3.8.0
 
       - name: Read Secrets for the Github App
         uses: rancher-eio/read-vault-secrets@0da85151ad1f19ed7986c41587e45aac1ace74b6 # v3
