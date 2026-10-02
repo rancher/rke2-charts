@@ -91,6 +91,9 @@ spec:
       labels:
 {{- include "dynamicNetworksController.labels" . | indent 8 }}
     spec:
+      {{- with .Values.dynamicNetworksController.priorityClassName }}
+      priorityClassName: {{ . }}
+      {{- end }}
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}

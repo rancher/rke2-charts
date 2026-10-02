@@ -175,6 +175,7 @@ dynamicNetworksController:
     repository: rancher/hardened-multus-dynamic-networks-controller
     tag: v0.3.8-build20260909
     pullPolicy: IfNotPresent
+  priorityClassName: ""
   sockets:
     containerd: /run/k3s/containerd/containerd.sock
     multus: /run/multus/multus.sock
