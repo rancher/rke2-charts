@@ -20,6 +20,10 @@ spec:
     metadata:
        labels:
           k8s-app: node-local-dns
+{{- if .Values.nodelocal.podAnnotations }}
+       annotations:
+{{ toYaml .Values.nodelocal.podAnnotations | indent 9 }}
+{{- end }}
     spec:
       priorityClassName: system-node-critical
 {{- if .Values.rbac.create }}
