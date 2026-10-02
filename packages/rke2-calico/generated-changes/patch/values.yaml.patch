@@ -41,7 +41,7 @@
  
    # Run Calico in non-privileged mode (Rootless)
    nonPrivileged: "Disabled"
-@@ -85,15 +101,15 @@
+@@ -81,15 +97,15 @@
  # apiServer configures the Calico API server, needed for interacting with
  # the projectcalico.org/v3 suite of APIs.
  apiServer:
@@ -58,8 +58,8 @@
 -  enabled: true
 +  enabled: false
  
- defaultFelixConfiguration:
-   enabled: false
+ # Deprecated: prefer applying FelixConfiguration (and other Calico resources)
+ # yourself after installing the CRDs and before installing this chart. See the
 @@ -111,7 +127,7 @@
  
  # Whether or not the tigera/operator should manange CustomResourceDefinitions
@@ -67,26 +67,28 @@
 -manageCRDs: true
 +manageCRDs: false
  
- # Resource requests and limits for the tigera/operator pod.
- resources: {}
-@@ -151,13 +167,32 @@
- dnsConfig: {}
+ # Whether to run the tigera/operator in zap development logging mode. When true, the operator
+ # logs at debug level using a human-readable console encoder and emits stacktraces on warnings.
+@@ -152,13 +168,34 @@
+
  # Image and registry configuration for the tigera/operator pod.
  tigeraOperator:
 -  image: tigera/operator
 +  image: rancher/mirrored-calico-operator
-   version: v1.42.6
+   version: v1.44.0
 -  registry: quay.io
 +  registry: docker.io
  calicoctl:
--  image: quay.io/calico/ctl
-+  image: rancher/mirrored-calico-ctl
-   tag: v3.32.2
+-  image: quay.io/calico/calico
++  image: rancher/hardened-calico
+   tag: v3.33.0
  
 +global:
 +  systemDefaultRegistry: ""
 +  clusterCIDRv4: ""
 +  clusterCIDRv6: ""
++  prime:
++    enabled: false
 +
 +# Config required by Windows nodes
 +ipamConfig:
