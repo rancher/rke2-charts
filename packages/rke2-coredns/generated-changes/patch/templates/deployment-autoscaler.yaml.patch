@@ -1,6 +1,6 @@
 --- charts-original/templates/deployment-autoscaler.yaml
 +++ charts/templates/deployment-autoscaler.yaml
-@@ -86,7 +86,7 @@
+@@ -90,7 +90,7 @@
        {{- end }}
        containers:
        - name: autoscaler
