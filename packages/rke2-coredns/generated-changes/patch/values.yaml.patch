@@ -164,7 +164,7 @@
      failureThreshold: 3
      successThreshold: 1
  
-@@ -467,3 +489,110 @@
+@@ -467,3 +489,113 @@
  
  # Configures initcontainers for the coredns deployment.
  initContainers: []
@@ -266,6 +266,9 @@
 +  # Ref: https://kubernetes.io/docs/user-guide/node-selection/
 +  nodeSelector:
 +    kubernetes.io/os: linux
++
++  # Annotations to add to the node-local-dns pods
++  podAnnotations: {}
 +
 +  # resources for the node-local-dns pods
 +  resources:
