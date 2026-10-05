@@ -18,11 +18,11 @@ spec:
       k8s-app: node-local-dns
   template:
     metadata:
-       labels:
+        labels:
           k8s-app: node-local-dns
 {{- if .Values.nodelocal.podAnnotations }}
-       annotations:
-{{ toYaml .Values.nodelocal.podAnnotations | indent 9 }}
+        annotations:
+{{ toYaml .Values.nodelocal.podAnnotations | indent 10 }}
 {{- end }}
     spec:
       priorityClassName: system-node-critical
