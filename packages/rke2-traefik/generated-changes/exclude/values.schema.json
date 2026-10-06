@@ -344,6 +344,10 @@
                 "defaultRuleSyntax": {
                     "description": "Can be used to use globally v2 router syntax. Deprecated since v3.4 /!\\. See https://doc.traefik.io/traefik/v3.0/migration/v2-to-v3/#new-v3-syntax-notable-changes",
                     "type": "string"
+                },
+                "strictTLSOptions": {
+                    "description": "Disables the unsafe fallback to default TLS options on conflict, mitigating [GHSA-g55h-rg46-x9c5](https://github.com/traefik/traefik/security/advisories/GHSA-g55h-rg46-x9c5). Requires traefik v3.7.11+.",
+                    "type": "boolean"
                 }
             },
             "additionalProperties": false
@@ -769,6 +773,10 @@
                         "openApi": {
                             "type": "object",
                             "properties": {
+                                "refreshInterval": {
+                                    "description": "Interval to refresh the OpenAPI specification, as a Go duration. Must be at least `1m`.",
+                                    "type": "string"
+                                },
                                 "validateRequestMethodAndPath": {
                                     "description": "When set to true, it will only accept paths and methods that are explicitly defined in its OpenAPI specification",
                                     "type": "boolean"
@@ -1442,6 +1450,130 @@
                             }
                         }
                     }
+                },
+                "transparencyLogs": {
+                    "description": "Tamper-evident transparency logs. It's enabled as soon as a `driver` is configured. Requires a valid license token and Traefik Hub \u003e= v3.21.",
+                    "type": "object",
+                    "properties": {
+                        "checkpointInterval": {
+                            "description": "Interval between checkpoint writes, as a Go duration. Must be at least `100ms`.",
+                            "type": "string"
+                        },
+                        "debug": {
+                            "description": "Also store the full rendered log line, not only its hash. Not recommended in production. Default: false.",
+                            "type": [
+                                "boolean",
+                                "null"
+                            ]
+                        },
+                        "driver": {
+                            "description": "Storage backend for the transparency log tree. Exactly one of `posix`, `gcp` or `aws` can be set.",
+                            "type": "object",
+                            "properties": {
+                                "aws": {
+                                    "type": "object",
+                                    "properties": {
+                                        "bucket": {
+                                            "description": "Name of the S3 bucket used to store log state.",
+                                            "type": "string"
+                                        },
+                                        "bucketPrefix": {
+                                            "description": "Prefix prepended to all log resource paths, to store multiple logs in one bucket.",
+                                            "type": "string"
+                                        },
+                                        "dsn": {
+                                            "description": "DSN of the MySQL instance to use. It carries the database password: treat it as a secret.",
+                                            "type": "string"
+                                        },
+                                        "maxIdleConns": {
+                                            "description": "Maximum number of idle connections in the MySQL connection pool.",
+                                            "type": [
+                                                "integer",
+                                                "null"
+                                            ],
+                                            "minimum": 0
+                                        },
+                                        "maxOpenConns": {
+                                            "description": "Maximum number of open connections to the MySQL database.",
+                                            "type": [
+                                                "integer",
+                                                "null"
+                                            ],
+                                            "minimum": 0
+                                        }
+                                    },
+                                    "additionalProperties": false
+                                },
+                                "gcp": {
+                                    "type": "object",
+                                    "properties": {
+                                        "bucket": {
+                                            "description": "Name of the GCS bucket used to store log state.",
+                                            "type": "string"
+                                        },
+                                        "bucketPrefix": {
+                                            "description": "Prefix prepended to all log resource paths, to store multiple logs in one bucket.",
+                                            "type": "string"
+                                        },
+                                        "spanner": {
+                                            "description": "GCP resource URI of the Spanner database instance to use.",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "additionalProperties": false
+                                },
+                                "posix": {
+                                    "type": "object",
+                                    "properties": {
+                                        "path": {
+                                            "description": "Local filesystem path where the transparency log is stored.",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "additionalProperties": false
+                                }
+                            },
+                            "additionalProperties": false
+                        },
+                        "signerPrivateKey": {
+                            "description": "Private key used to sign each checkpoint, as a file path. It's required as soon as a `driver` is set and it needs to be mounted in the pod, see EXAMPLES.md.",
+                            "type": "string"
+                        },
+                        "witnessGroup": {
+                            "description": "Witnesses cosigning each checkpoint.",
+                            "type": "object",
+                            "properties": {
+                                "failOpen": {
+                                    "description": "Publish checkpoints even when the witness policy cannot be satisfied. Intended only for a non-blocking adoption of witnessing. Default: false.",
+                                    "type": [
+                                        "boolean",
+                                        "null"
+                                    ]
+                                },
+                                "threshold": {
+                                    "description": "Minimum number of witnesses that must cosign for the group to be satisfied. It cannot exceed the number of configured witnesses. Default: 1.",
+                                    "type": [
+                                        "integer",
+                                        "null"
+                                    ],
+                                    "minimum": 0
+                                },
+                                "timeout": {
+                                    "description": "Maximum time to wait for witnesses to cosign a checkpoint, as a Go duration.",
+                                    "type": "string"
+                                },
+                                "witnesses": {
+                                    "description": "Witnesses cosigning each checkpoint. At least one is required when `threshold` is set. List of `{ url: \"\u003curl\u003e\", key: \"\u003cpath-or-content\u003e\" }` entries.",
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object"
+                                    }
+                                }
+                            },
+                            "additionalProperties": false
+                        }
+                    },
+                    "additionalProperties": false
                 }
             },
             "additionalProperties": false
@@ -2299,6 +2431,19 @@
                     "http": {
                         "type": "object",
                         "properties": {
+                            "aliasHeadersStrategy": {
+                                "description": "Defines how request headers with non-alphanumeric characters in their names are handled (v3.7.12+). See [upstream documentation](https://doc.traefik.io/traefik/reference/install-configuration/entrypoints/#aliasheadersstrategy)",
+                                "type": [
+                                    "string",
+                                    "null"
+                                ],
+                                "enum": [
+                                    "keep",
+                                    "delete",
+                                    "reject",
+                                    null
+                                ]
+                            },
                             "encodedCharacters": {
                                 "description": "See [upstream documentation](https://doc.traefik.io/traefik/security/request-path/#encoded-character-filtering)",
                                 "type": "object",
@@ -2398,7 +2543,8 @@
                                 }
                             },
                             "underscoreHeadersStrategy": {
-                                "description": "Defines how request headers with underscores in their names are handled (v3.7.6+). See [upstream documentation](https://doc.traefik.io/traefik/reference/install-configuration/entrypoints/#underscoreheadersstrategy)",
+                                "description": "Defines how request headers with underscores in their names are handled (v3.7.6-v3.7.11). Replaced by the aliasHeadersStrategy option for Traefik v3.7.12+. See [upstream documentation](https://doc.traefik.io/traefik/reference/install-configuration/entrypoints/#underscoreheadersstrategy)",
+                                "deprecated": true,
                                 "type": [
                                     "string",
                                     "null"
@@ -2647,6 +2793,10 @@
                             "description": "List of namespaces from which IngressRoute, IngressRouteTCP, IngressRouteUDP, and TraefikService are allowed to declare cross-provider references. Requires traefik v3.7.1+.",
                             "type": "array"
                         },
+                        "defaultTLSResourcesNamespace": {
+                            "description": "Restricts the namespace where the cluster-wide TLSOption and TLSStore named `default` can be defined. When empty, any namespace is allowed. Requires traefik v3.7.11+.",
+                            "type": "string"
+                        },
                         "enabled": {
                             "description": "Load Kubernetes IngressRoute provider",
                             "type": "boolean"
@@ -2665,6 +2815,10 @@
                         },
                         "nativeLBByDefault": {
                             "description": "Defines whether to use Native Kubernetes load-balancing mode by default.",
+                            "type": "boolean"
+                        },
+                        "safeNaming": {
+                            "description": "Enables collision-safe naming. ⚠️ It can be breaking, see [upstream documentation](https://doc.traefik.io/traefik/reference/install-configuration/providers/kubernetes/kubernetes-crd/#safenaming). Requires traefik v3.7.11+.",
                             "type": "boolean"
                         }
                     },
@@ -3087,6 +3241,10 @@
                 "namespaced": {
                     "description": "When set to true: \u003cbr /\u003e 1. It switches respectively the use of `ClusterRole` and `ClusterRoleBinding` to `Role` and `RoleBinding`.\u003cbr /\u003e 2. It adds `disableClusterScopeResources` on Ingress and CRD (Kubernetes) providers\u003cbr /\u003e **NOTE**: `IngressClass`, `NodePortLB` and **Gateway** provider cannot be used with namespaced RBAC. \u003cbr /\u003e See [upstream documentation](https://doc.traefik.io/traefik/reference/install-configuration/providers/kubernetes/kubernetes-ingress/#opt-providers-kubernetesIngress-disableClusterScopeResources) for more details.",
                     "type": "boolean"
+                },
+                "secretResourceNames": {
+                    "description": "List of Kubernetes secrets that are accessible for Traefik when `rbac.namespaced` is true. If empty, then access is granted to every secret. Ignored when `rbac.namespaced` is false (ClusterRole), since Kubernetes RBAC does not support `resourceNames` on cluster-scoped list/watch rules.",
+                    "type": "array"
                 }
             },
             "additionalProperties": false
