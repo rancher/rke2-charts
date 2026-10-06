@@ -6,7 +6,7 @@
  {{- $proxyMinVersion := index .Chart.Annotations "traefik.io/proxy-min-version" }}
  {{- $proxyMaxVersion := index .Chart.Annotations "traefik.io/proxy-max-version" }}
  {{- if (ne $version "experimental-v3.0") }}
-@@ -45,15 +46,15 @@
+@@ -49,15 +50,15 @@
    {{- end }}
  {{- end }}
  
@@ -25,7 +25,7 @@
    {{- if and (semverCompare "<v3.7.0-0" $version) .enabled (or
      (ne .proxyRequestBuffering nil)
      (gt (.clientBodyBufferSize | int) 0)
-@@ -79,7 +80,7 @@
+@@ -83,7 +84,7 @@
    {{- end }}
  {{- end }}
  
@@ -34,7 +34,7 @@
    {{- fail "ERROR: Kubernetes Ingress NGINX provider strictValidatePathType option requires traefik >= v3.7.0-ea.2." }}
  {{- end }}
  
-@@ -87,7 +88,7 @@
+@@ -91,7 +92,7 @@
    {{- fail "ERROR: providers.precedence option requires traefik >= v3.7.0-rc.1." }}
  {{- end }}
  
@@ -43,7 +43,7 @@
    {{- fail "ERROR: Kubernetes Ingress NGINX provider globalAuthUrl option requires traefik >= v3.7.0-rc.1." }}
  {{- end }}
  
-@@ -202,7 +203,7 @@
+@@ -226,7 +227,7 @@
      {{- end }}
    {{- end }}
  

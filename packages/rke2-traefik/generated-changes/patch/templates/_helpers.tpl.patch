@@ -46,9 +46,9 @@
  {{- end -}}
  {{- define "providers.knative.namespaces" -}}
  {{- default (include "traefik.namespace" .) (join "," .Values.providers.knative.namespaces) }}
-@@ -571,3 +588,11 @@
- {{- define "traefik.hubTokenFilePath" }}
- {{- printf "%s/%s" (.Values.hub.tokenMountPath | trimSuffix "/") "token" -}}
+@@ -589,3 +606,11 @@
+     {{- end -}}
+     {{- join " " $drivers -}}
  {{- end -}}
 +
 +{{- define "system_default_registry" -}}
