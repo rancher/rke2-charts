@@ -1,3 +1,4 @@
+---
 #
 # config/crd/standard/gateway.networking.k8s.io_referencegrants.yaml
 #
@@ -6,7 +7,7 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     api-approved.kubernetes.io: https://github.com/kubernetes-sigs/gateway-api/pull/4530
-    gateway.networking.k8s.io/bundle-version: v1.6.1
+    gateway.networking.k8s.io/bundle-version: v1.6.2
     gateway.networking.k8s.io/channel: standard
     helm.sh/resource-policy: keep
   name: referencegrants.gateway.networking.k8s.io
