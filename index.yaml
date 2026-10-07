@@ -31674,6 +31674,24 @@ entries:
     version: 0.1.000
   rke2-security-responder:
   - apiVersion: v2
+    appVersion: 0.1.7
+    created: "2026-10-07T12:45:40.038402259Z"
+    description: RKE2 Security Responder for in-cluster CVE/security notifications
+      and telemetry
+    digest: 86443e4ab961177f00e52ce2102d828583559b84bf5411719073afca18f04bb7
+    keywords:
+    - rke2
+    - security
+    - telemetry
+    maintainers:
+    - email: rke2-maintainers@suse.com
+      name: RKE2 Team
+    name: rke2-security-responder
+    type: application
+    urls:
+    - assets/rke2-security-responder/rke2-security-responder-0.1.701.tgz
+    version: 0.1.701
+  - apiVersion: v2
     appVersion: 0.1.6
     created: "2026-09-16T12:59:28.597054531Z"
     description: RKE2 Security Responder for in-cluster CVE/security notifications
