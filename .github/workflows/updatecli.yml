@@ -30,15 +30,17 @@ jobs:
       - name: Install Updatecli
         uses: updatecli/updatecli-action@2efa15cbae1751f532f9bfc88f56adafd6d1faed # v3.8.0
 
-      - name: Read Secrets for the Github App
-        uses: rancher-eio/read-vault-secrets@0da85151ad1f19ed7986c41587e45aac1ace74b6 # v3
+      - name: Load Secrets from Vault
+        uses: rancher-eio/read-vault-secrets@dfae8acd43a9e170fca5f90168da22f814fe4e9a # main
         with:
           secrets: |
+            secret/data/github/org/${{ github.repository_owner }}/github/renovate-rancher appId | APP_ID ;
+            secret/data/github/org/${{ github.repository_owner }}/github/renovate-rancher privateKey | PRIVATE_KEY
             secret/data/github/repo/${{ github.repository }}/issues-manager/github/app-credentials appId | CREATE_ISSUE_APP_ID ;
             secret/data/github/repo/${{ github.repository }}/issues-manager/github/app-credentials privateKey | CREATE_ISSUE_PRIVATE_KEY
 
-      - name: Get Github App token
-        id: get_token
+      - name: Get Github App token for RKE2 Issues
+        id: rke2_token
         uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
         with:
             client-id: ${{ env.CREATE_ISSUE_APP_ID }}
@@ -46,6 +48,13 @@ jobs:
             owner: rancher
             repositories: |
               rke2
+
+      - name: Get Github App Token for Renovate
+        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
+        id: app-token
+        with:
+          client-id: ${{ env.APP_ID }}
+          private-key: ${{ env.PRIVATE_KEY }}
 
       - name: Delete leftover UpdateCLI branches
         run: |
@@ -70,8 +79,8 @@ jobs:
         # Never use '--debug' option, because it might leak the access tokens.
         run: "updatecli pipeline apply --clean --config ./updatecli/updatecli.d/ --values ./updatecli/values.yaml"
         env:
-          UPDATECLI_GITHUB_ACTOR: ${{ github.actor }}
-          UPDATECLI_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          UPDATECLI_GITHUB_ACTOR: "renovate-rancher[bot]"
+          UPDATECLI_GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
           UPDATECLI_GITHUB_WORKFLOW_URL: "https://github.com/${{github.repository}}/actions/runs/${{github.run_id}}"
-          GH_TOKEN: ${{ steps.get_token.outputs.token }}
+          GH_TOKEN: ${{ steps.rke2_token.outputs.token }}
 
