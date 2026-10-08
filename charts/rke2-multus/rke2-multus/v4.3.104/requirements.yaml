@@ -1,0 +1,4 @@
+dependencies:
+- condition: rke2-whereabouts.enabled
+  name: rke2-whereabouts
+  repository: file://./charts/rke2-whereabouts
