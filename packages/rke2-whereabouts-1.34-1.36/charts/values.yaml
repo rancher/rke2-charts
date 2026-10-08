@@ -58,6 +58,7 @@ nodeSliceController:
 
 reconciler:
   logLevel: info
+  priorityClassName: ""
   resources:
     requests:
       cpu: "100m"
