@@ -35,9 +35,9 @@ jobs:
         with:
           secrets: |
             secret/data/github/org/${{ github.repository_owner }}/github/renovate-rancher appId | APP_ID ;
-            secret/data/github/org/${{ github.repository_owner }}/github/renovate-rancher privateKey | PRIVATE_KEY
+            secret/data/github/org/${{ github.repository_owner }}/github/renovate-rancher privateKey | PRIVATE_KEY ;
             secret/data/github/repo/${{ github.repository }}/issues-manager/github/app-credentials appId | CREATE_ISSUE_APP_ID ;
-            secret/data/github/repo/${{ github.repository }}/issues-manager/github/app-credentials privateKey | CREATE_ISSUE_PRIVATE_KEY
+            secret/data/github/repo/${{ github.repository }}/issues-manager/github/app-credentials privateKey | CREATE_ISSUE_PRIVATE_KEY ;
 
       - name: Get Github App token for RKE2 Issues
         id: rke2_token
