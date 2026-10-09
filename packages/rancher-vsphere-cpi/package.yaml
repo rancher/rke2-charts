@@ -1,4 +1,4 @@
 url: https://github.com/rancher/vsphere-charts.git
 subdirectory: charts/rancher-vsphere-cpi
-commit: a4145e06be37636d72943e918529042d4b0723da
+commit: 0d053b8be182f991118d50983ff04cf66607329b
 packageVersion: 00
