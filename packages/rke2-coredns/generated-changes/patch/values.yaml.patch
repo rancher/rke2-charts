@@ -8,7 +8,7 @@
 +  repository: rancher/hardened-coredns
    # Overrides the image tag whose default is the chart appVersion.
 -  tag: ""
-+  tag: "v1.14.7-build20260909"
++  tag: "v1.14.7-build20261009"
    pullPolicy: IfNotPresent
    ## Optionally specify an array of imagePullSecrets.
    ## Secrets must be manually created in the namespace.
@@ -116,7 +116,7 @@
 -    repository: registry.k8s.io/cpa/cluster-proportional-autoscaler
 -    tag: "v1.9.0"
 +    repository: rancher/hardened-cluster-autoscaler
-+    tag: "v1.11.0-build20260924"
++    tag: "v1.11.0-build20261008"
      pullPolicy: IfNotPresent
      ## Optionally specify an array of imagePullSecrets.
      ## Secrets must be manually created in the namespace.
@@ -256,11 +256,11 @@
 +
 +  image:
 +    repository: rancher/hardened-dns-node-cache
-+    tag: "1.27.1-r1-build20260928"
++    tag: "1.27.2-r1-build20261009"
 +
 +  initimage:
 +    repository: rancher/hardened-dns-node-cache
-+    tag: "1.27.1-r1-build20260928"
++    tag: "1.27.2-r1-build20261009"
 +
 +  # Node labels for pod assignment
 +  # Ref: https://kubernetes.io/docs/user-guide/node-selection/
