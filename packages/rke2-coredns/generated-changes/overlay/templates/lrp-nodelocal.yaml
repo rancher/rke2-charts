@@ -3,16 +3,18 @@ apiVersion: "cilium.io/v2"
 kind: CiliumLocalRedirectPolicy
 metadata:
   name: "lrp-nodelocal"
+  namespace: {{ .Release.Namespace }}
 spec:
   skipRedirectFromBackend: true
   redirectFrontend:
-    addressMatcher:
-      ip: "{{ template "clusterDNSServerIP" . }}"
+    serviceMatcher:
+      serviceName: {{ default (include "coredns.fullname" .) .Values.service.name }}
+      namespace: {{ .Release.Namespace }}
       toPorts:
-        - name: dns
+        - name: {{ include "coredns.portName" (dict "protocol" "udp" "port" 53) }}
           port: "53"
           protocol: UDP
-        - name: dns-tcp
+        - name: {{ include "coredns.portName" (dict "protocol" "tcp" "port" 53) }}
           port: "53"
           protocol: TCP
   redirectBackend:
@@ -20,10 +22,10 @@ spec:
       matchLabels:
         k8s-app: node-local-dns
     toPorts:
-      - name: dns
+      - name: {{ include "coredns.portName" (dict "protocol" "udp" "port" 53) }}
         port: "53"
         protocol: UDP
-      - name: dns-tcp
+      - name: {{ include "coredns.portName" (dict "protocol" "tcp" "port" 53) }}
         port: "53"
         protocol: TCP
 {{- end }}
