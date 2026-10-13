@@ -1,6 +1,6 @@
 --- charts-original/templates/_helpers.tpl
 +++ charts/templates/_helpers.tpl
-@@ -1,9 +1,30 @@
+@@ -1,9 +1,39 @@
  {{/* generate the image name for a component*/}}
 +{{- define "installation.imagePrefix" -}}
 +{{- $values := .Values | toYaml | fromYaml -}}
@@ -14,9 +14,18 @@
 +{{- define "tigera-operator.operatorImage" -}}
 +{{- $values := .Values | toYaml | fromYaml -}}
 +{{- if dig "global" "prime" "enabled" false $values -}}
-+{{- "rancher/hardened-calico-operator" -}}
++{{- .Values.global.prime.operator.image -}}
 +{{- else -}}
 +{{- .Values.tigeraOperator.image -}}
++{{- end -}}
++{{- end -}}
++
++{{- define "tigera-operator.version" -}}
++{{- $values := .Values | toYaml | fromYaml -}}
++{{- if dig "global" "prime" "enabled" false $values -}}
++{{- .Values.global.prime.operator.version -}}
++{{- else -}}
++{{- .Values.tigeraOperator.version -}}
 +{{- end -}}
 +{{- end -}}
 +
@@ -30,7 +39,7 @@
 +    {{- .Values.tigeraOperator.registry | trimSuffix "/" -}}/
  {{- end -}}
 -{{- .image -}}:{{- .version -}}
-+{{- include "tigera-operator.operatorImage" . -}}:{{- .Values.tigeraOperator.version -}}
++{{- include "tigera-operator.operatorImage" . -}}:{{- include "tigera-operator.version" . -}}
  {{- end -}}
  
  {{/*
