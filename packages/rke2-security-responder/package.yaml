@@ -1,4 +1,4 @@
 url: https://github.com/rancher/rke2-security-responder.git
 subdirectory: charts/rke2-security-responder
-commit: 2c3fa33578747a07125f7c7032d360b3860752de
+commit: a04158faecec1e864aee07d5ebf9aba772c5a91a
 packageVersion: 01
