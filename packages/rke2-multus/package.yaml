@@ -1,6 +1,6 @@
 url: local
 workingDir: charts
-packageVersion: 09
+packageVersion: 10
 additionalCharts:
   - workingDir: charts-crd
     crdOptions:
