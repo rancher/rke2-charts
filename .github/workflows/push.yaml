@@ -5,6 +5,13 @@ on:
     branches:
       - main-source
 
+# Serialize runs so concurrent merges don't race when pushing to main.
+# A queued run is only superseded by a newer one, which syncs from a later
+# main-source commit and therefore still includes the skipped changes.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+
 jobs:
   build:
     runs-on: ubuntu-latest
