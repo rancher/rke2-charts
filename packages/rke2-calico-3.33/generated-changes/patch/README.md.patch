@@ -1,14 +1,13 @@
 --- charts-original/README.md
 +++ charts/README.md
-@@ -217,9 +217,9 @@
+@@ -216,8 +216,8 @@
+ 
  # Configuration for the tigera operator images to deploy.
  tigeraOperator:
-   image: tigera/operator
+-  image: tigera/operator
 -  registry: quay.io
++  image: rancher/mirrored-calico-operator
 +  registry: docker.io
  calicoctl:
--  image: quay.io/calico/calico
-+  image: docker.io/rancher/hardened-calico
+   image: quay.io/calico/calico
  
- # Optionally configure the host and port used to access the Kubernetes API server.
- kubernetesServiceEndpoint:

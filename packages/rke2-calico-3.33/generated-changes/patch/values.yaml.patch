@@ -69,8 +69,8 @@
  
  # Whether to run the tigera/operator in zap development logging mode. When true, the operator
  # logs at debug level using a human-readable console encoder and emits stacktraces on warnings.
-@@ -152,13 +168,34 @@
-
+@@ -152,13 +168,37 @@
+ 
  # Image and registry configuration for the tigera/operator pod.
  tigeraOperator:
 -  image: tigera/operator
@@ -79,8 +79,7 @@
 -  registry: quay.io
 +  registry: docker.io
  calicoctl:
--  image: quay.io/calico/calico
-+  image: rancher/hardened-calico
+   image: quay.io/calico/calico
    tag: v3.33.0
  
 +global:
@@ -89,6 +88,9 @@
 +  clusterCIDRv6: ""
 +  prime:
 +    enabled: false
++    operator:
++      image: "rancher/hardened-calico-operator"
++      version: "v1.44.0-build20261012"
 +
 +# Config required by Windows nodes
 +ipamConfig:
