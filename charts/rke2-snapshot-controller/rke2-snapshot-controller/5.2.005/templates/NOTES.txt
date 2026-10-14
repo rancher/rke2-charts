@@ -1,0 +1,10 @@
+{{- if .Values.controller.enabled }}
+Volume Snapshot Controller installed.
+{{- end }}
+
+{{- range concat .Values.volumeSnapshotClasses }}
+Volume Snapshot Class "{{ .name }}" installed.
+{{- end }}
+{{- range concat .Values.volumeGroupSnapshotClasses }}
+Volume Group Snapshot Class "{{ .name }}" installed.
+{{- end }}

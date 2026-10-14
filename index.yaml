@@ -3003,6 +3003,23 @@ entries:
       catalog.cattle.io/namespace: tigera-operator
     apiVersion: v2
     appVersion: v3.33.0
+    created: "2026-10-14T18:56:09.509371675Z"
+    description: Installs the Tigera operator for Calico
+    digest: 06ed837d4eb4af699cba9b6c7b0a66d43d2f78c9329ac4b3e7dfe37c6f40bcf2
+    home: https://docs.tigera.io/calico
+    icon: https://docs.tigera.io/img/calico-logo.png
+    name: rke2-calico
+    sources:
+    - https://github.com/projectcalico/calico/tree/master/charts/tigera-operator
+    - https://github.com/tigera/operator
+    - https://github.com/projectcalico/calico
+    urls:
+    - assets/rke2-calico-3.33/rke2-calico-v3.33.001.tgz
+    version: v3.33.001
+  - annotations:
+      catalog.cattle.io/namespace: tigera-operator
+    apiVersion: v2
+    appVersion: v3.33.0
     created: "2026-10-05T23:03:48.773297264Z"
     description: Installs the Tigera operator for Calico
     digest: bf41723318b6f00820d0e1c0935ab323107e1ce5baea58471a50f5b6f4161f64
@@ -23280,6 +23297,33 @@ entries:
       artifacthub.io/prerelease: "false"
     apiVersion: v2
     appVersion: 1.15.1
+    created: "2026-10-14T18:56:10.739947872Z"
+    description: Ingress controller for Kubernetes using NGINX as a reverse proxy
+      and load balancer
+    digest: fba03116c40e1f08b02a563081627111ad1077087ac0eed8b0a1ac50df6acda8
+    home: https://github.com/kubernetes/ingress-nginx
+    icon: https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Nginx_logo.svg/500px-Nginx_logo.svg.png
+    keywords:
+    - ingress
+    - nginx
+    kubeVersion: '>=1.21.0-0'
+    maintainers:
+    - name: cpanato
+    - name: Gacko
+    - name: strongjz
+    - name: tao12345666333
+    name: rke2-ingress-nginx
+    sources:
+    - https://github.com/kubernetes/ingress-nginx
+    urls:
+    - assets/rke2-ingress-nginx/rke2-ingress-nginx-4.15.113.tgz
+    version: 4.15.113
+  - annotations:
+      artifacthub.io/changes: |
+        - Update Ingress-Nginx version controller-v1.15.1
+      artifacthub.io/prerelease: "false"
+    apiVersion: v2
+    appVersion: 1.15.1
     created: "2026-10-12T19:25:25.576240468Z"
     description: Ingress controller for Kubernetes using NGINX as a reverse proxy
       and load balancer
@@ -32242,6 +32286,30 @@ entries:
   rke2-snapshot-controller:
   - apiVersion: v2
     appVersion: v8.6.0
+    created: "2026-10-14T18:56:10.885577695Z"
+    description: |
+      Deploys a Snapshot Controller in a cluster. Snapshot Controllers are often bundled with the Kubernetes distribution,
+      this chart is meant for cases where it is not.
+    digest: ed5f41e6f913949d8c782b5d0c4135b49b09a5aa834ad099ed2bd3c309d67588
+    home: https://github.com/piraeusdatastore/helm-charts
+    icon: https://raw.githubusercontent.com/piraeusdatastore/piraeus/master/artwork/sandbox-artwork/icon/color.svg
+    keywords:
+    - storage
+    - snapshot
+    - validation
+    kubeVersion: '>= 1.25.0-0'
+    maintainers:
+    - name: The Piraeus Maintainers
+      url: https://github.com/piraeusdatastore/
+    name: rke2-snapshot-controller
+    sources:
+    - https://github.com/kubernetes-csi/external-snapshotter/
+    type: application
+    urls:
+    - assets/rke2-snapshot-controller/rke2-snapshot-controller-5.2.005.tgz
+    version: 5.2.005
+  - apiVersion: v2
+    appVersion: v8.6.0
     created: "2026-09-10T23:00:17.391113923Z"
     description: |
       Deploys a Snapshot Controller in a cluster. Snapshot Controllers are often bundled with the Kubernetes distribution,
@@ -32776,6 +32844,16 @@ entries:
     - assets/rke2-snapshot-controller/rke2-snapshot-controller-1.7.200.tgz
     version: 1.7.200
   rke2-snapshot-controller-crd:
+  - apiVersion: v1
+    appVersion: v8.6.0
+    created: "2026-10-14T18:56:10.892294667Z"
+    description: Installs the CRDs for rke2-snapshot-controller
+    digest: 52ba132c57948137e4efe434caae2496d6089c62e6c623f2936b8ad7e9d3ca9b
+    name: rke2-snapshot-controller-crd
+    type: application
+    urls:
+    - assets/rke2-snapshot-controller/rke2-snapshot-controller-crd-5.2.005.tgz
+    version: 5.2.005
   - apiVersion: v1
     appVersion: v8.6.0
     created: "2026-09-10T23:00:17.398815576Z"
