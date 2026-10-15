@@ -5,6 +5,6 @@
  type: application
 -name: snapshot-controller
 +name: rke2-snapshot-controller
- version: 5.2.0
- appVersion: "v8.6.0"
+ version: 5.4.0
+ appVersion: "v8.7.0"
  kubeVersion: ">= 1.25.0-0"

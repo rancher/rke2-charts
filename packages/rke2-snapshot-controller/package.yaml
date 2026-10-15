@@ -1,7 +1,7 @@
 url: https://github.com/piraeusdatastore/helm-charts.git
 subdirectory: charts/snapshot-controller
-commit: 5d733d8c44f666d26a7f1dd210fee876eae16c3f  # snapshot-controller-5.2.0
-packageVersion: 05
+commit: 2d6f016f92edb8297569e5dd7e0ed3ec2354ad9a  # snapshot-controller-5.4.0
+packageVersion: 00
 additionalCharts:
   - workingDir: charts-crd
     crdOptions:

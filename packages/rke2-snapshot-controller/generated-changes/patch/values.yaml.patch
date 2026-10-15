@@ -4,9 +4,9 @@
 -installCRDs: true
 +installCRDs: false
  
- controller:
-   enabled: true
-@@ -16,10 +16,10 @@
+ # Annotate the CRDs with `helm.sh/resource-policy: keep`, so that `helm uninstall` leaves them
+ # in place instead of deleting them along with every VolumeSnapshot in the cluster. Only takes
+@@ -21,10 +21,10 @@
      featureGates: CSIVolumeGroupSnapshot=true
  
    image:
@@ -15,11 +15,11 @@
      pullPolicy: IfNotPresent
      # Overrides the image tag whose default is the chart appVersion.
 -    tag: ""
-+    tag: "v8.6.0-build20261012"
++    tag: "v8.7.0-build20261015"
  
    imagePullSecrets: []
  
-@@ -40,9 +40,16 @@
+@@ -45,9 +45,16 @@
  
    resources: {}
  
@@ -38,7 +38,7 @@
  
    affinity: {}
  
-@@ -179,3 +186,6 @@
+@@ -184,3 +191,6 @@
  #        velero.io/csi-volumegroupsnapshot-class: "true"
  #      driver: linstor.csi.linbit.com
  #      deletionPolicy: Delete
