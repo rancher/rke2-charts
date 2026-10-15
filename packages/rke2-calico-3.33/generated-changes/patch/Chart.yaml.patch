@@ -5,7 +5,7 @@
  home: https://docs.tigera.io/calico
  icon: https://docs.tigera.io/img/calico-logo.png
 -name: tigera-operator
-+name: rke2-calico
++name: rke2-calico-3.33
  sources:
  - https://github.com/projectcalico/calico/tree/master/charts/tigera-operator
  - https://github.com/tigera/operator

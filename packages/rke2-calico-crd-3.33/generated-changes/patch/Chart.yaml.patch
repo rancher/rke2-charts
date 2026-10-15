@@ -11,5 +11,5 @@
 -- https://github.com/projectcalico/calico/tree/master/charts/crd.projectcalico.org.v1
 -- https://github.com/tigera/operator
 -- https://github.com/projectcalico/calico
-+name: rke2-calico-crd
++name: rke2-calico-crd-3.33
  version: v3.33.0
