@@ -1,0 +1,139 @@
+--- charts-original/templates/calico/crd.projectcalico.org_stagedkubernetesnetworkpolicies.yaml
++++ charts/templates/calico/crd.projectcalico.org_stagedkubernetesnetworkpolicies.yaml
+@@ -37,14 +37,6 @@
+             spec:
+               properties:
+                 egress:
+-                  description: |-
+-                    List of egress rules to be applied to the selected pods. Outgoing traffic is
+-                    allowed if there are no NetworkPolicies selecting the pod (and cluster policy
+-                    otherwise allows the traffic), OR if the traffic matches at least one egress rule
+-                    across all of the NetworkPolicy objects whose podSelector matches the pod. If
+-                    this field is empty then this NetworkPolicy limits all outgoing traffic (and serves
+-                    solely to ensure that the pods it selects are isolated by default).
+-                    This field is beta-level in 1.8
+                   items:
+                     description: |-
+                       NetworkPolicyEgressRule describes a particular set of traffic that is allowed out of pods
+@@ -52,12 +44,6 @@
+                       This type is beta-level in 1.8
+                     properties:
+                       ports:
+-                        description: |-
+-                          ports is a list of destination ports for outgoing traffic.
+-                          Each item in this list is combined using a logical OR. If this field is
+-                          empty or missing, this rule matches all ports (traffic not restricted by port).
+-                          If this field is present and contains at least one item, then this rule allows
+-                          traffic only if the traffic matches at least one port in the list.
+                         items:
+                           description:
+                             NetworkPolicyPort describes a port to allow traffic
+@@ -90,12 +76,6 @@
+                         type: array
+                         x-kubernetes-list-type: atomic
+                       to:
+-                        description: |-
+-                          to is a list of destinations for outgoing traffic of pods selected for this rule.
+-                          Items in this list are combined using a logical OR operation. If this field is
+-                          empty or missing, this rule matches all destinations (traffic not restricted by
+-                          destination). If this field is present and contains at least one item, this rule
+-                          allows traffic only if the traffic matches at least one item in the to list.
+                         items:
+                           description: |-
+                             NetworkPolicyPeer describes a peer to allow traffic to/from. Only certain combinations of
+@@ -124,13 +104,6 @@
+                                 - cidr
+                               type: object
+                             namespaceSelector:
+-                              description: |-
+-                                namespaceSelector selects namespaces using cluster-scoped labels. This field follows
+-                                standard label selector semantics; if present but empty, it selects all namespaces.
+-
+-                                If podSelector is also set, then the NetworkPolicyPeer as a whole selects
+-                                the pods matching podSelector in the namespaces selected by namespaceSelector.
+-                                Otherwise it selects all pods in the namespaces selected by namespaceSelector.
+                               properties:
+                                 matchExpressions:
+                                   description:
+@@ -178,13 +151,6 @@
+                               type: object
+                               x-kubernetes-map-type: atomic
+                             podSelector:
+-                              description: |-
+-                                podSelector is a label selector which selects pods. This field follows standard label
+-                                selector semantics; if present but empty, it selects all pods.
+-
+-                                If namespaceSelector is also set, then the NetworkPolicyPeer as a whole selects
+-                                the pods matching podSelector in the Namespaces selected by NamespaceSelector.
+-                                Otherwise it selects the pods matching podSelector in the policy's own namespace.
+                               properties:
+                                 matchExpressions:
+                                   description:
+@@ -252,12 +218,6 @@
+                       matched by a NetworkPolicySpec's podSelector. The traffic must match both ports and from.
+                     properties:
+                       from:
+-                        description: |-
+-                          from is a list of sources which should be able to access the pods selected for this rule.
+-                          Items in this list are combined using a logical OR operation. If this field is
+-                          empty or missing, this rule matches all sources (traffic not restricted by
+-                          source). If this field is present and contains at least one item, this rule
+-                          allows traffic only if the traffic matches at least one item in the from list.
+                         items:
+                           description: |-
+                             NetworkPolicyPeer describes a peer to allow traffic to/from. Only certain combinations of
+@@ -286,13 +246,6 @@
+                                 - cidr
+                               type: object
+                             namespaceSelector:
+-                              description: |-
+-                                namespaceSelector selects namespaces using cluster-scoped labels. This field follows
+-                                standard label selector semantics; if present but empty, it selects all namespaces.
+-
+-                                If podSelector is also set, then the NetworkPolicyPeer as a whole selects
+-                                the pods matching podSelector in the namespaces selected by namespaceSelector.
+-                                Otherwise it selects all pods in the namespaces selected by namespaceSelector.
+                               properties:
+                                 matchExpressions:
+                                   description:
+@@ -340,13 +293,6 @@
+                               type: object
+                               x-kubernetes-map-type: atomic
+                             podSelector:
+-                              description: |-
+-                                podSelector is a label selector which selects pods. This field follows standard label
+-                                selector semantics; if present but empty, it selects all pods.
+-
+-                                If namespaceSelector is also set, then the NetworkPolicyPeer as a whole selects
+-                                the pods matching podSelector in the Namespaces selected by NamespaceSelector.
+-                                Otherwise it selects the pods matching podSelector in the policy's own namespace.
+                               properties:
+                                 matchExpressions:
+                                   description:
+@@ -397,12 +343,6 @@
+                         type: array
+                         x-kubernetes-list-type: atomic
+                       ports:
+-                        description: |-
+-                          ports is a list of ports which should be made accessible on the pods selected for
+-                          this rule. Each item in this list is combined using a logical OR. If this field is
+-                          empty or missing, this rule matches all ports (traffic not restricted by port).
+-                          If this field is present and contains at least one item, then this rule allows
+-                          traffic only if the traffic matches at least one port in the list.
+                         items:
+                           description:
+                             NetworkPolicyPort describes a port to allow traffic
+@@ -438,13 +378,6 @@
+                   type: array
+                   x-kubernetes-list-type: atomic
+                 podSelector:
+-                  description: |-
+-                    Selects the pods to which this NetworkPolicy object applies. The array of
+-                    ingress rules is applied to any pods selected by this field. Multiple network
+-                    policies can select the same set of pods. In this case, the ingress rules for
+-                    each are combined additively. This field is NOT optional and follows standard
+-                    label selector semantics. An empty podSelector matches all pods in this
+-                    namespace.
+                   properties:
+                     matchExpressions:
+                       description:
