@@ -99,6 +99,10 @@ If this `major.minor.patch` (e.g. `0.0.1`) version of the Chart has been release
 
 #### Advanced Commands
 
+`make strip`: Runs the Perl description stripper on prepared `rke2-calico-crd-*` packages, removing descriptions that match the whitespace-tolerant regular expressions in `scripts/strip-descriptions.json` without reformatting surviving lines. Matching applies to `description` mapping values regardless of their indentation. Run `make patch` afterward to save the changes.
+
+`bash scripts/test-strip-descriptions.sh`: Checks whitespace- and indentation-independent matching, preservation of unrelated YAML, multiple YAML documents, and idempotence.
+
 `make charts`: Runs `make prepare` and then exports your charts to `assets/` and `charts/` and generates or updates your `index.yaml`.
 
 `make validate`: Validates your current repository branch against all the repository branches indicated in your configuration.yaml
