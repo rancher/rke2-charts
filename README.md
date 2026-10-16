@@ -99,6 +99,10 @@ If this `major.minor.patch` (e.g. `0.0.1`) version of the Chart has been release
 
 #### Advanced Commands
 
+`make strip`: Runs the Bash description stripper on prepared `rke2-calico-crd-*` packages, removing all occurrences of the 30 longest description strings in the allowlist without reformatting surviving lines. Descriptions must be standalone block mapping entries; unsupported layouts fail without modifying any files. Requires `jq`, Mike Farah's `yq`, and GNU `awk` (`gawk`, preserves line endings). Run `PACKAGE=rke2-calico-crd-3.33 make patch` afterward to save the changes.
+
+`bash scripts/test-strip-descriptions.sh`: Checks whitespace preservation, scalar styles, multiple YAML documents, line endings, idempotence, and failure safety.
+
 `make charts`: Runs `make prepare` and then exports your charts to `assets/` and `charts/` and generates or updates your `index.yaml`.
 
 `make validate`: Validates your current repository branch against all the repository branches indicated in your configuration.yaml
