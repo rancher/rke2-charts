@@ -19227,6 +19227,34 @@ entries:
           description: Add optional replica count and PodDisruptionBudget for the cluster-proportional-autoscaler
     apiVersion: v2
     appVersion: 1.14.7
+    created: "2026-10-16T19:00:10.987320813Z"
+    description: CoreDNS is a DNS server that chains plugins and provides Kubernetes
+      DNS Services
+    digest: aa1237d05242ccf45d7d9bfaeb6b621d4190071df11f6d7e18fd7dad646d10a5
+    home: https://coredns.io
+    icon: https://coredns.io/images/CoreDNS_Colour_Horizontal.png
+    keywords:
+    - coredns
+    - dns
+    - kubedns
+    maintainers:
+    - name: mrueg
+    - name: haad
+    - name: hagaibarel
+    - name: shubham-cmyk
+    name: rke2-coredns
+    sources:
+    - https://github.com/coredns/coredns
+    type: application
+    urls:
+    - assets/rke2-coredns/rke2-coredns-1.48.204.tgz
+    version: 1.48.204
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: added
+          description: Add optional replica count and PodDisruptionBudget for the cluster-proportional-autoscaler
+    apiVersion: v2
+    appVersion: 1.14.7
     created: "2026-10-16T16:46:04.033324023Z"
     description: CoreDNS is a DNS server that chains plugins and provides Kubernetes
       DNS Services
@@ -29347,6 +29375,27 @@ entries:
   rke2-multus:
   - apiVersion: v1
     appVersion: 4.3.1
+    created: "2026-10-16T19:00:11.55508033Z"
+    dependencies:
+    - condition: rke2-whereabouts.enabled
+      name: rke2-whereabouts
+      repository: file://./charts/rke2-whereabouts
+    description: Multus Helm chart for Kubernetes
+    digest: f586fc308a6fc78d0ab1338c0dd562a9f5901a811ef46d8cf385609273d015b3
+    home: https://github.com/k8snetworkplumbingwg/multus-cni
+    icon: https://raw.githubusercontent.com/k8snetworkplumbingwg/multus-cni/master/doc/images/Multus.png
+    maintainers:
+    - email: charts@rancher.com
+      name: Rancher Labs
+    name: rke2-multus
+    sources:
+    - https://github.com/intel/multus-cni
+    type: application
+    urls:
+    - assets/rke2-multus/rke2-multus-v4.3.111.tgz
+    version: v4.3.111
+  - apiVersion: v1
+    appVersion: 4.3.1
     created: "2026-10-14T19:26:40.34156466Z"
     dependencies:
     - condition: rke2-whereabouts.enabled
@@ -32145,6 +32194,15 @@ entries:
     - assets/rke2-multus/rke2-multus-v3.7.1-build2021041601.tgz
     version: v3.7.1-build2021041601
   rke2-multus-crd:
+  - apiVersion: v1
+    created: "2026-10-16T19:00:11.448250763Z"
+    description: Installs the CRDs for rke2-multus
+    digest: 9a84ffc99e46732a4714be2ead24739f0e434a016122a64a44c51d7ed8ff92c2
+    name: rke2-multus-crd
+    type: application
+    urls:
+    - assets/rke2-multus/rke2-multus-crd-4.3.111.tgz
+    version: 4.3.111
   - apiVersion: v1
     created: "2026-10-14T19:26:40.235688801Z"
     description: Installs the CRDs for rke2-multus
