@@ -23,6 +23,9 @@ if [ -n "$WHEREABOUTS_VERSION" ]; then
 			multus_package_version=$(yq '.packageVersion' packages/rke2-multus/package.yaml)
 			multus_new_version=$(printf "%02d" $((10#$multus_package_version + 1)))
 			sed -i "s/packageVersion:.*/packageVersion: $multus_new_version/g" packages/rke2-multus/package.yaml
+			multus36_package_version=$(yq '.packageVersion' packages/rke2-multus-1.34-1.36/package.yaml)
+			multus36_new_version=$(printf "%02d" $((10#$multus36_package_version + 1)))
+			sed -i "s/packageVersion:.*/packageVersion: $multus36_new_version/g" packages/rke2-multus-1.34-1.36/package.yaml
 		else
 			sed -i "s/  tag: $current_whereabouts_version/  tag: $WHEREABOUTS_VERSION/g" packages/rke2-whereabouts/charts/values.yaml
 			package_version=$(yq '.packageVersion' packages/rke2-whereabouts/package.yaml)
@@ -31,6 +34,9 @@ if [ -n "$WHEREABOUTS_VERSION" ]; then
 			multus_package_version=$(yq '.packageVersion' packages/rke2-multus/package.yaml)
 			multus_new_version=$(printf "%02d" $((10#$multus_package_version + 1)))
 			sed -i "s/packageVersion:.*/packageVersion: $multus_new_version/g" packages/rke2-multus/package.yaml
+			multus36_package_version=$(yq '.packageVersion' packages/rke2-multus-1.34-1.36/package.yaml)
+			multus36_new_version=$(printf "%02d" $((10#$multus36_package_version + 1)))
+			sed -i "s/packageVersion:.*/packageVersion: $multus36_new_version/g" packages/rke2-multus-1.34-1.36/package.yaml
 		fi
 	fi
 fi
