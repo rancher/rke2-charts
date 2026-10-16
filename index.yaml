@@ -19227,6 +19227,34 @@ entries:
           description: Add optional replica count and PodDisruptionBudget for the cluster-proportional-autoscaler
     apiVersion: v2
     appVersion: 1.14.7
+    created: "2026-10-16T16:46:04.033324023Z"
+    description: CoreDNS is a DNS server that chains plugins and provides Kubernetes
+      DNS Services
+    digest: d426aa82f27054cbf4a519fbb14624f5826f9a1c04056e4e02bb0402bb297d39
+    home: https://coredns.io
+    icon: https://coredns.io/images/CoreDNS_Colour_Horizontal.png
+    keywords:
+    - coredns
+    - dns
+    - kubedns
+    maintainers:
+    - name: mrueg
+    - name: haad
+    - name: hagaibarel
+    - name: shubham-cmyk
+    name: rke2-coredns
+    sources:
+    - https://github.com/coredns/coredns
+    type: application
+    urls:
+    - assets/rke2-coredns/rke2-coredns-1.48.203.tgz
+    version: 1.48.203
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: added
+          description: Add optional replica count and PodDisruptionBudget for the cluster-proportional-autoscaler
+    apiVersion: v2
+    appVersion: 1.14.7
     created: "2026-10-12T19:33:56.4267439Z"
     description: CoreDNS is a DNS server that chains plugins and provides Kubernetes
       DNS Services
