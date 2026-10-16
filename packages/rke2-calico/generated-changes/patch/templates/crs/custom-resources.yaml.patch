@@ -45,3 +45,60 @@
  
  apiVersion: operator.tigera.io/v1
  kind: Installation
+@@ -46,3 +84,56 @@
+ spec:
+ {{ $whiskerSpec | toYaml | indent 2 }}
+ {{ end }}
++{{- /* This should migrate all the crd v1 resources to v3 */ -}}
++{{- $calicoKinds := list 
++  "BGPConfiguration"
++  "BGPFilter"
++  "BGPPeer"
++  "BlockAffinity"
++  "CalicoNodeStatus"
++  "ClusterInformation"
++  "FelixConfiguration"
++  "GlobalNetworkPolicy"
++  "GlobalNetworkSet"
++  "HostEndpoint"
++  "IPAMBlock"
++  "IPAMConfig"
++  "IPAMHandle"
++  "IPPool"
++  "IPReservation"
++  "KubeControllersConfiguration"
++  "NetworkPolicy"
++  "NetworkSet"
++  "StagedGlobalNetworkPolicy"
++  "StagedKubernetesNetworkPolicy"
++  "StagedNetworkPolicy"
++  "Tier"
++}}
++
++{{- range $kind := $calicoKinds }}
++
++  {{- /* Look up all instances of the current Kind cluster-wide */ -}}
++  {{- $resources := lookup "crd.projectcalico.org/v1" $kind "" "" }}
++  
++  {{- if $resources }}
++    {{- range $item := $resources.items }}
++---
++{{- /* Strip cluster-assigned runtime metadata */ -}}
++{{- $_ := unset $item.metadata "resourceVersion" }}
++{{- $_ := unset $item.metadata "uid" }}
++{{- $_ := unset $item.metadata "generation" }}
++{{- $_ := unset $item.metadata "creationTimestamp" }}
++{{- $_ := unset $item.metadata "managedFields" }}
++
++{{- /* Update API version to projectcalico.org/v3 */ -}}
++{{- $_ := set $item "apiVersion" "projectcalico.org/v3" }}
++{{- if eq $item.kind "IPAMConfig" }}
++  {{- $_ := set $item "kind" "IPAMConfiguration" }}
++{{- end }}
++
++{{- /* Render as YAML */ -}}
++{{ toYaml $item }}
++    {{- end }}
++  {{- end }}
++
++{{- end }}
