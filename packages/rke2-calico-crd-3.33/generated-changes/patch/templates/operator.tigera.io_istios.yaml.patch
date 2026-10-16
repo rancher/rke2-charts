@@ -1,0 +1,1043 @@
+--- charts-original/templates/operator.tigera.io_istios.yaml
++++ charts/templates/operator.tigera.io_istios.yaml
+@@ -76,16 +76,6 @@
+                                         rules for the pod.
+                                       properties:
+                                         preferredDuringSchedulingIgnoredDuringExecution:
+-                                          description: |-
+-                                            The scheduler will prefer to schedule pods to nodes that satisfy
+-                                            the affinity expressions specified by this field, but it may choose
+-                                            a node that violates one or more of the expressions. The node that is
+-                                            most preferred is the one with the greatest sum of weights, i.e.
+-                                            for each node that meets all of the scheduling requirements (resource
+-                                            request, requiredDuringScheduling affinity expressions, etc.),
+-                                            compute a sum by iterating through the elements of this field and adding
+-                                            "weight" to the sum if the node matches the corresponding matchExpressions; the
+-                                            node(s) with the highest sum are the most preferred.
+                                           items:
+                                             description: |-
+                                               An empty preferred scheduling term matches all objects with implicit weight 0
+@@ -117,12 +107,6 @@
+                                                             Valid operators are In, NotIn, Exists, DoesNotExist. Gt, and Lt.
+                                                           type: string
+                                                         values:
+-                                                          description: |-
+-                                                            An array of string values. If the operator is In or NotIn,
+-                                                            the values array must be non-empty. If the operator is Exists or DoesNotExist,
+-                                                            the values array must be empty. If the operator is Gt or Lt, the values
+-                                                            array must have a single element, which will be interpreted as an integer.
+-                                                            This array is replaced during a strategic merge patch.
+                                                           items:
+                                                             type: string
+                                                           type: array
+@@ -154,12 +138,6 @@
+                                                             Valid operators are In, NotIn, Exists, DoesNotExist. Gt, and Lt.
+                                                           type: string
+                                                         values:
+-                                                          description: |-
+-                                                            An array of string values. If the operator is In or NotIn,
+-                                                            the values array must be non-empty. If the operator is Exists or DoesNotExist,
+-                                                            the values array must be empty. If the operator is Gt or Lt, the values
+-                                                            array must have a single element, which will be interpreted as an integer.
+-                                                            This array is replaced during a strategic merge patch.
+                                                           items:
+                                                             type: string
+                                                           type: array
+@@ -186,12 +164,6 @@
+                                           type: array
+                                           x-kubernetes-list-type: atomic
+                                         requiredDuringSchedulingIgnoredDuringExecution:
+-                                          description: |-
+-                                            If the affinity requirements specified by this field are not met at
+-                                            scheduling time, the pod will not be scheduled onto the node.
+-                                            If the affinity requirements specified by this field cease to be met
+-                                            at some point during pod execution (e.g. due to an update), the system
+-                                            may or may not try to eventually evict the pod from its node.
+                                           properties:
+                                             nodeSelectorTerms:
+                                               description:
+@@ -224,12 +196,6 @@
+                                                             Valid operators are In, NotIn, Exists, DoesNotExist. Gt, and Lt.
+                                                           type: string
+                                                         values:
+-                                                          description: |-
+-                                                            An array of string values. If the operator is In or NotIn,
+-                                                            the values array must be non-empty. If the operator is Exists or DoesNotExist,
+-                                                            the values array must be empty. If the operator is Gt or Lt, the values
+-                                                            array must have a single element, which will be interpreted as an integer.
+-                                                            This array is replaced during a strategic merge patch.
+                                                           items:
+                                                             type: string
+                                                           type: array
+@@ -261,12 +227,6 @@
+                                                             Valid operators are In, NotIn, Exists, DoesNotExist. Gt, and Lt.
+                                                           type: string
+                                                         values:
+-                                                          description: |-
+-                                                            An array of string values. If the operator is In or NotIn,
+-                                                            the values array must be non-empty. If the operator is Exists or DoesNotExist,
+-                                                            the values array must be empty. If the operator is Gt or Lt, the values
+-                                                            array must have a single element, which will be interpreted as an integer.
+-                                                            This array is replaced during a strategic merge patch.
+                                                           items:
+                                                             type: string
+                                                           type: array
+@@ -293,16 +253,6 @@
+                                         zone, etc. as some other pod(s)).
+                                       properties:
+                                         preferredDuringSchedulingIgnoredDuringExecution:
+-                                          description: |-
+-                                            The scheduler will prefer to schedule pods to nodes that satisfy
+-                                            the affinity expressions specified by this field, but it may choose
+-                                            a node that violates one or more of the expressions. The node that is
+-                                            most preferred is the one with the greatest sum of weights, i.e.
+-                                            for each node that meets all of the scheduling requirements (resource
+-                                            request, requiredDuringScheduling affinity expressions, etc.),
+-                                            compute a sum by iterating through the elements of this field and adding
+-                                            "weight" to the sum if the node has pods which matches the corresponding podAffinityTerm; the
+-                                            node(s) with the highest sum are the most preferred.
+                                           items:
+                                             description:
+                                               The weights of all of the matched
+@@ -369,29 +319,11 @@
+                                                     type: object
+                                                     x-kubernetes-map-type: atomic
+                                                   matchLabelKeys:
+-                                                    description: |-
+-                                                      MatchLabelKeys is a set of pod label keys to select which pods will
+-                                                      be taken into consideration. The keys are used to lookup values from the
+-                                                      incoming pod labels, those key-value labels are merged with `labelSelector` as `key in (value)`
+-                                                      to select the group of existing pods which pods will be taken into consideration
+-                                                      for the incoming pod's pod (anti) affinity. Keys that don't exist in the incoming
+-                                                      pod labels will be ignored. The default value is empty.
+-                                                      The same key is forbidden to exist in both matchLabelKeys and labelSelector.
+-                                                      Also, matchLabelKeys cannot be set when labelSelector isn't set.
+                                                     items:
+                                                       type: string
+                                                     type: array
+                                                     x-kubernetes-list-type: atomic
+                                                   mismatchLabelKeys:
+-                                                    description: |-
+-                                                      MismatchLabelKeys is a set of pod label keys to select which pods will
+-                                                      be taken into consideration. The keys are used to lookup values from the
+-                                                      incoming pod labels, those key-value labels are merged with `labelSelector` as `key notin (value)`
+-                                                      to select the group of existing pods which pods will be taken into consideration
+-                                                      for the incoming pod's pod (anti) affinity. Keys that don't exist in the incoming
+-                                                      pod labels will be ignored. The default value is empty.
+-                                                      The same key is forbidden to exist in both mismatchLabelKeys and labelSelector.
+-                                                      Also, mismatchLabelKeys cannot be set when labelSelector isn't set.
+                                                     items:
+                                                       type: string
+                                                     type: array
+@@ -463,12 +395,6 @@
+                                                     type: array
+                                                     x-kubernetes-list-type: atomic
+                                                   topologyKey:
+-                                                    description: |-
+-                                                      This pod should be co-located (affinity) or not co-located (anti-affinity) with the pods matching
+-                                                      the labelSelector in the specified namespaces, where co-located is defined as running on a node
+-                                                      whose value of the label with key topologyKey matches that of any node on which any of the
+-                                                      selected pods is running.
+-                                                      Empty topologyKey is not allowed.
+                                                     type: string
+                                                 required:
+                                                   - topologyKey
+@@ -486,22 +412,7 @@
+                                           type: array
+                                           x-kubernetes-list-type: atomic
+                                         requiredDuringSchedulingIgnoredDuringExecution:
+-                                          description: |-
+-                                            If the affinity requirements specified by this field are not met at
+-                                            scheduling time, the pod will not be scheduled onto the node.
+-                                            If the affinity requirements specified by this field cease to be met
+-                                            at some point during pod execution (e.g. due to a pod label update), the
+-                                            system may or may not try to eventually evict the pod from its node.
+-                                            When there are multiple elements, the lists of nodes corresponding to each
+-                                            podAffinityTerm are intersected, i.e. all terms must be satisfied.
+                                           items:
+-                                            description: |-
+-                                              Defines a set of pods (namely those matching the labelSelector
+-                                              relative to the given namespace(s)) that this pod should be
+-                                              co-located (affinity) or not co-located (anti-affinity) with,
+-                                              where co-located is defined as running on a node whose value of
+-                                              the label with key <topologyKey> matches that of any node on which
+-                                              a pod of the set of pods is running
+                                             properties:
+                                               labelSelector:
+                                                 description: |-
+@@ -556,29 +467,11 @@
+                                                 type: object
+                                                 x-kubernetes-map-type: atomic
+                                               matchLabelKeys:
+-                                                description: |-
+-                                                  MatchLabelKeys is a set of pod label keys to select which pods will
+-                                                  be taken into consideration. The keys are used to lookup values from the
+-                                                  incoming pod labels, those key-value labels are merged with `labelSelector` as `key in (value)`
+-                                                  to select the group of existing pods which pods will be taken into consideration
+-                                                  for the incoming pod's pod (anti) affinity. Keys that don't exist in the incoming
+-                                                  pod labels will be ignored. The default value is empty.
+-                                                  The same key is forbidden to exist in both matchLabelKeys and labelSelector.
+-                                                  Also, matchLabelKeys cannot be set when labelSelector isn't set.
+                                                 items:
+                                                   type: string
+                                                 type: array
+                                                 x-kubernetes-list-type: atomic
+                                               mismatchLabelKeys:
+-                                                description: |-
+-                                                  MismatchLabelKeys is a set of pod label keys to select which pods will
+-                                                  be taken into consideration. The keys are used to lookup values from the
+-                                                  incoming pod labels, those key-value labels are merged with `labelSelector` as `key notin (value)`
+-                                                  to select the group of existing pods which pods will be taken into consideration
+-                                                  for the incoming pod's pod (anti) affinity. Keys that don't exist in the incoming
+-                                                  pod labels will be ignored. The default value is empty.
+-                                                  The same key is forbidden to exist in both mismatchLabelKeys and labelSelector.
+-                                                  Also, mismatchLabelKeys cannot be set when labelSelector isn't set.
+                                                 items:
+                                                   type: string
+                                                 type: array
+@@ -649,12 +542,6 @@
+                                                 type: array
+                                                 x-kubernetes-list-type: atomic
+                                               topologyKey:
+-                                                description: |-
+-                                                  This pod should be co-located (affinity) or not co-located (anti-affinity) with the pods matching
+-                                                  the labelSelector in the specified namespaces, where co-located is defined as running on a node
+-                                                  whose value of the label with key topologyKey matches that of any node on which any of the
+-                                                  selected pods is running.
+-                                                  Empty topologyKey is not allowed.
+                                                 type: string
+                                             required:
+                                               - topologyKey
+@@ -669,16 +556,6 @@
+                                         node, zone, etc. as some other pod(s)).
+                                       properties:
+                                         preferredDuringSchedulingIgnoredDuringExecution:
+-                                          description: |-
+-                                            The scheduler will prefer to schedule pods to nodes that satisfy
+-                                            the anti-affinity expressions specified by this field, but it may choose
+-                                            a node that violates one or more of the expressions. The node that is
+-                                            most preferred is the one with the greatest sum of weights, i.e.
+-                                            for each node that meets all of the scheduling requirements (resource
+-                                            request, requiredDuringScheduling anti-affinity expressions, etc.),
+-                                            compute a sum by iterating through the elements of this field and subtracting
+-                                            "weight" from the sum if the node has pods which matches the corresponding podAffinityTerm; the
+-                                            node(s) with the highest sum are the most preferred.
+                                           items:
+                                             description:
+                                               The weights of all of the matched
+@@ -745,29 +622,11 @@
+                                                     type: object
+                                                     x-kubernetes-map-type: atomic
+                                                   matchLabelKeys:
+-                                                    description: |-
+-                                                      MatchLabelKeys is a set of pod label keys to select which pods will
+-                                                      be taken into consideration. The keys are used to lookup values from the
+-                                                      incoming pod labels, those key-value labels are merged with `labelSelector` as `key in (value)`
+-                                                      to select the group of existing pods which pods will be taken into consideration
+-                                                      for the incoming pod's pod (anti) affinity. Keys that don't exist in the incoming
+-                                                      pod labels will be ignored. The default value is empty.
+-                                                      The same key is forbidden to exist in both matchLabelKeys and labelSelector.
+-                                                      Also, matchLabelKeys cannot be set when labelSelector isn't set.
+                                                     items:
+                                                       type: string
+                                                     type: array
+                                                     x-kubernetes-list-type: atomic
+                                                   mismatchLabelKeys:
+-                                                    description: |-
+-                                                      MismatchLabelKeys is a set of pod label keys to select which pods will
+-                                                      be taken into consideration. The keys are used to lookup values from the
+-                                                      incoming pod labels, those key-value labels are merged with `labelSelector` as `key notin (value)`
+-                                                      to select the group of existing pods which pods will be taken into consideration
+-                                                      for the incoming pod's pod (anti) affinity. Keys that don't exist in the incoming
+-                                                      pod labels will be ignored. The default value is empty.
+-                                                      The same key is forbidden to exist in both mismatchLabelKeys and labelSelector.
+-                                                      Also, mismatchLabelKeys cannot be set when labelSelector isn't set.
+                                                     items:
+                                                       type: string
+                                                     type: array
+@@ -839,12 +698,6 @@
+                                                     type: array
+                                                     x-kubernetes-list-type: atomic
+                                                   topologyKey:
+-                                                    description: |-
+-                                                      This pod should be co-located (affinity) or not co-located (anti-affinity) with the pods matching
+-                                                      the labelSelector in the specified namespaces, where co-located is defined as running on a node
+-                                                      whose value of the label with key topologyKey matches that of any node on which any of the
+-                                                      selected pods is running.
+-                                                      Empty topologyKey is not allowed.
+                                                     type: string
+                                                 required:
+                                                   - topologyKey
+@@ -862,22 +715,7 @@
+                                           type: array
+                                           x-kubernetes-list-type: atomic
+                                         requiredDuringSchedulingIgnoredDuringExecution:
+-                                          description: |-
+-                                            If the anti-affinity requirements specified by this field are not met at
+-                                            scheduling time, the pod will not be scheduled onto the node.
+-                                            If the anti-affinity requirements specified by this field cease to be met
+-                                            at some point during pod execution (e.g. due to a pod label update), the
+-                                            system may or may not try to eventually evict the pod from its node.
+-                                            When there are multiple elements, the lists of nodes corresponding to each
+-                                            podAffinityTerm are intersected, i.e. all terms must be satisfied.
+                                           items:
+-                                            description: |-
+-                                              Defines a set of pods (namely those matching the labelSelector
+-                                              relative to the given namespace(s)) that this pod should be
+-                                              co-located (affinity) or not co-located (anti-affinity) with,
+-                                              where co-located is defined as running on a node whose value of
+-                                              the label with key <topologyKey> matches that of any node on which
+-                                              a pod of the set of pods is running
+                                             properties:
+                                               labelSelector:
+                                                 description: |-
+@@ -932,29 +770,11 @@
+                                                 type: object
+                                                 x-kubernetes-map-type: atomic
+                                               matchLabelKeys:
+-                                                description: |-
+-                                                  MatchLabelKeys is a set of pod label keys to select which pods will
+-                                                  be taken into consideration. The keys are used to lookup values from the
+-                                                  incoming pod labels, those key-value labels are merged with `labelSelector` as `key in (value)`
+-                                                  to select the group of existing pods which pods will be taken into consideration
+-                                                  for the incoming pod's pod (anti) affinity. Keys that don't exist in the incoming
+-                                                  pod labels will be ignored. The default value is empty.
+-                                                  The same key is forbidden to exist in both matchLabelKeys and labelSelector.
+-                                                  Also, matchLabelKeys cannot be set when labelSelector isn't set.
+                                                 items:
+                                                   type: string
+                                                 type: array
+                                                 x-kubernetes-list-type: atomic
+                                               mismatchLabelKeys:
+-                                                description: |-
+-                                                  MismatchLabelKeys is a set of pod label keys to select which pods will
+-                                                  be taken into consideration. The keys are used to lookup values from the
+-                                                  incoming pod labels, those key-value labels are merged with `labelSelector` as `key notin (value)`
+-                                                  to select the group of existing pods which pods will be taken into consideration
+-                                                  for the incoming pod's pod (anti) affinity. Keys that don't exist in the incoming
+-                                                  pod labels will be ignored. The default value is empty.
+-                                                  The same key is forbidden to exist in both mismatchLabelKeys and labelSelector.
+-                                                  Also, mismatchLabelKeys cannot be set when labelSelector isn't set.
+                                                 items:
+                                                   type: string
+                                                 type: array
+@@ -1025,12 +845,6 @@
+                                                 type: array
+                                                 x-kubernetes-list-type: atomic
+                                               topologyKey:
+-                                                description: |-
+-                                                  This pod should be co-located (affinity) or not co-located (anti-affinity) with the pods matching
+-                                                  the labelSelector in the specified namespaces, where co-located is defined as running on a node
+-                                                  whose value of the label with key topologyKey matches that of any node on which any of the
+-                                                  selected pods is running.
+-                                                  Empty topologyKey is not allowed.
+                                                 type: string
+                                             required:
+                                               - topologyKey
+@@ -1127,12 +941,6 @@
+                                           If the key is empty, operator must be Exists; this combination means to match all values and all keys.
+                                         type: string
+                                       operator:
+-                                        description: |-
+-                                          Operator represents a key's relationship to the value.
+-                                          Valid operators are Exists, Equal, Lt, and Gt. Defaults to Equal.
+-                                          Exists is equivalent to wildcard for value, so that a pod can
+-                                          tolerate all taints of a particular category.
+-                                          Lt and Gt perform numeric comparisons (requires feature gate TaintTolerationComparisonOperators).
+                                         type: string
+                                       tolerationSeconds:
+                                         description: |-
+@@ -1184,16 +992,6 @@
+                                         rules for the pod.
+                                       properties:
+                                         preferredDuringSchedulingIgnoredDuringExecution:
+-                                          description: |-
+-                                            The scheduler will prefer to schedule pods to nodes that satisfy
+-                                            the affinity expressions specified by this field, but it may choose
+-                                            a node that violates one or more of the expressions. The node that is
+-                                            most preferred is the one with the greatest sum of weights, i.e.
+-                                            for each node that meets all of the scheduling requirements (resource
+-                                            request, requiredDuringScheduling affinity expressions, etc.),
+-                                            compute a sum by iterating through the elements of this field and adding
+-                                            "weight" to the sum if the node matches the corresponding matchExpressions; the
+-                                            node(s) with the highest sum are the most preferred.
+                                           items:
+                                             description: |-
+                                               An empty preferred scheduling term matches all objects with implicit weight 0
+@@ -1225,12 +1023,6 @@
+                                                             Valid operators are In, NotIn, Exists, DoesNotExist. Gt, and Lt.
+                                                           type: string
+                                                         values:
+-                                                          description: |-
+-                                                            An array of string values. If the operator is In or NotIn,
+-                                                            the values array must be non-empty. If the operator is Exists or DoesNotExist,
+-                                                            the values array must be empty. If the operator is Gt or Lt, the values
+-                                                            array must have a single element, which will be interpreted as an integer.
+-                                                            This array is replaced during a strategic merge patch.
+                                                           items:
+                                                             type: string
+                                                           type: array
+@@ -1262,12 +1054,6 @@
+                                                             Valid operators are In, NotIn, Exists, DoesNotExist. Gt, and Lt.
+                                                           type: string
+                                                         values:
+-                                                          description: |-
+-                                                            An array of string values. If the operator is In or NotIn,
+-                                                            the values array must be non-empty. If the operator is Exists or DoesNotExist,
+-                                                            the values array must be empty. If the operator is Gt or Lt, the values
+-                                                            array must have a single element, which will be interpreted as an integer.
+-                                                            This array is replaced during a strategic merge patch.
+                                                           items:
+                                                             type: string
+                                                           type: array
+@@ -1294,12 +1080,6 @@
+                                           type: array
+                                           x-kubernetes-list-type: atomic
+                                         requiredDuringSchedulingIgnoredDuringExecution:
+-                                          description: |-
+-                                            If the affinity requirements specified by this field are not met at
+-                                            scheduling time, the pod will not be scheduled onto the node.
+-                                            If the affinity requirements specified by this field cease to be met
+-                                            at some point during pod execution (e.g. due to an update), the system
+-                                            may or may not try to eventually evict the pod from its node.
+                                           properties:
+                                             nodeSelectorTerms:
+                                               description:
+@@ -1332,12 +1112,6 @@
+                                                             Valid operators are In, NotIn, Exists, DoesNotExist. Gt, and Lt.
+                                                           type: string
+                                                         values:
+-                                                          description: |-
+-                                                            An array of string values. If the operator is In or NotIn,
+-                                                            the values array must be non-empty. If the operator is Exists or DoesNotExist,
+-                                                            the values array must be empty. If the operator is Gt or Lt, the values
+-                                                            array must have a single element, which will be interpreted as an integer.
+-                                                            This array is replaced during a strategic merge patch.
+                                                           items:
+                                                             type: string
+                                                           type: array
+@@ -1369,12 +1143,6 @@
+                                                             Valid operators are In, NotIn, Exists, DoesNotExist. Gt, and Lt.
+                                                           type: string
+                                                         values:
+-                                                          description: |-
+-                                                            An array of string values. If the operator is In or NotIn,
+-                                                            the values array must be non-empty. If the operator is Exists or DoesNotExist,
+-                                                            the values array must be empty. If the operator is Gt or Lt, the values
+-                                                            array must have a single element, which will be interpreted as an integer.
+-                                                            This array is replaced during a strategic merge patch.
+                                                           items:
+                                                             type: string
+                                                           type: array
+@@ -1401,16 +1169,6 @@
+                                         zone, etc. as some other pod(s)).
+                                       properties:
+                                         preferredDuringSchedulingIgnoredDuringExecution:
+-                                          description: |-
+-                                            The scheduler will prefer to schedule pods to nodes that satisfy
+-                                            the affinity expressions specified by this field, but it may choose
+-                                            a node that violates one or more of the expressions. The node that is
+-                                            most preferred is the one with the greatest sum of weights, i.e.
+-                                            for each node that meets all of the scheduling requirements (resource
+-                                            request, requiredDuringScheduling affinity expressions, etc.),
+-                                            compute a sum by iterating through the elements of this field and adding
+-                                            "weight" to the sum if the node has pods which matches the corresponding podAffinityTerm; the
+-                                            node(s) with the highest sum are the most preferred.
+                                           items:
+                                             description:
+                                               The weights of all of the matched
+@@ -1477,29 +1235,11 @@
+                                                     type: object
+                                                     x-kubernetes-map-type: atomic
+                                                   matchLabelKeys:
+-                                                    description: |-
+-                                                      MatchLabelKeys is a set of pod label keys to select which pods will
+-                                                      be taken into consideration. The keys are used to lookup values from the
+-                                                      incoming pod labels, those key-value labels are merged with `labelSelector` as `key in (value)`
+-                                                      to select the group of existing pods which pods will be taken into consideration
+-                                                      for the incoming pod's pod (anti) affinity. Keys that don't exist in the incoming
+-                                                      pod labels will be ignored. The default value is empty.
+-                                                      The same key is forbidden to exist in both matchLabelKeys and labelSelector.
+-                                                      Also, matchLabelKeys cannot be set when labelSelector isn't set.
+                                                     items:
+                                                       type: string
+                                                     type: array
+                                                     x-kubernetes-list-type: atomic
+                                                   mismatchLabelKeys:
+-                                                    description: |-
+-                                                      MismatchLabelKeys is a set of pod label keys to select which pods will
+-                                                      be taken into consideration. The keys are used to lookup values from the
+-                                                      incoming pod labels, those key-value labels are merged with `labelSelector` as `key notin (value)`
+-                                                      to select the group of existing pods which pods will be taken into consideration
+-                                                      for the incoming pod's pod (anti) affinity. Keys that don't exist in the incoming
+-                                                      pod labels will be ignored. The default value is empty.
+-                                                      The same key is forbidden to exist in both mismatchLabelKeys and labelSelector.
+-                                                      Also, mismatchLabelKeys cannot be set when labelSelector isn't set.
+                                                     items:
+                                                       type: string
+                                                     type: array
+@@ -1571,12 +1311,6 @@
+                                                     type: array
+                                                     x-kubernetes-list-type: atomic
+                                                   topologyKey:
+-                                                    description: |-
+-                                                      This pod should be co-located (affinity) or not co-located (anti-affinity) with the pods matching
+-                                                      the labelSelector in the specified namespaces, where co-located is defined as running on a node
+-                                                      whose value of the label with key topologyKey matches that of any node on which any of the
+-                                                      selected pods is running.
+-                                                      Empty topologyKey is not allowed.
+                                                     type: string
+                                                 required:
+                                                   - topologyKey
+@@ -1594,22 +1328,7 @@
+                                           type: array
+                                           x-kubernetes-list-type: atomic
+                                         requiredDuringSchedulingIgnoredDuringExecution:
+-                                          description: |-
+-                                            If the affinity requirements specified by this field are not met at
+-                                            scheduling time, the pod will not be scheduled onto the node.
+-                                            If the affinity requirements specified by this field cease to be met
+-                                            at some point during pod execution (e.g. due to a pod label update), the
+-                                            system may or may not try to eventually evict the pod from its node.
+-                                            When there are multiple elements, the lists of nodes corresponding to each
+-                                            podAffinityTerm are intersected, i.e. all terms must be satisfied.
+                                           items:
+-                                            description: |-
+-                                              Defines a set of pods (namely those matching the labelSelector
+-                                              relative to the given namespace(s)) that this pod should be
+-                                              co-located (affinity) or not co-located (anti-affinity) with,
+-                                              where co-located is defined as running on a node whose value of
+-                                              the label with key <topologyKey> matches that of any node on which
+-                                              a pod of the set of pods is running
+                                             properties:
+                                               labelSelector:
+                                                 description: |-
+@@ -1664,29 +1383,11 @@
+                                                 type: object
+                                                 x-kubernetes-map-type: atomic
+                                               matchLabelKeys:
+-                                                description: |-
+-                                                  MatchLabelKeys is a set of pod label keys to select which pods will
+-                                                  be taken into consideration. The keys are used to lookup values from the
+-                                                  incoming pod labels, those key-value labels are merged with `labelSelector` as `key in (value)`
+-                                                  to select the group of existing pods which pods will be taken into consideration
+-                                                  for the incoming pod's pod (anti) affinity. Keys that don't exist in the incoming
+-                                                  pod labels will be ignored. The default value is empty.
+-                                                  The same key is forbidden to exist in both matchLabelKeys and labelSelector.
+-                                                  Also, matchLabelKeys cannot be set when labelSelector isn't set.
+                                                 items:
+                                                   type: string
+                                                 type: array
+                                                 x-kubernetes-list-type: atomic
+                                               mismatchLabelKeys:
+-                                                description: |-
+-                                                  MismatchLabelKeys is a set of pod label keys to select which pods will
+-                                                  be taken into consideration. The keys are used to lookup values from the
+-                                                  incoming pod labels, those key-value labels are merged with `labelSelector` as `key notin (value)`
+-                                                  to select the group of existing pods which pods will be taken into consideration
+-                                                  for the incoming pod's pod (anti) affinity. Keys that don't exist in the incoming
+-                                                  pod labels will be ignored. The default value is empty.
+-                                                  The same key is forbidden to exist in both mismatchLabelKeys and labelSelector.
+-                                                  Also, mismatchLabelKeys cannot be set when labelSelector isn't set.
+                                                 items:
+                                                   type: string
+                                                 type: array
+@@ -1757,12 +1458,6 @@
+                                                 type: array
+                                                 x-kubernetes-list-type: atomic
+                                               topologyKey:
+-                                                description: |-
+-                                                  This pod should be co-located (affinity) or not co-located (anti-affinity) with the pods matching
+-                                                  the labelSelector in the specified namespaces, where co-located is defined as running on a node
+-                                                  whose value of the label with key topologyKey matches that of any node on which any of the
+-                                                  selected pods is running.
+-                                                  Empty topologyKey is not allowed.
+                                                 type: string
+                                             required:
+                                               - topologyKey
+@@ -1777,16 +1472,6 @@
+                                         node, zone, etc. as some other pod(s)).
+                                       properties:
+                                         preferredDuringSchedulingIgnoredDuringExecution:
+-                                          description: |-
+-                                            The scheduler will prefer to schedule pods to nodes that satisfy
+-                                            the anti-affinity expressions specified by this field, but it may choose
+-                                            a node that violates one or more of the expressions. The node that is
+-                                            most preferred is the one with the greatest sum of weights, i.e.
+-                                            for each node that meets all of the scheduling requirements (resource
+-                                            request, requiredDuringScheduling anti-affinity expressions, etc.),
+-                                            compute a sum by iterating through the elements of this field and subtracting
+-                                            "weight" from the sum if the node has pods which matches the corresponding podAffinityTerm; the
+-                                            node(s) with the highest sum are the most preferred.
+                                           items:
+                                             description:
+                                               The weights of all of the matched
+@@ -1853,29 +1538,11 @@
+                                                     type: object
+                                                     x-kubernetes-map-type: atomic
+                                                   matchLabelKeys:
+-                                                    description: |-
+-                                                      MatchLabelKeys is a set of pod label keys to select which pods will
+-                                                      be taken into consideration. The keys are used to lookup values from the
+-                                                      incoming pod labels, those key-value labels are merged with `labelSelector` as `key in (value)`
+-                                                      to select the group of existing pods which pods will be taken into consideration
+-                                                      for the incoming pod's pod (anti) affinity. Keys that don't exist in the incoming
+-                                                      pod labels will be ignored. The default value is empty.
+-                                                      The same key is forbidden to exist in both matchLabelKeys and labelSelector.
+-                                                      Also, matchLabelKeys cannot be set when labelSelector isn't set.
+                                                     items:
+                                                       type: string
+                                                     type: array
+                                                     x-kubernetes-list-type: atomic
+                                                   mismatchLabelKeys:
+-                                                    description: |-
+-                                                      MismatchLabelKeys is a set of pod label keys to select which pods will
+-                                                      be taken into consideration. The keys are used to lookup values from the
+-                                                      incoming pod labels, those key-value labels are merged with `labelSelector` as `key notin (value)`
+-                                                      to select the group of existing pods which pods will be taken into consideration
+-                                                      for the incoming pod's pod (anti) affinity. Keys that don't exist in the incoming
+-                                                      pod labels will be ignored. The default value is empty.
+-                                                      The same key is forbidden to exist in both mismatchLabelKeys and labelSelector.
+-                                                      Also, mismatchLabelKeys cannot be set when labelSelector isn't set.
+                                                     items:
+                                                       type: string
+                                                     type: array
+@@ -1947,12 +1614,6 @@
+                                                     type: array
+                                                     x-kubernetes-list-type: atomic
+                                                   topologyKey:
+-                                                    description: |-
+-                                                      This pod should be co-located (affinity) or not co-located (anti-affinity) with the pods matching
+-                                                      the labelSelector in the specified namespaces, where co-located is defined as running on a node
+-                                                      whose value of the label with key topologyKey matches that of any node on which any of the
+-                                                      selected pods is running.
+-                                                      Empty topologyKey is not allowed.
+                                                     type: string
+                                                 required:
+                                                   - topologyKey
+@@ -1970,22 +1631,7 @@
+                                           type: array
+                                           x-kubernetes-list-type: atomic
+                                         requiredDuringSchedulingIgnoredDuringExecution:
+-                                          description: |-
+-                                            If the anti-affinity requirements specified by this field are not met at
+-                                            scheduling time, the pod will not be scheduled onto the node.
+-                                            If the anti-affinity requirements specified by this field cease to be met
+-                                            at some point during pod execution (e.g. due to a pod label update), the
+-                                            system may or may not try to eventually evict the pod from its node.
+-                                            When there are multiple elements, the lists of nodes corresponding to each
+-                                            podAffinityTerm are intersected, i.e. all terms must be satisfied.
+                                           items:
+-                                            description: |-
+-                                              Defines a set of pods (namely those matching the labelSelector
+-                                              relative to the given namespace(s)) that this pod should be
+-                                              co-located (affinity) or not co-located (anti-affinity) with,
+-                                              where co-located is defined as running on a node whose value of
+-                                              the label with key <topologyKey> matches that of any node on which
+-                                              a pod of the set of pods is running
+                                             properties:
+                                               labelSelector:
+                                                 description: |-
+@@ -2040,29 +1686,11 @@
+                                                 type: object
+                                                 x-kubernetes-map-type: atomic
+                                               matchLabelKeys:
+-                                                description: |-
+-                                                  MatchLabelKeys is a set of pod label keys to select which pods will
+-                                                  be taken into consideration. The keys are used to lookup values from the
+-                                                  incoming pod labels, those key-value labels are merged with `labelSelector` as `key in (value)`
+-                                                  to select the group of existing pods which pods will be taken into consideration
+-                                                  for the incoming pod's pod (anti) affinity. Keys that don't exist in the incoming
+-                                                  pod labels will be ignored. The default value is empty.
+-                                                  The same key is forbidden to exist in both matchLabelKeys and labelSelector.
+-                                                  Also, matchLabelKeys cannot be set when labelSelector isn't set.
+                                                 items:
+                                                   type: string
+                                                 type: array
+                                                 x-kubernetes-list-type: atomic
+                                               mismatchLabelKeys:
+-                                                description: |-
+-                                                  MismatchLabelKeys is a set of pod label keys to select which pods will
+-                                                  be taken into consideration. The keys are used to lookup values from the
+-                                                  incoming pod labels, those key-value labels are merged with `labelSelector` as `key notin (value)`
+-                                                  to select the group of existing pods which pods will be taken into consideration
+-                                                  for the incoming pod's pod (anti) affinity. Keys that don't exist in the incoming
+-                                                  pod labels will be ignored. The default value is empty.
+-                                                  The same key is forbidden to exist in both mismatchLabelKeys and labelSelector.
+-                                                  Also, mismatchLabelKeys cannot be set when labelSelector isn't set.
+                                                 items:
+                                                   type: string
+                                                 type: array
+@@ -2133,12 +1761,6 @@
+                                                 type: array
+                                                 x-kubernetes-list-type: atomic
+                                               topologyKey:
+-                                                description: |-
+-                                                  This pod should be co-located (affinity) or not co-located (anti-affinity) with the pods matching
+-                                                  the labelSelector in the specified namespaces, where co-located is defined as running on a node
+-                                                  whose value of the label with key topologyKey matches that of any node on which any of the
+-                                                  selected pods is running.
+-                                                  Empty topologyKey is not allowed.
+                                                 type: string
+                                             required:
+                                               - topologyKey
+@@ -2235,12 +1857,6 @@
+                                           If the key is empty, operator must be Exists; this combination means to match all values and all keys.
+                                         type: string
+                                       operator:
+-                                        description: |-
+-                                          Operator represents a key's relationship to the value.
+-                                          Valid operators are Exists, Equal, Lt, and Gt. Defaults to Equal.
+-                                          Exists is equivalent to wildcard for value, so that a pod can
+-                                          tolerate all taints of a particular category.
+-                                          Lt and Gt perform numeric comparisons (requires feature gate TaintTolerationComparisonOperators).
+                                         type: string
+                                       tolerationSeconds:
+                                         description: |-
+@@ -2304,16 +1920,6 @@
+                                         rules for the pod.
+                                       properties:
+                                         preferredDuringSchedulingIgnoredDuringExecution:
+-                                          description: |-
+-                                            The scheduler will prefer to schedule pods to nodes that satisfy
+-                                            the affinity expressions specified by this field, but it may choose
+-                                            a node that violates one or more of the expressions. The node that is
+-                                            most preferred is the one with the greatest sum of weights, i.e.
+-                                            for each node that meets all of the scheduling requirements (resource
+-                                            request, requiredDuringScheduling affinity expressions, etc.),
+-                                            compute a sum by iterating through the elements of this field and adding
+-                                            "weight" to the sum if the node matches the corresponding matchExpressions; the
+-                                            node(s) with the highest sum are the most preferred.
+                                           items:
+                                             description: |-
+                                               An empty preferred scheduling term matches all objects with implicit weight 0
+@@ -2345,12 +1951,6 @@
+                                                             Valid operators are In, NotIn, Exists, DoesNotExist. Gt, and Lt.
+                                                           type: string
+                                                         values:
+-                                                          description: |-
+-                                                            An array of string values. If the operator is In or NotIn,
+-                                                            the values array must be non-empty. If the operator is Exists or DoesNotExist,
+-                                                            the values array must be empty. If the operator is Gt or Lt, the values
+-                                                            array must have a single element, which will be interpreted as an integer.
+-                                                            This array is replaced during a strategic merge patch.
+                                                           items:
+                                                             type: string
+                                                           type: array
+@@ -2382,12 +1982,6 @@
+                                                             Valid operators are In, NotIn, Exists, DoesNotExist. Gt, and Lt.
+                                                           type: string
+                                                         values:
+-                                                          description: |-
+-                                                            An array of string values. If the operator is In or NotIn,
+-                                                            the values array must be non-empty. If the operator is Exists or DoesNotExist,
+-                                                            the values array must be empty. If the operator is Gt or Lt, the values
+-                                                            array must have a single element, which will be interpreted as an integer.
+-                                                            This array is replaced during a strategic merge patch.
+                                                           items:
+                                                             type: string
+                                                           type: array
+@@ -2414,12 +2008,6 @@
+                                           type: array
+                                           x-kubernetes-list-type: atomic
+                                         requiredDuringSchedulingIgnoredDuringExecution:
+-                                          description: |-
+-                                            If the affinity requirements specified by this field are not met at
+-                                            scheduling time, the pod will not be scheduled onto the node.
+-                                            If the affinity requirements specified by this field cease to be met
+-                                            at some point during pod execution (e.g. due to an update), the system
+-                                            may or may not try to eventually evict the pod from its node.
+                                           properties:
+                                             nodeSelectorTerms:
+                                               description:
+@@ -2452,12 +2040,6 @@
+                                                             Valid operators are In, NotIn, Exists, DoesNotExist. Gt, and Lt.
+                                                           type: string
+                                                         values:
+-                                                          description: |-
+-                                                            An array of string values. If the operator is In or NotIn,
+-                                                            the values array must be non-empty. If the operator is Exists or DoesNotExist,
+-                                                            the values array must be empty. If the operator is Gt or Lt, the values
+-                                                            array must have a single element, which will be interpreted as an integer.
+-                                                            This array is replaced during a strategic merge patch.
+                                                           items:
+                                                             type: string
+                                                           type: array
+@@ -2489,12 +2071,6 @@
+                                                             Valid operators are In, NotIn, Exists, DoesNotExist. Gt, and Lt.
+                                                           type: string
+                                                         values:
+-                                                          description: |-
+-                                                            An array of string values. If the operator is In or NotIn,
+-                                                            the values array must be non-empty. If the operator is Exists or DoesNotExist,
+-                                                            the values array must be empty. If the operator is Gt or Lt, the values
+-                                                            array must have a single element, which will be interpreted as an integer.
+-                                                            This array is replaced during a strategic merge patch.
+                                                           items:
+                                                             type: string
+                                                           type: array
+@@ -2521,16 +2097,6 @@
+                                         zone, etc. as some other pod(s)).
+                                       properties:
+                                         preferredDuringSchedulingIgnoredDuringExecution:
+-                                          description: |-
+-                                            The scheduler will prefer to schedule pods to nodes that satisfy
+-                                            the affinity expressions specified by this field, but it may choose
+-                                            a node that violates one or more of the expressions. The node that is
+-                                            most preferred is the one with the greatest sum of weights, i.e.
+-                                            for each node that meets all of the scheduling requirements (resource
+-                                            request, requiredDuringScheduling affinity expressions, etc.),
+-                                            compute a sum by iterating through the elements of this field and adding
+-                                            "weight" to the sum if the node has pods which matches the corresponding podAffinityTerm; the
+-                                            node(s) with the highest sum are the most preferred.
+                                           items:
+                                             description:
+                                               The weights of all of the matched
+@@ -2597,29 +2163,11 @@
+                                                     type: object
+                                                     x-kubernetes-map-type: atomic
+                                                   matchLabelKeys:
+-                                                    description: |-
+-                                                      MatchLabelKeys is a set of pod label keys to select which pods will
+-                                                      be taken into consideration. The keys are used to lookup values from the
+-                                                      incoming pod labels, those key-value labels are merged with `labelSelector` as `key in (value)`
+-                                                      to select the group of existing pods which pods will be taken into consideration
+-                                                      for the incoming pod's pod (anti) affinity. Keys that don't exist in the incoming
+-                                                      pod labels will be ignored. The default value is empty.
+-                                                      The same key is forbidden to exist in both matchLabelKeys and labelSelector.
+-                                                      Also, matchLabelKeys cannot be set when labelSelector isn't set.
+                                                     items:
+                                                       type: string
+                                                     type: array
+                                                     x-kubernetes-list-type: atomic
+                                                   mismatchLabelKeys:
+-                                                    description: |-
+-                                                      MismatchLabelKeys is a set of pod label keys to select which pods will
+-                                                      be taken into consideration. The keys are used to lookup values from the
+-                                                      incoming pod labels, those key-value labels are merged with `labelSelector` as `key notin (value)`
+-                                                      to select the group of existing pods which pods will be taken into consideration
+-                                                      for the incoming pod's pod (anti) affinity. Keys that don't exist in the incoming
+-                                                      pod labels will be ignored. The default value is empty.
+-                                                      The same key is forbidden to exist in both mismatchLabelKeys and labelSelector.
+-                                                      Also, mismatchLabelKeys cannot be set when labelSelector isn't set.
+                                                     items:
+                                                       type: string
+                                                     type: array
+@@ -2691,12 +2239,6 @@
+                                                     type: array
+                                                     x-kubernetes-list-type: atomic
+                                                   topologyKey:
+-                                                    description: |-
+-                                                      This pod should be co-located (affinity) or not co-located (anti-affinity) with the pods matching
+-                                                      the labelSelector in the specified namespaces, where co-located is defined as running on a node
+-                                                      whose value of the label with key topologyKey matches that of any node on which any of the
+-                                                      selected pods is running.
+-                                                      Empty topologyKey is not allowed.
+                                                     type: string
+                                                 required:
+                                                   - topologyKey
+@@ -2714,22 +2256,7 @@
+                                           type: array
+                                           x-kubernetes-list-type: atomic
+                                         requiredDuringSchedulingIgnoredDuringExecution:
+-                                          description: |-
+-                                            If the affinity requirements specified by this field are not met at
+-                                            scheduling time, the pod will not be scheduled onto the node.
+-                                            If the affinity requirements specified by this field cease to be met
+-                                            at some point during pod execution (e.g. due to a pod label update), the
+-                                            system may or may not try to eventually evict the pod from its node.
+-                                            When there are multiple elements, the lists of nodes corresponding to each
+-                                            podAffinityTerm are intersected, i.e. all terms must be satisfied.
+                                           items:
+-                                            description: |-
+-                                              Defines a set of pods (namely those matching the labelSelector
+-                                              relative to the given namespace(s)) that this pod should be
+-                                              co-located (affinity) or not co-located (anti-affinity) with,
+-                                              where co-located is defined as running on a node whose value of
+-                                              the label with key <topologyKey> matches that of any node on which
+-                                              a pod of the set of pods is running
+                                             properties:
+                                               labelSelector:
+                                                 description: |-
+@@ -2784,29 +2311,11 @@
+                                                 type: object
+                                                 x-kubernetes-map-type: atomic
+                                               matchLabelKeys:
+-                                                description: |-
+-                                                  MatchLabelKeys is a set of pod label keys to select which pods will
+-                                                  be taken into consideration. The keys are used to lookup values from the
+-                                                  incoming pod labels, those key-value labels are merged with `labelSelector` as `key in (value)`
+-                                                  to select the group of existing pods which pods will be taken into consideration
+-                                                  for the incoming pod's pod (anti) affinity. Keys that don't exist in the incoming
+-                                                  pod labels will be ignored. The default value is empty.
+-                                                  The same key is forbidden to exist in both matchLabelKeys and labelSelector.
+-                                                  Also, matchLabelKeys cannot be set when labelSelector isn't set.
+                                                 items:
+                                                   type: string
+                                                 type: array
+                                                 x-kubernetes-list-type: atomic
+                                               mismatchLabelKeys:
+-                                                description: |-
+-                                                  MismatchLabelKeys is a set of pod label keys to select which pods will
+-                                                  be taken into consideration. The keys are used to lookup values from the
+-                                                  incoming pod labels, those key-value labels are merged with `labelSelector` as `key notin (value)`
+-                                                  to select the group of existing pods which pods will be taken into consideration
+-                                                  for the incoming pod's pod (anti) affinity. Keys that don't exist in the incoming
+-                                                  pod labels will be ignored. The default value is empty.
+-                                                  The same key is forbidden to exist in both mismatchLabelKeys and labelSelector.
+-                                                  Also, mismatchLabelKeys cannot be set when labelSelector isn't set.
+                                                 items:
+                                                   type: string
+                                                 type: array
+@@ -2877,12 +2386,6 @@
+                                                 type: array
+                                                 x-kubernetes-list-type: atomic
+                                               topologyKey:
+-                                                description: |-
+-                                                  This pod should be co-located (affinity) or not co-located (anti-affinity) with the pods matching
+-                                                  the labelSelector in the specified namespaces, where co-located is defined as running on a node
+-                                                  whose value of the label with key topologyKey matches that of any node on which any of the
+-                                                  selected pods is running.
+-                                                  Empty topologyKey is not allowed.
+                                                 type: string
+                                             required:
+                                               - topologyKey
+@@ -2897,16 +2400,6 @@
+                                         node, zone, etc. as some other pod(s)).
+                                       properties:
+                                         preferredDuringSchedulingIgnoredDuringExecution:
+-                                          description: |-
+-                                            The scheduler will prefer to schedule pods to nodes that satisfy
+-                                            the anti-affinity expressions specified by this field, but it may choose
+-                                            a node that violates one or more of the expressions. The node that is
+-                                            most preferred is the one with the greatest sum of weights, i.e.
+-                                            for each node that meets all of the scheduling requirements (resource
+-                                            request, requiredDuringScheduling anti-affinity expressions, etc.),
+-                                            compute a sum by iterating through the elements of this field and subtracting
+-                                            "weight" from the sum if the node has pods which matches the corresponding podAffinityTerm; the
+-                                            node(s) with the highest sum are the most preferred.
+                                           items:
+                                             description:
+                                               The weights of all of the matched
+@@ -2973,29 +2466,11 @@
+                                                     type: object
+                                                     x-kubernetes-map-type: atomic
+                                                   matchLabelKeys:
+-                                                    description: |-
+-                                                      MatchLabelKeys is a set of pod label keys to select which pods will
+-                                                      be taken into consideration. The keys are used to lookup values from the
+-                                                      incoming pod labels, those key-value labels are merged with `labelSelector` as `key in (value)`
+-                                                      to select the group of existing pods which pods will be taken into consideration
+-                                                      for the incoming pod's pod (anti) affinity. Keys that don't exist in the incoming
+-                                                      pod labels will be ignored. The default value is empty.
+-                                                      The same key is forbidden to exist in both matchLabelKeys and labelSelector.
+-                                                      Also, matchLabelKeys cannot be set when labelSelector isn't set.
+                                                     items:
+                                                       type: string
+                                                     type: array
+                                                     x-kubernetes-list-type: atomic
+                                                   mismatchLabelKeys:
+-                                                    description: |-
+-                                                      MismatchLabelKeys is a set of pod label keys to select which pods will
+-                                                      be taken into consideration. The keys are used to lookup values from the
+-                                                      incoming pod labels, those key-value labels are merged with `labelSelector` as `key notin (value)`
+-                                                      to select the group of existing pods which pods will be taken into consideration
+-                                                      for the incoming pod's pod (anti) affinity. Keys that don't exist in the incoming
+-                                                      pod labels will be ignored. The default value is empty.
+-                                                      The same key is forbidden to exist in both mismatchLabelKeys and labelSelector.
+-                                                      Also, mismatchLabelKeys cannot be set when labelSelector isn't set.
+                                                     items:
+                                                       type: string
+                                                     type: array
+@@ -3067,12 +2542,6 @@
+                                                     type: array
+                                                     x-kubernetes-list-type: atomic
+                                                   topologyKey:
+-                                                    description: |-
+-                                                      This pod should be co-located (affinity) or not co-located (anti-affinity) with the pods matching
+-                                                      the labelSelector in the specified namespaces, where co-located is defined as running on a node
+-                                                      whose value of the label with key topologyKey matches that of any node on which any of the
+-                                                      selected pods is running.
+-                                                      Empty topologyKey is not allowed.
+                                                     type: string
+                                                 required:
+                                                   - topologyKey
+@@ -3090,22 +2559,7 @@
+                                           type: array
+                                           x-kubernetes-list-type: atomic
+                                         requiredDuringSchedulingIgnoredDuringExecution:
+-                                          description: |-
+-                                            If the anti-affinity requirements specified by this field are not met at
+-                                            scheduling time, the pod will not be scheduled onto the node.
+-                                            If the anti-affinity requirements specified by this field cease to be met
+-                                            at some point during pod execution (e.g. due to a pod label update), the
+-                                            system may or may not try to eventually evict the pod from its node.
+-                                            When there are multiple elements, the lists of nodes corresponding to each
+-                                            podAffinityTerm are intersected, i.e. all terms must be satisfied.
+                                           items:
+-                                            description: |-
+-                                              Defines a set of pods (namely those matching the labelSelector
+-                                              relative to the given namespace(s)) that this pod should be
+-                                              co-located (affinity) or not co-located (anti-affinity) with,
+-                                              where co-located is defined as running on a node whose value of
+-                                              the label with key <topologyKey> matches that of any node on which
+-                                              a pod of the set of pods is running
+                                             properties:
+                                               labelSelector:
+                                                 description: |-
+@@ -3160,29 +2614,11 @@
+                                                 type: object
+                                                 x-kubernetes-map-type: atomic
+                                               matchLabelKeys:
+-                                                description: |-
+-                                                  MatchLabelKeys is a set of pod label keys to select which pods will
+-                                                  be taken into consideration. The keys are used to lookup values from the
+-                                                  incoming pod labels, those key-value labels are merged with `labelSelector` as `key in (value)`
+-                                                  to select the group of existing pods which pods will be taken into consideration
+-                                                  for the incoming pod's pod (anti) affinity. Keys that don't exist in the incoming
+-                                                  pod labels will be ignored. The default value is empty.
+-                                                  The same key is forbidden to exist in both matchLabelKeys and labelSelector.
+-                                                  Also, matchLabelKeys cannot be set when labelSelector isn't set.
+                                                 items:
+                                                   type: string
+                                                 type: array
+                                                 x-kubernetes-list-type: atomic
+                                               mismatchLabelKeys:
+-                                                description: |-
+-                                                  MismatchLabelKeys is a set of pod label keys to select which pods will
+-                                                  be taken into consideration. The keys are used to lookup values from the
+-                                                  incoming pod labels, those key-value labels are merged with `labelSelector` as `key notin (value)`
+-                                                  to select the group of existing pods which pods will be taken into consideration
+-                                                  for the incoming pod's pod (anti) affinity. Keys that don't exist in the incoming
+-                                                  pod labels will be ignored. The default value is empty.
+-                                                  The same key is forbidden to exist in both mismatchLabelKeys and labelSelector.
+-                                                  Also, mismatchLabelKeys cannot be set when labelSelector isn't set.
+                                                 items:
+                                                   type: string
+                                                 type: array
+@@ -3253,12 +2689,6 @@
+                                                 type: array
+                                                 x-kubernetes-list-type: atomic
+                                               topologyKey:
+-                                                description: |-
+-                                                  This pod should be co-located (affinity) or not co-located (anti-affinity) with the pods matching
+-                                                  the labelSelector in the specified namespaces, where co-located is defined as running on a node
+-                                                  whose value of the label with key topologyKey matches that of any node on which any of the
+-                                                  selected pods is running.
+-                                                  Empty topologyKey is not allowed.
+                                                 type: string
+                                             required:
+                                               - topologyKey
+@@ -3355,12 +2785,6 @@
+                                           If the key is empty, operator must be Exists; this combination means to match all values and all keys.
+                                         type: string
+                                       operator:
+-                                        description: |-
+-                                          Operator represents a key's relationship to the value.
+-                                          Valid operators are Exists, Equal, Lt, and Gt. Defaults to Equal.
+-                                          Exists is equivalent to wildcard for value, so that a pod can
+-                                          tolerate all taints of a particular category.
+-                                          Lt and Gt perform numeric comparisons (requires feature gate TaintTolerationComparisonOperators).
+                                         type: string
+                                       tolerationSeconds:
+                                         description: |-
