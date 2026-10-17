@@ -1,0 +1,10 @@
+--- Chart.yaml
++++ Chart.yaml
+@@ -2,6 +2,7 @@
+   artifacthub.io/changes: |
+     - kind: added
+       description: "feat(hub): support traefik hub v3.21.0"
++  fleet.cattle.io/bundle-id: rke2
+   traefik.io/hub-max-version: v3.21.0
+   traefik.io/hub-min-version: v3.19.3
+   traefik.io/proxy-max-version: v3.7.13

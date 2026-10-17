@@ -1,0 +1,33 @@
+annotations:
+  artifacthub.io/changes: |
+    - kind: changed
+      description: "This is a major release with breaking changes. Read the upgrade notes before upgrading."
+      links:
+        - name: Upgrade Notes
+          url: https://github.com/traefik/traefik-helm-chart/releases/tag/v42.0.0
+  traefik.io/hub-max-version: v3.21.3
+  traefik.io/hub-min-version: v3.19.3
+  traefik.io/proxy-max-version: v3.7.14
+  traefik.io/proxy-min-version: v3.6.0
+apiVersion: v2
+appVersion: v3.7.14
+description: A Traefik based Kubernetes ingress controller
+home: https://traefik.io/
+icon: https://raw.githubusercontent.com/traefik/traefik/master/docs/content/assets/img/traefik.logo.png
+keywords:
+- traefik
+- ingress
+- networking
+kubeVersion: '>=1.30.0-0'
+maintainers:
+- email: michel.loiseleur@traefik.io
+  name: mloiseleur
+- email: remi.buisson@traefik.io
+  name: darkweaver87
+- name: jnoordsij
+name: rke2-traefik
+sources:
+- https://github.com/traefik/traefik-helm-chart
+- https://github.com/traefik/traefik
+type: application
+version: 42.0.0
