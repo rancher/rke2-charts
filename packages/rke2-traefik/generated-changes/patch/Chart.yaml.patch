@@ -1,14 +1,14 @@
 --- charts-original/Chart.yaml
 +++ charts/Chart.yaml
-@@ -2,6 +2,7 @@
-   artifacthub.io/changes: |
+@@ -8,6 +8,7 @@
+       description: "feat(deps): update traefik docker tag to v3.7.15"
      - kind: added
-       description: "feat(hub): support traefik hub v3.21.0"
+       description: "feat(chart): support top-level and global imagePullSecrets"
 +  fleet.cattle.io/bundle-id: rke2
-   traefik.io/hub-max-version: v3.21.0
+   traefik.io/hub-max-version: v3.21.4
    traefik.io/hub-min-version: v3.19.3
-   traefik.io/proxy-max-version: v3.7.13
-@@ -22,7 +23,7 @@
+   traefik.io/proxy-max-version: v3.7.15
+@@ -28,7 +29,7 @@
  - email: remi.buisson@traefik.io
    name: darkweaver87
  - name: jnoordsij

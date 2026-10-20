@@ -46,7 +46,7 @@
  {{- end -}}
  {{- define "providers.knative.namespaces" -}}
  {{- default (include "traefik.namespace" .) (join "," .Values.providers.knative.namespaces) }}
-@@ -589,3 +606,11 @@
+@@ -591,3 +608,11 @@
      {{- end -}}
      {{- join " " $drivers -}}
  {{- end -}}

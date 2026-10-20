@@ -6,10 +6,10 @@
  {{- if and .Values.rbac.enabled (not .Values.rbac.namespaced) }}
  ---
  kind: ClusterRole
-@@ -48,7 +49,7 @@
-       - delete
-       - deletecollection
-     {{- end }}
+@@ -42,7 +43,7 @@
+       - get
+       - list
+       - watch
 -  {{- if or .Values.providers.kubernetesIngress.enabled .Values.providers.kubernetesIngressNGINX.enabled }}
 +  {{- if or .Values.providers.kubernetesIngress.enabled $kubernetesIngressNGINX.enabled }}
    - apiGroups:
