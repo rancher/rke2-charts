@@ -15,7 +15,7 @@ CURRENT_VERSION=${CURRENT_URL##*/traefik-}
 CURRENT_VERSION=${CURRENT_VERSION%.tgz}
 USER=$(whoami)
 if [[ "${CURRENT_VERSION}" == "${NEW_VERSION}" ]]; then
-    echo "Traefik chart is already at ${NEW_VERSION}, nothing to do"
+    echo "Traefik chart is already at ${NEW_VERSION}, nothing to do" >&2
     exit 0
 fi
 

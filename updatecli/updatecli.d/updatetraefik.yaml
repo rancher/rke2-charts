@@ -31,11 +31,6 @@ targets:
         - name: TRAEFIK_CHART_VERSION
           value: '{{ source "traefik_chart" }}'
         - name: PATH
-      changedif:
-        kind: file/checksum
-        spec:
-          files:
-            - packages/rke2-traefik/package.yaml
 
 scms:
   default:
