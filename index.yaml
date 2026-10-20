@@ -19341,6 +19341,34 @@ entries:
           description: serviceAccount.create defaults to true, so CoreDNS runs as its own ServiceAccount and the chart's ClusterRole is no longer bound to the namespace's default ServiceAccount, which every pod without its own account uses
     apiVersion: v2
     appVersion: 1.14.7
+    created: "2026-10-20T19:25:04.321828555Z"
+    description: CoreDNS is a DNS server that chains plugins and provides Kubernetes
+      DNS Services
+    digest: 17767be9da2a8025692839de29f488824aa6533e30fa7d782b69597f7a577121
+    home: https://coredns.io
+    icon: https://coredns.io/images/CoreDNS_Colour_Horizontal.png
+    keywords:
+    - coredns
+    - dns
+    - kubedns
+    maintainers:
+    - name: mrueg
+    - name: haad
+    - name: hagaibarel
+    - name: shubham-cmyk
+    name: rke2-coredns
+    sources:
+    - https://github.com/coredns/coredns
+    type: application
+    urls:
+    - assets/rke2-coredns/rke2-coredns-1.49.001.tgz
+    version: 1.49.001
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: security
+          description: serviceAccount.create defaults to true, so CoreDNS runs as its own ServiceAccount and the chart's ClusterRole is no longer bound to the namespace's default ServiceAccount, which every pod without its own account uses
+    apiVersion: v2
+    appVersion: 1.14.7
     created: "2026-10-20T19:14:27.192187499Z"
     description: CoreDNS is a DNS server that chains plugins and provides Kubernetes
       DNS Services
@@ -29570,6 +29598,27 @@ entries:
   rke2-multus:
   - apiVersion: v1
     appVersion: 4.3.1
+    created: "2026-10-20T19:25:04.865323879Z"
+    dependencies:
+    - condition: rke2-whereabouts.enabled
+      name: rke2-whereabouts
+      repository: file://./charts/rke2-whereabouts
+    description: Multus Helm chart for Kubernetes
+    digest: a3f55825398d1f392b2810ddb0f644a61902fc0e2ee2bd1307c3db5ebd083cf3
+    home: https://github.com/k8snetworkplumbingwg/multus-cni
+    icon: https://raw.githubusercontent.com/k8snetworkplumbingwg/multus-cni/master/doc/images/Multus.png
+    maintainers:
+    - email: charts@rancher.com
+      name: Rancher Labs
+    name: rke2-multus
+    sources:
+    - https://github.com/intel/multus-cni
+    type: application
+    urls:
+    - assets/rke2-multus/rke2-multus-v4.3.114.tgz
+    version: v4.3.114
+  - apiVersion: v1
+    appVersion: 4.3.1
     created: "2026-10-20T18:05:57.529869212Z"
     dependencies:
     - condition: rke2-whereabouts.enabled
@@ -32432,6 +32481,15 @@ entries:
     version: v3.7.1-build2021041601
   rke2-multus-crd:
   - apiVersion: v1
+    created: "2026-10-20T19:25:04.768527846Z"
+    description: Installs the CRDs for rke2-multus
+    digest: f47238038223a6f7bc5421e9772030cb6063f1cf0305b65f7682519842a46b4b
+    name: rke2-multus-crd
+    type: application
+    urls:
+    - assets/rke2-multus/rke2-multus-crd-4.3.114.tgz
+    version: 4.3.114
+  - apiVersion: v1
     created: "2026-10-20T18:05:57.449329989Z"
     description: Installs the CRDs for rke2-multus
     digest: 2ad54d968f5c17aeddbdbead820b1bfdc128051f712492f97a0dc41d1c2bc6cc
@@ -32667,6 +32725,24 @@ entries:
     - assets/rke2-runtimeclasses/rke2-runtimeclasses-0.1.000.tgz
     version: 0.1.000
   rke2-security-responder:
+  - apiVersion: v2
+    appVersion: 0.1.9
+    created: "2026-10-20T19:25:04.878693642Z"
+    description: RKE2 Security Responder for in-cluster CVE/security notifications
+      and telemetry
+    digest: de410a2602748614c77ec32043277c689d6b86ce9c93e53202709cf1a79269f5
+    keywords:
+    - rke2
+    - security
+    - telemetry
+    maintainers:
+    - email: rke2-maintainers@suse.com
+      name: RKE2 Team
+    name: rke2-security-responder
+    type: application
+    urls:
+    - assets/rke2-security-responder/rke2-security-responder-0.1.901.tgz
+    version: 0.1.901
   - apiVersion: v2
     appVersion: 0.1.8
     created: "2026-10-13T10:13:06.434971491Z"
