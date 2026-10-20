@@ -4208,6 +4208,16 @@ entries:
   rke2-calico-crd:
   - apiVersion: v2
     appVersion: v3.33.0
+    created: "2026-10-20T17:15:17.548613937Z"
+    description: Installs crd.projectcalico.org and operator.tigera.io Custom Resource
+      Definitions (CRDs)
+    digest: 2a588222754238ae87835b2b39d9d236c54c093427a3009cc671938f68e08d35
+    name: rke2-calico-crd
+    urls:
+    - assets/rke2-calico-crd-3.33/rke2-calico-crd-v3.33.001.tgz
+    version: v3.33.001
+  - apiVersion: v2
+    appVersion: v3.33.0
     created: "2026-10-07T18:43:35.606454837Z"
     description: Installs crd.projectcalico.org and operator.tigera.io Custom Resource
       Definitions (CRDs)
