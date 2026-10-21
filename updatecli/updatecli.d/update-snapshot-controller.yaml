@@ -1,0 +1,63 @@
+---
+name: "Update Snapshot Controller Chart"
+
+sources:
+  snapshot_controller_image:
+    name: Get Snapshot Controller image version
+    kind: githubrelease
+    spec:
+      owner: rancher
+      repository: image-build-external-snapshotter
+      token: '{{ requiredEnv .github.token }}'
+      username: '{{ requiredEnv .github.username }}'
+      typefilter:
+        release: true
+        draft: false
+        prerelease: false
+      versionfilter:
+        kind: regex
+        # pattern accepts any semver constraint
+        pattern: "v[0-9]+.[0-9]+.[0-9]+-build[0-9]+"
+
+targets:
+  snapshot_controller:
+    name: Update image
+    kind: shell
+    scmid: default
+    sourceid: snapshot_controller_image
+    spec:
+      command: 'updatecli/scripts/update-snapshot-controller.sh'
+      environments:
+        - name: SNAPSHOT_CONTROLLER_IMAGE_VERSION
+          value: '{{ source "snapshot_controller_image" }}'
+        - name: PATH
+        - name: UPDATECLI_GITHUB_WORKFLOW_URL
+        - name: GH_TOKEN
+
+scms:
+  default:
+    kind: github
+    spec:
+      token: '{{ requiredEnv .github.token }}'
+      username: '{{ requiredEnv .github.username }}'
+      user: '{{ .github.username }}'
+      email: '{{ .github.email }}'
+      owner: '{{ .github.owner }}'
+      repository: '{{ .github.repository }}'
+      branch: '{{ .github.branch }}'
+
+actions:
+  default:
+    title: Update Snapshot Controller image {{ source "snapshot_controller_image" }}
+    kind: github/pullrequest
+    spec:
+      strategy:
+        method: manual
+      description:
+        <h3>Chart Images</h3>
+        <ul>
+          <li>rancher/hardened-snapshot-controller:{{ source "snapshot_controller_image" }}</li>
+        </ul>
+      labels:
+        - updatecli
+    scmid: default
