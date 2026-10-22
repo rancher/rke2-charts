@@ -22513,6 +22513,19 @@ entries:
   rke2-flannel:
   - apiVersion: v1
     appVersion: v0.28.10
+    created: "2026-10-22T17:00:52.625114678Z"
+    description: Install Flannel Network Plugin.
+    digest: 1c27b8b0d75b3e94ff4793303ac81d1e3f14926b6fb4eb757a033b65e8ef5887
+    keywords:
+    - Flannel
+    name: rke2-flannel
+    sources:
+    - https://github.com/rancher/rke2-charts
+    urls:
+    - assets/rke2-flannel/rke2-flannel-v0.28.1004.tgz
+    version: v0.28.1004
+  - apiVersion: v1
+    appVersion: v0.28.10
     created: "2026-10-20T17:56:24.669296783Z"
     description: Install Flannel Network Plugin.
     digest: ab7674e6d643cfcf2de105abe249a6a71d18a7b6805ff968c95711dbfaba931b
@@ -29682,6 +29695,27 @@ entries:
   rke2-multus:
   - apiVersion: v1
     appVersion: 4.3.1
+    created: "2026-10-22T17:00:53.204514788Z"
+    dependencies:
+    - condition: rke2-whereabouts.enabled
+      name: rke2-whereabouts
+      repository: file://./charts/rke2-whereabouts
+    description: Multus Helm chart for Kubernetes
+    digest: bc1ed6d386f7f1a0bba024af127d317a4b199493219314e7c6391de4bf72fe50
+    home: https://github.com/k8snetworkplumbingwg/multus-cni
+    icon: https://raw.githubusercontent.com/k8snetworkplumbingwg/multus-cni/master/doc/images/Multus.png
+    maintainers:
+    - email: charts@rancher.com
+      name: Rancher Labs
+    name: rke2-multus
+    sources:
+    - https://github.com/intel/multus-cni
+    type: application
+    urls:
+    - assets/rke2-multus/rke2-multus-v4.3.115.tgz
+    version: v4.3.115
+  - apiVersion: v1
+    appVersion: 4.3.1
     created: "2026-10-20T19:25:04.865323879Z"
     dependencies:
     - condition: rke2-whereabouts.enabled
@@ -32564,6 +32598,15 @@ entries:
     - assets/rke2-multus/rke2-multus-v3.7.1-build2021041601.tgz
     version: v3.7.1-build2021041601
   rke2-multus-crd:
+  - apiVersion: v1
+    created: "2026-10-22T17:00:53.093791524Z"
+    description: Installs the CRDs for rke2-multus
+    digest: ff472ea9cca3a86321ba512f4bd656e3c583f7828c3294ffae8209e48d8bcef6
+    name: rke2-multus-crd
+    type: application
+    urls:
+    - assets/rke2-multus/rke2-multus-crd-4.3.115.tgz
+    version: 4.3.115
   - apiVersion: v1
     created: "2026-10-20T19:25:04.768527846Z"
     description: Installs the CRDs for rke2-multus
