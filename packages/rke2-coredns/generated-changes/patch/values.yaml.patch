@@ -252,11 +252,11 @@
 +
 +  image:
 +    repository: rancher/hardened-dns-node-cache
-+    tag: "1.27.2-r1-build20261020"
++    tag: "1.27.2-r1-build20261022"
 +
 +  initimage:
 +    repository: rancher/hardened-dns-node-cache
-+    tag: "1.27.2-r1-build20261020"
++    tag: "1.27.2-r1-build20261022"
 +
 +  # Node labels for pod assignment
 +  # Ref: https://kubernetes.io/docs/user-guide/node-selection/
