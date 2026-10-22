@@ -151,7 +151,7 @@ cniplugins:
 dhcpDaemonSet:
   image:
     repository: rancher/mirrored-library-busybox
-    tag: "1.36.1"
+    tag: "1.38.0"
 
 global:
   systemDefaultRegistry: ""
