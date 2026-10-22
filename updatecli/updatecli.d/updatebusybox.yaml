@@ -1,0 +1,56 @@
+---
+name: "Update busybox version"
+
+sources:
+  busybox:
+    name: Get busybox version
+    kind: dockerimage
+    spec:
+      image: rancher/mirrored-library-busybox
+      # Only match plain semver tags (ignore arch-suffixed tags like 1.37.0-amd64)
+      tagfilter: "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+      versionfilter:
+        kind: semver
+
+targets:
+  busyboxImage:
+    name: "Bump to latest busybox version in the multus charts"
+    kind: shell
+    scmid: default
+    sourceid: busybox
+    spec:
+      command: 'updatecli/scripts/update-busybox.sh'
+      environments:
+        - name: BUSYBOX_VERSION
+          value: '{{ source "busybox" }}'
+        - name: PATH
+        - name: UPDATECLI_GITHUB_WORKFLOW_URL
+        - name: GH_TOKEN
+
+scms:
+  default:
+    kind: github
+    spec:
+      token: '{{ requiredEnv .github.token }}'
+      username: '{{ requiredEnv .github.username }}'
+      user: '{{ .github.username }}'
+      email: '{{ .github.email }}'
+      owner: '{{ .github.owner }}'
+      repository: '{{ .github.repository }}'
+      branch: '{{ .github.branch }}'
+
+actions:
+  default:
+    title: 'Update busybox version to {{ source "busybox" }}'
+    kind: github/pullrequest
+    spec:
+      strategy:
+        method: manual
+      description:
+        <h3>Chart Images</h3>
+        <ul>
+          <li>rancher/mirrored-library-busybox:{{ source "busybox" }}</li>
+        </ul>
+      labels:
+        - updatecli
+    scmid: default
