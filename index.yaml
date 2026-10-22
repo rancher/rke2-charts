@@ -19358,6 +19358,34 @@ entries:
           description: serviceAccount.create defaults to true, so CoreDNS runs as its own ServiceAccount and the chart's ClusterRole is no longer bound to the namespace's default ServiceAccount, which every pod without its own account uses
     apiVersion: v2
     appVersion: 1.14.7
+    created: "2026-10-22T17:14:06.414550452Z"
+    description: CoreDNS is a DNS server that chains plugins and provides Kubernetes
+      DNS Services
+    digest: ba18d6a022b2bd960efa729e97e5337eab1ac0304f63816d5e19d01cf39911cb
+    home: https://coredns.io
+    icon: https://coredns.io/images/CoreDNS_Colour_Horizontal.png
+    keywords:
+    - coredns
+    - dns
+    - kubedns
+    maintainers:
+    - name: mrueg
+    - name: haad
+    - name: hagaibarel
+    - name: shubham-cmyk
+    name: rke2-coredns
+    sources:
+    - https://github.com/coredns/coredns
+    type: application
+    urls:
+    - assets/rke2-coredns/rke2-coredns-1.49.002.tgz
+    version: 1.49.002
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: security
+          description: serviceAccount.create defaults to true, so CoreDNS runs as its own ServiceAccount and the chart's ClusterRole is no longer bound to the namespace's default ServiceAccount, which every pod without its own account uses
+    apiVersion: v2
+    appVersion: 1.14.7
     created: "2026-10-20T19:25:04.321828555Z"
     description: CoreDNS is a DNS server that chains plugins and provides Kubernetes
       DNS Services
@@ -29695,6 +29723,27 @@ entries:
   rke2-multus:
   - apiVersion: v1
     appVersion: 4.3.1
+    created: "2026-10-22T17:14:07.009300394Z"
+    dependencies:
+    - condition: rke2-whereabouts.enabled
+      name: rke2-whereabouts
+      repository: file://./charts/rke2-whereabouts
+    description: Multus Helm chart for Kubernetes
+    digest: f8ad2976b6de04e481f829966eed3e25e5bb1e86b264f9eb249be2ec954b5c33
+    home: https://github.com/k8snetworkplumbingwg/multus-cni
+    icon: https://raw.githubusercontent.com/k8snetworkplumbingwg/multus-cni/master/doc/images/Multus.png
+    maintainers:
+    - email: charts@rancher.com
+      name: Rancher Labs
+    name: rke2-multus
+    sources:
+    - https://github.com/intel/multus-cni
+    type: application
+    urls:
+    - assets/rke2-multus/rke2-multus-v4.3.116.tgz
+    version: v4.3.116
+  - apiVersion: v1
+    appVersion: 4.3.1
     created: "2026-10-22T17:00:53.204514788Z"
     dependencies:
     - condition: rke2-whereabouts.enabled
@@ -32598,6 +32647,15 @@ entries:
     - assets/rke2-multus/rke2-multus-v3.7.1-build2021041601.tgz
     version: v3.7.1-build2021041601
   rke2-multus-crd:
+  - apiVersion: v1
+    created: "2026-10-22T17:14:06.895458384Z"
+    description: Installs the CRDs for rke2-multus
+    digest: aa50b9fd3a35db6c7e3abe77fa540ab3b5f378965a793a9644f4d280fcb7ead8
+    name: rke2-multus-crd
+    type: application
+    urls:
+    - assets/rke2-multus/rke2-multus-crd-4.3.116.tgz
+    version: 4.3.116
   - apiVersion: v1
     created: "2026-10-22T17:00:53.093791524Z"
     description: Installs the CRDs for rke2-multus
