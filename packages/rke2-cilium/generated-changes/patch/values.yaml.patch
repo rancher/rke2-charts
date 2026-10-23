@@ -6,10 +6,10 @@
    override: ~
 -  repository: "quay.io/cilium/cilium"
 +  repository: "rancher/mirrored-cilium-cilium"
-   tag: "v1.20.3"
+   tag: "v1.20.4"
    pullPolicy: "IfNotPresent"
 -  # cilium-digest
--  digest: sha256:95cfa5c2427cc6b452c00908778d0566311f572589284af949d06a013db1a849
+-  digest: sha256:20fe92e4c86641233a450098c158d2d29085f3419931ab6bf681d2485dedf16e
 -  useDigest: true
 +  useDigest: false
  # -- Scheduling configurations for cilium pods
@@ -48,8 +48,8 @@
      override: ~
 -    repository: "quay.io/cilium/certgen"
 +    repository: "rancher/mirrored-cilium-certgen"
-     tag: "v0.4.11"
--    digest: "sha256:14d29a176fc96d15b154559ce1a5baf01367c10baabfa7bb8028b72f087a56f0"
+     tag: "v0.4.13"
+-    digest: "sha256:f0c16ea8abe251d448a7fd04bdd93fe0f85fb1c3a456a455e05f7bb107dc2ff1"
 -    useDigest: true
 +    useDigest: false
      pullPolicy: "IfNotPresent"
@@ -70,9 +70,9 @@
        override: ~
 -      repository: "quay.io/cilium/hubble-relay"
 +      repository: "rancher/mirrored-cilium-hubble-relay"
-       tag: "v1.20.3"
+       tag: "v1.20.4"
 -      # hubble-relay-digest
--      digest: sha256:c6f819d9c5e0b35ccac63b9f2f1ae213fd9be50588e15d5a444d5d305ad317b5
+-      digest: sha256:cb23408209697ed30d2bc462e1f01eb622ea4423a891458f78bc88d7255bbfc1
 -      useDigest: true
 +      useDigest: false
        pullPolicy: "IfNotPresent"
@@ -141,9 +141,9 @@
      override: ~
 -    repository: "quay.io/cilium/cilium-envoy"
 +    repository: "rancher/mirrored-cilium-cilium-envoy"
-     tag: "v1.38.6-1791537840-00e749f11f69334c625e53fc1ce2fc6c7f34a51f"
+     tag: "v1.39.5-1792733054-8c73b2816bc8239e27f1fd53b271884688137459"
      pullPolicy: "IfNotPresent"
--    digest: "sha256:d6c8c0c91954d1885026d82a31b341f37dcd34a4b127fdaf1587e43ddd224cef"
+-    digest: "sha256:547ab45f6092f681d9f54f3be9fa8fb1e705c9c5dc2df388efe3a52aa6965629"
 -    useDigest: true
 +    useDigest: false
    # -- Init containers added to the cilium Envoy DaemonSet.
@@ -155,15 +155,15 @@
      override: ~
 -    repository: "quay.io/cilium/operator"
 +    repository: "rancher/mirrored-cilium-operator"
-     tag: "v1.20.3"
+     tag: "v1.20.4"
 -    # operator-generic-digest
--    genericDigest: sha256:efdd8d89d6d8f63d21a065fa2f9e17614a2b3ac9371b221af9355f63829e2dbc
+-    genericDigest: sha256:7a7a3489dc66ad67e420d285c8a8d2e169b0957ad15e120f593d27081bf38d82
 -    # operator-azure-digest
--    azureDigest: sha256:7132b3ff7e33a076ea9fadaa6e4f2b364937ed7b118b92928bdb4706921a2ffa
+-    azureDigest: sha256:0669c35e9f1638bbdd6cf5c64163e7ee4ea4ef440e223050e60665811369b4ec
 -    # operator-aws-digest
--    awsDigest: sha256:49bdd1d54bdf3da2740848c4662854d0d41c0df25cffe8575d71723db08cc0d1
+-    awsDigest: sha256:caab27c6e3286a596d502f76aa6cffe2efab6e8a92234a0d10d2eed3eda85c7c
 -    # operator-alibabacloud-digest
--    alibabacloudDigest: sha256:615f8c2995e437320571d6f61e623d6848ed3ea357cdaa886ac95bbff29a0b52
+-    alibabacloudDigest: sha256:163a08ee4438780638899742e95521e1a37edeb676c6e5c924d320c4c0bd09ad
 -    useDigest: true
 +    useDigest: false
      pullPolicy: "IfNotPresent"
@@ -194,9 +194,9 @@
      override: ~
 -    repository: "quay.io/cilium/cilium"
 +    repository: "rancher/mirrored-cilium-cilium"
-     tag: "v1.20.3"
+     tag: "v1.20.4"
 -    # cilium-digest
--    digest: sha256:95cfa5c2427cc6b452c00908778d0566311f572589284af949d06a013db1a849
+-    digest: sha256:20fe92e4c86641233a450098c158d2d29085f3419931ab6bf681d2485dedf16e
 -    useDigest: true
 +    useDigest: false
      pullPolicy: "IfNotPresent"
@@ -208,9 +208,9 @@
        override: ~
 -      repository: "quay.io/cilium/cilium-envoy"
 +      repository: "rancher/mirrored-cilium-cilium-envoy"
-       tag: "v1.38.6-1791537840-00e749f11f69334c625e53fc1ce2fc6c7f34a51f"
+       tag: "v1.39.5-1792733054-8c73b2816bc8239e27f1fd53b271884688137459"
        pullPolicy: "IfNotPresent"
--      digest: "sha256:d6c8c0c91954d1885026d82a31b341f37dcd34a4b127fdaf1587e43ddd224cef"
+-      digest: "sha256:547ab45f6092f681d9f54f3be9fa8fb1e705c9c5dc2df388efe3a52aa6965629"
 -      useDigest: true
 +      useDigest: false
    # -- The priority class to use for the preflight pod.
@@ -222,9 +222,9 @@
        override: ~
 -      repository: "quay.io/cilium/clustermesh-apiserver"
 +      repository: "rancher/mirrored-cilium-clustermesh-apiserver"
-       tag: "v1.20.3"
+       tag: "v1.20.4"
 -      # clustermesh-apiserver-digest
--      digest: sha256:5c8dca0d0b77bb593df157be39f6c9c868dc08922bbd0540ac0a56815341b227
+-      digest: sha256:aeac78ae77d166b86630310f2eb53fbc92014eda36ada8e6b2d7f2b8f2dadbfa
 -      useDigest: true
 +      useDigest: false
        pullPolicy: "IfNotPresent"
