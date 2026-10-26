@@ -18,12 +18,16 @@
            imagePullPolicy: {{ .Values.tigeraOperator.imagePullPolicy | default "IfNotPresent" }}
            command:
              - operator
-@@ -81,7 +81,7 @@
+@@ -81,7 +81,11 @@
              - name: OPERATOR_NAME
                value: "tigera-operator"
              - name: TIGERA_OPERATOR_INIT_IMAGE_VERSION
 -              value: {{.Values.tigeraOperator.version}}
 +              value: {{ include "tigera-operator.version" . }}
++          {{- if .Values.global.prime.enabled }}
++            - name: CALICO_IMAGE_TAG_OVERRIDES
++              value: {{ .Values.global.prime.imageTagOverrides | toJson | quote }}
++          {{- end }}
            {{- with .Values.tigeraOperator.env }}
            {{- toYaml . | nindent 12 }}
            {{- end }}

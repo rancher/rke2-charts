@@ -1,6 +1,6 @@
 --- charts-original/README.md
 +++ charts/README.md
-@@ -216,8 +216,8 @@
+@@ -216,11 +216,29 @@
  
  # Configuration for the tigera operator images to deploy.
  tigeraOperator:
@@ -11,3 +11,24 @@
  calicoctl:
    image: quay.io/calico/calico
  
++PRIME installations use the hardened operator and Calico component images.
++The component image tags are passed to the operator with
++`CALICO_IMAGE_TAG_OVERRIDES` when `global.prime.enabled` is true. The defaults
++match the hardened Calico v3.33.0 build:
++
++```yaml
++global:
++  prime:
++    enabled: true
++    operator:
++      image: rancher/hardened-calico-operator
++      version: v1.44.0-build20261023
++    imageTagOverrides:
++      calico: v3.33.0-build20261022
++      node: v3.33.0-build20261022
++      third-party-cni-plugins: v3.33.0-build20261022
++```
++
+ # Optionally configure the host and port used to access the Kubernetes API server.
+ kubernetesServiceEndpoint:
+   host: ""
