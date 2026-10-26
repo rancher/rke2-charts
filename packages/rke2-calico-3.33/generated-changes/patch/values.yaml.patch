@@ -69,7 +69,7 @@
  
  # Whether to run the tigera/operator in zap development logging mode. When true, the operator
  # logs at debug level using a human-readable console encoder and emits stacktraces on warnings.
-@@ -152,13 +168,41 @@
+@@ -152,13 +168,46 @@
  
  # Image and registry configuration for the tigera/operator pod.
  tigeraOperator:
@@ -92,9 +92,14 @@
 +      image: "rancher/hardened-calico-operator"
 +      version: "v1.44.0-build20261023"
 +    imageTagOverrides:
-+      calico: "v3.33.0-build20261022"
-+      node: "v3.33.0-build20261022"
-+      third-party-cni-plugins: "v3.33.0-build20261022"
++      calico: "v3.33.0-build20261026"
++      envoy-gateway: "v3.33.0-build20261026"
++      envoy-proxy: "v3.33.0-build20261026"
++      envoy-rate-limit: "v3.33.0-build20261026"
++      node: "v3.33.0-build20261026"
++      third-party-cni-plugins: "v3.33.0-build20261026"
++      whisker: "v3.33.0-build20261026"
++
 +
 +# Config required by Windows nodes
 +ipamConfig:
