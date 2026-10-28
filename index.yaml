@@ -37011,6 +37011,18 @@ entries:
   - annotations:
       fleet.cattle.io/bundle-id: rke2
     apiVersion: v1
+    appVersion: v3.7.16
+    created: "2026-10-28T19:10:52.768537735Z"
+    description: Installs the CRDs for rke2-traefik
+    digest: 2ee5c4e6968ec36ac325fc685028f42cd76d025ac92830303dd1aa8e68f8e70b
+    name: rke2-traefik-crd
+    type: application
+    urls:
+    - assets/rke2-traefik/rke2-traefik-crd-42.1.301.tgz
+    version: 42.1.301
+  - annotations:
+      fleet.cattle.io/bundle-id: rke2
+    apiVersion: v1
     appVersion: v3.7.15
     created: "2026-10-21T10:23:15.921520539Z"
     description: Installs the CRDs for rke2-traefik
