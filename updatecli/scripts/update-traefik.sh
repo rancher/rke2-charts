@@ -37,7 +37,7 @@ if [[ -n "${CHART_VERSION}" ]]; then
     CURRENT_VERSION=${CURRENT_VERSION%.tgz}
     USER=$(whoami)
     if [[ "${CURRENT_VERSION}" == "${CHART_VERSION}" ]]; then
-        echo "Traefik chart is already at ${CHART_VERSION}, nothing to do"
+        echo "Traefik chart is already at ${CHART_VERSION}, nothing to do" >&2
     else
         echo "Updating Traefik chart from ${CURRENT_VERSION} to ${CHART_VERSION}"
         # A new chart resets the package version to 00, even if the image was also updated above.
