@@ -34635,6 +34635,40 @@ entries:
   - annotations:
       artifacthub.io/changes: |
         - kind: added
+          description: "feat(hub): support traefik hub v3.20.19 and v3.21.6"
+      traefik.io/hub-max-version: v3.21.6
+      traefik.io/hub-min-version: v3.19.3
+      traefik.io/proxy-max-version: v3.7.16
+      traefik.io/proxy-min-version: v3.6.0
+    apiVersion: v2
+    appVersion: v3.7.16
+    created: "2026-10-28T17:07:56.624939878Z"
+    description: A Traefik based Kubernetes ingress controller
+    digest: 804988e072d4f688326bc9d9fd8be771aa1789e1f9ebb09fca89bd5593397117
+    home: https://traefik.io/
+    icon: https://raw.githubusercontent.com/traefik/traefik/master/docs/content/assets/img/traefik.logo.png
+    keywords:
+    - traefik
+    - ingress
+    - networking
+    kubeVersion: '>=1.30.0-0'
+    maintainers:
+    - email: michel.loiseleur@traefik.io
+      name: mloiseleur
+    - email: remi.buisson@traefik.io
+      name: darkweaver87
+    - name: jnoordsij
+    name: rke2-traefik
+    sources:
+    - https://github.com/traefik/traefik-helm-chart
+    - https://github.com/traefik/traefik
+    type: application
+    urls:
+    - assets/rke2-traefik/rke2-traefik-42.1.300.tgz
+    version: 42.1.300
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: added
           description: "feat(hub): support traefik hub v3.20.18 and v3.21.5"
       traefik.io/hub-max-version: v3.21.5
       traefik.io/hub-min-version: v3.19.3
