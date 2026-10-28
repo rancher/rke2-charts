@@ -18,10 +18,26 @@ sources:
         pattern: 'v[0-9]+\.[0-9]+\.[0-9]+'
     transformers:
       - trimprefix: "v"
+  traefik_image:
+    name: Get Traefik image version
+    kind: githubrelease
+    spec:
+      owner: rancher
+      repository: image-build-traefik
+      token: '{{ requiredEnv .github.token }}'
+      username: '{{ requiredEnv .github.username }}'
+      typefilter:
+        release: true
+        draft: false
+        prerelease: false
+      versionfilter:
+        kind: regex
+        # pattern accepts any semver constraint
+        pattern: "v[0-9]+.[0-9]+.[0-9]+-build[0-9]+"
 
 targets:
   traefik:
-    name: Update Traefik chart
+    name: Update Traefik chart and image
     kind: shell
     scmid: default
     sourceid: traefik_chart
@@ -30,6 +46,8 @@ targets:
       environments:
         - name: TRAEFIK_CHART_VERSION
           value: '{{ source "traefik_chart" }}'
+        - name: TRAEFIK_IMAGE_VERSION
+          value: '{{ source "traefik_image" }}'
         - name: PATH
 
 scms:
@@ -51,6 +69,11 @@ actions:
     spec:
       strategy:
         method: manual
+      description:
+        <h3>Chart Images</h3>
+        <ul>
+          <li>rancher/hardened-traefik:{{ source "traefik_image" }}</li>
+        </ul>
       labels:
         - updatecli
     scmid: default
