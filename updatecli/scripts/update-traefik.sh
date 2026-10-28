@@ -46,6 +46,17 @@ if [[ -n "${CHART_VERSION}" ]]; then
             -e 's/^packageVersion: .*/packageVersion: 00/' \
             "${PACKAGE_FILE}"
 
+        # The rke2-traefik-crd chart is generated from a standalone template whose
+        # version and appVersion are not derived from the upstream chart url. Keep
+        # them in sync with the main chart, otherwise the generated crd chart drifts
+        # (e.g. main 42.1.3xx while crd stays 42.1.0xx) and is never republished.
+        CRD_CHART_FILE="packages/${PACKAGE}/templates/crd-template/Chart.yaml"
+        APP_VERSION=$(curl -sfL "https://traefik.github.io/charts/traefik/traefik-${CHART_VERSION}.tgz" | tar xzO traefik/Chart.yaml | yq -r '.appVersion')
+        sed -i \
+            -e "s/^version: .*/version: ${CHART_VERSION}/" \
+            -e "s/^appVersion: .*/appVersion: ${APP_VERSION}/" \
+            "${CRD_CHART_FILE}"
+
         GOCACHE="/home/$USER/.cache/go-build" GOPATH="/home/$USER/go" PACKAGE="${PACKAGE}" make prepare
         find "packages/${PACKAGE}/charts" -name '*.orig' -delete
         GOCACHE="/home/$USER/.cache/go-build" GOPATH="/home/$USER/go" PACKAGE="${PACKAGE}" make patch
