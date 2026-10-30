@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+root=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)
+tool="$root/bin/charts-build-scripts"
+[[ $# == 1 ]] || { echo "Usage: $0 <base-commit>" >&2; exit 1; }
+base=$(git -C "$root" rev-parse --verify "$1^{commit}")
+git -C "$root" merge-base --is-ancestor "$base" HEAD || {
+    echo "error: base commit must be an ancestor of HEAD" >&2
+    exit 1
+}
+[[ -x "$tool" ]] || { echo "error: run make pull-scripts first" >&2; exit 1; }
+
+declare -A changed_packages=()
+while IFS= read -r -d '' path; do
+    [[ "$path" == packages/*/* ]] || continue
+    package=${path#packages/}
+    package=${package%%/*}
+    [[ -f "$root/packages/$package/package.yaml" ]] && changed_packages["$package"]=1
+done < <(git -C "$root" diff --name-only -z "$base" HEAD -- packages)
+
+packages=()
+if ((${#changed_packages[@]})); then
+    mapfile -t packages < <(printf '%s\n' "${!changed_packages[@]}" | LC_ALL=C sort)
+fi
+for package in "${packages[@]}"; do
+    echo "Generating native chart output for $package"
+    (
+        cd "$root"
+        PACKAGE="$package" "$tool" charts --config "$root/configuration.yaml"
+    )
+done

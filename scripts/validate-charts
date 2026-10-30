@@ -1,0 +1,167 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+candidate=${1:-.}
+published=${2:-}
+candidate=$(cd -- "$candidate" && pwd)
+temporary_directory=$(mktemp -d)
+trap 'rm -rf -- "$temporary_directory"' EXIT
+
+if [[ -z "$published" ]]; then
+    url=$(yq -er '.validate.url' "$candidate/configuration.yaml")
+    branch=$(yq -er '.validate.branch' "$candidate/configuration.yaml")
+    published="$temporary_directory/published"
+    git clone --quiet --single-branch --branch "$branch" "$url" "$published"
+fi
+published=$(cd -- "$published" && pwd)
+tool="$candidate/bin/charts-build-scripts"
+[[ -x "$tool" ]] || { echo "error: missing native charts-build-scripts binary: $tool" >&2; exit 1; }
+[[ -f "$published/index.yaml" ]] || { echo "error: missing published index: $published/index.yaml" >&2; exit 1; }
+[[ -z "$(git -C "$published" status --porcelain)" ]] || {
+    echo "error: published checkout must be clean" >&2
+    exit 1
+}
+
+if command -v sha256sum >/dev/null; then
+    checksum=(sha256sum)
+elif command -v shasum >/dev/null; then
+    checksum=(shasum -a 256)
+else
+    echo "error: sha256sum or shasum is required" >&2
+    exit 1
+fi
+
+cp "$published/index.yaml" "$temporary_directory/index.before.yaml"
+yq -r '.entries[] | .[] | [.name, .version, .digest, .created, (.urls | join(","))] | @tsv' \
+    "$temporary_directory/index.before.yaml" | LC_ALL=C sort > "$temporary_directory/index.before"
+: > "$temporary_directory/candidate-urls"
+
+safe_archive() {
+    local archive=$1 path
+    while IFS= read -r path; do
+        [[ "$path" != /* && "/$path/" != *"/../"* && "/$path/" != *"/./"* ]] || {
+            echo "error: unsafe path in chart archive: $archive: $path" >&2
+            return 1
+        }
+    done < <(tar -tzf "$archive")
+}
+
+extract_archive() {
+    local archive=$1 destination=$2
+    safe_archive "$archive"
+    mkdir -p "$destination"
+    tar -xzf "$archive" -C "$destination"
+    local -a roots=("$destination"/*)
+    [[ ${#roots[@]} == 1 && -d "${roots[0]}" && -f "${roots[0]}/Chart.yaml" ]] || {
+        echo "error: expected one chart directory in archive: $archive" >&2
+        return 1
+    }
+}
+
+candidate_count=0
+new_count=0
+existing_count=0
+candidate_archives=()
+if [[ -d "$candidate/assets" ]]; then
+    mapfile -d '' -t candidate_archives < <(find "$candidate/assets" -type f -name '*.tgz' -print0 | LC_ALL=C sort -z)
+fi
+for archive in "${candidate_archives[@]}"; do
+    candidate_count=$((candidate_count + 1))
+    relative_archive=${archive#"$candidate/"}
+    safe_archive "$archive"
+    chart_metadata_path=$(tar -tzf "$archive" | awk -F/ 'NF == 2 && $2 == "Chart.yaml" && !found++ { print }')
+    [[ -n "$chart_metadata_path" ]] || { echo "error: missing root Chart.yaml in $archive" >&2; exit 1; }
+    chart_metadata=$(tar -xOzf "$archive" "$chart_metadata_path")
+    chart_name=$(yq -er '.name' <<< "$chart_metadata")
+    chart_version=$(yq -er '.version' <<< "$chart_metadata")
+    [[ "$chart_name" =~ ^[a-zA-Z0-9][a-zA-Z0-9._-]*$ &&
+       "$chart_version" =~ ^[a-zA-Z0-9][a-zA-Z0-9.+_-]*$ ]] || {
+        echo "error: invalid chart identity in $archive: $chart_name $chart_version" >&2
+        exit 1
+    }
+    expected_archive="assets/$chart_name/$chart_name-$chart_version.tgz"
+    expected_chart="charts/$chart_name/$chart_version"
+    [[ "$relative_archive" == "$expected_archive" ]] || {
+        echo "error: native asset path does not match chart identity: $relative_archive" >&2
+        exit 1
+    }
+    chart_directory="$candidate/$expected_chart"
+    [[ -f "$chart_directory/Chart.yaml" ]] || {
+        echo "error: missing extracted candidate chart: $chart_directory" >&2
+        exit 1
+    }
+    [[ "$(yq -er '.name' "$chart_directory/Chart.yaml")" == "$chart_name" &&
+       "$(yq -er '.version' "$chart_directory/Chart.yaml")" == "$chart_version" ]] || {
+        echo "error: extracted chart identity does not match archive: $relative_archive" >&2
+        exit 1
+    }
+    candidate_extract="$temporary_directory/candidate-$candidate_count"
+    extract_archive "$archive" "$candidate_extract"
+    diff -r "$chart_directory" "${candidate_extract}/$chart_name" >/dev/null || {
+        echo "error: candidate archive and extracted chart differ: $relative_archive" >&2
+        exit 1
+    }
+
+    urls=$(CHART="$chart_name" VERSION="$chart_version" yq -r \
+        '.entries[strenv(CHART)][]? | select(.version == strenv(VERSION)) | .urls[]' \
+        "$temporary_directory/index.before.yaml")
+    if [[ -n "$urls" ]]; then
+        published_asset=
+        while IFS= read -r url; do
+            [[ "$url" != /* && "/$url/" != *"/../"* && -f "$published/$url" ]] || {
+                echo "error: published index references a missing or unsafe asset: $url" >&2
+                exit 1
+            }
+            published_extract="$temporary_directory/published-$candidate_count"
+            extract_archive "$published/$url" "$published_extract"
+            diff -r "$chart_directory" "${published_extract}/$chart_name" >/dev/null || {
+                echo "error: chart $chart_name/$chart_version is already published with different contents; bump its version" >&2
+                exit 1
+            }
+            published_asset=${published_asset:-$url}
+        done <<< "$urls"
+        printf '%s\t%s\t%s\n' "$chart_name" "$chart_version" "$published_asset" \
+            >> "$temporary_directory/candidate-urls"
+        existing_count=$((existing_count + 1))
+        continue
+    fi
+
+    [[ ! -e "$published/$expected_archive" && ! -e "$published/$expected_chart" ]] || {
+        echo "error: unindexed published path conflicts with $chart_name/$chart_version" >&2
+        exit 1
+    }
+    mkdir -p "$published/$(dirname "$expected_archive")" "$published/$(dirname "$expected_chart")"
+    cp "$archive" "$published/$expected_archive"
+    cp -R "$chart_directory" "$published/$expected_chart"
+    printf '%s\t%s\t%s\n' "$chart_name" "$chart_version" "$expected_archive" \
+        >> "$temporary_directory/candidate-urls"
+    new_count=$((new_count + 1))
+done
+
+if [[ $new_count -gt 0 ]]; then
+    (cd "$published" && "$tool" index)
+fi
+
+yq -r '.entries[] | .[] | [.name, .version, .digest, .created, (.urls | join(","))] | @tsv' \
+    "$published/index.yaml" | LC_ALL=C sort > "$temporary_directory/index.after"
+comm -23 "$temporary_directory/index.before" "$temporary_directory/index.after" \
+    > "$temporary_directory/index.removed"
+[[ ! -s "$temporary_directory/index.removed" ]] || {
+    echo "error: index generation removed or changed published entries:" >&2
+    cat "$temporary_directory/index.removed" >&2
+    exit 1
+}
+
+while IFS=$'\t' read -r chart_name chart_version published_asset; do
+    digest=$("${checksum[@]}" "$published/$published_asset")
+    digest=${digest%% *}
+    indexed=$(CHART="$chart_name" VERSION="$chart_version" ASSET="$published_asset" yq -r \
+        '.entries[strenv(CHART)][] | select(.version == strenv(VERSION)) | select(.urls[] == strenv(ASSET)) | .digest' \
+        "$published/index.yaml")
+    [[ "$indexed" == "$digest" ]] || {
+        echo "error: missing or incorrect index digest for $published_asset" >&2
+        exit 1
+    }
+done < "$temporary_directory/candidate-urls"
+
+echo "Validation passed: $candidate_count candidate charts ($new_count new, $existing_count already published); historical index entries preserved."

@@ -1,6 +1,8 @@
-template: source
-
 validate:
-- url: https://github.com/rancher/rke2-charts.git
+  url: https://github.com/rancher/rke2-charts.git
   branch: main
-  dropReleaseCandidates: true
+
+helmRepo:
+  cname: rke2-charts.rancher.io
+
+omitBuildMetadataOnExport: true
