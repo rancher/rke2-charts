@@ -27,6 +27,6 @@ if [ -n "$CALICO_VERSION" ]; then
 		app_version=$(echo "$CALICO_VERSION" | grep -Eo 'v[0-9]+.[0-9]+.[0-9]+')
 		yq -i ".version = \"$CALICO_VERSION\" |
 			.appVersion = \"$app_version\"" packages/rke2-canal/charts/Chart.yaml
-		sed -i "s/packageVersion:.*/packageVersion: 00/g" packages/rke2-canal/package.yaml
+		sed -i "s/packageVersion:.*/packageVersion: 01/g" packages/rke2-canal/package.yaml
 	fi
 fi
