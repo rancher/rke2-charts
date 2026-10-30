@@ -95,7 +95,7 @@
 +      calico: "v3.33.0-build20261026"
 +      envoy-gateway: "v3.33.0-build20261026"
 +      envoy-proxy: "v3.33.0-build20261026"
-+      envoy-rate-limit: "v3.33.0-build20261026"
++      envoy-ratelimit: "v3.33.0-build20261026"
 +      node: "v3.33.0-build20261026"
 +      third-party-cni-plugins: "v3.33.0-build20261026"
 +      whisker: "v3.33.0-build20261026"
