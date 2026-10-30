@@ -34642,6 +34642,40 @@ entries:
       traefik.io/proxy-min-version: v3.6.0
     apiVersion: v2
     appVersion: v3.7.16
+    created: "2026-10-30T09:31:01.12016887Z"
+    description: A Traefik based Kubernetes ingress controller
+    digest: 379394b36412ba6b4cef92f124acfd808c200b73dbd61ecb19685f27f2af277d
+    home: https://traefik.io/
+    icon: https://raw.githubusercontent.com/traefik/traefik/master/docs/content/assets/img/traefik.logo.png
+    keywords:
+    - traefik
+    - ingress
+    - networking
+    kubeVersion: '>=1.30.0-0'
+    maintainers:
+    - email: michel.loiseleur@traefik.io
+      name: mloiseleur
+    - email: remi.buisson@traefik.io
+      name: darkweaver87
+    - name: jnoordsij
+    name: rke2-traefik
+    sources:
+    - https://github.com/traefik/traefik-helm-chart
+    - https://github.com/traefik/traefik
+    type: application
+    urls:
+    - assets/rke2-traefik/rke2-traefik-42.1.302.tgz
+    version: 42.1.302
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: added
+          description: "feat(hub): support traefik hub v3.20.19 and v3.21.6"
+      traefik.io/hub-max-version: v3.21.6
+      traefik.io/hub-min-version: v3.19.3
+      traefik.io/proxy-max-version: v3.7.16
+      traefik.io/proxy-min-version: v3.6.0
+    apiVersion: v2
+    appVersion: v3.7.16
     created: "2026-10-28T17:39:14.11414324Z"
     description: A Traefik based Kubernetes ingress controller
     digest: c57823ce209bbc992e408acb2547a643bf524cf50613570cf739830648b8c96d
@@ -35239,6 +35273,44 @@ entries:
     urls:
     - assets/rke2-traefik/rke2-traefik-41.1.100.tgz
     version: 41.1.100
+  - annotations:
+      artifacthub.io/changes: |
+        - "fix(ingressroute): :bug: use spec.ingressClassName with Proxy v3.7+"
+        - "feat(provider/kubernetesIngressNGINX): set default values on httpentrypoint & httpsentrypoint"
+        - "feat(deps): update traefik docker tag to v3.7.1"
+        - "feat(api): support disableDashboardAd option"
+        - "chore(release): publish 40.1.0"
+      fleet.cattle.io/bundle-id: rke2
+      traefik.io/hub-max-version: v3.20.1
+      traefik.io/hub-min-version: v3.19.3
+      traefik.io/proxy-max-version: v3.7.1
+      traefik.io/proxy-min-version: v3.6.0
+    apiVersion: v2
+    appVersion: v3.7.1
+    created: "2026-10-30T09:31:01.30389349Z"
+    description: A Traefik based Kubernetes ingress controller
+    digest: 2a10c46698f0a619122c2ce7be8809cc301b47d302fed9d25fd66d162553ce9a
+    home: https://traefik.io/
+    icon: https://raw.githubusercontent.com/traefik/traefik/master/docs/content/assets/img/traefik.logo.png
+    keywords:
+    - traefik
+    - ingress
+    - networking
+    kubeVersion: '>=1.25.0-0'
+    maintainers:
+    - email: michel.loiseleur@traefik.io
+      name: mloiseleur
+    - email: remi.buisson@traefik.io
+      name: darkweaver87
+    - name: jnoordsij
+    name: rke2-traefik
+    sources:
+    - https://github.com/traefik/traefik-helm-chart
+    - https://github.com/traefik/traefik
+    type: application
+    urls:
+    - assets/rke2-traefik-1.34-1.36/rke2-traefik-40.1.023.tgz
+    version: 40.1.023
   - annotations:
       artifacthub.io/changes: |
         - "fix(ingressroute): :bug: use spec.ingressClassName with Proxy v3.7+"
@@ -37012,6 +37084,18 @@ entries:
       fleet.cattle.io/bundle-id: rke2
     apiVersion: v1
     appVersion: v3.7.16
+    created: "2026-10-30T09:31:01.228396778Z"
+    description: Installs the CRDs for rke2-traefik
+    digest: f5a411eb1099e134bb371db25abc8dfa3796d0ae7e2e2faad412a5358eab6558
+    name: rke2-traefik-crd
+    type: application
+    urls:
+    - assets/rke2-traefik/rke2-traefik-crd-42.1.302.tgz
+    version: 42.1.302
+  - annotations:
+      fleet.cattle.io/bundle-id: rke2
+    apiVersion: v1
+    appVersion: v3.7.16
     created: "2026-10-28T19:10:52.768537735Z"
     description: Installs the CRDs for rke2-traefik
     digest: 2ee5c4e6968ec36ac325fc685028f42cd76d025ac92830303dd1aa8e68f8e70b
@@ -37176,6 +37260,18 @@ entries:
     urls:
     - assets/rke2-traefik/rke2-traefik-crd-41.1.100.tgz
     version: 41.1.100
+  - annotations:
+      fleet.cattle.io/bundle-id: rke2
+    apiVersion: v1
+    appVersion: v3.7.15
+    created: "2026-10-30T09:31:01.36324056Z"
+    description: Installs the CRDs for rke2-traefik
+    digest: 0339aa43285c80d5f1fcaa640b2901958f28473efbbc8f86571f0d272f911f60
+    name: rke2-traefik-crd
+    type: application
+    urls:
+    - assets/rke2-traefik-1.34-1.36/rke2-traefik-crd-40.1.023.tgz
+    version: 40.1.023
   - annotations:
       fleet.cattle.io/bundle-id: rke2
     apiVersion: v1
