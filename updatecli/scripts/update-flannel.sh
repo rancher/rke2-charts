@@ -44,7 +44,7 @@ if [ -n "$FLANNEL_VERSION" ]; then
 			sed -i ":a;N;\$!ba;s/-    repository: registry.k8s.io\/networking\/kube-network-policies\\n-    tag: $current_netpol_version/-    repository: registry.k8s.io\/networking\/kube-network-policies\\
 -    tag: $new_netpol_version/g" packages/rke2-flannel/generated-changes/patch/values.yaml.patch
 			yq -i ".url = \"https://github.com/flannel-io/flannel/releases/download/$app_version/flannel.tgz\" |
-				.packageVersion = 00" packages/rke2-flannel/package.yaml
+				.packageVersion = 01" packages/rke2-flannel/package.yaml
 			rm -fr workdir
 		else
 			sed -i "s/+    tag: $current_flannel_version/+    tag: $FLANNEL_VERSION/g" packages/rke2-flannel/generated-changes/patch/values.yaml.patch

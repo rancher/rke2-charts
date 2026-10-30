@@ -40,10 +40,10 @@ if [[ -n "${CHART_VERSION}" ]]; then
         echo "Traefik chart is already at ${CHART_VERSION}, nothing to do" >&2
     else
         echo "Updating Traefik chart from ${CURRENT_VERSION} to ${CHART_VERSION}"
-        # A new chart resets the package version to 00, even if the image was also updated above.
+        # A new chart resets the package version to 01, even if the image was also updated above.
         sed -i \
             -e "s|^url: .*|url: https://traefik.github.io/charts/traefik/traefik-${CHART_VERSION}.tgz|" \
-            -e 's/^packageVersion: .*/packageVersion: 00/' \
+            -e 's/^packageVersion: .*/packageVersion: 01/' \
             "${PACKAGE_FILE}"
 
         # The rke2-traefik-crd chart is generated from a standalone template whose
