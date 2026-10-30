@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+packages=${1:-packages}
+selection=${PACKAGE:-}
+if [[ -n "$selection" && ! "$selection" =~ ^[a-zA-Z0-9_-][a-zA-Z0-9._/-]*$ ]] ||
+   [[ "/$selection/" == *"/../"* || "/$selection/" == *"/./"* || "$selection" == *"//"* || "$selection" == */ ]]; then
+    echo "error: invalid relative path: $selection" >&2
+    exit 1
+fi
+[[ -d "$packages" ]] || { echo "error: missing packages directory: $packages" >&2; exit 1; }
+command -v yq >/dev/null || { echo "error: yq is required" >&2; exit 1; }
+
+selected=0
+while IFS= read -r -d '' package_file; do
+    package=${package_file#"$packages/"}
+    package=${package%/package.yaml}
+    if [[ -n "$selection" && "$package" != "$selection" && "$package" != "$selection/"* ]]; then
+        continue
+    fi
+    selected=$((selected + 1))
+    value=$(yq -r '.packageVersion' "$package_file")
+    if [[ ! "$value" =~ ^[0-9]+$ || ${#value} -gt 9 ]] || (( 10#$value < 1 )); then
+        echo "error: invalid .packageVersion in $package_file: $value (must be an integer >= 1)" >&2
+        exit 1
+    fi
+done < <(find "$packages" -type f -name package.yaml -print0)
+[[ $selected -gt 0 ]] || { echo "error: no packages match PACKAGE=$selection" >&2; exit 1; }

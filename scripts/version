@@ -1,4 +1,0 @@
-#!/bin/bash
-set -e
-
-CHARTS_BUILD_SCRIPT_VERSION=v0.1.0
