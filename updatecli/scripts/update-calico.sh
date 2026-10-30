@@ -21,9 +21,9 @@ if [ -n "$CALICO_VERSION" ]; then
 		sed -i "s/ appVersion: .*/ appVersion: $CALICO_VERSION/g" packages/rke2-calico-crd/generated-changes/patch/Chart.yaml.patch
 		sed -i "s/ version: .*/ version: $CALICO_VERSION/g" packages/rke2-calico-crd/generated-changes/patch/Chart.yaml.patch
 		yq -i ".url = \"https://github.com/projectcalico/calico/releases/download/$CALICO_VERSION/tigera-operator-$CALICO_VERSION.tgz\" |
-			.packageVersion = 00" packages/rke2-calico/package.yaml
+			.packageVersion = 01" packages/rke2-calico/package.yaml
 		yq -i ".url = \"https://github.com/projectcalico/calico/releases/download/$CALICO_VERSION/crd.projectcalico.org.v1-$CALICO_VERSION.tgz\" |
-			.packageVersion = 00" packages/rke2-calico-crd/package.yaml
+			.packageVersion = 01" packages/rke2-calico-crd/package.yaml
 		GOCACHE='/home/runner/.cache/go-build' GOPATH='/home/runner/go' PACKAGE='rke2-calico' make prepare
 		GOCACHE='/home/runner/.cache/go-build' GOPATH='/home/runner/go' PACKAGE='rke2-calico-crd' make prepare
 		find packages/rke2-calico/charts -name '*.orig' -delete

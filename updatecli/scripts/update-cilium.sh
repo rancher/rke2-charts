@@ -26,7 +26,7 @@ if [ -n "$CILIUM_VERSION" ]; then
 		sed -i "s/ appVersion: .*/ appVersion: $cilium_num_version/g" packages/rke2-cilium/generated-changes/patch/Chart.yaml.patch
 		sed -i "s/ version: .*/ version: $cilium_num_version/g" packages/rke2-cilium/generated-changes/patch/Chart.yaml.patch
 		yq -i ".url = \"https://helm.cilium.io/cilium-$cilium_num_version.tgz\" |
-			.packageVersion = 00" packages/rke2-cilium/package.yaml
+			.packageVersion = 01" packages/rke2-cilium/package.yaml
 		mv packages/rke2-cilium/generated-changes/patch/values.yaml.patch workdir
 		GOCACHE='/home/runner/.cache/go-build' GOPATH='/home/runner/go' PACKAGE='rke2-cilium' make prepare
 		cp packages/rke2-cilium/charts/values.yaml workdir

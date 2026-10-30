@@ -67,7 +67,7 @@ if [ -n "$MULTUS_VERSION" ]; then
 			sed -i "s/version: .*/version: $app_version/g" packages/rke2-multus/templates/crd-template/Chart.yaml
 			sed -i "s/  tag: $current_multus_version/  tag: $MULTUS_VERSION/g" packages/rke2-multus/charts/values.yaml
 			sed -i "s/  tag: $current_app_version/  tag: $app_version/g" packages/rke2-multus/charts/values.yaml
-			sed -i "s/packageVersion:.*/packageVersion: 00/g" packages/rke2-multus/package.yaml
+			sed -i "s/packageVersion:.*/packageVersion: 01/g" packages/rke2-multus/package.yaml
 		else
 			sed -i "s/  tag: $current_multus_version/  tag: $MULTUS_VERSION/g" packages/rke2-multus/charts/values.yaml
 			if [ "$new_package" = false ]; then
@@ -86,7 +86,7 @@ if [ -n "$MULTUS_VERSION" ]; then
 			sed -i "s/appVersion: .*/appVersion: $app_version/g" packages/rke2-multus-1.34-1.36/charts/Chart.yaml
 			sed -i "s/  tag: $current_multus_version/  tag: $MULTUS_VERSION/g" packages/rke2-multus-1.34-1.36/charts/values.yaml
 			sed -i "s/  tag: $current_app_version/  tag: $app_version/g" packages/rke2-multus-1.34-1.36/charts/values.yaml
-			sed -i "s/packageVersion:.*/packageVersion: 00/g" packages/rke2-multus-1.34-1.36/package.yaml
+			sed -i "s/packageVersion:.*/packageVersion: 01/g" packages/rke2-multus-1.34-1.36/package.yaml
 		else
 			sed -i "s/  tag: $current_multus_version/  tag: $MULTUS_VERSION/g" packages/rke2-multus-1.34-1.36/charts/values.yaml
 			if [ "$new_package36" = false ]; then
