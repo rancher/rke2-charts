@@ -5,6 +5,9 @@ on:
     branches:
       - main-source
 
+permissions:
+  contents: read
+
 # Serialize runs so concurrent merges don't race when pushing to main.
 # A queued run is only superseded by a newer one, which syncs from a later
 # main-source commit and therefore still includes the skipped changes.
@@ -15,23 +18,37 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
     - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      with:
+        path: source
+        persist-credentials: false
 
-    - name: Pull scripts
-      run: sudo make pull-scripts
+    - name: Checkout live branch separately
+      uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      with:
+        ref: main
+        path: live
 
-    - name: Pull in all relevant branches
-      run: git fetch origin main-source main
+    - name: Validate and stage publication
+      working-directory: source
+      run: make validate
+      env:
+        LIVE_DIR: ${{ github.workspace }}/live
 
-    - name: Checkout live branch
-      run: git checkout main
-
-    - name: Synchronize
-      run: sudo make sync
-      
-    - name: Add assets to branch
-      run: git add . && git -c user.name="actions" -c user.email="actions@github.com" commit -m "$(git log -b main-source --oneline -n1 --pretty=format:'%B')" || true
-
-    - name: Push assets
-      run: git push origin main
+    - name: Commit and push new assets
+      env:
+        SOURCE_REF: ${{ github.sha }}
+      run: |
+        set -euo pipefail
+        git -C live add -- assets charts index.yaml
+        if git -C live diff --cached --quiet; then
+          echo "No new charts to publish."
+          exit 0
+        fi
+        message=$(git -C source log -1 --format=%B "$SOURCE_REF")
+        git -C live -c user.name=actions -c user.email=actions@github.com \
+          commit --message="$message" --trailer="Source-Commit: $SOURCE_REF"
+        git -C live push origin HEAD:main
