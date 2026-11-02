@@ -4,6 +4,7 @@ dependencies:
 - condition: rke2-whereabouts.enabled
   name: rke2-whereabouts
   repository: file://./charts/rke2-whereabouts
+  version: 0.9.4
 description: Multus Helm chart for Kubernetes
 home: https://github.com/k8snetworkplumbingwg/multus-cni
 icon: https://raw.githubusercontent.com/k8snetworkplumbingwg/multus-cni/master/doc/images/Multus.png
