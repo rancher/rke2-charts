@@ -6,7 +6,8 @@
    traefik.io/proxy-min-version: v3.6.0
 +  fleet.cattle.io/bundle-id: rke2
  apiVersion: v2
- appVersion: v3.7.1
+-appVersion: v3.7.1
++appVersion: v3.7.17
  description: A Traefik based Kubernetes ingress controller
 @@ -25,7 +26,7 @@
  - email: remi.buisson@traefik.io
