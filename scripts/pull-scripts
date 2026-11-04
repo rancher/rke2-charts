@@ -1,23 +1,31 @@
-#!/bin/bash
-set -e
+#!/usr/bin/env bash
+set -euo pipefail
 
-cd $(dirname $0)
+cd "$(dirname "$0")/.."
 
-source ./version
+CHARTS_BUILD_SCRIPT_VERSION=v1.9.35
+binary=./bin/charts-build-scripts
+expected_version=${CHARTS_BUILD_SCRIPT_VERSION#v}
+
+has_expected_version() {
+    local version
+    version=$("$1" --version) || return 1
+    [[ "$version" == "charts-build-scripts version $expected_version" ||
+       "$version" == "charts-build-scripts version $expected_version ("*")" ]]
+}
+
+if [[ -x "$binary" ]] && has_expected_version "$binary"; then
+    exit 0
+fi
 
 echo "Pulling in charts-build-scripts version ${CHARTS_BUILD_SCRIPT_VERSION}"
 
-rm -rf ../bin
-cd ..
+os=$(uname -s | tr '[:upper:]' '[:lower:]')
+arch=$(uname -m | sed -e 's/^x86_64$/amd64/' -e 's/^aarch64$/arm64/')
+asset="charts-build-scripts_${os}_${arch}"
+release="https://github.com/rancher/charts-build-scripts/releases/download/$CHARTS_BUILD_SCRIPT_VERSION"
 
-rm -rf charts-build-scripts
-git clone --depth 1 --branch $CHARTS_BUILD_SCRIPT_VERSION https://github.com/rancher/charts-build-scripts.git 2>/dev/null
-
-cd charts-build-scripts
-./scripts/build
-mv bin ../bin
-cd ..
-
-rm -rf charts-build-scripts
+mkdir -p ./bin
+curl --fail --location --silent --show-error --retry 3 "$release/$asset" -o ./bin/charts-build-scripts
 chmod +x ./bin/charts-build-scripts
 ./bin/charts-build-scripts --version

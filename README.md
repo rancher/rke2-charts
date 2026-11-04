@@ -1,12 +1,15 @@
 ## Source Branch
 
-This branch contains packages that contain Packages that will be synced to another branch.
+`main-source` contains package definitions, upstream patches, and maintenance
+automation. `main` contains the published Helm repository: historical chart
+archives, extracted charts, and `index.yaml`. Do not merge these branches or
+commit generated repository output to `main-source`.
 
 See the README.md under `packages/` for more information.
 
 The following directory structure is expected:
 ```text
-package/
+packages/
   <package>/
 ```
 
@@ -32,14 +35,34 @@ For an example of a chart that uses systemdefaultregistry you can look at:
 
 ### Configuration
 
-This repository branch contains a `configuration.yaml` file that is used to specify how it interacts with other repository branches.
+[`configuration.yaml`](configuration.yaml) identifies the authoritative
+published repository for validation and the Helm repository hostname.
 
 #### Validate
 
-This branch validates against the generated assets of the following branches to make sure it isn't overriding already released charts.
-- main at https://github.com/rancher/rke2-charts.git (only latest assets)
+[`scripts/validate-charts`](scripts/validate-charts) compares native chart output
+with the published `main` checkout. It rejects changed contents for an already
+published chart version, stages only new chart identities, updates the index
+with the upstream builder, and verifies historical index entries remain intact.
 
-Before submitting any PRs, a Github Workflow will check to see if your package doesn't break any already released packages in these repository branches.
+PRs targeting `main-source` generate charts and validate them against a
+separate `main` checkout without write credentials. Pushes to `main-source`
+repeat validation against a fresh `main` checkout, then commit and push only
+new chart output and `index.yaml`. Publishing commits include a
+`Source-Commit` trailer; runs are serialized, reject older source revisions,
+and use non-force pushes. A rerun without new charts is a no-op.
+
+To validate and stage locally against an existing clean main checkout instead
+of cloning the configured repository:
+
+```shell
+LIVE_DIR=/absolute/path/to/main-checkout make validate
+```
+
+To stage a publication locally without committing or pushing:
+
+`make validate` runs native chart generation and stages validated additions in
+the checkout named by `LIVE_DIR`; it does not commit or push.
 
 ### Making Changes
 
@@ -63,7 +86,7 @@ If you are working with a single Package, set `export PACKAGE=<packageName>` to 
 
 This will prevent the scripts from running commands on every package in this repository.
 
-You'll also want to update the `packageVersion` and `releaseCandidateVersion` located in `packages/${PACKAGE}/package.yaml`.
+You'll also want to update the `packageVersion` in `packages/${PACKAGE}/package.yaml`.
 
 See the section below for how to update this field.
 
@@ -79,11 +102,13 @@ Once your directory is clean, you are ready to submit a PR.
 
 #### Versioning Packages
 
-If this `major.minor.patch` (e.g. `0.0.1`) version of the Chart has never been released, reset the `packageVersion` to `01` and the `releaseCandidateVersion` to `00`.
+If this upstream Chart version has never been released, reset `packageVersion`
+to `01`. Every package must specify an integer package version of at least 1,
+including packages marked `doNotRelease`.
 
 If this `major.minor.patch` (e.g. `0.0.1`) version of the Chart has been released before:
-- If this is the first time you are making a change to this chart for a specific Rancher release (i.e. the current `packageVersion` has already been released in the Live Branch), increment the `packageVersion` by 1 and reset the `releaseCandidateVersion` to `00`.
-- Otherwise, only increment the `releaseCandidateVersion` by 1.
+- Increment `packageVersion`, and verify that the resulting chart version has
+  not already been published with different contents.
 
 ### Makefile
 
@@ -103,8 +128,10 @@ If this `major.minor.patch` (e.g. `0.0.1`) version of the Chart has been release
 
 `bash scripts/test-strip-descriptions.sh`: Checks whitespace- and indentation-independent matching, preservation of unrelated YAML, multiple YAML documents, and idempotence.
 
-`make charts`: Runs `make prepare` and then exports your charts to `assets/` and `charts/` and generates or updates your `index.yaml`.
+`make charts`: Runs the native upstream chart generator. It writes
+chart-name-based archives, extracted charts, and an index into the current
+checkout; use a clean disposable checkout for generated output.
 
-`make validate`: Validates your current repository branch against all the repository branches indicated in your configuration.yaml
-
-`make docs`: Pulls in the latest docs, scripts, etc. from the charts-build-scripts repository
+`make validate`: Runs `make charts`, compares output against `main`, and stages
+only new versions into a clean `LIVE_DIR` checkout. Without `LIVE_DIR`, it
+clones the configured validation branch. It does not commit or push.
