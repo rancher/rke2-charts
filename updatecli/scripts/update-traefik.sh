@@ -1,6 +1,11 @@
 #!/usr/bin/env bash
 set -eu
 
+source $(dirname $0)/create-issue.sh
+
+ISSUE_TITLE="Updatecli failed for traefik ${TRAEFIK_CHART_VERSION:-}"
+trap report-error EXIT INT
+
 CHART_VERSION="${TRAEFIK_CHART_VERSION:-}"
 IMAGE_VERSION="${TRAEFIK_IMAGE_VERSION:-}"
 

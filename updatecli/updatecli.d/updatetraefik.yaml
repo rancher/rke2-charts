@@ -49,6 +49,8 @@ targets:
         - name: TRAEFIK_IMAGE_VERSION
           value: '{{ source "traefik_image" }}'
         - name: PATH
+        - name: UPDATECLI_GITHUB_WORKFLOW_URL
+        - name: GH_TOKEN
 
 scms:
   default:
