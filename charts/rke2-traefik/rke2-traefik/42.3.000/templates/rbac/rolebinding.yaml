@@ -1,0 +1,32 @@
+{{- $ingressNGINXNamespaces := ternary (splitList "," (include "providers.kubernetesIngressNGINX.namespaces" .)) (list) .Values.providers.kubernetesIngressNGINX.enabled -}}
+{{- $namespaces := include "traefik.namespace" . | list -}}
+{{- if .Values.rbac.namespaced -}}
+  {{- $namespaces = concat $namespaces .Values.hub.namespaces -}}
+  {{- $namespaces = concat $namespaces ((.Values.providers.kubernetesIngress).namespaces) -}}
+  {{- $namespaces = concat $namespaces ((.Values.providers.kubernetesCRD).namespaces) -}}
+  {{- $namespaces = concat $namespaces ((.Values.providers.kubernetesGateway).namespaces) -}}
+  {{- $namespaces = concat $namespaces ((.Values.providers.knative).namespaces) -}}
+  {{- $namespaces = concat $namespaces $ingressNGINXNamespaces -}}
+{{- end -}}
+{{- $namespaces = sortAlpha (uniq $namespaces) -}}
+
+{{- if and .Values.rbac.enabled (or .Values.rbac.namespaced .Values.hub.token) }}
+{{- range $namespaces }}
+---
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: {{ template "traefik.fullname" $ }}
+  namespace: {{ . }}
+  labels:
+    {{- include "traefik.labels" $ | nindent 4 }}
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: {{ template "traefik.fullname" $ }}
+subjects:
+  - kind: ServiceAccount
+    name: {{ include "traefik.serviceAccountName" $ }}
+    namespace: {{ template "traefik.namespace" $ }}
+{{- end -}}
+{{- end -}}
