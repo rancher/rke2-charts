@@ -26,6 +26,9 @@ if [[ -n "${IMAGE_VERSION}" ]]; then
         if [[ "${current_image_version}" != "${IMAGE_VERSION}" ]]; then
             echo "Updating Traefik image from ${current_image_version} to ${IMAGE_VERSION} in ${package}"
             sed -i "s/${current_image_version}/${IMAGE_VERSION}/g" "${patch_file}"
+            app_version="${IMAGE_VERSION%-build*}"
+            sed -i "s/^appVersion:.*/appVersion: ${app_version}/" "packages/${package}/templates/crd-template/Chart.yaml"
+            sed -i "s/^+appVersion:.*/+appVersion: ${app_version}/" "packages/${package}/generated-changes/patch/Chart.yaml.patch"
             package_version=$(yq '.packageVersion' "packages/${package}/package.yaml")
             new_version=$(printf "%02d" $((10#${package_version} + 1)))
             sed -i "s/^packageVersion:.*/packageVersion: ${new_version}/" "packages/${package}/package.yaml"
