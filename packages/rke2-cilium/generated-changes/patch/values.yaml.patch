@@ -64,6 +64,15 @@
    # @schema
    # type: [null, boolean]
    # @schema
+@@ -1706,7 +1707,7 @@
+       #                 certificates not provided by the user at installation
+       #                 time.
+       # - certmanager:  This method use cert-manager to generate & rotate certificates.
+-      method: helm
++      method: cronJob
+       # -- Generated certificates validity duration in days.
+       #
+       # Defaults to 365 days (1 year) because MacOS does not accept
 @@ -1769,11 +1770,9 @@
        # type: [null, string]
        # @schema
