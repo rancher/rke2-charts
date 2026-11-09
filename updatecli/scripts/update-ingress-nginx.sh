@@ -19,13 +19,13 @@ if [ -z "${NEW_TAG}" ]; then
     exit 1
 fi
 
-current=$(sed -nr 's/^\+ *primeTag: "?([^"]+)"?.*/\1/p' "${PATCH_FILE}" | head -1)
-
-if [ "${current}" != "${NEW_TAG}" ]; then
-    echo "Updating ingress-nginx prime tag from ${current} to ${NEW_TAG}"
-    sed -i "/^\+ *primeTag:/s|${current}|${NEW_TAG}|g" "${PATCH_FILE}"
-    UPDATED=true
-fi
+for current in $(sed -nr 's/^\+ *primeTag: "?([^"]+)"?.*/\1/p' "${PATCH_FILE}"); do
+    if [ "${current}" != "${NEW_TAG}" ]; then
+        echo "Updating ingress-nginx prime tag from ${current} to ${NEW_TAG}"
+        sed -i "/^\+ *primeTag:/s|${current}|${NEW_TAG}|g" "${PATCH_FILE}"
+        UPDATED=true
+    fi
+done
 
 if [ "${UPDATED}" = true ]; then
     package_version=$(yq '.packageVersion' "${PACKAGE_FILE}")
