@@ -35,6 +35,8 @@ cp "$published/index.yaml" "$temporary_directory/index.before.yaml"
 yq -r '.entries[] | .[] | [.name, .version, .digest, .created, (.urls | join(","))] | @tsv' \
     "$temporary_directory/index.before.yaml" | LC_ALL=C sort > "$temporary_directory/index.before"
 : > "$temporary_directory/candidate-urls"
+new_assets="$temporary_directory/new-assets"
+mkdir -p "$new_assets/assets"
 
 safe_archive() {
     local archive=$1 path
@@ -133,13 +135,23 @@ for archive in "${candidate_archives[@]}"; do
     mkdir -p "$published/$(dirname "$expected_archive")" "$published/$(dirname "$expected_chart")"
     cp "$archive" "$published/$expected_archive"
     cp -R "$chart_directory" "$published/$expected_chart"
+    mkdir -p "$new_assets/$(dirname "$expected_archive")"
+    cp "$archive" "$new_assets/$expected_archive"
     printf '%s\t%s\t%s\n' "$chart_name" "$chart_version" "$expected_archive" \
         >> "$temporary_directory/candidate-urls"
     new_count=$((new_count + 1))
 done
 
 if [[ $new_count -gt 0 ]]; then
-    (cd "$published" && "$tool" index)
+    git -C "$new_assets" init --quiet
+    git -C "$new_assets" -c commit.gpgsign=false -c core.hooksPath=/dev/null \
+        -c user.name=validation -c user.email=validation@example.invalid \
+        commit --quiet --allow-empty -m "Initialize chart index"
+    (cd "$new_assets" && "$tool" index)
+    NEW_INDEX="$new_assets/index.yaml" yq \
+        '.entries = (load(strenv(NEW_INDEX)).entries *+ .entries)' \
+        "$temporary_directory/index.before.yaml" > "$temporary_directory/index.merged.yaml"
+    cp "$temporary_directory/index.merged.yaml" "$published/index.yaml"
 fi
 
 yq -r '.entries[] | .[] | [.name, .version, .digest, .created, (.urls | join(","))] | @tsv' \
