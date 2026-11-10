@@ -1,0 +1,184 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: {{ include "mychart.fullname" . }}-csi-ovirtplugin-attacher-cluster-role
+  labels:
+    app.kubernetes.io/component: attacher-cluster-role
+    app.kubernetes.io/part-of: csi-driver-ovirt
+  {{- include "mychart.labels" . | nindent 4 }}
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: '{{ include "mychart.fullname" . }}-external-attacher-runner'
+subjects:
+- kind: ServiceAccount
+  name: '{{ include "mychart.fullname" . }}-controller-sa'
+  namespace: '{{ .Release.Namespace }}'
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: {{ include "mychart.fullname" . }}-csi-ovirtplugin-health-monitor-controller-cluster-role
+  labels:
+    app.kubernetes.io/component: health-monitor-controller-cluster-role
+    app.kubernetes.io/part-of: csi-driver-ovirt
+  {{- include "mychart.labels" . | nindent 4 }}
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: '{{ include "mychart.fullname" . }}-external-health-monitor-controller-runner'
+subjects:
+- kind: ServiceAccount
+  name: '{{ include "mychart.fullname" . }}-controller-sa'
+  namespace: '{{ .Release.Namespace }}'
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: {{ include "mychart.fullname" . }}-csi-ovirtplugin-provisioner-cluster-role
+  labels:
+    app.kubernetes.io/component: provisioner-cluster-role
+    app.kubernetes.io/part-of: csi-driver-ovirt
+  {{- include "mychart.labels" . | nindent 4 }}
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: '{{ include "mychart.fullname" . }}-external-provisioner-runner'
+subjects:
+- kind: ServiceAccount
+  name: '{{ include "mychart.fullname" . }}-controller-sa'
+  namespace: '{{ .Release.Namespace }}'
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: {{ include "mychart.fullname" . }}-csi-ovirtplugin-resizer-cluster-role
+  labels:
+    app.kubernetes.io/component: resizer-cluster-role
+    app.kubernetes.io/part-of: csi-driver-ovirt
+  {{- include "mychart.labels" . | nindent 4 }}
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: '{{ include "mychart.fullname" . }}-external-resizer-runner'
+subjects:
+- kind: ServiceAccount
+  name: '{{ include "mychart.fullname" . }}-controller-sa'
+  namespace: '{{ .Release.Namespace }}'
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: {{ include "mychart.fullname" . }}-csi-ovirtplugin-attacher-role
+  labels:
+    app.kubernetes.io/component: attacher-role
+    app.kubernetes.io/part-of: csi-driver-ovirt
+  {{- include "mychart.labels" . | nindent 4 }}
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: '{{ include "mychart.fullname" . }}-external-attacher-cfg'
+subjects:
+- kind: ServiceAccount
+  name: '{{ include "mychart.fullname" . }}-controller-sa'
+  namespace: '{{ .Release.Namespace }}'
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: {{ include "mychart.fullname" . }}-csi-ovirtplugin-health-monitor-controller-role
+  labels:
+    app.kubernetes.io/component: health-monitor-controller-role
+    app.kubernetes.io/part-of: csi-driver-ovirt
+  {{- include "mychart.labels" . | nindent 4 }}
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: '{{ include "mychart.fullname" . }}-external-health-monitor-controller-cfg'
+subjects:
+- kind: ServiceAccount
+  name: '{{ include "mychart.fullname" . }}-controller-sa'
+  namespace: '{{ .Release.Namespace }}'
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: {{ include "mychart.fullname" . }}-csi-ovirtplugin-provisioner-role
+  labels:
+    app.kubernetes.io/component: provisioner-role
+    app.kubernetes.io/part-of: csi-driver-ovirt
+  {{- include "mychart.labels" . | nindent 4 }}
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: '{{ include "mychart.fullname" . }}-external-provisioner-cfg'
+subjects:
+- kind: ServiceAccount
+  name: '{{ include "mychart.fullname" . }}-controller-sa'
+  namespace: '{{ .Release.Namespace }}'
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: {{ include "mychart.fullname" . }}-csi-ovirtplugin-resizer-role
+  labels:
+    app.kubernetes.io/component: resizer-role
+    app.kubernetes.io/part-of: csi-driver-ovirt
+  {{- include "mychart.labels" . | nindent 4 }}
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: '{{ include "mychart.fullname" . }}-external-resizer-cfg'
+subjects:
+- kind: ServiceAccount
+  name: '{{ include "mychart.fullname" . }}-controller-sa'
+  namespace: '{{ .Release.Namespace }}'
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: {{ include "mychart.fullname" . }}-csi-ovirtplugin-node-health-monitor-controller-cluster-role
+  labels:
+    app.kubernetes.io/component: health-monitor-controller-cluster-role
+    app.kubernetes.io/part-of: csi-driver-ovirt
+  {{- include "mychart.labels" . | nindent 4 }}
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: '{{ include "mychart.fullname" . }}-external-health-monitor-controller-runner'
+subjects:
+- kind: ServiceAccount
+  name: '{{ include "mychart.fullname" . }}-node-sa'
+  namespace: '{{ .Release.Namespace }}'
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: {{ include "mychart.fullname" . }}-csi-ovirtplugin-node-health-monitor-controller-role
+  labels:
+    app.kubernetes.io/component: health-monitor-controller-role
+    app.kubernetes.io/part-of: csi-driver-ovirt
+  {{- include "mychart.labels" . | nindent 4 }}
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: '{{ include "mychart.fullname" . }}-external-health-monitor-controller-cfg'
+subjects:
+- kind: ServiceAccount
+  name: '{{ include "mychart.fullname" . }}-node-sa'
+  namespace: '{{ .Release.Namespace }}'
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: {{ include "mychart.fullname" . }}-ovirt-node-privileged-binding
+  labels:
+  {{- include "mychart.labels" . | nindent 4 }}
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: '{{ include "mychart.fullname" . }}-ovirt-privileged-role'
+subjects:
+- kind: ServiceAccount
+  name: '{{ include "mychart.fullname" . }}-node-sa'
+  namespace: '{{ .Release.Namespace }}'

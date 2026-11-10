@@ -1,0 +1,7 @@
+runtimeClasses:
+  - name: nvidia
+    handler: nvidia
+  - name: nvidia-experimental
+    handler: nvidia-experimental
+  - name: crun
+    handler: crun

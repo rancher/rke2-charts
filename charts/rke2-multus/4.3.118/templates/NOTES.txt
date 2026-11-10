@@ -1,0 +1,33 @@
+======
+1. The following components have been deployed as part of this helm chart:
+{{- if .Values.manifests.clusterRole }}
+Cluster Role: {{ .Values.serviceAccount.name }}
+{{- end}}
+{{- if .Values.manifests.clusterRoleBinding }}
+Cluster Role Binding: {{ .Chart.Name }}
+{{- end }}
+{{- if .Values.manifests.configMap }}
+Config Map: {{ .Release.Name }}-{{ .Chart.Version }}-config
+{{- end }}
+{{- if .Values.manifests.customResourceDefinition }}
+Custom Resource Definition: network-attachment-definitions.k8s.cni.cncf.io
+{{- end }}
+{{- if .Values.manifests.daemonSet }}
+Daemon Set: {{ .Release.Name }}
+{{- end }}
+{{- if .Values.manifests.dhcpDaemonSet }}
+Daemon Set: {{ .Release.Name }}-dhcp
+{{- end}}
+{{- if .Values.manifests.serviceAccount }}
+Service Account: {{ .Values.serviceAccount.name }}
+{{- end }}
+
+You can now deploy any other CNI and create its Network Attachment Defintion.
+---------
+
+2. To uninstall helm chart use the command:
+helm delete {{ .Release.Name }}
+
+You may have to manually delete CRD -
+kubectl delete crd network-attachment-definitions.k8s.cni.cncf.io
+---------

@@ -44,6 +44,36 @@ entries:
       catalog.cattle.io/upstream-version: 0.2.17
     apiVersion: v2
     appVersion: v0.2.10
+    created: "2026-11-10T22:26:19.238336086Z"
+    dependencies:
+    - condition: kube-vip.enabled
+      name: kube-vip
+      repository: file://./charts/kube-vip
+      version: 0.11.0
+    description: A Helm chart for Harvester Cloud Provider
+    digest: bd1ab3f024d985bf279f7ebdf4d2cca6ea381ea3c941d8023545328a6277ebcd
+    keywords:
+    - infrastructure
+    - harvester
+    maintainers:
+    - name: harvester
+    name: harvester-cloud-provider
+    type: application
+    urls:
+    - assets/harvester-cloud-provider/harvester-cloud-provider-0.2.1701.tgz
+    version: 0.2.1701
+  - annotations:
+      catalog.cattle.io/certified: rancher
+      catalog.cattle.io/display-name: Harvester Cloud Provider
+      catalog.cattle.io/kube-version: '>= 1.23.0-0'
+      catalog.cattle.io/namespace: kube-system
+      catalog.cattle.io/os: linux
+      catalog.cattle.io/rancher-version: '>= 2.7.0-0'
+      catalog.cattle.io/release-name: harvester-cloud-provider
+      catalog.cattle.io/ui-component: harvester-cloud-provider
+      catalog.cattle.io/upstream-version: 0.2.17
+    apiVersion: v2
+    appVersion: v0.2.10
     created: "2026-10-27T15:15:09.121605774Z"
     dependencies:
     - condition: kube-vip.enabled
@@ -682,6 +712,31 @@ entries:
       catalog.cattle.io/ui-component: harvester-csi-driver
     apiVersion: v2
     appVersion: v0.2.11
+    created: "2026-11-10T22:26:19.246296254Z"
+    description: A Helm chart for Harvester CSI driver
+    digest: ec3b24395de4423ec097f5b6822f306c9ff1f9b4f2e2c5d38114cc3031a9beb0
+    keywords:
+    - infrastructure
+    - harvester
+    maintainers:
+    - name: harvester
+    name: harvester-csi-driver
+    type: application
+    urls:
+    - assets/harvester-csi-driver/harvester-csi-driver-0.1.3301.tgz
+    version: 0.1.3301
+  - annotations:
+      catalog.cattle.io/certified: rancher
+      catalog.cattle.io/display-name: Harvester CSI Driver
+      catalog.cattle.io/kube-version: '>= 1.18.0-0'
+      catalog.cattle.io/namespace: kube-system
+      catalog.cattle.io/os: linux
+      catalog.cattle.io/permits-os: linux
+      catalog.cattle.io/rancher-version: '>= 2.6.1-0 < 2.8.0-0'
+      catalog.cattle.io/release-name: harvester-csi-driver
+      catalog.cattle.io/ui-component: harvester-csi-driver
+    apiVersion: v2
+    appVersion: v0.2.11
     created: "2026-10-27T15:15:09.136904563Z"
     description: A Helm chart for Harvester CSI driver
     digest: ad0f997c72875dfe209fe42960f5a51b2f7ba2827850548ff26d0f4a84c40fec
@@ -1170,6 +1225,34 @@ entries:
     - assets/harvester-csi-driver/harvester-csi-driver-0.1.300.tgz
     version: 0.1.300
   rancher-vsphere-cpi:
+  - annotations:
+      catalog.cattle.io/certified: rancher
+      catalog.cattle.io/display-name: vSphere CPI
+      catalog.cattle.io/kube-version: '>= 1.27.0-0 < 1.38.0-0'
+      catalog.cattle.io/namespace: kube-system
+      catalog.cattle.io/os: linux
+      catalog.cattle.io/permits-os: linux,windows
+      catalog.cattle.io/rancher-version: '>= 2.9.0-0'
+      catalog.cattle.io/release-name: vsphere-cpi
+    apiVersion: v1
+    appVersion: 1.37.0
+    created: "2026-11-10T22:26:19.253443594Z"
+    description: vSphere Cloud Provider Interface (CPI)
+    digest: 361c01e0b2d1d6c16f0bf7edbef5013e1b70e251ba394626dde7052500974903
+    icon: https://charts.rancher.io/assets/logos/vsphere-cpi.svg
+    keywords:
+    - infrastructure
+    maintainers:
+    - email: jiaqi.luo@suse.com
+      name: Jiaqi Luo
+    - email: brad.davidson@suse.com
+      name: Brad Davidson
+    name: rancher-vsphere-cpi
+    sources:
+    - https://github.com/kubernetes/cloud-provider-vsphere
+    urls:
+    - assets/rancher-vsphere-cpi/rancher-vsphere-cpi-1.16.601.tgz
+    version: 1.16.601
   - annotations:
       catalog.cattle.io/certified: rancher
       catalog.cattle.io/display-name: vSphere CPI
@@ -2023,6 +2106,36 @@ entries:
     - assets/rancher-vsphere-cpi/rancher-vsphere-cpi-1.1.000.tgz
     version: 1.1.000
   rancher-vsphere-csi:
+  - annotations:
+      catalog.cattle.io/certified: rancher
+      catalog.cattle.io/display-name: vSphere CSI
+      catalog.cattle.io/kube-version: '>= 1.27.0-0 < 1.38.0-0'
+      catalog.cattle.io/namespace: kube-system
+      catalog.cattle.io/os: linux,windows
+      catalog.cattle.io/permits-os: linux,windows
+      catalog.cattle.io/rancher-version: '>= 2.9.0-0'
+      catalog.cattle.io/release-name: vsphere-csi
+    apiVersion: v1
+    appVersion: 3.8.0
+    created: "2026-11-10T22:26:19.285161899Z"
+    description: vSphere Cloud Storage Interface (CSI)
+    digest: d8b484a018851d6290a5c4342cab32555e3d8380416482f1bd5cef6825492b23
+    icon: https://charts.rancher.io/assets/logos/vsphere-csi.svg
+    keywords:
+    - infrastructure
+    maintainers:
+    - email: jiaqi.luo@suse.com
+      name: Jiaqi Luo
+    - email: brad.davidson@suse.com
+      name: Brad Davidson
+    - email: derek.nola@suse.com
+      name: Derek Nola
+    name: rancher-vsphere-csi
+    sources:
+    - https://github.com/kubernetes-sigs/vsphere-csi-driver
+    urls:
+    - assets/rancher-vsphere-csi/rancher-vsphere-csi-3.8.1-rancher0.tgz
+    version: 3.8.1-rancher0
   - annotations:
       catalog.cattle.io/certified: rancher
       catalog.cattle.io/display-name: vSphere CSI
@@ -3188,6 +3301,23 @@ entries:
       catalog.cattle.io/namespace: tigera-operator
     apiVersion: v2
     appVersion: v3.33.0
+    created: "2026-11-10T22:26:19.29243873Z"
+    description: Installs the Tigera operator for Calico
+    digest: c88da4513fdcc307ebf939e6fd569252ff3fc0fdb8dda291ba02d7ac5c38d2db
+    home: https://docs.tigera.io/calico
+    icon: https://docs.tigera.io/img/calico-logo.png
+    name: rke2-calico
+    sources:
+    - https://github.com/projectcalico/calico/tree/master/charts/tigera-operator
+    - https://github.com/tigera/operator
+    - https://github.com/projectcalico/calico
+    urls:
+    - assets/rke2-calico/rke2-calico-3.33.4.tgz
+    version: 3.33.4
+  - annotations:
+      catalog.cattle.io/namespace: tigera-operator
+    apiVersion: v2
+    appVersion: v3.33.0
     created: "2026-10-26T22:28:31.799789521Z"
     description: Installs the Tigera operator for Calico
     digest: d9b65f23806734b22ba2ddeeb678b489b62fb47ae8f41557549bcbd14257ccde
@@ -3252,6 +3382,23 @@ entries:
     urls:
     - assets/rke2-calico-3.33/rke2-calico-v3.33.000.tgz
     version: v3.33.000
+  - annotations:
+      catalog.cattle.io/namespace: tigera-operator
+    apiVersion: v2
+    appVersion: v3.32.2
+    created: "2026-11-10T22:26:19.291960763Z"
+    description: Installs the Tigera operator for Calico
+    digest: 618ff04d615fedfe98f1fad48e32be9b17d6d6ab7e841941e76bad24d17a988c
+    home: https://docs.tigera.io/calico
+    icon: https://docs.tigera.io/img/calico-logo.png
+    name: rke2-calico
+    sources:
+    - https://github.com/projectcalico/calico/tree/master/charts/tigera-operator
+    - https://github.com/tigera/operator
+    - https://github.com/projectcalico/calico
+    urls:
+    - assets/rke2-calico/rke2-calico-3.32.201.tgz
+    version: 3.32.201
   - annotations:
       catalog.cattle.io/namespace: tigera-operator
     apiVersion: v2
@@ -4437,6 +4584,16 @@ entries:
     version: v3.33.001
   - apiVersion: v2
     appVersion: v3.33.0
+    created: "2026-11-10T22:26:19.46775703Z"
+    description: Installs crd.projectcalico.org and operator.tigera.io Custom Resource
+      Definitions (CRDs)
+    digest: ebb4a3abb2c0015c0bc1839fbed4ae9f5a06dad5b5a848a78c11865c313fc350
+    name: rke2-calico-crd
+    urls:
+    - assets/rke2-calico-crd/rke2-calico-crd-3.33.1.tgz
+    version: 3.33.1
+  - apiVersion: v2
+    appVersion: v3.33.0
     created: "2026-10-07T18:43:35.606454837Z"
     description: Installs crd.projectcalico.org and operator.tigera.io Custom Resource
       Definitions (CRDs)
@@ -4445,6 +4602,16 @@ entries:
     urls:
     - assets/rke2-calico-crd-3.33/rke2-calico-crd-v3.33.000.tgz
     version: v3.33.000
+  - apiVersion: v2
+    appVersion: v3.32.2
+    created: "2026-11-10T22:26:19.462808973Z"
+    description: Installs crd.projectcalico.org and operator.tigera.io Custom Resource
+      Definitions (CRDs)
+    digest: 9ef27f169b8da3043a01bd447f767f78812fa97015b354a9a92bfb2bc5007b0c
+    name: rke2-calico-crd
+    urls:
+    - assets/rke2-calico-crd/rke2-calico-crd-3.32.201.tgz
+    version: 3.32.201
   - apiVersion: v2
     appVersion: v3.32.2
     created: "2026-09-03T16:45:19.238740657Z"
@@ -5127,6 +5294,23 @@ entries:
     - assets/rke2-calico/rke2-calico-crd-v1.0.001.tgz
     version: v1.0.001
   rke2-canal:
+  - apiVersion: v1
+    appVersion: v3.32.2
+    created: "2026-11-10T22:26:19.508585015Z"
+    description: Install Canal Network Plugin.
+    digest: 021d52251cfca2fe4603e509923b1b5ba7925eb30eeb1e34c80168768319104f
+    home: https://www.projectcalico.org/
+    keywords:
+    - canal
+    maintainers:
+    - email: charts@rancher.com
+      name: Rancher Labs
+    name: rke2-canal
+    sources:
+    - https://github.com/rancher/rke2-charts
+    urls:
+    - assets/rke2-canal/rke2-canal-3.32.201-build20261022.tgz
+    version: 3.32.201-build20261022
   - apiVersion: v1
     appVersion: v3.32.2
     created: "2026-10-22T18:04:36.093768575Z"
@@ -7797,6 +7981,110 @@ entries:
     - assets/rke2-canal/rke2-canal-crd-v3.27.3-build2024040301.tgz
     version: v3.27.3-build2024040301
   rke2-cilium:
+  - annotations:
+      artifacthub.io/crds: "- kind: CiliumNetworkPolicy\n  version: v2\n  name: ciliumnetworkpolicies.cilium.io\n
+        \ displayName: Cilium Network Policy\n  description: |\n    Cilium Network
+        Policies provide additional functionality beyond what\n    is provided by
+        standard Kubernetes NetworkPolicy such as the ability\n    to allow traffic
+        based on FQDNs, or to filter at Layer 7.\n- kind: CiliumClusterwideNetworkPolicy\n
+        \ version: v2\n  name: ciliumclusterwidenetworkpolicies.cilium.io\n  displayName:
+        Cilium Clusterwide Network Policy\n  description: |\n    Cilium Clusterwide
+        Network Policies support configuring network traffic\n    policiies across
+        the entire cluster, including applying node firewalls.\n- kind: CiliumLocalRedirectPolicy\n
+        \ version: v2\n  name: ciliumlocalredirectpolicies.cilium.io\n  displayName:
+        Cilium Local Redirect Policy\n  description: |\n    Cilium Local Redirect
+        Policy allows local redirects to be configured\n    within a node to support
+        use cases like Node-Local DNS.\n- kind: CiliumNode\n  version: v2\n  name:
+        ciliumnodes.cilium.io\n  displayName: Cilium Node\n  description: |\n    Cilium
+        Node represents a node managed by Cilium. It contains a\n    specification
+        to control various node specific configuration aspects\n    and a status section
+        to represent the status of the node.\n- kind: CiliumIdentity\n  version: v2\n
+        \ name: ciliumidentities.cilium.io\n  displayName: Cilium Identity\n  description:
+        |\n    Cilium Identity allows introspection into security identities that\n
+        \   Cilium allocates which identify sets of labels that are assigned to\n
+        \   individual endpoints in the cluster.\n- kind: CiliumEndpoint\n  version:
+        v2\n  name: ciliumendpoints.cilium.io\n  displayName: Cilium Endpoint\n  description:
+        |\n    Cilium Endpoint represents the status of individual pods or nodes in\n
+        \   the cluster which are managed by Cilium, including enforcement status,\n
+        \   IP addressing and whether the networking is successfully operational.\n-
+        kind: CiliumEndpointSlice\n  version: v2alpha1\n  name: ciliumendpointslices.cilium.io\n
+        \ displayName: Cilium Endpoint Slice\n  description: |\n    Cilium Endpoint
+        Slice represents the status of groups of pods or nodes\n    in the cluster
+        which are managed by Cilium, including enforcement status,\n    IP addressing
+        and whether the networking is successfully operational.\n- kind: CiliumEgressGatewayPolicy\n
+        \ version: v2\n  name: ciliumegressgatewaypolicies.cilium.io\n  displayName:
+        Cilium Egress Gateway Policy\n  description: |\n    Cilium Egress Gateway
+        Policy provides control over the way that traffic\n    leaves the cluster
+        and which source addresses to use for that traffic.\n- kind: CiliumClusterwideEnvoyConfig\n
+        \ version: v2\n  name: ciliumclusterwideenvoyconfigs.cilium.io\n  displayName:
+        Cilium Clusterwide Envoy Config\n  description: |\n    Cilium Clusterwide
+        Envoy Config specifies Envoy resources and K8s service mappings\n    to be
+        provisioned into Cilium host proxy instances in cluster context.\n- kind:
+        CiliumEnvoyConfig\n  version: v2\n  name: ciliumenvoyconfigs.cilium.io\n  displayName:
+        Cilium Envoy Config\n  description: |\n    Cilium Envoy Config specifies Envoy
+        resources and K8s service mappings\n    to be provisioned into Cilium host
+        proxy instances in namespace context.\n- kind: CiliumNodeConfig\n  version:
+        v2\n  name: ciliumnodeconfigs.cilium.io\n  displayName: Cilium Node Configuration\n
+        \ description: |\n    CiliumNodeConfig is a list of configuration key-value
+        pairs. It is applied to\n    nodes indicated by a label selector.\n- kind:
+        CiliumBGPClusterConfig\n  version: v2alpha1\n  name: ciliumbgpclusterconfigs.cilium.io\n
+        \ displayName: Cilium BGP Cluster Config\n  description: |\n    Cilium BGP
+        Cluster Config instructs Cilium operator to create specific BGP cluster\n
+        \   configurations.\n- kind: CiliumBGPPeerConfig\n  version: v2alpha1\n  name:
+        ciliumbgppeerconfigs.cilium.io\n  displayName: Cilium BGP Peer Config\n  description:
+        |\n    CiliumBGPPeerConfig is a common set of BGP peer configurations. It
+        can be referenced \n    by multiple peers from CiliumBGPClusterConfig.\n-
+        kind: CiliumBGPAdvertisement\n  version: v2alpha1\n  name: ciliumbgpadvertisements.cilium.io\n
+        \ displayName: Cilium BGP Advertisement\n  description: |\n    CiliumBGPAdvertisement
+        is used to define source of BGP advertisement as well as BGP attributes \n
+        \   to be advertised with those prefixes.\n- kind: CiliumBGPNodeConfig\n  version:
+        v2alpha1\n  name: ciliumbgpnodeconfigs.cilium.io\n  displayName: Cilium BGP
+        Node Config\n  description: |\n    CiliumBGPNodeConfig is read only node specific
+        BGP configuration. It is constructed by Cilium operator.\n    It will also
+        contain node local BGP state information.\n- kind: CiliumBGPNodeConfigOverride\n
+        \ version: v2alpha1\n  name: ciliumbgpnodeconfigoverrides.cilium.io\n  displayName:
+        Cilium BGP Node Config Override\n  description: |\n    CiliumBGPNodeConfigOverride
+        can be used to override node specific BGP configuration.\n- kind: CiliumLoadBalancerIPPool\n
+        \ version: v2\n  name: ciliumloadbalancerippools.cilium.io\n  displayName:
+        Cilium Load Balancer IP Pool\n  description: |\n    Defining a Cilium Load
+        Balancer IP Pool instructs Cilium to assign IPs to LoadBalancer Services.\n-
+        kind: CiliumCIDRGroup\n  version: v2alpha1\n  name: ciliumcidrgroups.cilium.io\n
+        \ displayName: Cilium CIDR Group\n  description: |\n    CiliumCIDRGroup is
+        a list of CIDRs that can be referenced as a single entity from CiliumNetworkPolicies.\n-
+        kind: CiliumL2AnnouncementPolicy\n  version: v2alpha1\n  name: ciliuml2announcementpolicies.cilium.io\n
+        \ displayName: Cilium L2 Announcement Policy\n  description: |\n    CiliumL2AnnouncementPolicy
+        is a policy which determines which service IPs will be announced to\n    the
+        local area network, by which nodes, and via which interfaces.\n- kind: CiliumPodIPPool\n
+        \ version: v2alpha1\n  name: ciliumpodippools.cilium.io\n  displayName: Cilium
+        Pod IP Pool\n  description: |\n    CiliumPodIPPool defines an IP pool that
+        can be used for pooled IPAM (i.e. the multi-pool IPAM mode).\n- kind: CiliumGatewayClassConfig\n
+        \ version: v2alpha1\n  name: ciliumgatewayclassconfigs.cilium.io\n  displayName:
+        Cilium Gateway Class Config\n  description: |\n    CiliumGatewayClassConfig
+        defines a configuration for Gateway API GatewayClass.\n- kind: CiliumDatapathPlugin\n
+        \ version: v2alpha1\n  name: ciliumdatapathplugins.cilium.io\n  displayName:
+        Cilium Datapath Plugin\n  description: |\n    CiliumDatapathPlugin is a plugin
+        that extends datapath functionality.\n"
+    apiVersion: v2
+    appVersion: 1.20.4
+    created: "2026-11-10T22:26:20.319471995Z"
+    description: eBPF-based Networking, Security, and Observability
+    digest: dcac6c591b73dbb8da2a23e0de2c0ba0c368d19dc525de192d481beb5ba3b351
+    home: https://docs.rke2.io/
+    keywords:
+    - BPF
+    - eBPF
+    - Kubernetes
+    - Networking
+    - Security
+    - Observability
+    - Troubleshooting
+    kubeVersion: '>= 1.21.0-0'
+    name: rke2-cilium
+    sources:
+    - https://github.com/rancher/rke2-charts
+    urls:
+    - assets/rke2-cilium/rke2-cilium-1.20.402.tgz
+    version: 1.20.402
   - annotations:
       artifacthub.io/crds: "- kind: CiliumNetworkPolicy\n  version: v2\n  name: ciliumnetworkpolicies.cilium.io\n
         \ displayName: Cilium Network Policy\n  description: |\n    Cilium Network
@@ -19516,6 +19804,30 @@ entries:
     - assets/rke2-cilium/rke2-cilium-1.11.102.tgz
     version: 1.11.102
   - apiVersion: v1
+    created: "2026-11-10T22:26:20.343318352Z"
+    dependencies:
+    - name: cilium
+      repository: file://./charts/cilium
+    - import-values:
+      - defaults
+      name: rke2-cilium-hard-defaults
+      repository: file://./charts/rke2-cilium-hard-defaults
+    description: eBPF-based Networking, Security, and Observability
+    digest: 81fead90e5df60e1c0a47be890d487e2696ac3e13b60294189a4a0827b3da941
+    home: https://cilium.io/
+    keywords:
+    - cilium
+    kubeVersion: '>= 1.12.0-0'
+    maintainers:
+    - email: charts@rancher.com
+      name: Rancher Labs
+    name: rke2-cilium
+    sources:
+    - https://github.com/rancher/rke2-charts
+    urls:
+    - assets/rke2-cilium-legacy/rke2-cilium-1.11.101.tgz
+    version: 1.11.101
+  - apiVersion: v1
     created: "2022-01-20T16:34:36.791360247Z"
     dependencies:
     - name: cilium
@@ -19900,6 +20212,34 @@ entries:
     - assets/rke2-cilium/rke2-cilium-1.9.401.tgz
     version: 1.9.401
   rke2-coredns:
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: fixed
+          description: Default the Service and container ports when a server block has no port set, instead of rendering null ports
+    apiVersion: v2
+    appVersion: 1.14.7
+    created: "2026-11-10T22:26:20.4326831Z"
+    description: CoreDNS is a DNS server that chains plugins and provides Kubernetes
+      DNS Services
+    digest: 98ef6f015a05a23c1b83e8507b2c034a6fd2f5c2a2908eef9a38039339f6dd7d
+    home: https://coredns.io
+    icon: https://coredns.io/images/CoreDNS_Colour_Horizontal.png
+    keywords:
+    - coredns
+    - dns
+    - kubedns
+    maintainers:
+    - name: mrueg
+    - name: haad
+    - name: hagaibarel
+    - name: shubham-cmyk
+    name: rke2-coredns
+    sources:
+    - https://github.com/coredns/coredns
+    type: application
+    urls:
+    - assets/rke2-coredns/rke2-coredns-1.50.201.tgz
+    version: 1.50.201
   - annotations:
       artifacthub.io/changes: |
         - kind: fixed
@@ -23186,6 +23526,19 @@ entries:
     version: v0.28.1005
   - apiVersion: v1
     appVersion: v0.28.10
+    created: "2026-11-10T22:26:20.432984329Z"
+    description: Install Flannel Network Plugin.
+    digest: 065d79bcdfe043f7a5c5f9f7ed86d0356aa59151904793a3d70fa52c70bfe412
+    keywords:
+    - Flannel
+    name: rke2-flannel
+    sources:
+    - https://github.com/rancher/rke2-charts
+    urls:
+    - assets/rke2-flannel/rke2-flannel-0.28.1005.tgz
+    version: 0.28.1005
+  - apiVersion: v1
+    appVersion: v0.28.10
     created: "2026-10-22T17:00:52.625114678Z"
     description: Install Flannel Network Plugin.
     digest: 1c27b8b0d75b3e94ff4793303ac81d1e3f14926b6fb4eb757a033b65e8ef5887
@@ -24303,6 +24656,16 @@ entries:
     - assets/rke2-flannel/rke2-flannel-v0.24.001.tgz
     version: v0.24.001
   rke2-gateway-api-crd:
+  - apiVersion: v2
+    appVersion: v1.6.3
+    created: "2026-11-10T22:26:20.466631319Z"
+    description: RKE2 Helm chart for Gateway API CRDs
+    digest: e8f5ee7c39477406cb2dd78e0ea0da470e223354526c707e87dc6cc0b4d37d38
+    name: rke2-gateway-api-crd
+    type: application
+    urls:
+    - assets/rke2-gateway-api-crd/rke2-gateway-api-crd-1.6.301.tgz
+    version: 1.6.301
   - apiVersion: v2
     appVersion: v1.6.3
     created: "2026-10-08T16:07:49.617809867Z"
@@ -28916,6 +29279,46 @@ entries:
           description: "Stop rendering `annotations: null` on the cert-manager `Issuer`, which referenced an undefined `additionalAnnotations` value. This mirrors the earlier APIService fix and prevents permanent GitOps `OutOfSync`."
     apiVersion: v2
     appVersion: 0.9.0
+    created: "2026-11-10T22:26:20.717111924Z"
+    description: Metrics Server is a scalable, efficient source of container resource
+      metrics for Kubernetes built-in autoscaling pipelines.
+    digest: 1ddbac8c8e3a9c60d034ea91b0c87b3d9f253ac075afae824371c22c342ea890
+    home: https://github.com/kubernetes-sigs/metrics-server
+    icon: https://avatars.githubusercontent.com/u/36015203?s=400&v=4
+    keywords:
+    - kubernetes
+    - metrics-server
+    - metrics
+    maintainers:
+    - name: stevehipwell
+      url: https://github.com/stevehipwell
+    - name: krmichel
+      url: https://github.com/krmichel
+    - name: endrec
+      url: https://github.com/endrec
+    name: rke2-metrics-server
+    sources:
+    - https://github.com/kubernetes-sigs/metrics-server
+    type: application
+    urls:
+    - assets/rke2-metrics-server/rke2-metrics-server-3.14.5.tgz
+    version: 3.14.5
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: added
+          description: "Add chart option to permit setting hostUsers for additional isolation."
+        - kind: added
+          description: "Add `namespaceOverride` which allows deploying to a namespace other than `.Release.namespace`."
+        - kind: changed
+          description: "Apply `tls.certManager.annotations` and `tls.certManager.labels` to the Cert Manager `Certificate` resource; these values are documented but were previously never rendered."
+        - kind: changed
+          description: "Use `metrics-server.fullname` instead of `metrics-server.name` for ClusterRole."
+        - kind: changed
+          description: "Update the _Metrics Server_ OCI image to [`0.9.0`](https://github.com/kubernetes-sigs/metrics-server/releases/tag/v0.9.0)."
+        - kind: fixed
+          description: "Stop rendering `annotations: null` on the cert-manager `Issuer`, which referenced an undefined `additionalAnnotations` value. This mirrors the earlier APIService fix and prevents permanent GitOps `OutOfSync`."
+    apiVersion: v2
+    appVersion: 0.9.0
     created: "2026-11-04T16:41:07.58110894Z"
     description: Metrics Server is a scalable, efficient source of container resource
       metrics for Kubernetes built-in autoscaling pipelines.
@@ -30489,6 +30892,50 @@ entries:
   rke2-multus:
   - apiVersion: v1
     appVersion: 4.3.1
+    created: "2026-11-10T22:26:20.718445414Z"
+    dependencies:
+    - condition: rke2-whereabouts.enabled
+      name: rke2-whereabouts
+      repository: file://./charts/rke2-whereabouts
+      version: 0.9.4
+    description: Multus Helm chart for Kubernetes
+    digest: 89c248c115704b45701f2f60dbee3424ec8b72debf93bb3860974598d319503d
+    home: https://github.com/k8snetworkplumbingwg/multus-cni
+    icon: https://raw.githubusercontent.com/k8snetworkplumbingwg/multus-cni/master/doc/images/Multus.png
+    maintainers:
+    - email: charts@rancher.com
+      name: Rancher Labs
+    name: rke2-multus
+    sources:
+    - https://github.com/intel/multus-cni
+    type: application
+    urls:
+    - assets/rke2-multus/rke2-multus-4.3.119.tgz
+    version: 4.3.119
+  - apiVersion: v2
+    appVersion: 4.3.1
+    created: "2026-11-10T22:26:20.7179939Z"
+    dependencies:
+    - condition: rke2-whereabouts.enabled
+      name: rke2-whereabouts
+      repository: file://./charts/rke2-whereabouts
+      version: 0.9.4
+    description: Multus Helm chart for Kubernetes
+    digest: cd092927cc6b5db78cd77cb160b1da3d85f243d25acc1eb26d6fc49dea8e2eb2
+    home: https://github.com/k8snetworkplumbingwg/multus-cni
+    icon: https://raw.githubusercontent.com/k8snetworkplumbingwg/multus-cni/master/doc/images/Multus.png
+    maintainers:
+    - email: charts@rancher.com
+      name: Rancher Labs
+    name: rke2-multus
+    sources:
+    - https://github.com/intel/multus-cni
+    type: application
+    urls:
+    - assets/rke2-multus/rke2-multus-4.3.118.tgz
+    version: 4.3.118
+  - apiVersion: v1
+    appVersion: 4.3.1
     created: "2026-10-22T23:26:18.861567392Z"
     dependencies:
     - condition: rke2-whereabouts.enabled
@@ -30508,6 +30955,48 @@ entries:
     urls:
     - assets/rke2-multus/rke2-multus-v4.3.118.tgz
     version: v4.3.118
+  - apiVersion: v2
+    appVersion: 4.3.1
+    created: "2026-11-10T22:26:20.793821341Z"
+    dependencies:
+    - condition: rke2-whereabouts.enabled
+      name: rke2-whereabouts
+      repository: file://./charts/rke2-whereabouts
+    description: Multus Helm chart for Kubernetes
+    digest: a33bcf4db933ffe9ed0a819b34c5322edfd45eddaa48c5cf4f759f27a607b014
+    home: https://github.com/k8snetworkplumbingwg/multus-cni
+    icon: https://raw.githubusercontent.com/k8snetworkplumbingwg/multus-cni/master/doc/images/Multus.png
+    maintainers:
+    - email: charts@rancher.com
+      name: Rancher Labs
+    name: rke2-multus
+    sources:
+    - https://github.com/intel/multus-cni
+    type: application
+    urls:
+    - assets/rke2-multus-1.34-1.36/rke2-multus-v4.3.118.tgz
+    version: v4.3.118
+  - apiVersion: v2
+    appVersion: 4.3.1
+    created: "2026-11-10T22:26:20.79271473Z"
+    dependencies:
+    - condition: rke2-whereabouts.enabled
+      name: rke2-whereabouts
+      repository: file://./charts/rke2-whereabouts
+    description: Multus Helm chart for Kubernetes
+    digest: 62b57902c24a306c97950bd7c4281fb7fcafa3f977098988f3582127f2750429
+    home: https://github.com/k8snetworkplumbingwg/multus-cni
+    icon: https://raw.githubusercontent.com/k8snetworkplumbingwg/multus-cni/master/doc/images/Multus.png
+    maintainers:
+    - email: charts@rancher.com
+      name: Rancher Labs
+    name: rke2-multus
+    sources:
+    - https://github.com/intel/multus-cni
+    type: application
+    urls:
+    - assets/rke2-multus-1.34-1.36/rke2-multus-v4.3.117.tgz
+    version: v4.3.117
   - apiVersion: v1
     appVersion: 4.3.1
     created: "2026-10-22T17:52:43.115052138Z"
@@ -30550,6 +31039,48 @@ entries:
     urls:
     - assets/rke2-multus/rke2-multus-v4.3.116.tgz
     version: v4.3.116
+  - apiVersion: v2
+    appVersion: 4.3.1
+    created: "2026-11-10T22:26:20.791750591Z"
+    dependencies:
+    - condition: rke2-whereabouts.enabled
+      name: rke2-whereabouts
+      repository: file://./charts/rke2-whereabouts
+    description: Multus Helm chart for Kubernetes
+    digest: 8a72bc6454b969586b238a0d0c2845c89711c2e61d47d16fb87abbedd3614073
+    home: https://github.com/k8snetworkplumbingwg/multus-cni
+    icon: https://raw.githubusercontent.com/k8snetworkplumbingwg/multus-cni/master/doc/images/Multus.png
+    maintainers:
+    - email: charts@rancher.com
+      name: Rancher Labs
+    name: rke2-multus
+    sources:
+    - https://github.com/intel/multus-cni
+    type: application
+    urls:
+    - assets/rke2-multus-1.34-1.36/rke2-multus-v4.3.116.tgz
+    version: v4.3.116
+  - apiVersion: v2
+    appVersion: 4.3.1
+    created: "2026-11-10T22:26:20.791250305Z"
+    dependencies:
+    - condition: rke2-whereabouts.enabled
+      name: rke2-whereabouts
+      repository: file://./charts/rke2-whereabouts
+    description: Multus Helm chart for Kubernetes
+    digest: f84b4e33b25459055ab319dbfbc1a7acbabf493a8c37dd164bdea69d6a4bd250
+    home: https://github.com/k8snetworkplumbingwg/multus-cni
+    icon: https://raw.githubusercontent.com/k8snetworkplumbingwg/multus-cni/master/doc/images/Multus.png
+    maintainers:
+    - email: charts@rancher.com
+      name: Rancher Labs
+    name: rke2-multus
+    sources:
+    - https://github.com/intel/multus-cni
+    type: application
+    urls:
+    - assets/rke2-multus-1.34-1.36/rke2-multus-v4.3.115.tgz
+    version: v4.3.115
   - apiVersion: v1
     appVersion: 4.3.1
     created: "2026-10-22T17:00:53.204514788Z"
@@ -30571,6 +31102,27 @@ entries:
     urls:
     - assets/rke2-multus/rke2-multus-v4.3.115.tgz
     version: v4.3.115
+  - apiVersion: v2
+    appVersion: 4.3.1
+    created: "2026-11-10T22:26:20.790772963Z"
+    dependencies:
+    - condition: rke2-whereabouts.enabled
+      name: rke2-whereabouts
+      repository: file://./charts/rke2-whereabouts
+    description: Multus Helm chart for Kubernetes
+    digest: 6b00efed7a2d088b6303c517bb73304c83f3f1beeebbe65cb157560bff1d0db0
+    home: https://github.com/k8snetworkplumbingwg/multus-cni
+    icon: https://raw.githubusercontent.com/k8snetworkplumbingwg/multus-cni/master/doc/images/Multus.png
+    maintainers:
+    - email: charts@rancher.com
+      name: Rancher Labs
+    name: rke2-multus
+    sources:
+    - https://github.com/intel/multus-cni
+    type: application
+    urls:
+    - assets/rke2-multus-1.34-1.36/rke2-multus-v4.3.114.tgz
+    version: v4.3.114
   - apiVersion: v1
     appVersion: 4.3.1
     created: "2026-10-20T19:25:04.865323879Z"
@@ -30592,6 +31144,27 @@ entries:
     urls:
     - assets/rke2-multus/rke2-multus-v4.3.114.tgz
     version: v4.3.114
+  - apiVersion: v2
+    appVersion: 4.3.1
+    created: "2026-11-10T22:26:20.79027515Z"
+    dependencies:
+    - condition: rke2-whereabouts.enabled
+      name: rke2-whereabouts
+      repository: file://./charts/rke2-whereabouts
+    description: Multus Helm chart for Kubernetes
+    digest: 45950a2a16e3b02c39669a8f305dfe61b26361a011115a57c00fc025faa7ac0c
+    home: https://github.com/k8snetworkplumbingwg/multus-cni
+    icon: https://raw.githubusercontent.com/k8snetworkplumbingwg/multus-cni/master/doc/images/Multus.png
+    maintainers:
+    - email: charts@rancher.com
+      name: Rancher Labs
+    name: rke2-multus
+    sources:
+    - https://github.com/intel/multus-cni
+    type: application
+    urls:
+    - assets/rke2-multus-1.34-1.36/rke2-multus-v4.3.113.tgz
+    version: v4.3.113
   - apiVersion: v1
     appVersion: 4.3.1
     created: "2026-10-20T18:05:57.529869212Z"
@@ -30613,6 +31186,27 @@ entries:
     urls:
     - assets/rke2-multus/rke2-multus-v4.3.113.tgz
     version: v4.3.113
+  - apiVersion: v2
+    appVersion: 4.3.1
+    created: "2026-11-10T22:26:20.789790337Z"
+    dependencies:
+    - condition: rke2-whereabouts.enabled
+      name: rke2-whereabouts
+      repository: file://./charts/rke2-whereabouts
+    description: Multus Helm chart for Kubernetes
+    digest: 08020bf2bee35ba39cec3de4d5ef6747fb22cb057af30ee2354542b7b97dda9f
+    home: https://github.com/k8snetworkplumbingwg/multus-cni
+    icon: https://raw.githubusercontent.com/k8snetworkplumbingwg/multus-cni/master/doc/images/Multus.png
+    maintainers:
+    - email: charts@rancher.com
+      name: Rancher Labs
+    name: rke2-multus
+    sources:
+    - https://github.com/intel/multus-cni
+    type: application
+    urls:
+    - assets/rke2-multus-1.34-1.36/rke2-multus-v4.3.112.tgz
+    version: v4.3.112
   - apiVersion: v1
     appVersion: 4.3.1
     created: "2026-10-16T20:59:00.008544459Z"
@@ -30655,6 +31249,27 @@ entries:
     urls:
     - assets/rke2-multus/rke2-multus-v4.3.111.tgz
     version: v4.3.111
+  - apiVersion: v2
+    appVersion: 4.3.1
+    created: "2026-11-10T22:26:20.789278343Z"
+    dependencies:
+    - condition: rke2-whereabouts.enabled
+      name: rke2-whereabouts
+      repository: file://./charts/rke2-whereabouts
+    description: Multus Helm chart for Kubernetes
+    digest: c2d8ec17e3aeb29f52757e692cbcc56db4ae160010d0602b97731c56cf17a03e
+    home: https://github.com/k8snetworkplumbingwg/multus-cni
+    icon: https://raw.githubusercontent.com/k8snetworkplumbingwg/multus-cni/master/doc/images/Multus.png
+    maintainers:
+    - email: charts@rancher.com
+      name: Rancher Labs
+    name: rke2-multus
+    sources:
+    - https://github.com/intel/multus-cni
+    type: application
+    urls:
+    - assets/rke2-multus-1.34-1.36/rke2-multus-v4.3.111.tgz
+    version: v4.3.111
   - apiVersion: v1
     appVersion: 4.3.1
     created: "2026-10-14T19:26:40.34156466Z"
@@ -30676,6 +31291,27 @@ entries:
     urls:
     - assets/rke2-multus/rke2-multus-v4.3.110.tgz
     version: v4.3.110
+  - apiVersion: v2
+    appVersion: 4.3.1
+    created: "2026-11-10T22:26:20.788809033Z"
+    dependencies:
+    - condition: rke2-whereabouts.enabled
+      name: rke2-whereabouts
+      repository: file://./charts/rke2-whereabouts
+    description: Multus Helm chart for Kubernetes
+    digest: 40af9e377af8a6a60931d931df3cbf0d572c4be199878d5123403909575b7b40
+    home: https://github.com/k8snetworkplumbingwg/multus-cni
+    icon: https://raw.githubusercontent.com/k8snetworkplumbingwg/multus-cni/master/doc/images/Multus.png
+    maintainers:
+    - email: charts@rancher.com
+      name: Rancher Labs
+    name: rke2-multus
+    sources:
+    - https://github.com/intel/multus-cni
+    type: application
+    urls:
+    - assets/rke2-multus-1.34-1.36/rke2-multus-v4.3.109.tgz
+    version: v4.3.109
   - apiVersion: v1
     appVersion: 4.3.1
     created: "2026-10-12T16:14:09.220055342Z"
@@ -30697,6 +31333,27 @@ entries:
     urls:
     - assets/rke2-multus/rke2-multus-v4.3.109.tgz
     version: v4.3.109
+  - apiVersion: v2
+    appVersion: 4.3.1
+    created: "2026-11-10T22:26:20.788334495Z"
+    dependencies:
+    - condition: rke2-whereabouts.enabled
+      name: rke2-whereabouts
+      repository: file://./charts/rke2-whereabouts
+    description: Multus Helm chart for Kubernetes
+    digest: 4ad49d5fe46978a04a269794fe8a9713e062344f4e26da6aea7a06204d1dba06
+    home: https://github.com/k8snetworkplumbingwg/multus-cni
+    icon: https://raw.githubusercontent.com/k8snetworkplumbingwg/multus-cni/master/doc/images/Multus.png
+    maintainers:
+    - email: charts@rancher.com
+      name: Rancher Labs
+    name: rke2-multus
+    sources:
+    - https://github.com/intel/multus-cni
+    type: application
+    urls:
+    - assets/rke2-multus-1.34-1.36/rke2-multus-v4.3.108.tgz
+    version: v4.3.108
   - apiVersion: v1
     appVersion: 4.3.1
     created: "2026-10-12T13:27:32.290076127Z"
@@ -30739,6 +31396,48 @@ entries:
     urls:
     - assets/rke2-multus/rke2-multus-v4.3.104.tgz
     version: v4.3.104
+  - apiVersion: v2
+    appVersion: 4.3.1
+    created: "2026-11-10T22:26:20.787857593Z"
+    dependencies:
+    - condition: rke2-whereabouts.enabled
+      name: rke2-whereabouts
+      repository: file://./charts/rke2-whereabouts
+    description: Multus Helm chart for Kubernetes
+    digest: dff0f0533c7b5a085eb936474cf5753d0a8e8b4631ae7b58c3e9df92a126973e
+    home: https://github.com/k8snetworkplumbingwg/multus-cni
+    icon: https://raw.githubusercontent.com/k8snetworkplumbingwg/multus-cni/master/doc/images/Multus.png
+    maintainers:
+    - email: charts@rancher.com
+      name: Rancher Labs
+    name: rke2-multus
+    sources:
+    - https://github.com/intel/multus-cni
+    type: application
+    urls:
+    - assets/rke2-multus-1.34-1.36/rke2-multus-v4.3.104.tgz
+    version: v4.3.104
+  - apiVersion: v2
+    appVersion: 4.3.1
+    created: "2026-11-10T22:26:20.78737276Z"
+    dependencies:
+    - condition: rke2-whereabouts.enabled
+      name: rke2-whereabouts
+      repository: file://./charts/rke2-whereabouts
+    description: Multus Helm chart for Kubernetes
+    digest: ffe81f32a8394b5c8796d64c425929f515383432aeb26a31890670280b3faa12
+    home: https://github.com/k8snetworkplumbingwg/multus-cni
+    icon: https://raw.githubusercontent.com/k8snetworkplumbingwg/multus-cni/master/doc/images/Multus.png
+    maintainers:
+    - email: charts@rancher.com
+      name: Rancher Labs
+    name: rke2-multus
+    sources:
+    - https://github.com/intel/multus-cni
+    type: application
+    urls:
+    - assets/rke2-multus-1.34-1.36/rke2-multus-v4.3.103.tgz
+    version: v4.3.103
   - apiVersion: v1
     appVersion: 4.3.1
     created: "2026-10-02T09:21:28.91692195Z"
@@ -30760,6 +31459,27 @@ entries:
     urls:
     - assets/rke2-multus/rke2-multus-v4.3.103.tgz
     version: v4.3.103
+  - apiVersion: v2
+    appVersion: 4.3.1
+    created: "2026-11-10T22:26:20.78689657Z"
+    dependencies:
+    - condition: rke2-whereabouts.enabled
+      name: rke2-whereabouts
+      repository: file://./charts/rke2-whereabouts
+    description: Multus Helm chart for Kubernetes
+    digest: c069cd80a9a7c36fe9c6c9039af9478c6c5ddbcba656d27a6a2ea07503264cf9
+    home: https://github.com/k8snetworkplumbingwg/multus-cni
+    icon: https://raw.githubusercontent.com/k8snetworkplumbingwg/multus-cni/master/doc/images/Multus.png
+    maintainers:
+    - email: charts@rancher.com
+      name: Rancher Labs
+    name: rke2-multus
+    sources:
+    - https://github.com/intel/multus-cni
+    type: application
+    urls:
+    - assets/rke2-multus-1.34-1.36/rke2-multus-v4.3.102.tgz
+    version: v4.3.102
   - apiVersion: v1
     appVersion: 4.3.1
     created: "2026-09-23T00:17:59.346469838Z"
@@ -30781,6 +31501,27 @@ entries:
     urls:
     - assets/rke2-multus/rke2-multus-v4.3.102.tgz
     version: v4.3.102
+  - apiVersion: v2
+    appVersion: 4.3.1
+    created: "2026-11-10T22:26:20.786389553Z"
+    dependencies:
+    - condition: rke2-whereabouts.enabled
+      name: rke2-whereabouts
+      repository: file://./charts/rke2-whereabouts
+    description: Multus Helm chart for Kubernetes
+    digest: d3e8cff8f20371d28b8ba177268f5f59db657a60aada88724c35cf49bcda045e
+    home: https://github.com/k8snetworkplumbingwg/multus-cni
+    icon: https://raw.githubusercontent.com/k8snetworkplumbingwg/multus-cni/master/doc/images/Multus.png
+    maintainers:
+    - email: charts@rancher.com
+      name: Rancher Labs
+    name: rke2-multus
+    sources:
+    - https://github.com/intel/multus-cni
+    type: application
+    urls:
+    - assets/rke2-multus-1.34-1.36/rke2-multus-v4.3.101.tgz
+    version: v4.3.101
   - apiVersion: v1
     appVersion: 4.3.1
     created: "2026-09-10T01:16:17.200416532Z"
@@ -30802,6 +31543,27 @@ entries:
     urls:
     - assets/rke2-multus/rke2-multus-v4.3.101.tgz
     version: v4.3.101
+  - apiVersion: v2
+    appVersion: 4.3.1
+    created: "2026-11-10T22:26:20.785927093Z"
+    dependencies:
+    - condition: rke2-whereabouts.enabled
+      name: rke2-whereabouts
+      repository: file://./charts/rke2-whereabouts
+    description: Multus Helm chart for Kubernetes
+    digest: 328e65c251d5a168f219bf1d17199c9a528548f73abfd4e2e5f40343f93498cf
+    home: https://github.com/k8snetworkplumbingwg/multus-cni
+    icon: https://raw.githubusercontent.com/k8snetworkplumbingwg/multus-cni/master/doc/images/Multus.png
+    maintainers:
+    - email: charts@rancher.com
+      name: Rancher Labs
+    name: rke2-multus
+    sources:
+    - https://github.com/intel/multus-cni
+    type: application
+    urls:
+    - assets/rke2-multus-1.34-1.36/rke2-multus-v4.3.100.tgz
+    version: v4.3.100
   - apiVersion: v1
     appVersion: 4.3.1
     created: "2026-09-09T23:28:03.105237573Z"
@@ -31012,6 +31774,27 @@ entries:
     urls:
     - assets/rke2-multus/rke2-multus-v4.3.011.tgz
     version: v4.3.011
+  - apiVersion: v2
+    appVersion: 4.3.0
+    created: "2026-11-10T22:26:20.785437362Z"
+    dependencies:
+    - condition: rke2-whereabouts.enabled
+      name: rke2-whereabouts
+      repository: file://./charts/rke2-whereabouts
+    description: Multus Helm chart for Kubernetes
+    digest: 87cd378c44752b7aa702a5eeeaf3ed391b18b10fa82088163c9ae7759b74430a
+    home: https://github.com/k8snetworkplumbingwg/multus-cni
+    icon: https://raw.githubusercontent.com/k8snetworkplumbingwg/multus-cni/master/doc/images/Multus.png
+    maintainers:
+    - email: charts@rancher.com
+      name: Rancher Labs
+    name: rke2-multus
+    sources:
+    - https://github.com/intel/multus-cni
+    type: application
+    urls:
+    - assets/rke2-multus-1.34-1.36/rke2-multus-v4.3.010.tgz
+    version: v4.3.010
   - apiVersion: v1
     appVersion: 4.3.0
     created: "2026-08-05T15:43:04.052678008Z"
@@ -32673,6 +33456,27 @@ entries:
     version: v4.1.001
   - apiVersion: v2
     appVersion: 4.1.0
+    created: "2026-11-10T22:26:20.734261991Z"
+    dependencies:
+    - condition: rke2-whereabouts.enabled
+      name: rke2-whereabouts
+      repository: file://./charts/rke2-whereabouts
+    description: Multus Helm chart for Kubernetes
+    digest: 7fdafde9551944c95ed7d571806f4754bb0cd7b89d889e60ea40d681823ca8d1
+    home: https://github.com/k8snetworkplumbingwg/multus-cni
+    icon: https://raw.githubusercontent.com/k8snetworkplumbingwg/multus-cni/master/doc/images/Multus.png
+    maintainers:
+    - email: charts@rancher.com
+      name: Rancher Labs
+    name: rke2-multus
+    sources:
+    - https://github.com/intel/multus-cni
+    type: application
+    urls:
+    - assets/rke2-multus/rke2-multus-v4.1.000.tgz
+    version: v4.1.000
+  - apiVersion: v2
+    appVersion: 4.1.0
     created: "2024-09-04T15:19:14.997042515Z"
     dependencies:
     - condition: rke2-whereabouts.enabled
@@ -33260,6 +34064,27 @@ entries:
     - assets/rke2-multus/rke2-multus-v3.9-build2022102804.tgz
     version: v3.9-build2022102804
   - apiVersion: v2
+    appVersion: "3.9"
+    created: "2026-11-10T22:26:20.723582498Z"
+    dependencies:
+    - condition: rke2-whereabouts.enabled
+      name: rke2-whereabouts
+      repository: file://./charts/rke2-whereabouts
+    description: Multus Helm chart for Kubernetes
+    digest: c2e855c2ef74339b964d01a85e29d1d364e02e879cfa0737f3d8f3b8d8308793
+    home: https://github.com/k8snetworkplumbingwg/multus-cni
+    icon: https://raw.githubusercontent.com/k8snetworkplumbingwg/multus-cni/master/doc/images/Multus.png
+    maintainers:
+    - email: charts@rancher.com
+      name: Rancher Labs
+    name: rke2-multus
+    sources:
+    - https://github.com/intel/multus-cni
+    type: application
+    urls:
+    - assets/rke2-multus/rke2-multus-v3.9-build2022102801.tgz
+    version: v3.9-build2022102801
+  - apiVersion: v2
     appVersion: "3.8"
     created: "2022-10-13T23:41:04.305927903Z"
     dependencies:
@@ -33455,6 +34280,15 @@ entries:
     - assets/rke2-multus/rke2-multus-v3.7.1-build2021041601.tgz
     version: v3.7.1-build2021041601
   rke2-multus-crd:
+  - apiVersion: v1
+    created: "2026-11-10T22:26:20.794051204Z"
+    description: Installs the CRDs for rke2-multus
+    digest: b80fe084832198545ac764b406f192a062ed3ff75b6d64aef2a62e30ededf79a
+    name: rke2-multus-crd
+    type: application
+    urls:
+    - assets/rke2-multus-crd/rke2-multus-crd-4.3.119.tgz
+    version: 4.3.119
   - apiVersion: v1
     created: "2026-10-22T23:26:18.749817734Z"
     description: Installs the CRDs for rke2-multus
@@ -33710,6 +34544,16 @@ entries:
   rke2-ovirt-csi-driver:
   - apiVersion: v2
     appVersion: 4.15.0
+    created: "2026-11-10T22:26:20.794873871Z"
+    description: Implementation of a CSI driver for oVirt.
+    digest: e6c7c51fca726bd9ef7aca39b027eb8de54d552792b4bead6be3a928460a4845
+    name: rke2-ovirt-csi-driver
+    type: application
+    urls:
+    - assets/rke2-ovirt-csi-driver/rke2-ovirt-csi-driver-4.15.1.tgz
+    version: 4.15.1
+  - apiVersion: v2
+    appVersion: 4.15.0
     created: "2026-05-06T19:56:57.397605945Z"
     description: Implementation of a CSI driver for oVirt.
     digest: a991348c5318e1400c05f939dfbcdad65169057d7d6d742f6f92e361de3562d3
@@ -33719,6 +34563,22 @@ entries:
     - assets/rke2-ovirt-csi-driver/rke2-ovirt-csi-driver-4.15.000.tgz
     version: 4.15.000
   rke2-runtimeclasses:
+  - apiVersion: v2
+    appVersion: 0.1.0
+    created: "2026-11-10T22:26:20.79504106Z"
+    description: Add the default runtime classes
+    digest: a223a47873a1a06bd097fc555f8a01a5f68cb36fea0e39fef1d06e2f9383de86
+    keywords:
+    - runtimeclasses
+    maintainers:
+    - email: charts@rancher.com
+      name: Rancher Labs
+    name: rke2-runtimeclasses
+    sources:
+    - https://github.com/rancher/rke2-charts
+    urls:
+    - assets/rke2-runtimeclasses/rke2-runtimeclasses-0.1.1.tgz
+    version: 0.1.1
   - apiVersion: v2
     appVersion: 0.1.0
     created: "2023-12-08T19:13:18.15953377Z"
@@ -33865,10 +34725,34 @@ entries:
   rke2-snapshot-controller:
   - apiVersion: v2
     appVersion: v8.7.0
+    created: "2026-11-10T22:26:20.806820505Z"
+    description: 'Deploys a Snapshot Controller in a cluster. Snapshot Controllers
+      are often bundled with the Kubernetes distribution, this chart is meant for
+      cases where it is not. '
+    digest: 8bf331a3b2528bcc618270b6a0fa6e8bb9ce3bd9551a1f9826e02ecd0bac0ede
+    home: https://github.com/piraeusdatastore/helm-charts
+    icon: https://raw.githubusercontent.com/piraeusdatastore/piraeus/master/artwork/sandbox-artwork/icon/color.svg
+    keywords:
+    - storage
+    - snapshot
+    - validation
+    kubeVersion: '>= 1.25.0-0'
+    maintainers:
+    - name: The Piraeus Maintainers
+      url: https://github.com/piraeusdatastore/
+    name: rke2-snapshot-controller
+    sources:
+    - https://github.com/kubernetes-csi/external-snapshotter/
+    type: application
+    urls:
+    - assets/rke2-snapshot-controller/rke2-snapshot-controller-5.4.1.tgz
+    version: 5.4.1
+  - apiVersion: v2
+    appVersion: v8.7.0
     created: "2026-10-21T14:18:50.334562185Z"
-    description: |
-      Deploys a Snapshot Controller in a cluster. Snapshot Controllers are often bundled with the Kubernetes distribution,
-      this chart is meant for cases where it is not.
+    description: 'Deploys a Snapshot Controller in a cluster. Snapshot Controllers
+      are often bundled with the Kubernetes distribution, this chart is meant for
+      cases where it is not. '
     digest: fa0968f8b7ae5b9bfb874697a41b58a02b8df1db566436359cd470bc66e1fd46
     home: https://github.com/piraeusdatastore/helm-charts
     icon: https://raw.githubusercontent.com/piraeusdatastore/piraeus/master/artwork/sandbox-artwork/icon/color.svg
@@ -33890,9 +34774,9 @@ entries:
   - apiVersion: v2
     appVersion: v8.7.0
     created: "2026-10-15T19:08:28.252039216Z"
-    description: |
-      Deploys a Snapshot Controller in a cluster. Snapshot Controllers are often bundled with the Kubernetes distribution,
-      this chart is meant for cases where it is not.
+    description: 'Deploys a Snapshot Controller in a cluster. Snapshot Controllers
+      are often bundled with the Kubernetes distribution, this chart is meant for
+      cases where it is not. '
     digest: da6bdf711448624d23ee0abd5f3e966ca31a339bba2fa3a5d12bb7baa996d629
     home: https://github.com/piraeusdatastore/helm-charts
     icon: https://raw.githubusercontent.com/piraeusdatastore/piraeus/master/artwork/sandbox-artwork/icon/color.svg
@@ -33914,9 +34798,9 @@ entries:
   - apiVersion: v2
     appVersion: v8.6.0
     created: "2026-10-14T18:56:10.885577695Z"
-    description: |
-      Deploys a Snapshot Controller in a cluster. Snapshot Controllers are often bundled with the Kubernetes distribution,
-      this chart is meant for cases where it is not.
+    description: 'Deploys a Snapshot Controller in a cluster. Snapshot Controllers
+      are often bundled with the Kubernetes distribution, this chart is meant for
+      cases where it is not. '
     digest: ed5f41e6f913949d8c782b5d0c4135b49b09a5aa834ad099ed2bd3c309d67588
     home: https://github.com/piraeusdatastore/helm-charts
     icon: https://raw.githubusercontent.com/piraeusdatastore/piraeus/master/artwork/sandbox-artwork/icon/color.svg
@@ -33938,9 +34822,9 @@ entries:
   - apiVersion: v2
     appVersion: v8.6.0
     created: "2026-09-10T23:00:17.391113923Z"
-    description: |
-      Deploys a Snapshot Controller in a cluster. Snapshot Controllers are often bundled with the Kubernetes distribution,
-      this chart is meant for cases where it is not.
+    description: 'Deploys a Snapshot Controller in a cluster. Snapshot Controllers
+      are often bundled with the Kubernetes distribution, this chart is meant for
+      cases where it is not. '
     digest: bed03d3daf91552cd69604fcd1371d60d3b1bd822074f03d00211486bdfccd0b
     home: https://github.com/piraeusdatastore/helm-charts
     icon: https://raw.githubusercontent.com/piraeusdatastore/piraeus/master/artwork/sandbox-artwork/icon/color.svg
@@ -33962,9 +34846,9 @@ entries:
   - apiVersion: v2
     appVersion: v8.6.0
     created: "2026-08-19T21:39:48.437140467Z"
-    description: |
-      Deploys a Snapshot Controller in a cluster. Snapshot Controllers are often bundled with the Kubernetes distribution,
-      this chart is meant for cases where it is not.
+    description: 'Deploys a Snapshot Controller in a cluster. Snapshot Controllers
+      are often bundled with the Kubernetes distribution, this chart is meant for
+      cases where it is not. '
     digest: 44140673bb42ae6892b71c719b06e94041da2f07c628d3ba21baf3e868363131
     home: https://github.com/piraeusdatastore/helm-charts
     icon: https://raw.githubusercontent.com/piraeusdatastore/piraeus/master/artwork/sandbox-artwork/icon/color.svg
@@ -33986,9 +34870,9 @@ entries:
   - apiVersion: v2
     appVersion: v8.6.0
     created: "2026-08-18T23:01:38.369149323Z"
-    description: |
-      Deploys a Snapshot Controller in a cluster. Snapshot Controllers are often bundled with the Kubernetes distribution,
-      this chart is meant for cases where it is not.
+    description: 'Deploys a Snapshot Controller in a cluster. Snapshot Controllers
+      are often bundled with the Kubernetes distribution, this chart is meant for
+      cases where it is not. '
     digest: 89af76997d085a5bbd05e151069cf2d337a08661a126c10d956b5dbe5a1211fd
     home: https://github.com/piraeusdatastore/helm-charts
     icon: https://raw.githubusercontent.com/piraeusdatastore/piraeus/master/artwork/sandbox-artwork/icon/color.svg
@@ -34010,9 +34894,9 @@ entries:
   - apiVersion: v2
     appVersion: v8.6.0
     created: "2026-08-18T21:22:57.98174965Z"
-    description: |
-      Deploys a Snapshot Controller in a cluster. Snapshot Controllers are often bundled with the Kubernetes distribution,
-      this chart is meant for cases where it is not.
+    description: 'Deploys a Snapshot Controller in a cluster. Snapshot Controllers
+      are often bundled with the Kubernetes distribution, this chart is meant for
+      cases where it is not. '
     digest: 8a8282f2ba2f80c2f6613c7ca787dd3862fd990feb48e1d22447d4382e54ef48
     home: https://github.com/piraeusdatastore/helm-charts
     icon: https://raw.githubusercontent.com/piraeusdatastore/piraeus/master/artwork/sandbox-artwork/icon/color.svg
@@ -34034,9 +34918,9 @@ entries:
   - apiVersion: v2
     appVersion: v8.6.0
     created: "2026-08-18T19:34:34.944798133Z"
-    description: |
-      Deploys a Snapshot Controller in a cluster. Snapshot Controllers are often bundled with the Kubernetes distribution,
-      this chart is meant for cases where it is not.
+    description: 'Deploys a Snapshot Controller in a cluster. Snapshot Controllers
+      are often bundled with the Kubernetes distribution, this chart is meant for
+      cases where it is not. '
     digest: b8b89121686b24d183777c62f3aa3c2a9091e79d11d379c1e741df648fd34524
     home: https://github.com/piraeusdatastore/helm-charts
     icon: https://raw.githubusercontent.com/piraeusdatastore/piraeus/master/artwork/sandbox-artwork/icon/color.svg
@@ -34058,9 +34942,9 @@ entries:
   - apiVersion: v2
     appVersion: v8.5.0
     created: "2026-07-22T20:01:59.113983145Z"
-    description: |
-      Deploys a Snapshot Controller in a cluster. Snapshot Controllers are often bundled with the Kubernetes distribution,
-      this chart is meant for cases where it is not.
+    description: 'Deploys a Snapshot Controller in a cluster. Snapshot Controllers
+      are often bundled with the Kubernetes distribution, this chart is meant for
+      cases where it is not. '
     digest: 5633e4c522f668937fcd761c58cd17a5d94e22456951b31aad230a4fe3628f9b
     home: https://github.com/piraeusdatastore/helm-charts
     icon: https://raw.githubusercontent.com/piraeusdatastore/piraeus/master/artwork/sandbox-artwork/icon/color.svg
@@ -34082,9 +34966,9 @@ entries:
   - apiVersion: v2
     appVersion: v8.5.0
     created: "2026-07-09T20:32:37.924498135Z"
-    description: |
-      Deploys a Snapshot Controller in a cluster. Snapshot Controllers are often bundled with the Kubernetes distribution,
-      this chart is meant for cases where it is not.
+    description: 'Deploys a Snapshot Controller in a cluster. Snapshot Controllers
+      are often bundled with the Kubernetes distribution, this chart is meant for
+      cases where it is not. '
     digest: 0417d21c9e73b3ab1b46a25b6a8ab210b2e8f3c19493823a617e59830c92fb35
     home: https://github.com/piraeusdatastore/helm-charts
     icon: https://raw.githubusercontent.com/piraeusdatastore/piraeus/master/artwork/sandbox-artwork/icon/color.svg
@@ -34106,9 +34990,9 @@ entries:
   - apiVersion: v2
     appVersion: v8.5.0
     created: "2026-06-08T17:32:14.27751508Z"
-    description: |
-      Deploys a Snapshot Controller in a cluster. Snapshot Controllers are often bundled with the Kubernetes distribution,
-      this chart is meant for cases where it is not.
+    description: 'Deploys a Snapshot Controller in a cluster. Snapshot Controllers
+      are often bundled with the Kubernetes distribution, this chart is meant for
+      cases where it is not. '
     digest: 6f6d39b6d2ea78d2923c28e29a951f5d40448ce8b8d405d04def1cce993048cb
     home: https://github.com/piraeusdatastore/helm-charts
     icon: https://raw.githubusercontent.com/piraeusdatastore/piraeus/master/artwork/sandbox-artwork/icon/color.svg
@@ -34130,9 +35014,9 @@ entries:
   - apiVersion: v2
     appVersion: v8.5.0
     created: "2026-05-13T19:20:08.46437897Z"
-    description: |
-      Deploys a Snapshot Controller in a cluster. Snapshot Controllers are often bundled with the Kubernetes distribution,
-      this chart is meant for cases where it is not.
+    description: 'Deploys a Snapshot Controller in a cluster. Snapshot Controllers
+      are often bundled with the Kubernetes distribution, this chart is meant for
+      cases where it is not. '
     digest: ac2e924abbec14df1c60677b3a52f5844e4c503aefc00feb48e0fd0779d70489
     home: https://github.com/piraeusdatastore/helm-charts
     icon: https://raw.githubusercontent.com/piraeusdatastore/piraeus/master/artwork/sandbox-artwork/icon/color.svg
@@ -34154,9 +35038,9 @@ entries:
   - apiVersion: v2
     appVersion: v8.5.0
     created: "2026-05-12T18:17:18.847265709Z"
-    description: |
-      Deploys a Snapshot Controller in a cluster. Snapshot Controllers are often bundled with the Kubernetes distribution,
-      this chart is meant for cases where it is not.
+    description: 'Deploys a Snapshot Controller in a cluster. Snapshot Controllers
+      are often bundled with the Kubernetes distribution, this chart is meant for
+      cases where it is not. '
     digest: 009eba6faed651fb1322ad414e5920497069f5fd22d4dc4b87e3571be785b3b4
     home: https://github.com/piraeusdatastore/helm-charts
     icon: https://raw.githubusercontent.com/piraeusdatastore/piraeus/master/artwork/sandbox-artwork/icon/color.svg
@@ -34178,9 +35062,9 @@ entries:
   - apiVersion: v2
     appVersion: v8.5.0
     created: "2026-04-15T19:33:12.577955104Z"
-    description: |
-      Deploys a Snapshot Controller in a cluster. Snapshot Controllers are often bundled with the Kubernetes distribution,
-      this chart is meant for cases where it is not.
+    description: 'Deploys a Snapshot Controller in a cluster. Snapshot Controllers
+      are often bundled with the Kubernetes distribution, this chart is meant for
+      cases where it is not. '
     digest: f914013a2e16b5729a028a1ee5f622b13f7cf937b5609fd168edee55071522d8
     home: https://github.com/piraeusdatastore/helm-charts
     icon: https://raw.githubusercontent.com/piraeusdatastore/piraeus/master/artwork/sandbox-artwork/icon/color.svg
@@ -34202,9 +35086,9 @@ entries:
   - apiVersion: v2
     appVersion: v8.4.0
     created: "2026-03-10T20:06:42.371722276Z"
-    description: |
-      Deploys a Snapshot Controller in a cluster. Snapshot Controllers are often bundled with the Kubernetes distribution,
-      this chart is meant for cases where it is not.
+    description: 'Deploys a Snapshot Controller in a cluster. Snapshot Controllers
+      are often bundled with the Kubernetes distribution, this chart is meant for
+      cases where it is not. '
     digest: f93931cb7295d6d0608739d6e5917a0e14683e3467fb7c10a164e01a6f9913b2
     home: https://github.com/piraeusdatastore/helm-charts
     icon: https://raw.githubusercontent.com/piraeusdatastore/piraeus/master/artwork/sandbox-artwork/icon/color.svg
@@ -34226,9 +35110,9 @@ entries:
   - apiVersion: v2
     appVersion: v8.4.0
     created: "2026-02-06T17:39:39.221312313Z"
-    description: |
-      Deploys a Snapshot Controller in a cluster. Snapshot Controllers are often bundled with the Kubernetes distribution,
-      this chart is meant for cases where it is not.
+    description: 'Deploys a Snapshot Controller in a cluster. Snapshot Controllers
+      are often bundled with the Kubernetes distribution, this chart is meant for
+      cases where it is not. '
     digest: e8f030538ec5598c07409bb3728b71ff496e61845fa82427e54ee7e4adc648f8
     home: https://github.com/piraeusdatastore/helm-charts
     icon: https://raw.githubusercontent.com/piraeusdatastore/piraeus/master/artwork/sandbox-artwork/icon/color.svg
@@ -34250,9 +35134,9 @@ entries:
   - apiVersion: v2
     appVersion: v8.4.0
     created: "2026-01-08T18:48:36.506366916Z"
-    description: |
-      Deploys a Snapshot Controller in a cluster. Snapshot Controllers are often bundled with the Kubernetes distribution,
-      this chart is meant for cases where it is not.
+    description: 'Deploys a Snapshot Controller in a cluster. Snapshot Controllers
+      are often bundled with the Kubernetes distribution, this chart is meant for
+      cases where it is not. '
     digest: e3df1bc650bcae039738fab0703a2773a2668bb9c7907b108e008788ff7167f1
     home: https://github.com/piraeusdatastore/helm-charts
     icon: https://raw.githubusercontent.com/piraeusdatastore/piraeus/master/artwork/sandbox-artwork/icon/color.svg
@@ -34274,9 +35158,9 @@ entries:
   - apiVersion: v2
     appVersion: v8.2.0
     created: "2025-07-10T21:38:15.557909312Z"
-    description: |
-      Deploys a Snapshot Controller in a cluster. Snapshot Controllers are often bundled with the Kubernetes distribution,
-      this chart is meant for cases where it is not.
+    description: 'Deploys a Snapshot Controller in a cluster. Snapshot Controllers
+      are often bundled with the Kubernetes distribution, this chart is meant for
+      cases where it is not. '
     digest: ab1080acb6ea6575cd2e4ccb52fff78b564fc97dd049fa190c28c114c96642fa
     home: https://github.com/piraeusdatastore/helm-charts
     icon: https://raw.githubusercontent.com/piraeusdatastore/piraeus/master/artwork/sandbox-artwork/icon/color.svg
@@ -34298,9 +35182,9 @@ entries:
   - apiVersion: v2
     appVersion: v8.2.0
     created: "2025-01-09T09:52:32.361837711Z"
-    description: |
-      Deploys a Snapshot Controller in a cluster. Snapshot Controllers are often bundled with the Kubernetes distribution,
-      this chart is meant for cases where it is not.
+    description: 'Deploys a Snapshot Controller in a cluster. Snapshot Controllers
+      are often bundled with the Kubernetes distribution, this chart is meant for
+      cases where it is not. '
     digest: 6f25f1db8c86033ea1e129fa12f2bab266d031c754ee0efc9a6006a70b5f0bb0
     home: https://github.com/piraeusdatastore/helm-charts
     icon: https://raw.githubusercontent.com/piraeusdatastore/piraeus/master/artwork/sandbox-artwork/icon/color.svg
@@ -34322,9 +35206,9 @@ entries:
   - apiVersion: v2
     appVersion: v8.2.0
     created: "2025-01-08T21:12:53.755341902Z"
-    description: |
-      Deploys a Snapshot Controller in a cluster. Snapshot Controllers are often bundled with the Kubernetes distribution,
-      this chart is meant for cases where it is not.
+    description: 'Deploys a Snapshot Controller in a cluster. Snapshot Controllers
+      are often bundled with the Kubernetes distribution, this chart is meant for
+      cases where it is not. '
     digest: cf09013d7b346e18c256a5f555c376aa4485acffd73932a16b7d751bb5a1af47
     home: https://github.com/piraeusdatastore/helm-charts
     icon: https://raw.githubusercontent.com/piraeusdatastore/piraeus/master/artwork/sandbox-artwork/icon/color.svg
@@ -34346,11 +35230,11 @@ entries:
   - apiVersion: v2
     appVersion: v8.1.0
     created: "2024-10-17T03:43:10.458081411Z"
-    description: |
-      Deploys a Snapshot Controller in a cluster. Snapshot Controllers are often bundled with the Kubernetes distribution,
-      this chart is meant for cases where it is not.
-      Also deploys the Snapshot Validation Webhook and configures your cluster to validate every `VolumeSnapshot` and
-      `VolumeSnapshotContent` resource by sending it to the webhook.
+    description: 'Deploys a Snapshot Controller in a cluster. Snapshot Controllers
+      are often bundled with the Kubernetes distribution, this chart is meant for
+      cases where it is not. Also deploys the Snapshot Validation Webhook and configures
+      your cluster to validate every `VolumeSnapshot` and `VolumeSnapshotContent`
+      resource by sending it to the webhook. '
     digest: 499c33d20a9dfc27f6ea96004de6999c7634d14ef7433c2145996935e53bfce3
     home: https://github.com/piraeusdatastore/helm-charts
     icon: https://raw.githubusercontent.com/piraeusdatastore/piraeus/master/artwork/sandbox-artwork/icon/color.svg
@@ -34372,11 +35256,11 @@ entries:
   - apiVersion: v2
     appVersion: v8.1.0
     created: "2024-10-07T17:57:01.013331979Z"
-    description: |
-      Deploys a Snapshot Controller in a cluster. Snapshot Controllers are often bundled with the Kubernetes distribution,
-      this chart is meant for cases where it is not.
-      Also deploys the Snapshot Validation Webhook and configures your cluster to validate every `VolumeSnapshot` and
-      `VolumeSnapshotContent` resource by sending it to the webhook.
+    description: 'Deploys a Snapshot Controller in a cluster. Snapshot Controllers
+      are often bundled with the Kubernetes distribution, this chart is meant for
+      cases where it is not. Also deploys the Snapshot Validation Webhook and configures
+      your cluster to validate every `VolumeSnapshot` and `VolumeSnapshotContent`
+      resource by sending it to the webhook. '
     digest: 29760ca6c7a21721babe63edd31a3339ebfbc212568d8c4f9fe749682982296e
     home: https://github.com/piraeusdatastore/helm-charts
     icon: https://raw.githubusercontent.com/piraeusdatastore/piraeus/master/artwork/sandbox-artwork/icon/color.svg
@@ -34401,9 +35285,9 @@ entries:
     apiVersion: v2
     appVersion: v6.2.1
     created: "2023-05-22T19:44:35.431428072Z"
-    description: |
-      Deploys a Snapshot Controller in a cluster. Snapshot Controllers are often bundled with the Kubernetes distribution,
-      this chart is meant for cases where it is not.
+    description: 'Deploys a Snapshot Controller in a cluster. Snapshot Controllers
+      are often bundled with the Kubernetes distribution, this chart is meant for
+      cases where it is not. '
     digest: bd021f94128aeec4f0f58ed409267e2a6b0a96cfb2bc3c4b734d05da957d41b0
     home: https://github.com/piraeusdatastore/helm-charts
     icon: https://raw.githubusercontent.com/piraeusdatastore/piraeus/master/artwork/sandbox-artwork/icon/color.svg
@@ -34426,9 +35310,9 @@ entries:
     apiVersion: v2
     appVersion: v6.2.1
     created: "2023-02-27T22:12:11.353449643Z"
-    description: |
-      Deploys a Snapshot Controller in a cluster. Snapshot Controllers are often bundled with the Kubernetes distribution,
-      this chart is meant for cases where it is not.
+    description: 'Deploys a Snapshot Controller in a cluster. Snapshot Controllers
+      are often bundled with the Kubernetes distribution, this chart is meant for
+      cases where it is not. '
     digest: 5f130f0820f4bd7d59d4ef2d8595f81ef8ad6617e69a0f991a7c4cd34873e36d
     home: https://github.com/piraeusdatastore/helm-charts
     icon: https://raw.githubusercontent.com/piraeusdatastore/piraeus/master/artwork/sandbox-artwork/icon/color.svg
@@ -34451,9 +35335,9 @@ entries:
     apiVersion: v2
     appVersion: v6.2.1
     created: "2023-02-24T22:23:51.284593686Z"
-    description: |
-      Deploys a Snapshot Controller in a cluster. Snapshot Controllers are often bundled with the Kubernetes distribution,
-      this chart is meant for cases where it is not.
+    description: 'Deploys a Snapshot Controller in a cluster. Snapshot Controllers
+      are often bundled with the Kubernetes distribution, this chart is meant for
+      cases where it is not. '
     digest: 2d68e926dff0ffcd1957986e5eb95b876ef53e4e8fe26e523fa1883f55f148ff
     home: https://github.com/piraeusdatastore/helm-charts
     icon: https://raw.githubusercontent.com/piraeusdatastore/piraeus/master/artwork/sandbox-artwork/icon/color.svg
@@ -34471,6 +35355,16 @@ entries:
     - assets/rke2-snapshot-controller/rke2-snapshot-controller-1.7.200.tgz
     version: 1.7.200
   rke2-snapshot-controller-crd:
+  - apiVersion: v1
+    appVersion: v8.7.0
+    created: "2026-11-10T22:26:20.813911124Z"
+    description: Installs the CRDs for rke2-snapshot-controller
+    digest: a82929d62a799df52df3131bc3524f96959f2d28311d2875d25601ac4853b09d
+    name: rke2-snapshot-controller-crd
+    type: application
+    urls:
+    - assets/rke2-snapshot-controller-crd/rke2-snapshot-controller-crd-5.4.1.tgz
+    version: 5.4.1
   - apiVersion: v1
     appVersion: v8.7.0
     created: "2026-10-21T14:18:50.344710412Z"
@@ -34728,9 +35622,9 @@ entries:
     apiVersion: v2
     appVersion: v8.1.0
     created: "2024-10-07T20:36:23.645568471Z"
-    description: |
-      Deploys the snapshot-validation-webhook and configures your cluster to validate every `VolumeSnapshot` and
-      `VolumeSnapshotContent` resource by sending it to the webhook.
+    description: 'Deploys the snapshot-validation-webhook and configures your cluster
+      to validate every `VolumeSnapshot` and `VolumeSnapshotContent` resource by sending
+      it to the webhook. '
     digest: d4af9264bdf073ea375bbd85f3ea7e5c682028c280968acb8cb9ecae4fbc1c93
     home: https://github.com/piraeusdatastore/helm-charts
     icon: https://raw.githubusercontent.com/piraeusdatastore/piraeus/master/artwork/sandbox-artwork/icon/color.svg
@@ -34754,9 +35648,9 @@ entries:
     apiVersion: v2
     appVersion: v8.1.0
     created: "2024-10-07T17:57:01.017680868Z"
-    description: |
-      Deploys the snapshot-validation-webhook and configures your cluster to validate every `VolumeSnapshot` and
-      `VolumeSnapshotContent` resource by sending it to the webhook.
+    description: 'Deploys the snapshot-validation-webhook and configures your cluster
+      to validate every `VolumeSnapshot` and `VolumeSnapshotContent` resource by sending
+      it to the webhook. '
     digest: 2aca57a29596fb3a461c6ef089f9826503bc07c2bbe5d1704afc2ba69515bfc3
     home: https://github.com/piraeusdatastore/helm-charts
     icon: https://raw.githubusercontent.com/piraeusdatastore/piraeus/master/artwork/sandbox-artwork/icon/color.svg
@@ -34780,9 +35674,9 @@ entries:
     apiVersion: v2
     appVersion: v6.2.2
     created: "2023-09-21T12:20:16.757023062Z"
-    description: |
-      Deploys the snapshot-validation-webhook and configures your cluster to validate every `VolumeSnapshot` and
-      `VolumeSnapshotContent` resource by sending it to the webhook.
+    description: 'Deploys the snapshot-validation-webhook and configures your cluster
+      to validate every `VolumeSnapshot` and `VolumeSnapshotContent` resource by sending
+      it to the webhook. '
     digest: d69853e66e100eaf077a9c3de6fa9a148b37f39b12217250b1ee6ad268d5ffb0
     home: https://github.com/piraeusdatastore/helm-charts
     icon: https://raw.githubusercontent.com/piraeusdatastore/piraeus/master/artwork/sandbox-artwork/icon/color.svg
@@ -34806,9 +35700,9 @@ entries:
     apiVersion: v2
     appVersion: v6.2.2
     created: "2023-09-21T10:18:47.985813355Z"
-    description: |
-      Deploys the snapshot-validation-webhook and configures your cluster to validate every `VolumeSnapshot` and
-      `VolumeSnapshotContent` resource by sending it to the webhook.
+    description: 'Deploys the snapshot-validation-webhook and configures your cluster
+      to validate every `VolumeSnapshot` and `VolumeSnapshotContent` resource by sending
+      it to the webhook. '
     digest: c63a3e8a0a6df3d9499803b1f5646fdcdfecfe3a372489ee9fa782c3133d21c2
     home: https://github.com/piraeusdatastore/helm-charts
     icon: https://raw.githubusercontent.com/piraeusdatastore/piraeus/master/artwork/sandbox-artwork/icon/color.svg
@@ -34832,9 +35726,9 @@ entries:
     apiVersion: v2
     appVersion: v6.2.2
     created: "2023-07-14T20:21:14.288190301Z"
-    description: |
-      Deploys the snapshot-validation-webhook and configures your cluster to validate every `VolumeSnapshot` and
-      `VolumeSnapshotContent` resource by sending it to the webhook.
+    description: 'Deploys the snapshot-validation-webhook and configures your cluster
+      to validate every `VolumeSnapshot` and `VolumeSnapshotContent` resource by sending
+      it to the webhook. '
     digest: d871162d706db8fc824ae87c12b82f80ab02f07a6448f65a336bb072b3cead6c
     home: https://github.com/piraeusdatastore/helm-charts
     icon: https://raw.githubusercontent.com/piraeusdatastore/piraeus/master/artwork/sandbox-artwork/icon/color.svg
@@ -34858,9 +35752,9 @@ entries:
     apiVersion: v2
     appVersion: v6.2.1
     created: "2023-05-22T19:44:35.43433557Z"
-    description: |
-      Deploys the snapshot-validation-webhook and configures your cluster to validate every `VolumeSnapshot` and
-      `VolumeSnapshotContent` resource by sending it to the webhook.
+    description: 'Deploys the snapshot-validation-webhook and configures your cluster
+      to validate every `VolumeSnapshot` and `VolumeSnapshotContent` resource by sending
+      it to the webhook. '
     digest: 23a6062e44d99dfe58644c10a60c28f9728ea7a0ac34466a9a4e995693e68a6a
     home: https://github.com/piraeusdatastore/helm-charts
     icon: https://raw.githubusercontent.com/piraeusdatastore/piraeus/master/artwork/sandbox-artwork/icon/color.svg
@@ -34884,9 +35778,9 @@ entries:
     apiVersion: v2
     appVersion: v6.2.1
     created: "2023-02-24T22:23:51.285656981Z"
-    description: |
-      Deploys the snapshot-validation-webhook and configures your cluster to validate every `VolumeSnapshot` and
-      `VolumeSnapshotContent` resource by sending it to the webhook.
+    description: 'Deploys the snapshot-validation-webhook and configures your cluster
+      to validate every `VolumeSnapshot` and `VolumeSnapshotContent` resource by sending
+      it to the webhook. '
     digest: ed2fe327300174d5709fe35688449d3963568ed9f75e8ffc31333d35004c5225
     home: https://github.com/piraeusdatastore/helm-charts
     icon: https://raw.githubusercontent.com/piraeusdatastore/piraeus/master/artwork/sandbox-artwork/icon/color.svg
@@ -34959,6 +35853,44 @@ entries:
     - assets/rke2-sriov/rke2-sriov-crd-v1.0.001.tgz
     version: v1.0.001
   rke2-traefik:
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: added
+          description: "feat(labels): add app.kubernetes.io/version to resource metadata"
+        - kind: added
+          description: "feat(deps): update traefik docker tag to v3.7.17"
+        - kind: changed
+          description: "docs(gateway): fix dead Gateway API spec links in values"
+      traefik.io/hub-max-version: v3.21.7
+      traefik.io/hub-min-version: v3.19.3
+      traefik.io/proxy-max-version: v3.7.17
+      traefik.io/proxy-min-version: v3.6.0
+    apiVersion: v2
+    appVersion: v3.7.17
+    created: "2026-11-10T22:26:21.053994417Z"
+    description: A Traefik based Kubernetes ingress controller
+    digest: af394139eef45fc5395c382bc69b3bcdc996548cbac4fae7fa3cce5950d33aef
+    home: https://traefik.io/
+    icon: https://raw.githubusercontent.com/traefik/traefik/master/docs/content/assets/img/traefik.logo.png
+    keywords:
+    - traefik
+    - ingress
+    - networking
+    kubeVersion: '>=1.30.0-0'
+    maintainers:
+    - email: michel.loiseleur@traefik.io
+      name: mloiseleur
+    - email: remi.buisson@traefik.io
+      name: darkweaver87
+    - name: jnoordsij
+    name: rke2-traefik
+    sources:
+    - https://github.com/traefik/traefik-helm-chart
+    - https://github.com/traefik/traefik
+    type: application
+    urls:
+    - assets/rke2-traefik/rke2-traefik-42.3.1.tgz
+    version: 42.3.1
   - annotations:
       artifacthub.io/changes: |
         - kind: added
@@ -35676,6 +36608,44 @@ entries:
     urls:
     - assets/rke2-traefik/rke2-traefik-41.1.100.tgz
     version: 41.1.100
+  - annotations:
+      artifacthub.io/changes: |
+        - "fix(ingressroute): :bug: use spec.ingressClassName with Proxy v3.7+"
+        - "feat(provider/kubernetesIngressNGINX): set default values on httpentrypoint & httpsentrypoint"
+        - "feat(deps): update traefik docker tag to v3.7.1"
+        - "feat(api): support disableDashboardAd option"
+        - "chore(release): publish 40.1.0"
+      fleet.cattle.io/bundle-id: rke2
+      traefik.io/hub-max-version: v3.20.1
+      traefik.io/hub-min-version: v3.19.3
+      traefik.io/proxy-max-version: v3.7.1
+      traefik.io/proxy-min-version: v3.6.0
+    apiVersion: v2
+    appVersion: v3.7.17
+    created: "2026-11-10T22:26:20.961296716Z"
+    description: A Traefik based Kubernetes ingress controller
+    digest: f567c81c74f383c4d49b9d35b162c839bbb97d36bac5a4719d58e94ab02dd3be
+    home: https://traefik.io/
+    icon: https://raw.githubusercontent.com/traefik/traefik/master/docs/content/assets/img/traefik.logo.png
+    keywords:
+    - traefik
+    - ingress
+    - networking
+    kubeVersion: '>=1.25.0-0'
+    maintainers:
+    - email: michel.loiseleur@traefik.io
+      name: mloiseleur
+    - email: remi.buisson@traefik.io
+      name: darkweaver87
+    - name: jnoordsij
+    name: rke2-traefik
+    sources:
+    - https://github.com/traefik/traefik-helm-chart
+    - https://github.com/traefik/traefik
+    type: application
+    urls:
+    - assets/rke2-traefik/rke2-traefik-40.1.24.tgz
+    version: 40.1.24
   - annotations:
       artifacthub.io/changes: |
         - "fix(ingressroute): :bug: use spec.ingressClassName with Proxy v3.7+"
@@ -36588,6 +37558,44 @@ entries:
     urls:
     - assets/rke2-traefik/rke2-traefik-40.1.001.tgz
     version: 40.1.001
+  - annotations:
+      artifacthub.io/changes: |
+        - "fix(ingressroute): :bug: use spec.ingressClassName with Proxy v3.7+"
+        - "feat(provider/kubernetesIngressNGINX): set default values on httpentrypoint & httpsentrypoint"
+        - "feat(deps): update traefik docker tag to v3.7.1"
+        - "feat(api): support disableDashboardAd option"
+        - "chore(release): publish 40.1.0"
+      fleet.cattle.io/bundle-id: rke2
+      traefik.io/hub-max-version: v3.20.1
+      traefik.io/hub-min-version: v3.19.3
+      traefik.io/proxy-max-version: v3.7.1
+      traefik.io/proxy-min-version: v3.6.0
+    apiVersion: v2
+    appVersion: v3.7.1
+    created: "2026-11-10T22:26:21.164365945Z"
+    description: A Traefik based Kubernetes ingress controller
+    digest: 18824da6d4ca0b6a95fd952e46260da61768abd8e8c4937f4f6c26d4e3ff36bb
+    home: https://traefik.io/
+    icon: https://raw.githubusercontent.com/traefik/traefik/master/docs/content/assets/img/traefik.logo.png
+    keywords:
+    - traefik
+    - ingress
+    - networking
+    kubeVersion: '>=1.25.0-0'
+    maintainers:
+    - email: michel.loiseleur@traefik.io
+      name: mloiseleur
+    - email: remi.buisson@traefik.io
+      name: darkweaver87
+    - name: jnoordsij
+    name: rke2-traefik
+    sources:
+    - https://github.com/traefik/traefik-helm-chart
+    - https://github.com/traefik/traefik
+    type: application
+    urls:
+    - assets/rke2-traefik-1.34-1.36/rke2-traefik-40.1.000.tgz
+    version: 40.1.000
   - annotations:
       artifacthub.io/changes: |
         - "fix(ingressroute): :bug: use spec.ingressClassName with Proxy v3.7+"
@@ -37525,6 +38533,18 @@ entries:
       fleet.cattle.io/bundle-id: rke2
     apiVersion: v1
     appVersion: v3.7.17
+    created: "2026-11-10T22:26:21.29705429Z"
+    description: Installs the CRDs for rke2-traefik
+    digest: 6e3e9d7237345e45ea71c8f7738eb68f8fafa2c2d5004ad176bbf9e6bb55371b
+    name: rke2-traefik-crd
+    type: application
+    urls:
+    - assets/rke2-traefik-crd/rke2-traefik-crd-42.3.1.tgz
+    version: 42.3.1
+  - annotations:
+      fleet.cattle.io/bundle-id: rke2
+    apiVersion: v1
+    appVersion: v3.7.17
     created: "2026-11-06T20:26:45.276929861Z"
     description: Installs the CRDs for rke2-traefik
     digest: a27d763e8c61602666b28b1f292fd94fb60b0074d57c0a9128e6d2c0f0c29028
@@ -37737,6 +38757,18 @@ entries:
     urls:
     - assets/rke2-traefik-1.34-1.36/rke2-traefik-crd-40.1.024.tgz
     version: 40.1.024
+  - annotations:
+      fleet.cattle.io/bundle-id: rke2
+    apiVersion: v1
+    appVersion: v3.7.17
+    created: "2026-11-10T22:26:21.295927629Z"
+    description: Installs the CRDs for rke2-traefik
+    digest: 22ce9897f247ba430d417c71005dbe075070db54e5f0201e0aad5278ed2a1101
+    name: rke2-traefik-crd
+    type: application
+    urls:
+    - assets/rke2-traefik-crd/rke2-traefik-crd-40.1.24.tgz
+    version: 40.1.24
   - annotations:
       fleet.cattle.io/bundle-id: rke2
     apiVersion: v1
@@ -38013,6 +39045,18 @@ entries:
     urls:
     - assets/rke2-traefik/rke2-traefik-crd-40.1.001.tgz
     version: 40.1.001
+  - annotations:
+      fleet.cattle.io/bundle-id: rke2
+    apiVersion: v1
+    appVersion: v3.7.1
+    created: "2026-11-10T22:26:21.232182775Z"
+    description: Installs the CRDs for rke2-traefik
+    digest: 064bee98a85a608e70c2202f3c92812d18ae79eeb61663ce91b9e1facffb9d09
+    name: rke2-traefik-crd
+    type: application
+    urls:
+    - assets/rke2-traefik-1.34-1.36/rke2-traefik-crd-40.1.000.tgz
+    version: 40.1.000
   - annotations:
       fleet.cattle.io/bundle-id: rke2
     apiVersion: v1

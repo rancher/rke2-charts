@@ -1,0 +1,159 @@
+csiController:
+  csiAttacher:
+    containerSecurityContext:
+      privileged: true
+    image:
+      repository: rancher/mirrored-sig-storage-csi-attacher
+      tag: v4.10.0
+    resources:
+      limits:
+        cpu: 160m
+        memory: 128Mi
+      requests:
+        cpu: 80m
+        memory: 64Mi
+  csiProvisioner:
+    containerSecurityContext:
+      privileged: true
+    image:
+      repository: rancher/mirrored-sig-storage-csi-provisioner
+      tag: v6.0.0
+    resources:
+      limits:
+        cpu: 160m
+        memory: 128Mi
+      requests:
+        cpu: 80m
+        memory: 64Mi
+  csiResizer:
+    enabled: false
+    containerSecurityContext:
+      privileged: true
+    image:
+      repository: rancher/mirrored-sig-storage-csi-resizer
+      tag: v1.14.0
+    resources:
+      limits:
+        cpu: 160m
+        memory: 128Mi
+      requests:
+        cpu: 80m
+        memory: 64Mi
+  livenessProbe:
+    image:
+      repository: rancher/mirrored-sig-storage-livenessprobe
+      tag: v2.17.0
+    resources:
+      limits:
+        cpu: 160m
+        memory: 128Mi
+      requests:
+        cpu: 80m
+        memory: 64Mi
+  ovirtController:
+    name: ovirt-csi-controller-plugin
+    containerSecurityContext:
+      privileged: true
+    env:
+      csiEndpoint: unix:///csi-socket/csi.sock
+      ovirtConfig: /tmp/config/ovirt-config.yaml
+    image:
+      repository: rancher/mirrored-ovirt-csi-driver
+      tag: 4.15.0
+    imagePullPolicy: Always
+    resources:
+      limits:
+        cpu: 160m
+        memory: 128Mi
+      requests:
+        cpu: 80m
+        memory: 64Mi
+  prepareOvirtConfig:
+    env:
+      ovirtCafile: /tmp/config/ovirt-engine-ca.pem
+    image:
+      repository: rancher/mirrored-ovirt-csi-driver
+      tag: 4.15.0
+    imagePullPolicy: IfNotPresent
+    resources:
+      requests:
+        cpu: 160m
+        memory: 128Mi
+  replicas: 1
+csiNode:
+  csiDriverRegistrar:
+    image:
+      repository: rancher/mirrored-sig-storage-csi-node-driver-registrar
+      tag: v2.15.0
+    resources:
+      limits:
+        cpu: 160m
+        memory: 128Mi
+      requests:
+        cpu: 80m
+        memory: 64Mi
+  livenessProbe:
+    image:
+      repository: rancher/mirrored-sig-storage-livenessprobe
+      tag: v2.17.0
+    resources:
+      limits:
+        cpu: 160m
+        memory: 128Mi
+      requests:
+        cpu: 80m
+        memory: 64Mi
+  ovirtNode:
+    name: ovirt-csi-node-plugin
+    containerSecurityContext:
+      privileged: true
+    env:
+      csiEndpoint: unix:///csi-socket/csi.sock
+      ovirtConfig: /tmp/config/ovirt-config.yaml
+    image:
+      repository: rancher/mirrored-ovirt-csi-driver
+      tag: 4.15.0
+    imagePullPolicy: Always
+    resources:
+      limits:
+        cpu: 160m
+        memory: 128Mi
+      requests:
+        cpu: 80m
+        memory: 64Mi
+  prepareOvirtConfig:
+    env:
+      ovirtCafile: /tmp/config/ovirt-engine-ca.pem
+    image:
+      repository: rancher/mirrored-ovirt-csi-driver
+      tag: 4.15.0
+    imagePullPolicy: IfNotPresent
+    resources:
+      requests:
+        cpu: 10m
+        memory: 50Mi
+kubernetesClusterDomain: cluster.local
+ovirt:
+  caProvided: true
+  insecure: false
+  secretName: ovirt-csi-creds
+  caConfigMapName: ovirt-csi-ca.crt
+ovirtCsiDriverControllerSa:
+  serviceAccount:
+    annotations: {}
+ovirtCsiDriverNodeSa:
+  serviceAccount:
+    annotations: {}
+pvc:
+  1GOvirtCowDisk:
+    storageClass: ovirt-csi-sc
+    storageRequest: 1Gi
+
+driver:
+  name: csi.ovirt.org
+
+## Ref: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
+imagePullSecrets: []
+
+global:
+  systemDefaultRegistry: ""
