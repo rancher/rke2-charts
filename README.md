@@ -42,8 +42,9 @@ published repository for validation and the Helm repository hostname.
 
 [`scripts/validate-charts`](scripts/validate-charts) compares native chart output
 with the published `main` checkout. It rejects changed contents for an already
-published chart version, stages only new chart identities, updates the index
-with the upstream builder, and verifies historical index entries remain intact.
+published chart version, stages only new chart identities, generates index
+entries for those charts with the upstream builder, and merges them into the
+published index without regenerating historical entries.
 
 PRs targeting `main-source` generate charts and validate them against a
 separate `main` checkout without write credentials. Pushes to `main-source`
