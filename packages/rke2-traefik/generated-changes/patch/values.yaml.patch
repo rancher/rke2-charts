@@ -53,7 +53,7 @@
      # -- See [upstream documentation](https://doc.traefik.io/traefik/reference/install-configuration/providers/kubernetes/kubernetes-ingress/#opt-providers-kubernetesIngress-labelselector)
      labelSelector: ""
      # -- Array of namespaces to watch. If left empty, Traefik watches all namespaces. . When using `rbac.namespaced`, it will watch helm release namespace and namespaces listed in this array.
-@@ -886,6 +886,8 @@
+@@ -889,6 +889,8 @@
          insecureSkipVerify:  # @schema type:[boolean, null]
  
  global:
@@ -62,7 +62,7 @@
    checkNewVersion: true
    # -- Please take time to consider whether or not you wish to share anonymous data with us
    # See https://doc.traefik.io/traefik/contributing/data-collection/
-@@ -963,7 +965,7 @@
+@@ -966,7 +968,7 @@
      # -- (bool) Enable this entrypoint as a default entrypoint. When a service doesn't explicitly set an entrypoint it will only use this entrypoint.
      asDefault:  # @schema type: [boolean, null]; default: null
      port: 8000
@@ -71,7 +71,7 @@
      # containerPort: 8000
      expose:
        default: true
-@@ -1022,7 +1024,7 @@
+@@ -1025,7 +1027,7 @@
      # asDefault: true
      port: 8443
      # -- (int) Use hostPort if set.
@@ -80,7 +80,7 @@
      # -- (int) Use containerPort if set.
      containerPort:  # @schema type:[integer, null]; minimum:0
      expose:
-@@ -1159,7 +1161,8 @@
+@@ -1162,7 +1164,8 @@
    # -- Additional entries here will be added to the Service [spec](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.35/#servicespec-v1-core).
    # Cannot contain selector or ports entries.
    spec:
@@ -89,8 +89,8 @@
 +    ipFamilyPolicy: PreferDualStack
    # -- Can be used to create multiple Service.
    # See EXAMPLES.md for more details.
-   additionalServices: {}
-@@ -1253,7 +1256,8 @@
+   additionalServices: {}  # @schema additionalProperties: {"type": "object", "additionalProperties": false, "properties": {"enabled": {"type": "boolean"}, "single": {"type": "boolean"}, "spec": {"type": "object"}, "labels": {"type": "object"}, "annotations": {"type": "object"}, "annotationsTCP": {"type": "object"}, "annotationsUDP": {"type": "object"}}}
+@@ -1256,7 +1259,8 @@
  #        topologyKey: kubernetes.io/hostname
  
  # -- nodeSelector is the simplest recommended form of node selection constraint.

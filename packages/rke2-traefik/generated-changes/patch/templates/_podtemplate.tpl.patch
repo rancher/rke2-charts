@@ -9,7 +9,7 @@
          imagePullPolicy: {{ .Values.image.pullPolicy }}
          name: {{ template "traefik.fullname" . }}
          resources:
-@@ -633,7 +633,8 @@
+@@ -640,7 +640,8 @@
            {{- end }}
            {{- end }}
            {{- end }}

@@ -43,7 +43,7 @@
    {{- fail "ERROR: Kubernetes Ingress NGINX provider globalAuthUrl option requires traefik >= v3.7.0-rc.1." }}
  {{- end }}
  
-@@ -244,7 +245,7 @@
+@@ -255,7 +256,7 @@
      {{- end }}
    {{- end }}
  

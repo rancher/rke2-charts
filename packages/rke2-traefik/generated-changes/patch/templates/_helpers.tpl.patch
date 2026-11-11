@@ -31,7 +31,7 @@
  {{- print $servicePath | trimSuffix "-" -}}
  {{- end -}}
  
-@@ -196,8 +207,14 @@
+@@ -196,7 +207,13 @@
  {{- default (include "traefik.namespace" .) (join "," .Values.providers.kubernetesIngress.namespaces) }}
  {{- end -}}
  {{- define "providers.kubernetesIngressNGINX.namespaces" -}}
@@ -42,12 +42,11 @@
 +{{- default (include "traefik.namespace" .) (join "," $watchNamespace) }}
 +{{- else -}}
 +{{- default (include "traefik.namespace" .) $watchNamespace }}
- {{- end -}}
 +{{- end -}}
+ {{- end -}}
  {{- define "providers.knative.namespaces" -}}
  {{- default (include "traefik.namespace" .) (join "," .Values.providers.knative.namespaces) }}
- {{- end -}}
-@@ -604,3 +621,11 @@
+@@ -624,3 +641,11 @@
      {{- end -}}
      {{- join " " $drivers -}}
  {{- end -}}
