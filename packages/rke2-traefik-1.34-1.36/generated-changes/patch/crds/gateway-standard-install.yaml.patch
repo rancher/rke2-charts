@@ -1,11 +1,13 @@
 --- charts-original/crds/gateway-standard-install.yaml
 +++ charts/crds/gateway-standard-install.yaml
-@@ -24,8 +24,9 @@
+@@ -23,9 +23,10 @@
+ kind: CustomResourceDefinition
  metadata:
    annotations:
-     api-approved.kubernetes.io: https://github.com/kubernetes-sigs/gateway-api/pull/4530
+-    api-approved.kubernetes.io: https://github.com/kubernetes-sigs/gateway-api/pull/4530
 -    gateway.networking.k8s.io/bundle-version: v1.5.1
-+    gateway.networking.k8s.io/bundle-version: v1.6.3
++    api-approved.kubernetes.io: https://github.com/kubernetes-sigs/gateway-api/pull/5371
++    gateway.networking.k8s.io/bundle-version: v1.7.0
      gateway.networking.k8s.io/channel: standard
 +    helm.sh/resource-policy: keep
    labels:
@@ -28,7 +30,15 @@
                      - Service mesh workload-to-service communication
                      - Other resource types beyond Service
  
-@@ -811,12 +812,12 @@
+@@ -190,6 +191,7 @@
+                         resources, SectionName is interpreted as the following:
+ 
+                         * Gateway: Listener name
++                        * ListenerSet: Listener name
+                         * HTTPRoute: HTTPRouteRule name
+                         * Service: Port name
+ 
+@@ -811,12 +813,12 @@
  
                    Support Levels:
  
@@ -45,7 +55,15 @@
                      - Service mesh workload-to-service communication
                      - Other resource types beyond Service
  
-@@ -1395,12 +1396,6 @@
+@@ -866,6 +868,7 @@
+                         resources, SectionName is interpreted as the following:
+ 
+                         * Gateway: Listener name
++                        * ListenerSet: Listener name
+                         * HTTPRoute: HTTPRouteRule name
+                         * Service: Port name
+ 
+@@ -1395,12 +1398,6 @@
      storage: false
      subresources:
        status: {}
@@ -58,18 +76,20 @@
  ---
  #
  # config/crd/standard/gateway.networking.k8s.io_gatewayclasses.yaml
-@@ -1410,8 +1405,9 @@
+@@ -1409,9 +1406,10 @@
+ kind: CustomResourceDefinition
  metadata:
    annotations:
-     api-approved.kubernetes.io: https://github.com/kubernetes-sigs/gateway-api/pull/4530
+-    api-approved.kubernetes.io: https://github.com/kubernetes-sigs/gateway-api/pull/4530
 -    gateway.networking.k8s.io/bundle-version: v1.5.1
-+    gateway.networking.k8s.io/bundle-version: v1.6.3
++    api-approved.kubernetes.io: https://github.com/kubernetes-sigs/gateway-api/pull/5371
++    gateway.networking.k8s.io/bundle-version: v1.7.0
      gateway.networking.k8s.io/channel: standard
 +    helm.sh/resource-policy: keep
    name: gatewayclasses.gateway.networking.k8s.io
  spec:
    group: gateway.networking.k8s.io
-@@ -1461,6 +1457,9 @@
+@@ -1461,6 +1459,9 @@
            Gateway is not deleted while in use.
  
            GatewayClass is a Cluster level resource.
@@ -79,7 +99,25 @@
          properties:
            apiVersion:
              description: |-
-@@ -1914,12 +1913,6 @@
+@@ -1497,7 +1498,7 @@
+                 pattern: ^[a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*\/[A-Za-z0-9\/\-._~%!$&'()*+,;=:]+$
+                 type: string
+                 x-kubernetes-validations:
+-                - message: Value is immutable
++                - message: field is immutable
+                   rule: self == oldSelf
+               description:
+                 description: Description helps describe a GatewayClass with more details.
+@@ -1741,7 +1742,7 @@
+                 pattern: ^[a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*\/[A-Za-z0-9\/\-._~%!$&'()*+,;=:]+$
+                 type: string
+                 x-kubernetes-validations:
+-                - message: Value is immutable
++                - message: field is immutable
+                   rule: self == oldSelf
+               description:
+                 description: Description helps describe a GatewayClass with more details.
+@@ -1914,12 +1915,6 @@
      storage: false
      subresources:
        status: {}
@@ -92,18 +130,20 @@
  ---
  #
  # config/crd/standard/gateway.networking.k8s.io_gateways.yaml
-@@ -1929,8 +1922,9 @@
+@@ -1928,9 +1923,10 @@
+ kind: CustomResourceDefinition
  metadata:
    annotations:
-     api-approved.kubernetes.io: https://github.com/kubernetes-sigs/gateway-api/pull/4530
+-    api-approved.kubernetes.io: https://github.com/kubernetes-sigs/gateway-api/pull/4530
 -    gateway.networking.k8s.io/bundle-version: v1.5.1
-+    gateway.networking.k8s.io/bundle-version: v1.6.3
++    api-approved.kubernetes.io: https://github.com/kubernetes-sigs/gateway-api/pull/5371
++    gateway.networking.k8s.io/bundle-version: v1.7.0
      gateway.networking.k8s.io/channel: standard
 +    helm.sh/resource-policy: keep
    name: gateways.gateway.networking.k8s.io
  spec:
    group: gateway.networking.k8s.io
-@@ -1964,6 +1958,8 @@
+@@ -1964,6 +1960,8 @@
          description: |-
            Gateway represents an instance of a service-traffic handling infrastructure
            by binding Listeners to a set of IP addresses.
@@ -112,7 +152,7 @@
          properties:
            apiVersion:
              description: |-
-@@ -2174,7 +2170,7 @@
+@@ -2174,7 +2172,7 @@
                        An implementation may chose to add additional implementation-specific annotations as they see fit.
  
                        Support: Extended
@@ -121,7 +161,7 @@
                      type: object
                      x-kubernetes-validations:
                      - message: Annotation keys must be in the form of an optional
-@@ -2396,6 +2392,12 @@
+@@ -2396,6 +2394,12 @@
                    request to "foo.example.com" SHOULD only be routed using routes attached
                    to the "foo.example.com" Listener (and not the "*.example.com" Listener).
  
@@ -134,7 +174,7 @@
                    This concept is known as "Listener Isolation", and it is an Extended feature
                    of Gateway API. Implementations that do not support Listener Isolation MUST
                    clearly document this, and MUST NOT claim support for the
-@@ -3036,7 +3038,7 @@
+@@ -3036,7 +3040,7 @@
                                    - kind
                                    - name
                                    type: object
@@ -143,7 +183,7 @@
                                  minItems: 1
                                  type: array
                                  x-kubernetes-list-type: atomic
-@@ -3201,7 +3203,7 @@
+@@ -3201,7 +3205,7 @@
                                          - kind
                                          - name
                                          type: object
@@ -152,7 +192,15 @@
                                        minItems: 1
                                        type: array
                                        x-kubernetes-list-type: atomic
-@@ -3802,7 +3804,7 @@
+@@ -3363,6 +3367,7 @@
+                   * "Accepted"
+                   * "Programmed"
+                   * "Ready"
++                  * "AddressesAssigned"
+                 items:
+                   description: Condition contains details for one aspect of the current
+                     state of this API Resource.
+@@ -3802,7 +3807,7 @@
                        An implementation may chose to add additional implementation-specific annotations as they see fit.
  
                        Support: Extended
@@ -161,7 +209,7 @@
                      type: object
                      x-kubernetes-validations:
                      - message: Annotation keys must be in the form of an optional
-@@ -4024,6 +4026,12 @@
+@@ -4024,6 +4029,12 @@
                    request to "foo.example.com" SHOULD only be routed using routes attached
                    to the "foo.example.com" Listener (and not the "*.example.com" Listener).
  
@@ -174,7 +222,7 @@
                    This concept is known as "Listener Isolation", and it is an Extended feature
                    of Gateway API. Implementations that do not support Listener Isolation MUST
                    clearly document this, and MUST NOT claim support for the
-@@ -4664,7 +4672,7 @@
+@@ -4664,7 +4675,7 @@
                                    - kind
                                    - name
                                    type: object
@@ -183,7 +231,7 @@
                                  minItems: 1
                                  type: array
                                  x-kubernetes-list-type: atomic
-@@ -4829,7 +4837,7 @@
+@@ -4829,7 +4840,7 @@
                                          - kind
                                          - name
                                          type: object
@@ -192,7 +240,15 @@
                                        minItems: 1
                                        type: array
                                        x-kubernetes-list-type: atomic
-@@ -5201,12 +5209,6 @@
+@@ -4991,6 +5002,7 @@
+                   * "Accepted"
+                   * "Programmed"
+                   * "Ready"
++                  * "AddressesAssigned"
+                 items:
+                   description: Condition contains details for one aspect of the current
+                     state of this API Resource.
+@@ -5201,12 +5213,6 @@
      storage: false
      subresources:
        status: {}
@@ -205,18 +261,53 @@
  ---
  #
  # config/crd/standard/gateway.networking.k8s.io_grpcroutes.yaml
-@@ -5216,8 +5218,9 @@
+@@ -5215,9 +5221,10 @@
+ kind: CustomResourceDefinition
  metadata:
    annotations:
-     api-approved.kubernetes.io: https://github.com/kubernetes-sigs/gateway-api/pull/4530
+-    api-approved.kubernetes.io: https://github.com/kubernetes-sigs/gateway-api/pull/4530
 -    gateway.networking.k8s.io/bundle-version: v1.5.1
-+    gateway.networking.k8s.io/bundle-version: v1.6.3
++    api-approved.kubernetes.io: https://github.com/kubernetes-sigs/gateway-api/pull/5371
++    gateway.networking.k8s.io/bundle-version: v1.7.0
      gateway.networking.k8s.io/channel: standard
 +    helm.sh/resource-policy: keep
    name: grpcroutes.gateway.networking.k8s.io
  spec:
    group: gateway.networking.k8s.io
-@@ -5838,6 +5841,10 @@
+@@ -5327,11 +5334,30 @@
+                   the implementation. The implementation MUST raise an 'Accepted' Condition
+                   with a status of `False` in the corresponding RouteParentStatus.
+ 
++                  In the event that multiple GRPCRoutes specify intersecting hostnames (e.g.
++                  overlapping wildcard matching and exact matching hostnames), precedence must
++                  be given to rules from the GRPCRoute with the largest number of:
++
++                  * Characters in a matching non-wildcard hostname.
++                  * Characters in a matching hostname.
++
++                  When multiple GRPCRoutes attach to the same Listener and yield identical
++                  Listener/Route intersected hostnames, implementations SHOULD evaluate
++                  precedence using the original hostnames configured on the Route, not the
++                  calculated Listener/Route hostname intersection.
++
++                  Resolving Route precedence using original Route hostname specificity is an
++                  Extended feature. Implementations that support this behavior SHOULD claim
++                  support for the `GatewayRouteHostnameIntersectionPrecedence` feature.
++                  Implementations that do not support this feature MAY evaluate precedence
++                  using the calculated Listener/Route hostname intersection.
++
+                   If a Route (A) of type HTTPRoute or GRPCRoute is attached to a
+                   Listener and that listener already has another Route (B) of the other
+                   type attached and the intersection of the hostnames of A and B is
+-                  non-empty, then the implementation MUST accept exactly one of these two
+-                  routes, determined by the following criteria, in order:
++                  non-empty, then the implementation MAY reject one of the two routes.
++                  An implementation that does so MUST accept exactly one of them,
++                  determined by the following criteria, in order:
+ 
+                   * The oldest Route based on creation timestamp.
+                   * The Route appearing first in alphabetical order by
+@@ -5838,6 +5864,10 @@
                                          Support: Extended for Kubernetes Service
  
                                          Support: Implementation-specific for any other resource
@@ -227,7 +318,7 @@
                                        properties:
                                          group:
                                            default: ""
-@@ -6489,6 +6496,10 @@
+@@ -6489,6 +6519,10 @@
                                    Support: Extended for Kubernetes Service
  
                                    Support: Implementation-specific for any other resource
@@ -238,7 +329,17 @@
                                  properties:
                                    group:
                                      default: ""
-@@ -7275,12 +7286,6 @@
+@@ -7012,6 +7046,9 @@
+                     : 0) : 0) + (self.size() > 14 ? (has(self[14].matches) ? self[14].matches.size()
+                     : 0) : 0) + (self.size() > 15 ? (has(self[15].matches) ? self[15].matches.size()
+                     : 0) : 0) <= 128'
++                - message: Rule name must be unique within the route
++                  rule: self.all(l1, !has(l1.name) || self.exists_one(l2, has(l2.name)
++                    && l1.name == l2.name))
+             type: object
+           status:
+             description: Status defines the current state of GRPCRoute.
+@@ -7275,12 +7312,6 @@
      storage: true
      subresources:
        status: {}
@@ -251,18 +352,39 @@
  ---
  #
  # config/crd/standard/gateway.networking.k8s.io_httproutes.yaml
-@@ -7290,8 +7295,9 @@
+@@ -7289,9 +7320,10 @@
+ kind: CustomResourceDefinition
  metadata:
    annotations:
-     api-approved.kubernetes.io: https://github.com/kubernetes-sigs/gateway-api/pull/4530
+-    api-approved.kubernetes.io: https://github.com/kubernetes-sigs/gateway-api/pull/4530
 -    gateway.networking.k8s.io/bundle-version: v1.5.1
-+    gateway.networking.k8s.io/bundle-version: v1.6.3
++    api-approved.kubernetes.io: https://github.com/kubernetes-sigs/gateway-api/pull/5371
++    gateway.networking.k8s.io/bundle-version: v1.7.0
      gateway.networking.k8s.io/channel: standard
 +    helm.sh/resource-policy: keep
    name: httproutes.gateway.networking.k8s.io
  spec:
    group: gateway.networking.k8s.io
-@@ -7728,9 +7734,9 @@
+@@ -7391,8 +7423,16 @@
+                   * Characters in a matching non-wildcard hostname.
+                   * Characters in a matching hostname.
+ 
+-                  If ties exist across multiple Routes, the matching precedence rules for
+-                  HTTPRouteMatches takes over.
++                  When multiple HTTPRoutes attach to the same Listener and yield identical
++                  Listener/Route intersected hostnames, implementations SHOULD evaluate
++                  precedence using the original hostnames configured on the Route, not the
++                  calculated Listener/Route hostname intersection.
++
++                  Resolving Route precedence using original Route hostname specificity is an
++                  Extended feature. Implementations that support this behavior SHOULD claim
++                  support for the `GatewayRouteHostnameIntersectionPrecedence` feature.
++                  Implementations that do not support this feature MAY evaluate precedence
++                  using the calculated Listener/Route hostname intersection.
+ 
+                   Support: Core
+                 items:
+@@ -7728,9 +7768,9 @@
                                          Multiple header names in the value of the `Access-Control-Allow-Headers`
                                          response header are separated by a comma (",").
  
@@ -274,7 +396,7 @@
  
                                          If any header name in the `Access-Control-Request-Headers` request header
                                          is not included in the list of header names specified by the response
-@@ -7742,21 +7748,20 @@
+@@ -7742,21 +7782,20 @@
                                          client side.
  
                                          A wildcard indicates that the requests with all HTTP headers are allowed.
@@ -310,7 +432,7 @@
  
                                          Support: Extended
                                        items:
-@@ -7801,32 +7806,29 @@
+@@ -7801,32 +7840,29 @@
                                          A CORS-safelisted method is a method that is `GET`, `HEAD`, or `POST`.
                                          (See https://fetch.spec.whatwg.org/#cors-safelisted-method) The
                                          CORS-safelisted methods are always allowed, regardless of whether they
@@ -358,7 +480,7 @@
  
                                          Support: Extended
                                        items:
-@@ -7876,7 +7878,7 @@
+@@ -7876,7 +7912,7 @@
                                          An origin value that includes _only_ the `*` character indicates requests
                                          from all `Origin`s are allowed.
  
@@ -367,7 +489,7 @@
                                          means the server supports clients from multiple origins. If the request
                                          `Origin` matches the configured allowed origins, the gateway must return
                                          the given `Origin` and sets value of the header
-@@ -7898,19 +7900,15 @@
+@@ -7898,19 +7934,15 @@
                                          `Access-Control-Allow-Origin` to the same value as the `Origin`
                                          header provided by the client.
  
@@ -396,7 +518,7 @@
  
                                          Support: Extended
                                        items:
-@@ -7949,7 +7947,7 @@
+@@ -7949,7 +7981,7 @@
                                          (See https://fetch.spec.whatwg.org/#cors-safelisted-response-header-name)
                                          The CORS-safelisted response headers are exposed to client by default.
  
@@ -405,7 +527,7 @@
                                          this additional header will be exposed as part of the response to the
                                          client.
  
-@@ -7959,12 +7957,15 @@
+@@ -7959,12 +7991,15 @@
                                          response header are separated by a comma (",").
  
                                          A wildcard indicates that the responses with all HTTP headers are exposed
@@ -426,7 +548,7 @@
  
                                          Support: Extended
                                        items:
-@@ -8214,6 +8215,10 @@
+@@ -8214,6 +8249,10 @@
                                          Support: Extended for Kubernetes Service
  
                                          Support: Implementation-specific for any other resource
@@ -437,7 +559,7 @@
                                        properties:
                                          group:
                                            default: ""
-@@ -8472,7 +8477,7 @@
+@@ -8472,7 +8511,7 @@
                                          Accepted Condition for the Route to `status: False`, with a
                                          Reason of `UnsupportedValue`.
  
@@ -446,7 +568,7 @@
                                        enum:
                                        - 301
                                        - 302
-@@ -8985,9 +8990,9 @@
+@@ -8985,9 +9024,9 @@
                                    Multiple header names in the value of the `Access-Control-Allow-Headers`
                                    response header are separated by a comma (",").
  
@@ -458,7 +580,7 @@
  
                                    If any header name in the `Access-Control-Request-Headers` request header
                                    is not included in the list of header names specified by the response
-@@ -8999,21 +9004,20 @@
+@@ -8999,21 +9038,20 @@
                                    client side.
  
                                    A wildcard indicates that the requests with all HTTP headers are allowed.
@@ -494,7 +616,7 @@
  
                                    Support: Extended
                                  items:
-@@ -9058,32 +9062,29 @@
+@@ -9058,32 +9096,29 @@
                                    A CORS-safelisted method is a method that is `GET`, `HEAD`, or `POST`.
                                    (See https://fetch.spec.whatwg.org/#cors-safelisted-method) The
                                    CORS-safelisted methods are always allowed, regardless of whether they
@@ -542,7 +664,7 @@
  
                                    Support: Extended
                                  items:
-@@ -9133,7 +9134,7 @@
+@@ -9133,7 +9168,7 @@
                                    An origin value that includes _only_ the `*` character indicates requests
                                    from all `Origin`s are allowed.
  
@@ -551,7 +673,7 @@
                                    means the server supports clients from multiple origins. If the request
                                    `Origin` matches the configured allowed origins, the gateway must return
                                    the given `Origin` and sets value of the header
-@@ -9155,19 +9156,15 @@
+@@ -9155,19 +9190,15 @@
                                    `Access-Control-Allow-Origin` to the same value as the `Origin`
                                    header provided by the client.
  
@@ -580,7 +702,7 @@
  
                                    Support: Extended
                                  items:
-@@ -9206,7 +9203,7 @@
+@@ -9206,7 +9237,7 @@
                                    (See https://fetch.spec.whatwg.org/#cors-safelisted-response-header-name)
                                    The CORS-safelisted response headers are exposed to client by default.
  
@@ -589,7 +711,7 @@
                                    this additional header will be exposed as part of the response to the
                                    client.
  
-@@ -9216,12 +9213,15 @@
+@@ -9216,12 +9247,15 @@
                                    response header are separated by a comma (",").
  
                                    A wildcard indicates that the responses with all HTTP headers are exposed
@@ -610,7 +732,7 @@
  
                                    Support: Extended
                                  items:
-@@ -9469,6 +9469,10 @@
+@@ -9469,6 +9503,10 @@
                                    Support: Extended for Kubernetes Service
  
                                    Support: Implementation-specific for any other resource
@@ -621,7 +743,7 @@
                                  properties:
                                    group:
                                      default: ""
-@@ -9727,7 +9731,7 @@
+@@ -9727,7 +9765,7 @@
                                    Accepted Condition for the Route to `status: False`, with a
                                    Reason of `UnsupportedValue`.
  
@@ -630,7 +752,141 @@
                                  enum:
                                  - 301
                                  - 302
-@@ -11180,9 +11184,9 @@
+@@ -10371,6 +10409,104 @@
+                       minLength: 1
+                       pattern: ^[a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$
+                       type: string
++                    retry:
++                      description: |-
++                        Retry defines the configuration for when to retry an HTTP request.
++
++                        A request is retried when attempts is greater than 0 and the backend did
++                        not process it. This is the case when the connection could not be
++                        established, or when the backend explicitly rejected the request, either
++                        before processing it or with one of the configured status codes.
++
++                        Support: Extended
++                      properties:
++                        attempts:
++                          default: 1
++                          description: |-
++                            Attempts specifies the maximum number of times an individual request
++                            from the Gateway to a backend should be retried in addition to the
++                            initial request.
++
++                            If the maximum number of retries has been attempted without a successful
++                            response from the backend, the Gateway MUST return an error.
++
++                            An explicit zero value MUST disable retries.
++
++                            Support: Extended
++                          minimum: 0
++                          type: integer
++                        backoff:
++                          description: |-
++                            Backoff specifies the base interval for a backoff strategy between
++                            retry attempts and is represented in Gateway API Duration formatting.
++                            The duration a Gateway waits before a retry attempt is determined
++                            by the base interval and the implementation's retry strategy.
++
++                            Implementations MAY add random jitter and MAY cap the delay at an
++                            implementation-defined maximum, which SHOULD NOT be less than the base
++                            interval. The precise backoff curve and jitter calculation are
++                            implementation-specific and not exposed in the Gateway API specification.
++                            Implementations typically apply exponential backoff with jitter to
++                            mitigate thundering-herd issues.
++
++                            If a Request timeout (`rules[].timeouts.request`) is configured on the
++                            route, the entire duration of the initial request and any retry attempts
++                            MUST not exceed the Request timeout duration. If any retry attempts are
++                            still in progress when the Request timeout duration has been reached,
++                            these SHOULD be canceled if possible and the Gateway MUST immediately
++                            return a timeout error.
++
++                            If a BackendRequest timeout (`rules[].timeouts.backendRequest`) is
++                            configured on the route, any retry attempts which reach the configured
++                            BackendRequest timeout duration without a response SHOULD be canceled if
++                            possible and the Gateway SHOULD schedule the next retry attempt according
++                            to the configured backoff.
++
++                            If a BackendRequest timeout is _not_ configured on the route, retry
++                            attempts MAY time out after an implementation default duration, or MAY
++                            remain pending until a configured Request timeout or implementation
++                            default duration for total request time is reached.
++
++                            When this field is unspecified, the backoff strategy and base interval
++                            are implementation-specific.
++
++                            Implementations which retry immediately with no backoff MUST NOT advertise
++                            support for this field and MUST set the Accepted Condition for the Route
++                            to `status: False` with a Reason of `UnsupportedValue` when this field is
++                            set.
++
++                            Support: Implementation-specific
++                          pattern: ^([0-9]{1,5}(h|m|s|ms)){1,4}$
++                          type: string
++                        codes:
++                          description: |-
++                            Codes defines the HTTP response status codes for which a backend request
++                            should be retried.
++
++                            Support: Extended
++                          items:
++                            description: |-
++                              HTTPRouteRetryStatusCode defines an HTTP response status code for
++                              which a backend request should be retried.
++
++                              Implementations MUST support the following status codes as retriable:
++
++                              * 500
++                              * 502
++                              * 503
++                              * 504
++
++                              Implementations MAY support specifying additional discrete values in the
++                              500-599 range.
++
++                              Implementations MAY support specifying discrete values in the 400-499 range,
++                              which are often inadvisable to retry.
++                            maximum: 599
++                            minimum: 400
++                            type: integer
++                          type: array
++                          x-kubernetes-list-type: set
++                      type: object
+                     timeouts:
+                       description: |-
+                         Timeouts defines the timeouts that can be configured for an HTTP request.
+@@ -10479,6 +10615,9 @@
+                 type: array
+                 x-kubernetes-list-type: atomic
+                 x-kubernetes-validations:
++                - message: Rule name must be unique within the route
++                  rule: self.all(l1, !has(l1.name) || self.exists_one(l2, has(l2.name)
++                    && l1.name == l2.name))
+                 - message: While 16 rules and 64 matches per rule are allowed, the
+                     total number of matches across all rules in a route must be less
+                     than 128
+@@ -10843,8 +10982,16 @@
+                   * Characters in a matching non-wildcard hostname.
+                   * Characters in a matching hostname.
+ 
+-                  If ties exist across multiple Routes, the matching precedence rules for
+-                  HTTPRouteMatches takes over.
++                  When multiple HTTPRoutes attach to the same Listener and yield identical
++                  Listener/Route intersected hostnames, implementations SHOULD evaluate
++                  precedence using the original hostnames configured on the Route, not the
++                  calculated Listener/Route hostname intersection.
++
++                  Resolving Route precedence using original Route hostname specificity is an
++                  Extended feature. Implementations that support this behavior SHOULD claim
++                  support for the `GatewayRouteHostnameIntersectionPrecedence` feature.
++                  Implementations that do not support this feature MAY evaluate precedence
++                  using the calculated Listener/Route hostname intersection.
+ 
+                   Support: Core
+                 items:
+@@ -11180,9 +11327,9 @@
                                          Multiple header names in the value of the `Access-Control-Allow-Headers`
                                          response header are separated by a comma (",").
  
@@ -642,7 +898,7 @@
  
                                          If any header name in the `Access-Control-Request-Headers` request header
                                          is not included in the list of header names specified by the response
-@@ -11194,21 +11198,20 @@
+@@ -11194,21 +11341,20 @@
                                          client side.
  
                                          A wildcard indicates that the requests with all HTTP headers are allowed.
@@ -678,7 +934,7 @@
  
                                          Support: Extended
                                        items:
-@@ -11253,32 +11256,29 @@
+@@ -11253,32 +11399,29 @@
                                          A CORS-safelisted method is a method that is `GET`, `HEAD`, or `POST`.
                                          (See https://fetch.spec.whatwg.org/#cors-safelisted-method) The
                                          CORS-safelisted methods are always allowed, regardless of whether they
@@ -726,7 +982,7 @@
  
                                          Support: Extended
                                        items:
-@@ -11328,7 +11328,7 @@
+@@ -11328,7 +11471,7 @@
                                          An origin value that includes _only_ the `*` character indicates requests
                                          from all `Origin`s are allowed.
  
@@ -735,7 +991,7 @@
                                          means the server supports clients from multiple origins. If the request
                                          `Origin` matches the configured allowed origins, the gateway must return
                                          the given `Origin` and sets value of the header
-@@ -11350,19 +11350,15 @@
+@@ -11350,19 +11493,15 @@
                                          `Access-Control-Allow-Origin` to the same value as the `Origin`
                                          header provided by the client.
  
@@ -764,7 +1020,7 @@
  
                                          Support: Extended
                                        items:
-@@ -11401,7 +11397,7 @@
+@@ -11401,7 +11540,7 @@
                                          (See https://fetch.spec.whatwg.org/#cors-safelisted-response-header-name)
                                          The CORS-safelisted response headers are exposed to client by default.
  
@@ -773,7 +1029,7 @@
                                          this additional header will be exposed as part of the response to the
                                          client.
  
-@@ -11411,12 +11407,15 @@
+@@ -11411,12 +11550,15 @@
                                          response header are separated by a comma (",").
  
                                          A wildcard indicates that the responses with all HTTP headers are exposed
@@ -794,7 +1050,7 @@
  
                                          Support: Extended
                                        items:
-@@ -11666,6 +11665,10 @@
+@@ -11666,6 +11808,10 @@
                                          Support: Extended for Kubernetes Service
  
                                          Support: Implementation-specific for any other resource
@@ -805,7 +1061,7 @@
                                        properties:
                                          group:
                                            default: ""
-@@ -11924,7 +11927,7 @@
+@@ -11924,7 +12070,7 @@
                                          Accepted Condition for the Route to `status: False`, with a
                                          Reason of `UnsupportedValue`.
  
@@ -814,7 +1070,7 @@
                                        enum:
                                        - 301
                                        - 302
-@@ -12437,9 +12440,9 @@
+@@ -12437,9 +12583,9 @@
                                    Multiple header names in the value of the `Access-Control-Allow-Headers`
                                    response header are separated by a comma (",").
  
@@ -826,7 +1082,7 @@
  
                                    If any header name in the `Access-Control-Request-Headers` request header
                                    is not included in the list of header names specified by the response
-@@ -12451,21 +12454,20 @@
+@@ -12451,21 +12597,20 @@
                                    client side.
  
                                    A wildcard indicates that the requests with all HTTP headers are allowed.
@@ -862,7 +1118,7 @@
  
                                    Support: Extended
                                  items:
-@@ -12510,32 +12512,29 @@
+@@ -12510,32 +12655,29 @@
                                    A CORS-safelisted method is a method that is `GET`, `HEAD`, or `POST`.
                                    (See https://fetch.spec.whatwg.org/#cors-safelisted-method) The
                                    CORS-safelisted methods are always allowed, regardless of whether they
@@ -910,7 +1166,7 @@
  
                                    Support: Extended
                                  items:
-@@ -12585,7 +12584,7 @@
+@@ -12585,7 +12727,7 @@
                                    An origin value that includes _only_ the `*` character indicates requests
                                    from all `Origin`s are allowed.
  
@@ -919,7 +1175,7 @@
                                    means the server supports clients from multiple origins. If the request
                                    `Origin` matches the configured allowed origins, the gateway must return
                                    the given `Origin` and sets value of the header
-@@ -12607,19 +12606,15 @@
+@@ -12607,19 +12749,15 @@
                                    `Access-Control-Allow-Origin` to the same value as the `Origin`
                                    header provided by the client.
  
@@ -948,7 +1204,7 @@
  
                                    Support: Extended
                                  items:
-@@ -12658,7 +12653,7 @@
+@@ -12658,7 +12796,7 @@
                                    (See https://fetch.spec.whatwg.org/#cors-safelisted-response-header-name)
                                    The CORS-safelisted response headers are exposed to client by default.
  
@@ -957,7 +1213,7 @@
                                    this additional header will be exposed as part of the response to the
                                    client.
  
-@@ -12668,12 +12663,15 @@
+@@ -12668,12 +12806,15 @@
                                    response header are separated by a comma (",").
  
                                    A wildcard indicates that the responses with all HTTP headers are exposed
@@ -978,7 +1234,7 @@
  
                                    Support: Extended
                                  items:
-@@ -12921,6 +12919,10 @@
+@@ -12921,6 +13062,10 @@
                                    Support: Extended for Kubernetes Service
  
                                    Support: Implementation-specific for any other resource
@@ -989,7 +1245,7 @@
                                  properties:
                                    group:
                                      default: ""
-@@ -13179,7 +13181,7 @@
+@@ -13179,7 +13324,7 @@
                                    Accepted Condition for the Route to `status: False`, with a
                                    Reason of `UnsupportedValue`.
  
@@ -998,7 +1254,122 @@
                                  enum:
                                  - 301
                                  - 302
-@@ -14208,12 +14210,6 @@
+@@ -13823,6 +13968,104 @@
+                       minLength: 1
+                       pattern: ^[a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$
+                       type: string
++                    retry:
++                      description: |-
++                        Retry defines the configuration for when to retry an HTTP request.
++
++                        A request is retried when attempts is greater than 0 and the backend did
++                        not process it. This is the case when the connection could not be
++                        established, or when the backend explicitly rejected the request, either
++                        before processing it or with one of the configured status codes.
++
++                        Support: Extended
++                      properties:
++                        attempts:
++                          default: 1
++                          description: |-
++                            Attempts specifies the maximum number of times an individual request
++                            from the Gateway to a backend should be retried in addition to the
++                            initial request.
++
++                            If the maximum number of retries has been attempted without a successful
++                            response from the backend, the Gateway MUST return an error.
++
++                            An explicit zero value MUST disable retries.
++
++                            Support: Extended
++                          minimum: 0
++                          type: integer
++                        backoff:
++                          description: |-
++                            Backoff specifies the base interval for a backoff strategy between
++                            retry attempts and is represented in Gateway API Duration formatting.
++                            The duration a Gateway waits before a retry attempt is determined
++                            by the base interval and the implementation's retry strategy.
++
++                            Implementations MAY add random jitter and MAY cap the delay at an
++                            implementation-defined maximum, which SHOULD NOT be less than the base
++                            interval. The precise backoff curve and jitter calculation are
++                            implementation-specific and not exposed in the Gateway API specification.
++                            Implementations typically apply exponential backoff with jitter to
++                            mitigate thundering-herd issues.
++
++                            If a Request timeout (`rules[].timeouts.request`) is configured on the
++                            route, the entire duration of the initial request and any retry attempts
++                            MUST not exceed the Request timeout duration. If any retry attempts are
++                            still in progress when the Request timeout duration has been reached,
++                            these SHOULD be canceled if possible and the Gateway MUST immediately
++                            return a timeout error.
++
++                            If a BackendRequest timeout (`rules[].timeouts.backendRequest`) is
++                            configured on the route, any retry attempts which reach the configured
++                            BackendRequest timeout duration without a response SHOULD be canceled if
++                            possible and the Gateway SHOULD schedule the next retry attempt according
++                            to the configured backoff.
++
++                            If a BackendRequest timeout is _not_ configured on the route, retry
++                            attempts MAY time out after an implementation default duration, or MAY
++                            remain pending until a configured Request timeout or implementation
++                            default duration for total request time is reached.
++
++                            When this field is unspecified, the backoff strategy and base interval
++                            are implementation-specific.
++
++                            Implementations which retry immediately with no backoff MUST NOT advertise
++                            support for this field and MUST set the Accepted Condition for the Route
++                            to `status: False` with a Reason of `UnsupportedValue` when this field is
++                            set.
++
++                            Support: Implementation-specific
++                          pattern: ^([0-9]{1,5}(h|m|s|ms)){1,4}$
++                          type: string
++                        codes:
++                          description: |-
++                            Codes defines the HTTP response status codes for which a backend request
++                            should be retried.
++
++                            Support: Extended
++                          items:
++                            description: |-
++                              HTTPRouteRetryStatusCode defines an HTTP response status code for
++                              which a backend request should be retried.
++
++                              Implementations MUST support the following status codes as retriable:
++
++                              * 500
++                              * 502
++                              * 503
++                              * 504
++
++                              Implementations MAY support specifying additional discrete values in the
++                              500-599 range.
++
++                              Implementations MAY support specifying discrete values in the 400-499 range,
++                              which are often inadvisable to retry.
++                            maximum: 599
++                            minimum: 400
++                            type: integer
++                          type: array
++                          x-kubernetes-list-type: set
++                      type: object
+                     timeouts:
+                       description: |-
+                         Timeouts defines the timeouts that can be configured for an HTTP request.
+@@ -13931,6 +14174,9 @@
+                 type: array
+                 x-kubernetes-list-type: atomic
+                 x-kubernetes-validations:
++                - message: Rule name must be unique within the route
++                  rule: self.all(l1, !has(l1.name) || self.exists_one(l2, has(l2.name)
++                    && l1.name == l2.name))
+                 - message: While 16 rules and 64 matches per rule are allowed, the
+                     total number of matches across all rules in a route must be less
+                     than 128
+@@ -14208,12 +14454,6 @@
      storage: false
      subresources:
        status: {}
@@ -1011,18 +1382,20 @@
  ---
  #
  # config/crd/standard/gateway.networking.k8s.io_listenersets.yaml
-@@ -14223,8 +14219,9 @@
+@@ -14222,9 +14462,10 @@
+ kind: CustomResourceDefinition
  metadata:
    annotations:
-     api-approved.kubernetes.io: https://github.com/kubernetes-sigs/gateway-api/pull/4530
+-    api-approved.kubernetes.io: https://github.com/kubernetes-sigs/gateway-api/pull/4530
 -    gateway.networking.k8s.io/bundle-version: v1.5.1
-+    gateway.networking.k8s.io/bundle-version: v1.6.3
++    api-approved.kubernetes.io: https://github.com/kubernetes-sigs/gateway-api/pull/5371
++    gateway.networking.k8s.io/bundle-version: v1.7.0
      gateway.networking.k8s.io/channel: standard
 +    helm.sh/resource-policy: keep
    name: listenersets.gateway.networking.k8s.io
  spec:
    group: gateway.networking.k8s.io
-@@ -14992,12 +14989,6 @@
+@@ -14992,12 +15233,6 @@
      storage: true
      subresources:
        status: {}
@@ -1035,18 +1408,20 @@
  ---
  #
  # config/crd/standard/gateway.networking.k8s.io_referencegrants.yaml
-@@ -15007,8 +14998,9 @@
+@@ -15006,9 +15241,10 @@
+ kind: CustomResourceDefinition
  metadata:
    annotations:
-     api-approved.kubernetes.io: https://github.com/kubernetes-sigs/gateway-api/pull/4530
+-    api-approved.kubernetes.io: https://github.com/kubernetes-sigs/gateway-api/pull/4530
 -    gateway.networking.k8s.io/bundle-version: v1.5.1
-+    gateway.networking.k8s.io/bundle-version: v1.6.3
++    api-approved.kubernetes.io: https://github.com/kubernetes-sigs/gateway-api/pull/5371
++    gateway.networking.k8s.io/bundle-version: v1.7.0
      gateway.networking.k8s.io/channel: standard
 +    helm.sh/resource-policy: keep
    name: referencegrants.gateway.networking.k8s.io
  spec:
    group: gateway.networking.k8s.io
-@@ -15182,6 +15174,8 @@
+@@ -15182,6 +15418,8 @@
              - from
              - to
              type: object
@@ -1055,7 +1430,7 @@
          type: object
      served: true
      storage: false
-@@ -15345,16 +15339,1309 @@
+@@ -15345,16 +15583,1309 @@
              - from
              - to
              type: object
@@ -1079,8 +1454,8 @@
 +kind: CustomResourceDefinition
 +metadata:
 +  annotations:
-+    api-approved.kubernetes.io: https://github.com/kubernetes-sigs/gateway-api/pull/4530
-+    gateway.networking.k8s.io/bundle-version: v1.6.3
++    api-approved.kubernetes.io: https://github.com/kubernetes-sigs/gateway-api/pull/5371
++    gateway.networking.k8s.io/bundle-version: v1.7.0
 +    gateway.networking.k8s.io/channel: standard
 +    helm.sh/resource-policy: keep
 +  name: tcproutes.gateway.networking.k8s.io
@@ -2371,18 +2746,46 @@
  ---
  #
  # config/crd/standard/gateway.networking.k8s.io_tlsroutes.yaml
-@@ -15364,8 +16651,9 @@
+@@ -15363,9 +16894,10 @@
+ kind: CustomResourceDefinition
  metadata:
    annotations:
-     api-approved.kubernetes.io: https://github.com/kubernetes-sigs/gateway-api/pull/4530
+-    api-approved.kubernetes.io: https://github.com/kubernetes-sigs/gateway-api/pull/4530
 -    gateway.networking.k8s.io/bundle-version: v1.5.1
-+    gateway.networking.k8s.io/bundle-version: v1.6.3
++    api-approved.kubernetes.io: https://github.com/kubernetes-sigs/gateway-api/pull/5371
++    gateway.networking.k8s.io/bundle-version: v1.7.0
      gateway.networking.k8s.io/channel: standard
 +    helm.sh/resource-policy: keep
    name: tlsroutes.gateway.networking.k8s.io
  spec:
    group: gateway.networking.k8s.io
-@@ -15442,7 +16730,7 @@
+@@ -15422,6 +16954,25 @@
+                   1. IPs are not allowed in SNI hostnames per RFC 6066.
+                   2. A hostname may be prefixed with a wildcard label (`*.`). The wildcard
+                      label must appear by itself as the first label.
++
++
++                  In the event that multiple TLSRoutes specify intersecting hostnames (e.g.
++                  overlapping wildcard matching and exact matching hostnames), precedence must
++                  be given to rules from the TLSRoute with the largest number of:
++
++                  * Characters in a matching non-wildcard hostname.
++                  * Characters in a matching hostname.
++
++                  When multiple TLSRoutes attach to the same Listener and yield identical
++                  Listener/Route intersected hostnames, implementations SHOULD evaluate
++                  precedence using the original hostnames configured on the Route, not the
++                  calculated Listener/Route hostname intersection.
++
++                  Resolving Route precedence using original Route hostname specificity is an
++                  Extended feature. Implementations that support this behavior SHOULD claim
++                  support for the `GatewayRouteHostnameIntersectionPrecedence` feature.
++                  Implementations that do not support this feature MAY evaluate precedence
++                  using the calculated Listener/Route hostname intersection.
+                 items:
+                   description: |-
+                     Hostname is the fully qualified domain name of a network host. This matches
+@@ -15442,7 +16993,7 @@
                    minLength: 1
                    pattern: ^(\*\.)?[a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$
                    type: string
@@ -2391,7 +2794,7 @@
                  minItems: 1
                  type: array
                  x-kubernetes-list-type: atomic
-@@ -15677,6 +16965,9 @@
+@@ -15677,6 +17228,9 @@
                          weight; if an invalid backend is requested to have 80% of requests, then
                          80% of requests must be rejected instead.
  
@@ -2401,7 +2804,7 @@
                          Support: Core for Kubernetes Service
  
                          Support: Extended for Kubernetes ServiceImport
-@@ -15684,6 +16975,8 @@
+@@ -15684,6 +17238,8 @@
                          Support: Implementation-specific for any other resource
  
                          Support for weight: Extended
@@ -2410,7 +2813,7 @@
                        items:
                          description: |-
                            BackendRef defines how a Route should forward a request to a Kubernetes
-@@ -16159,7 +17452,7 @@
+@@ -16159,7 +17715,7 @@
                    minLength: 1
                    pattern: ^(\*\.)?[a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$
                    type: string
@@ -2419,7 +2822,7 @@
                  type: array
                  x-kubernetes-list-type: atomic
                parentRefs:
-@@ -16382,6 +17675,9 @@
+@@ -16382,6 +17938,9 @@
                          weight; if an invalid backend is requested to have 80% of requests, then
                          80% of requests must be rejected instead.
  
@@ -2429,7 +2832,7 @@
                          Support: Core for Kubernetes Service
  
                          Support: Extended for Kubernetes ServiceImport
-@@ -16389,6 +17685,8 @@
+@@ -16389,6 +17948,8 @@
                          Support: Implementation-specific for any other resource
  
                          Support for weight: Extended
@@ -2438,7 +2841,33 @@
                        items:
                          description: |-
                            BackendRef defines how a Route should forward a request to a Kubernetes
-@@ -16840,7 +18138,7 @@
+@@ -16820,6 +18381,25 @@
+                   1. IPs are not allowed in SNI hostnames per RFC 6066.
+                   2. A hostname may be prefixed with a wildcard label (`*.`). The wildcard
+                      label must appear by itself as the first label.
++
++
++                  In the event that multiple TLSRoutes specify intersecting hostnames (e.g.
++                  overlapping wildcard matching and exact matching hostnames), precedence must
++                  be given to rules from the TLSRoute with the largest number of:
++
++                  * Characters in a matching non-wildcard hostname.
++                  * Characters in a matching hostname.
++
++                  When multiple TLSRoutes attach to the same Listener and yield identical
++                  Listener/Route intersected hostnames, implementations SHOULD evaluate
++                  precedence using the original hostnames configured on the Route, not the
++                  calculated Listener/Route hostname intersection.
++
++                  Resolving Route precedence using original Route hostname specificity is an
++                  Extended feature. Implementations that support this behavior SHOULD claim
++                  support for the `GatewayRouteHostnameIntersectionPrecedence` feature.
++                  Implementations that do not support this feature MAY evaluate precedence
++                  using the calculated Listener/Route hostname intersection.
+                 items:
+                   description: |-
+                     Hostname is the fully qualified domain name of a network host. This matches
+@@ -16840,7 +18420,7 @@
                    minLength: 1
                    pattern: ^(\*\.)?[a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$
                    type: string
@@ -2447,7 +2876,7 @@
                  minItems: 1
                  type: array
                  x-kubernetes-list-type: atomic
-@@ -17075,6 +18373,9 @@
+@@ -17075,6 +18655,9 @@
                          weight; if an invalid backend is requested to have 80% of requests, then
                          80% of requests must be rejected instead.
  
@@ -2457,7 +2886,7 @@
                          Support: Core for Kubernetes Service
  
                          Support: Extended for Kubernetes ServiceImport
-@@ -17082,6 +18383,8 @@
+@@ -17082,6 +18665,8 @@
                          Support: Implementation-specific for any other resource
  
                          Support for weight: Extended
@@ -2466,7 +2895,7 @@
                        items:
                          description: |-
                            BackendRef defines how a Route should forward a request to a Kubernetes
-@@ -17467,9 +18770,1355 @@
+@@ -17467,9 +19052,1350 @@
      storage: false
      subresources:
        status: {}
@@ -2484,8 +2913,8 @@
 +kind: CustomResourceDefinition
 +metadata:
 +  annotations:
-+    api-approved.kubernetes.io: https://github.com/kubernetes-sigs/gateway-api/pull/4530
-+    gateway.networking.k8s.io/bundle-version: v1.6.3
++    api-approved.kubernetes.io: https://github.com/kubernetes-sigs/gateway-api/pull/5371
++    gateway.networking.k8s.io/bundle-version: v1.7.0
 +    gateway.networking.k8s.io/channel: standard
 +    helm.sh/resource-policy: keep
 +  name: udproutes.gateway.networking.k8s.io
@@ -3781,7 +4210,7 @@
 +kind: ValidatingAdmissionPolicy
 +metadata:
 +  annotations:
-+    gateway.networking.k8s.io/bundle-version: v1.6.3
++    gateway.networking.k8s.io/bundle-version: v1.7.0
 +    gateway.networking.k8s.io/channel: standard
 +  name: "safe-upgrades.gateway.networking.k8s.io"
 +spec:
@@ -3794,29 +4223,24 @@
 +      resources:   ["*"]
 +  validations:
 +    - expression: "object.spec.group != 'gateway.networking.k8s.io' || oldObject == null || (
-+        has(object.metadata.annotations) && object.metadata.annotations.exists(k, k == 'gateway.networking.k8s.io/channel') &&
++        has(object.metadata.annotations) && object.metadata.annotations.exists(k, k == 'gateway.networking.k8s.io/channel') && 
 +        object.metadata.annotations['gateway.networking.k8s.io/channel'] == 'standard' ) || (
-+        oldObject != null && has(oldObject.metadata.annotations) && oldObject.metadata.annotations.exists(k, k == 'gateway.networking.k8s.io/channel') &&
++        oldObject != null && has(oldObject.metadata.annotations) && oldObject.metadata.annotations.exists(k, k == 'gateway.networking.k8s.io/channel') && 
 +        oldObject.metadata.annotations['gateway.networking.k8s.io/channel'] == 'experimental' )"
 +      message: "Installing experimental CRDs on top of standard channel CRDs is prohibited by default. Uninstall ValidatingAdmissionPolicy safe-upgrades.gateway.networking.k8s.io to install experimental CRDs on top of standard channel CRDs."
 +      reason: Invalid
 +    - expression: "object.spec.group != 'gateway.networking.k8s.io' ||
 +        (has(object.metadata.annotations) && object.metadata.annotations.exists(k, k == 'gateway.networking.k8s.io/bundle-version') &&
-+        (
-+          matches(object.metadata.annotations['gateway.networking.k8s.io/bundle-version'], '-(rc)') ||
-+          (
-+            !matches(object.metadata.annotations['gateway.networking.k8s.io/bundle-version'], 'v1.[0-5].\\\\d+') &&
-+            !matches(object.metadata.annotations['gateway.networking.k8s.io/bundle-version'], 'v0')
-+          )
-+        ))" #TODO Kubernetes 1.37: Migrate to kubernetes semver library
-+      message: "Installing CRDs with version before v1.5.0 is prohibited by default. Uninstall ValidatingAdmissionPolicy safe-upgrades.gateway.networking.k8s.io to install older versions."
++        !matches(object.metadata.annotations['gateway.networking.k8s.io/bundle-version'], 'v1.[0-6].\\\\d+') &&
++        !matches(object.metadata.annotations['gateway.networking.k8s.io/bundle-version'], 'v0'))" #TODO Kubernetes 1.37: Migrate to kubernetes semver library
++      message: "Installing CRDs with version before v1.7.0 is prohibited by default. Uninstall ValidatingAdmissionPolicy safe-upgrades.gateway.networking.k8s.io to install older versions."
 +      reason: Invalid
 +---
 +apiVersion: admissionregistration.k8s.io/v1
 +kind: ValidatingAdmissionPolicyBinding
 +metadata:
 +  annotations:
-+    gateway.networking.k8s.io/bundle-version: v1.6.3
++    gateway.networking.k8s.io/bundle-version: v1.7.0
 +    gateway.networking.k8s.io/channel: standard
 +  name: safe-upgrades.gateway.networking.k8s.io
 +spec:
