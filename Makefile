@@ -33,7 +33,8 @@ charts:
 		bash ./scripts/generate-changed-charts "$$CHARTS_BASE_REF"; \
 	else \
 		./bin/charts-build-scripts charts --config configuration.yaml; \
-	fi
+	fi && \
+	bash ./scripts/organize-chart-directories
 
 validate: charts
 	bash ./scripts/validate-charts . "$${LIVE_DIR:-}"

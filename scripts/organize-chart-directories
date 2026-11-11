@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+# Restore the historical charts/<chart>/<chart>/<version> layout.
+set -euo pipefail
+
+shopt -s nullglob
+for metadata in charts/*/*/Chart.yaml; do
+    version_dir=${metadata%/Chart.yaml}
+    chart_dir=${version_dir%/*}
+    version=${version_dir##*/}
+    destination="$chart_dir/${chart_dir##*/}/$version"
+
+    if [[ -e "$destination" ]]; then
+        if ! diff -r "$version_dir" "$destination" >/dev/null; then
+            echo "error: extracted chart differs from existing destination: $destination" >&2
+            exit 1
+        fi
+        rm -rf -- "$version_dir"
+    else
+        mkdir -p "${destination%/*}"
+        mv -- "$version_dir" "$destination"
+    fi
+done

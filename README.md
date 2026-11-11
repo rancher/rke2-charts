@@ -132,6 +132,7 @@ If this `major.minor.patch` (e.g. `0.0.1`) version of the Chart has been release
 `make charts`: Runs the native upstream chart generator. It writes
 chart-name-based archives, extracted charts, and an index into the current
 checkout; use a clean disposable checkout for generated output.
+It maintain compatibility with the historical chart layout of `charts/<chart>/<chart>/<version>`, we move the extracted chart into this structure after generation.
 
 `make validate`: Runs `make charts`, compares output against `main`, and stages
 only new versions into a clean `LIVE_DIR` checkout. Without `LIVE_DIR`, it

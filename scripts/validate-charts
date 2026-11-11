@@ -82,7 +82,7 @@ for archive in "${candidate_archives[@]}"; do
         exit 1
     }
     expected_archive="assets/$chart_name/$chart_name-$chart_version.tgz"
-    expected_chart="charts/$chart_name/$chart_version"
+    expected_chart="charts/$chart_name/$chart_name/$chart_version"
     [[ "$relative_archive" == "$expected_archive" ]] || {
         echo "error: native asset path does not match chart identity: $relative_archive" >&2
         exit 1
