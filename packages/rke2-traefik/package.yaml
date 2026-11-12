@@ -1,4 +1,4 @@
-url: https://traefik.github.io/charts/traefik/traefik-42.3.0.tgz
+url: https://traefik.github.io/charts/traefik/traefik-42.3.2.tgz
 packageVersion: 01
 
 additionalCharts:
