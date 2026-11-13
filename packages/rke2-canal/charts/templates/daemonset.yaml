@@ -43,9 +43,22 @@ spec:
       initContainers:
         # This container installs the CNI binaries
         # and CNI network config file on each node.
+        - image: {{ template "system_default_registry" . }}{{ .Values.calico.cniPlugins.repository }}:{{ .Values.calico.cniPlugins.tag }}
+          imagePullPolicy: IfNotPresent
+          name: cni-plugins
+          resources: {}
+          securityContext:
+            privileged: true
+          volumeMounts:
+          - mountPath: /host/opt/cni/bin
+            name: cni-plugins-stage
         - name: install-cni
           image: {{ template "system_default_registry" . }}{{ .Values.calico.cniImage.repository }}:{{ .Values.calico.cniImage.tag }}
-          command: ["/opt/cni/bin/install"]
+          command:
+          - /usr/bin/calico
+          - component
+          - cni
+          - install
           env:
             # Set the serviceaccount name to use for the Calico CNI plugin.
             # We use canal-node instead of calico-node when using flannel networking.
@@ -63,6 +76,8 @@ spec:
                   name: {{ .Release.Name }}-config
                   key: cni_network_config
             # Set the hostname based on the k8s node name.
+            - name: CNI_NET_DIR
+              value: /etc/cni/net.d
             - name: KUBERNETES_NODE_NAME
               valueFrom:
                 fieldRef:
@@ -81,8 +96,12 @@ spec:
               name: cni-bin-dir
             - mountPath: /host/etc/cni/net.d
               name: cni-net-dir
+            - mountPath: /opt/cni/bin
+              name: cni-plugins-stage
           securityContext:
             privileged: true
+            runAsUser: 0
+            runAsGroup: 0
           {{- if .Values.calico_init.resources }}
           resources: {{- toYaml .Values.calico_init.resources | nindent 12 }}
           {{- end }}
@@ -90,23 +109,59 @@ spec:
         # to communicate with Felix over the Policy Sync API.
         - name: flexvol-driver
           image: {{ template "system_default_registry" . }}{{ .Values.calico.flexvolImage.repository }}:{{ .Values.calico.flexvolImage.tag }}
-          command: ['/usr/local/bin/flexvol.sh', '-s', '/usr/local/bin/flexvol', '-i', 'flexvoldriver']
+          command:
+          - /usr/bin/calico
+          - component
+          - flexvol
+          - install
+          - --target
+          - /host/driver/uds
           volumeMounts:
           - name: flexvol-driver-host
             mountPath: /host/driver
           securityContext:
             privileged: true
+            runAsUser: 0
+            runAsGroup: 0
           {{- if .Values.flexvol.resources }}
           resources: {{- toYaml .Values.flexvol.resources | nindent 12 }}
           {{- end }}
+        - command:
+          - /usr/bin/calico
+          - component
+          - node
+          - init
+          - --best-effort
+          image:  {{ template "system_default_registry" . }}{{ .Values.calico.cniImage.repository }}:{{ .Values.calico.cniImage.tag }}
+          imagePullPolicy: IfNotPresent
+          name: ebpf-bootstrap
+          resources: {}
+          securityContext:
+            capabilities:
+              drop:
+              - ALL
+            privileged: true
+            runAsGroup: 0
+            runAsNonRoot: false
+            runAsUser: 0
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /sys/fs
+            mountPropagation: Bidirectional
+            name: sys-fs
+          - mountPath: /var/run/calico
+            mountPropagation: Bidirectional
+            name: var-run-calico
+          - mountPath: /nodeproc
+            name: nodeproc
+            readOnly: true
 
       containers:
         # Runs canal container on each Kubernetes node.  This
         # container programs network policy and routes on each
         # host.
         - name: calico-node
-          command:
-          - "start_runit"
           image: {{ template "system_default_registry" . }}{{ .Values.calico.nodeImage.repository }}:{{ .Values.calico.nodeImage.tag }}
           env:
             # Use Kubernetes API as the backing datastore.
@@ -197,6 +252,9 @@ spec:
               value: {{ .Values.calico.felixFeatureDetectOverride | quote }}
           securityContext:
             privileged: true
+            runAsGroup: 0
+            runAsNonRoot: false
+            runAsUser: 0
           {{- if .Values.calico.resources }}
           resources: {{- toYaml .Values.calico.resources | nindent 12 }}
           {{- end }}
@@ -204,8 +262,18 @@ spec:
             preStop:
               exec:
                 command:
-                - /usr/bin/calico-node
-                - -shutdown
+                - /usr/bin/calico
+                - component
+                - node
+                - shutdown
+          startupProbe:
+            exec:
+              command:
+              - /usr/bin/calico
+              - component
+              - node
+              - health
+              - --felix-ready
           livenessProbe: {{- toYaml .Values.calico.livenessProbe | nindent 12 }}
           readinessProbe: {{- toYaml .Values.calico.readinessProbe | nindent 12 }}
           volumeMounts:
@@ -320,9 +388,12 @@ spec:
         - name: cni-bin-dir
           hostPath:
             path: /opt/cni/bin
+        - emptyDir: {}
+          name: cni-plugins-stage
         - name: cni-net-dir
           hostPath:
             path: /etc/cni/net.d
+            type: ""
         # Used to access CNI logs.
         - name: cni-log-dir
           hostPath:
@@ -332,6 +403,14 @@ spec:
           hostPath:
             type: DirectoryOrCreate
             path: /var/run/nodeagent
+        - hostPath:
+            path: /sys/fs
+            type: DirectoryOrCreate
+          name: sys-fs
+        - hostPath:
+            path: /proc
+            type: ""
+          name: nodeproc
         # Used to install Flex Volume Driver
         - name: flexvol-driver-host
           hostPath:

@@ -103,6 +103,7 @@ rules:
       - ippools
       - ipreservations
       - ipamblocks
+      - ipamconfigs
       - globalnetworkpolicies
       - globalnetworksets
       - networkpolicies
@@ -121,6 +122,9 @@ rules:
   # Calico must create and update some CRDs on startup.
   - apiGroups: ["crd.projectcalico.org"]
     resources:
+      - blockaffinities
+      - tiers
+      - ipamconfigs
       - caliconodestatuses
       - ippools
       - felixconfigurations
