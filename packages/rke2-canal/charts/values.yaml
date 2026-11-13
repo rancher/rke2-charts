@@ -72,22 +72,25 @@ flannel:
   #   memory: 128Mi
   #   cpu: 500m
 calico:
+  cniPlugins:
+    repository: "rancher/hardened-cni-plugins"
+    tag: "v1.9.1-build20260903"
   # CNI installation image.
   cniImage:
-    repository: rancher/hardened-calico
-    tag: v3.32.2-build20261022
+    repository: rancher/hardened-calico-calico-calico
+    tag: v3.33.0-build20261106
   # Canal node image.
   nodeImage:
-    repository: rancher/hardened-calico
-    tag: v3.32.2-build20261022
+    repository: rancher/hardened-calico-calico
+    tag: v3.33.0-build20261106
   # Flexvol Image.
   flexvolImage:
-    repository: rancher/hardened-calico
-    tag: v3.32.2-build20261022
+    repository: rancher/hardened-calico-calico
+    tag: v3.33.0-build20261106
   # kubecontroller image
   kubeControllerImage:
-    repository: rancher/hardened-calico
-    tag: v3.32.2-build20261022
+    repository: rancher/hardened-calico-calico
+    tag: v3.33.0-build20261106
   # Datastore type for canal. It can be either kuberentes or etcd.
   datastoreType: kubernetes
   # Wait for datastore to initialize.
@@ -149,19 +152,23 @@ calico:
       #   cpu: 250m
       #   memory: 256Mi
   livenessProbe:
-    exec:
-      command:
-        - /usr/bin/calico-node
-        - -felix-live
+    httpGet:
+      host: localhost
+      path: /liveness
+      port: 9099
+      scheme: HTTP
     periodSeconds: 10
     initialDelaySeconds: 10
     failureThreshold: 6
     timeoutSeconds: 10
   readinessProbe:
-    httpGet:
-      path: /readiness
-      port: 9099
-      host: localhost
+    exec:
+      command:
+      - /usr/bin/calico
+      - component
+      - node
+      - health
+      - --felix-ready
     periodSeconds: 10
     timeoutSeconds: 10
 # configuration for the calico-init initContainer

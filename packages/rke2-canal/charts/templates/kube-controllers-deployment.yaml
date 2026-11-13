@@ -37,7 +37,11 @@ spec:
       containers:
         - name: calico-kube-controllers
           image: {{ template "system_default_registry" . }}{{ .Values.calico.kubeControllerImage.repository }}:{{ .Values.calico.kubeControllerImage.tag }}
-          command: ["/usr/bin/kube-controllers"]
+          command:
+          - /usr/bin/calico
+          - component
+          - kube-controllers
+          - --health-port=9440
           env:
             # Choose which controllers to run.
             - name: ENABLED_CONTROLLERS
@@ -47,8 +51,10 @@ spec:
           livenessProbe:
             exec:
               command:
-              - /usr/bin/check-status
-              - -l
+              - /usr/bin/calico
+              - health
+              - --port=9440
+              - --type=liveness
             periodSeconds: 10
             initialDelaySeconds: 10
             failureThreshold: 6
@@ -56,8 +62,10 @@ spec:
           readinessProbe:
             exec:
               command:
-              - /usr/bin/check-status
-              - -r
+              - /usr/bin/calico
+              - health
+              - --port=9440
+              - --type=readiness
             periodSeconds: 10
 ---
 # This manifest creates a Pod Disruption Budget for Controller to allow K8s Cluster Autoscaler to evict
