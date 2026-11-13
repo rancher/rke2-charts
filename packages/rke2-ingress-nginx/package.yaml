@@ -1,2 +1,2 @@
 url: https://github.com/kubernetes/ingress-nginx/releases/download/helm-chart-4.15.1/ingress-nginx-4.15.1.tgz
-packageVersion: 18
+packageVersion: 19
