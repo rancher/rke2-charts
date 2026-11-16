@@ -7,7 +7,7 @@
 -  namespace: {{.Release.Namespace}}
 +  namespace: tigera-operator
    labels:
-     helm.sh/chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+     helm.sh/chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
      {{- include "tigera-operator.labels" (dict "context" .) | nindent 4 }}
 @@ -34,5 +34,5 @@
        serviceAccountName: tigera-operator

@@ -1,6 +1,10 @@
 --- charts-original/Chart.yaml
 +++ charts/Chart.yaml
-@@ -3,9 +3,11 @@
+@@ -1,9 +1,11 @@
++annotations:
++  catalog.cattle.io/namespace: tigera-operator
+ apiVersion: v2
+ appVersion: v3.33.1
  description: Installs the Tigera operator for Calico
  home: https://docs.tigera.io/calico
  icon: https://docs.tigera.io/img/calico-logo.png
@@ -9,7 +13,3 @@
  sources:
  - https://github.com/projectcalico/calico/tree/master/charts/tigera-operator
  - https://github.com/tigera/operator
- - https://github.com/projectcalico/calico
- version: v3.32.2
-+annotations:
-+  catalog.cattle.io/namespace: tigera-operator
