@@ -31,6 +31,6 @@
 +{{- end -}}
 +
 +
- {{/* Warn about Gateway API CRDs no longer shipped with this chart in future versions */}}
+ {{/* Gateway API CRDs are managed separately from this chart. */}}
  {{- if .Values.providers.kubernetesGateway.enabled }}
- {{- printf "\n" -}}
+ {{- $gatewayAPIVersion := include "traefik.gatewayAPIVersion" . }}
