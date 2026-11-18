@@ -1,0 +1,19 @@
+{{- if .Values.podDisruptionBudget.enabled -}}
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: {{ template "traefik.fullname" . }}
+  namespace: {{ template "traefik.namespace" . }}
+  labels:
+    {{- include "traefik.labels" . | nindent 4 }}
+spec:
+  selector:
+    matchLabels:
+      {{- include "traefik.labelselector" . | nindent 6 }}
+  {{- if .Values.podDisruptionBudget.minAvailable }}
+  minAvailable: {{ .Values.podDisruptionBudget.minAvailable }}
+  {{- end }}
+  {{- if .Values.podDisruptionBudget.maxUnavailable }}
+  maxUnavailable: {{ .Values.podDisruptionBudget.maxUnavailable }}
+  {{- end }}
+{{- end -}}
