@@ -7,5 +7,5 @@
 -name: coredns
 +name: rke2-coredns
  sources:
+ - https://github.com/coredns/helm
  - https://github.com/coredns/coredns
- type: application
