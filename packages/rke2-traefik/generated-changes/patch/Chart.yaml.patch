@@ -1,6 +1,6 @@
 --- charts-original/Chart.yaml
 +++ charts/Chart.yaml
-@@ -41,7 +41,7 @@
+@@ -30,7 +30,7 @@
  - email: remi.buisson@traefik.io
    name: darkweaver87
  - name: jnoordsij
