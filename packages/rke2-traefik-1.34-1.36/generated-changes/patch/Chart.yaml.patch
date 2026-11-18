@@ -11,7 +11,7 @@
    traefik.io/proxy-min-version: v3.6.0
  apiVersion: v2
 -appVersion: v3.7.1
-+appVersion: v3.7.17
++appVersion: v3.7.19
  description: A Traefik based Kubernetes ingress controller
  home: https://traefik.io/
  icon: https://raw.githubusercontent.com/traefik/traefik/master/docs/content/assets/img/traefik.logo.png

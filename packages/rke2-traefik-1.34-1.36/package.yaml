@@ -1,5 +1,5 @@
 url: https://traefik.github.io/charts/traefik/traefik-40.1.0.tgz
-packageVersion: 25
+packageVersion: 26
 
 additionalCharts:
   - workingDir: charts-crd
