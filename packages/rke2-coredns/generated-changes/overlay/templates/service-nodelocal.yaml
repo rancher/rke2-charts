@@ -11,11 +11,11 @@ metadata:
     kubernetes.io/name: "KubeDNSUpstream"
 spec:
   ports:
-  - name: udp-53
+  - name: {{ include "coredns.portName" (dict "protocol" "udp" "port" 53) }}
     port: 53
     protocol: UDP
     targetPort: 53
-  - name: tcp-53
+  - name: {{ include "coredns.portName" (dict "protocol" "tcp" "port" 53) }}
     port: 53
     protocol: TCP
     targetPort: 53
