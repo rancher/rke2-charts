@@ -1,0 +1,25 @@
+annotations:
+  artifacthub.io/changes: |
+    - kind: changed
+      description: The chart repository (https://github.com/coredns/helm) is the first entry in sources, so helm push sets it as the OCI chart's org.opencontainers.image.source annotation and Renovate finds the chart's release notes
+apiVersion: v2
+appVersion: 1.14.7
+description: CoreDNS is a DNS server that chains plugins and provides Kubernetes DNS
+  Services
+home: https://coredns.io
+icon: https://coredns.io/images/CoreDNS_Colour_Horizontal.png
+keywords:
+- coredns
+- dns
+- kubedns
+maintainers:
+- name: mrueg
+- name: haad
+- name: hagaibarel
+- name: shubham-cmyk
+name: rke2-coredns
+sources:
+- https://github.com/coredns/helm
+- https://github.com/coredns/coredns
+type: application
+version: 1.50.801
