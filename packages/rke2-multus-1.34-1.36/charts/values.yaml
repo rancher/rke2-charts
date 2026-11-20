@@ -174,7 +174,7 @@ dynamicNetworksController:
   enabled: false
   image:
     repository: rancher/hardened-multus-dynamic-networks-controller
-    tag: v0.3.9-build20261020
+    tag: v0.3.9-build20261120
     pullPolicy: IfNotPresent
   priorityClassName: ""
   sockets:
