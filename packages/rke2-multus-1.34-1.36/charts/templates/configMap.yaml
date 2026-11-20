@@ -15,7 +15,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ .Release.Name }}-{{ .Chart.Version }}-config
+  name: {{ .Release.Name }}-{{ .Chart.Version | replace "+" "-" }}-config
   namespace: {{ .Release.Namespace }}
   labels:
 {{- include "multus.labels" . | indent 4 }}

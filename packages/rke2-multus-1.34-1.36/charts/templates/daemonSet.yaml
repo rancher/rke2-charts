@@ -165,7 +165,7 @@ spec:
         {{- if .Values.manifests.configMap }}
         - name: multus-cfg
           configMap:
-            name: {{ .Release.Name }}-{{ .Chart.Version }}-config
+            name: {{ .Release.Name }}-{{ .Chart.Version | replace "+" "-" }}-config
         {{- end }}
 {{- end }}
 {{- end }}

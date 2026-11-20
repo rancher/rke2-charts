@@ -134,7 +134,7 @@ spec:
             path: /
         - name: multus-daemon-config
           configMap:
-            name: {{ .Release.Name }}-{{ .Chart.Version }}-config
+            name: {{ .Release.Name }}-{{ .Chart.Version | replace "+" "-" }}-config
             items:
             - key: daemon-config.json
               path: daemon-config.json

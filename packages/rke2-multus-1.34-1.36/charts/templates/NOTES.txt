@@ -7,7 +7,7 @@ Cluster Role: {{ .Values.serviceAccount.name }}
 Cluster Role Binding: {{ .Chart.Name }}
 {{- end }}
 {{- if .Values.manifests.configMap }}
-Config Map: {{ .Release.Name }}-{{ .Chart.Version }}-config
+Config Map: {{ .Release.Name }}-{{ .Chart.Version | replace "+" "-" }}-config
 {{- end }}
 {{- if .Values.manifests.customResourceDefinition }}
 Custom Resource Definition: network-attachment-definitions.k8s.cni.cncf.io
