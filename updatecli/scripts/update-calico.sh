@@ -3,8 +3,29 @@ set -eu
 
 source $(dirname $0)/create-issue.sh
 
-ISSUE_TITLE="Updatecli failed for calico ${CALICO_VERSION}" 
+ISSUE_TITLE="Updatecli failed for calico ${CALICO_VERSION}"
 trap report-error EXIT INT
+
+IMAGES_UPDATED=false
+CHART_UPDATED=false
+
+if [ -n "$CALICO_PRIME_VERSION" ]; then
+	current_calico_prime_version=$(sed -n '/^+    imageTagOverrides:/,/^+$/ {
+		s|^+      [^:]*: "*\(v[0-9][0-9.]*-build[0-9][0-9]*\)"*$|\1|p
+	}' packages/rke2-calico/generated-changes/patch/values.yaml.patch | sort -u)
+	if [ "$current_calico_prime_version" != "$CALICO_PRIME_VERSION" ]; then
+		echo "Updating Calico Prime images to $CALICO_PRIME_VERSION"
+		sed -i "/^+    imageTagOverrides:/,/^+$/ s/v[0-9][0-9.]*-build[0-9][0-9]*/$CALICO_PRIME_VERSION/g" \
+			packages/rke2-calico/generated-changes/patch/values.yaml.patch
+		IMAGES_UPDATED=true
+	fi
+fi
+
+if [ "$IMAGES_UPDATED" = true ]; then
+	package_version=$(yq '.packageVersion' packages/rke2-calico/package.yaml)
+	new_version=$(printf "%02d" $((10#$package_version + 1)))
+	sed -i "s/packageVersion:.*/packageVersion: $new_version/g" packages/rke2-calico/package.yaml
+fi
 
 if [ -n "$CALICO_VERSION" ]; then
 	current_calico_version=$(sed -n 's|^url: .*/\(v[0-9.]\+\)/.*|\1|p' packages/rke2-calico/package.yaml)
@@ -24,12 +45,16 @@ if [ -n "$CALICO_VERSION" ]; then
 			.packageVersion = 01" packages/rke2-calico/package.yaml
 		yq -i ".url = \"https://github.com/projectcalico/calico/releases/download/$CALICO_VERSION/crd.projectcalico.org.v1-$CALICO_VERSION.tgz\" |
 			.packageVersion = 01" packages/rke2-calico-crd/package.yaml
-		GOCACHE='/home/runner/.cache/go-build' GOPATH='/home/runner/go' PACKAGE='rke2-calico' make prepare
-		GOCACHE='/home/runner/.cache/go-build' GOPATH='/home/runner/go' PACKAGE='rke2-calico-crd' make prepare
-		find packages/rke2-calico/charts -name '*.orig' -delete
-		find packages/rke2-calico-crd/charts -name '*.orig' -delete
-		GOCACHE='/home/runner/.cache/go-build' GOPATH='/home/runner/go' PACKAGE='rke2-calico' make patch
-		GOCACHE='/home/runner/.cache/go-build' GOPATH='/home/runner/go' PACKAGE='rke2-calico-crd' make patch
-		make clean
+		CHART_UPDATED=true
 	fi
+fi
+
+if [ "$IMAGES_UPDATED" = true ] || [ "$CHART_UPDATED" = true ]; then
+	GOCACHE='/home/runner/.cache/go-build' GOPATH='/home/runner/go' PACKAGE='rke2-calico' make prepare
+	GOCACHE='/home/runner/.cache/go-build' GOPATH='/home/runner/go' PACKAGE='rke2-calico-crd' make prepare
+	find packages/rke2-calico/charts -name '*.orig' -delete
+	find packages/rke2-calico-crd/charts -name '*.orig' -delete
+	GOCACHE='/home/runner/.cache/go-build' GOPATH='/home/runner/go' PACKAGE='rke2-calico' make patch
+	GOCACHE='/home/runner/.cache/go-build' GOPATH='/home/runner/go' PACKAGE='rke2-calico-crd' make patch
+	make clean
 fi
