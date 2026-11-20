@@ -8,7 +8,7 @@ flannel:
   # kube-flannel image
   image:
     repository: rancher/hardened-flannel
-    tag: v0.28.10-build20261119
+    tag: v0.28.11-build20261120
   # The interface used by canal for host <-> host communication.
   # If left blank, then the interface is chosen using the node's
   # default route.
@@ -164,11 +164,11 @@ calico:
   readinessProbe:
     exec:
       command:
-      - /usr/bin/calico
-      - component
-      - node
-      - health
-      - --felix-ready
+        - /usr/bin/calico
+        - component
+        - node
+        - health
+        - --felix-ready
     periodSeconds: 10
     timeoutSeconds: 10
 # configuration for the calico-init initContainer
