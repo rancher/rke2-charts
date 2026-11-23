@@ -31,7 +31,8 @@
    {{- toYaml .Values.service.ipFamilies | nindent 4 }}
    {{- end }}
 -  {{- if .Values.service.ipFamilyPolicy }}
-   ipFamilyPolicy: {{ .Values.service.ipFamilyPolicy }}
+-  ipFamilyPolicy: {{ .Values.service.ipFamilyPolicy }}
++  ipFamilyPolicy: {{ template "ipFamilyPolicy" . }}
 -  {{- end }}
    {{- if .Values.service.trafficDistribution }}
    trafficDistribution: {{ .Values.service.trafficDistribution }}
