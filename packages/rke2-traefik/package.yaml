@@ -1,5 +1,5 @@
-url: https://traefik.github.io/charts/traefik/traefik-42.4.1.tgz
-packageVersion: 02
+url: https://traefik.github.io/charts/traefik/traefik-42.4.2.tgz
+packageVersion: 01
 
 additionalCharts:
   - workingDir: charts-crd
