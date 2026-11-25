@@ -36,7 +36,15 @@
  | providers.kubernetesIngress.ingressEndpoint.hostname | string | `""` | Hostname used for Kubernetes Ingress endpoints |
  | providers.kubernetesIngress.ingressEndpoint.ip | string | `""` | IP used for Kubernetes Ingress endpoints |
  | providers.kubernetesIngress.labelSelector | string | `nil` |  |
-@@ -623,7 +623,7 @@
+@@ -577,6 +577,7 @@
+ | providers.kubernetesIngressNGINX.ipAllowListStrategy.depth | int | `0` | Number of trusted proxy hops to skip when extracting the client IP from the X-Forwarded-For header. 0 disables depth-based extraction. (default: 0) |
+ | providers.kubernetesIngressNGINX.ipAllowListStrategy.excludedIPS | list | `[]` | List of IPs to exclude when scanning the X-Forwarded-For header to find the client IP. |
+ | providers.kubernetesIngressNGINX.ipAllowListStrategy.ipv6Subnet | int | `0` | IPv6 subnet size used to group IPv6 addresses when checking the allow list. 0 disables subnet grouping. |
++| providers.kubernetesIngressNGINX.migrationClass.enabled | bool | `true` | Create the RKE2 ingress-nginx migration IngressClass when the provider is enabled. |
+ | providers.kubernetesIngressNGINX.modsec.enabled | bool | `false` | Enable ModSec engine. Requires Traefik Hub >= v3.20.0-ea.8. |
+ | providers.kubernetesIngressNGINX.modsec.owaspCoreRules | bool | `false` | Enable OWASP Core Rules. |
+ | providers.kubernetesIngressNGINX.modsec.snippet | string | `""` | Custom ModSec rules snippet. |
+@@ -623,7 +624,7 @@
  | service.labels | object | `{}` | Additional service labels (e.g. for filtering Service by custom labels) |
  | service.nameOverride | string | `""` | Override the default Service name. Useful for adopting an existing Service (e.g., during migration from another ingress controller). |
  | service.single | bool | `true` | Single service exposing both TCP and UDP ports. When set to false, it will create two Service, one for TCP and one for UDP. |

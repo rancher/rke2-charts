@@ -53,7 +53,17 @@
      # -- See [upstream documentation](https://doc.traefik.io/traefik/reference/install-configuration/providers/kubernetes/kubernetes-ingress/#opt-providers-kubernetesIngress-labelselector)
      labelSelector: ""
      # -- Array of namespaces to watch. If left empty, Traefik watches all namespaces. . When using `rbac.namespaced`, it will watch helm release namespace and namespaces listed in this array.
-@@ -854,6 +854,8 @@
+@@ -391,6 +391,9 @@
+   kubernetesIngressNGINX:
+     # -- Enable Kubernetes Ingress NGINX provider
+     enabled: false
++    migrationClass:
++      # -- Create the RKE2 ingress-nginx migration IngressClass when the provider is enabled.
++      enabled: true
+     # -- Ingress Class Controller value this controller satisfies
+     controllerClass: "k8s.io/ingress-nginx"
+     # -- Name of the ingress class this controller satisfies
+@@ -854,6 +857,8 @@
          insecureSkipVerify:  # @schema type:[boolean, null]
  
  global:
@@ -62,7 +72,7 @@
    checkNewVersion: true
    # -- Please take time to consider whether or not you wish to share anonymous data with us
    # See https://doc.traefik.io/traefik/contributing/data-collection/
-@@ -926,7 +928,7 @@
+@@ -926,7 +931,7 @@
      ## -- Enable this entrypoint as a default entrypoint. When a service doesn't explicitly set an entrypoint it will only use this entrypoint.
      asDefault:  # @schema type: [boolean, null]; default: null
      port: 8000
@@ -71,7 +81,7 @@
      # containerPort: 8000
      expose:
        default: true
-@@ -984,7 +986,7 @@
+@@ -984,7 +989,7 @@
      ## -- Enable this entrypoint as a default entrypoint. When a service doesn't explicitly set an entrypoint it will only use this entrypoint.
      # asDefault: true
      port: 8443
@@ -80,7 +90,7 @@
      containerPort:  # @schema type:[integer, null]; minimum:0
      expose:
        default: true
-@@ -1112,7 +1114,8 @@
+@@ -1112,7 +1117,8 @@
    # -- Additional entries here will be added to the Service [spec](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.35/#servicespec-v1-core).
    # Cannot contain selector or ports entries.
    spec:
@@ -90,7 +100,7 @@
    # -- Can be used to create multiple Service.
    # See EXAMPLES.md for more details.
    additionalServices: {}
-@@ -1201,7 +1204,8 @@
+@@ -1201,7 +1207,8 @@
  #        topologyKey: kubernetes.io/hostname
  
  # -- nodeSelector is the simplest recommended form of node selection constraint.
