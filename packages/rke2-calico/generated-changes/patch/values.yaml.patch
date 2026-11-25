@@ -92,13 +92,13 @@
 +      image: "rancher/hardened-calico-operator"
 +      version: "v1.44.1-build20261118"
 +    imageTagOverrides:
-+      calico: "v3.33.1-build20261124"
-+      envoy-gateway: "v3.33.1-build20261124"
-+      envoy-proxy: "v3.33.1-build20261124"
-+      envoy-ratelimit: "v3.33.1-build20261124"
-+      node: "v3.33.1-build20261124"
-+      third-party-cni-plugins: "v3.33.1-build20261124"
-+      whisker: "v3.33.1-build20261124"
++      calico: "v3.33.1-build20261125"
++      envoy-gateway: "v3.33.1-build20261125"
++      envoy-proxy: "v3.33.1-build20261125"
++      envoy-ratelimit: "v3.33.1-build20261125"
++      node: "v3.33.1-build20261125"
++      third-party-cni-plugins: "v3.33.1-build20261125"
++      whisker: "v3.33.1-build20261125"
 +
 +
 +# Config required by Windows nodes
