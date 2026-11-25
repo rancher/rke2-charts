@@ -1,0 +1,34 @@
+annotations:
+  artifacthub.io/changes: |
+    - kind: fixed
+      description: "fix(ports): only use hostIP for entrypoint binding with hostNetwork"
+    - kind: fixed
+      description: "fix(labels): keep the chart version out of the pod labels"
+    - kind: added
+      description: "feat(hub): support traefik hub v3.21.13"
+  traefik.io/hub-max-version: v3.21.13
+  traefik.io/hub-min-version: v3.19.3
+  traefik.io/proxy-max-version: v3.7.19
+  traefik.io/proxy-min-version: v3.6.0
+apiVersion: v2
+appVersion: v3.7.19
+description: A Traefik based Kubernetes ingress controller
+home: https://traefik.io/
+icon: https://raw.githubusercontent.com/traefik/traefik/master/docs/content/assets/img/traefik.logo.png
+keywords:
+- traefik
+- ingress
+- networking
+kubeVersion: '>=1.30.0-0'
+maintainers:
+- email: michel.loiseleur@traefik.io
+  name: mloiseleur
+- email: remi.buisson@traefik.io
+  name: darkweaver87
+- name: jnoordsij
+name: rke2-traefik
+sources:
+- https://github.com/traefik/traefik-helm-chart
+- https://github.com/traefik/traefik
+type: application
+version: 42.4.202
