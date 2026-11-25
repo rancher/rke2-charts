@@ -19,3 +19,12 @@
             {{- if .enabled }}
            - "--providers.kubernetesingressnginx"
              {{- if or .watchNamespace (and $.Values.rbac.enabled $.Values.rbac.namespaced) }}
+@@ -609,7 +610,7 @@
+           - "--providers.kubernetesingressnginx.modsec=true"
+               {{- include "traefik.yaml2CommandLineArgs" (dict "path" "providers.kubernetesingressnginx.modsec" "content" (omit .modsec "enabled")) | nindent 10 }}
+             {{- end }}
+-            {{- include "traefik.yaml2CommandLineArgs" (dict "path" "providers.kubernetesingressnginx" "content" (omit . "enabled" "publishService" "watchNamespace" "modsec")) | nindent 10 }}
++            {{- include "traefik.yaml2CommandLineArgs" (dict "path" "providers.kubernetesingressnginx" "content" (omit . "enabled" "publishService" "watchNamespace" "modsec" "migrationClass")) | nindent 10 }}
+            {{- end }}
+           {{- end }}
+           {{- with .Values.providers.knative }}
