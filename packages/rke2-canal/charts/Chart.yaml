@@ -10,4 +10,4 @@ maintainers:
 name: rke2-canal
 sources:
   - https://github.com/rancher/rke2-charts
-version: v3.33.1-build20261124
+version: v3.33.1-build20261125
