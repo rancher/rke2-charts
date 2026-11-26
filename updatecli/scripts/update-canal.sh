@@ -17,6 +17,14 @@ if [ -n "$FLANNEL_VERSION" ]; then
 		bump_package=true
 	fi
 fi
+if [ -n "$CNI_PLUGINS_VERSION" ]; then
+	current_cni_plugins_version=$(yq '.calico.cniPlugins.tag' packages/rke2-canal/charts/values.yaml)
+	if [ "$current_cni_plugins_version" != "$CNI_PLUGINS_VERSION" ]; then
+		echo "Updating cni plugins image to $CNI_PLUGINS_VERSION"
+		yq -i ".calico.cniPlugins.tag = \"$CNI_PLUGINS_VERSION\"" packages/rke2-canal/charts/values.yaml
+		bump_package=true
+	fi
+fi
 if [ -n "$CALICO_VERSION" ]; then
 	current_calico_version=$(yq '.calico.cniImage.tag' packages/rke2-canal/charts/values.yaml)
 	if [ "$current_calico_version" != "$CALICO_VERSION" ]; then
