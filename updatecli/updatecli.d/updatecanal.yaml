@@ -19,6 +19,23 @@ sources:
         # pattern accepts any semver constraint
         pattern: "v[0-9]+.[0-9]+.[0-9]+-build[0-9]+"
 
+  cni_plugins:
+    name: Get CNI plugins version
+    kind: githubrelease
+    spec:
+      owner: rancher
+      repository: image-build-cni-plugins
+      token: '{{ requiredEnv .github.token }}'
+      username: '{{ requiredEnv .github.username }}'
+      typefilter:
+        release: true
+        draft: false
+        prerelease: false
+      versionfilter:
+        kind: regex
+        # pattern accepts any semver constraint
+        pattern: "v[0-9]+.[0-9]+.[0-9]+-build[0-9]+"
+
   calico:
     name: Get calico version
     kind: githubrelease
@@ -47,6 +64,8 @@ targets:
       environments:
         - name: FLANNEL_VERSION
           value: '{{ source "flannel" }}'
+        - name: CNI_PLUGINS_VERSION
+          value: '{{ source "cni_plugins" }}'
         - name: CALICO_VERSION
           value: '{{ source "calico" }}'
         - name: PATH
@@ -67,7 +86,7 @@ scms:
 
 actions:
   default:
-    title: 'Bump flannel version to {{ source "flannel" }} and Calico to {{ source "calico" }} on Canal'
+    title: 'Bump flannel version to {{ source "flannel" }}, cni plugins to {{ source "cni_plugins" }} and Calico to {{ source "calico" }} on Canal'
     kind: github/pullrequest
     spec:
       strategy:
