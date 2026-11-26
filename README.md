@@ -1,3 +1,6 @@
+This repository is used internally to bundle Helm charts in RKE2. It is not
+intended to be used as a standalone Helm chart repository.
+
 ## Source Branch
 
 `main-source` contains package definitions, upstream patches, and maintenance
