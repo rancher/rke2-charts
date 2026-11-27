@@ -1,5 +1,5 @@
 url: local
 workingDir: charts
-packageVersion: 16
+packageVersion: 17
 # whereabouts is only used as a dependency of multus
 doNotRelease: true
