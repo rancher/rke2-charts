@@ -3,6 +3,50 @@ entries:
   rke2-multus:
     - apiVersion: v2
       appVersion: 4.3.2
+      created: "2026-11-27T13:30:33.560725545Z"
+      dependencies:
+        - condition: rke2-whereabouts.enabled
+          name: rke2-whereabouts
+          repository: file://./charts/rke2-whereabouts
+          version: 0.9.4+v1.3436
+      description: Multus Helm chart for Kubernetes
+      digest: b0a76fd4ff363e78bb6cea8ca6c376229d57c0a9e7a3a9ea2f87e5f89401b9c5
+      home: https://github.com/k8snetworkplumbingwg/multus-cni
+      icon: https://raw.githubusercontent.com/k8snetworkplumbingwg/multus-cni/master/doc/images/Multus.png
+      maintainers:
+        - email: charts@rancher.com
+          name: Rancher Labs
+      name: rke2-multus
+      sources:
+        - https://github.com/intel/multus-cni
+      type: application
+      urls:
+        - assets/rke2-multus/rke2-multus-4.3.206+v1.3436.tgz
+      version: 4.3.206+v1.3436
+    - apiVersion: v1
+      appVersion: 4.3.2
+      created: "2026-11-27T13:30:33.561719961Z"
+      dependencies:
+        - condition: rke2-whereabouts.enabled
+          name: rke2-whereabouts
+          repository: file://./charts/rke2-whereabouts
+          version: 0.9.4
+      description: Multus Helm chart for Kubernetes
+      digest: cbc85eceb3dae0fe2a74d477c9922bd40fb0a6d5f07e6ddeb72647b2d79d43ec
+      home: https://github.com/k8snetworkplumbingwg/multus-cni
+      icon: https://raw.githubusercontent.com/k8snetworkplumbingwg/multus-cni/master/doc/images/Multus.png
+      maintainers:
+        - email: charts@rancher.com
+          name: Rancher Labs
+      name: rke2-multus
+      sources:
+        - https://github.com/intel/multus-cni
+      type: application
+      urls:
+        - assets/rke2-multus/rke2-multus-4.3.206.tgz
+      version: 4.3.206
+    - apiVersion: v2
+      appVersion: 4.3.2
       created: "2026-11-27T13:25:12.828854188Z"
       dependencies:
         - condition: rke2-whereabouts.enabled
@@ -3603,6 +3647,15 @@ entries:
         - assets/rke2-multus/rke2-multus-v3.7.1-build2021041601.tgz
       version: v3.7.1-build2021041601
   rke2-multus-crd:
+    - apiVersion: v1
+      created: "2026-11-27T13:30:33.561939171Z"
+      description: Installs the CRDs for rke2-multus
+      digest: 273b444f3704b3bc10e7e7bb6763ec24ada441c12928663cd1188424bf049c93
+      name: rke2-multus-crd
+      type: application
+      urls:
+        - assets/rke2-multus-crd/rke2-multus-crd-4.3.206.tgz
+      version: 4.3.206
     - apiVersion: v1
       created: "2026-11-27T13:25:12.829769372Z"
       description: Installs the CRDs for rke2-multus
