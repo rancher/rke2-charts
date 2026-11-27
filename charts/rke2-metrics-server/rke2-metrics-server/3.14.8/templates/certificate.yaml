@@ -1,0 +1,53 @@
+{{- if eq .Values.tls.type "cert-manager" }}
+{{- if not .Values.tls.certManager.existingIssuer.enabled }}
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: {{ include "metrics-server.fullname" . }}-issuer
+  namespace: {{ include "metrics-server.namespace" . }}
+spec:
+  selfSigned: {}
+{{- end }}
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  {{- with .Values.tls.certManager.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+  {{- with .Values.tls.certManager.labels }}
+  labels:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+  name: {{ include "metrics-server.fullname" . }}
+  namespace: {{ include "metrics-server.namespace" . }}
+spec:
+  commonName: {{ include "metrics-server.fullname" . }}
+  dnsNames:
+  - {{ include "metrics-server.fullname" . }}.{{ include "metrics-server.namespace" . }}
+  - {{ include "metrics-server.fullname" . }}.{{ include "metrics-server.namespace" . }}.svc
+  - {{ include "metrics-server.fullname" . }}.{{ include "metrics-server.namespace" . }}.svc.{{ .Values.tls.clusterDomain }}
+  secretName: {{ include "metrics-server.fullname" . }}
+  usages:
+    - server auth
+    - client auth
+  privateKey:
+    algorithm: RSA
+    size: 2048
+  {{- with .Values.tls.certManager.duration }}
+  duration: {{ . }}
+  {{- end }}
+  {{- with .Values.tls.certManager.renewBefore }}
+  renewBefore: {{ . }}
+  {{- end }}
+  issuerRef:
+    {{- if .Values.tls.certManager.existingIssuer.enabled }}
+    name: {{ .Values.tls.certManager.existingIssuer.name }}
+    kind: {{ .Values.tls.certManager.existingIssuer.kind }}
+    {{- else }}
+    name: {{ include "metrics-server.fullname" . }}-issuer
+    kind: Issuer
+    {{- end }}
+    group: cert-manager.io
+{{- end }}
