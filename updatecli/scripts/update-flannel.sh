@@ -26,7 +26,7 @@ check_upstream_chart() {
 }
 
 export GOCACHE='/home/runner/.cache/go-build' GOPATH='/home/runner/go' PACKAGE='rke2-flannel'
-make prepare
+make prepare >&2
 find $package/charts -name '*.orig' -delete
 
 updated=false
@@ -62,4 +62,4 @@ fi
 if [ "$updated" = true ]; then
 	make patch
 fi
-make clean
+make clean >&2
