@@ -1,5 +1,914 @@
 apiVersion: v1
 entries:
+  rancher-vsphere-cpi:
+    - annotations:
+        catalog.cattle.io/certified: rancher
+        catalog.cattle.io/display-name: vSphere CPI
+        catalog.cattle.io/kube-version: '>= 1.27.0-0 < 1.38.0-0'
+        catalog.cattle.io/namespace: kube-system
+        catalog.cattle.io/os: linux
+        catalog.cattle.io/permits-os: linux,windows
+        catalog.cattle.io/rancher-version: '>= 2.9.0-0'
+        catalog.cattle.io/release-name: vsphere-cpi
+      apiVersion: v1
+      appVersion: 1.37.0
+      created: "2026-11-27T21:34:39.013959286Z"
+      description: vSphere Cloud Provider Interface (CPI)
+      digest: 2471629f0368c1c60172951a9ca7962a3a89584b68d7eba122285107db20501a
+      icon: https://charts.rancher.io/assets/logos/vsphere-cpi.svg
+      keywords:
+        - infrastructure
+      maintainers:
+        - email: jiaqi.luo@suse.com
+          name: Jiaqi Luo
+        - email: brad.davidson@suse.com
+          name: Brad Davidson
+      name: rancher-vsphere-cpi
+      sources:
+        - https://github.com/kubernetes/cloud-provider-vsphere
+      urls:
+        - assets/rancher-vsphere-cpi/rancher-vsphere-cpi-1.16.8.tgz
+      version: 1.16.8
+    - annotations:
+        catalog.cattle.io/certified: rancher
+        catalog.cattle.io/display-name: vSphere CPI
+        catalog.cattle.io/kube-version: '>= 1.27.0-0 < 1.38.0-0'
+        catalog.cattle.io/namespace: kube-system
+        catalog.cattle.io/os: linux
+        catalog.cattle.io/permits-os: linux,windows
+        catalog.cattle.io/rancher-version: '>= 2.9.0-0'
+        catalog.cattle.io/release-name: vsphere-cpi
+      apiVersion: v1
+      appVersion: 1.37.0
+      created: "2026-11-12T22:11:20.063750356Z"
+      description: vSphere Cloud Provider Interface (CPI)
+      digest: 2e21d0f85c7f3914c57feba39bf83d21d0f9bc6387f378102b72e62ee161fb18
+      icon: https://charts.rancher.io/assets/logos/vsphere-cpi.svg
+      keywords:
+        - infrastructure
+      maintainers:
+        - email: jiaqi.luo@suse.com
+          name: Jiaqi Luo
+        - email: brad.davidson@suse.com
+          name: Brad Davidson
+      name: rancher-vsphere-cpi
+      sources:
+        - https://github.com/kubernetes/cloud-provider-vsphere
+      urls:
+        - assets/rancher-vsphere-cpi/rancher-vsphere-cpi-1.16.7.tgz
+      version: 1.16.7
+    - annotations:
+        catalog.cattle.io/certified: rancher
+        catalog.cattle.io/display-name: vSphere CPI
+        catalog.cattle.io/kube-version: '>= 1.27.0-0 < 1.38.0-0'
+        catalog.cattle.io/namespace: kube-system
+        catalog.cattle.io/os: linux
+        catalog.cattle.io/permits-os: linux,windows
+        catalog.cattle.io/rancher-version: '>= 2.9.0-0'
+        catalog.cattle.io/release-name: vsphere-cpi
+      apiVersion: v1
+      appVersion: 1.37.0
+      created: "2026-11-02T19:02:01.368294357Z"
+      description: vSphere Cloud Provider Interface (CPI)
+      digest: cbe26f42d43f23d89fcde20e476309a714513e8dbb9d5dc5b97d74c3e4e7726d
+      icon: https://charts.rancher.io/assets/logos/vsphere-cpi.svg
+      keywords:
+        - infrastructure
+      maintainers:
+        - email: jiaqi.luo@suse.com
+          name: Jiaqi Luo
+        - email: brad.davidson@suse.com
+          name: Brad Davidson
+      name: rancher-vsphere-cpi
+      sources:
+        - https://github.com/kubernetes/cloud-provider-vsphere
+      urls:
+        - assets/rancher-vsphere-cpi/rancher-vsphere-cpi-1.16.600.tgz
+      version: 1.16.600
+    - annotations:
+        catalog.cattle.io/certified: rancher
+        catalog.cattle.io/display-name: vSphere CPI
+        catalog.cattle.io/kube-version: '>= 1.27.0-0 < 1.38.0-0'
+        catalog.cattle.io/namespace: kube-system
+        catalog.cattle.io/os: linux
+        catalog.cattle.io/permits-os: linux,windows
+        catalog.cattle.io/rancher-version: '>= 2.9.0-0'
+        catalog.cattle.io/release-name: vsphere-cpi
+      apiVersion: v1
+      appVersion: 1.37.0
+      created: "2026-10-23T17:26:24.448020455Z"
+      description: vSphere Cloud Provider Interface (CPI)
+      digest: 26c4d923efd1c8a720048151c9e8de218e030c6f6689ec37fe526c7f7adf60ea
+      icon: https://charts.rancher.io/assets/logos/vsphere-cpi.svg
+      keywords:
+        - infrastructure
+      maintainers:
+        - email: jiaqi.luo@suse.com
+          name: Jiaqi Luo
+        - email: brad.davidson@suse.com
+          name: Brad Davidson
+      name: rancher-vsphere-cpi
+      sources:
+        - https://github.com/kubernetes/cloud-provider-vsphere
+      urls:
+        - assets/rancher-vsphere-cpi/rancher-vsphere-cpi-1.16.500.tgz
+      version: 1.16.500
+    - annotations:
+        catalog.cattle.io/certified: rancher
+        catalog.cattle.io/display-name: vSphere CPI
+        catalog.cattle.io/kube-version: '>= 1.27.0-0 < 1.38.0-0'
+        catalog.cattle.io/namespace: kube-system
+        catalog.cattle.io/os: linux
+        catalog.cattle.io/permits-os: linux,windows
+        catalog.cattle.io/rancher-version: '>= 2.9.0-0'
+        catalog.cattle.io/release-name: vsphere-cpi
+      apiVersion: v1
+      appVersion: 1.37.0
+      created: "2026-10-12T19:33:55.269592968Z"
+      description: vSphere Cloud Provider Interface (CPI)
+      digest: add429d77ce0374cbc52f6fdc163ec44cd233572b307f1c2b12e15c9f50fbdd6
+      icon: https://charts.rancher.io/assets/logos/vsphere-cpi.svg
+      keywords:
+        - infrastructure
+      maintainers:
+        - email: jiaqi.luo@suse.com
+          name: Jiaqi Luo
+        - email: brad.davidson@suse.com
+          name: Brad Davidson
+      name: rancher-vsphere-cpi
+      sources:
+        - https://github.com/kubernetes/cloud-provider-vsphere
+      urls:
+        - assets/rancher-vsphere-cpi/rancher-vsphere-cpi-1.16.400.tgz
+      version: 1.16.400
+    - annotations:
+        catalog.cattle.io/certified: rancher
+        catalog.cattle.io/display-name: vSphere CPI
+        catalog.cattle.io/kube-version: '>= 1.27.0-0 < 1.38.0-0'
+        catalog.cattle.io/namespace: kube-system
+        catalog.cattle.io/os: linux
+        catalog.cattle.io/permits-os: linux,windows
+        catalog.cattle.io/rancher-version: '>= 2.9.0-0'
+        catalog.cattle.io/release-name: vsphere-cpi
+      apiVersion: v1
+      appVersion: 1.37.0
+      created: "2026-09-14T17:13:10.17874702Z"
+      description: vSphere Cloud Provider Interface (CPI)
+      digest: be83503071a481a83085fe452303e9bd2c7edaaefce29d99ed33284840ba381a
+      icon: https://charts.rancher.io/assets/logos/vsphere-cpi.svg
+      keywords:
+        - infrastructure
+      maintainers:
+        - email: jiaqi.luo@suse.com
+          name: Jiaqi Luo
+        - email: brad.davidson@suse.com
+          name: Brad Davidson
+      name: rancher-vsphere-cpi
+      sources:
+        - https://github.com/kubernetes/cloud-provider-vsphere
+      urls:
+        - assets/rancher-vsphere-cpi/rancher-vsphere-cpi-1.16.200.tgz
+      version: 1.16.200
+    - annotations:
+        catalog.cattle.io/certified: rancher
+        catalog.cattle.io/display-name: vSphere CPI
+        catalog.cattle.io/kube-version: '>= 1.27.0-0 < 1.38.0-0'
+        catalog.cattle.io/namespace: kube-system
+        catalog.cattle.io/os: linux
+        catalog.cattle.io/permits-os: linux,windows
+        catalog.cattle.io/rancher-version: '>= 2.9.0-0'
+        catalog.cattle.io/release-name: vsphere-cpi
+      apiVersion: v1
+      appVersion: 1.37.0
+      created: "2026-09-09T20:32:58.437464323Z"
+      description: vSphere Cloud Provider Interface (CPI)
+      digest: 33f88fc4df5a2e91f1c30fe6ac99e18e5c1b6667ab00fffcceff88fc6f7874dd
+      icon: https://charts.rancher.io/assets/logos/vsphere-cpi.svg
+      keywords:
+        - infrastructure
+      maintainers:
+        - email: jiaqi.luo@suse.com
+          name: Jiaqi Luo
+        - email: brad.davidson@suse.com
+          name: Brad Davidson
+      name: rancher-vsphere-cpi
+      sources:
+        - https://github.com/kubernetes/cloud-provider-vsphere
+      urls:
+        - assets/rancher-vsphere-cpi/rancher-vsphere-cpi-1.16.100.tgz
+      version: 1.16.100
+    - annotations:
+        catalog.cattle.io/certified: rancher
+        catalog.cattle.io/display-name: vSphere CPI
+        catalog.cattle.io/kube-version: '>= 1.27.0-0 < 1.38.0-0'
+        catalog.cattle.io/namespace: kube-system
+        catalog.cattle.io/os: linux
+        catalog.cattle.io/permits-os: linux,windows
+        catalog.cattle.io/rancher-version: '>= 2.9.0-0'
+        catalog.cattle.io/release-name: vsphere-cpi
+      apiVersion: v1
+      appVersion: 1.37.0
+      created: "2026-09-01T17:47:42.239693215Z"
+      description: vSphere Cloud Provider Interface (CPI)
+      digest: 0d1bc799e9d3e26e4a8584212c12b21668f0388a41565593440688168a33ed9c
+      icon: https://charts.rancher.io/assets/logos/vsphere-cpi.svg
+      keywords:
+        - infrastructure
+      maintainers:
+        - email: jiaqi.luo@suse.com
+          name: Jiaqi Luo
+        - email: brad.davidson@suse.com
+          name: Brad Davidson
+      name: rancher-vsphere-cpi
+      sources:
+        - https://github.com/kubernetes/cloud-provider-vsphere
+      urls:
+        - assets/rancher-vsphere-cpi/rancher-vsphere-cpi-1.16.000.tgz
+      version: 1.16.000
+    - annotations:
+        catalog.cattle.io/certified: rancher
+        catalog.cattle.io/display-name: vSphere CPI
+        catalog.cattle.io/kube-version: '>= 1.27.0-0 < 1.37.0-0'
+        catalog.cattle.io/namespace: kube-system
+        catalog.cattle.io/os: linux
+        catalog.cattle.io/permits-os: linux,windows
+        catalog.cattle.io/rancher-version: '>= 2.9.0-0'
+        catalog.cattle.io/release-name: vsphere-cpi
+      apiVersion: v1
+      appVersion: 1.36.0
+      created: "2026-07-22T23:00:26.756505614Z"
+      description: vSphere Cloud Provider Interface (CPI)
+      digest: d7e2671ddbfaffccb957ebe8bc42c5d54082f298150656f4cbd6428b3cfcc1c3
+      icon: https://charts.rancher.io/assets/logos/vsphere-cpi.svg
+      keywords:
+        - infrastructure
+      maintainers:
+        - email: jiaqi.luo@suse.com
+          name: Jiaqi Luo
+        - email: brad.davidson@suse.com
+          name: Brad Davidson
+      name: rancher-vsphere-cpi
+      sources:
+        - https://github.com/kubernetes/cloud-provider-vsphere
+      urls:
+        - assets/rancher-vsphere-cpi/rancher-vsphere-cpi-1.15.300.tgz
+      version: 1.15.300
+    - annotations:
+        catalog.cattle.io/certified: rancher
+        catalog.cattle.io/display-name: vSphere CPI
+        catalog.cattle.io/kube-version: '>= 1.27.0-0 < 1.37.0-0'
+        catalog.cattle.io/namespace: kube-system
+        catalog.cattle.io/os: linux
+        catalog.cattle.io/permits-os: linux,windows
+        catalog.cattle.io/rancher-version: '>= 2.9.0-0'
+        catalog.cattle.io/release-name: vsphere-cpi
+      apiVersion: v1
+      appVersion: 1.36.0
+      created: "2026-07-10T21:55:34.783974596Z"
+      description: vSphere Cloud Provider Interface (CPI)
+      digest: f6d8e9342e17d81501721cd4eaf36e7df56a703b0c1439d85acedd176531637a
+      icon: https://charts.rancher.io/assets/logos/vsphere-cpi.svg
+      keywords:
+        - infrastructure
+      maintainers:
+        - email: jiaqi.luo@suse.com
+          name: Jiaqi Luo
+        - email: brad.davidson@suse.com
+          name: Brad Davidson
+      name: rancher-vsphere-cpi
+      sources:
+        - https://github.com/kubernetes/cloud-provider-vsphere
+      urls:
+        - assets/rancher-vsphere-cpi/rancher-vsphere-cpi-1.15.200.tgz
+      version: 1.15.200
+    - annotations:
+        catalog.cattle.io/certified: rancher
+        catalog.cattle.io/display-name: vSphere CPI
+        catalog.cattle.io/kube-version: '>= 1.27.0-0 < 1.37.0-0'
+        catalog.cattle.io/namespace: kube-system
+        catalog.cattle.io/os: linux
+        catalog.cattle.io/permits-os: linux,windows
+        catalog.cattle.io/rancher-version: '>= 2.9.0-0'
+        catalog.cattle.io/release-name: vsphere-cpi
+      apiVersion: v1
+      appVersion: 1.36.0
+      created: "2026-07-10T18:13:56.125342201Z"
+      description: vSphere Cloud Provider Interface (CPI)
+      digest: e348c0adbd4e90c94c9817fb4e5cc2ff6c43929f5b4b84c69b9032145aaa01aa
+      icon: https://charts.rancher.io/assets/logos/vsphere-cpi.svg
+      keywords:
+        - infrastructure
+      maintainers:
+        - email: jiaqi.luo@suse.com
+          name: Jiaqi Luo
+        - email: brad.davidson@suse.com
+          name: Brad Davidson
+      name: rancher-vsphere-cpi
+      sources:
+        - https://github.com/kubernetes/cloud-provider-vsphere
+      urls:
+        - assets/rancher-vsphere-cpi/rancher-vsphere-cpi-1.15.100.tgz
+      version: 1.15.100
+    - annotations:
+        catalog.cattle.io/certified: rancher
+        catalog.cattle.io/display-name: vSphere CPI
+        catalog.cattle.io/kube-version: '>= 1.27.0-0 < 1.37.0-0'
+        catalog.cattle.io/namespace: kube-system
+        catalog.cattle.io/os: linux
+        catalog.cattle.io/permits-os: linux,windows
+        catalog.cattle.io/rancher-version: '>= 2.9.0-0'
+        catalog.cattle.io/release-name: vsphere-cpi
+      apiVersion: v1
+      appVersion: 1.36.0
+      created: "2026-07-07T18:37:03.096479086Z"
+      description: vSphere Cloud Provider Interface (CPI)
+      digest: 4ab0e9d1f8124ec6896974958ba37a2bb06f748a8c94191f03156aabcaaddf1d
+      icon: https://charts.rancher.io/assets/logos/vsphere-cpi.svg
+      keywords:
+        - infrastructure
+      maintainers:
+        - email: jiaqi.luo@suse.com
+          name: Jiaqi Luo
+        - email: brad.davidson@suse.com
+          name: Brad Davidson
+      name: rancher-vsphere-cpi
+      sources:
+        - https://github.com/kubernetes/cloud-provider-vsphere
+      urls:
+        - assets/rancher-vsphere-cpi/rancher-vsphere-cpi-1.15.000.tgz
+      version: 1.15.000
+    - annotations:
+        catalog.cattle.io/certified: rancher
+        catalog.cattle.io/display-name: vSphere CPI
+        catalog.cattle.io/kube-version: '>= 1.27.0-0 < 1.37.0-0'
+        catalog.cattle.io/namespace: kube-system
+        catalog.cattle.io/os: linux
+        catalog.cattle.io/permits-os: linux,windows
+        catalog.cattle.io/rancher-version: '>= 2.9.0-0'
+        catalog.cattle.io/release-name: vsphere-cpi
+      apiVersion: v1
+      appVersion: 1.36.0
+      created: "2026-04-29T18:35:51.197621874Z"
+      description: vSphere Cloud Provider Interface (CPI)
+      digest: 9df83785ed25de0a81971656d1880dea41bf649a8e731b6faecae95622101080
+      icon: https://charts.rancher.io/assets/logos/vsphere-cpi.svg
+      keywords:
+        - infrastructure
+      maintainers:
+        - email: jiaqi.luo@suse.com
+          name: Jiaqi Luo
+        - email: brad.davidson@suse.com
+          name: Brad Davidson
+      name: rancher-vsphere-cpi
+      sources:
+        - https://github.com/kubernetes/cloud-provider-vsphere
+      urls:
+        - assets/rancher-vsphere-cpi/rancher-vsphere-cpi-1.14.000.tgz
+      version: 1.14.000
+    - annotations:
+        catalog.cattle.io/certified: rancher
+        catalog.cattle.io/display-name: vSphere CPI
+        catalog.cattle.io/kube-version: '>= 1.27.0-0 < 1.36.0-0'
+        catalog.cattle.io/namespace: kube-system
+        catalog.cattle.io/os: linux
+        catalog.cattle.io/permits-os: linux,windows
+        catalog.cattle.io/rancher-version: '>= 2.9.0-0'
+        catalog.cattle.io/release-name: vsphere-cpi
+      apiVersion: v1
+      appVersion: 1.35.0
+      created: "2025-12-23T15:51:41.227258403Z"
+      description: vSphere Cloud Provider Interface (CPI)
+      digest: a8007d4d1b888988340982e263032b8f8870fe83f375d7faedba6b6a7f0d46b1
+      icon: https://charts.rancher.io/assets/logos/vsphere-cpi.svg
+      keywords:
+        - infrastructure
+      maintainers:
+        - email: jiaqi.luo@suse.com
+          name: Jiaqi Luo
+        - email: brad.davidson@suse.com
+          name: Brad Davidson
+      name: rancher-vsphere-cpi
+      sources:
+        - https://github.com/kubernetes/cloud-provider-vsphere
+      urls:
+        - assets/rancher-vsphere-cpi/rancher-vsphere-cpi-1.13.000.tgz
+      version: 1.13.000
+    - annotations:
+        catalog.cattle.io/certified: rancher
+        catalog.cattle.io/display-name: vSphere CPI
+        catalog.cattle.io/kube-version: '>= 1.27.0-0 < 1.35.0-0'
+        catalog.cattle.io/namespace: kube-system
+        catalog.cattle.io/os: linux
+        catalog.cattle.io/permits-os: linux,windows
+        catalog.cattle.io/rancher-version: '>= 2.9.0-0'
+        catalog.cattle.io/release-name: vsphere-cpi
+      apiVersion: v1
+      appVersion: 1.34.0
+      created: "2025-09-16T16:50:25.339111077Z"
+      description: vSphere Cloud Provider Interface (CPI)
+      digest: 3af2f8da0a9d7c6d6b28cccd9cf4a36b703d5bec545def1110bec4871399af79
+      icon: https://charts.rancher.io/assets/logos/vsphere-cpi.svg
+      keywords:
+        - infrastructure
+      maintainers:
+        - email: jiaqi.luo@suse.com
+          name: Jiaqi Luo
+        - email: brad.davidson@suse.com
+          name: Brad Davidson
+      name: rancher-vsphere-cpi
+      sources:
+        - https://github.com/kubernetes/cloud-provider-vsphere
+      urls:
+        - assets/rancher-vsphere-cpi/rancher-vsphere-cpi-1.12.100.tgz
+      version: 1.12.100
+    - annotations:
+        catalog.cattle.io/certified: rancher
+        catalog.cattle.io/display-name: vSphere CPI
+        catalog.cattle.io/kube-version: '>= 1.27.0-0 < 1.35.0-0'
+        catalog.cattle.io/namespace: kube-system
+        catalog.cattle.io/os: linux
+        catalog.cattle.io/permits-os: linux,windows
+        catalog.cattle.io/rancher-version: '>= 2.9.0-0'
+        catalog.cattle.io/release-name: vsphere-cpi
+      apiVersion: v1
+      appVersion: 1.34.0
+      created: "2025-09-05T18:04:16.062646573Z"
+      description: vSphere Cloud Provider Interface (CPI)
+      digest: c6eb9104b4173abbd3068937bf21322dc628312704b6f23db55e4a81a225b479
+      icon: https://charts.rancher.io/assets/logos/vsphere-cpi.svg
+      keywords:
+        - infrastructure
+      maintainers:
+        - email: jiaqi.luo@suse.com
+          name: Jiaqi Luo
+        - email: brad.davidson@suse.com
+          name: Brad Davidson
+      name: rancher-vsphere-cpi
+      sources:
+        - https://github.com/kubernetes/cloud-provider-vsphere
+      urls:
+        - assets/rancher-vsphere-cpi/rancher-vsphere-cpi-1.12.000.tgz
+      version: 1.12.000
+    - annotations:
+        catalog.cattle.io/certified: rancher
+        catalog.cattle.io/display-name: vSphere CPI
+        catalog.cattle.io/kube-version: '>= 1.27.0-0 < 1.34.0-0'
+        catalog.cattle.io/namespace: kube-system
+        catalog.cattle.io/os: linux
+        catalog.cattle.io/permits-os: linux,windows
+        catalog.cattle.io/rancher-version: '>= 2.9.0-0'
+        catalog.cattle.io/release-name: vsphere-cpi
+      apiVersion: v1
+      appVersion: 1.33.0
+      created: "2025-04-30T21:25:59.832252608Z"
+      description: vSphere Cloud Provider Interface (CPI)
+      digest: 7052813513d539d76841f2416cfea862ebbdc006ba23ad96ad067ea3d399c38a
+      icon: https://charts.rancher.io/assets/logos/vsphere-cpi.svg
+      keywords:
+        - infrastructure
+      maintainers:
+        - email: jiaqi.luo@suse.com
+          name: Jiaqi Luo
+        - email: brad.davidson@suse.com
+          name: Brad Davidson
+      name: rancher-vsphere-cpi
+      sources:
+        - https://github.com/kubernetes/cloud-provider-vsphere
+      urls:
+        - assets/rancher-vsphere-cpi/rancher-vsphere-cpi-1.11.000.tgz
+      version: 1.11.000
+    - annotations:
+        catalog.cattle.io/certified: rancher
+        catalog.cattle.io/display-name: vSphere CPI
+        catalog.cattle.io/kube-version: '>= 1.27.0-0 < 1.33.0-0'
+        catalog.cattle.io/namespace: kube-system
+        catalog.cattle.io/os: linux
+        catalog.cattle.io/permits-os: linux,windows
+        catalog.cattle.io/rancher-version: '>= 2.9.0-0'
+        catalog.cattle.io/release-name: vsphere-cpi
+      apiVersion: v1
+      appVersion: 1.32.1
+      created: "2024-12-21T01:46:08.385201485Z"
+      description: vSphere Cloud Provider Interface (CPI)
+      digest: 42d7b3b21101777c98708471a9caf6665b6127c962cea40d8c82ac0fa545853d
+      icon: https://charts.rancher.io/assets/logos/vsphere-cpi.svg
+      keywords:
+        - infrastructure
+      maintainers:
+        - email: jiaqi.luo@suse.com
+          name: Jiaqi Luo
+        - email: brad.davidson@suse.com
+          name: Brad Davidson
+      name: rancher-vsphere-cpi
+      sources:
+        - https://github.com/kubernetes/cloud-provider-vsphere
+      urls:
+        - assets/rancher-vsphere-cpi/rancher-vsphere-cpi-1.10.000.tgz
+      version: 1.10.000
+    - annotations:
+        catalog.cattle.io/certified: rancher
+        catalog.cattle.io/display-name: vSphere CPI
+        catalog.cattle.io/kube-version: '>= 1.27.0-0 < 1.32.0-0'
+        catalog.cattle.io/namespace: kube-system
+        catalog.cattle.io/os: linux
+        catalog.cattle.io/permits-os: linux,windows
+        catalog.cattle.io/rancher-version: '>= 2.9.0-0'
+        catalog.cattle.io/release-name: vsphere-cpi
+      apiVersion: v1
+      appVersion: 1.31.0
+      created: "2024-09-20T21:25:44.062868759Z"
+      description: vSphere Cloud Provider Interface (CPI)
+      digest: 6c385e23eed9cabea67c0301d3b2a8fe610ce02f56ee9c26b15c39a4a49e2a0e
+      icon: https://charts.rancher.io/assets/logos/vsphere-cpi.svg
+      keywords:
+        - infrastructure
+      maintainers:
+        - email: jiaqi.luo@suse.com
+          name: Jiaqi Luo
+        - email: brad.davidson@suse.com
+          name: Brad Davidson
+      name: rancher-vsphere-cpi
+      sources:
+        - https://github.com/kubernetes/cloud-provider-vsphere
+      urls:
+        - assets/rancher-vsphere-cpi/rancher-vsphere-cpi-1.9.100.tgz
+      version: 1.9.100
+    - annotations:
+        catalog.cattle.io/certified: rancher
+        catalog.cattle.io/display-name: vSphere CPI
+        catalog.cattle.io/kube-version: '>= 1.27.0-0 < 1.32.0-0'
+        catalog.cattle.io/namespace: kube-system
+        catalog.cattle.io/os: linux
+        catalog.cattle.io/permits-os: linux,windows
+        catalog.cattle.io/rancher-version: '>= 2.9.0-0'
+        catalog.cattle.io/release-name: vsphere-cpi
+      apiVersion: v1
+      appVersion: 1.31.0
+      created: "2024-08-28T22:47:31.676681596Z"
+      description: vSphere Cloud Provider Interface (CPI)
+      digest: bdad9648a852120c0eccbf71aca4cf629304b6641ee92607075b4be1829337b6
+      icon: https://charts.rancher.io/assets/logos/vsphere-cpi.svg
+      keywords:
+        - infrastructure
+      maintainers:
+        - email: jiaqi.luo@suse.com
+          name: Jiaqi Luo
+        - email: brad.davidson@suse.com
+          name: Brad Davidson
+      name: rancher-vsphere-cpi
+      sources:
+        - https://github.com/kubernetes/cloud-provider-vsphere
+      urls:
+        - assets/rancher-vsphere-cpi/rancher-vsphere-cpi-1.9.000.tgz
+      version: 1.9.000
+    - annotations:
+        catalog.cattle.io/certified: rancher
+        catalog.cattle.io/display-name: vSphere CPI
+        catalog.cattle.io/kube-version: '>= 1.18.0-0 < 1.31.0-0'
+        catalog.cattle.io/namespace: kube-system
+        catalog.cattle.io/os: linux
+        catalog.cattle.io/permits-os: linux,windows
+        catalog.cattle.io/rancher-version: '>= 2.9.0-0'
+        catalog.cattle.io/release-name: vsphere-cpi
+      apiVersion: v1
+      appVersion: 1.30.1
+      created: "2024-07-11T17:11:50.174678188Z"
+      description: vSphere Cloud Provider Interface (CPI)
+      digest: 9cd8f0f67c243df5b421c8b81c800ea06f491bb261829b0dfac6d37f8aa6209f
+      icon: https://charts.rancher.io/assets/logos/vsphere-cpi.svg
+      keywords:
+        - infrastructure
+      maintainers:
+        - email: jiaqi.luo@suse.com
+          name: Jiaqi Luo
+        - email: brad.davidson@suse.com
+          name: Brad Davidson
+      name: rancher-vsphere-cpi
+      sources:
+        - https://github.com/kubernetes/cloud-provider-vsphere
+      urls:
+        - assets/rancher-vsphere-cpi/rancher-vsphere-cpi-1.8.000.tgz
+      version: 1.8.000
+    - annotations:
+        catalog.cattle.io/certified: rancher
+        catalog.cattle.io/display-name: vSphere CPI
+        catalog.cattle.io/kube-version: '>= 1.18.0-0 < 1.29.0-0'
+        catalog.cattle.io/namespace: kube-system
+        catalog.cattle.io/os: linux
+        catalog.cattle.io/permits-os: linux,windows
+        catalog.cattle.io/rancher-version: '>= 2.8.0-0'
+        catalog.cattle.io/release-name: vsphere-cpi
+      apiVersion: v1
+      appVersion: 1.28.0
+      created: "2024-03-05T21:16:52.558643733Z"
+      description: vSphere Cloud Provider Interface (CPI)
+      digest: 82af48126cdae86a551c11eb9519e9871f8697a3cdbdb8b4ead2a4d336c8a611
+      icon: https://charts.rancher.io/assets/logos/vsphere-cpi.svg
+      keywords:
+        - infrastructure
+      maintainers:
+        - email: jiaqi.luo@suse.com
+          name: Jiaqi Luo
+        - email: brad.davidson@suse.com
+          name: Brad Davidson
+      name: rancher-vsphere-cpi
+      sources:
+        - https://github.com/kubernetes/cloud-provider-vsphere
+      urls:
+        - assets/rancher-vsphere-cpi/rancher-vsphere-cpi-1.7.001.tgz
+      version: 1.7.001
+    - annotations:
+        catalog.cattle.io/certified: rancher
+        catalog.cattle.io/display-name: vSphere CPI
+        catalog.cattle.io/kube-version: '>= 1.18.0-0 < 1.29.0-0'
+        catalog.cattle.io/namespace: kube-system
+        catalog.cattle.io/os: linux
+        catalog.cattle.io/permits-os: linux,windows
+        catalog.cattle.io/rancher-version: '>= 2.8.0-0'
+        catalog.cattle.io/release-name: vsphere-cpi
+      apiVersion: v1
+      appVersion: 1.28.0
+      created: "2024-03-05T00:18:40.55573731Z"
+      description: vSphere Cloud Provider Interface (CPI)
+      digest: a5817d6bf16d731c9de8a3b0891ac91b30aaa1b74bb937c11ac73e01139e3c56
+      icon: https://charts.rancher.io/assets/logos/vsphere-cpi.svg
+      keywords:
+        - infrastructure
+      maintainers:
+        - email: jiaqi.luo@suse.com
+          name: Jiaqi Luo
+        - email: brad.davidson@suse.com
+          name: Brad Davidson
+      name: rancher-vsphere-cpi
+      sources:
+        - https://github.com/kubernetes/cloud-provider-vsphere
+      urls:
+        - assets/rancher-vsphere-cpi/rancher-vsphere-cpi-1.7.000.tgz
+      version: 1.7.000
+    - annotations:
+        catalog.cattle.io/certified: rancher
+        catalog.cattle.io/display-name: vSphere CPI
+        catalog.cattle.io/kube-version: '>= 1.18.0-0 < 1.28.0-0'
+        catalog.cattle.io/namespace: kube-system
+        catalog.cattle.io/os: linux
+        catalog.cattle.io/permits-os: linux,windows
+        catalog.cattle.io/rancher-version: '>= 2.6.0-0'
+        catalog.cattle.io/release-name: vsphere-cpi
+      apiVersion: v1
+      appVersion: 1.26.1
+      created: "2023-05-22T19:44:34.808999651Z"
+      description: vSphere Cloud Provider Interface (CPI)
+      digest: dc9e143719143a97828d4b6a753162d562c3394c9c3061bb6ddb9f83880917cc
+      icon: https://charts.rancher.io/assets/logos/vsphere-cpi.svg
+      keywords:
+        - infrastructure
+      maintainers:
+        - email: jiaqi.luo@suse.com
+          name: Jiaqi Luo
+        - email: anna.blendermann@suse.com
+          name: Andy Blendermann
+        - email: brad.davidson@suse.com
+          name: Brad Davidson
+      name: rancher-vsphere-cpi
+      sources:
+        - https://github.com/kubernetes/cloud-provider-vsphere
+      urls:
+        - assets/rancher-vsphere-cpi/rancher-vsphere-cpi-1.5.100.tgz
+      version: 1.5.100
+    - annotations:
+        catalog.cattle.io/certified: rancher
+        catalog.cattle.io/display-name: vSphere CPI
+        catalog.cattle.io/kube-version: '>= 1.18.0-0 < 1.26.0-0'
+        catalog.cattle.io/namespace: kube-system
+        catalog.cattle.io/os: linux
+        catalog.cattle.io/permits-os: linux,windows
+        catalog.cattle.io/rancher-version: '>= 2.6.0-0'
+        catalog.cattle.io/release-name: vsphere-cpi
+      apiVersion: v1
+      appVersion: 1.4.1
+      created: "2023-04-06T23:24:02.315174486Z"
+      description: vSphere Cloud Provider Interface (CPI)
+      digest: cc8ead539c5f3c6dc7b15410b041277543e7eedb33f03527f1e67d706ef9ecab
+      icon: https://charts.rancher.io/assets/logos/vsphere-cpi.svg
+      keywords:
+        - infrastructure
+      maintainers:
+        - email: jiaqi.luo@suse.com
+          name: Rancher
+      name: rancher-vsphere-cpi
+      sources:
+        - https://github.com/kubernetes/cloud-provider-vsphere
+      urls:
+        - assets/rancher-vsphere-cpi/rancher-vsphere-cpi-1.4.200.tgz
+      version: 1.4.200
+    - annotations:
+        catalog.cattle.io/certified: rancher
+        catalog.cattle.io/display-name: vSphere CPI
+        catalog.cattle.io/kube-version: '>= 1.18.0-0 < 1.26.0-0'
+        catalog.cattle.io/namespace: kube-system
+        catalog.cattle.io/os: linux
+        catalog.cattle.io/permits-os: linux,windows
+        catalog.cattle.io/rancher-version: '>= 2.6.0-0'
+        catalog.cattle.io/release-name: vsphere-cpi
+      apiVersion: v1
+      appVersion: 1.4.1
+      created: "2023-01-10T22:53:59.826184787Z"
+      description: vSphere Cloud Provider Interface (CPI)
+      digest: 9ead1e9978977aceabb0394a2033638b9abd373a5b49fa4b23b57dbdbd513d26
+      icon: https://charts.rancher.io/assets/logos/vsphere-cpi.svg
+      keywords:
+        - infrastructure
+      maintainers:
+        - email: jiaqi.luo@suse.com
+          name: Rancher
+      name: rancher-vsphere-cpi
+      sources:
+        - https://github.com/kubernetes/cloud-provider-vsphere
+      urls:
+        - assets/rancher-vsphere-cpi/rancher-vsphere-cpi-1.4.101.tgz
+      version: 1.4.101
+    - annotations:
+        catalog.cattle.io/certified: rancher
+        catalog.cattle.io/display-name: vSphere CPI
+        catalog.cattle.io/kube-version: '>= 1.18.0-0 < 1.26.0-0'
+        catalog.cattle.io/namespace: kube-system
+        catalog.cattle.io/os: linux
+        catalog.cattle.io/permits-os: linux,windows
+        catalog.cattle.io/rancher-version: '>= 2.6.0-0'
+        catalog.cattle.io/release-name: vsphere-cpi
+      apiVersion: v1
+      appVersion: 1.4.1
+      created: "2022-11-08T23:23:35.214364877Z"
+      description: vSphere Cloud Provider Interface (CPI)
+      digest: d25c00bc6a6c14b5580b55b33059c2803c744f302b4ef99e5af286e8a4cd3904
+      icon: https://charts.rancher.io/assets/logos/vsphere-cpi.svg
+      keywords:
+        - infrastructure
+      maintainers:
+        - email: jiaqi.luo@suse.com
+          name: Rancher
+      name: rancher-vsphere-cpi
+      sources:
+        - https://github.com/kubernetes/cloud-provider-vsphere
+      urls:
+        - assets/rancher-vsphere-cpi/rancher-vsphere-cpi-1.4.100.tgz
+      version: 1.4.100
+    - annotations:
+        catalog.cattle.io/certified: rancher
+        catalog.cattle.io/display-name: vSphere CPI
+        catalog.cattle.io/kube-version: '>= 1.18.0-0 < 1.26.0-0'
+        catalog.cattle.io/namespace: kube-system
+        catalog.cattle.io/os: linux
+        catalog.cattle.io/permits-os: linux,windows
+        catalog.cattle.io/rancher-version: '>= 2.6.0-0 < 2.7.0-0'
+        catalog.cattle.io/release-name: vsphere-cpi
+      apiVersion: v1
+      appVersion: 1.2.4
+      created: "2022-09-29T22:05:40.247277996Z"
+      description: vSphere Cloud Provider Interface (CPI)
+      digest: 4f0c13b135ac91ef6cedf70b0bf6fad818129ee78925fe325b9afc3e290fcd24
+      icon: https://charts.rancher.io/assets/logos/vsphere-cpi.svg
+      keywords:
+        - infrastructure
+      maintainers:
+        - email: jamie.phillips@suse.com
+          name: Rancher
+      name: rancher-vsphere-cpi
+      sources:
+        - https://github.com/kubernetes/cloud-provider-vsphere
+      urls:
+        - assets/rancher-vsphere-cpi/rancher-vsphere-cpi-1.4.001.tgz
+      version: 1.4.001
+    - annotations:
+        catalog.cattle.io/certified: rancher
+        catalog.cattle.io/display-name: vSphere CPI
+        catalog.cattle.io/kube-version: '>= 1.18.0-0 < 1.26.0-0'
+        catalog.cattle.io/namespace: kube-system
+        catalog.cattle.io/os: linux
+        catalog.cattle.io/permits-os: linux,windows
+        catalog.cattle.io/rancher-version: '>= 2.6.0-0'
+        catalog.cattle.io/release-name: vsphere-cpi
+      apiVersion: v1
+      appVersion: 1.2.4
+      created: "2022-11-08T21:55:15.928166716Z"
+      description: vSphere Cloud Provider Interface (CPI)
+      digest: 500bc20798ced2ee7244467ec9343248b3c0a8b8dec0e33561cdc2766171d859
+      icon: https://charts.rancher.io/assets/logos/vsphere-cpi.svg
+      keywords:
+        - infrastructure
+      maintainers:
+        - email: jiaqi.luo@suse.com
+          name: Rancher
+      name: rancher-vsphere-cpi
+      sources:
+        - https://github.com/kubernetes/cloud-provider-vsphere
+      urls:
+        - assets/rancher-vsphere-cpi/rancher-vsphere-cpi-1.4.000.tgz
+      version: 1.4.000
+    - annotations:
+        catalog.cattle.io/certified: rancher
+        catalog.cattle.io/display-name: vSphere CPI
+        catalog.cattle.io/kube-version: '>= 1.18.0-0 < 1.25.0-0'
+        catalog.cattle.io/namespace: kube-system
+        catalog.cattle.io/os: linux
+        catalog.cattle.io/permits-os: linux,windows
+        catalog.cattle.io/rancher-version: '>= 2.6.0-0 <= 2.6.100-0'
+        catalog.cattle.io/release-name: vsphere-cpi
+      apiVersion: v1
+      appVersion: 1.2.2
+      created: "2022-05-06T16:01:56.514781338Z"
+      description: vSphere Cloud Provider Interface (CPI)
+      digest: be8f9686c19bbc27f1e0b3d484dd965abff8af1c72da5ab38c536bcc548dd64e
+      icon: https://charts.rancher.io/assets/logos/vsphere-cpi.svg
+      keywords:
+        - infrastructure
+      maintainers:
+        - email: jamie.phillips@suse.com
+          name: Rancher
+      name: rancher-vsphere-cpi
+      sources:
+        - https://github.com/kubernetes/cloud-provider-vsphere
+      urls:
+        - assets/rancher-vsphere-cpi/rancher-vsphere-cpi-1.2.201.tgz
+      version: 1.2.201
+    - annotations:
+        catalog.cattle.io/certified: rancher
+        catalog.cattle.io/display-name: vSphere CPI
+        catalog.cattle.io/kube-version: '>= 1.18.0-0 < 1.24.0-0'
+        catalog.cattle.io/namespace: kube-system
+        catalog.cattle.io/os: linux
+        catalog.cattle.io/permits-os: linux,windows
+        catalog.cattle.io/rancher-version: '>= 2.6.0-0 <= 2.6.100-0'
+        catalog.cattle.io/release-name: vsphere-cpi
+      apiVersion: v1
+      appVersion: 1.2.1
+      created: "2022-04-04T14:23:17.022122467Z"
+      description: vSphere Cloud Provider Interface (CPI)
+      digest: f97f8ff30afd77d60cb1042ef03bcac22d48f371bddcc90ed8c0a6dd5ac9d32e
+      icon: https://charts.rancher.io/assets/logos/vsphere-cpi.svg
+      keywords:
+        - infrastructure
+      maintainers:
+        - email: jamie.phillips@suse.com
+          name: Rancher
+      name: rancher-vsphere-cpi
+      sources:
+        - https://github.com/kubernetes/cloud-provider-vsphere
+      urls:
+        - assets/rancher-vsphere-cpi/rancher-vsphere-cpi-1.2.101.tgz
+      version: 1.2.101
+    - annotations:
+        catalog.cattle.io/certified: rancher
+        catalog.cattle.io/display-name: vSphere CPI
+        catalog.cattle.io/kube-version: '>= 1.18.0-0 < 1.23.0-0'
+        catalog.cattle.io/namespace: kube-system
+        catalog.cattle.io/os: linux
+        catalog.cattle.io/permits-os: linux,windows
+        catalog.cattle.io/rancher-version: '>= 2.6.0-0 <= 2.6.100-0'
+        catalog.cattle.io/release-name: vsphere-cpi
+      apiVersion: v1
+      appVersion: 1.1.0
+      created: "2022-03-21T22:25:22.808173826Z"
+      description: vSphere Cloud Provider Interface (CPI)
+      digest: a0a04742e0d37c7668fa8a6d0243edb24eae458b7ef0cb0edd943d251b6b95bc
+      icon: https://charts.rancher.io/assets/logos/vsphere-cpi.svg
+      keywords:
+        - infrastructure
+      maintainers:
+        - email: caleb@rancher.com
+          name: Rancher
+      name: rancher-vsphere-cpi
+      sources:
+        - https://github.com/kubernetes/cloud-provider-vsphere
+      urls:
+        - assets/rancher-vsphere-cpi/rancher-vsphere-cpi-1.1.002.tgz
+      version: 1.1.002
+    - annotations:
+        catalog.cattle.io/certified: rancher
+        catalog.cattle.io/display-name: vSphere CPI
+        catalog.cattle.io/kube-version: '>= 1.18.0-0 < 1.23.0-0'
+        catalog.cattle.io/namespace: kube-system
+        catalog.cattle.io/os: linux
+        catalog.cattle.io/permits-os: linux,windows
+        catalog.cattle.io/rancher-version: '>= 2.6.0-0 <= 2.6.100-0'
+        catalog.cattle.io/release-name: vsphere-cpi
+      apiVersion: v1
+      appVersion: 1.1.0
+      created: "2022-03-05T00:37:27.410809336Z"
+      description: vSphere Cloud Provider Interface (CPI)
+      digest: 6b7516309e763b6cecd94c12a193782aebc7f93fcae08f6baf642b60a71756e4
+      icon: https://charts.rancher.io/assets/logos/vsphere-cpi.svg
+      keywords:
+        - infrastructure
+      maintainers:
+        - email: caleb@rancher.com
+          name: Rancher
+      name: rancher-vsphere-cpi
+      sources:
+        - https://github.com/kubernetes/cloud-provider-vsphere
+      urls:
+        - assets/rancher-vsphere-cpi/rancher-vsphere-cpi-1.1.000.tgz
+      version: 1.1.000
   rke2-metrics-server:
     - annotations:
         artifacthub.io/changes: |
@@ -29348,887 +30257,6 @@ entries:
       urls:
         - assets/rke2-security-responder/rke2-security-responder-0.1.301.tgz
       version: 0.1.301
-  rancher-vsphere-cpi:
-    - annotations:
-        catalog.cattle.io/certified: rancher
-        catalog.cattle.io/display-name: vSphere CPI
-        catalog.cattle.io/kube-version: '>= 1.27.0-0 < 1.38.0-0'
-        catalog.cattle.io/namespace: kube-system
-        catalog.cattle.io/os: linux
-        catalog.cattle.io/permits-os: linux,windows
-        catalog.cattle.io/rancher-version: '>= 2.9.0-0'
-        catalog.cattle.io/release-name: vsphere-cpi
-      apiVersion: v1
-      appVersion: 1.37.0
-      created: "2026-11-12T22:11:20.063750356Z"
-      description: vSphere Cloud Provider Interface (CPI)
-      digest: 2e21d0f85c7f3914c57feba39bf83d21d0f9bc6387f378102b72e62ee161fb18
-      icon: https://charts.rancher.io/assets/logos/vsphere-cpi.svg
-      keywords:
-        - infrastructure
-      maintainers:
-        - email: jiaqi.luo@suse.com
-          name: Jiaqi Luo
-        - email: brad.davidson@suse.com
-          name: Brad Davidson
-      name: rancher-vsphere-cpi
-      sources:
-        - https://github.com/kubernetes/cloud-provider-vsphere
-      urls:
-        - assets/rancher-vsphere-cpi/rancher-vsphere-cpi-1.16.7.tgz
-      version: 1.16.7
-    - annotations:
-        catalog.cattle.io/certified: rancher
-        catalog.cattle.io/display-name: vSphere CPI
-        catalog.cattle.io/kube-version: '>= 1.27.0-0 < 1.38.0-0'
-        catalog.cattle.io/namespace: kube-system
-        catalog.cattle.io/os: linux
-        catalog.cattle.io/permits-os: linux,windows
-        catalog.cattle.io/rancher-version: '>= 2.9.0-0'
-        catalog.cattle.io/release-name: vsphere-cpi
-      apiVersion: v1
-      appVersion: 1.37.0
-      created: "2026-11-02T19:02:01.368294357Z"
-      description: vSphere Cloud Provider Interface (CPI)
-      digest: cbe26f42d43f23d89fcde20e476309a714513e8dbb9d5dc5b97d74c3e4e7726d
-      icon: https://charts.rancher.io/assets/logos/vsphere-cpi.svg
-      keywords:
-        - infrastructure
-      maintainers:
-        - email: jiaqi.luo@suse.com
-          name: Jiaqi Luo
-        - email: brad.davidson@suse.com
-          name: Brad Davidson
-      name: rancher-vsphere-cpi
-      sources:
-        - https://github.com/kubernetes/cloud-provider-vsphere
-      urls:
-        - assets/rancher-vsphere-cpi/rancher-vsphere-cpi-1.16.600.tgz
-      version: 1.16.600
-    - annotations:
-        catalog.cattle.io/certified: rancher
-        catalog.cattle.io/display-name: vSphere CPI
-        catalog.cattle.io/kube-version: '>= 1.27.0-0 < 1.38.0-0'
-        catalog.cattle.io/namespace: kube-system
-        catalog.cattle.io/os: linux
-        catalog.cattle.io/permits-os: linux,windows
-        catalog.cattle.io/rancher-version: '>= 2.9.0-0'
-        catalog.cattle.io/release-name: vsphere-cpi
-      apiVersion: v1
-      appVersion: 1.37.0
-      created: "2026-10-23T17:26:24.448020455Z"
-      description: vSphere Cloud Provider Interface (CPI)
-      digest: 26c4d923efd1c8a720048151c9e8de218e030c6f6689ec37fe526c7f7adf60ea
-      icon: https://charts.rancher.io/assets/logos/vsphere-cpi.svg
-      keywords:
-        - infrastructure
-      maintainers:
-        - email: jiaqi.luo@suse.com
-          name: Jiaqi Luo
-        - email: brad.davidson@suse.com
-          name: Brad Davidson
-      name: rancher-vsphere-cpi
-      sources:
-        - https://github.com/kubernetes/cloud-provider-vsphere
-      urls:
-        - assets/rancher-vsphere-cpi/rancher-vsphere-cpi-1.16.500.tgz
-      version: 1.16.500
-    - annotations:
-        catalog.cattle.io/certified: rancher
-        catalog.cattle.io/display-name: vSphere CPI
-        catalog.cattle.io/kube-version: '>= 1.27.0-0 < 1.38.0-0'
-        catalog.cattle.io/namespace: kube-system
-        catalog.cattle.io/os: linux
-        catalog.cattle.io/permits-os: linux,windows
-        catalog.cattle.io/rancher-version: '>= 2.9.0-0'
-        catalog.cattle.io/release-name: vsphere-cpi
-      apiVersion: v1
-      appVersion: 1.37.0
-      created: "2026-10-12T19:33:55.269592968Z"
-      description: vSphere Cloud Provider Interface (CPI)
-      digest: add429d77ce0374cbc52f6fdc163ec44cd233572b307f1c2b12e15c9f50fbdd6
-      icon: https://charts.rancher.io/assets/logos/vsphere-cpi.svg
-      keywords:
-        - infrastructure
-      maintainers:
-        - email: jiaqi.luo@suse.com
-          name: Jiaqi Luo
-        - email: brad.davidson@suse.com
-          name: Brad Davidson
-      name: rancher-vsphere-cpi
-      sources:
-        - https://github.com/kubernetes/cloud-provider-vsphere
-      urls:
-        - assets/rancher-vsphere-cpi/rancher-vsphere-cpi-1.16.400.tgz
-      version: 1.16.400
-    - annotations:
-        catalog.cattle.io/certified: rancher
-        catalog.cattle.io/display-name: vSphere CPI
-        catalog.cattle.io/kube-version: '>= 1.27.0-0 < 1.38.0-0'
-        catalog.cattle.io/namespace: kube-system
-        catalog.cattle.io/os: linux
-        catalog.cattle.io/permits-os: linux,windows
-        catalog.cattle.io/rancher-version: '>= 2.9.0-0'
-        catalog.cattle.io/release-name: vsphere-cpi
-      apiVersion: v1
-      appVersion: 1.37.0
-      created: "2026-09-14T17:13:10.17874702Z"
-      description: vSphere Cloud Provider Interface (CPI)
-      digest: be83503071a481a83085fe452303e9bd2c7edaaefce29d99ed33284840ba381a
-      icon: https://charts.rancher.io/assets/logos/vsphere-cpi.svg
-      keywords:
-        - infrastructure
-      maintainers:
-        - email: jiaqi.luo@suse.com
-          name: Jiaqi Luo
-        - email: brad.davidson@suse.com
-          name: Brad Davidson
-      name: rancher-vsphere-cpi
-      sources:
-        - https://github.com/kubernetes/cloud-provider-vsphere
-      urls:
-        - assets/rancher-vsphere-cpi/rancher-vsphere-cpi-1.16.200.tgz
-      version: 1.16.200
-    - annotations:
-        catalog.cattle.io/certified: rancher
-        catalog.cattle.io/display-name: vSphere CPI
-        catalog.cattle.io/kube-version: '>= 1.27.0-0 < 1.38.0-0'
-        catalog.cattle.io/namespace: kube-system
-        catalog.cattle.io/os: linux
-        catalog.cattle.io/permits-os: linux,windows
-        catalog.cattle.io/rancher-version: '>= 2.9.0-0'
-        catalog.cattle.io/release-name: vsphere-cpi
-      apiVersion: v1
-      appVersion: 1.37.0
-      created: "2026-09-09T20:32:58.437464323Z"
-      description: vSphere Cloud Provider Interface (CPI)
-      digest: 33f88fc4df5a2e91f1c30fe6ac99e18e5c1b6667ab00fffcceff88fc6f7874dd
-      icon: https://charts.rancher.io/assets/logos/vsphere-cpi.svg
-      keywords:
-        - infrastructure
-      maintainers:
-        - email: jiaqi.luo@suse.com
-          name: Jiaqi Luo
-        - email: brad.davidson@suse.com
-          name: Brad Davidson
-      name: rancher-vsphere-cpi
-      sources:
-        - https://github.com/kubernetes/cloud-provider-vsphere
-      urls:
-        - assets/rancher-vsphere-cpi/rancher-vsphere-cpi-1.16.100.tgz
-      version: 1.16.100
-    - annotations:
-        catalog.cattle.io/certified: rancher
-        catalog.cattle.io/display-name: vSphere CPI
-        catalog.cattle.io/kube-version: '>= 1.27.0-0 < 1.38.0-0'
-        catalog.cattle.io/namespace: kube-system
-        catalog.cattle.io/os: linux
-        catalog.cattle.io/permits-os: linux,windows
-        catalog.cattle.io/rancher-version: '>= 2.9.0-0'
-        catalog.cattle.io/release-name: vsphere-cpi
-      apiVersion: v1
-      appVersion: 1.37.0
-      created: "2026-09-01T17:47:42.239693215Z"
-      description: vSphere Cloud Provider Interface (CPI)
-      digest: 0d1bc799e9d3e26e4a8584212c12b21668f0388a41565593440688168a33ed9c
-      icon: https://charts.rancher.io/assets/logos/vsphere-cpi.svg
-      keywords:
-        - infrastructure
-      maintainers:
-        - email: jiaqi.luo@suse.com
-          name: Jiaqi Luo
-        - email: brad.davidson@suse.com
-          name: Brad Davidson
-      name: rancher-vsphere-cpi
-      sources:
-        - https://github.com/kubernetes/cloud-provider-vsphere
-      urls:
-        - assets/rancher-vsphere-cpi/rancher-vsphere-cpi-1.16.000.tgz
-      version: 1.16.000
-    - annotations:
-        catalog.cattle.io/certified: rancher
-        catalog.cattle.io/display-name: vSphere CPI
-        catalog.cattle.io/kube-version: '>= 1.27.0-0 < 1.37.0-0'
-        catalog.cattle.io/namespace: kube-system
-        catalog.cattle.io/os: linux
-        catalog.cattle.io/permits-os: linux,windows
-        catalog.cattle.io/rancher-version: '>= 2.9.0-0'
-        catalog.cattle.io/release-name: vsphere-cpi
-      apiVersion: v1
-      appVersion: 1.36.0
-      created: "2026-07-22T23:00:26.756505614Z"
-      description: vSphere Cloud Provider Interface (CPI)
-      digest: d7e2671ddbfaffccb957ebe8bc42c5d54082f298150656f4cbd6428b3cfcc1c3
-      icon: https://charts.rancher.io/assets/logos/vsphere-cpi.svg
-      keywords:
-        - infrastructure
-      maintainers:
-        - email: jiaqi.luo@suse.com
-          name: Jiaqi Luo
-        - email: brad.davidson@suse.com
-          name: Brad Davidson
-      name: rancher-vsphere-cpi
-      sources:
-        - https://github.com/kubernetes/cloud-provider-vsphere
-      urls:
-        - assets/rancher-vsphere-cpi/rancher-vsphere-cpi-1.15.300.tgz
-      version: 1.15.300
-    - annotations:
-        catalog.cattle.io/certified: rancher
-        catalog.cattle.io/display-name: vSphere CPI
-        catalog.cattle.io/kube-version: '>= 1.27.0-0 < 1.37.0-0'
-        catalog.cattle.io/namespace: kube-system
-        catalog.cattle.io/os: linux
-        catalog.cattle.io/permits-os: linux,windows
-        catalog.cattle.io/rancher-version: '>= 2.9.0-0'
-        catalog.cattle.io/release-name: vsphere-cpi
-      apiVersion: v1
-      appVersion: 1.36.0
-      created: "2026-07-10T21:55:34.783974596Z"
-      description: vSphere Cloud Provider Interface (CPI)
-      digest: f6d8e9342e17d81501721cd4eaf36e7df56a703b0c1439d85acedd176531637a
-      icon: https://charts.rancher.io/assets/logos/vsphere-cpi.svg
-      keywords:
-        - infrastructure
-      maintainers:
-        - email: jiaqi.luo@suse.com
-          name: Jiaqi Luo
-        - email: brad.davidson@suse.com
-          name: Brad Davidson
-      name: rancher-vsphere-cpi
-      sources:
-        - https://github.com/kubernetes/cloud-provider-vsphere
-      urls:
-        - assets/rancher-vsphere-cpi/rancher-vsphere-cpi-1.15.200.tgz
-      version: 1.15.200
-    - annotations:
-        catalog.cattle.io/certified: rancher
-        catalog.cattle.io/display-name: vSphere CPI
-        catalog.cattle.io/kube-version: '>= 1.27.0-0 < 1.37.0-0'
-        catalog.cattle.io/namespace: kube-system
-        catalog.cattle.io/os: linux
-        catalog.cattle.io/permits-os: linux,windows
-        catalog.cattle.io/rancher-version: '>= 2.9.0-0'
-        catalog.cattle.io/release-name: vsphere-cpi
-      apiVersion: v1
-      appVersion: 1.36.0
-      created: "2026-07-10T18:13:56.125342201Z"
-      description: vSphere Cloud Provider Interface (CPI)
-      digest: e348c0adbd4e90c94c9817fb4e5cc2ff6c43929f5b4b84c69b9032145aaa01aa
-      icon: https://charts.rancher.io/assets/logos/vsphere-cpi.svg
-      keywords:
-        - infrastructure
-      maintainers:
-        - email: jiaqi.luo@suse.com
-          name: Jiaqi Luo
-        - email: brad.davidson@suse.com
-          name: Brad Davidson
-      name: rancher-vsphere-cpi
-      sources:
-        - https://github.com/kubernetes/cloud-provider-vsphere
-      urls:
-        - assets/rancher-vsphere-cpi/rancher-vsphere-cpi-1.15.100.tgz
-      version: 1.15.100
-    - annotations:
-        catalog.cattle.io/certified: rancher
-        catalog.cattle.io/display-name: vSphere CPI
-        catalog.cattle.io/kube-version: '>= 1.27.0-0 < 1.37.0-0'
-        catalog.cattle.io/namespace: kube-system
-        catalog.cattle.io/os: linux
-        catalog.cattle.io/permits-os: linux,windows
-        catalog.cattle.io/rancher-version: '>= 2.9.0-0'
-        catalog.cattle.io/release-name: vsphere-cpi
-      apiVersion: v1
-      appVersion: 1.36.0
-      created: "2026-07-07T18:37:03.096479086Z"
-      description: vSphere Cloud Provider Interface (CPI)
-      digest: 4ab0e9d1f8124ec6896974958ba37a2bb06f748a8c94191f03156aabcaaddf1d
-      icon: https://charts.rancher.io/assets/logos/vsphere-cpi.svg
-      keywords:
-        - infrastructure
-      maintainers:
-        - email: jiaqi.luo@suse.com
-          name: Jiaqi Luo
-        - email: brad.davidson@suse.com
-          name: Brad Davidson
-      name: rancher-vsphere-cpi
-      sources:
-        - https://github.com/kubernetes/cloud-provider-vsphere
-      urls:
-        - assets/rancher-vsphere-cpi/rancher-vsphere-cpi-1.15.000.tgz
-      version: 1.15.000
-    - annotations:
-        catalog.cattle.io/certified: rancher
-        catalog.cattle.io/display-name: vSphere CPI
-        catalog.cattle.io/kube-version: '>= 1.27.0-0 < 1.37.0-0'
-        catalog.cattle.io/namespace: kube-system
-        catalog.cattle.io/os: linux
-        catalog.cattle.io/permits-os: linux,windows
-        catalog.cattle.io/rancher-version: '>= 2.9.0-0'
-        catalog.cattle.io/release-name: vsphere-cpi
-      apiVersion: v1
-      appVersion: 1.36.0
-      created: "2026-04-29T18:35:51.197621874Z"
-      description: vSphere Cloud Provider Interface (CPI)
-      digest: 9df83785ed25de0a81971656d1880dea41bf649a8e731b6faecae95622101080
-      icon: https://charts.rancher.io/assets/logos/vsphere-cpi.svg
-      keywords:
-        - infrastructure
-      maintainers:
-        - email: jiaqi.luo@suse.com
-          name: Jiaqi Luo
-        - email: brad.davidson@suse.com
-          name: Brad Davidson
-      name: rancher-vsphere-cpi
-      sources:
-        - https://github.com/kubernetes/cloud-provider-vsphere
-      urls:
-        - assets/rancher-vsphere-cpi/rancher-vsphere-cpi-1.14.000.tgz
-      version: 1.14.000
-    - annotations:
-        catalog.cattle.io/certified: rancher
-        catalog.cattle.io/display-name: vSphere CPI
-        catalog.cattle.io/kube-version: '>= 1.27.0-0 < 1.36.0-0'
-        catalog.cattle.io/namespace: kube-system
-        catalog.cattle.io/os: linux
-        catalog.cattle.io/permits-os: linux,windows
-        catalog.cattle.io/rancher-version: '>= 2.9.0-0'
-        catalog.cattle.io/release-name: vsphere-cpi
-      apiVersion: v1
-      appVersion: 1.35.0
-      created: "2025-12-23T15:51:41.227258403Z"
-      description: vSphere Cloud Provider Interface (CPI)
-      digest: a8007d4d1b888988340982e263032b8f8870fe83f375d7faedba6b6a7f0d46b1
-      icon: https://charts.rancher.io/assets/logos/vsphere-cpi.svg
-      keywords:
-        - infrastructure
-      maintainers:
-        - email: jiaqi.luo@suse.com
-          name: Jiaqi Luo
-        - email: brad.davidson@suse.com
-          name: Brad Davidson
-      name: rancher-vsphere-cpi
-      sources:
-        - https://github.com/kubernetes/cloud-provider-vsphere
-      urls:
-        - assets/rancher-vsphere-cpi/rancher-vsphere-cpi-1.13.000.tgz
-      version: 1.13.000
-    - annotations:
-        catalog.cattle.io/certified: rancher
-        catalog.cattle.io/display-name: vSphere CPI
-        catalog.cattle.io/kube-version: '>= 1.27.0-0 < 1.35.0-0'
-        catalog.cattle.io/namespace: kube-system
-        catalog.cattle.io/os: linux
-        catalog.cattle.io/permits-os: linux,windows
-        catalog.cattle.io/rancher-version: '>= 2.9.0-0'
-        catalog.cattle.io/release-name: vsphere-cpi
-      apiVersion: v1
-      appVersion: 1.34.0
-      created: "2025-09-16T16:50:25.339111077Z"
-      description: vSphere Cloud Provider Interface (CPI)
-      digest: 3af2f8da0a9d7c6d6b28cccd9cf4a36b703d5bec545def1110bec4871399af79
-      icon: https://charts.rancher.io/assets/logos/vsphere-cpi.svg
-      keywords:
-        - infrastructure
-      maintainers:
-        - email: jiaqi.luo@suse.com
-          name: Jiaqi Luo
-        - email: brad.davidson@suse.com
-          name: Brad Davidson
-      name: rancher-vsphere-cpi
-      sources:
-        - https://github.com/kubernetes/cloud-provider-vsphere
-      urls:
-        - assets/rancher-vsphere-cpi/rancher-vsphere-cpi-1.12.100.tgz
-      version: 1.12.100
-    - annotations:
-        catalog.cattle.io/certified: rancher
-        catalog.cattle.io/display-name: vSphere CPI
-        catalog.cattle.io/kube-version: '>= 1.27.0-0 < 1.35.0-0'
-        catalog.cattle.io/namespace: kube-system
-        catalog.cattle.io/os: linux
-        catalog.cattle.io/permits-os: linux,windows
-        catalog.cattle.io/rancher-version: '>= 2.9.0-0'
-        catalog.cattle.io/release-name: vsphere-cpi
-      apiVersion: v1
-      appVersion: 1.34.0
-      created: "2025-09-05T18:04:16.062646573Z"
-      description: vSphere Cloud Provider Interface (CPI)
-      digest: c6eb9104b4173abbd3068937bf21322dc628312704b6f23db55e4a81a225b479
-      icon: https://charts.rancher.io/assets/logos/vsphere-cpi.svg
-      keywords:
-        - infrastructure
-      maintainers:
-        - email: jiaqi.luo@suse.com
-          name: Jiaqi Luo
-        - email: brad.davidson@suse.com
-          name: Brad Davidson
-      name: rancher-vsphere-cpi
-      sources:
-        - https://github.com/kubernetes/cloud-provider-vsphere
-      urls:
-        - assets/rancher-vsphere-cpi/rancher-vsphere-cpi-1.12.000.tgz
-      version: 1.12.000
-    - annotations:
-        catalog.cattle.io/certified: rancher
-        catalog.cattle.io/display-name: vSphere CPI
-        catalog.cattle.io/kube-version: '>= 1.27.0-0 < 1.34.0-0'
-        catalog.cattle.io/namespace: kube-system
-        catalog.cattle.io/os: linux
-        catalog.cattle.io/permits-os: linux,windows
-        catalog.cattle.io/rancher-version: '>= 2.9.0-0'
-        catalog.cattle.io/release-name: vsphere-cpi
-      apiVersion: v1
-      appVersion: 1.33.0
-      created: "2025-04-30T21:25:59.832252608Z"
-      description: vSphere Cloud Provider Interface (CPI)
-      digest: 7052813513d539d76841f2416cfea862ebbdc006ba23ad96ad067ea3d399c38a
-      icon: https://charts.rancher.io/assets/logos/vsphere-cpi.svg
-      keywords:
-        - infrastructure
-      maintainers:
-        - email: jiaqi.luo@suse.com
-          name: Jiaqi Luo
-        - email: brad.davidson@suse.com
-          name: Brad Davidson
-      name: rancher-vsphere-cpi
-      sources:
-        - https://github.com/kubernetes/cloud-provider-vsphere
-      urls:
-        - assets/rancher-vsphere-cpi/rancher-vsphere-cpi-1.11.000.tgz
-      version: 1.11.000
-    - annotations:
-        catalog.cattle.io/certified: rancher
-        catalog.cattle.io/display-name: vSphere CPI
-        catalog.cattle.io/kube-version: '>= 1.27.0-0 < 1.33.0-0'
-        catalog.cattle.io/namespace: kube-system
-        catalog.cattle.io/os: linux
-        catalog.cattle.io/permits-os: linux,windows
-        catalog.cattle.io/rancher-version: '>= 2.9.0-0'
-        catalog.cattle.io/release-name: vsphere-cpi
-      apiVersion: v1
-      appVersion: 1.32.1
-      created: "2024-12-21T01:46:08.385201485Z"
-      description: vSphere Cloud Provider Interface (CPI)
-      digest: 42d7b3b21101777c98708471a9caf6665b6127c962cea40d8c82ac0fa545853d
-      icon: https://charts.rancher.io/assets/logos/vsphere-cpi.svg
-      keywords:
-        - infrastructure
-      maintainers:
-        - email: jiaqi.luo@suse.com
-          name: Jiaqi Luo
-        - email: brad.davidson@suse.com
-          name: Brad Davidson
-      name: rancher-vsphere-cpi
-      sources:
-        - https://github.com/kubernetes/cloud-provider-vsphere
-      urls:
-        - assets/rancher-vsphere-cpi/rancher-vsphere-cpi-1.10.000.tgz
-      version: 1.10.000
-    - annotations:
-        catalog.cattle.io/certified: rancher
-        catalog.cattle.io/display-name: vSphere CPI
-        catalog.cattle.io/kube-version: '>= 1.27.0-0 < 1.32.0-0'
-        catalog.cattle.io/namespace: kube-system
-        catalog.cattle.io/os: linux
-        catalog.cattle.io/permits-os: linux,windows
-        catalog.cattle.io/rancher-version: '>= 2.9.0-0'
-        catalog.cattle.io/release-name: vsphere-cpi
-      apiVersion: v1
-      appVersion: 1.31.0
-      created: "2024-09-20T21:25:44.062868759Z"
-      description: vSphere Cloud Provider Interface (CPI)
-      digest: 6c385e23eed9cabea67c0301d3b2a8fe610ce02f56ee9c26b15c39a4a49e2a0e
-      icon: https://charts.rancher.io/assets/logos/vsphere-cpi.svg
-      keywords:
-        - infrastructure
-      maintainers:
-        - email: jiaqi.luo@suse.com
-          name: Jiaqi Luo
-        - email: brad.davidson@suse.com
-          name: Brad Davidson
-      name: rancher-vsphere-cpi
-      sources:
-        - https://github.com/kubernetes/cloud-provider-vsphere
-      urls:
-        - assets/rancher-vsphere-cpi/rancher-vsphere-cpi-1.9.100.tgz
-      version: 1.9.100
-    - annotations:
-        catalog.cattle.io/certified: rancher
-        catalog.cattle.io/display-name: vSphere CPI
-        catalog.cattle.io/kube-version: '>= 1.27.0-0 < 1.32.0-0'
-        catalog.cattle.io/namespace: kube-system
-        catalog.cattle.io/os: linux
-        catalog.cattle.io/permits-os: linux,windows
-        catalog.cattle.io/rancher-version: '>= 2.9.0-0'
-        catalog.cattle.io/release-name: vsphere-cpi
-      apiVersion: v1
-      appVersion: 1.31.0
-      created: "2024-08-28T22:47:31.676681596Z"
-      description: vSphere Cloud Provider Interface (CPI)
-      digest: bdad9648a852120c0eccbf71aca4cf629304b6641ee92607075b4be1829337b6
-      icon: https://charts.rancher.io/assets/logos/vsphere-cpi.svg
-      keywords:
-        - infrastructure
-      maintainers:
-        - email: jiaqi.luo@suse.com
-          name: Jiaqi Luo
-        - email: brad.davidson@suse.com
-          name: Brad Davidson
-      name: rancher-vsphere-cpi
-      sources:
-        - https://github.com/kubernetes/cloud-provider-vsphere
-      urls:
-        - assets/rancher-vsphere-cpi/rancher-vsphere-cpi-1.9.000.tgz
-      version: 1.9.000
-    - annotations:
-        catalog.cattle.io/certified: rancher
-        catalog.cattle.io/display-name: vSphere CPI
-        catalog.cattle.io/kube-version: '>= 1.18.0-0 < 1.31.0-0'
-        catalog.cattle.io/namespace: kube-system
-        catalog.cattle.io/os: linux
-        catalog.cattle.io/permits-os: linux,windows
-        catalog.cattle.io/rancher-version: '>= 2.9.0-0'
-        catalog.cattle.io/release-name: vsphere-cpi
-      apiVersion: v1
-      appVersion: 1.30.1
-      created: "2024-07-11T17:11:50.174678188Z"
-      description: vSphere Cloud Provider Interface (CPI)
-      digest: 9cd8f0f67c243df5b421c8b81c800ea06f491bb261829b0dfac6d37f8aa6209f
-      icon: https://charts.rancher.io/assets/logos/vsphere-cpi.svg
-      keywords:
-        - infrastructure
-      maintainers:
-        - email: jiaqi.luo@suse.com
-          name: Jiaqi Luo
-        - email: brad.davidson@suse.com
-          name: Brad Davidson
-      name: rancher-vsphere-cpi
-      sources:
-        - https://github.com/kubernetes/cloud-provider-vsphere
-      urls:
-        - assets/rancher-vsphere-cpi/rancher-vsphere-cpi-1.8.000.tgz
-      version: 1.8.000
-    - annotations:
-        catalog.cattle.io/certified: rancher
-        catalog.cattle.io/display-name: vSphere CPI
-        catalog.cattle.io/kube-version: '>= 1.18.0-0 < 1.29.0-0'
-        catalog.cattle.io/namespace: kube-system
-        catalog.cattle.io/os: linux
-        catalog.cattle.io/permits-os: linux,windows
-        catalog.cattle.io/rancher-version: '>= 2.8.0-0'
-        catalog.cattle.io/release-name: vsphere-cpi
-      apiVersion: v1
-      appVersion: 1.28.0
-      created: "2024-03-05T21:16:52.558643733Z"
-      description: vSphere Cloud Provider Interface (CPI)
-      digest: 82af48126cdae86a551c11eb9519e9871f8697a3cdbdb8b4ead2a4d336c8a611
-      icon: https://charts.rancher.io/assets/logos/vsphere-cpi.svg
-      keywords:
-        - infrastructure
-      maintainers:
-        - email: jiaqi.luo@suse.com
-          name: Jiaqi Luo
-        - email: brad.davidson@suse.com
-          name: Brad Davidson
-      name: rancher-vsphere-cpi
-      sources:
-        - https://github.com/kubernetes/cloud-provider-vsphere
-      urls:
-        - assets/rancher-vsphere-cpi/rancher-vsphere-cpi-1.7.001.tgz
-      version: 1.7.001
-    - annotations:
-        catalog.cattle.io/certified: rancher
-        catalog.cattle.io/display-name: vSphere CPI
-        catalog.cattle.io/kube-version: '>= 1.18.0-0 < 1.29.0-0'
-        catalog.cattle.io/namespace: kube-system
-        catalog.cattle.io/os: linux
-        catalog.cattle.io/permits-os: linux,windows
-        catalog.cattle.io/rancher-version: '>= 2.8.0-0'
-        catalog.cattle.io/release-name: vsphere-cpi
-      apiVersion: v1
-      appVersion: 1.28.0
-      created: "2024-03-05T00:18:40.55573731Z"
-      description: vSphere Cloud Provider Interface (CPI)
-      digest: a5817d6bf16d731c9de8a3b0891ac91b30aaa1b74bb937c11ac73e01139e3c56
-      icon: https://charts.rancher.io/assets/logos/vsphere-cpi.svg
-      keywords:
-        - infrastructure
-      maintainers:
-        - email: jiaqi.luo@suse.com
-          name: Jiaqi Luo
-        - email: brad.davidson@suse.com
-          name: Brad Davidson
-      name: rancher-vsphere-cpi
-      sources:
-        - https://github.com/kubernetes/cloud-provider-vsphere
-      urls:
-        - assets/rancher-vsphere-cpi/rancher-vsphere-cpi-1.7.000.tgz
-      version: 1.7.000
-    - annotations:
-        catalog.cattle.io/certified: rancher
-        catalog.cattle.io/display-name: vSphere CPI
-        catalog.cattle.io/kube-version: '>= 1.18.0-0 < 1.28.0-0'
-        catalog.cattle.io/namespace: kube-system
-        catalog.cattle.io/os: linux
-        catalog.cattle.io/permits-os: linux,windows
-        catalog.cattle.io/rancher-version: '>= 2.6.0-0'
-        catalog.cattle.io/release-name: vsphere-cpi
-      apiVersion: v1
-      appVersion: 1.26.1
-      created: "2023-05-22T19:44:34.808999651Z"
-      description: vSphere Cloud Provider Interface (CPI)
-      digest: dc9e143719143a97828d4b6a753162d562c3394c9c3061bb6ddb9f83880917cc
-      icon: https://charts.rancher.io/assets/logos/vsphere-cpi.svg
-      keywords:
-        - infrastructure
-      maintainers:
-        - email: jiaqi.luo@suse.com
-          name: Jiaqi Luo
-        - email: anna.blendermann@suse.com
-          name: Andy Blendermann
-        - email: brad.davidson@suse.com
-          name: Brad Davidson
-      name: rancher-vsphere-cpi
-      sources:
-        - https://github.com/kubernetes/cloud-provider-vsphere
-      urls:
-        - assets/rancher-vsphere-cpi/rancher-vsphere-cpi-1.5.100.tgz
-      version: 1.5.100
-    - annotations:
-        catalog.cattle.io/certified: rancher
-        catalog.cattle.io/display-name: vSphere CPI
-        catalog.cattle.io/kube-version: '>= 1.18.0-0 < 1.26.0-0'
-        catalog.cattle.io/namespace: kube-system
-        catalog.cattle.io/os: linux
-        catalog.cattle.io/permits-os: linux,windows
-        catalog.cattle.io/rancher-version: '>= 2.6.0-0'
-        catalog.cattle.io/release-name: vsphere-cpi
-      apiVersion: v1
-      appVersion: 1.4.1
-      created: "2023-04-06T23:24:02.315174486Z"
-      description: vSphere Cloud Provider Interface (CPI)
-      digest: cc8ead539c5f3c6dc7b15410b041277543e7eedb33f03527f1e67d706ef9ecab
-      icon: https://charts.rancher.io/assets/logos/vsphere-cpi.svg
-      keywords:
-        - infrastructure
-      maintainers:
-        - email: jiaqi.luo@suse.com
-          name: Rancher
-      name: rancher-vsphere-cpi
-      sources:
-        - https://github.com/kubernetes/cloud-provider-vsphere
-      urls:
-        - assets/rancher-vsphere-cpi/rancher-vsphere-cpi-1.4.200.tgz
-      version: 1.4.200
-    - annotations:
-        catalog.cattle.io/certified: rancher
-        catalog.cattle.io/display-name: vSphere CPI
-        catalog.cattle.io/kube-version: '>= 1.18.0-0 < 1.26.0-0'
-        catalog.cattle.io/namespace: kube-system
-        catalog.cattle.io/os: linux
-        catalog.cattle.io/permits-os: linux,windows
-        catalog.cattle.io/rancher-version: '>= 2.6.0-0'
-        catalog.cattle.io/release-name: vsphere-cpi
-      apiVersion: v1
-      appVersion: 1.4.1
-      created: "2023-01-10T22:53:59.826184787Z"
-      description: vSphere Cloud Provider Interface (CPI)
-      digest: 9ead1e9978977aceabb0394a2033638b9abd373a5b49fa4b23b57dbdbd513d26
-      icon: https://charts.rancher.io/assets/logos/vsphere-cpi.svg
-      keywords:
-        - infrastructure
-      maintainers:
-        - email: jiaqi.luo@suse.com
-          name: Rancher
-      name: rancher-vsphere-cpi
-      sources:
-        - https://github.com/kubernetes/cloud-provider-vsphere
-      urls:
-        - assets/rancher-vsphere-cpi/rancher-vsphere-cpi-1.4.101.tgz
-      version: 1.4.101
-    - annotations:
-        catalog.cattle.io/certified: rancher
-        catalog.cattle.io/display-name: vSphere CPI
-        catalog.cattle.io/kube-version: '>= 1.18.0-0 < 1.26.0-0'
-        catalog.cattle.io/namespace: kube-system
-        catalog.cattle.io/os: linux
-        catalog.cattle.io/permits-os: linux,windows
-        catalog.cattle.io/rancher-version: '>= 2.6.0-0'
-        catalog.cattle.io/release-name: vsphere-cpi
-      apiVersion: v1
-      appVersion: 1.4.1
-      created: "2022-11-08T23:23:35.214364877Z"
-      description: vSphere Cloud Provider Interface (CPI)
-      digest: d25c00bc6a6c14b5580b55b33059c2803c744f302b4ef99e5af286e8a4cd3904
-      icon: https://charts.rancher.io/assets/logos/vsphere-cpi.svg
-      keywords:
-        - infrastructure
-      maintainers:
-        - email: jiaqi.luo@suse.com
-          name: Rancher
-      name: rancher-vsphere-cpi
-      sources:
-        - https://github.com/kubernetes/cloud-provider-vsphere
-      urls:
-        - assets/rancher-vsphere-cpi/rancher-vsphere-cpi-1.4.100.tgz
-      version: 1.4.100
-    - annotations:
-        catalog.cattle.io/certified: rancher
-        catalog.cattle.io/display-name: vSphere CPI
-        catalog.cattle.io/kube-version: '>= 1.18.0-0 < 1.26.0-0'
-        catalog.cattle.io/namespace: kube-system
-        catalog.cattle.io/os: linux
-        catalog.cattle.io/permits-os: linux,windows
-        catalog.cattle.io/rancher-version: '>= 2.6.0-0 < 2.7.0-0'
-        catalog.cattle.io/release-name: vsphere-cpi
-      apiVersion: v1
-      appVersion: 1.2.4
-      created: "2022-09-29T22:05:40.247277996Z"
-      description: vSphere Cloud Provider Interface (CPI)
-      digest: 4f0c13b135ac91ef6cedf70b0bf6fad818129ee78925fe325b9afc3e290fcd24
-      icon: https://charts.rancher.io/assets/logos/vsphere-cpi.svg
-      keywords:
-        - infrastructure
-      maintainers:
-        - email: jamie.phillips@suse.com
-          name: Rancher
-      name: rancher-vsphere-cpi
-      sources:
-        - https://github.com/kubernetes/cloud-provider-vsphere
-      urls:
-        - assets/rancher-vsphere-cpi/rancher-vsphere-cpi-1.4.001.tgz
-      version: 1.4.001
-    - annotations:
-        catalog.cattle.io/certified: rancher
-        catalog.cattle.io/display-name: vSphere CPI
-        catalog.cattle.io/kube-version: '>= 1.18.0-0 < 1.26.0-0'
-        catalog.cattle.io/namespace: kube-system
-        catalog.cattle.io/os: linux
-        catalog.cattle.io/permits-os: linux,windows
-        catalog.cattle.io/rancher-version: '>= 2.6.0-0'
-        catalog.cattle.io/release-name: vsphere-cpi
-      apiVersion: v1
-      appVersion: 1.2.4
-      created: "2022-11-08T21:55:15.928166716Z"
-      description: vSphere Cloud Provider Interface (CPI)
-      digest: 500bc20798ced2ee7244467ec9343248b3c0a8b8dec0e33561cdc2766171d859
-      icon: https://charts.rancher.io/assets/logos/vsphere-cpi.svg
-      keywords:
-        - infrastructure
-      maintainers:
-        - email: jiaqi.luo@suse.com
-          name: Rancher
-      name: rancher-vsphere-cpi
-      sources:
-        - https://github.com/kubernetes/cloud-provider-vsphere
-      urls:
-        - assets/rancher-vsphere-cpi/rancher-vsphere-cpi-1.4.000.tgz
-      version: 1.4.000
-    - annotations:
-        catalog.cattle.io/certified: rancher
-        catalog.cattle.io/display-name: vSphere CPI
-        catalog.cattle.io/kube-version: '>= 1.18.0-0 < 1.25.0-0'
-        catalog.cattle.io/namespace: kube-system
-        catalog.cattle.io/os: linux
-        catalog.cattle.io/permits-os: linux,windows
-        catalog.cattle.io/rancher-version: '>= 2.6.0-0 <= 2.6.100-0'
-        catalog.cattle.io/release-name: vsphere-cpi
-      apiVersion: v1
-      appVersion: 1.2.2
-      created: "2022-05-06T16:01:56.514781338Z"
-      description: vSphere Cloud Provider Interface (CPI)
-      digest: be8f9686c19bbc27f1e0b3d484dd965abff8af1c72da5ab38c536bcc548dd64e
-      icon: https://charts.rancher.io/assets/logos/vsphere-cpi.svg
-      keywords:
-        - infrastructure
-      maintainers:
-        - email: jamie.phillips@suse.com
-          name: Rancher
-      name: rancher-vsphere-cpi
-      sources:
-        - https://github.com/kubernetes/cloud-provider-vsphere
-      urls:
-        - assets/rancher-vsphere-cpi/rancher-vsphere-cpi-1.2.201.tgz
-      version: 1.2.201
-    - annotations:
-        catalog.cattle.io/certified: rancher
-        catalog.cattle.io/display-name: vSphere CPI
-        catalog.cattle.io/kube-version: '>= 1.18.0-0 < 1.24.0-0'
-        catalog.cattle.io/namespace: kube-system
-        catalog.cattle.io/os: linux
-        catalog.cattle.io/permits-os: linux,windows
-        catalog.cattle.io/rancher-version: '>= 2.6.0-0 <= 2.6.100-0'
-        catalog.cattle.io/release-name: vsphere-cpi
-      apiVersion: v1
-      appVersion: 1.2.1
-      created: "2022-04-04T14:23:17.022122467Z"
-      description: vSphere Cloud Provider Interface (CPI)
-      digest: f97f8ff30afd77d60cb1042ef03bcac22d48f371bddcc90ed8c0a6dd5ac9d32e
-      icon: https://charts.rancher.io/assets/logos/vsphere-cpi.svg
-      keywords:
-        - infrastructure
-      maintainers:
-        - email: jamie.phillips@suse.com
-          name: Rancher
-      name: rancher-vsphere-cpi
-      sources:
-        - https://github.com/kubernetes/cloud-provider-vsphere
-      urls:
-        - assets/rancher-vsphere-cpi/rancher-vsphere-cpi-1.2.101.tgz
-      version: 1.2.101
-    - annotations:
-        catalog.cattle.io/certified: rancher
-        catalog.cattle.io/display-name: vSphere CPI
-        catalog.cattle.io/kube-version: '>= 1.18.0-0 < 1.23.0-0'
-        catalog.cattle.io/namespace: kube-system
-        catalog.cattle.io/os: linux
-        catalog.cattle.io/permits-os: linux,windows
-        catalog.cattle.io/rancher-version: '>= 2.6.0-0 <= 2.6.100-0'
-        catalog.cattle.io/release-name: vsphere-cpi
-      apiVersion: v1
-      appVersion: 1.1.0
-      created: "2022-03-21T22:25:22.808173826Z"
-      description: vSphere Cloud Provider Interface (CPI)
-      digest: a0a04742e0d37c7668fa8a6d0243edb24eae458b7ef0cb0edd943d251b6b95bc
-      icon: https://charts.rancher.io/assets/logos/vsphere-cpi.svg
-      keywords:
-        - infrastructure
-      maintainers:
-        - email: caleb@rancher.com
-          name: Rancher
-      name: rancher-vsphere-cpi
-      sources:
-        - https://github.com/kubernetes/cloud-provider-vsphere
-      urls:
-        - assets/rancher-vsphere-cpi/rancher-vsphere-cpi-1.1.002.tgz
-      version: 1.1.002
-    - annotations:
-        catalog.cattle.io/certified: rancher
-        catalog.cattle.io/display-name: vSphere CPI
-        catalog.cattle.io/kube-version: '>= 1.18.0-0 < 1.23.0-0'
-        catalog.cattle.io/namespace: kube-system
-        catalog.cattle.io/os: linux
-        catalog.cattle.io/permits-os: linux,windows
-        catalog.cattle.io/rancher-version: '>= 2.6.0-0 <= 2.6.100-0'
-        catalog.cattle.io/release-name: vsphere-cpi
-      apiVersion: v1
-      appVersion: 1.1.0
-      created: "2022-03-05T00:37:27.410809336Z"
-      description: vSphere Cloud Provider Interface (CPI)
-      digest: 6b7516309e763b6cecd94c12a193782aebc7f93fcae08f6baf642b60a71756e4
-      icon: https://charts.rancher.io/assets/logos/vsphere-cpi.svg
-      keywords:
-        - infrastructure
-      maintainers:
-        - email: caleb@rancher.com
-          name: Rancher
-      name: rancher-vsphere-cpi
-      sources:
-        - https://github.com/kubernetes/cloud-provider-vsphere
-      urls:
-        - assets/rancher-vsphere-cpi/rancher-vsphere-cpi-1.1.000.tgz
-      version: 1.1.000
   rancher-vsphere-csi:
     - annotations:
         catalog.cattle.io/certified: rancher
