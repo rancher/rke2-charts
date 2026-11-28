@@ -117,7 +117,7 @@ spec:
             - "-config=/etc/dynamic-networks-controller/dynamic-networks-config.json"
             - "-v=5"
           {{- if .Values.pod.resources.enabled }}
-          resources: {{- toYaml .Values.pod.resources.dynamicNetworksController | nindent 10 }}
+          resources: {{- toYaml .Values.pod.resources.dynamicNetworksController | nindent 12 }}
           {{- end }}
           securityContext:
             privileged: true
